@@ -3,6 +3,9 @@
 require_once(realpath(dirname(__FILE__)."/../../config.php"));
 require_once(realpath(dirname(__FILE__)."/include/config.php"));
 
+if (!defined('MDLOPNSM_BLK_PATH')) exit();
+
+require_once(MDLOPNSM_BLK_PATH."/include/opensim.func.php");
 
 
 class block_mdlopensim extends block_base 
@@ -44,11 +47,12 @@ class block_mdlopensim extends block_base
 
 		$this->content = new stdClass;
 
-		$this->content->text = '<a href="'.MDLOPNSM_BLK_URL.'/actions/world_map.php?course='.$id.'">'.get_string('mdlos_world_map','block_mdlopensim').'</a><br />';
-		$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('mdlos_regions_list','block_mdlopensim').'</a><br />';
+		$this->content->text = '<a href="'.MDLOPNSM_BLK_URL.'/?action=home&course='.$id.'">'.        get_string('mdlos_db_status','block_mdlopensim').'</a><br />';
+		$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/?action=world_map&course='.$id.'">'.   get_string('mdlos_world_map','block_mdlopensim').'</a><br />';
+		$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/?action=regions_list&course='.$id.'">'.get_string('mdlos_regions_list','block_mdlopensim').'</a><br />';
 		if (!isguest()) {
-			$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/avatars_list.php?course='.$id.'">'.get_string('mdlos_avatars_list','block_mdlopensim').'</a><br />';
-			$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/avatar_make.php?course='.$id.'">'.get_string('mdlos_avatar_make','block_mdlopensim').'</a><br />';
+			$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/?action=avatars_list&course='.$id.'">'.get_string('mdlos_avatars_list','block_mdlopensim').'</a><br />';
+			$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/?action=avatar_make&course='.$id.'">'. get_string('mdlos_avatar_make','block_mdlopensim').'</a><br />';
 /*
 			if (isadmin()) {
 				$this->content->text.= '<hr />';
@@ -59,11 +63,17 @@ class block_mdlopensim extends block_base
 		}
 		$this->content->text.= "<hr />";		
 
-		$this->check_opensim_db();
+		$db_state = opensim_check_db();
+		$this->grid_status 		= $db_state['grid_status'];
+		$this->now_online 	 	= $db_state['now_online'];
+		$this->lastmonth_online = $db_state['lastmonth_online'];
+		$this->user_count  		= $db_state['user_count'];
+		$this->region_count		= $db_state['region_count'];
+
 		$this->content->text.= "<center><b>".$this->grid_name."</b></center>";		
 		$this->content->text.= get_string('mdlos_db_status','block_mdlopensim').": ";		
-		if ($this->grid_status) $this->content->text.= get_string('mdlos_online_ttl', 'block_mdlopensim')."<br />";		
-		else					$this->content->text.= get_string('mdlos_offline_ttl','block_mdlopensim')."<br />";		
+		if ($this->grid_status) $this->content->text.= "<b><font color=\"#129212\">".get_string('mdlos_online_ttl', 'block_mdlopensim')."</font></b><br />";		
+		else					$this->content->text.= "<b><font color=\"#ea0202\">".get_string('mdlos_offline_ttl','block_mdlopensim')."</font></b><br />";		
 		$this->content->text.= get_string('mdlos_total_users','block_mdlopensim').": ".$this->user_count."<br />";		
 		$this->content->text.= get_string('mdlos_total_regions','block_mdlopensim').": ".$this->region_count."<br />";		
 		$this->content->text.= get_string('mdlos_visitors_last30days','block_mdlopensim').": ".$this->lastmonth_online."<br />";		
@@ -94,34 +104,6 @@ class block_mdlopensim extends block_base
 	function hide_header() 
 	{
 		return false;
-	}
-
-
-
-	function check_opensim_db()
-	{
-		require_once(MDLOPNSM_BLK_PATH."/include/opensim_mysql.php");
-
-		$DbLink = new DB;
-   
-		$DbLink->query("SELECT COUNT(*) FROM agents".
-					   " WHERE agentOnline = 1 AND logintime > (unix_timestamp(from_unixtime(unix_timestamp(now()) - 86400)))");
-		if ($DbLink->Errno==0) {
-			list($this->now_online) = $DbLink->next_record();
-
-			$DbLink->query("SELECT COUNT(*) FROM agents".
-						   " WHERE logintime > unix_timestamp(from_unixtime(unix_timestamp(now()) - 2419200))");
-			list($this->lastmonth_online) = $DbLink->next_record();
-
-			$DbLink->query("SELECT COUNT(*) FROM users");
-			list($this->user_count) = $DbLink->next_record();
-
-			$DbLink->query("SELECT COUNT(*) FROM regions");
-			list($this->region_count) = $DbLink->next_record();
-
-			$this->grid_status = true;
-		}
-		$DbLink->close();
 	}
 
 }
