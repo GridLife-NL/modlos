@@ -37,11 +37,12 @@ if ($action=="world_map") {
 include(MDLOPNSM_BLK_PATH."/actions/world_map_action.php");
 }
 else if ($action=="regions_list") {
-	require("./include/x.php");
-	$x = new regionsList();
-	$x->set_condition();
-	$x->execute();
+	require("./include/regions_list.class.php");
+	$x = new RegionsList();
+	//$x->set_condition();
+	//$x->execute();
 	$x->print_regions();
+print ("SSSSSSSSSSSSSS<br />");
 }
 else if ($action=="avatars_list") {
 	print_avatars_list();

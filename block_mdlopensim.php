@@ -48,7 +48,7 @@ class block_mdlopensim extends block_base
 		$this->content = new stdClass;
 
 		$this->content->text = '<a href="'.MDLOPNSM_BLK_URL.'/actions/db_status.php&course='.$id.'">'.get_string('mdlos_db_status','block_mdlopensim').'</a><br />';
-		$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/map_display.php?course='.$id.'">'.get_string('mdlos_world_map','block_mdlopensim').'</a><br />';
+		$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/map_action.php?course='.$id.'">'.get_string('mdlos_world_map','block_mdlopensim').'</a><br />';
 		$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('mdlos_regions_list','block_mdlopensim').'</a><br />';
 		if (!isguest()) {
 			$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/avatars_list?course='.$id.'">'.get_string('mdlos_avatars_list','block_mdlopensim').'</a><br />';

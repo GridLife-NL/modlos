@@ -3,8 +3,9 @@
 require_once(realpath(dirname(__FILE__)."/../../../config.php"));
 require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 
+global $CFG;
 
-$world_map_url = MDLOPNSM_BLK_URL."/actions/world_map.php";
+$world_map_url = MDLOPNSM_BLK_URL."/helper/world_map.php";
 $allow_zoom = true;
 
 $grid_name = $CFG->mdlopnsm_grid_name;
@@ -27,7 +28,6 @@ require(MDLOPNSM_BLK_PATH."/include/map_script.php");
 $map_script = ob_get_contents();
 ob_end_clean();
  
-
 include(MDLOPNSM_BLK_PATH."/html/world_map.html");
 
 ?>
