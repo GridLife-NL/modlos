@@ -18,14 +18,14 @@ define("MDLOPNSM_GRP_WKEY", $CFG->mdlopnsm_groupdb_write_key);
 //define("MDLOPNSM_BANKER",   $CFG->mdlopnsm_banker_avatar);
 
 // OpenSim Default Tables
-define("OPENSIM_USERS_TBL",	  "users");
-define("OPENSIM_AGENTS_TBL",  "agents");
-define("OPENSIM_REGIONS_TBL", "regions");
-define("OPENSIM_ESTMAP_TBL",  "estate_map");
-define("OPENSIM_ESTSET_TBL",  "estate_settings");
+//define("OPENSIM_USERS_TBL",	  "users");
+//define("OPENSIM_AGENTS_TBL",  "agents");
+//define("OPENSIM_REGIONS_TBL", "regions");
+//define("OPENSIM_ESTMAP_TBL",  "estate_map");
+//define("OPENSIM_ESTSET_TBL",  "estate_settings");
 // 0.6.9
-define("OPENSIM_AUTH_TBL",    "auth");
-define("OPENSIM_PRESENCE_TBL","Presence");
+//define("OPENSIM_AUTH_TBL",    "auth");
+//define("OPENSIM_PRESENCE_TBL","Presence");
 
 
 

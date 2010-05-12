@@ -8,7 +8,7 @@
 // $size, $centerX, $centerY, $world_map_url
 //
 
-require_once(MDLOPNSM_BLK_PATH."/include/opensim_mysql.php");
+require_once(MDLOPNSM_BLK_PATH."/include/opensim.func.php");
 
 
 $display_marker = "dr";	// infomation marker
@@ -41,17 +41,15 @@ function loadmap() {
 	mapInstance.centerAndZoomAtWORLDCoord(new XYPoint(<?php print $centerX?>, <?php print $centerY?>), 1);
 <?php
 	$DbLink = new DB;
-	$DbLink->query("select uuid,regionName,serverIP,serverURI,locX,locY,serverHttpPort,owner_uuid from ".OPENSIM_REGIONS_TBL." Order by locX");
+	$DbLink->query("SELECT uuid,regionName,serverIP,serverURI,locX,locY,serverHttpPort FROM regions ORDER BY locX");
 
-	while($DbLink->Errno==0 and list($uuid, $regionName, $serverIP, $serverURI, $locX, $locY, $serverHttpPort, $owner)=$DbLink->next_record()) {
-		$DbLink1 = new DB;
-		$DbLink1->query("select username,lastname from ".OPENSIM_USERS_TBL." where uuid='$owner'");
-		list($firstN, $lastN) = $DbLink1->next_record();
-		$uuid = str_replace("-", "", $uuid); 
+	while($DbLink->Errno==0 and list($uuid, $regionName, $serverIP, $serverURI, $locX, $locY, $serverHttpPort)=$DbLink->next_record())
+	{
+		$name = opensim_get_regionowner($uuid);
+		$firstN = $name['firstname'];
+		$lastN  = $name['lastname'];
 
-		$dx = 0.00;
-		$dy = 0.00;
-
+		$dx = 0.00; $dy = 0.00;
 		if ($display_marker=="tl") {
 			$dx = -0.40; 	$dy = 0.40;
 		}
@@ -80,6 +78,7 @@ function loadmap() {
 		}
 		$server = "$server:$serverHttpPort";
 
+		$uuid = str_replace("-", "", $uuid);
 	  	$imageURL = $server."/index.php?method=regionImage".$uuid;
 		$windowTitle = "Region Name: ".$regionName."<br /><br />Coordinates: ".$locX.",".$locY."<br /><br />Owner: ".$firstN." ".$lastN;
 ?>

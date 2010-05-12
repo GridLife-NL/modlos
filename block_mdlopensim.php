@@ -104,19 +104,19 @@ class block_mdlopensim extends block_base
 
 		$DbLink = new DB;
    
-		$DbLink->query("select count(*) from ".OPENSIM_AGENTS_TBL.
-					   " where agentOnline = 1 and logintime > (unix_timestamp(from_unixtime(unix_timestamp(now()) - 86400)))");
+		$DbLink->query("SELECT COUNT(*) FROM agents".
+					   " WHERE agentOnline = 1 AND logintime > (unix_timestamp(from_unixtime(unix_timestamp(now()) - 86400)))");
 		if ($DbLink->Errno==0) {
 			list($this->now_online) = $DbLink->next_record();
 
-			$DbLink->query("select count(*) from ".OPENSIM_AGENTS_TBL.
-						   " where logintime > unix_timestamp(from_unixtime(unix_timestamp(now()) - 2419200))");
+			$DbLink->query("SELECT COUNT(*) FROM agents".
+						   " WHERE logintime > unix_timestamp(from_unixtime(unix_timestamp(now()) - 2419200))");
 			list($this->lastmonth_online) = $DbLink->next_record();
 
-			$DbLink->query("select count(*) from ".OPENSIM_USERS_TBL."");
+			$DbLink->query("SELECT COUNT(*) FROM users");
 			list($this->user_count) = $DbLink->next_record();
 
-			$DbLink->query("select count(*) from ".OPENSIM_REGIONS_TBL."");
+			$DbLink->query("SELECT COUNT(*) FROM regions");
 			list($this->region_count) = $DbLink->next_record();
 
 			$this->grid_status = true;
