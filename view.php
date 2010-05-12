@@ -42,7 +42,6 @@ else if ($action=="regions_list") {
 	//$x->set_condition();
 	//$x->execute();
 	$x->print_regions();
-print ("SSSSSSSSSSSSSS<br />");
 }
 else if ($action=="avatars_list") {
 	print_avatars_list();
