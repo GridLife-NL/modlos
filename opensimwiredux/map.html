@@ -1,0 +1,54 @@
+
+<head>
+	<title><{$grid_name}></title>
+	<style type=text/css media=all><{include file="db:xoopensim_map.css"}></style>
+	<script src="<{$module_url}>/js/prototype.js" type=text/javascript></script>
+	<script src="<{$module_url}>/js/effects.js"   type=text/javascript></script>
+	<script src="<{$module_url}>/js/mapapi.js"    type=text/javascript></script>
+	<script type=text/javascript><{$map_script}></script>
+</head>
+
+<body onload=loadmap()>
+
+<div id=map-container style="z-index: 0;"></div>
+
+<div id=map-nav>
+	<div id=map-nav-up style="z-index: 1;">
+		<a href="javascript: mapInstance.panUp();"><img alt=Up src="<{$module_url}>/images/pan_up.gif"></a>
+	</div>
+	<div id=map-nav-down style="z-index: 1;">
+		<a href="javascript: mapInstance.panDown();"><img alt=Down src="<{$module_url}>/images/pan_down.gif"></a>
+	</div>
+	<div id=map-nav-left style="z-index: 1;">
+		<a href="javascript: mapInstance.panLeft();"><img alt=Left src="<{$module_url}>/images/pan_left.gif"></a>
+	</div>
+	<div id=map-nav-right style="z-index: 1;">
+		<a href="javascript: mapInstance.panRight();"><img alt=Right src="<{$module_url}>/images/pan_right.gif"></a>
+	</div>
+	<div id=map-nav-center style="z-index: 1;">
+		<a href="javascript: mapInstance.panOrRecenterToWORLDCoord(new XYPoint(<{$mapstartX}>,<{$mapstartY}>), true);"><img alt=Center src="<{$module_url}>/images/center.gif"></a>
+	</div>
+
+	<!-- START ZOOM PANEL-->
+	<{if $allow_zoom}>
+		<div id=map-zoom-plus>
+			<{if $pluszoom==0 }>
+				<img alt="Zoom In" src="<{$module_url}>/images/zoom_in_grey.gif">
+			<{else}>
+				<a href="javascript: setZoom(<{$pluszoom}>);"><img alt="Zoom In" src="<{$module_url}>/images/zoom_in.gif"></a>
+			<{/if}>
+		</div>
+
+		<div id=map-zoom-minus>
+			<{if $minuszoom==0 }>
+				<img alt="Zoom In" src="<{$module_url}>/images/zoom_out_grey.gif">
+			<{else}>
+				<a href="javascript: setZoom(<{$minuszoom}>);"><img alt="Zoom Out" src="<{$module_url}>/images/zoom_out.gif"></a>
+			<{/if}>
+		</div>
+	<{/if}>
+	<!-- END ZOOM PANEL-->
+
+</div>
+</body>
+
