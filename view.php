@@ -3,7 +3,7 @@
 require_once(realpath(dirname(__FILE__)."/../../config.php"));
 require_once(realpath(dirname(__FILE__)."/include/config.php"));
 
-require_once(MDLOPNSM_BLK_PATH."/include/libtools.php");
+require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
 
 
 $courseid = optional_param('course', '0', PARAM_INT);
@@ -33,7 +33,8 @@ else {
 print_tabnav($action, $course);
 
 if ($action=="world_map") {
-	print_world_map();
+	//print_world_map();
+include(MDLOPNSM_BLK_PATH."/actions/world_map_action.php");
 }
 else if ($action=="regions_list") {
 	require("./include/x.php");

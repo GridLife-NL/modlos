@@ -10,6 +10,14 @@ if (!defined('MDLOPNSM_BLK_PATH')) exit();
 
 
 
+function print_world_map($currenttab, $course)
+{
+	global $CFG;
+
+	include(MDLOPNSM_BLK_PATH."/html/world_map_object.html");
+}
+
+
 
 function print_tabnav($currenttab, $course)
 {
