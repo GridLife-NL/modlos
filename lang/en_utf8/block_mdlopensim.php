@@ -175,7 +175,7 @@ $string['mdlos_lname_desc'] = 'Select to last name limitation is active, or not'
 $string['mdlos_dst_region_name'] = 'Default Home Region';
 $string['mdlos_dst_region_desc'] = 'Select default home region';
 $string['mdlos_use_https'] = 'Do you use HTTPS with POST';
-$string['mdlos_use_https_desc'] = "Do you use HTTPS, when you send important data (ex. password) to XoopenSim with POST method? 
+$string['mdlos_use_https_desc'] = "Do you use HTTPS, when you send important data (ex. password) to Mdlopensim with POST method? 
 It is not necessary to select it, when the whole of this site is already https or use https login to Moodle.";
 $string['mdlos_https_url'] = 'Moodle Top URL of HTTPS';
 $string['mdlos_https_url_desc'] = "Specify HTTPS URL of Moodle Module. 
@@ -195,8 +195,8 @@ $string['mdlos_dsclmr_desc'] = 'Select to display of disclaimer is active or not
 $string['mdlos_dsclmr_cntnt'] = 'Content of Disclaimer';
 $string['mdlos_dsclmr_cntnt_desc'] = 'Specify content of Disclaimer of OpenSim';
 
-$string['mdlos_home_cntnt'] = 'Home Content';
-$string['mdlos_home_cntnt_desc'] = 'Specify content of home page';
+$string['mdlos_db_status_cntnt'] = 'DB Status Content';
+$string['mdlos_db_status_cntnt_desc'] = 'Specify content of db status page';
 $string['mdlos_rg_cntnt'] = 'Regions List Content';
 $string['mdlos_rg_cntnt_desc'] = 'Specify content of regions list page';
 $string['mdlos_avt_cntnt'] = 'Avatars List Content';

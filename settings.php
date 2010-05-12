@@ -88,11 +88,9 @@ $settings->add(new admin_setting_configtext('mdlopnsm_banker_avatar',
                    	get_string('mdlos_banker_desc', 'block_mdlopensim'), "00000000-0000-0000-0000-000000000000", PARAM_TEXT));
 */
 
-/*
-$settings->add(new admin_setting_configtextarea('mdlopnsm_home_content', 
-					get_string('mdlos_home_cntnt', 'block_mdlopensim'),
-                   	get_string('mdlos_home_cntnt_desc', 'block_mdlopensim'), "<center><h2>Welcome to Moodle OpenSim Interface</h2></center>", PARAM_RAW));
-*/
+$settings->add(new admin_setting_configtextarea('mdlopnsm_db_status_content', 
+					get_string('mdlos_db_status_cntnt', 'block_mdlopensim'),
+                   	get_string('mdlos_db_status_cntnt_desc', 'block_mdlopensim'), "<h2><center>Welcome to Moodle OpenSim Interface</center></h2>", PARAM_RAW));
 
 $settings->add(new admin_setting_configtextarea('mdlopnsm_regions_content', 
 					get_string('mdlos_rg_cntnt', 'block_mdlopensim'),

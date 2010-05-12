@@ -194,14 +194,14 @@ $string['mdlos_dsclmr_desc'] = 'アバター作成時に OpenSimの使用許諾�
 $string['mdlos_dsclmr_cntnt'] = '使用許諾の内容';
 $string['mdlos_dsclmr_cntnt_desc'] = 'OpenSim使用許諾の内容を記入する．HTMLタグ，BB Codeタグは使用不可';
 
-$string['mdlos_home_cntnt'] = 'トップページのコンテンツ';
-$string['mdlos_home_cntnt_desc'] = 'XoopenSim のトップページのコンテンツ．HTMLタグ使用可能';
+$string['mdlos_db_status_cntnt'] = 'データベース状態のページのコンテンツ';
+$string['mdlos_db_status_cntnt_desc'] = 'Mdlopensim のデータベース状態のページのコンテンツ．HTMLタグ使用可能';
 $string['mdlos_rg_cntnt'] = 'リージョンリストページのコンテンツ';
-$string['mdlos_rg_cntnt_desc'] = 'XoopenSim のリージョンリストページのコンテンツ．HTMLタグ使用可能';
+$string['mdlos_rg_cntnt_desc'] = 'Mdlopensim のリージョンリストページのコンテンツ．HTMLタグ使用可能';
 $string['mdlos_avt_cntnt'] = 'アバターリストページのコンテンツ';
-$string['mdlos_avt_cntnt_desc'] = 'XoopenSim のアバターリストページのコンテンツ．HTMLタグ使用可能';
+$string['mdlos_avt_cntnt_desc'] = 'Mdlopensim のアバターリストページのコンテンツ．HTMLタグ使用可能';
 $string['mdlos_edtbl_cntnt'] = 'アバター編集ページのコンテンツ';
-$string['mdlos_edtbl_cntnt_desc'] = 'XoopenSim のアバター編集ページのコンテンツ．HTMLタグ使用可能';
+$string['mdlos_edtbl_cntnt_desc'] = 'Mdlopensim のアバター編集ページのコンテンツ．HTMLタグ使用可能';
 
 $string['mdlos_grid_log_dir'] = 'グリッドサーバのログ保存先';
 $string['mdlos_grid_log_desc'] = 'グリッドサーバのログの保存先';
