@@ -5,7 +5,7 @@ require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
 
 
 
-class  AvatarMake
+class  AvatarCreate
 {
 	var $regionNames  = array();
 	var $actvLastName = 0;
