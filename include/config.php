@@ -6,6 +6,8 @@ define('MDLOPNSM_DIR_NAME', basename(dirname(dirname(__FILE__))));
 define('MDLOPNSM_BLK_URL',  $CFG->wwwroot.'/blocks/'.MDLOPNSM_DIR_NAME);
 define('MDLOPNSM_BLK_PATH', $CFG->dirroot.'/blocks/'.MDLOPNSM_DIR_NAME);
 
+$opensim_inc_dir = MDLOPNSM_BLK_PATH."/include/";
+
 
 // for DB
 define("OPENSIM_DB_HOST",   $CFG->mdlopnsm_sql_server_name);

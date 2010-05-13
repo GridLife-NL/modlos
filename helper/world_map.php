@@ -4,8 +4,7 @@ require_once(realpath(dirname(__FILE__)."/../../../config.php"));
 require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 
 
-$world_map_url   = MDLOPNSM_BLK_URL."/helper/world_map.php";
-$opensim_inc_dir = MDLOPNSM_BLK_PATH."/include/";
+$world_map_url = MDLOPNSM_BLK_URL."/helper/world_map.php";
 $allow_zoom = true;
 
 
