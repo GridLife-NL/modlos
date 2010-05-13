@@ -1,14 +1,16 @@
 <?php
-//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 //
-// 		Modified From OpenSim WebInterface Redux v0.28 for Moodle  by Fumi.Iseki
+// Modified From OpenSim WebInterface Redux v0.28 
+//													by Fumi.Iseki
 //
 //
-// OPENSIM_REGIONS_TBL, OPENSIM_USERS_TBL
-// $size, $centerX, $centerY, $world_map_url
+// $size, $centerX, $centerY, $world_map_url, $opensim_inc_dir are needed
 //
 
-require_once(MDLOPNSM_BLK_PATH."/include/opensim.func.php");
+//
+require_once($opensim_inc_dir."opensim.func.php");
+
 
 
 $display_marker = "dr";	// infomation marker

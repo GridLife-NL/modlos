@@ -1,71 +1,58 @@
 <?php
-/****************************************************************
- * opensim.func.php v1.0.0  by Fumi.Iseki for OpenSim 
+/*********************************************************************************
+ * opensim.func.php v1.0.0 for OpenSim 	by Fumi.Iseki  2010 5/13
  *
- * 		Copyright (c) 2009, 2010 http://www.nsl.tuis.ac.jp/
+ * 			Copyright (c) 2009, 2010   http://www.nsl.tuis.ac.jp/
  *
  *			supported versions of OpenSim are 0.6.7, 0.6.8, 0.6.9 and 0.7Dev
  *			tools.func.php is needed
  *			opensim.mysql.php is needed
  *
- ***************************************************************/
+ *********************************************************************************/
 
 
-/****************************************************************
-  Function List
+/*********************************************************************************
+ Function List
 
-function  opensim_get_dbversion(&$db=null)
-function  opensim_check_db(&$db=null)
+ function  opensim_get_dbversion(&$db=null)
+ function  opensim_check_db(&$db=null)
 
-function  opensim_get_avatarnum(&$db=null)
-function  opensim_get_avatarname($uuid, &$db=null)
-function  opensim_get_avatarinfos($condition="", &$db=null)
-function  opensim_get_avatarprofiles($condition="", &$db=null)
-function  opensim_get_avataronline($uuid, &$db=null)
-function  opensim_create_avatar($UUID, $firstname, $lastname, $passwd, $homeregion, &$db=null)
-function  opensim_delete_avatar($uuid, &$db=null)
+ function  opensim_get_avatarnum(&$db=null)
+ function  opensim_get_avatarname($uuid, &$db=null)
+ function  opensim_get_avatarinfos($condition="", &$db=null)
+ function  opensim_get_avatarprofiles($condition="", &$db=null)
+ function  opensim_get_avataronline($uuid, &$db=null)
+ function  opensim_create_avatar($UUID, $firstname, $lastname, $passwd, $homeregion, &$db=null)
+ function  opensim_delete_avatar($uuid, &$db=null)
 
-function  opensim_get_regionnum(&$db=null)
-function  opensim_get_regionname($region, &$db=null)
-function  opensim_get_regionnames($condition="", &$db=null)
-function  opensim_get_regioninfos($condition="", &$db=null)
-function  opensim_get_regionname_by_id($handle, &$db=null)
+ function  opensim_get_regionnum(&$db=null)
+ function  opensim_get_regionname($region, &$db=null)
+ function  opensim_get_regionnames($condition="", &$db=null)
+ function  opensim_get_regioninfos($condition="", &$db=null)
+ function  opensim_get_regionname_by_id($handle, &$db=null)
 
-function  opensim_get_regionowner($region, &$db=null)
-function  opensim_set_regionowner($region, $woner_uuid, &$db=null)
-function  opensim_create_inventoryfolders($uuid, &$db=null)
-function  opensim_set_homeregion($uuid, $region, &$db=null)
+ function  opensim_get_regionowner($region, &$db=null)
+ function  opensim_set_regionowner($region, $woner_uuid, &$db=null)
+ function  opensim_create_inventoryfolders($uuid, &$db=null)
+ function  opensim_set_homeregion($uuid, $region, &$db=null)
 
-function  opensim_get_password($uuid, $tbl="", &$db=null)
-function  opensim_set_password($uuid, $passwdhash, $passwdsalt="", $tbl="", &$db=null)
-function  opensim_supply_passwordSalt(&$db=null)
-function  opensim_succession_presence(&$db=null)
+ function  opensim_get_password($uuid, $tbl="", &$db=null)
+ function  opensim_set_password($uuid, $passwdhash, $passwdsalt="", $tbl="", &$db=null)
+ function  opensim_supply_passwordSalt(&$db=null)
+ function  opensim_succession_presence(&$db=null)
 
-****************************************************************/
+ *********************************************************************************/
 
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
-// Local Setting (please change by your environment)
+// Load Function
 //
 
-if (defined('MDLOPNSM_BLK_PATH')) {			// for Mdlopensim
-	//require_once(MDLOPNSM_BLK_PATH."/include/config.php");
-	require_once(MDLOPNSM_BLK_PATH."/include/tools.func.php");
-	require_once(MDLOPNSM_BLK_PATH."/include/opensim.mysql.php");
-}
-else if (defined('_OPENSIM_MODULE_PATH')) {	// for XoopenSim
-    //require_once(_OPENSIM_MODULE_PATH."/include/config.php");
-    require_once(_OPENSIM_MODULE_PATH."/include/tools.func.php");
-    require_once(_OPENSIM_MODULE_PATH."/include/opensim.mysql.php");
-}
-else { 										// for TEST
-	require_once("tools.func.php");
-	require_once("opensim.mysql.php");
-}
-
+require_once($opensim_inc_dir."tools.func.php");
+require_once($opensim_inc_dir."opensim.mysql.php");
 
 
 

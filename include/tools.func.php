@@ -1,15 +1,24 @@
 <?php
 /****************************************************************
-	tools.func.php   by Fumi.Iseki for PHP
+ * tools.func.php v1.0.0  
+ *							by Fumi.Iseki (c) 2010 5/13
+ *
+ *							http://www.nsl.tuis.ac.jp/
+ *
+ ****************************************************************/
+
+
+/****************************************************************
+ Function List
  
 
-function  isAlphabetNumeric($str)
-function  isGUID($uuid)
+ function  isAlphabetNumeric($str)
+ function  isGUID($uuid)
 
-function  make_random_hash()
-function  make_random_guid()
+ function  make_random_hash()
+ function  make_random_guid()
 
-****************************************************************/
+*****************************************************************/
 
 
 

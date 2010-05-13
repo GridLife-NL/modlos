@@ -17,10 +17,11 @@
 
 // for TEST
 if (!defined("OPENSIM_DB_HOST")) {
-	define("OPENSIM_DB_HOST",  "202.26.159.xxx");
-	define("OPENSIM_DB_NAME",  "opensim_xxxx");
-	define("OPENSIM_DB_USER",  "opensim_xxxx");
-	define("OPENSIM_DB_PASS",  "opensim_xxxx");
+	exit();
+	//define("OPENSIM_DB_HOST",  "202.26.159.xxx");
+	//define("OPENSIM_DB_NAME",  "opensim_xxxx");
+	//define("OPENSIM_DB_USER",  "opensim_xxxx");
+	//define("OPENSIM_DB_PASS",  "opensim_xxxx");
 }
 
 

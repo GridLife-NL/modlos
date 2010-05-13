@@ -15,8 +15,8 @@ This file acts as a client to the xmlrpc.php service, to test a call to the getA
 	$verifyParams = new xmlrpcval(array('RequestingAgentID' => new xmlrpcval('00000000-0000-0000-0000-000000000000', 'string')
 									   ,'RequestingSessionID'  => new xmlrpcval('00000000-0000-0000-0000-000000000000', 'string')
 									   ,'RequestingAgentUserService'  => new xmlrpcval('http://opensim.tuis.ac.jp:8002', 'string')
-									   ,'ReadKey'  => new xmlrpcval('68000', 'string')
-									   ,'WriteKey' => new xmlrpcval('68030', 'string')
+									   ,'ReadKey'  => new xmlrpcval('XXXXX', 'string')
+									   ,'WriteKey' => new xmlrpcval('XXXXX', 'string')
 									   ,'AgentID'  => new xmlrpcval('61dfee5c-2440-49f7-8668-a47cecb19d04', 'string'))
 									   , 'struct');
 
