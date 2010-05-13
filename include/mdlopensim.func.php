@@ -50,11 +50,9 @@ function print_tabnav($currenttab, $course)
 
 
 
-function print_tabheader($currenttab, $courseid)
+function print_tabheader($currenttab, $course)
 {
 	global $CFG;
-
-	$course = get_record('course', 'id', $courseid);
 
 	// Print Navi Header
 	if (empty($course)) {

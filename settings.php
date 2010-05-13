@@ -60,11 +60,11 @@ $settings->add(new admin_setting_configtext('mdlopnsm_home_region',
 					get_string('mdlos_dst_region_name', 'block_mdlopensim'),
                    	get_string('mdlos_dst_region_desc', 'block_mdlopensim'), "", PARAM_TEXT));
 
+/*
 $settings->add(new admin_setting_configcheckbox('mdlopnsm_use_https', 
 					get_string('mdlos_use_https', 'block_mdlopensim'),
                    	get_string('mdlos_use_https_desc', 'block_mdlopensim'), 0));
 
-/*
 $settings->add(new admin_setting_configtext('mdlopnsm_https_url', 
 					get_string('mdlos_https_url', 'block_mdlopensim'),
                    	get_string('mdlos_https_url_desc', 'block_mdlopensim'), "", PARAM_URL));

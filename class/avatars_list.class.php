@@ -7,16 +7,16 @@ require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
 
 class  AvatarsList
 {
-var $db_data = array();
-var $icon = array();
-var $pnum = array();
+	var $db_data = array();
+	var $icon = array();
+	var $pnum = array();
 	var $action_url;
 	var $edit_url;
 	var $owner_url;
 
 	var $db_ver  = "0.6";
 	var $isAdmin = false;
-var $userid  = 0;
+	var $userid  = 0;
 
 	// Page Control
 	var $Cpstart = 0;
@@ -37,6 +37,7 @@ var $userid  = 0;
 
 	function  set_condition() 
 	{
+		//$this->userid = $root->mContext->mXoopsUser->get('uid');
 		$this->isAdmin = isadmin();
 		$this->db_ver  = opensim_get_dbversion();
 
