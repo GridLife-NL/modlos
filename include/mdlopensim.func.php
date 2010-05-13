@@ -34,13 +34,18 @@ function print_tabnav($currenttab, $course)
 	}
 
 	$toprow = array();
-	$toprow[] = new tabobject('map_action',MDLOPNSM_BLK_URL.'/actions/map_action.php?course='.$courseid, get_string('mdlos_world_map','block_mdlopensim'));
-	$toprow[] = new tabobject('regions_list',MDLOPNSM_BLK_URL.'/actions/regions_list.php?course='.$courseid, get_string('mdlos_regions_list','block_mdlopensim'));
+	$toprow[] = new tabobject('map_action', MDLOPNSM_BLK_URL.'/actions/map_action.php?course='.$courseid, 
+																	get_string('mdlos_world_map','block_mdlopensim'));
+	$toprow[] = new tabobject('regions_list', MDLOPNSM_BLK_URL.'/actions/regions_list.php?course='.$courseid, 
+																	get_string('mdlos_regions_list','block_mdlopensim'));
 	if (!isGuest()) {
-		$toprow[] = new tabobject('avatars_list',MDLOPNSM_BLK_URL.'/actions/avatars_list.php?course='.$courseid, get_string('mdlos_avatars_list','block_mdlopensim'));
-		$toprow[] = new tabobject('avatar_make', MDLOPNSM_BLK_URL.'/actions/avatar_make.php?course='. $courseid, get_string('mdlos_avatar_make','block_mdlopensim'));
+		$toprow[] = new tabobject('avatars_list', MDLOPNSM_BLK_URL.'/actions/avatars_list.php?course='.$courseid, 
+																			get_string('mdlos_avatars_list','block_mdlopensim'));
+		$toprow[] = new tabobject('avatar_create', MDLOPNSM_BLK_URL.'/actions/avatar_create.php?course='. $courseid, 
+																			get_string('mdlos_avatar_create','block_mdlopensim'));
 		if (isadmin()) {
-			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/actions/admin/settings.php?section=blocksettingmdlopnsm', get_string('mdlos_general_setting_menu','block_mdlopensim'));
+			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/actions/admin/settings.php?section=blocksettingmdlopensim', 
+																					get_string('mdlos_general_setting_menu','block_mdlopensim'));
 		}
 	}
 	$tabs = array($toprow);

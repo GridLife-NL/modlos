@@ -67,7 +67,7 @@ $string['mdlos_world_map'] = 'World Map';
 $string['mdlos_user_info'] = 'User Information';
 $string['mdlos_avatars_list'] = 'Avatars List';
 $string['mdlos_regions_list'] = 'Regions List';
-$string['mdlos_avatar_make'] = 'Make Avatar';
+$string['mdlos_avatar_create'] = 'Create Avatar';
 $string['mdlos_editable_list'] = 'Editable Avatars List';
 
 $string['mdlos_avatar_info'] = 'Avatar Information';

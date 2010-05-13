@@ -66,7 +66,7 @@ $string['mdlos_world_map'] = 'ワールドマップ';
 $string['mdlos_user_info'] = 'ユーザ情報';
 $string['mdlos_avatars_list'] = 'アバターリスト';
 $string['mdlos_regions_list'] = 'リージョンリスト';
-$string['mdlos_avatar_make'] = 'アバター作成';
+$string['mdlos_avatar_create'] = 'アバター作成';
 $string['mdlos_editable_list'] = '編集可能アバターリスト';
 
 $string['mdlos_avatar_info'] = 'アバター情報';
