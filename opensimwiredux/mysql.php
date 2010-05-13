@@ -14,29 +14,43 @@
 // Modified by Fumi.Iseki for Xoops Cube and Moodle  2010 3/29
 //
 
+
+// for TEST
+if (!defined("OPENSIM_DB_HOST")) {
+	exit();
+	//define("OPENSIM_DB_HOST",  "202.26.159.xxx");
+	//define("OPENSIM_DB_NAME",  "opensim_xxxx");
+	//define("OPENSIM_DB_USER",  "opensim_xxxx");
+	//define("OPENSIM_DB_PASS",  "opensim_xxxx");
+}
+
+
+
 class DB
 {
 	var $Host 	  = OPENSIM_DB_HOST;	// Hostname of our MySQL server
 	var $Database = OPENSIM_DB_NAME;	// Logical database name on that server
 	var $User 	  = OPENSIM_DB_USER;	// Database user
 	var $Password = OPENSIM_DB_PASS;	// Database user's password
-	var $Link_ID = 0;					// Result of mysql_connect()
+	var $Link_ID  = 0;					// Result of mysql_connect()
 	var $Query_ID = 0;					// Result of most recent mysql_query()
-	var $Record	= array();				// Current mysql_fetch_array()-result
+	var $Record	  = array();			// Current mysql_fetch_array()-result
 	var $Row;							// Current row number
-	var $Errno = 0;						// Error state of query
-	var $Error = "";
+	var $Errno    = 0;					// Error state of query
+	var $Error    = "";
 
 
-/*
-	function DB()
+	/*
+	function DB($connect=false)
 	{
 		$this->Host 	= OPENSIM_DB_HOST;	
 		$this->Database = OPENSIM_DB_NAME;	
 		$this->User 	= OPENSIM_DB_USER;	
 		$this->Password = OPENSIM_DB_PASS;	
+
+		if ($connect) $this->connect();
 	}
-*/
+	*/
 
 
 
@@ -62,12 +76,9 @@ class DB
 
 	function connect()
 	{
-		if($this->Link_ID == 0)
-		{
+		if($this->Link_ID==0) {
 			$this->Link_ID = mysql_connect($this->Host, $this->User, $this->Password);
-			if (!$this->Link_ID)
-			{
-				// Modified by Fumi.Iseki
+			if (!$this->Link_ID) {
 				//$this->halt("Link_ID == false, connect failed");
 				$this->Errno = 999;
 				return;
@@ -75,10 +86,10 @@ class DB
 			//if (_CHARSET=="UTF-8") mysql_set_charset('utf8'); 
 			mysql_set_charset('utf8'); 
 			$SelectResult = mysql_select_db($this->Database, $this->Link_ID);
-			if(!$SelectResult)
-			{
+			if (!$SelectResult) {
 				$this->Errno = mysql_errno($this->Link_ID);
 				$this->Error = mysql_error($this->Link_ID);
+				$this->Link_ID = 0;
 				$this->halt("cannot select database <i>".$this->Database."</i>");
 			}
 		}
@@ -96,14 +107,13 @@ class DB
 	function query($Query_String)
 	{
 		$this->connect();
-		if ($this->Errno!=0) return null;	// added by Fumi.Iseki
+		if ($this->Errno!=0) return 0; 	// added by Fumi.Iseki
 
 		$this->Query_ID = mysql_query($Query_String,$this->Link_ID);
 		$this->Row = 0;
 		$this->Errno = mysql_errno();
 		$this->Error = mysql_error();
-		if (!$this->Query_ID)
-		{
+		if (!$this->Query_ID) {
 			$this->halt("Invalid SQL: ".$Query_String);
 		}
 		return $this->Query_ID;
@@ -118,8 +128,7 @@ class DB
 		$this->Errno = mysql_errno();
 		$this->Error = mysql_error();
 		$stat = is_array($this->Record);
-		if (!$stat)
-		{
+		if (!$stat) {
 			@mysql_free_result($this->Query_ID);
 			$this->Query_ID = 0;
 		}
@@ -145,6 +154,8 @@ class DB
 	function optimize($tbl_name)
 	{
 		$this->connect();
+		if ($this->Errno!=0) return;
+
 		$this->Query_ID = @mysql_query("OPTIMIZE TABLE $tbl_name",$this->Link_ID);
 	}
 
@@ -152,14 +163,20 @@ class DB
 
 	function clean_results()
 	{
-		if($this->Query_ID != 0) mysql_freeresult($this->Query_ID);
+		if ($this->Query_ID!=0) {
+			mysql_freeresult($this->Query_ID);
+			$this->Query_ID = 0;
+		}
 	}
 
 
 
 	function close()
 	{
-		if($this->Link_ID != 0) mysql_close($this->Link_ID);
+		if ($this->Link_ID) {
+			mysql_close($this->Link_ID);
+			$this->Link_ID = 0;
+		}
 	}
 
 
@@ -167,6 +184,9 @@ class DB
 	// added by Fumi.Iseki
 	function exist_table($table)
 	{
+		$this->connect();
+		if ($this->Errno!=0) return false;
+
 		$tl = mysql_list_tables($this->Database, $this->Link_ID);
 		while($row=mysql_fetch_row($tl)) {
 			if (in_array($table, $row)) return true;
@@ -175,4 +195,5 @@ class DB
 	}
 
 }
+
 ?>
