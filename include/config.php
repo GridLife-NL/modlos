@@ -6,7 +6,8 @@ define('MDLOPNSM_DIR_NAME', basename(dirname(dirname(__FILE__))));
 define('MDLOPNSM_BLK_URL',  $CFG->wwwroot.'/blocks/'.MDLOPNSM_DIR_NAME);
 define('MDLOPNSM_BLK_PATH', $CFG->dirroot.'/blocks/'.MDLOPNSM_DIR_NAME);
 
-// top directory of this block
+// module_path is top directory of this block
+global $module_path;
 $module_path = MDLOPNSM_BLK_PATH.'/';
 
 

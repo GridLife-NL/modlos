@@ -14,7 +14,8 @@ $action = "map_action";
 
 global $CFG;
 
-$title = $CFG->mdlopnsm_grid_name." : World Map";
+$grid_name = $CFG->mdlopnsm_grid_name;
+$world_map = get_string("mdlos_world_map", "block_mdlopensim");
 $object_url = MDLOPNSM_BLK_URL.'/helper/world_map.php';
 
 

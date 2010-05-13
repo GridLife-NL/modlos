@@ -133,22 +133,15 @@ class  RegionsList
 		$grid_name = $CFG->mdlopnsm_grid_name;
 		$content   = $CFG->mdlopnsm_regions_content;
 
+        $module_url =  _OPENSIM_MODULE_URL;
+/*
 		$this->set_condition();
 		$this->execute();
 
-		include(MDLOPNSM_BLK_PATH."/html/regions.html");
-	}
-}
-
-
-/*
-        $render->setAttribute('grid_name',  $grid_name);
-        $render->setAttribute('content',    $content);
-        $render->setAttribute('isAdmin',    $this->isAdmin);
+        $isAdmin = $this->isAdmin);
         $render->setAttribute('isGuest',    $this->isGuest);
 
         $render->setAttribute('db_data',    $this->db_data);
-        $render->setAttribute('module_url', _OPENSIM_MODULE_URL);
         $render->setAttribute('action',     $this->action);
         $render->setAttribute('action_url', $this->action_url);
 
@@ -161,17 +154,24 @@ class  RegionsList
         $render->setAttribute('pnum',       $this->pnum);
         $render->setAttribute('number',     $this->number);
         $render->setAttribute('order',      $this->order);
+*/
 
-$smarty.const._MD_XPNSM_REGIONS_LIST
-$smarty.const._MD_XPNSM_REGION_NAME
-$smarty.const._MD_XPNSM_LOCATION_X
-$smarty.const._MD_XPNSM_LOCATION_Y
-$smarty.const._MD_XPNSM_ESTATE_OWNER
-$smarty.const._MD_XPNSM_REGION_OWNER
-$smarty.const._MD_XPNSM_ESTATE_ID
+		$regions_list = get_string("mdlos_regions_list","block_mdlopensim");
+		$region_name  = get_string("mdlos_region_name", "block_mdlopensim");
+		$location_x   = get_string("mdlos_location_X",  "block_mdlopensim");
+		$location_y   = get_string("mdlos_location_Y",  "block_mdlopensim");
+		$estate_owner = get_string("mdlos_estate_owner","block_mdlopensim");
+		$estate_id    = get_string("mdlos_estate_id",  	"block_mdlopensim");
+		$region_owner = get_string("mdlos_region_owner","block_mdlopensim");
+/*
 $smarty.const._MD_XPNSM_IPADDR
 $smarty.const._MD_XPNSM_REGIONS_FOUND
 $smarty.const._MD_XPNSM_PAGE
 $smarty.const._MD_XPNSM_PAGE_OF
 */
+
+		include(MDLOPNSM_BLK_PATH."/html/regions.html");
+	}
+}
+
 ?>

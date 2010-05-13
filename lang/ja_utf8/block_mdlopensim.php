@@ -94,13 +94,17 @@ $string['mdlos_user_search'] 		= 'ユーザ検索';
 
 $string['mdlos_region'] 			= 'リージョン';
 $string['mdlos_region_info'] 		= 'リージョン情報';
-$string['mdlos_region_name'] 		= 'リージョンの名前';
+$string['mdlos_region_name'] 		= 'リージョン名';
 $string['mdlos_regions_found'] 		= 'リージョン';
 $string['mdlos_location_x'] 		= '座標: X';
 $string['mdlos_location_y'] 		= '座標: Y';
 $string['mdlos_page'] 				= 'ページ';
 $string['mdlos_page_of'] 			= '/';
 $string['mdlos_coordinates'] 		= '座標';
+$string['mdlos_region_owner'] 		= 'リージョンオーナー';
+$string['mdlos_estate_owner']		= '管理者';
+$string['mdlos_estate_id']			= 'Estate ID';
+$string['mdlos_region_owner_chng']  = 'リージョンオーナー変更';
 
 $string['mdlos_firstname_required'] = 'ファーストネームを書いてください！';
 $string['mdlos_lastname_required'] 	= 'ラストネームを書いてください！';
