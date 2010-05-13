@@ -51,8 +51,8 @@
 // Load Function
 //
 
-require_once($opensim_inc_dir."tools.func.php");
-require_once($opensim_inc_dir."opensim.mysql.php");
+require_once($module_path."include/tools.func.php");
+require_once($module_path."include/opensim.mysql.php");
 
 
 

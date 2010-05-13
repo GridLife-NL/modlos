@@ -139,4 +139,38 @@ class  RegionsList
 	}
 }
 
+
+/*
+        $render->setAttribute('grid_name',  $grid_name);
+        $render->setAttribute('content',    $content);
+        $render->setAttribute('isAdmin',    $this->isAdmin);
+        $render->setAttribute('isGuest',    $this->isGuest);
+
+        $render->setAttribute('db_data',    $this->db_data);
+        $render->setAttribute('module_url', _OPENSIM_MODULE_URL);
+        $render->setAttribute('action',     $this->action);
+        $render->setAttribute('action_url', $this->action_url);
+
+        $render->setAttribute('icon',       $this->icon);
+        $render->setAttribute('sitestart',  $this->sitestart);
+        $render->setAttribute('sitemax',    $this->sitemax);
+
+        $render->setAttribute('pstart',     $this->pstart);
+        $render->setAttribute('plimit',     $this->plimit);
+        $render->setAttribute('pnum',       $this->pnum);
+        $render->setAttribute('number',     $this->number);
+        $render->setAttribute('order',      $this->order);
+
+$smarty.const._MD_XPNSM_REGIONS_LIST
+$smarty.const._MD_XPNSM_REGION_NAME
+$smarty.const._MD_XPNSM_LOCATION_X
+$smarty.const._MD_XPNSM_LOCATION_Y
+$smarty.const._MD_XPNSM_ESTATE_OWNER
+$smarty.const._MD_XPNSM_REGION_OWNER
+$smarty.const._MD_XPNSM_ESTATE_ID
+$smarty.const._MD_XPNSM_IPADDR
+$smarty.const._MD_XPNSM_REGIONS_FOUND
+$smarty.const._MD_XPNSM_PAGE
+$smarty.const._MD_XPNSM_PAGE_OF
+*/
 ?>

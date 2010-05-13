@@ -5,11 +5,11 @@
 //													by Fumi.Iseki
 //
 //
-// $size, $centerX, $centerY, $world_map_url, $opensim_inc_dir are needed
+// $size, $centerX, $centerY, $world_map_url, $module_path are needed
 //
 
 //
-require_once($opensim_inc_dir."opensim.func.php");
+require_once($module_path."include/opensim.func.php");
 
 
 
