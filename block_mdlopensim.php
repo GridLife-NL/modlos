@@ -47,7 +47,7 @@ class block_mdlopensim extends block_base
 
 		$this->content = new stdClass;
 
-		$this->content->text = '<a href="'.MDLOPNSM_BLK_URL.'/actions/db_status.php&course='.$id.'">'.get_string('mdlos_db_status','block_mdlopensim').'</a><br />';
+		$this->content->text = '<a href="'.MDLOPNSM_BLK_URL.'/actions/show_db.php&course='.$id.'">'.get_string('mdlos_show_db','block_mdlopensim').'</a><br />';
 		$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/map_action.php?course='.$id.'">'.get_string('mdlos_world_map','block_mdlopensim').'</a><br />';
 		$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('mdlos_regions_list','block_mdlopensim').'</a><br />';
 		if (!isguest()) {
@@ -72,8 +72,8 @@ class block_mdlopensim extends block_base
 
 		$this->content->text.= "<center><b>".$this->grid_name."</b></center>";		
 		$this->content->text.= get_string('mdlos_db_status','block_mdlopensim').": ";		
-		if ($this->grid_status) $this->content->text.= "<b><font color=\"#129212\">".get_string('mdlos_online_ttl', 'block_mdlopensim')."</font></b><br />";		
-		else					$this->content->text.= "<b><font color=\"#ea0202\">".get_string('mdlos_offline_ttl','block_mdlopensim')."</font></b><br />";		
+		if ($this->grid_status) $this->content->text.= "<b><font color=\"#129212\">ONLINE</font></b><br />";		
+		else					$this->content->text.= "<b><font color=\"#ea0202\">OFFLINE</font></b><br />";		
 		$this->content->text.= get_string('mdlos_total_users','block_mdlopensim').": ".$this->user_count."<br />";		
 		$this->content->text.= get_string('mdlos_total_regions','block_mdlopensim').": ".$this->region_count."<br />";		
 		$this->content->text.= get_string('mdlos_visitors_last30days','block_mdlopensim').": ".$this->lastmonth_online."<br />";		

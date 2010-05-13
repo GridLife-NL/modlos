@@ -38,6 +38,7 @@ class  RegionsList
 
 		$db_ver = opensim_get_dbversion(); 
 		if ($db_ver=="0.0.0") {
+			error(get_string('courseidwrong', 'block_autoattend'));
 			//$this->mActionForm->addErrorMessage(_MD_XPNSM_DB_CONNECT_ERROR);
 		}
 
