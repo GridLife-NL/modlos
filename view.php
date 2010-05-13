@@ -39,12 +39,13 @@ include(MDLOPNSM_BLK_PATH."/actions/world_map_action.php");
 else if ($action=="regions_list") {
 	require("./class/regions_list.class.php");
 	$x = new RegionsList();
-	//$x->set_condition();
-	//$x->execute();
-	$x->print_regions();
+	$x->print_page();
 }
 else if ($action=="avatars_list") {
-	print_avatars_list();
+	require("./class/avatars_list.class.php");
+	$x = new AvatarsList();
+	$x->print_page();
+	//print_avatars_list();
 }
 
 print_footer($course);

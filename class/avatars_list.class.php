@@ -1,25 +1,22 @@
 <?php
 
-if (!defined('XOOPS_ROOT_PATH')) exit();
-
-require_once(_OPENSIM_MODULE_PATH."/include/xoopensim.func.php");
-require_once _OPENSIM_MODULE_PATH.'/class/AbstructAction.class.php';
-require_once(_OPENSIM_MODULE_PATH."/include/config.php");
+if (!defined('MDLOPNSM_BLK_PATH')) exit();
+require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
 
 
-class  avatarsAction extends Abstruct_Action
+
+class  AvatarsList
 {
-	var $db_data = array();
-	var $icon = array();
-	var $pnum = array();
+var $db_data = array();
+var $icon = array();
+var $pnum = array();
 	var $action_url;
 	var $edit_url;
-
 	var $owner_url;
 
 	var $db_ver  = "0.6";
 	var $isAdmin = false;
-	var $userid  = 0;
+var $userid  = 0;
 
 	// Page Control
 	var $Cpstart = 0;
@@ -38,26 +35,16 @@ class  avatarsAction extends Abstruct_Action
 	var $sql_condition = "";
 
 
-	function  avatarsAction($controller) 
+	function  set_condition() 
 	{
-		$this->mController = $controller;
-
-		$root = & XCube_Root::getSingleton();
-		if ($root->mContext->mUser->isInRole('Site.GuestUser')) {
-			$root->mController->executeForward(_OPENSIM_MODULE_URL);
-		}
-		else {
-			$this->userid = $root->mContext->mXoopsUser->get('uid');
-		}
-
-		$this->isAdmin = isXoopensimAdmin($root);
+		$this->isAdmin = isadmin();
 		$this->db_ver  = opensim_get_dbversion();
 
-		$sql_order = "ORDER by created ASC";
+		$sql_order = "ORDER BY created ASC";
 
 		// firstname & lastname
-		$this->firstname = $root->mContext->mRequest->getRequest('firstname');
-		$this->lastname  = $root->mContext->mRequest->getRequest('lastname');
+		$this->firstname = optional_param('firsrname', '', PARAM_TEXT);
+		$this->lastname  = optional_param('lastname',  '', PARAM_TEXT);
 		if ($this->firstname!="" and !preg_match("/^\w+$/", $this->firstname)) $this->firstname = "";
 		if ($this->lastname!=""  and !preg_match("/^\w+$/", $this->lastname))  $this->lastname  = "";
 
@@ -79,15 +66,11 @@ class  avatarsAction extends Abstruct_Action
 		}
 
 		// pstart & plimit
-		$this->pstart = $root->mContext->mRequest->getRequest('pstart');
-		$this->plimit = $root->mContext->mRequest->getRequest('plimit');
-		if ($this->pstart!="" and !preg_match("/^[0-9]+$/", $this->pstart)) $this->pstart = "";
-		if ($this->plimit!="" and !preg_match("/^[0-9]+$/", $this->plimit)) $this->plimit = "";
-		if ($this->pstart=="") $this->pstart = $this->Cpstart;
-		if ($this->plimit=="") $this->plimit = $this->Cplimit;
-		$sql_limit = "LIMIT $this->pstart, $this->plimit";
+		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
+		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 
 		// SQL Condition
+		$sql_limit = "LIMIT $this->pstart, $this->plimit";
 		$this->sql_condition = " WHERE $sql_validuser $sql_firstname $sql_lastname $sql_order $sql_limit";
 		$this->action_url    = _OPENSIM_MODULE_URL."/?action=avatars";
 		$this->edit_url      = _OPENSIM_MODULE_URL."/?action=edit";
@@ -142,7 +125,7 @@ class  avatarsAction extends Abstruct_Action
 
 
 		// Xoopensim Users D
-		$usersdbHandler = & xoops_getmodulehandler('usersdb');
+		//$usersdbHandler = & xoops_getmodulehandler('usersdb');
 
 		// OpenSim DB
 		$users = opensim_get_avatarinfos($this->sql_condition);
@@ -184,6 +167,7 @@ class  avatarsAction extends Abstruct_Action
 
 			// serach Xoops DB
 			$uid = -1;
+/*
 			$avatardata = & $usersdbHandler->get($UUID);
 			if ($avatardata!=null) {
 				$uid = $avatardata->get('uid');
@@ -196,6 +180,7 @@ class  avatarsAction extends Abstruct_Action
 					}
 				}
 			}
+*/
 			$this->db_data[$colum]['uid'] = $uid;
 
 			if ($this->isAdmin or $this->userid==$uid) {
@@ -213,39 +198,17 @@ class  avatarsAction extends Abstruct_Action
 
 
 
-	function  executeView($render) 
+	function  print_page() 
 	{
-		$root = & XCube_Root::getSingleton();
-		$grid_name = $root->mContext->mModuleConfig['grid_name'];
-		$content   = $root->mContext->mModuleConfig['avatars_content'];
+        global $CFG;
 
-		$render->setTemplateName('xoopensim_avatars.html');
+        $grid_name = $CFG->mdlopnsm_grid_name;
+        $content   = $CFG->mdlopnsm_avatars_content;
 
-		$render->setAttribute('grid_name', 		$grid_name);
-		$render->setAttribute('content',   		$content);
+        $this->set_condition();
+        $this->execute();
 
-		$render->setAttribute('db_data',   		$this->db_data);
-		$render->setAttribute('action_url',		$this->action_url);
-		$render->setAttribute('edit_url',		$this->edit_url);
-		$render->setAttribute('owner_url',		$this->owner_url);
-		$render->setAttribute('module_url',		_OPENSIM_MODULE_URL);
-		$render->setAttribute('firstname', 		$this->firstname );
-		$render->setAttribute('lastname',  		$this->lastname );
-
-		$render->setAttribute('not_edit',		XOPNSIM_NOT_EDITABLE);
-		$render->setAttribute('can_edit',		XOPNSIM_EDITABLE);
-		$render->setAttribute('owner_edit',		XOPNSIM_OWNER_EDITABLE);
-
-		$render->setAttribute('lnk_firstname',	$this->lnk_firstname);
-		$render->setAttribute('lnk_lastname',	$this->lnk_lastname);
-		$render->setAttribute('icon',	   		$this->icon);
-		$render->setAttribute('sitemax',   		$this->sitemax);
-		$render->setAttribute('sitestart', 		$this->sitestart);
-
-		$render->setAttribute('pstart',	   		$this->pstart);
-		$render->setAttribute('plimit',	   		$this->plimit);
-		$render->setAttribute('pnum',	   		$this->pnum);
-		$render->setAttribute('number',	   		$this->number);
+        include(MDLOPNSM_BLK_PATH."/html/avatars.html");
 	}
 }
 

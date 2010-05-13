@@ -6,6 +6,7 @@ define('MDLOPNSM_DIR_NAME', basename(dirname(dirname(__FILE__))));
 define('MDLOPNSM_BLK_URL',  $CFG->wwwroot.'/blocks/'.MDLOPNSM_DIR_NAME);
 define('MDLOPNSM_BLK_PATH', $CFG->dirroot.'/blocks/'.MDLOPNSM_DIR_NAME);
 
+// directory of opensim.func.php 
 $opensim_inc_dir = MDLOPNSM_BLK_PATH."/include/";
 
 

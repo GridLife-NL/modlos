@@ -125,7 +125,7 @@ class  RegionsList
 
 
 
-	function  print_regions() 
+	function  print_page() 
 	{
 		global $CFG;
 
