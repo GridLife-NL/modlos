@@ -6,6 +6,7 @@ require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 if (!defined('MDLOPNSM_BLK_PATH')) exit();
 require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
 
+
 $courseid = optional_param('course', '0', PARAM_INT);
 $action = "map_action";
 
