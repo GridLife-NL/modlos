@@ -922,7 +922,6 @@
 		
         global $groupEnforceGroupPerms, $requestingAgent, $uuidZero, $groupDBCon;
 		global $osagent, $osgroup, $osgroupinvite, $osgroupmembership, $osgroupnotice, $osgrouprolemembership, $osrole;
-
         $agentID = $params['AgentID'];
         
         $sql = " SELECT $osgroup.GroupID, $osgroup.Name as GroupName, $osgroup.Charter, $osgroup.InsigniaID, $osgroup.FounderID, $osgroup.MembershipFee, $osgroup.OpenEnrollment, $osgroup.ShowInList, $osgroup.AllowPublish, $osgroup.MaturePublish"
