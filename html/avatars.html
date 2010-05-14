@@ -33,7 +33,7 @@
               <tr>
                 <td>
                   <{if $icon[0]=="on"}>
-                    <a href="<{$action_url}>&<{$lnk_firstname}><{$lnk_lastname}>pstart=0&plimit=<{$plimit}>" target="_self">
+                    <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=0&amp;plimit=<{$plimit}>" target="_self">
                   <{/if}>
                     <img src=<{$module_url}>/images/icons/icon_back_more_<{$icon[0]}>.gif width=15 height=15 border="0">
                   <{if $icon[0]=="on"}>
@@ -42,7 +42,7 @@
                 </td>
                 <td>
                   <{if $icon[0]=="on"}>
-                    <a href="<{$action_url}>&<{$lnk_firstname}><{$lnk_lastname}>pstart=<{$pnum[0]}>&plimit=<{$plimit}>" target="_self">
+                    <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=<{$pnum[0]}>&amp;plimit=<{$plimit}>" target="_self">
                   <{/if}>
                     <img src=<{$module_url}>/images/icons/icon_back_one_<{$icon[0]}>.gif width=15 height=15 border="0">
                   <{if $icon[0]=="on"}>
@@ -58,7 +58,7 @@
 
                 <td>
                   <{if $icon[1]=="on"}>
-                    <a href="<{$action_url}>&<{$lnk_firstname}><{$lnk_lastname}>pstart=<{$pnum[1]}>&plimit=<{$plimit}>" target="_self">
+                    <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=<{$pnum[1]}>&amp;plimit=<{$plimit}>" target="_self">
                   <{/if}>
                       <img src=<{$module_url}>/images/icons/icon_forward_one_<{$icon[1]}>.gif width=15 height=15 border="0">
                   <{if $icon[1]=="on"}>
@@ -67,7 +67,7 @@
                 </td>
                 <td>
                   <{if $icon[1]=="on"}>
-                    <a href="<{$action_url}>&<{$lnk_firstname}><{$lnk_lastname}>pstart=<{$pnum[2]}>&plimit=<{$plimit}>" target="_self">
+                    <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=<{$pnum[2]}>&amp;plimit=<{$plimit}>" target="_self">
                   <{/if}>
                       <img src=<{$module_url}>/images/icons/icon_forward_more_<{$icon[1]}>.gif width=15 height=15 border="0">
                   <{if $icon[1]=="on"}>
@@ -77,21 +77,21 @@
 
                 <td width="10"></td>
                 <td>
-                  <a href="<{$action_url}>&<{$lnk_firstname}><{$lnk_lastname}>pstart=0&plimit=10" target="_self">
+                  <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=0&amp;plimit=10" target="_self">
                     <img src=<{$module_url}>/images/icons/<{$icon[3]}>.gif width=15 height=15 border="0" ALT="Limit 10"></a>
                 </td>
                 <td>
-                  <a href="<{$action_url}>&<{$lnk_firstname}><{$lnk_lastname}>pstart=0&plimit=25" target="_self">
+                  <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=0&amp;plimit=25" target="_self">
                     <img src=<{$module_url}>/images/icons/<{$icon[4]}>.gif width=15 height=15 border="0" ALT="Limit 25">
                   </a>
                 </td>
                 <td>
-                  <a href="<{$action_url}>&<{$lnk_firstname}><{$lnk_lastname}>pstart=0&plimit=50" target="_self">
+                  <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=0&amp;plimit=50" target="_self">
                     <img src=<{$module_url}>/images/icons/<{$icon[5]}>.gif width=15 height=15 border="0" ALT="Limit 50">
                   </a>
                 </td>
                 <td>
-                  <a href="<{$action_url}>&<{$lnk_firstname}><{$lnk_lastname}>pstart=0&plimit=100" target="_self">
+                  <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=0&amp;plimit=100" target="_self">
                     <img src=<{$module_url}>/images/icons/<{$icon[6]}>.gif width=15 height=15 border="0" ALT="Limit 100">
                   </a>
                 </td>
@@ -174,9 +174,9 @@
                 </td>
                 <td width=80>
                   <{if $dat.editable==$can_edit}>
-                    <a href="<{$edit_url}>&uuid=<{$dat.UUID}>" ><font color=#cc1010><b><{$smarty.const._MD_XPNSM_EDIT_TTL}></b></font></a>
+                    <a href="<{$edit_url}>&amp;uuid=<{$dat.UUID}>" ><font color=#cc1010><b><{$smarty.const._MD_XPNSM_EDIT_TTL}></b></font></a>
                   <{elseif $dat.editable==$owner_edit and $dat.state==XOPNSIM_STATE_ACTIVE}>
-                    <a href="<{$owner_url}>&uuid=<{$dat.UUID}>"><font color=#aa5050><b><{$smarty.const._MD_XPNSM_GET_OWNER_TTL}></b></font></a>
+                    <a href="<{$owner_url}>&amp;uuid=<{$dat.UUID}>"><font color=#aa5050><b><{$smarty.const._MD_XPNSM_GET_OWNER_TTL}></b></font></a>
                   <{else}>
                     -
                   <{/if}>
