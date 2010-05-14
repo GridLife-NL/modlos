@@ -199,11 +199,6 @@ $string['mdlos_https_url'] 			= 'HTTPSの URL';
 $string['mdlos_https_url_desc'] 	= 'HTTPSを使用する場合は，Moodle のモジュールの HTTPSでの URLを指定する．'.
 									  '省略した場合は，$CFG->wwwroot の http: を https: に変換したものを使用する';
 
-$string['mdlos_userinfo_link'] 		= 'iXoopsユーザの名前からアカウント情報のページへのリンク';
-$string['mdlos_userinfo_link__desc']= 'ページ上に Xoopsユーザの名前が表示された場合に，そのユーザのアカウント情報画面へのリンクを張るかどうかを指定する．'.
-									  'なお，セキュリティ上の問題から，<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>'.
-									  'UserInfoProtector</a>などを使用して，他のユーザのアカウント画面の表示を禁止している場合などは，ここを 「はい」 にすると煩わしいだけになる．';
-
 $string['mdlos_grpdb_rkey'] 		= 'Flotsam グループデータベース読み込みアクセスキー';
 $string['mdlos_grpdb_rkey_desc'] 	= 'Flotsam Group Function を使用する場合に指定する読み込み用キー．'.
 									  'OpnenSim.iniの [Groups]セクションの XmlRpcServiceReadKeyの値と一致させる必要がある．';
@@ -215,10 +210,10 @@ $string['mdlos_crncy_key_desc'] 	= 'DTL Money サーバへのアクセスキー�
 $string['mdlos_banker'] 			= 'バンカーアバターのUUID　（未実装）';
 $string['mdlos_banker_desc'] 		= 'バンカーアバター （お金の管理を行うアバター） のUUID (GUID)';
 
-$string['mdlos_dsclmr'] 			= '使用許諾の表示';
-$string['mdlos_dsclmr_desc'] 		= 'アバター作成時に OpenSimの使用許諾を表示するかどうかの指定';
-$string['mdlos_dsclmr_cntnt'] 		= '使用許諾の内容';
-$string['mdlos_dsclmr_cntnt_desc'] 	= 'OpenSim使用許諾の内容を記入する．HTMLタグ，BB Codeタグは使用不可';
+$string['mdlos_userinfo_link'] 		= 'Xoopsユーザの名前からアカウント情報のページへのリンク';
+$string['mdlos_userinfo_link__desc']= 'ページ上に Xoopsユーザの名前が表示された場合に，そのユーザのアカウント情報画面へのリンクを張るかどうかを指定する．'.
+									  'なお，セキュリティ上の問題から，<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>'.
+									  'UserInfoProtector</a>などを使用して，他のユーザのアカウント画面の表示を禁止している場合などは，ここを 「はい」 にすると煩わしいだけになる．';
 
 $string['mdlos_db_status_cntnt'] 	= 'データベース状態のページのコンテンツ';
 $string['mdlos_db_status_cntnt_desc']='Mdlopensim のデータベース状態のページのコンテンツ．HTMLタグ使用可能';
@@ -228,6 +223,11 @@ $string['mdlos_avt_cntnt'] 			= 'アバターリストページのコンテン�
 $string['mdlos_avt_cntnt_desc'] 	= 'Mdlopensim のアバターリストページのコンテンツ．HTMLタグ使用可能';
 $string['mdlos_edtbl_cntnt'] 		= 'アバター編集ページのコンテンツ';
 $string['mdlos_edtbl_cntnt_desc'] 	= 'Mdlopensim のアバター編集ページのコンテンツ．HTMLタグ使用可能';
+
+$string['mdlos_dsclmr'] 			= '使用許諾の表示';
+$string['mdlos_dsclmr_desc'] 		= 'アバター作成時に OpenSimの使用許諾を表示するかどうかの指定';
+$string['mdlos_dsclmr_cntnt'] 		= '使用許諾の内容';
+$string['mdlos_dsclmr_cntnt_desc'] 	= 'OpenSim使用許諾の内容を記入する．HTMLタグ，BB Codeタグは使用不可';
 
 $string['mdlos_grid_log_dir'] 		= 'グリッドサーバのログ保存先';
 $string['mdlos_grid_log_desc'] 		= 'グリッドサーバのログの保存先';

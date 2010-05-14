@@ -211,10 +211,12 @@ $string['mdlos_crncy_key_desc'] 	= 'Specify Money server access key code';
 $string['mdlos_banker'] 			= 'UUID of Banker Avatar';
 $string['mdlos_banker_desc'] 		= 'Specify UUID(GUID) of Banker Avatar';
 
-$string['mdlos_dsclmr'] 			= 'Disclaimer Activation';
-$string['mdlos_dsclmr_desc'] 		= 'Select to display of disclaimer is active or not';
-$string['mdlos_dsclmr_cntnt'] 		= 'Content of Disclaimer';
-$string['mdlos_dsclmr_cntnt_desc'] 	= 'Specify content of Disclaimer of OpenSim';
+$string['mdlos_userinfo_link']      = 'Link from Xoops user\'s name to user information page';
+$string['mdlos_userinfo_link__desc']= 'It is specified whether to put the link form Xoops user\'s name to Xoops account information page, '.
+									  'when Xoops user\'s name is displayed on the XoopenSim page. '.
+									  'From the viewpoint on security, You might be forbidding user to view other user\'s account information page using '.
+									  '<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>UserInfoProtector</a>. '.
+									  'In that case, if this is Yes, it is very annoying.';
 
 $string['mdlos_db_status_cntnt'] 	= 'DB Status Content';
 $string['mdlos_db_status_cntnt_desc']='Specify content of db status page';
@@ -224,6 +226,11 @@ $string['mdlos_avt_cntnt'] 			= 'Avatars List Content';
 $string['mdlos_avt_cntnt_desc'] 	= 'Specify content of avatars list page';
 $string['mdlos_edtbl_cntnt'] 		= 'Editable Avatas List Content';
 $string['mdlos_edtbl_cntnt_desc'] 	= 'Specify content of editable avatars list page';
+
+$string['mdlos_dsclmr'] 			= 'Disclaimer Activation';
+$string['mdlos_dsclmr_desc'] 		= 'Select to display of disclaimer is active or not';
+$string['mdlos_dsclmr_cntnt'] 		= 'Content of Disclaimer';
+$string['mdlos_dsclmr_cntnt_desc'] 	= 'Specify content of Disclaimer of OpenSim';
 
 $string['mdlos_grid_log_dir'] 		= 'Grid Server Log Directory';
 $string['mdlos_grid_log_desc'] 		= 'Specify grid server directory';
