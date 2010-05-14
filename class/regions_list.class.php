@@ -29,7 +29,6 @@ class  RegionsList
 
 	function  set_condition() 
 	{
-
 		$this->isAdmin = isadmin();
 		$this->isGuest = isguest();
 
@@ -59,8 +58,8 @@ class  RegionsList
 		$sql_limit = "LIMIT $this->pstart, $this->plimit";
 		$this->sql_condition = " $sql_order $sql_limit";
 
-		$this->action = "regions_list";
-		$this->action_url = MDLOPNSM_BLK_URL."/actions/".$this->action.".php";
+		$this->action = "regions_list.php";
+		$this->action_url = MDLOPNSM_BLK_URL."/actions/".$this->action;
 
 		return;
 	}
@@ -130,45 +129,25 @@ class  RegionsList
 	{
 		global $CFG;
 
-		$grid_name = $CFG->mdlopnsm_grid_name;
-		$content   = $CFG->mdlopnsm_regions_content;
-
-        $module_url =  _OPENSIM_MODULE_URL;
-/*
 		$this->set_condition();
 		$this->execute();
 
-        $isAdmin = $this->isAdmin);
-        $render->setAttribute('isGuest',    $this->isGuest);
+		$grid_name     = $CFG->mdlopnsm_grid_name;
+		$content       = $CFG->mdlopnsm_regions_content;
+        $module_url    = MDLOPNSM_BLK_URL;
 
-        $render->setAttribute('db_data',    $this->db_data);
-        $render->setAttribute('action',     $this->action);
-        $render->setAttribute('action_url', $this->action_url);
+		$regions_list  = get_string("mdlos_regions_list",  "block_mdlopensim");
+		$location_x    = get_string("mdlos_location_x",    "block_mdlopensim");
+		$location_y    = get_string("mdlos_location_y",    "block_mdlopensim");
+		$region_name   = get_string("mdlos_region_name",   "block_mdlopensim");
+		$estate_owner  = get_string("mdlos_estate_owner",  "block_mdlopensim");
+		$ip_address    = get_string("mdlos_ipaddr",		   "block_mdlopensim");
+		$regions_found = get_string("mdlos_regions_found", "block_mdlopensim");
+		$page_num	   = get_string("mdlos_page",		   "block_mdlopensim");
+		$page_num_of   = get_string("mdlos_page_of",	   "block_mdlopensim");
 
-        $render->setAttribute('icon',       $this->icon);
-        $render->setAttribute('sitestart',  $this->sitestart);
-        $render->setAttribute('sitemax',    $this->sitemax);
-
-        $render->setAttribute('pstart',     $this->pstart);
-        $render->setAttribute('plimit',     $this->plimit);
-        $render->setAttribute('pnum',       $this->pnum);
-        $render->setAttribute('number',     $this->number);
-        $render->setAttribute('order',      $this->order);
-*/
-
-		$regions_list = get_string("mdlos_regions_list","block_mdlopensim");
-		$region_name  = get_string("mdlos_region_name", "block_mdlopensim");
-		$location_x   = get_string("mdlos_location_X",  "block_mdlopensim");
-		$location_y   = get_string("mdlos_location_Y",  "block_mdlopensim");
-		$estate_owner = get_string("mdlos_estate_owner","block_mdlopensim");
-		$estate_id    = get_string("mdlos_estate_id",  	"block_mdlopensim");
-		$region_owner = get_string("mdlos_region_owner","block_mdlopensim");
-/*
-$smarty.const._MD_XPNSM_IPADDR
-$smarty.const._MD_XPNSM_REGIONS_FOUND
-$smarty.const._MD_XPNSM_PAGE
-$smarty.const._MD_XPNSM_PAGE_OF
-*/
+		//$region_owner = get_string("mdlos_region_owner", "block_mdlopensim");
+		//$estate_id    = get_string("mdlos_estate_id",    "block_mdlopensim");
 
 		include(MDLOPNSM_BLK_PATH."/html/regions.html");
 	}
