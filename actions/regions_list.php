@@ -16,7 +16,7 @@ print_tabheader($action, $course);
 
 require_once(MDLOPNSM_BLK_PATH."/class/regions_list.class.php");
 $regions = new RegionsList();
-$regions->print_page();
+$regions->print_page($courseid);
 
 print_footer($course);
 	

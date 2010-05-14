@@ -125,7 +125,7 @@ class  RegionsList
 
 
 
-	function  print_page() 
+	function  print_page($courseid) 
 	{
 		global $CFG;
 
@@ -135,6 +135,11 @@ class  RegionsList
 		$grid_name     = $CFG->mdlopnsm_grid_name;
 		$content       = $CFG->mdlopnsm_regions_content;
         $module_url    = MDLOPNSM_BLK_URL;
+		$course		   = "&amp;course=$courseid";
+		$order		   = "?order=$this->order";
+		$pstart		   = "&amp;pstart=$this->pstart";
+		$plimit		   = "&amp;plimit=$this->plimit";
+
 
 		$regions_list  = get_string("mdlos_regions_list",  "block_mdlopensim");
 		$location_x    = get_string("mdlos_location_x",    "block_mdlopensim");

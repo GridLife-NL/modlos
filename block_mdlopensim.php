@@ -74,10 +74,10 @@ class block_mdlopensim extends block_base
 		$this->content->text.= get_string('mdlos_db_status','block_mdlopensim').": ";		
 		if ($this->grid_status) $this->content->text.= "<b><font color=\"#129212\">ONLINE</font></b><br />";		
 		else					$this->content->text.= "<b><font color=\"#ea0202\">OFFLINE</font></b><br />";		
-		$this->content->text.= get_string('mdlos_total_users','block_mdlopensim').": ".$this->user_count."<br />";		
-		$this->content->text.= get_string('mdlos_total_regions','block_mdlopensim').": ".$this->region_count."<br />";		
-		$this->content->text.= get_string('mdlos_visitors_last30days','block_mdlopensim').": ".$this->lastmonth_online."<br />";		
-		$this->content->text.= get_string('mdlos_online_now','block_mdlopensim').": ".$this->now_online."<br />";		
+		$this->content->text.= get_string('mdlos_total_users','block_mdlopensim').": <b>".$this->user_count."</b><br />";		
+		$this->content->text.= get_string('mdlos_total_regions','block_mdlopensim').": <b>".$this->region_count."</b><br />";		
+		$this->content->text.= get_string('mdlos_visitors_last30days','block_mdlopensim').": <b>".$this->lastmonth_online."</b><br />";		
+		$this->content->text.= get_string('mdlos_online_now','block_mdlopensim').": <b>".$this->now_online."</b><br />";		
 
 		$this->content->footer = '<hr /><i>Moodle OpenSim '.$this->release.'</i>';
 
