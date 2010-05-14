@@ -201,8 +201,22 @@
                   <{/if}>
                   </b>
                 </td>
-                <td width=100><b><{$dat.region}></b></td>
-                <td width=100><b><{$dat.uname}></b></td>
+                <td width=100>
+                  <{if $dat.region!=' - ' }>
+                    <a style="cursor:pointer" onClick="window.open('<{$module_url}>/helper/region.php?region=<{$dat.region_id}>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+                      <b><{$dat.region}></b>
+                    </a>
+                  <{else}>
+                    <b><{$dat.region}></b>
+                  <{/if}>
+                </td>
+                <td width=100>
+                  <{if $userinfo and $dat.uname!=' - ' }>
+                    <a href="<{$smarty.const.XOOPS_URL}>/userinfo.php?uid=<{$dat.uid}>"><b><{$dat.uname}></b></a>
+                  <{else}>
+                    <b><{$dat.uname}></b>
+                  <{/if}>
+                </td>
                 <td>&nbsp;</td>
               </tr>
           <{/foreach}>

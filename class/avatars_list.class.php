@@ -39,7 +39,10 @@ class  AvatarsList
 	{
 		//$this->userid = $root->mContext->mXoopsUser->get('uid');
 		$this->isAdmin = isadmin();
-		$this->db_ver  = opensim_get_dbversion();
+		$this->db_ver  = opensim_get_db_version();
+		if ($db_ver=="0.0") {
+			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'));
+		}
 
 		$sql_order = "ORDER BY created ASC";
 
@@ -82,7 +85,7 @@ class  AvatarsList
 
 	function  execute()
 	{
-		$this->number    = opensim_get_avatarnum();
+		$this->number    = opensim_get_avatar_num();
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
 		if ($this->sitemax==0) $this->sitemax = 1;
@@ -129,7 +132,7 @@ class  AvatarsList
 		//$usersdbHandler = & xoops_getmodulehandler('usersdb');
 
 		// OpenSim DB
-		$users = opensim_get_avatarinfos($this->sql_condition);
+		$users = opensim_get_avatar_infos($this->sql_condition);
 
 		$DbLink = new DB;
 		$colum  = 0;
@@ -160,10 +163,10 @@ class  AvatarsList
 
 			// Agent Online Info
 			$UUID = $this->db_data[$colum]['UUID'];
-			$online = opensim_get_avataronline($UUID, $DbLink);
+			$online = opensim_get_avatar_online($UUID, $DbLink);
 			$this->db_data[$colum]['online'] = $online['online'];
 			if ($online['online']) {
-				$this->db_data[$colum]['region'] = opensim_get_regionname($online['region'], $DbLink);
+				$this->db_data[$colum]['region'] = opensim_get_region_name($online['region'], $DbLink);
 			}
 
 			// serach Xoops DB

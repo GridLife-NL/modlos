@@ -35,10 +35,9 @@ class  RegionsList
 		$this->order = optional_param('order', '', PARAM_TEXT);
 		if ($this->order!="" and !preg_match("/^[a-z]+$/", $this->order)) $this->order = "";
 
-		$db_ver = opensim_get_dbversion(); 
-		if ($db_ver=="0.0.0") {
-			error(get_string('courseidwrong', 'block_autoattend'));
-			//$this->mActionForm->addErrorMessage(_MD_XPNSM_DB_CONNECT_ERROR);
+		$db_ver = opensim_get_db_version(); 
+		if ($db_ver=="0.0") {
+			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'));
 		}
 
 		if ($this->order=="name")       $sql_order = " ORDER BY regionName ASC";
@@ -68,7 +67,7 @@ class  RegionsList
 
 	function  execute()
 	{
-		$this->number    = opensim_get_regionnum();
+		$this->number    = opensim_get_region_num();
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
 		if ($this->sitemax==0) $this->sitemax = 1; 
@@ -111,7 +110,7 @@ class  RegionsList
 		if ($this->plimit != 100) $this->icon[6] = "icon_limit_100_on";
 
 		//
-		$regions = opensim_get_regioninfos($this->sql_condition);
+		$regions = opensim_get_region_infos($this->sql_condition);
 		$colum  = 0;
 		foreach($regions as $region) {
 			$this->db_data[$colum] = $region;

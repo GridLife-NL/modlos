@@ -9,6 +9,7 @@
 //
 
 //
+global $module_path;
 require_once($module_path."include/opensim.func.php");
 
 
@@ -47,7 +48,7 @@ function loadmap() {
 
 	while($DbLink->Errno==0 and list($uuid, $regionName, $serverIP, $serverURI, $locX, $locY, $serverHttpPort)=$DbLink->next_record())
 	{
-		$name = opensim_get_regionowner($uuid);
+		$name = opensim_get_region_owner($uuid);
 		$firstN = $name['firstname'];
 		$lastN  = $name['lastname'];
 

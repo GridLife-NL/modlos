@@ -7,12 +7,13 @@ define ('_OPENSIM_MODULE_URL',  XOOPS_MODULE_URL.'/'._OPENSIM_DIR_NAME);
 define ('_OPENSIM_MODULE_PATH', XOOPS_ROOT_PATH.'/modules/'._OPENSIM_DIR_NAME);
 
 require_once(_OPENSIM_MODULE_PATH."/include/config.php");
-require_once(_OPENSIM_MODULE_PATH."/include/opensim_mysql.php");
 require_once(_OPENSIM_MODULE_PATH."/include/xoopensim.func.php");
 
 
-$owner = ' - ';
-$state = 0;
+
+$owner  = ' - ';
+$state  = 0;
+$userid = 0;
 
 
 $root = & XCube_Root::getSingleton();
@@ -24,7 +25,8 @@ if ($root->mContext->mUser->isInRole('Site.GuestUser')) {
 $agent = $root->mContext->mRequest->getRequest('agent');
 if (!preg_match("/^[0-9a-fA-F-]+$/", $agent)) exit('<h4>bad agent uuid!!</h4>');
 $grid_name = $root->mContext->mModuleConfig['grid_name'];
-
+$userinfo  = $root->mContext->mModuleConfig['userinfo_link'];
+$isAdmin = isXoopensimAdmin($root);
 
 if ($agent) {
 	// Xoops DB
@@ -32,25 +34,60 @@ if ($agent) {
 	$avatardata = & $usersdbHandler->get($agent);
 	if ($avatardata!=null) {
 		$userid = $avatardata->get('uid');
-		if ($userid!='0') $owner = get_username_byid($userid);
+		if ($userid!='0') $owner = get_username_by_id($userid);
 		$state = $avatardata->get('state');
 	}
 
 	// OpenSim DB
 	$DbLink = new DB;
-	$DbLink->query("SELECT UUID,username,lastname,homeRegion,created,lastLogin,profileAboutText FROM ".OPENSIM_USERS_TBL." where uuid='$agent'");
-	list($UUID, $firstN, $lastN, $regHandle, $created, $lastlogin, $profileTXT ) = $DbLink->next_record();
+	$online = false;
 
-	$DbLink->query("SELECT UUID,regionName,serverIP,serverHttpPort,serverURI FROM ".OPENSIM_REGIONS_TBL." where regionHandle='$regHandle'");
-	list($regionUUID, $regionName, $serverIP, $serverHttpPort, $serverURI) = $DbLink->next_record();
+	$profileTXT = "";
 
-	$DbLink->query("SELECT agentOnline FROM ".OPENSIM_AGENTS_TBL." where UUID='$UUID'");
-	list($agentOnline) = $DbLink->next_record();
+	if ($DbLink->exist_table("UserAccounts")) {
+		$DbLink->query("SELECT PrincipalID,FirstName,LastName,HomeRegionID,Created,Login FROM UserAccounts".
+						" LEFT JOIN Presence ON PrincipalID=UserID AND Logout!='0' WHERE PrincipalID='$agent'");
+		list($UUID, $firstN, $lastN, $regionUUID, $created, $lastlogin) = $DbLink->next_record();
 
-	$born   = date("Y M d (D) - A g:i", $created);
-	if ($lastlogin=='0') $lastin = ' - ';
-	else				 $lastin = date("Y M d (D) - A g:i", $lastlogin);
+		$DbLink->query("SELECT regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE uuid='$regionUUID'");
+		list($regionName, $serverIP, $serverHttpPort, $serverURI) = $DbLink->next_record();
+
+		$DbLink->query("SELECT Online FROM Presence WHERE UserID='$UUID'");
+		list($agentOnline) = $DbLink->next_record();
+		if ($agentOnline=="true") $online = true;
+	}
+	else {
+		$DbLink->query("SELECT UUID,username,lastname,homeRegion,created,lastLogin,profileAboutText FROM users WHERE uuid='$agent'");
+		list($UUID, $firstN, $lastN, $regHandle, $created, $lastlogin, $profileTXT ) = $DbLink->next_record();
+
+		$DbLink->query("SELECT uuid,regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE regionHandle='$regHandle'");
+		list($regionUUID, $regionName, $serverIP, $serverHttpPort, $serverURI) = $DbLink->next_record();
+
+		$DbLink->query("SELECT agentOnline FROM agents WHERE UUID='$UUID'");
+		list($agentOnline) = $DbLink->next_record();
+		if ($agentOnline==1) $online = true;
+	}
 	$DbLink->close();
+
+	// osprofile
+	$handler = & xoops_getmodulehandler('profuserprofiledb');
+	if ($handler!=null) {
+		$profobj = $handler->get($agent);
+		if ($profobj!=null) $profileTXT = $profobj->get('profileAboutText');
+	}
+
+	if ($created=='0' or $created==null or $created=="" or $created=='0') {
+		$born = ' - ';
+	}
+	else {
+		$born = date("Y M d (D) - A g:i", $created);
+	}
+	if ($lastlogin==null or $lastlogin=="" or $lastlogin=='0') {
+		$lastin = ' - ';
+	}
+	else {
+		$lastin = date("Y M d (D) - A g:i", $lastlogin);
+	}
 }
 
 
@@ -67,6 +104,7 @@ $guid = str_replace("-", "", $UUID);
 
 
 $xoopsTpl->assign('grid_name',  $grid_name);
+$xoopsTpl->assign('userinfo',   $userinfo);
 $xoopsTpl->assign('regionName', $regionName);
 $xoopsTpl->assign('regionUUID', $regionUUID);
 $xoopsTpl->assign('firstN',     $firstN);
@@ -75,11 +113,13 @@ $xoopsTpl->assign('UUID',       $UUID);
 $xoopsTpl->assign('born',       $born);
 $xoopsTpl->assign('lastin',     $lastin);
 $xoopsTpl->assign('owner',		$owner);
+$xoopsTpl->assign('userid',		$userid);
 $xoopsTpl->assign('state',		$state);
-$xoopsTpl->assign('agentOnline',$agentOnline);
+$xoopsTpl->assign('agentOnline',$online);
 $xoopsTpl->assign('profileTXT', $profileTXT);
 $xoopsTpl->assign('server',     $server);
 $xoopsTpl->assign('guid',       $guid);
+$xoopsTpl->assign('isAdmin',    $isAdmin);
 
 $xoopsTpl->assign('module_url', _OPENSIM_MODULE_URL);
 $xoopsTpl->assign('st_notsync', XOPNSIM_STATE_NOTSYNC);
