@@ -14,32 +14,35 @@
 /*********************************************************************************
  Function List
 
- function  opensim_get_dbversion(&$db=null)
+ function  opensim_get_db_version(&$db=null)
  function  opensim_check_db(&$db=null)
 
- function  opensim_get_avatarnum(&$db=null)
- function  opensim_get_avatarname($uuid, &$db=null)
- function  opensim_get_avatarinfos($condition="", &$db=null)
- function  opensim_get_avatarprofiles($condition="", &$db=null)
- function  opensim_get_avataronline($uuid, &$db=null)
+ function  opensim_get_avatar_num(&$db=null)
+ function  opensim_get_avatar_name($uuid, &$db=null)
+ function  opensim_get_avatar_infos($condition="", &$db=null)
+ function  opensim_get_avatar_profiles($condition="", &$db=null)
+ function  opensim_get_avatar_online($uuid, &$db=null)
  function  opensim_create_avatar($UUID, $firstname, $lastname, $passwd, $homeregion, &$db=null)
  function  opensim_delete_avatar($uuid, &$db=null)
 
- function  opensim_get_regionnum(&$db=null)
- function  opensim_get_regionname($region, &$db=null)
- function  opensim_get_regionnames($condition="", &$db=null)
- function  opensim_get_regioninfos($condition="", &$db=null)
- function  opensim_get_regionname_by_id($handle, &$db=null)
+ function  opensim_get_region_num(&$db=null)
+ function  opensim_get_region_name($region, &$db=null)
+ function  opensim_get_region_names($condition="", &$db=null)
+ function  opensim_get_region_infos($condition="", &$db=null)
+ function  opensim_get_region_name_by_id($id, &$db=null)
 
- function  opensim_get_regionowner($region, &$db=null)
- function  opensim_set_regionowner($region, $woner_uuid, &$db=null)
- function  opensim_create_inventoryfolders($uuid, &$db=null)
- function  opensim_set_homeregion($uuid, $region, &$db=null)
+ function  opensim_get_region_owner($region, &$db=null)
+ function  opensim_set_region_owner($region, $woner_uuid, &$db=null)
+ function  opensim_create_inventory_folders($uuid, &$db=null)
+ function  opensim_set_home_region($uuid, $region, &$db=null)
 
  function  opensim_get_password($uuid, $tbl="", &$db=null)
  function  opensim_set_password($uuid, $passwdhash, $passwdsalt="", $tbl="", &$db=null)
  function  opensim_supply_passwordSalt(&$db=null)
  function  opensim_succession_presence(&$db=null)
+
+ function  opensim_get_voice_mode($region, &$db=null)
+ function  opensim_set_voice_mode($region, $mode, &$db=null)
 
  *********************************************************************************/
 
@@ -50,6 +53,8 @@
 //
 // Load Function
 //
+
+global $module_path;
 
 require_once($module_path."include/tools.func.php");
 require_once($module_path."include/opensim.mysql.php");
@@ -63,7 +68,7 @@ require_once($module_path."include/opensim.mysql.php");
 // for DB
 //
 
-function  opensim_get_dbversion(&$db=null)
+function  opensim_get_db_version(&$db=null)
 {
 	$flg = false;
 	if (!is_object($db)) {
@@ -73,7 +78,7 @@ function  opensim_get_dbversion(&$db=null)
 
 	$ver = "0.6";
 	if ($db->exist_table("UserAccounts")) $ver = "0.7";
-	if ($db->Errno!=0) $ver = "0.0.0";
+	if ($db->Errno!=0) $ver = "0.0";
 
 	if ($flg) $db->close();
 
@@ -133,7 +138,7 @@ function  opensim_check_db(&$db=null)
 // for Avatar
 //
 
-function  opensim_get_avatarnum(&$db=null)
+function  opensim_get_avatar_num(&$db=null)
 {
 	$num = 0;
 
@@ -158,7 +163,7 @@ function  opensim_get_avatarnum(&$db=null)
 
 
 
-function  opensim_get_avatarname($uuid, &$db=null)
+function  opensim_get_avatar_name($uuid, &$db=null)
 {
 	if (!isGUID($uuid)) return null;
 
@@ -194,7 +199,7 @@ function  opensim_get_avatarname($uuid, &$db=null)
 
 
 
-function  opensim_get_avatarinfos($condition="", &$db=null)
+function  opensim_get_avatar_infos($condition="", &$db=null)
 {
 	$flg = false;
 	if (!is_object($db)) {
@@ -228,7 +233,7 @@ function  opensim_get_avatarinfos($condition="", &$db=null)
 
 
 
-function  opensim_get_avatarprofiles($condition="", &$db=null)
+function  opensim_get_avatar_profiles($condition="", &$db=null)
 {
 	$flg = false;
 	if (!is_object($db)) {
@@ -261,7 +266,7 @@ function  opensim_get_avatarprofiles($condition="", &$db=null)
 
 
 
-function  opensim_get_avataronline($uuid, &$db=null)
+function  opensim_get_avatar_online($uuid, &$db=null)
 {
 	if (!isGUID($uuid)) return null;
 
@@ -272,7 +277,7 @@ function  opensim_get_avataronline($uuid, &$db=null)
 	}
 
 	$online = false;
-	$region = null;
+	$region = "00000000-0000-0000-0000-000000000000";
 
 	if ($db->exist_table("Presence")) {
 		$db->query("SELECT Online,RegionID FROM Presence WHERE UserID='$uuid' AND Logout='0'");
@@ -338,7 +343,7 @@ function  opensim_create_avatar($UUID, $firstname, $lastname, $passwd, $homeregi
 				$errno = $db->Errno;
 			}
 			if ($errno==0) {
-				$errno = opensim_create_inventoryfolders($UUID, $db);
+				$errno = opensim_create_inventory_folders($UUID, $db);
 			}
 
 			if ($errno!=0) {
@@ -430,7 +435,7 @@ function  opensim_delete_avatar($uuid, &$db=null)
 // for Region
 //
 
-function  opensim_get_regionnum(&$db=null)
+function  opensim_get_region_num(&$db=null)
 {
 	$num = 0;
 
@@ -449,7 +454,7 @@ function  opensim_get_regionnum(&$db=null)
 
 
 
-function  opensim_get_regionname($region, &$db=null)
+function  opensim_get_region_name($region, &$db=null)
 {
 	if (!isGUID($region)) return null;
 
@@ -468,7 +473,7 @@ function  opensim_get_regionname($region, &$db=null)
 
 
 
-function  opensim_get_regionnames($condition="", &$db=null)
+function  opensim_get_region_names($condition="", &$db=null)
 {
 	$flg = false;
 	if (!is_object($db)) {
@@ -488,7 +493,7 @@ function  opensim_get_regionnames($condition="", &$db=null)
 
  
 
-function  opensim_get_regionname_by_id($id, &$db=null)
+function  opensim_get_region_name_by_id($id, &$db=null)
 {
 	if ($id==null) return null;
 
@@ -516,7 +521,7 @@ function  opensim_get_regionname_by_id($id, &$db=null)
 
 
 
-function  opensim_get_regioninfos($condition="", &$db=null)
+function  opensim_get_region_infos($condition="", &$db=null)
 {
 	$flg = false;
 	if (!is_object($db)) {
@@ -596,7 +601,7 @@ function  opensim_get_regioninfos($condition="", &$db=null)
 //
 // SIMのリージョンIDからオーナーの情報を返す．
 // 
-function  opensim_get_regionowner($region, &$db=null)
+function  opensim_get_region_owner($region, &$db=null)
 {
 	if (!isGUID($region)) return null;
 
@@ -639,7 +644,7 @@ function  opensim_get_regionowner($region, &$db=null)
 
 
 
-function  opensim_set_regionowner($region, $owner, &$db=null)
+function  opensim_set_region_owner($region, $owner, &$db=null)
 {
 	if (!isGUID($region) or !isGUID($owner)) return false;
 
@@ -667,7 +672,7 @@ function  opensim_set_regionowner($region, $owner, &$db=null)
 // for Inventory
 //
 
-function  opensim_create_inventoryfolders($uuid, &$db=null)
+function  opensim_create_inventory_folders($uuid, &$db=null)
 {
 	if (!isGUID($uuid)) return 999;
 
@@ -765,7 +770,7 @@ function  opensim_create_inventoryfolders($uuid, &$db=null)
 // for Home Region
 //
 
-function  opensim_set_homeregion($uuid, $hmregion, &$db=null)
+function  opensim_set_home_region($uuid, $hmregion, &$db=null)
 {
 	if (!isGUID($uuid)) return false;
 	if ($hmregion=="")  return false;
@@ -983,7 +988,7 @@ function  opensim_succession_presence($region_name, &$db=null)
 // for Voice (VoIP)
 //
 
-function  opensim_get_voicemode($region, &$db=null)
+function  opensim_get_voice_mode($region, &$db=null)
 {
 	if (!isGUID($region)) return -1;
 
@@ -1009,7 +1014,7 @@ function  opensim_get_voicemode($region, &$db=null)
 
 
 
-function  opensim_set_voicemode($region, $mode, &$db=null)
+function  opensim_set_voice_mode($region, $mode, &$db=null)
 {
 	if (!isGUID($region)) return false;
 	if (!preg_match("/^[0-2]$/", $mode)) false;
