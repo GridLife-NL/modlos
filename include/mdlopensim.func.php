@@ -47,7 +47,7 @@ function print_tabnav($currenttab, $course)
 		$toprow[] = new tabobject('avatar_create', MDLOPNSM_BLK_URL.'/actions/avatar_create.php?course='. $courseid, 
 																	get_string('mdlos_avatar_create','block_mdlopensim'));
 		if (isadmin()) {
-			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/actions/admin/settings.php?section=blocksettingmdlopensim', 
+			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmdlopensim', 
 																	get_string('mdlos_general_setting_menu','block_mdlopensim'));
 		}
 	}

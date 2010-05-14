@@ -199,6 +199,11 @@ $string['mdlos_https_url'] 			= 'HTTPSの URL';
 $string['mdlos_https_url_desc'] 	= 'HTTPSを使用する場合は，Moodle のモジュールの HTTPSでの URLを指定する．'.
 									  '省略した場合は，$CFG->wwwroot の http: を https: に変換したものを使用する';
 
+$string['mdlos_userinfo_link'] 		= 'iXoopsユーザの名前からアカウント情報のページへのリンク';
+$string['mdlos_userinfo_link__desc']= 'ページ上に Xoopsユーザの名前が表示された場合に，そのユーザのアカウント情報画面へのリンクを張るかどうかを指定する．'.
+									  'なお，セキュリティ上の問題から，<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>'.
+									  'UserInfoProtector</a>などを使用して，他のユーザのアカウント画面の表示を禁止している場合などは，ここを 「はい」 にすると煩わしいだけになる．';
+
 $string['mdlos_grpdb_rkey'] 		= 'Flotsam グループデータベース読み込みアクセスキー';
 $string['mdlos_grpdb_rkey_desc'] 	= 'Flotsam Group Function を使用する場合に指定する読み込み用キー．'.
 									  'OpnenSim.iniの [Groups]セクションの XmlRpcServiceReadKeyの値と一致させる必要がある．';

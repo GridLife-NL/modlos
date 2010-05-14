@@ -5,28 +5,21 @@
 // usage... http://xxx/yyy/zzz/region.php?region=3a9379b7-1821-4b04-ab97-e38df166bac1
 //
 
-require_once '../../../mainfile.php';
+require_once(realpath(dirname(__FILE__)."/../../../config.php"));
+require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 
-define ('_OPENSIM_DIR_NAME',    basename(dirname(dirname(__FILE__))));
-define ('_OPENSIM_MODULE_URL',  XOOPS_MODULE_URL.'/'._OPENSIM_DIR_NAME);
-define ('_OPENSIM_MODULE_PATH', XOOPS_ROOT_PATH.'/modules/'._OPENSIM_DIR_NAME);
+if (!defined('MDLOPNSM_BLK_PATH')) exit();
+require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
 
-require_once(_OPENSIM_MODULE_PATH."/include/config.php");
-require_once(_OPENSIM_MODULE_PATH."/include/opensim.func.php");
-require_once(_OPENSIM_MODULE_PATH."/include/xoopensim.func.php");
+global $CFG;
 
+$isAdmin = isadmin();
+$region  = optional_param('region', '', PARAM_TEXT);
+$grid_name = $CFG->mdlopnsm_grid_name;
+//$userinfo  = $CFG->mdlopnsm_userinfo_link;
 
-$root = & XCube_Root::getSingleton();
+//$action_url = MDLOPNSM_BLK_URL."/helper/region.php";
 
-if ($root->mContext->mUser->isInRole('Site.GuestUser')) {
-	exit('<h4>guest user is not allowed!!</h4>');
-}
-$isAdmin = isXoopensimAdmin($root);
-
-$region = $root->mContext->mRequest->getRequest('region');
-if (!preg_match("/^[0-9a-fA-F-]+$/", $region)) exit('<h4>bad region uuid!!</h4>');
-$grid_name  = $root->mContext->mModuleConfig['grid_name'];
-$action_url = _OPENSIM_MODULE_URL."/helper/region.php";
 
 
 //////////////
