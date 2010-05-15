@@ -35,57 +35,37 @@ $action_url = MDLOPNSM_BLK_URL."/helper/agent.php";
 //////////////
 if ($agent) {
 	// Moodle DB
-	$usersdbHandler = & xoops_getmodulehandler('usersdb');
-	$avatardata = & $usersdbHandler->get($agent);
-	if ($avatardata!=null) {
-		$userid = $avatardata->get('uid');
-		if ($userid!='0') $owner = get_username_by_id($userid);
-		$state = $avatardata->get('state');
-	}
-
-
-
+	$userid = $avatardata->get('uid');
+	if ($userid!='0') $owner = get_username_by_id($userid);
+	$state = $avatardata->get('state');
 
 	// OpenSim DB
-	$DbLink = new DB;
-	$online = false;
-
-
-	if ($DbLink->exist_table("UserAccounts")) {
-		$DbLink->query("SELECT PrincipalID,FirstName,LastName,HomeRegionID,Created,Login FROM UserAccounts".
-						" LEFT JOIN Presence ON PrincipalID=UserID AND Logout!='0' WHERE PrincipalID='$agent'");
-		list($UUID, $firstN, $lastN, $regionUUID, $created, $lastlogin) = $DbLink->next_record();
-
-		$DbLink->query("SELECT regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE uuid='$regionUUID'");
-		list($regionName, $serverIP, $serverHttpPort, $serverURI) = $DbLink->next_record();
-
-		$DbLink->query("SELECT Online FROM Presence WHERE UserID='$UUID'");
-		list($agentOnline) = $DbLink->next_record();
-		if ($agentOnline=="true") $online = true;
+	$profileTXT = "";
+	$avinfo = opensim_get_avatar_info($agent);
+	if ($avinfo!=null) {
+		$UUI 			= $avinfo['UUID'];
+		$firstname		= $avinfo['firstname'];
+		$lastname		= $avinfo['lastname'];
+		$fullname		= $avinfo['fullname'];       
+		$created		= $avinfo['created'];
+		$lastlogin		= $avinfo['lastlogin'];
+		$regionUUID		= $avinfo['regionUUID'];
+		$regionName		= $avinfo['regionName'];
+		$serverIP		= $avinfo['serverIP'];
+		$serverHttpPort	= $avinfo['serverHttpPort'];
+		$serverURI		= $avinfo['serverURI'];
+		$agentOnline	= $avinfo['agentOnline'];
+		$profileTXT 	= $avinfp['profileTXT'];
 	}
-	else {
-		$DbLink->query("SELECT UUID,username,lastname,homeRegion,created,lastLogin,profileAboutText FROM users WHERE uuid='$agent'");
-		list($UUID, $firstN, $lastN, $regHandle, $created, $lastlogin, $profileTXT ) = $DbLink->next_record();
-
-		$DbLink->query("SELECT uuid,regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE regionHandle='$regHandle'");
-		list($regionUUID, $regionName, $serverIP, $serverHttpPort, $serverURI) = $DbLink->next_record();
-
-		$DbLink->query("SELECT agentOnline FROM agents WHERE UUID='$UUID'");
-		list($agentOnline) = $DbLink->next_record();
-		if ($agentOnline==1) $online = true;
-	}
-	$DbLink->close();
-
-
 
 	// osprofile
-	$profileTXT = "";
 	$handler = & xoops_getmodulehandler('profuserprofiledb');
 	if ($handler!=null) {
 		$profobj = $handler->get($agent);
 		if ($profobj!=null) $profileTXT = $profobj->get('profileAboutText');
 	}
 
+	//
 	if ($created=='0' or $created==null or $created=="" or $created=='0') {
 		$born = ' - ';
 	}
@@ -131,11 +111,71 @@ $xoopsTpl->assign('server',     $server);
 $xoopsTpl->assign('guid',       $guid);
 $xoopsTpl->assign('isAdmin',    $isAdmin);
 
-$xoopsTpl->assign('module_url', _OPENSIM_MODULE_URL);
-$xoopsTpl->assign('st_notsync', XOPNSIM_STATE_NOTSYNC);
-$xoopsTpl->assign('st_active',  XOPNSIM_STATE_ACTIVE); 
-$xoopsTpl->assign('st_inactive',XOPNSIM_STATE_INACTIVE);
 
-$xoopsTpl->display('db:xoopensim_agent.html');
+$module_url	  = MDLOPNSM_BLK_URL
+$course       = "&amp;course=".$courseid;
+
+$st_notsync   = get_string("mdlos_state_notsync",	"block_mdlopensim");
+$st_active    = get_string("mdlos_state_active",	"block_mdlopensim");
+$st_inactive  = get_string("mdlos_state_inactive",	"block_mdlopensim");
+
+$region_ttl   = get_string("mdlos_region",          "block_mdlopensim");
+$uuid_ttl     = get_string("mdlos_uuid",            "block_mdlopensim");
+$change_ttl   = get_string("mdlos_change",          "block_mdlopensim");
+
+
+$coordinates  = get_string("mdlos_coordinates",     "block_mdlopensim");
+$admin_user   = get_string("mdlos_admin_user",      "block_mdlopensim");
+$region_owner = get_string("mdlos_region_owner",    "block_mdlopensim");
+$voice_mode   = get_string("mdlos_voice_chat_mode", "block_mdlopensim");
+
+include(MDLOPNSM_BLK_PATH."/html/agent.html");
+
+_MD_XPNSM_AVATARS_LIST
+_MD_XPNSM_AVATARS_LIST
+_MD_XPNSM_USERS_FOUND
+_MD_XPNSM_PAGE
+_MD_XPNSM_PAGE_OF
+_MD_XPNSM_USER_SEARCH
+_MD_XPNSM_FIRSTNAME
+_MD_XPNSM_LASTNAME
+_MD_XPNSM_NO
+_MD_XPNSM_EDIT
+_MD_XPNSM_FIRSTNAME
+_MD_XPNSM_LASTNAME
+_MD_XPNSM_LASTLOGIN
+_MD_XPNSM_STATUS
+_MD_XPNSM_CRNTREGION
+_MD_XPNSM_OWNER
+_MD_XPNSM_EDIT_TTL
+_MD_XPNSM_GET_OWNER_TTL
+_MD_XPNSM_NOT_SYNCDB
+_MD_XPNSM_ONLINE_TTL
+_MD_XPNSM_ACTIVE
+_MD_XPNSM_INACTIVE
+_MD_XPNSM_UNKNOWN_STATUS
+
+$region_ttl   = get_string("mdlos_region",    		"block_mdlopensim");
+$uuid_ttl     = get_string("mdlos_uuid",    		"block_mdlopensim");
+$change_ttl   = get_string("mdlos_change",			"block_mdlopensim");
+$region_info  = get_string("mdlos_region_info",		"block_mdlopensim");
+$coordinates  = get_string("mdlos_coordinates", 	"block_mdlopensim");
+$admin_user   = get_string("mdlos_admin_user",  	"block_mdlopensim");
+$region_owner = get_string("mdlos_region_owner",	"block_mdlopensim");
+$voice_mode	  = get_string("mdlos_voice_chat_mode", "block_mdlopensim");
+
+		error(get_string('mdlos_db_connect_error', 'block_mdlopensim'));
+		$regions_list  = get_string("mdlos_regions_list",  "block_mdlopensim");
+		$location_x    = get_string("mdlos_location_x",    "block_mdlopensim");
+		$location_y    = get_string("mdlos_location_y",    "block_mdlopensim");
+		$region_name   = get_string("mdlos_region_name",   "block_mdlopensim");
+		$estate_owner  = get_string("mdlos_estate_owner",  "block_mdlopensim");
+		$ip_address    = get_string("mdlos_ipaddr",		   "block_mdlopensim");
+		$regions_found = get_string("mdlos_regions_found", "block_mdlopensim");
+		$page_num	   = get_string("mdlos_page",		   "block_mdlopensim");
+		$page_num_of   = get_string("mdlos_page_of",	   "block_mdlopensim");
+		//$region_owner = get_string("mdlos_region_owner", "block_mdlopensim");
+		//$estate_id    = get_string("mdlos_estate_id",    "block_mdlopensim");
+		error(get_string('mdlos_db_connect_error', 'block_mdlopensim'));
 
 ?>
