@@ -23,6 +23,7 @@ $string['mdlos_no'] 				= 'No.';
 $string['mdlos_ipaddr'] 			= 'IPアドレス';
 $string['mdlos_info'] 				= 'これについて・・・';
 $string['mdlos_edit'] 				= '編集';
+$string['mdlos_change'] 			= '変更';
 
 $string['mdlos_online_ttl'] 		= 'オンライン';
 $string['mdlos_offline_ttl'] 		= 'オフライン';
@@ -155,6 +156,12 @@ $string['mdlos_hmrgn_update_error']	= 'ホームリージョンの更新に失�
 $string['mdlos_inactivate_error']	= 'アバターの無効化に失敗しました!!';
 $string['mdlos_activate_error']		= 'アバターの有効化に失敗しました!!';
 
+$string['mdlos_voice_chat_mode']	= 'ボイスチャットモード';
+$string['mdlos_voice_chat_mode_chng']='モード変更';
+$string['mdlos_voice_inactive_chnl']= 'ボイス無効';
+$string['mdlos_voice_private_chnl']	= 'プライベートチャネル';
+$string['mdlos_voice_percel_chnl']	= '不動産チャネル';
+
 
 // Config
 $string['mdlos_mdl_name'] 			= 'Moodle OpenSim';
@@ -210,10 +217,10 @@ $string['mdlos_crncy_key_desc'] 	= 'DTL Money サーバへのアクセスキー�
 $string['mdlos_banker'] 			= 'バンカーアバターのUUID　（未実装）';
 $string['mdlos_banker_desc'] 		= 'バンカーアバター （お金の管理を行うアバター） のUUID (GUID)';
 
-$string['mdlos_userinfo_link'] 		= 'Xoopsユーザの名前からアカウント情報のページへのリンク';
-$string['mdlos_userinfo_link__desc']= 'ページ上に Xoopsユーザの名前が表示された場合に，そのユーザのアカウント情報画面へのリンクを張るかどうかを指定する．'.
+$string['mdlos_userinfo_link'] 		= 'Xoopsユーザの名前からアカウントページへのリンク';
+$string['mdlos_userinfo_link_desc'] = 'ページ上に Xoopsユーザの名前が表示された場合に，そのユーザのアカウント情報画面へのリンクを張るかどうかを指定する．'.
 									  'なお，セキュリティ上の問題から，<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>'.
-									  'UserInfoProtector</a>などを使用して，他のユーザのアカウント画面の表示を禁止している場合などは，ここを 「はい」 にすると煩わしいだけになる．';
+									  'UserInfoProtector</a>などを使用して，他のユーザのアカウント画面の表示を禁止している場合などにこれを有効にすると，煩わしいだけとなる．';
 
 $string['mdlos_db_status_cntnt'] 	= 'データベース状態のページのコンテンツ';
 $string['mdlos_db_status_cntnt_desc']='Mdlopensim のデータベース状態のページのコンテンツ．HTMLタグ使用可能';

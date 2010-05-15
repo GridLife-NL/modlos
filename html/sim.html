@@ -1,0 +1,120 @@
+<html>
+<head>
+<style type="text/css">
+.styleTitel {
+	font-size: 16px;
+	font-weight: bold;
+	color: #105BA7;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.styleText {font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #666666;}
+.styleTopTitle {
+	font-size: 20px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+
+<title><?php print $grid_name?> : <?php print $region_info?></title>
+</head>
+
+<body>
+
+<?php if ($hasPermit) {?>
+<form action="<?php print $action_url?>" method="POST">
+<?php }?>
+
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td colspan="2" valign="top"><span class="styleTopTitle"><?php print $grid_name."&nbsp;:&nbsp;".$region_info?></span></td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="top"><hr /></td>
+  </tr>
+  <tr>
+    <td width="55%" valign="top">
+
+      <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr><td>&nbsp;</td></tr>
+        <tr><td><span class="styleTitel"><?php print $region_ttl.": ".$regionName?></span></td></tr>
+        <?php if ($hasPermit) {?>
+          <tr><td>&nbsp;</td></tr>
+          <tr><td class="styleText"><b><?php print $uuid_ttl.": ".$region?></b></td></tr>
+        <?php }?>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td class="styleText"><b><?php print $coordinates." X: ".$locX." Y: ".$locY?></b></td></tr>
+        <tr><td class="styleText">&nbsp;</td></tr>
+        <tr>
+          <td class="styleText">
+            <b><?php print $admin_user?>:&nbsp;
+              <a href="<?php print $module_url.'/helper/agent.php?agent='.$owner_uuid.$course?>"><?php print $owner_name?></a>
+            </b>
+          </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+          <td class="styleText"><b><?php print $voice_mode?>:&nbsp;<?php print $vcmode_title?></b></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+
+<!-- need Escape -->
+        <?php if ($hasPermit) {?>
+          <tr><td class="styleText">
+            <!--<?php print $region_owner?>&nbsp;&nbsp; -->
+            <select wide="32" name="rgnadmin">
+              <?php foreach($avatars as $avatar) {?>
+                <?php if ($avatar['name']==$owner_name) {?>
+                  <option value="<?php print $avatar['uuid']?>" selected><?php print $avatar['name']?></option>
+                <?php } else {?>
+                  <option value="<?php print $avatar['uuid']?>" ><?php print $avatar['name']?></option>
+                <?php }?>
+              <?php }?>
+            </select>&nbsp;&nbsp;
+
+            <!-- <?php print $voice_mode?>&nbsp;&nbsp; -->
+            <select wide="32" name="voice_mode">
+              <?php foreach($voice_modes as $vcm) {?>
+                <?php if ($vcm['id']==$vcmode) {?>
+                  <option value="<?php print $vcm['id']?>" selected><?php print $vcm['title']?></option>
+                <?php } else {?>
+                  <option value="<?php print $vcm['id']?>" ><?php print $vcm['title']?></option>
+                <?php }?>
+              <?php }?>
+            </select>&nbsp;&nbsp;
+
+            <input type="hidden" name="region" value=<?php print $region?> >
+            <input type="submit" value="<?php print $change_ttl?>" />
+          </td></tr>
+        <?php }?>
+
+      </table>
+      <br /><br />
+    </td>
+
+    <td width="45%" valign="top">
+      <br /><br />
+      <table border="0" align="center" cellpadding="5" cellspacing="0">
+        <tr>
+          <td bgcolor="#999999">
+            <div align="center">
+              <table width="256" height="256" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td bgcolor="#FFFFFF" background="<?php print $server.'/index.php?method=regionImage'.$guid?>">&nbsp;</td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<?php if ($hasPermit) {?>
+</form>
+<?php }?>
+
+</body>
+
+</html>

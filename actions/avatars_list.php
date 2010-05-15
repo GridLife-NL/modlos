@@ -15,8 +15,8 @@ $action = 'avatars_list';
 print_tabheader($action, $course);
 
 require_once(MDLOPNSM_BLK_PATH."/class/avatars_list.class.php");
-$regions = new AvatarsList();
-$regions->print_page($courseid);
+$regions = new AvatarsList($courseid);
+$regions->print_page();
 
 print_footer($course);
 	

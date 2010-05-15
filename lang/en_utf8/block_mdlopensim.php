@@ -24,6 +24,7 @@ $string['mdlos_no'] 				= 'No.';
 $string['mdlos_ipaddr'] 			= 'IP Address';
 $string['mdlos_info'] 				= 'Info';
 $string['mdlos_edit'] 				= 'Edit';
+$string['mdlos_change'] 			= 'Change';
 
 $string['mdlos_online_ttl'] 		= 'ONLINE';
 $string['mdlos_offline_ttl'] 		= 'OFFLINE';
@@ -108,7 +109,6 @@ $string['mdlos_estate_owner']       = 'Admin';
 $string['mdlos_estate_id']          = 'Estate ID';
 $string['mdlos_region_owner_chng']  = 'Region Owner Change';
 
-
 $string['mdlos_firstname_required'] = 'You must input First Name!!';
 $string['mdlos_lastname_required'] 	= 'You must input Last Name!!';
 $string['mdlos_passwd_required'] 	= 'You must input Password!!';
@@ -157,6 +157,12 @@ $string['mdlos_passwd_update_error']= 'It failed in updating password!!';
 $string['mdlos_hmrgn_update_error'] = 'It failed in updating home region of avatar!!';
 $string['mdlos_inactivate_error']   = 'It failed in the inactivation of avatar!!';
 $string['mdlos_activate_error']     = 'It failed in the activation of avatar!!';
+
+$string['mdlos_voice_chat_mode']    = 'Voice Chat Mode';
+$string['mdlos_voice_chat_mode_chng']='Change Mode';
+$string['mdlos_voice_inactive_chnl']= 'Inactive Voice';
+$string['mdlos_voice_private_chnl'] = 'Private Channel';
+$string['mdlos_voice_percel_chnl']  = 'Percel Channel';
 
 
 // Config
@@ -212,11 +218,11 @@ $string['mdlos_banker'] 			= 'UUID of Banker Avatar';
 $string['mdlos_banker_desc'] 		= 'Specify UUID(GUID) of Banker Avatar';
 
 $string['mdlos_userinfo_link']      = 'Link from Xoops user\'s name to user information page';
-$string['mdlos_userinfo_link__desc']= 'It is specified whether to put the link form Xoops user\'s name to Xoops account information page, '.
+$string['mdlos_userinfo_link_desc'] = 'It is specified whether to put the link form Xoops user\'s name to Xoops account information page, '.
 									  'when Xoops user\'s name is displayed on the XoopenSim page. '.
 									  'From the viewpoint on security, You might be forbidding user to view other user\'s account information page using '.
 									  '<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>UserInfoProtector</a>. '.
-									  'In that case, if this is Yes, it is very annoying.';
+									  'In that case, if this is checked, it is very annoying.';
 
 $string['mdlos_db_status_cntnt'] 	= 'DB Status Content';
 $string['mdlos_db_status_cntnt_desc']='Specify content of db status page';

@@ -4,7 +4,7 @@
  *
  *
  * function print_tabnav($currenttab, $course)
- * function print_tabheader($currenttab, $courseid)
+ * function print_tabheader($currenttab, $course)
  *
  ****************************************************************/
 

@@ -13,10 +13,12 @@ class  AvatarsList
 	var $action_url;
 	var $edit_url;
 	var $owner_url;
+	var $courseid = 0;
 
-	var $db_ver  = "0.6";
-	var $isAdmin = false;
+	var $hasPermit = false;
+	var $isGuest = true;
 	var $userid  = 0;
+	var $db_ver  = "";
 
 	// Page Control
 	var $Cpstart = 0;
@@ -35,10 +37,17 @@ class  AvatarsList
 	var $sql_condition = "";
 
 
+
+	function  AvatarsList($courseid)
+	{
+		$this->courseid  = $courseid;
+		$this->isGuest   = isguest();
+		$this->hasPermit = hasPermit($courseid);
+	}
+
+
 	function  set_condition() 
 	{
-		//$this->userid = $root->mContext->mXoopsUser->get('uid');
-		$this->isAdmin = isadmin();
 		$this->db_ver  = opensim_get_db_version();
 		if ($db_ver=="0.0") {
 			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'));
@@ -206,11 +215,11 @@ class  AvatarsList
 	{
         global $CFG;
 
-        $grid_name = $CFG->mdlopnsm_grid_name;
-        $content   = $CFG->mdlopnsm_avatars_content;
-
         $this->set_condition();
         $this->execute();
+
+        $grid_name = $CFG->mdlopnsm_grid_name;
+        $content   = $CFG->mdlopnsm_avatars_content;
 
         include(MDLOPNSM_BLK_PATH."/html/avatars.html");
 	}

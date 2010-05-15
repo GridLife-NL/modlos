@@ -11,8 +11,9 @@ class  RegionsList
 	var $pnum = array();
 	var $action;
 	var $action_url;
+	var $courseid = 0;
 
-	var $isAdmin = false;
+	var $hasPermit = false;
 	var $isGuest = true;
 	var $db_ver  = "";
 
@@ -27,11 +28,18 @@ class  RegionsList
 	var $sql_condition = "";
 
 
+
+	function  RegionsList($courseid)
+	{
+		$this->courseid  = $courseid;
+		$this->isGuest   = isguest();
+		$this->hasPermit = hasPermit($courseid);
+	}
+
+
+
 	function  set_condition() 
 	{
-		$this->isAdmin = isadmin();
-		$this->isGuest = isguest();
-
 		$this->order = optional_param('order', '', PARAM_TEXT);
 		if ($this->order!="" and !preg_match("/^[a-z]+$/", $this->order)) $this->order = "";
 
@@ -124,7 +132,7 @@ class  RegionsList
 
 
 
-	function  print_page($courseid) 
+	function  print_page() 
 	{
 		global $CFG;
 
@@ -133,12 +141,11 @@ class  RegionsList
 
 		$grid_name     = $CFG->mdlopnsm_grid_name;
 		$content       = $CFG->mdlopnsm_regions_content;
-        $module_url    = MDLOPNSM_BLK_URL;
-		$course		   = "&amp;course=$courseid";
+		$module_url	   = MDLOPNSM_BLK_URL;
+		$course		   = "&amp;course=$this->courseid";
 		$order		   = "?order=$this->order";
 		$pstart		   = "&amp;pstart=$this->pstart";
 		$plimit		   = "&amp;plimit=$this->plimit";
-
 
 		$regions_list  = get_string("mdlos_regions_list",  "block_mdlopensim");
 		$location_x    = get_string("mdlos_location_x",    "block_mdlopensim");

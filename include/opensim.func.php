@@ -28,6 +28,7 @@
  function  opensim_get_region_num(&$db=null)
  function  opensim_get_region_name($region, &$db=null)
  function  opensim_get_region_names($condition="", &$db=null)
+ function  opensim_get_region_info($region, &$db=null)
  function  opensim_get_region_infos($condition="", &$db=null)
  function  opensim_get_region_name_by_id($id, &$db=null)
 
@@ -521,6 +522,33 @@ function  opensim_get_region_name_by_id($id, &$db=null)
 
 
 
+function  opensim_get_region_info($region, &$db=null)
+{
+	if (!isGUID($region)) return null;
+
+	$flg = false;
+	if (!is_object($db)) {
+		$db  = new DB;
+		$flg = true;
+	}
+
+	$db->query("SELECT regionName,serverIP,serverHttpPort,serverURI,locX,locY FROM regions WHERE uuid='$region'");
+	list($regionName, $serverIP, $serverHttpPort, $serverURI, $locX, $locY) = $db->next_record();
+    $rginfo = opensim_get_region_owner($region, $db);
+
+	$rginfo['regionName'] 	  = $regionName;
+	$rginfo['serverIP'] 	  = $serverIP;
+	$rginfo['serverHttpPort'] = $serverHttpPort;
+	$rginfo['serverURI'] 	  = $serverURI;
+	$rginfo['locX'] 		  = $locX;
+	$rginfo['locY'] 		  = $locY;
+
+	if ($flg) $db->close();
+	return $rginfo;
+}
+
+
+
 function  opensim_get_region_infos($condition="", &$db=null)
 {
 	$flg = false;
@@ -528,7 +556,7 @@ function  opensim_get_region_infos($condition="", &$db=null)
 		$db  = new DB;
 		$flg = true;
 	}
-	$regions = array();
+	$rginfos = array();
 
 	$items = " regions.uuid,regionName,locX,locY,serverIP,serverURI,serverHttpPort,owner_uuid,estate_map.EstateID,EstateOwner,";
  	$join1 = " FROM regions LEFT JOIN estate_map ON RegionID=regions.uuid ";
@@ -550,43 +578,43 @@ function  opensim_get_region_infos($condition="", &$db=null)
 	if ($db->Errno==0) {
 		while (list($UUID,$regionName,$locX,$locY,$serverIP,$serverURI,$serverPort,
 						$owneruuid,$estateid,$estateowner,$firstname,$lastname) = $db->next_record()) {
-			$regions[$UUID]['UUID']		  	= $UUID;
-			$regions[$UUID]['regionName'] 	= $regionName;
-			$regions[$UUID]['locX']		  	= $locX;
-			$regions[$UUID]['locY']		  	= $locY;
-			$regions[$UUID]['serverIP']	  	= $serverIP;
-			$regions[$UUID]['serverURI']  	= $serverURI;
-			$regions[$UUID]['serverPort'] 	= $serverPort;
-			$regions[$UUID]['owner_uuid'] 	= $owneruuid;
-			$regions[$UUID]['estate_id'] 	= $estateid;
-			$regions[$UUID]['estate_owner'] = $estateowner;
-			$regions[$UUID]['est_firstname']= $firstname;
-			$regions[$UUID]['est_lastname'] = $lastname;
-			$regions[$UUID]['est_fullname'] = null;
+			$rginfos[$UUID]['UUID']		  	= $UUID;
+			$rginfos[$UUID]['regionName'] 	= $regionName;
+			$rginfos[$UUID]['locX']		  	= $locX;
+			$rginfos[$UUID]['locY']		  	= $locY;
+			$rginfos[$UUID]['serverIP']	  	= $serverIP;
+			$rginfos[$UUID]['serverURI']  	= $serverURI;
+			$rginfos[$UUID]['serverPort'] 	= $serverPort;
+			$rginfos[$UUID]['owner_uuid'] 	= $owneruuid;
+			$rginfos[$UUID]['estate_id'] 	= $estateid;
+			$rginfos[$UUID]['estate_owner'] = $estateowner;
+			$rginfos[$UUID]['est_firstname']= $firstname;
+			$rginfos[$UUID]['est_lastname'] = $lastname;
+			$rginfos[$UUID]['est_fullname'] = null;
 			$fullname = $firstname." ".$lastname;
-			if ($fullname!="") $regions[$UUID]['est_fullname'] = $fullname;
+			if ($fullname!="") $rginfos[$UUID]['est_fullname'] = $fullname;
 		}
 	}
 
 	// Region Owner
-	foreach($regions as $region) {
-		$regions[$region['UUID']]['rgn_firstname'] = null;
-		$regions[$region['UUID']]['rgn_lastname']  = null;
-		$regions[$region['UUID']]['rgn_fullname']  = null;
+	foreach($rginfos as $region) {
+		$rginfos[$region['UUID']]['rgn_firstname'] = null;
+		$rginfos[$region['UUID']]['rgn_lastname']  = null;
+		$rginfos[$region['UUID']]['rgn_fullname']  = null;
 
 		if ($region['owner_uuid']!=null) {
 			$db->query("SELECT ".$uname.$frmwh."'".$region['owner_uuid']."'");
 			list($firstname,$lastname) = $db->next_record();
-			$regions[$region['UUID']]['rgn_firstname'] = $firstname;
-			$regions[$region['UUID']]['rgn_lastname']  = $lastname;
+			$rginfos[$region['UUID']]['rgn_firstname'] = $firstname;
+			$rginfos[$region['UUID']]['rgn_lastname']  = $lastname;
 			$fullname = $firstname." ".$lastname;
-			if ($fullname!="") $regions[$region['UUID']]['rgn_fullname'] = $fullname;
+			if ($fullname!="") $rginfos[$region['UUID']]['rgn_fullname'] = $fullname;
 		}
 	}
 
 	if ($flg) $db->close();
 
-	return $regions;
+	return $rginfos;
 }
 
 
@@ -634,12 +662,12 @@ function  opensim_get_region_owner($region, &$db=null)
 	$fullname = $firstname." ".$lastname;
 	if ($fullname==" ") $fullname = null;
 
-	$ret['firstname']  = $firstname;
-	$ret['lastname']   = $lastname;
-	$ret['fullname']   = $fullname;
-	$ret['owner_uuid'] = $owneruuid;
+	$name['firstname']  = $firstname;
+	$name['lastname']   = $lastname;
+	$name['fullname']   = $fullname;
+	$name['owner_uuid'] = $owneruuid;
 
-	return $ret;
+	return $name;
 }
 
 
