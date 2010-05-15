@@ -11,18 +11,18 @@ require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 if (!defined('MDLOPNSM_BLK_PATH')) exit();
 require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
 
-$region  = optional_param('region', '', PARAM_TEXT);
-if (!isGUID($region)) exit("<h4>bad region uuid!! ($region)</h4>");
-
-
-if (isguest()) {
+$isGuest = isguest();
+if ($isGuest) {
 	exit('<h4>guest user is not allowed!!</h4>');
 }
 
+
 $courseid = optional_param('course', '0', PARAM_INT);
+$region   = required_param('region', PARAM_ALPHAEXT);
+if (!isGUID($region)) exit("<h4>bad region uuid!! ($region)</h4>");
+
 require_login($courseid);
 $hasPermit = hasPermit($courseid);
-$isGuest   = isguest();
 
 global $CFG;
 $grid_name  = $CFG->mdlopnsm_grid_name;

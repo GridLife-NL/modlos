@@ -1,0 +1,104 @@
+<html>
+
+<head>
+<style type="text/css">
+.styleTitel {font-size: 16px; font-weight: bold; color: #105BA7; font-family: Arial, Helvetica, sans-serif;}
+.styleText {font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #444444;}
+.styleTopTitle {font-size: 20px; font-weight: bold;	font-family: Arial, Helvetica, sans-serif;}
+.styleOnline {font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #009900;}
+.styleOffline {font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #FF0000;}
+.styleplace {color: #FFFFFF;font-size: 3px;}
+</style>
+<title><{$grid_name}> : <{$smarty.const._MD_XPNSM_USER_INFO}></title>
+</head>
+
+<body>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr><td colspan="2" valign="top"><span class="styleTopTitle"><{$grid_name}>&nbsp;:&nbsp;<{$smarty.const._MD_XPNSM_AVATAR_INFO}></span></td></tr>
+  <tr><td colspan="2" valign="top"><hr /></td></tr>
+  <tr>
+    <td width="55%" valign="top">
+      <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr><td>&nbsp;</td></tr>
+        <tr><td><span class="styleTitel"><{$smarty.const._MD_XPNSM_USER}>: <{$firstN}>&nbsp;&nbsp;<{$lastN}></span></td></tr>
+        <{if $isAdmin }>
+          <tr><td>&nbsp;</td></tr>
+          <tr><td class="styleText"><b><{$smarty.const._MD_XPNSM_UUID}>: <{$UUID}></b></td></tr>
+        <{/if}>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td class="styleText"><b><{$smarty.const._MD_XPNSM_BORN_ON}>: <{$born}></b></td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td class="styleText"><b><{$smarty.const._MD_XPNSM_LASTLOGIN}>: <{$lastin}></b></td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+          <td class="styleText"><b><{$smarty.const._MD_XPNSM_OWNERNAME}>: <font color="#105BA7">
+            <{if $userinfo and $owner!=' - '}>
+              <a href="<{$smarty.const.XOOPS_URL}>/userinfo.php?uid=<{$userid}>" target="_blank"><{$owner}></a>
+            <{else}>
+              <{$owner}>
+            <{/if}>
+            </font></b>
+          </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+          <td class="styleText"><b><{$smarty.const._MD_XPNSM_STATUS}>: 
+            <{if $state==$st_notsync }>
+              <font color=#FF0000><{$smarty.const._MD_XPNSM_NOT_SYNCDB}></font>
+            <{elseif $state==$st_active }>
+              <font color=#0000FF><{$smarty.const._MD_XPNSM_ACTIVE}></font>
+            <{elseif $state==$st_inactive }>
+              <font color=#FF0000><{$smarty.const._MD_XPNSM_INACTIVE}></font>
+            <{else}>
+              <font color=#FF0000><{$smarty.const._MD_XPNSM_UNKNOWN_STATUS}> (<{$sate}>)</font>
+            <{/if}>
+            <{if $agentOnline}>
+              [<span class='styleOnline'><{$smarty.const._MD_XPNSM_ONLINE_TTL}></span>]
+            <{else}>
+              [<span class='styleOffline'><{$smarty.const._MD_XPNSM_OFFLINE_TTL}></span>]
+            <{/if}>
+            </b>
+          </td>
+        </tr>
+        <tr><td class="styleText">&nbsp;</td></tr>
+        <tr>
+          <td class="styleText"><b><{$smarty.const._MD_XPNSM_HOME_REGION}>: <a href="<{$module_url}>/helper/region.php?region=<{$regionUUID}>"><{$regionName}></b></a></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td><span class="styleText"><u><b><{$smarty.const._MD_XPNSM_PROFILE}></b></u></span></td></tr>
+        <tr><td><span class="styleplace">.</span></td></tr>
+        <tr>
+          <td><span class="styleText">
+            <{if $profileTXT}>
+              <{$profileTXT}>
+            <{else}>
+              <{$smarty.const._MD_XPNSM_HAS_NOPROFILE}>
+            <{/if}>
+          </span></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+      </table>
+      <br /><br />
+    </td>
+
+    <td width="45%" valign="top">
+      <br /><br />
+      <table border="0" align="center" cellpadding="5" cellspacing="0">
+        <tr>
+          <td bgcolor="#999999">
+            <div align="center">
+              <table width="256" height="256" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td bgcolor="#FFFFFF" background="<{$module_url}>/images/info.jpg">&nbsp;</td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+
+</html>

@@ -19,6 +19,7 @@
 
  function  opensim_get_avatar_num(&$db=null)
  function  opensim_get_avatar_name($uuid, &$db=null)
+ function  opensim_get_avatar_info($uuid, &$db=null)
  function  opensim_get_avatar_infos($condition="", &$db=null)
  function  opensim_get_avatar_profiles($condition="", &$db=null)
  function  opensim_get_avatar_online($uuid, &$db=null)
@@ -191,11 +192,72 @@ function  opensim_get_avatar_name($uuid, &$db=null)
 	$fullname = $firstname." ".$lastname;
 	if ($fullname==" ") $fullname = null;
 
-	$ret['firstname']  = $firstname;
-	$ret['lastname']   = $lastname;
-	$ret['fullname']   = $fullname;
+	$name['firstname'] = $firstname;
+	$name['lastname']  = $lastname;
+	$name['fullname']  = $fullname;
 
-	return $ret;
+	return $name;
+}
+
+
+
+function  opensim_get_avatar_info($uuid, &$db=null)
+{
+	if (!isGUID($uuid)) return null;
+
+	$flg = false;
+	if (!is_object($db)) {
+		$db  = new DB;
+		$flg = true;
+	}
+	
+	$online = false;
+	$profileTXT = "";
+
+	if ($db->exist_table("UserAccounts")) {
+		$db->query("SELECT PrincipalID,FirstName,LastName,HomeRegionID,Created,Login FROM UserAccounts".
+						" LEFT JOIN Presence ON PrincipalID=UserID AND Logout!='0' WHERE PrincipalID='$agent'");
+		list($UUID, $firstname, $lastname, $regionUUID, $created, $lastlogin) = $db->next_record();
+
+		$db->query("SELECT regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE uuid='$regionUUID'");
+		list($regionName, $serverIP, $serverHttpPort, $serverURI) = $db->next_record();
+
+		$db->query("SELECT Online FROM Presence WHERE UserID='$UUID'");
+		list($agentOnline) = $db->next_record();
+		if ($agentOnline=="true") $online = true;
+	}
+	else {
+		$db->query("SELECT UUID,username,lastname,homeRegion,created,lastLogin,profileAboutText FROM users WHERE uuid='$agent'");
+		list($UUID, $firstname, $lastname, $regHandle, $created, $lastlogin, $profileTXT ) = $db->next_record();
+
+		$db->query("SELECT uuid,regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE regionHandle='$regHandle'");
+		list($regionUUID, $regionName, $serverIP, $serverHttpPort, $serverURI) = $db->next_record();
+
+		$db->query("SELECT agentOnline FROM agents WHERE UUID='$UUID'");
+		list($agentOnline) = $db->next_record();
+		if ($agentOnline==1) $online = true;
+	}
+	if ($flg) $db->close();
+
+
+	$fullname = $firstname." ".$lastname;
+	if ($fullname==" ") $fullname = null;
+
+	$avinfo['UUID'] 		  = $UUID;
+	$avinfo['firstname'] 	  = $firstname;
+	$avinfo['lastname'] 	  = $lastname;
+	$avinfo['fullname']   	  = $fullname;
+	$avinfo['created'] 		  = $created;
+	$avinfo['lastlogin'] 	  = $lastlogin;
+	$avinfo['regionUUID'] 	  = $regionUUID;
+	$avinfo['regionName'] 	  = $regionName;
+	$avinfo['serverIP'] 	  = $serverIP;
+	$avinfo['serverHttpPort'] = $serverHttpPort;
+	$avinfo['serverURI'] 	  = $serverURI;
+	$avinfo['agentOnline']	  = $agentOnline;
+	$avinfo['profileTXT']	  = $profileTXT;
+
+	return $avinfo;
 }
 
 
@@ -207,7 +269,7 @@ function  opensim_get_avatar_infos($condition="", &$db=null)
 		$db  = new DB;
 		$flg = true;
 	}
-	$users = array();
+	$avinfos = array();
 	
 	if ($db->exist_table("UserAccounts")) {
 		$db->query("SELECT PrincipalID,FirstName,LastName,Created,Login,homeRegionID FROM UserAccounts ".
@@ -219,17 +281,17 @@ function  opensim_get_avatar_infos($condition="", &$db=null)
 
 	if ($db->Errno==0) {
 		while (list($UUID,$firstname,$lastname,$created,$lastlogin,$hmregion) = $db->next_record()) {
-			$users[$UUID]['UUID']	   = $UUID;
-			$users[$UUID]['firstname'] = $firstname;
-			$users[$UUID]['lastname']  = $lastname;
-			$users[$UUID]['created']   = $created;
-			$users[$UUID]['lastlogin'] = $lastlogin;
-			$users[$UUID]['hmregion']  = $hmregion;
+			$avinfos[$UUID]['UUID']	   = $UUID;
+			$avinfos[$UUID]['firstname'] = $firstname;
+			$avinfos[$UUID]['lastname']  = $lastname;
+			$avinfos[$UUID]['created']   = $created;
+			$avinfos[$UUID]['lastlogin'] = $lastlogin;
+			$avinfos[$UUID]['hmregion']  = $hmregion;
 		}
 	}			  
 	if ($flg) $db->close();
 
-	return $users;
+	return $avinfos;
 }
 
 
@@ -535,6 +597,7 @@ function  opensim_get_region_info($region, &$db=null)
 	$db->query("SELECT regionName,serverIP,serverHttpPort,serverURI,locX,locY FROM regions WHERE uuid='$region'");
 	list($regionName, $serverIP, $serverHttpPort, $serverURI, $locX, $locY) = $db->next_record();
     $rginfo = opensim_get_region_owner($region, $db);
+	if ($flg) $db->close();
 
 	$rginfo['regionName'] 	  = $regionName;
 	$rginfo['serverIP'] 	  = $serverIP;
@@ -543,7 +606,6 @@ function  opensim_get_region_info($region, &$db=null)
 	$rginfo['locX'] 		  = $locX;
 	$rginfo['locY'] 		  = $locY;
 
-	if ($flg) $db->close();
 	return $rginfo;
 }
 
@@ -592,7 +654,7 @@ function  opensim_get_region_infos($condition="", &$db=null)
 			$rginfos[$UUID]['est_lastname'] = $lastname;
 			$rginfos[$UUID]['est_fullname'] = null;
 			$fullname = $firstname." ".$lastname;
-			if ($fullname!="") $rginfos[$UUID]['est_fullname'] = $fullname;
+			if ($fullname!=" ") $rginfos[$UUID]['est_fullname'] = $fullname;
 		}
 	}
 
@@ -608,7 +670,7 @@ function  opensim_get_region_infos($condition="", &$db=null)
 			$rginfos[$region['UUID']]['rgn_firstname'] = $firstname;
 			$rginfos[$region['UUID']]['rgn_lastname']  = $lastname;
 			$fullname = $firstname." ".$lastname;
-			if ($fullname!="") $rginfos[$region['UUID']]['rgn_fullname'] = $fullname;
+			if ($fullname!=" ") $rginfos[$region['UUID']]['rgn_fullname'] = $fullname;
 		}
 	}
 
@@ -821,7 +883,7 @@ function  opensim_set_home_region($uuid, $hmregion, &$db=null)
 
 		if ($db->exist_table("users") and $errno==0) {
 			$db->query("UPDATE users SET homeRegion='$regionHandle',homeRegionID='$regionID' WHERE UUID='$uuid'");
-			if ($DbLink->Errno!=0) {
+			if ($db->Errno!=0) {
 				if (!$db->exist_table("auth")) $errno = 99;
 			}
 		}

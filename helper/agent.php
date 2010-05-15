@@ -1,36 +1,40 @@
 <?php
 
-require_once '../../../mainfile.php';
+require_once(realpath(dirname(__FILE__)."/../../../config.php"));
+require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 
-define ('_OPENSIM_DIR_NAME',    basename(dirname(dirname(__FILE__))));
-define ('_OPENSIM_MODULE_URL',  XOOPS_MODULE_URL.'/'._OPENSIM_DIR_NAME);
-define ('_OPENSIM_MODULE_PATH', XOOPS_ROOT_PATH.'/modules/'._OPENSIM_DIR_NAME);
+if (!defined('MDLOPNSM_BLK_PATH')) exit();
+require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
 
-require_once(_OPENSIM_MODULE_PATH."/include/config.php");
-require_once(_OPENSIM_MODULE_PATH."/include/xoopensim.func.php");
+$region = optional_param('region', '', PARAM_TEXT);
+if (!isGUID($region)) exit("<h4>bad region uuid!! ($region)</h4>");
 
+$isGuest = isguest();
+if ($isGuest)) {
+	exit('<h4>guest user is not allowed!!</h4>');
+}
 
 
 $owner  = ' - ';
 $state  = 0;
-$userid = 0;
+$userid = 0;	// Xoops
 
-$userinfo  = $CFG->mdlopnsm_userinfo_link;
+$courseid = optional_param('course', '0', PARAM_INT);
+$agent 	  = required_param('agent', PARAM_ALPHAEXT);
+if (!isGUID($agent)) exit('<h4>bad agent uuid!!</h4>');
 
-$root = & XCube_Root::getSingleton();
+require_login($courseid);
+$hasPermit  = hasPermit($courseid);
 
-if ($root->mContext->mUser->isInRole('Site.GuestUser')) {
-	exit('<h4>guest user is not allowed!!i</h4>');
-}
+global $CFG;
+$grid_name  = $CFG->mdlopnsm_grid_name;
+$userinfo   = $CFG->mdlopnsm_userinfo_link;
+$action_url = MDLOPNSM_BLK_URL."/helper/agent.php";
 
-$agent = $root->mContext->mRequest->getRequest('agent');
-if (!preg_match("/^[0-9a-fA-F-]+$/", $agent)) exit('<h4>bad agent uuid!!</h4>');
-$grid_name = $root->mContext->mModuleConfig['grid_name'];
-$userinfo  = $root->mContext->mModuleConfig['userinfo_link'];
-$isAdmin = isXoopensimAdmin($root);
 
+//////////////
 if ($agent) {
-	// Xoops DB
+	// Moodle DB
 	$usersdbHandler = & xoops_getmodulehandler('usersdb');
 	$avatardata = & $usersdbHandler->get($agent);
 	if ($avatardata!=null) {
@@ -39,11 +43,13 @@ if ($agent) {
 		$state = $avatardata->get('state');
 	}
 
+
+
+
 	// OpenSim DB
 	$DbLink = new DB;
 	$online = false;
 
-	$profileTXT = "";
 
 	if ($DbLink->exist_table("UserAccounts")) {
 		$DbLink->query("SELECT PrincipalID,FirstName,LastName,HomeRegionID,Created,Login FROM UserAccounts".
@@ -70,7 +76,10 @@ if ($agent) {
 	}
 	$DbLink->close();
 
+
+
 	// osprofile
+	$profileTXT = "";
 	$handler = & xoops_getmodulehandler('profuserprofiledb');
 	if ($handler!=null) {
 		$profobj = $handler->get($agent);
