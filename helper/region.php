@@ -11,13 +11,21 @@ require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 if (!defined('MDLOPNSM_BLK_PATH')) exit();
 require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
 
-global $CFG;
-
-$isAdmin = isadmin();
 $region  = optional_param('region', '', PARAM_TEXT);
-$grid_name = $CFG->mdlopnsm_grid_name;
-//$userinfo  = $CFG->mdlopnsm_userinfo_link;
+if (!isGUID($region)) exit('<h4>bad region uuid!!</h4>');
 
+
+if ($isguest()) {
+	exit('<h4>guest user is not allowed!!</h4>');
+}
+
+$courseid = optional_param('course', '0', PARAM_INT);
+require_login($courseid);
+$hasPermit = hasPermit($courseid);
+
+
+global $CFG;
+$grid_name = $CFG->mdlopnsm_grid_name;
 //$action_url = MDLOPNSM_BLK_URL."/helper/region.php";
 
 
@@ -31,12 +39,12 @@ foreach($users as $user) {
 	$col++;
 }
 
-if ($isAdmin and xoops_getenv("REQUEST_METHOD")=="POST") {
-	$rgnadmin = $root->mContext->mRequest->getRequest('rgnadmin');
+if ($hasPermit and !empty($_POST)) {
+	$rgnadmin = optional_param('rgnadmin', '', PARAM_TEXT);
 	if ($rgnadmin!="") {
 		opensim_set_region_owner($region, $rgnadmin);
 	}
-	$voice_mode = $root->mContext->mRequest->getRequest('voice_mode');
+	$voice_mode = optional_param('voice_mode', '', PARAM_TEXT);
 	if ($voice_mode!="") {
 		opensim_set_voice_mode($region, $voice_mode);
 	}

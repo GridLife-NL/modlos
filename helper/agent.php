@@ -15,6 +15,7 @@ $owner  = ' - ';
 $state  = 0;
 $userid = 0;
 
+$userinfo  = $CFG->mdlopnsm_userinfo_link;
 
 $root = & XCube_Root::getSingleton();
 
