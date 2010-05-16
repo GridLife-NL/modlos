@@ -4,8 +4,8 @@ require_once(realpath(dirname(__FILE__)."/../../config.php"));
 require_once(realpath(dirname(__FILE__)."/include/config.php"));
 
 if (!defined('MDLOPNSM_BLK_PATH')) exit();
-
 require_once(MDLOPNSM_BLK_PATH."/include/opensim.func.php");
+
 
 
 class block_mdlopensim extends block_base 
