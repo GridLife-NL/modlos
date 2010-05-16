@@ -60,7 +60,7 @@ $string['mdlos_has_noprofile'] 		= 'This User has no Profile';
 $string['mdlos_not_syncdb'] 		= 'Not Synchro DB';
 $string['mdlos_active'] 			= 'Active';
 $string['mdlos_inactive'] 			= 'Inactive';
-$string['mdlos_unkonwn_status'] 	= 'unknown Status';
+$string['mdlos_unknown_status'] 	= 'unknown Status';
 $string['mdlos_active_list'] 		= 'Active List';
 $string['mdlos_inactive_list'] 		= 'Inactive List';
 

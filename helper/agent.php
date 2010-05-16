@@ -33,14 +33,13 @@ $state  = 0;
 
 if ($agent) {
 	// Moodle DB
-	//if ($mdlos = get_record('block_mdlos_users', 'UUID', $agent)) {
-		//$userid = $mdlos->uid;
-		$userid = "2";
-		//$state  = $mdlos->state;
+	if ($mdlos = get_record('block_mdlos_users', 'UUID', $agent)) {
+		$userid = $mdlos->uid;
+		$state  = $mdlos->state;
 		if ($moodle = get_record("user", "id", $userid)) {
 			$owner = $moodle->firstname." ".$moodle->lastname;
 		}
-	//}
+	}
 
 	// OpenSim DB
 	$profileTXT = "";
@@ -60,7 +59,6 @@ if ($agent) {
 		$agentOnline	= $avinfo['agentOnline'];
 		$profileTXT 	= $avinfp['profileTXT'];
 	}
-
 
 	// osprofile
 	if ($profileTXT=="") {
@@ -101,7 +99,6 @@ $guid = str_replace("-", "", $UUID);
 $module_url	  	= MDLOPNSM_BLK_URL;
 $course       	= "&amp;course=".$courseid;
 
-print ("ASAAAAAAAAAAAAAAAAAAAA<br />");
 $user_info_ttl  = get_string("mdlos_user_info",		"block_mdlopensim");
 $avatar_info_ttl= get_string("mdlos_avatar_info",	"block_mdlopensim");
 $user_ttl	  	= get_string("mdlos_user",			"block_mdlopensim");
@@ -121,7 +118,6 @@ $unknown_status	= get_string("mdlos_unknown_status","block_mdlopensim");
 $home_region	= get_string("mdlos_home_region",	"block_mdlopensim");
 $has_noprofile	= get_string("mdlos_has_noprofile",	"block_mdlopensim");
 
-die();
 include(MDLOPNSM_BLK_PATH."/html/agent.html");
 
 ?>

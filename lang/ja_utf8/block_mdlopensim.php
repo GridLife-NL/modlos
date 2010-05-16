@@ -59,7 +59,7 @@ $string['mdlos_has_noprofile'] 		= 'このユーザにプロフィールはあ�
 $string['mdlos_not_syncdb'] 		= '未同期';
 $string['mdlos_active'] 			= 'アクティブ';
 $string['mdlos_inactive'] 			= '使用停止';
-$string['mdlos_unkonwn_status'] 	= '不明';
+$string['mdlos_unknown_status'] 	= '不明';
 $string['mdlos_active_list'] 		= '使用可能リスト';
 $string['mdlos_inactive_list'] 		= '使用停止リスト';
 
