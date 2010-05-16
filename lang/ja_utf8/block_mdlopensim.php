@@ -77,16 +77,16 @@ $string['mdlos_avatar_updated'] 	= 'アバターのデータを更新しまし�
 $string['mdlos_avatar_gotted'] 		= 'アバターを手に入れました';
 $string['mdlos_avatar_deleted'] 	= 'アバターを削除しました';
 
-$string['mdlos_avatar_create'] 		= 'アバターの作成';
-$string['mdlos_avatar_update'] 		= 'アバターの更新';
-$string['mdlos_avatar_delete'] 		= 'アバターの削除';
-$string['mdlos_avatar_submit'] 		= 'アバターの作成';
-$string['mdlos_avatar_edit'] 		= 'アバターの編集';
+$string['mdlos_avatar_create'] 		= 'アバター作成';
+$string['mdlos_avatar_update'] 		= 'アバター更新';
+$string['mdlos_avatar_delete'] 		= 'アバター削除';
+$string['mdlos_avatar_submit'] 		= 'アバター作成';
+$string['mdlos_avatar_edit'] 		= 'アバター編集';
 $string['mdlos_avatar_reset'] 		= 'リセット';
-$string['mdlos_avatar_own'] 		= 'オーナーの変更';
+$string['mdlos_avatar_own'] 		= 'オーナー変更';
 
-$string['mdlos_avatar_upd_submit'] 	= 'アバターの更新';
-$string['mdlos_avatar_dlt_submit'] 	= 'アバターの削除';
+$string['mdlos_avatar_upd_submit'] 	= 'アバター更新';
+$string['mdlos_avatar_dlt_submit'] 	= 'アバター削除';
 $string['mdlos_avatar_dlt_canceled']= '削除取り消し';
 
 $string['mdlos_users_found'] 		= 'ユーザ';

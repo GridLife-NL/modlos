@@ -105,7 +105,7 @@ $string['mdlos_page_of'] 			= 'of';
 $string['mdlos_coordinates'] 		= 'Coordinates';
 
 $string['mdlos_region_owner']       = 'Region Owner';
-$string['mdlos_estate_owner']       = 'Admin';
+$string['mdlos_estate_owner']       = 'Administrator';
 $string['mdlos_estate_id']          = 'Estate ID';
 $string['mdlos_region_owner_chng']  = 'Region Owner Change';
 
