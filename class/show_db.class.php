@@ -9,7 +9,7 @@ require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
 
 
 
-class  ShowDB
+class  ShowDataBase
 {
 	var	$grid_status;
 	var $now_online;
@@ -19,7 +19,7 @@ class  ShowDB
 	var $courseid;
 
 
-	function  ShowDB($courseid) 
+	function  ShowDataBase($courseid) 
 	{
 		$this->courseid = $courseid;
 

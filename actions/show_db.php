@@ -15,7 +15,7 @@ $action = 'show_db';
 print_tabheader($action, $course);
 
 require_once(MDLOPNSM_BLK_PATH."/class/show_db.class.php");
-$regions = new ShowDB($courseid);
+$regions = new ShowDataBase($courseid);
 $regions->print_page();
 
 print_footer($course);

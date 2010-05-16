@@ -260,7 +260,6 @@ $string['mdlos_synchronized'] 		= 'OpenSimデータベースとの同期完了�
 
 $string['mdlos_return_tab'] 		= '戻る';
 
-
-$string['mdlos_access_forbidden'] 	= 'このページにはアクセスが許可されてません';
+$string['mdlos_access_forbidden'] 	= 'このページへのアクセスは許可されてません';
 
 ?>
