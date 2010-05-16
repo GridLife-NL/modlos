@@ -59,7 +59,7 @@ function print_tabnav($currenttab, $course)
 	}
 
 	if ($hasPermit) {
-		$toprow[] = new tabobject('', '', "&nbsp;&nbsp;");
+		//$toprow[] = new tabobject('', '', "&nbsp;&nbsp;");
 		if (isadmin()) {
 			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmdlopensim', 
 																	'<b>'.get_string('mdlos_general_setting_tab','block_mdlopensim').'</b>');
