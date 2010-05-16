@@ -139,23 +139,23 @@ class  RegionsList
 		$this->set_condition();
 		$this->execute();
 
-		$grid_name     = $CFG->mdlopnsm_grid_name;
-		$content       = $CFG->mdlopnsm_regions_content;
-		$module_url	   = MDLOPNSM_BLK_URL;
-		$course		   = "&amp;course=$this->courseid";
-		$order		   = "?order=$this->order";
-		$pstart		   = "&amp;pstart=$this->pstart";
-		$plimit		   = "&amp;plimit=$this->plimit";
+		$grid_name       = $CFG->mdlopnsm_grid_name;
+		$content         = $CFG->mdlopnsm_regions_content;
+		$module_url	     = MDLOPNSM_BLK_URL;
+		$course		     = "&amp;course=$this->courseid";
+		$order		     = "?order=$this->order";
+		$pstart		     = "&amp;pstart=$this->pstart";
+		$plimit		   	 = "&amp;plimit=$this->plimit";
 
-		$regions_list  = get_string("mdlos_regions_list",  "block_mdlopensim");
-		$location_x    = get_string("mdlos_location_x",    "block_mdlopensim");
-		$location_y    = get_string("mdlos_location_y",    "block_mdlopensim");
-		$region_name   = get_string("mdlos_region_name",   "block_mdlopensim");
-		$estate_owner  = get_string("mdlos_estate_owner",  "block_mdlopensim");
-		$ip_address    = get_string("mdlos_ipaddr",		   "block_mdlopensim");
-		$regions_found = get_string("mdlos_regions_found", "block_mdlopensim");
-		$page_num	   = get_string("mdlos_page",		   "block_mdlopensim");
-		$page_num_of   = get_string("mdlos_page_of",	   "block_mdlopensim");
+		$regions_list_ttl= get_string("mdlos_regions_list", "block_mdlopensim");
+		$location_x    	 = get_string("mdlos_location_x",   "block_mdlopensim");
+		$location_y      = get_string("mdlos_location_y",   "block_mdlopensim");
+		$region_name     = get_string("mdlos_region_name",  "block_mdlopensim");
+		$estate_owner    = get_string("mdlos_estate_owner", "block_mdlopensim");
+		$ip_address      = get_string("mdlos_ipaddr",		"block_mdlopensim");
+		$regions_found   = get_string("mdlos_regions_found","block_mdlopensim");
+		$page_num	     = get_string("mdlos_page",		    "block_mdlopensim");
+		$page_num_of     = get_string("mdlos_page_of",	    "block_mdlopensim");
 
 		//$region_owner = get_string("mdlos_region_owner", "block_mdlopensim");
 		//$estate_id    = get_string("mdlos_estate_id",    "block_mdlopensim");

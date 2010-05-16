@@ -1,6 +1,6 @@
 <?php
 /////////////////////////////////////////////////////////////////////////////
-// Region ¤Î¸ÄÊÌ¾ðÊó¤òÉ½¼¨¤¹¤ë¡¥
+// Region ã®å€‹åˆ¥æƒ…å ±ã‚’è¡¨ç¤ºã™ã‚‹ï¼Ž
 //
 // usage... http://xxx/yyy/zzz/region.php?region=3a9379b7-1821-4b04-ab97-e38df166bac1
 //
@@ -18,7 +18,7 @@ if ($isGuest) {
 
 
 $courseid = optional_param('course', '0', PARAM_INT);
-$region   = required_param('region', PARAM_ALPHAEXT);
+$region   = required_param('region', PARAM_TEXT);
 if (!isGUID($region)) exit("<h4>bad region uuid!! ($region)</h4>");
 
 require_login($courseid);
@@ -51,12 +51,12 @@ if ($hasPermit and !empty($_POST)) {
 
 
 //////////////
-$voice_modes[0]['id']	= '0';
-$voice_modes[1]['id']	= '1';
-$voice_modes[2]['id']	= '2';
-$voice_modes[0]['title']= get_string("mdlos_voice_inactive_chnl","block_mdlopensim");
-$voice_modes[1]['title']= get_string("mdlos_voice_private_chnl", "block_mdlopensim");
-$voice_modes[2]['title']= get_string("mdlos_voice_percel_chnl",  "block_mdlopensim");
+$voice_modes[0]['id']	 = '0';
+$voice_modes[1]['id']	 = '1';
+$voice_modes[2]['id']	 = '2';
+$voice_modes[0]['title'] = get_string("mdlos_voice_inactive_chnl","block_mdlopensim");
+$voice_modes[1]['title'] = get_string("mdlos_voice_private_chnl", "block_mdlopensim");
+$voice_modes[2]['title'] = get_string("mdlos_voice_percel_chnl",  "block_mdlopensim");
 
 $vcmode = opensim_get_voice_mode($region);
 $vcmode_title = $voice_modes[$vcmode]['title'];
@@ -95,17 +95,17 @@ $locY = $locY/256;
 
 
 //////////////
-$course 	  = "&amp;course=".$courseid;
+$course 	  	= "&amp;course=".$courseid;
 
-$region_ttl   = get_string("mdlos_region",    		"block_mdlopensim");
-$uuid_ttl     = get_string("mdlos_uuid",    		"block_mdlopensim");
-$change_ttl   = get_string("mdlos_change",			"block_mdlopensim");
+$region_info_ttl= get_string("mdlos_region_info",	 "block_mdlopensim");
+$region_ttl   	= get_string("mdlos_region",   		 "block_mdlopensim");
+$uuid_ttl     	= get_string("mdlos_uuid",    		 "block_mdlopensim");
+$change_ttl   	= get_string("mdlos_change",		 "block_mdlopensim");
 
-$region_info  = get_string("mdlos_region_info",		"block_mdlopensim");
-$coordinates  = get_string("mdlos_coordinates", 	"block_mdlopensim");
-$admin_user   = get_string("mdlos_admin_user",  	"block_mdlopensim");
-$region_owner = get_string("mdlos_region_owner",	"block_mdlopensim");
-$voice_mode	  = get_string("mdlos_voice_chat_mode", "block_mdlopensim");
+$coordinates  	= get_string("mdlos_coordinates", 	 "block_mdlopensim");
+$admin_user   	= get_string("mdlos_admin_user",  	 "block_mdlopensim");
+$region_owner 	= get_string("mdlos_region_owner",	 "block_mdlopensim");
+$voice_mode	  	= get_string("mdlos_voice_chat_mode","block_mdlopensim");
 
 include(MDLOPNSM_BLK_PATH."/html/sim.html");
 

@@ -216,7 +216,7 @@ function  opensim_get_avatar_info($uuid, &$db=null)
 
 	if ($db->exist_table("UserAccounts")) {
 		$db->query("SELECT PrincipalID,FirstName,LastName,HomeRegionID,Created,Login FROM UserAccounts".
-						" LEFT JOIN Presence ON PrincipalID=UserID AND Logout!='0' WHERE PrincipalID='$agent'");
+						" LEFT JOIN Presence ON PrincipalID=UserID AND Logout!='0' WHERE PrincipalID='$uuid'");
 		list($UUID, $firstname, $lastname, $regionUUID, $created, $lastlogin) = $db->next_record();
 
 		$db->query("SELECT regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE uuid='$regionUUID'");
@@ -227,10 +227,10 @@ function  opensim_get_avatar_info($uuid, &$db=null)
 		if ($agentOnline=="true") $online = true;
 	}
 	else {
-		$db->query("SELECT UUID,username,lastname,homeRegion,created,lastLogin,profileAboutText FROM users WHERE uuid='$agent'");
-		list($UUID, $firstname, $lastname, $regHandle, $created, $lastlogin, $profileTXT ) = $db->next_record();
+		$db->query("SELECT UUID,username,lastname,homeRegion,created,lastLogin,profileAboutText FROM users WHERE uuid='$uuid'");
+		list($UUID, $firstname, $lastname, $rgnHandle, $created, $lastlogin, $profileTXT ) = $db->next_record();
 
-		$db->query("SELECT uuid,regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE regionHandle='$regHandle'");
+		$db->query("SELECT uuid,regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE regionHandle='$rgnHandle'");
 		list($regionUUID, $regionName, $serverIP, $serverHttpPort, $serverURI) = $db->next_record();
 
 		$db->query("SELECT agentOnline FROM agents WHERE UUID='$UUID'");
