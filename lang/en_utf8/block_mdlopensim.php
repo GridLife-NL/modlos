@@ -47,9 +47,9 @@ $string['mdlos_avatar_own_ttl'] 	= 'OWN AVATAR';
 $string['mdlos_avatar_dlt_cncld_ttl']='AVATAR delete CANCELED';
 
 $string['mdlos_db_status'] 			= 'DB Status';
-$string['mdlos_total_users'] i		= 'Total Users';
+$string['mdlos_total_users'] 		= 'Total Users';
 $string['mdlos_total_regions'] 		= 'Total Regions';
-$string['mdlos_visitors_last30days']= 'Unique Visitors last 30 days';
+$string['mdlos_visitors_last30days']= 'Visitors last 30 days';
 $string['mdlos_online_now'] 		= 'OnLine Now';
 
 $string['mdlos_user'] 				= 'User';
@@ -172,13 +172,13 @@ $string['mdlos_mdl_desc'] 			= 'Moodle OpenSim interface';
 $string['mdlos_grid_name'] 			= 'Grid Name';
 $string['mdlos_grid_desc'] 			= 'Specify the OpenSim grid name';
 
-$string['mdlos_sql_server_name'] 	= 'SQL Server Name';
+$string['mdlos_sql_server_name'] 	= 'OpenSim SQL Server Name';
 $string['mdlos_sql_server_desc'] 	= 'Specify the OpenSim SQL server name or IP address';
-$string['mdlos_sql_db_name'] 		= 'SQL DB Name';
+$string['mdlos_sql_db_name'] 		= 'OpenSim SQL DB Name';
 $string['mdlos_sql_db_desc'] 		= 'Specify the OpenSim SQL DB name';
-$string['mdlos_sql_user'] 			= 'SQL db User Name';
+$string['mdlos_sql_user'] 			= 'OpenSim SQL DB User Name';
 $string['mdlos_sql_user_desc'] 		= 'Specify the OpenSim SQL user name';
-$string['mdlos_sql_pass'] 			= 'SQL db Password';
+$string['mdlos_sql_pass'] 			= 'Opensim SQL DB Password';
 $string['mdlos_sql_pass_desc'] 		= 'Specify the OpenSim SQL password';
 
 $string['mdlos_asset_uri'] 			= 'Asset Server URL';
@@ -186,7 +186,7 @@ $string['mdlos_asset_uri_desc'] 	= 'Specify Asset server URL';
 $string['mdlos_invent_uri'] 		= 'Inventory Server URL';
 $string['mdlos_invent_uri_desc'] 	= 'Specify Inventory server URL';
 $string['mdlos_crncy_uri'] 			= 'Money Server URL';
-$string['mdlos_crncy_uri_desc'] 	= 'Specify Money server URL';
+$string['mdlos_crncy_uri_desc'] 	= 'Specify DTL Money server URL, if exist.';
 
 $string['mdlos_map_stx'] 			= 'World Map Start Point (X)';
 $string['mdlos_map_stx_desc'] 		= 'Specify X coordinates of world map';
@@ -200,7 +200,7 @@ $string['mdlos_max_avatars_desc'] 	= 'Max number of avatars that a user can own.
 $string['mdlos_lname_activate'] 	= 'Last Name Activation';
 $string['mdlos_lname_desc'] 		= 'Select to last name limitation is active, or not';
 $string['mdlos_dst_region_name'] 	= 'Default Home Region';
-$string['mdlos_dst_region_desc'] 	= 'Select default home region';
+$string['mdlos_dst_region_desc'] 	= 'Soecify default home region (SIM)';
 $string['mdlos_use_https'] 			= 'Do you use HTTPS with POST';
 $string['mdlos_use_https_desc'] 	= 'Do you use HTTPS, when you send important data (ex. password) to Mdlopensim with POST method?'. 
 									  'It is not necessary to select it, when the whole of this site is already https or use https login to Moodle.';
@@ -223,9 +223,12 @@ $string['mdlos_userinfo_link_desc'] = 'It is specified whether to put the link f
 									  'From the viewpoint on security, You might be forbidding user to view other user\'s account information page using '.
 									  '<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>UserInfoProtector</a>. '.
 									  'In that case, if this is checked, it is very annoying.';
+$string['mdlos_cprt_sloodle']       = 'Cooperation with Sloodle';
+$string['mdlos_cprt_sloodle_desc']  = 'If Sloodle is installed, the avatar of OpenSim and the Moodle user\'s correspondence that recognized by Mdlopensim '.
+									  'are written to the DB of Sloodle.';
 
 $string['mdlos_db_status_cntnt'] 	= 'DB Status Content';
-$string['mdlos_db_status_cntnt_desc']='Specify content of db status page';
+$string['mdlos_db_status_cntnt_desc']='Specify content of DB status page';
 $string['mdlos_rg_cntnt'] 			= 'Regions List Content';
 $string['mdlos_rg_cntnt_desc'] 		= 'Specify content of regions list page';
 $string['mdlos_avt_cntnt'] 			= 'Avatars List Content';
@@ -248,16 +251,17 @@ $string['mdlos_user_log_desc'] 		= 'Specify user server directory';
 
 // Admin
 $string["mdlos_admin_title"] 		= 'Moodle OpenSim';
-$string["mdlos_general_setting_menu"]='Preferences';
-$string["mdlos_lastnames_menu"] 	= 'Lastnames Management';
-$string['mdlos_synchro_menu'] 		= 'Synchronization of db';
-
-$string['mdlos_synchro_db'] 		= 'Synchronization of Data Base';
-$string['mdlos_synchro_submit'] 	= 'Synchro db';
-$string['mdlos_synchro_contents'] 	= 'Synchrnsize db ?';
-$string['mdlos_synchronized'] 		= 'Synchronized OpenSim db!!';
-
+$string["mdlos_general_setting_tab"]= 'Preferences';
+$string["mdlos_lastnames_tab"] 		= 'Lastnames';
 $string['mdlos_lastnames'] 			= 'Lastnames Management';
+
+$string['mdlos_synchro_tab'] 		= 'Synchro DB';
+$string['mdlos_synchro_db'] 		= 'Synchronization of Data Base';
+$string['mdlos_synchro_submit'] 	= 'Synchro DB';
+$string['mdlos_synchro_contents'] 	= 'Synchrnsize DB?';
+$string['mdlos_synchronized'] 		= 'Synchronized OpenSim DB!!';
+
+$string['mdlos_return_tab'] 		= 'Return';
 
 $string['mdlos_access_forbidden'] 	= 'Forbidden Access to this Page!!';
 

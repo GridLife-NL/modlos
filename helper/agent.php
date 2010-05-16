@@ -32,15 +32,6 @@ $userid = 0;
 $state  = 0;
 
 if ($agent) {
-	// Moodle DB
-	if ($mdlos = get_record('block_mdlos_users', 'UUID', $agent)) {
-		$userid = $mdlos->uid;
-		$state  = $mdlos->state;
-		if ($moodle = get_record("user", "id", $userid)) {
-			$owner = $moodle->firstname." ".$moodle->lastname;
-		}
-	}
-
 	// OpenSim DB
 	$profileTXT = "";
 	$avinfo = opensim_get_avatar_info($agent);
@@ -58,6 +49,15 @@ if ($agent) {
 		$serverURI		= $avinfo['serverURI'];
 		$agentOnline	= $avinfo['agentOnline'];
 		$profileTXT 	= $avinfp['profileTXT'];
+	}
+
+	// Moodle DB
+	if ($mdlos = get_record('block_mdlos_users', 'UUID', $agent)) {
+		$userid = $mdlos->uid;
+		$state  = $mdlos->state;
+		if ($moodle = get_record("user", "id", $userid)) {
+			$owner = $moodle->firstname." ".$moodle->lastname;
+		}
 	}
 
 	// osprofile

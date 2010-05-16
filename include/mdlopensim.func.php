@@ -33,7 +33,10 @@ function print_tabnav($currenttab, $course)
 	else {
 		$courseid = $course->id;
 	}
+	$hasPermit = hasPermit($courseid);
 
+
+	///////
 	$toprow = array();
 	$toprow[] = new tabobject('show_db', MDLOPNSM_BLK_URL.'/actions/show_db.php?course='.$courseid, 
 																	get_string('mdlos_show_db','block_mdlopensim'));
@@ -46,11 +49,30 @@ function print_tabnav($currenttab, $course)
 																	get_string('mdlos_avatars_list','block_mdlopensim'));
 		$toprow[] = new tabobject('avatar_create', MDLOPNSM_BLK_URL.'/actions/avatar_create.php?course='. $courseid, 
 																	get_string('mdlos_avatar_create','block_mdlopensim'));
+	}
+
+	if ($courseid!=0) {
+		$toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$courseid, get_string('mdlos_return_tab', 'block_mdlopensim'));
+	}
+	else {
+		$toprow[] = new tabobject('', $CFG->wwwroot, get_string('mdlos_return_tab', 'block_mdlopensim'));
+	}
+
+	if ($hasPermit) {
+		$toprow[] = new tabobject('', '', "&nbsp;&nbsp;");
 		if (isadmin()) {
 			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmdlopensim', 
-																	get_string('mdlos_general_setting_menu','block_mdlopensim'));
+																	get_string('mdlos_general_setting_tab','block_mdlopensim'));
 		}
+		if ($CFG->mdlopnsm_activate_lastname) {
+			$toprow[] = new tabobject('lastname', MDLOPNSM_BLK_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
+																	get_string('mdlos_lastnames_tab','block_mdlopensim'));
+		}
+		$toprow[] = new tabobject('syncdb', MDLOPNSIM_BLK_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
+																	get_string('mdlos_synchro_tab','block_mdlopensim'));
 	}
+
+
 	$tabs = array($toprow);
 
 	print_tabs($tabs, $currenttab, NULL, NULL);

@@ -170,13 +170,13 @@ $string['mdlos_mdl_desc'] 			= 'Moodle OpenSim インターフェイス';
 $string['mdlos_grid_name'] 			= 'グリッド名';
 $string['mdlos_grid_desc'] 			= 'OpenSim のグリッド名';
 
-$string['mdlos_sql_server_name'] 	= 'SQLサーバ名';
+$string['mdlos_sql_server_name'] 	= 'OpenSim SQLサーバ名';
 $string['mdlos_sql_server_desc'] 	= 'OpenSim の SQLサーバの FQDNか IPアドレス';
-$string['mdlos_sql_db_name'] 		= 'SQLデータベース名';
+$string['mdlos_sql_db_name'] 		= 'OpenSim SQLデータベース名';
 $string['mdlos_sql_db_desc'] 		= 'OpenSim の SQLデータベースの名前';
-$string['mdlos_sql_user'] 			= 'SQLデータベースのユーザ名';
+$string['mdlos_sql_user'] 			= 'OpenSim SQLデータベースのユーザ名';
 $string['mdlos_sql_user_desc'] 		= 'OpenSim の SQLデータベースのーザ名';
-$string['mdlos_sql_pass'] 			= 'SQLデータベースのパスワード';
+$string['mdlos_sql_pass'] 			= 'OpenSim SQLデータベースのパスワード';
 $string['mdlos_sql_pass_desc'] 		= 'OpenSim の SQLデータベースのパスワード';
 
 $string['mdlos_asset_uri'] 			= 'Asset サーバのURI';
@@ -221,6 +221,8 @@ $string['mdlos_userinfo_link'] 		= 'Xoopsユーザの名前からアカウント
 $string['mdlos_userinfo_link_desc'] = 'ページ上に Xoopsユーザの名前が表示された場合に，そのユーザのアカウント情報画面へのリンクを張るかどうかを指定する．'.
 									  'なお，セキュリティ上の問題から，<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>'.
 									  'UserInfoProtector</a>などを使用して，他のユーザのアカウント画面の表示を禁止している場合などにこれを有効にすると，煩わしいだけとなる．';
+$string['mdlos_cprt_sloodle'] 		= 'Sloodleとの連携';
+$string['mdlos_cprt_sloodle_desc'] 	= 'Sloodleがインストールされている場合，Mdlopensimで認識した OpenSimのアバターとMoodleユーザの対応を Sloodleのデータベースにも書き込む';
 
 $string['mdlos_db_status_cntnt'] 	= 'データベース状態のページのコンテンツ';
 $string['mdlos_db_status_cntnt_desc']='Mdlopensim のデータベース状態のページのコンテンツ．HTMLタグ使用可能';
@@ -246,16 +248,18 @@ $string['mdlos_user_log_desc'] 		= 'ユーザサーバのログの保存先';
 
 // Admin
 $string["mdlos_admin_title"] 		= 'Moodle OpenSim';
-$string["mdlos_general_setting_menu"]='一般設定';
-$string["mdlos_lastnames_menu"] 	= 'ラストネーム管理';
+$string["mdlos_general_setting_tab"]= '一般設定';
+$string["mdlos_lastnames_tab"] 		= 'ラストネーム';
+$string['mdlos_lastnames'] 			= 'ラストネーム管理';
 
-$string['mdlos_synchro_menu'] 		= 'データベース同期';
+$string['mdlos_synchro_tab'] 		= 'DB同期';
 $string['mdlos_synchro_db'] 		= 'データベース同期';
 $string['mdlos_synchro_submit'] 	= 'データベース同期の実行';
 $string['mdlos_synchro_contens'] 	= 'OpenSimデータベースと Moodleデータベースとの同期';
 $string['mdlos_synchronized'] 		= 'OpenSimデータベースとの同期完了！';
 
-$string['mdlos_lastnames'] 			= 'ラストネーム 管理';
+$string['mdlos_return_tab'] 		= '戻る';
+
 
 $string['mdlos_access_forbidden'] 	= 'このページにはアクセスが許可されてません';
 
