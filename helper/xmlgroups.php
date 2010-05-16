@@ -18,13 +18,13 @@ $groupWriteKey = MDLOPNSIM_GRP_WKEY;
 
 
 // DB Name
-$osagent 				= $CFG->prefix."block_mdlos_group_active";
-$osgroup 				= $CFG->prefix."block_mdlos_group_list";
-$osgroupinvite 			= $CFG->prefix."block_mdlos_group_invite";
-$osgroupmembership 		= $CFG->prefix."block_mdlos_group_membership";
-$osgroupnotice 			= $CFG->prefix."block_mdlos_group_notice";
-$osgrouprolemembership	= $CFG->prefix."block_mdlos_group_rolemembership";
-$osrole 				= $CFG->prefix."block_mdlos_group_role";
+$osagent 				= MDLOPNSM_DB_PREFIX."group_active";
+$osgroup 				= MDLOPNSM_DB_PREFIX."group_list";
+$osgroupinvite 			= MDLOPNSM_DB_PREFIX."group_invite";
+$osgroupmembership 		= MDLOPNSM_DB_PREFIX."group_membership";
+$osgroupnotice 			= MDLOPNSM_DB_PREFIX."group_notice";
+$osgrouprolemembership	= MDLOPNSM_DB_PREFIX."group_rolemembership";
+$osrole 				= MDLOPNSM_DB_PREFIX."group_role";
 
 
 $debugXMLRPC = 0;
