@@ -43,6 +43,8 @@
  function  opensim_supply_passwordSalt(&$db=null)
  function  opensim_succession_presence(&$db=null)
 
+ function  opensim_succession_data($region_nmae, &$db=null)
+
  function  opensim_get_voice_mode($region, &$db=null)
  function  opensim_set_voice_mode($region, $mode, &$db=null)
 
@@ -56,10 +58,8 @@
 // Load Function
 //
 
-global $module_path;
-
-require_once($module_path."include/tools.func.php");
-require_once($module_path."include/opensim.mysql.php");
+require_once(CMS_MODULE_PATH."/include/tools.func.php");
+require_once(CMS_MODULE_PATH."/include/opensim.mysql.php");
 
 
 
@@ -107,7 +107,15 @@ function  opensim_check_db(&$db=null)
 	if ($db->Errno==0) {
 		list($ret['region_count']) = $db->next_record();
 
-		if ($db->exist_table("Presence")) {
+		if ($db->exist_table("GridUser")) {				// 0.7Dev2
+			$db->query("SELECT COUNT(*) FROM UserAccounts");
+			list($ret['user_count']) = $db->next_record();
+			$db->query("SELECT COUNT(*) FROM GridUser WHERE Online='true' and Login>(unix_timestamp(from_unixtime(unix_timestamp(now())-86400)))");
+			list($ret['now_online']) = $db->next_record();
+			$db->query("SELECT COUNT(*) FROM GridUser WHERE Login>unix_timestamp(from_unixtime(unix_timestamp(now())-2419200))");
+			list($ret['lastmonth_online']) = $db->next_record();
+		}
+		else if ($db->exist_table("Presence")) {		// 0.7Dev1
 			$db->query("SELECT COUNT(*) FROM UserAccounts");
 			list($ret['user_count']) = $db->next_record();
 			$db->query("SELECT COUNT(*) FROM Presence WHERE Online='true' and Login>(unix_timestamp(from_unixtime(unix_timestamp(now())-86400)))");
@@ -115,7 +123,7 @@ function  opensim_check_db(&$db=null)
 			$db->query("SELECT COUNT(*) FROM Presence WHERE Login>unix_timestamp(from_unixtime(unix_timestamp(now())-2419200))");
 			list($ret['lastmonth_online']) = $db->next_record();
 		}
-		else {
+		else {  // 0.6.x
 			$db->query("SELECT COUNT(*) FROM users");
 			list($ret['user_count']) = $db->next_record();
 			$db->query("SELECT COUNT(*) FROM agents WHERE agentOnline=1 and logintime>(unix_timestamp(from_unixtime(unix_timestamp(now())-86400)))");
@@ -214,14 +222,23 @@ function  opensim_get_avatar_info($uuid, &$db=null)
 	$online = false;
 	$profileTXT = "";
 
-	if ($db->exist_table("UserAccounts")) {
+
+	if ($db->exist_table("GridUser")) {
+		$db->query("SELECT PrincipalID,FirstName,LastName,HomeRegionID,Created,Login FROM UserAccounts".
+						" LEFT JOIN GridUser ON PrincipalID=UserID AND Logout!='0' WHERE PrincipalID='$uuid'");
+		list($UUID, $firstname, $lastname, $regionUUID, $created, $lastlogin) = $db->next_record();
+		$db->query("SELECT regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE uuid='$regionUUID'");
+		list($regionName, $serverIP, $serverHttpPort, $serverURI) = $db->next_record();
+		$db->query("SELECT Online FROM GridUser WHERE UserID='$UUID'");
+		list($agentOnline) = $db->next_record();
+		if ($agentOnline=="True") $online = true;
+	}
+	else if ($db->exist_table("Presence")) {
 		$db->query("SELECT PrincipalID,FirstName,LastName,HomeRegionID,Created,Login FROM UserAccounts".
 						" LEFT JOIN Presence ON PrincipalID=UserID AND Logout!='0' WHERE PrincipalID='$uuid'");
 		list($UUID, $firstname, $lastname, $regionUUID, $created, $lastlogin) = $db->next_record();
-
 		$db->query("SELECT regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE uuid='$regionUUID'");
 		list($regionName, $serverIP, $serverHttpPort, $serverURI) = $db->next_record();
-
 		$db->query("SELECT Online FROM Presence WHERE UserID='$UUID'");
 		list($agentOnline) = $db->next_record();
 		if ($agentOnline=="true") $online = true;
@@ -229,10 +246,8 @@ function  opensim_get_avatar_info($uuid, &$db=null)
 	else {
 		$db->query("SELECT UUID,username,lastname,homeRegion,created,lastLogin,profileAboutText FROM users WHERE uuid='$uuid'");
 		list($UUID, $firstname, $lastname, $rgnHandle, $created, $lastlogin, $profileTXT ) = $db->next_record();
-
 		$db->query("SELECT uuid,regionName,serverIP,serverHttpPort,serverURI FROM regions WHERE regionHandle='$rgnHandle'");
 		list($regionUUID, $regionName, $serverIP, $serverHttpPort, $serverURI) = $db->next_record();
-
 		$db->query("SELECT agentOnline FROM agents WHERE UUID='$UUID'");
 		list($agentOnline) = $db->next_record();
 		if ($agentOnline==1) $online = true;
@@ -249,6 +264,7 @@ function  opensim_get_avatar_info($uuid, &$db=null)
 	$avinfo['fullname']   	  = $fullname;
 	$avinfo['created'] 		  = $created;
 	$avinfo['lastlogin'] 	  = $lastlogin;
+	$avinfo['online'] 	  	  = $online;
 	$avinfo['regionUUID'] 	  = $regionUUID;
 	$avinfo['regionName'] 	  = $regionName;
 	$avinfo['serverIP'] 	  = $serverIP;
@@ -271,9 +287,13 @@ function  opensim_get_avatar_infos($condition="", &$db=null)
 	}
 	$avinfos = array();
 	
-	if ($db->exist_table("UserAccounts")) {
+	if ($db->exist_table("GridUser")) {
 		$db->query("SELECT PrincipalID,FirstName,LastName,Created,Login,homeRegionID FROM UserAccounts ".
-							"LEFT JOIN Presence ON PrincipalID=UserID AND Logout!='0'".$condition);
+							"LEFT JOIN GridUser ON PrincipalID=UserID AND Logout!='0' ".$condition);
+	}
+	else if ($db->exist_table("Presence")) {
+		$db->query("SELECT PrincipalID,FirstName,LastName,Created,Login,homeRegionID FROM UserAccounts ".
+							"LEFT JOIN Presence ON PrincipalID=UserID AND Logout!='0' ".$condition);
 	}
 	else {
 		$db->query("SELECT UUID,username,lastname,created,lastLogin,homeRegion FROM users ".$condition);
@@ -281,7 +301,7 @@ function  opensim_get_avatar_infos($condition="", &$db=null)
 
 	if ($db->Errno==0) {
 		while (list($UUID,$firstname,$lastname,$created,$lastlogin,$hmregion) = $db->next_record()) {
-			$avinfos[$UUID]['UUID']	   = $UUID;
+			$avinfos[$UUID]['UUID']	     = $UUID;
 			$avinfos[$UUID]['firstname'] = $firstname;
 			$avinfos[$UUID]['lastname']  = $lastname;
 			$avinfos[$UUID]['created']   = $created;
@@ -342,7 +362,14 @@ function  opensim_get_avatar_online($uuid, &$db=null)
 	$online = false;
 	$region = "00000000-0000-0000-0000-000000000000";
 
-	if ($db->exist_table("Presence")) {
+	if ($db->exist_table("GridUser")) {
+		$db->query("SELECT Online,LastRegionID FROM GridUser WHERE UserID='$uuid'");
+		if ($db->Errno==0) {
+			list($onln, $region) = $db->next_record();
+			if ($onln=="True") $online = true;
+		}
+	}
+	else if ($db->exist_table("Presence")) {
 		$db->query("SELECT Online,RegionID FROM Presence WHERE UserID='$uuid' AND Logout='0'");
 		if ($db->Errno==0) {
 			list($onln, $region) = $db->next_record();
@@ -392,12 +419,21 @@ function  opensim_create_avatar($UUID, $firstname, $lastname, $passwd, $homeregi
 								  "VALUES ('$UUID','$nulluuid','$firstname','$lastname','','$serviceURLs','".time()."','0','0','')");
 			$errno = $db->Errno;
 			if ($errno==0) {
-				$ssid = make_random_guid();
-				$csid = make_random_guid();
-				$db->query("INSERT INTO Presence (UserID,RegionID,SessionID,SecureSessionID,Online,Login,Logout,".
+
+				if ($db->exist_table("GridUser")) {
+					$db->query("INSERT INTO GridUser (UserID,HomeRegionID,HomePosition,HomeLookAt,".
+													 "LastRegionID,LastPosition,LastLookAt,Online,Login,Logout) ".
+									"VALUES ('$UUID','$regionID','<128,128,0>','<0,0,0>',".
+											"'$regionID','<128,128,0>','<0,0,0>','false','0','0')");
+				}
+				if ($db->exist_table("Presence")) {
+					$ssid = make_random_guid();
+					$csid = make_random_guid();
+					$db->query("INSERT INTO Presence (UserID,RegionID,SessionID,SecureSessionID,Online,Login,Logout,".
 												 "Position,LookAt,HomeRegionID,HomePosition,HomeLookAt) ".
-								  "VALUES ('$UUID','$regionID','$ssid','$csid','false','0','0',".
+							 		"VALUES ('$UUID','$regionID','$ssid','$csid','false','0','0',".
 										   "'<128,128,0>','<0,0,0>','$regionID','<128,128,0>','<0,0,0>')");
+				}
 				$errno = $db->Errno;
 			}
 			if ($errno==0) {
@@ -411,10 +447,10 @@ function  opensim_create_avatar($UUID, $firstname, $lastname, $passwd, $homeregi
 
 			if ($errno!=0) {
 				$db->query("DELETE FROM UserAccounts WHERE PrincipalID='$UUID'");
-				$db->query("DELETE FROM Presence     WHERE UserID='$UUID'");
-				$db->query("DELETE FROM auth         WHERE UUID='$UUID'");
 				$db->query("DELETE FROM auth         WHERE UUID='$UUID'");
 				$db->query("DELETE FROM inventoryfolders WHERE agentID='$UUID'");
+				if ($db->exist_table("Presence")) $db->query("DELETE FROM Presence WHERE UserID='$UUID'");
+				if ($db->exist_table("GridUser")) $db->query("DELETE FROM GridUser WHERE UserID='$UUID'");
 			}
 		}
 
@@ -458,11 +494,13 @@ function  opensim_delete_avatar($uuid, &$db=null)
 
 	if ($db->exist_table("UserAccounts")) {
 		$db->query("DELETE FROM UserAccounts WHERE PrincipalID='$uuid'");
-		$db->query("DELETE FROM Presence     WHERE UserID='$uuid'");
 		$db->query("DELETE FROM auth         WHERE UUID='$uuid'");
 		$db->query("DELETE FROM Avatars      WHERE PrincipalID='$uuid'");
 		$db->query("DELETE FROM Friends      WHERE PrincipalID='$uuid'");
 		$db->query("DELETE FROM tokens       WHERE UUID='$uuid'");
+		if ($db->exist_table("Presence")) $db->query("DELETE FROM Presence WHERE UserID='$uuid'");
+		if ($db->exist_table("GridUser")) $db->query("DELETE FROM GridUser WHERE UserID='$uuid'");
+
 	}
 	if ($db->exist_table("users")) {
 		$db->query("DELETE FROM users        WHERE UUID='$uuid'");
@@ -876,6 +914,10 @@ function  opensim_set_home_region($uuid, $hmregion, &$db=null)
 	if ($errno==0) {
 		list($regionID,$regionHandle) = $db->next_record();
 
+		if ($db->exist_table("Griduser")) {
+			$db->query("UPDATE GridUser SET HomeRegionID='$regionID' WHERE UserID='$uuid'");
+			$errno = $db->Errno;
+		}
 		if ($db->exist_table("Presence")) {
 			$db->query("UPDATE Presence SET HomeRegionID='$regionID' WHERE UserID='$uuid'");
 			$errno = $db->Errno;
@@ -1020,7 +1062,7 @@ function  opensim_supply_passwordSalt(&$db=null)
 
 
 
-function  opensim_succession_presence($region_name, &$db=null)
+function  opensim_succession_agents_to_presence($region_id, &$db=null)
 {
 	$flg = false;
 	if (!is_object($db)) {
@@ -1028,38 +1070,36 @@ function  opensim_succession_presence($region_name, &$db=null)
 		$flg = true;
 	}
 
-	if (!$db->exist_table("Presence") or !$db->exist_table("agents")) {
-		if ($flg) $db->close();
-		return;
-	}
-
-	$db->query("SELECT uuid FROM regions WHERE regionName='".$region_name."'");
-	list($default_hmregion) = $db->next_record();
-
 	$db->query("SELECT agents.UUID,sessionID,secureSessionID,currentRegion,loginTime,logoutTime,homeRegion ".
 							 "FROM agents,users WHERE agents.UUID=users.UUID");
 	$errno = $db->Errno;
 	
 	if ($errno==0) {
 		$db2 = new DB;
-		while(list($UUID,$sessionID,$secureSessionID,$currentRegion,$login,$logout,$homeHandle) = $db->next_record()) {
-			$db2->query("SELECT UserID FROM Presence WHERE UserID='$UUID'");
-			list($UserID) = $db2->next_record();
-			if ($UserID==null) {
-				$db2->query("SELECT uuid FROM regions WHERE regionHandle='$homeHandle'");
-				list($homeRegion) = $db2->next_record();
+		while(list($UUID,$sessionID,$secureSessionID,$currentRegion,$login,$logout,$homeHandle) = $db->next_record())
+		{
+			$db2->query("SELECT uuid FROM regions WHERE regionHandle='$homeHandle'");
+			list($homeRegion) = $db2->next_record();
+			if ($homeRegion==null or $homeRegion=="") $homeRegion = $region_id;
 
-				if ($homeRegion==null or $homeRegion=="") $homeRegion = $default_hmregion;
+			$db2->query("SELECT UserID,HomeRegionID FROM Presence WHERE UserID='$UUID'");
+			list($userid,$hmregion) = $db2->next_record();
+
+			if ($userid==null) {
 				if ($login!=0 and $logout<$login) $logout = $login;
 
 				$db2->query("INSERT INTO Presence (UserID,RegionID,SessionID,SecureSessionID,Online,Login,Logout,".
 												 "Position,LookAt,HomeRegionID,HomePosition,HomeLookAt) ".
-								  "VALUES ('$UUID','$currentRegion','$sessionID','$secureSessionID','false','$login','$logout',".
-										   "'<128,128,0>','<0,0,0>','$homeRegion','<128,128,0>','<0,0,0>')");
+								  			"VALUES ('$UUID','$currentRegion','$sessionID','$secureSessionID','false','$login','$logout',".
+										   			"'<128,128,0>','<0,0,0>','$homeRegion','<128,128,0>','<0,0,0>')");
 				$errno =$db2->Errno;
+
 				if ($errno!=0) {
 					$db->query("DELETE FROM Presence WHERE UserID='$UUID'");
 				}
+			}
+			else if ($hmregion=="00000000-0000-0000-0000-000000000000" or $hmregion==null) {
+				$db2->query("UPDATE Presence SET HomeRegionID='$homeRegion' WHERE UserID='$UUID'");
 			}
 		}
 	}
@@ -1069,6 +1109,135 @@ function  opensim_succession_presence($region_name, &$db=null)
 	if ($errno!=0) return false;
 	return true;
 }
+
+
+
+function  opensim_succession_agents_to_griduser($region_id, &$db=null)
+{
+	$flg = false;
+	if (!is_object($db)) {
+		$db  = new DB;
+		$flg = true;
+	}
+
+	$db->query("SELECT agents.UUID,currentRegion,loginTime,logoutTime,homeRegion FROM agents,users WHERE agents.UUID=users.UUID");
+	$errno = $db->Errno;
+	
+	if ($errno==0) {
+		$db2 = new DB;
+		while(list($UUID,$currentRegion,$login,$logout,$homeHandle) = $db->next_record()) {
+			$db2->query("SELECT uuid FROM regions WHERE regionHandle='$homeHandle'");
+			list($homeRegion) = $db2->next_record();
+			if ($homeRegion==null or $homeRegion=="") $homeRegion = $region_id;
+
+			$db2->query("SELECT UserID,HomeRegionID FROM GridUser WHERE UserID='$UUID'");
+			list($userid,$hmregion) = $db2->next_record();
+
+			if ($userid==null) {
+				if ($login!=0 and $logout<$login) $logout = $login;
+
+				$db2->query("INSERT INTO GridUser (UserID,HomeRegionID,HomePosition,HomeLookAt,LastRegionID,LastPosition,LastLookAt,Online,Login,Logout) ".
+							"VALUES ('$UUID','$homeRegion','<128,128,0>','<0,0,0>','$currentRegion','<128,128,0>','<0,0,0>','False','$login','$logout')");
+				$errno =$db2->Errno;
+
+				if ($errno!=0) {
+					$db->query("DELETE FROM GridUser WHERE UserID='$UUID'");
+				}
+			}
+			else if ($hmregion=="00000000-0000-0000-0000-000000000000" or $hmregion==null) {
+				$db2->query("UPDATE GridUser SET HomeRegionID='$homeRegion' WHERE UserID='$UUID'");
+			}
+		}
+	}
+	//$db2->close();	// should not be close!!
+	if ($flg) $db->close();
+
+	if ($errno!=0) return false;
+	return true;
+}
+
+
+
+function  opensim_succession_presence_to_griduser($region_id, &$db=null)
+{
+	$flg = false;
+	if (!is_object($db)) {
+		$db  = new DB;
+		$flg = true;
+	}
+
+	$db->query("SELECT agents.UUID,currentRegion,loginTime,logoutTime,homeRegion FROM agents,users WHERE agents.UUID=users.UUID");
+	$errno = $db->Errno;
+	
+	if ($errno==0) {
+		$db2 = new DB;
+		while(list($UUID,$currentRegion,$login,$logout,$homeHandle) = $db->next_record()) {
+			$db2->query("SELECT uuid FROM regions WHERE regionHandle='$homeHandle'");
+			list($homeRegion) = $db2->next_record();
+			if ($homeRegion==null or $homeRegion=="") $homeRegion = $region_id;
+
+			$db2->query("SELECT UserID,HomeRegionID FROM GridUser WHERE UserID='$UUID'");
+			list($userid,$hmregion) = $db2->next_record();
+
+			if ($userid==null) {
+				if ($login!=0 and $logout<$login) $logout = $login;
+
+				$db2->query("INSERT INTO GridUser (UserID,HomeRegionID,HomePosition,HomeLookAt,LastRegionID,LastPosition,LastLookAt,Online,Login,Logout) ".
+							"VALUES ('$UUID','$homeRegion','<128,128,0>','<0,0,0>','$currentRegion','<128,128,0>','<0,0,0>','False','$login','$logout')");
+				$errno =$db2->Errno;
+
+				if ($errno!=0) {
+					$db->query("DELETE FROM GridUser WHERE UserID='$UUID'");
+				}
+			}
+			else if ($hmregion=="00000000-0000-0000-0000-000000000000" or $hmregion==null) {
+				$db2->query("UPDATE GridUser SET HomeRegionID='$homeRegion' WHERE UserID='$UUID'");
+			}
+		}
+	}
+	//$db2->close();	// should not be close!!
+	if ($flg) $db->close();
+
+	if ($errno!=0) return false;
+	return true;
+}
+
+
+
+//
+// agents -> Presence -> GridUser
+//
+//		$region_name is default home region name.
+//
+function  opensim_succession_data($region_nmae, &$db=null)
+{
+	$flg = false;
+	if (!is_object($db)) {
+		$db  = new DB;
+		$flg = true;
+	}
+
+	$exist_agents   = $db->exist_table("agents");
+	$exist_presence = $db->exist_table("Presence");
+	$exist_griduser = $db->exist_table("GridUser");
+
+	$db->query("SELECT uuid FROM regions WHERE regionName='".$region_name."'");
+	list($region_id) = $db->next_record();
+
+	if ($exist_presence and $exist_griduser) {
+		opensim_succession_presence_to_griduser($region_id, $db);
+	}
+	if ($exist_agents and $exist_griduser) {
+		opensim_succession_agents_to_griduser($region_id, $db);
+	}
+	if ($exist_agents and $exist_presence) {
+		opensim_succession_agents_to_presence($region_id, $db);
+	}
+
+	if ($flg) $db->close();
+	return;
+}
+
 
 
 

@@ -113,7 +113,7 @@ class  SynchroDataBase
 		$render->setAttribute('action_url',   $this->action_url);
 		$render->setAttribute('actionForm',   $this->mActionForm);
 
-		include(MDLOPNSIM_BLK_PATH.'/admin/html/synchro.html');
+		include(CMS_MODULE_PATH.'/admin/html/synchro.html');
 	}
 }
 

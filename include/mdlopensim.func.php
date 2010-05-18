@@ -97,7 +97,7 @@ function  mdlopensim_insert_usertable($user)
 	else if (array_key_exists('username', $user)) $firstname = $user['username'];
 	else return false;
 
-	$insobj->UUID, 	   = $user['UUID'];
+	$insobj->UUID 	   = $user['UUID'];
 	$insobj->firstname = $firstname;
 	$insobj->lastname  = $user['lastname'];
 
@@ -328,7 +328,7 @@ function print_tabnav($currenttab, $course)
 			$toprow[] = new tabobject('lastname', CMS_MODULE_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
 																	'<b>'.get_string('mdlos_lastnames_tab','block_mdlopensim').'</b>');
 		}
-		$toprow[] = new tabobject('syncdb', MDLOPNSIM_BLK_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
+		$toprow[] = new tabobject('syncdb', CMS_MODULE_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
 																	'<b>'.get_string('mdlos_synchro_tab','block_mdlopensim').'</b>');
 		if (isadmin()) {
 			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmdlopensim', 
