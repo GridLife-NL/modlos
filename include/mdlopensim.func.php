@@ -288,7 +288,6 @@ function  mdlopensim_delete_profiles($uuid)
     return;
 }
 
-?>
 
 
 function print_tabnav($currenttab, $course)
