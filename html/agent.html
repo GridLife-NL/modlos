@@ -47,11 +47,11 @@
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td class="styleText"><b><?php print $status_ttl?>:&nbsp;
-            <?php if ($state==MDLOPNSM_STATE_NOTSYNC) {?>
+            <?php if ($state==AVATAR_STATE_NOTSYNC) {?>
               <font color=#FF0000><?php print $not_syncdb_ttl?></font>
-            <?php } elseif ($state==MDLOPNSM_STATE_ACTIVE) {?>
+            <?php } elseif ($state==AVATAR_STATE_ACTIVE) {?>
               <font color=#0000FF><?php print $active_ttl?></font>
-            <?php } elseif ($state==MDLOPNSM_STATE_INACTIVE) {?>
+            <?php } elseif ($state==AVATAR_STATE_INACTIVE) {?>
               <font color=#FF0000><?php print $inactive_ttl?></font>
             <?php } else {?>
               <font color=#FF0000><?php print $unknown_status."(".$sate.")"?></font>

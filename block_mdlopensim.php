@@ -3,8 +3,8 @@
 require_once(realpath(dirname(__FILE__)."/../../config.php"));
 require_once(realpath(dirname(__FILE__)."/include/config.php"));
 
-if (!defined('MDLOPNSM_BLK_PATH')) exit();
-require_once(MDLOPNSM_BLK_PATH."/include/opensim.func.php");
+if (!defined('CMS_MODULE_PATH')) exit();
+require_once(CMS_MODULE_PATH."/include/opensim.func.php");
 
 
 
@@ -47,12 +47,12 @@ class block_mdlopensim extends block_base
 
 		$this->content = new stdClass;
 
-		$this->content->text = '<a href="'.MDLOPNSM_BLK_URL.'/actions/show_db.php?course='.$id.'">'.get_string('mdlos_show_db','block_mdlopensim').'</a><br />';
-		$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/map_action.php?course='.$id.'">'.get_string('mdlos_world_map','block_mdlopensim').'</a><br />';
-		$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('mdlos_regions_list','block_mdlopensim').'</a><br />';
+		$this->content->text = '<a href="'.CMS_MODULE_URL.'/actions/show_db.php?course='.$id.'">'.get_string('mdlos_show_db','block_mdlopensim').'</a><br />';
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.get_string('mdlos_world_map','block_mdlopensim').'</a><br />';
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('mdlos_regions_list','block_mdlopensim').'</a><br />';
 		if (!isguest()) {
-			$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/avatars_list?course='.$id.'">'.get_string('mdlos_avatars_list','block_mdlopensim').'</a><br />';
-			$this->content->text.= '<a href="'.MDLOPNSM_BLK_URL.'/actions/avatar_create?course='.$id.'">'.get_string('mdlos_avatar_create','block_mdlopensim').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list?course='.$id.'">'.get_string('mdlos_avatars_list','block_mdlopensim').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatar_create?course='.$id.'">'.get_string('mdlos_avatar_create','block_mdlopensim').'</a><br />';
 /*
 			if (isadmin()) {
 				$this->content->text.= '<hr />';

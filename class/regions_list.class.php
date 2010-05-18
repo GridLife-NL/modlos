@@ -1,7 +1,7 @@
 <?php
 
-if (!defined('MDLOPNSM_BLK_PATH')) exit();
-require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
+if (!defined('CMS_MODULE_PATH')) exit();
+require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
 
@@ -66,7 +66,7 @@ class  RegionsList
 		$this->sql_condition = " $sql_order $sql_limit";
 
 		$this->action = "regions_list.php";
-		$this->action_url = MDLOPNSM_BLK_URL."/actions/".$this->action;
+		$this->action_url = CMS_MODULE_URL."/actions/".$this->action;
 
 		return;
 	}
@@ -141,7 +141,7 @@ class  RegionsList
 
 		$grid_name       = $CFG->mdlopnsm_grid_name;
 		$content         = $CFG->mdlopnsm_regions_content;
-		$module_url	     = MDLOPNSM_BLK_URL;
+		$module_url	     = CMS_MODULE_URL;
 		$course		     = "&amp;course=$this->courseid";
 		$order		     = "?order=$this->order";
 		$pstart		     = "&amp;pstart=$this->pstart";
@@ -160,7 +160,7 @@ class  RegionsList
 		//$region_owner = get_string("mdlos_region_owner", "block_mdlopensim");
 		//$estate_id    = get_string("mdlos_estate_id",    "block_mdlopensim");
 
-		include(MDLOPNSM_BLK_PATH."/html/regions.html");
+		include(CMS_MODULE_PATH."/html/regions.html");
 	}
 }
 

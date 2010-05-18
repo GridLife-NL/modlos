@@ -1,7 +1,7 @@
 <?php
 
-if (!defined('MDLOPNSM_BLK_PATH')) exit();
-require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
+if (!defined('CMS_MODULE_PATH')) exit();
+require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
 
@@ -221,7 +221,7 @@ class  AvatarsList
         $grid_name = $CFG->mdlopnsm_grid_name;
         $content   = $CFG->mdlopnsm_avatars_content;
 
-        include(MDLOPNSM_BLK_PATH."/html/avatars.html");
+        include(CMS_MODULE_PATH."/html/avatars.html");
 	}
 }
 

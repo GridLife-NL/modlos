@@ -8,8 +8,8 @@
 require_once(realpath(dirname(__FILE__)."/../../../config.php"));
 require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 
-if (!defined('MDLOPNSM_BLK_PATH')) exit();
-require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
+if (!defined('CMS_MODULE_PATH')) exit();
+require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 $isGuest = isguest();
 if ($isGuest) {
@@ -26,7 +26,7 @@ $hasPermit = hasPermit($courseid);
 
 global $CFG;
 $grid_name  = $CFG->mdlopnsm_grid_name;
-$action_url = MDLOPNSM_BLK_URL."/helper/region.php";
+$action_url = CMS_MODULE_URL."/helper/region.php";
 
 
 //////////////
@@ -107,6 +107,6 @@ $admin_user   	= get_string("mdlos_admin_user",  	 "block_mdlopensim");
 $region_owner 	= get_string("mdlos_region_owner",	 "block_mdlopensim");
 $voice_mode	  	= get_string("mdlos_voice_chat_mode","block_mdlopensim");
 
-include(MDLOPNSM_BLK_PATH."/html/sim.html");
+include(CMS_MODULE_PATH."/html/sim.html");
 
 ?>

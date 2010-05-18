@@ -24,12 +24,12 @@
  ****************************************************************/
 
 
-if (!defined('MDLOPNSM_BLK_PATH')) exit();
+if (!defined('CMS_MODULE_PATH')) exit();
 
-require_once(MDLOPNSM_BLK_PATH."/include/config.php");
-require_once(MDLOPNSM_BLK_PATH."/include/tools.func.php");
-require_once(MDLOPNSM_BLK_PATH."/include/moodle.func.php");
-require_once(MDLOPNSM_BLK_PATH."/include/opensim.func.php");
+require_once(CMS_MODULE_PATH."/include/config.php");
+require_once(CMS_MODULE_PATH."/include/tools.func.php");
+require_once(CMS_MODULE_PATH."/include/moodle.func.php");
+require_once(CMS_MODULE_PATH."/include/opensim.func.php");
 
 
 
@@ -148,7 +148,7 @@ function  mdlopensim_update_usertable($user)
 function  mdlopensim_delete_usertable($user)
 {
 	if (!isGUID($user['UUID'])) return false;
-	if ($user['state']==MDLOPNSM_STATE_ACTIVE) return false;		// active
+	if ($user['state']==AVATAR_STATE_ACTIVE) return false;		// active
 
 	$ret = delete_records('block_mdlos_users', 'UUID', $user['UUID']);
 	if (!$ret) return false;
@@ -310,22 +310,22 @@ function print_tabnav($currenttab, $course)
 
 	///////
 	$toprow = array();
-	$toprow[] = new tabobject('show_db', MDLOPNSM_BLK_URL.'/actions/show_db.php?course='.$courseid, 
+	$toprow[] = new tabobject('show_db', CMS_MODULE_URL.'/actions/show_db.php?course='.$courseid, 
 																	'<b>'.get_string('mdlos_show_db','block_mdlopensim').'</b>');
-	$toprow[] = new tabobject('map_action', MDLOPNSM_BLK_URL.'/actions/map_action.php?course='.$courseid, 
+	$toprow[] = new tabobject('map_action', CMS_MODULE_URL.'/actions/map_action.php?course='.$courseid, 
 																	'<b>'.get_string('mdlos_world_map','block_mdlopensim').'</b>');
-	$toprow[] = new tabobject('regions_list', MDLOPNSM_BLK_URL.'/actions/regions_list.php?course='.$courseid, 
+	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php?course='.$courseid, 
 																	'<b>'.get_string('mdlos_regions_list','block_mdlopensim').'</b>');
 	if (!isGuest()) {
-		$toprow[] = new tabobject('avatars_list', MDLOPNSM_BLK_URL.'/actions/avatars_list.php?course='.$courseid, 
+		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php?course='.$courseid, 
 																	'<b>'.get_string('mdlos_avatars_list','block_mdlopensim').'</b>');
-		$toprow[] = new tabobject('avatar_create', MDLOPNSM_BLK_URL.'/actions/avatar_create.php?course='. $courseid, 
+		$toprow[] = new tabobject('avatar_create', CMS_MODULE_URL.'/actions/avatar_create.php?course='. $courseid, 
 																	'<b>'.get_string('mdlos_avatar_create','block_mdlopensim').'</b>');
 	}
 
 	if ($hasPermit) {
 		if ($CFG->mdlopnsm_activate_lastname) {
-			$toprow[] = new tabobject('lastname', MDLOPNSM_BLK_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
+			$toprow[] = new tabobject('lastname', CMS_MODULE_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
 																	'<b>'.get_string('mdlos_lastnames_tab','block_mdlopensim').'</b>');
 		}
 		$toprow[] = new tabobject('syncdb', MDLOPNSIM_BLK_URL.'/admin/settings.php?section=blocksettingmdlopensim', 

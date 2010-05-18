@@ -4,8 +4,8 @@
 // ?action=home または ?action= の場合に読み出される．
 //
 
-if (!defined('MDLOPNSM_BLK_PATH')) exit();
-require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
+if (!defined('CMS_MODULE_PATH')) exit();
+require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
 
@@ -53,7 +53,7 @@ class  ShowDataBase
 
 		$grid_name       	= $CFG->mdlopnsm_grid_name;
 		$content         	= $CFG->mdlopnsm_db_status_content;
-		$module_url 		= MDLOPNSM_BLK_URL;
+		$module_url 		= CMS_MODULE_URL;
 
 		$db_status 			= get_string("mdlos_db_status", 		  "block_mdlopensim");
 		$online_ttl 		= get_string("mdlos_online_ttl", 		  "block_mdlopensim");
@@ -63,7 +63,7 @@ class  ShowDataBase
 		$visitors_last30days= get_string("mdlos_visitors_last30days", "block_mdlopensim");
 		$online_now 		= get_string("mdlos_online_now", 		  "block_mdlopensim");
 
-		include(MDLOPNSM_BLK_PATH."/html/show_db.html");
+		include(CMS_MODULE_PATH."/html/show_db.html");
 	}
 
 

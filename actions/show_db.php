@@ -3,8 +3,8 @@
 require_once(realpath(dirname(__FILE__)."/../../../config.php"));
 require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 
-if (!defined('MDLOPNSM_BLK_PATH')) exit();
-require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
+if (!defined('CMS_MODULE_PATH')) exit();
+require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
 $courseid = optional_param('course', '0', PARAM_INT);
@@ -14,7 +14,7 @@ $action = 'show_db';
 
 print_tabheader($action, $course);
 
-require_once(MDLOPNSM_BLK_PATH."/class/show_db.class.php");
+require_once(CMS_MODULE_PATH."/class/show_db.class.php");
 $regions = new ShowDataBase($courseid);
 $regions->print_page();
 

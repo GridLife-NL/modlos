@@ -3,8 +3,8 @@
 require_once(realpath(dirname(__FILE__)."/../../../config.php"));
 require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 
-if (!defined('MDLOPNSM_BLK_PATH')) exit();
-require_once(MDLOPNSM_BLK_PATH."/include/mdlopensim.func.php");
+if (!defined('CMS_MODULE_PATH')) exit();
+require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 $isGuest = isguest();
 if ($isGuest) {
@@ -22,7 +22,7 @@ $hasPermit  = hasPermit($courseid);
 global $CFG;
 $grid_name  = $CFG->mdlopnsm_grid_name;
 $userinfo   = $CFG->mdlopnsm_userinfo_link;
-$action_url = MDLOPNSM_BLK_URL."/helper/agent.php";
+$action_url = CMS_MODULE_URL."/helper/agent.php";
 
 
 //////////////
@@ -96,7 +96,7 @@ $guid = str_replace("-", "", $UUID);
 
 
 ///////////////
-$module_url	  	= MDLOPNSM_BLK_URL;
+$module_url	  	= CMS_MODULE_URL;
 $course       	= "&amp;course=".$courseid;
 
 $user_info_ttl  = get_string("mdlos_user_info",		"block_mdlopensim");
@@ -118,6 +118,6 @@ $unknown_status	= get_string("mdlos_unknown_status","block_mdlopensim");
 $home_region	= get_string("mdlos_home_region",	"block_mdlopensim");
 $has_noprofile	= get_string("mdlos_has_noprofile",	"block_mdlopensim");
 
-include(MDLOPNSM_BLK_PATH."/html/agent.html");
+include(CMS_MODULE_PATH."/html/agent.html");
 
 ?>
