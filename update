@@ -1,0 +1,6 @@
+svn update
+svn update osprofile
+svn update flotsam_XmlRpcGroup
+svn update opensimwiredux
+(cd xoopensim && ./update)
+chown -R www.www .
