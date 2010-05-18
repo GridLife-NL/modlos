@@ -41,13 +41,13 @@ require_once(CMS_MODULE_PATH."/include/opensim.func.php");
 // Active/Inactive Avatar
 function  mdlopensim_activate_avatar($uuid)
 {
-	$ban = get_record('block_mdlos_banned', 'UUID', $uuid);
+	$ban = get_record(CMS_DB_PREFIX.'banned', 'uuid', $uuid);
 	if (!$ban) return false;
 
 	$ret = opensim_set_password($uuid, $ban->agentinfo);
 	if (!$ret) return false;
 
-	$ret = delete_records('block_mdlos_banned', 'UUID', $uuid);
+	$ret = delete_records(CMS_DB_PREFIX.'banned', 'uuid', $uuid);
 	if (!$ret) return false;
 	return true;
 }
@@ -61,10 +61,10 @@ function  mdlopensim_inactivate_avatar($uuid)
 	$passwdhash = $passwd['passwordHash'];
 	if ($passwdhash==null) return false;
 
-	$insobj->UUID 	   = $uuid;
+	$insobj->uuid 	   = $uuid;
 	$insobj->agentinfo = $passwdhash;
 	$insobj->time 	   = time();
-	$ret = insert_record('block_mdlos_banned', $insobj);
+	$ret = insert_record(CMS_DB_PREFIX.'banned', $insobj);
 	if (!$ret) return false;
 
 	$ret = opensim_set_password($uuid, "invalid password");
@@ -77,7 +77,7 @@ function  mdlopensim_inactivate_avatar($uuid)
 
 function  mdlopensim_delete_banneddb($uuid)
 {
-	$ret = delete_records('block_mdlos_banned', 'UUID', $uuid);
+	$ret = delete_records(CMS_DB_PREFIX.'banned', 'uuid', $uuid);
 	if (!$ret) return false;
 	return true;
 }
@@ -111,11 +111,12 @@ function  mdlopensim_insert_usertable($user)
 	else 					  $insobj->time = time();
 
 	$regionName = opensim_get_region_name_by_id($user['hmregion']);
-	if ($regionName!=null)            $insobj->hmregion = $regionName;
-	else if ($user['hmregion']!=null) $insobj->hmregion = $user['hmregion'];
+	if ($regionName!="")              $insobj->hmregion = $regionName;
+	else if ($user['hmregion']!="")   $insobj->hmregion = $user['hmregion'];
+	else if ($user['homeRegion']!="") $insobj->hmregion = $user['homeRegion'];
 	else                              $insobj->hmregion = "";
 
-	$ret = insert_record('block_mdlos_users', $insobj);
+	$ret = insert_record(CMS_DB_PREFIX.'users', $insobj);
 	if (!$ret) return false;
 	return true;
 }
@@ -131,14 +132,14 @@ function  mdlopensim_update_usertable($user)
 	if ($user['state']!="")  $updobj->state = $user['state'];
 
 	$regionName = opensim_get_region_name_by_id($user['hmregion']);
-	if ($regionName!=null)            $updobj->hmregion = $regionName;
-	else if ($user['hmregion']!=null) $updobj->hmregion = $user['hmregion'];
-	else                              $updobj->hmregion = "";
+	if ($regionName!="")            $updobj->hmregion = $regionName;
+	else if ($user['hmregion']!="") $updobj->hmregion = $user['hmregion'];
+	else                            $updobj->hmregion = "";
 
 	if ($user['created']!="")  $updobj->time = $user['created'];
 	else 					   $updobj->time = time();
 
-	$ret = update_record('block_mdlos_users', $insobj);
+	$ret = update_record(CMS_DB_PREFIX.'users', $insobj);
 	if (!$ret) return false;
 	return true;
 }
@@ -150,7 +151,7 @@ function  mdlopensim_delete_usertable($user)
 	if (!isGUID($user['UUID'])) return false;
 	if ($user['state']==AVATAR_STATE_ACTIVE) return false;		// active
 
-	$ret = delete_records('block_mdlos_users', 'UUID', $user['UUID']);
+	$ret = delete_records(CMS_DB_PREFIX.'users', 'uuid', $user['UUID']);
 	if (!$ret) return false;
 	return true;
 }
@@ -168,13 +169,11 @@ function  mdlopensim_delete_groupdb($uuid, $delallgrp=false)
 	if (!$ret) return false;
 
 	if ($delallgrp) {
-		$criteria = new Criteria('FounderID', $uuid);
-		$groupHandler = & xoops_getmodulehandler('grouplistdb');
-		$groupobjs = & $groupHandler->getObjects($criteria);
+		$groupobjs = get_records(XMLGROUP_LIST_TBL, 'founderid', $uuid);
 		if ($groupobjs==null) return false;
 
 		foreach($groupobjs as $groupdata) {
-			$ret = mdlopensim_delete_groupdb_by_gpid($groupdata->get('GroupID'));
+			$ret = mdlopensim_delete_groupdb_by_gpid($groupdata->GroupID);
 			if (!$ret) return false;
 		}
 	}
@@ -186,10 +185,10 @@ function  mdlopensim_delete_groupdb($uuid, $delallgrp=false)
 
 function  mdlopensim_delete_groupdb_by_uuid($uuid)
 {
-	delete_records('block_mdlos_group_active', 'AgentID', $uuid);
-	delete_records('block_mdlos_group_invite', 'AgentID', $uuid);
-	delete_records('block_mdlos_group_membership', 'AgentID', $uuid);
-	delete_records('block_mdlos_group_rolemembership', 'AgentID', $uuid);
+	delete_records(XMLGROUP_ACTIVE_TBL, 	'agentid', $uuid);
+	delete_records(XMLGROUP_INVITE_TBL, 	'agentid', $uuid);
+	delete_records(XMLGROUP_MEMBERSHIP_TBL, 'agentid', $uuid);
+	delete_records(XMLGROUP_ROLE_MEMBER_TBL,'agentid', $uuid);
 
 	return true;
 }
@@ -198,13 +197,13 @@ function  mdlopensim_delete_groupdb_by_uuid($uuid)
 
 function  mdlopensim_delete_groupdb_by_gpid($gpid)
 {
-	delete_records('block_mdlos_group_active', 'ActiveGroupID', $gpid);
-	delete_records('block_mdlos_group_invite', 'GroupID', $gpid);
-	delete_records('block_mdlos_group_membership', 'GroupID', $gpid);
-	delete_records('block_mdlos_group_notice', 'GroupID', $gpid);
-	delete_records('block_mdlos_group_role', 'GroupID', $gpid);
-	delete_records('block_mdlos_group_rolemembership', 'GroupID', $gpid);
-	delete_records('block_mdlos_group_list', 'GroupID', $gpid);
+	delete_records(XMLGROUP_ACTIVE_TBL, 	'activegroupid', $gpid);
+	delete_records(XMLGROUP_LIST_TBL, 		'groupid', $gpid);
+	delete_records(XMLGROUP_INVITE_TBL, 	'groupid', $gpid);
+	delete_records(XMLGROUP_MEMBERSHIP_TBL,	'groupid', $gpid);
+	delete_records(XMLGROUP_NOTICE_TBL, 	'groupid', $gpid);
+	delete_records(XMLGROUP_ROLE_TBL, 		'groupid', $gpid);
+	delete_records(XMLGROUP_ROLE_MEMBER_TBL,'groupid', $gpid);
 
 	return true;
 }
@@ -218,41 +217,55 @@ function  mdlopensim_delete_groupdb_by_gpid($gpid)
 // called from synchro.class.php
 function  mdlopensim_set_profiles($profs, $ovwrite=true)
 {
-	$handler = & xoops_getmodulehandler('profuserprofiledb');
-	if ($handler==null) return false;
-
 	foreach($profs as $prof) {
-		$profobj = $handler->get($prof['UUID']);
-		if ($ovwrite or $profobj==null) {
-			if ($profobj==null) $profobj = & $handler->create();
-			if ($profobj!=null) {
-				$profobj->assignVar('useruuid', 		 $prof['UUID']);
-				$profobj->assignVar('profilePartnar', 	 $prof['Partnar']);
-				$profobj->assignVar('profileWantToMask', $prof['SkillsMask']);
-				$profobj->assignVar('profileSkillsMask', $prof['WantToMask']);
-				$profobj->assignVar('profileAboutText',  $prof['AboutText']);
-				$profobj->assignVar('profileFirstText',  $prof['FirstAboutText']);
-				$profobj->assignVar('profileImage', 	 $prof['Image']);
-				$profobj->assignVar('profileFirstImage', $prof['FirstImage']);
-				$handler->insert($profobj);
+		if ($prof['UUID']!="") {
+			$insert = false;
+			$prfobj = get_record(PROFILE_USERPROFILE_TBL, 'useruuid', $prof['UUID']);
+			if (!$prfobj) $insert = true;
+
+			$prfobj->useruuid = $prof['UUID'];
+
+			if ($prof['Partnar']!="")		$prfobj->profilepartnar		  = $prof['Partnar'];
+			if ($prof['Image']!="")			$prfobj->profileimage		  = $prof['Image'];
+			if ($prof['AboutText']!="")		$prfobj->profileabouttext	  =	$prof['AboutText'];
+			if ($prof['AllowPublish']!="")	$prfobj->profileallowpublish  = $prof['AllowPublish'];
+			if ($prof['MaturePublish']!="")	$prfobj->profilematurepublish = $prof['MaturePublish'];
+			if ($prof['URL']!="")			$prfobj->profileurl 		  = $prof['URL'];
+			if ($prof['WantToMask']!="")	$prfobj->profilewanttomask 	  = $prof['WantToMask'];
+			if ($prof['WantToText']!="")	$prfobj->profilewanttotext 	  = $prof['WantToText'];
+			if ($prof['SkillsMask']!="")	$prfobj->profileskillsmask 	  = $prof['SkillsMask'];
+			if ($prof['SkillsText']!="")	$prfobj->profileskillstext 	  = $prof['SkillsText'];
+			if ($prof['LanguagesText']!="")	$prfobj->profilelanguagestext = $prof['LanguagesText'];
+			if ($prof['FirstAboutText']!="")$prfobj->profilefirsttext 	  = $prof['FirstAboutText'];
+			if ($prof['FirstImage'])		$prfobj->profilefirstimag 	  = $prof['FirstImage'];
+	
+			if ($insert) {
+				$rslt = insert_record(PROFILE_USERPROFILE_TBL, $prfobj);
+			}
+			else if ($ovwrite) {
+				$rslt = update_record(PROFILE_USERPROFILE_TBL, $prfobj);
 			}
 		}
 	}
 
-	$handler = & xoops_getmodulehandler('profusersettingsdb');
-	if ($handler==null) return false;
 
 	foreach($profs as $prof) {
-		$profobj = $handler->get($prof['UUID']);
+		if ($prof['UUID']!="") {
+			$insert = false;
+			$setobj = get_record(PROFILE_USERSETTINGS_TBL, 'useruuid', $prof['UUID']);
+			if (!$setobj) $insert = true;
 
-		if ($prof['Email']!="") {
-			if ($ovwrite or $profobj==null) {
-				if ($profobj==null) $profobj = & $handler->create();
-				if ($profobj!=null) {
-					$profobj->assignVar('useruuid', $prof['UUID']);
-					$profobj->assignVar('email',    $prof['Email']);
-					$handler->insert($profobj);
-				}
+			$setobj->useruuid = $prof['UUID'];
+
+			if ($prof['ImviaEmail']!="")$setobj->imviaemail = $prof['ImviaEmail'];
+			if ($prof['Visible']!="")	$setobj->visible	= $prof['Visible'];
+			if ($prof['Email']!="")		$setobj->email    	= $prof['Email'];
+
+			if ($insert) {
+				$rslt = insert_record(PROFILE_USERSETTINGS_TBL, $setobj);
+			}
+			else if ($ovwrite) {
+				$rslt = update_record(PROFILE_USERSETTINGS_TBL, $setobj);
 			}
 		}
 	}
@@ -265,25 +278,11 @@ function  mdlopensim_set_profiles($profs, $ovwrite=true)
 
 function  mdlopensim_delete_profiles($uuid)
 {
-    $criteria = new Criteria('useruuid', $uuid);
-	$handler = & xoops_getmodulehandler('profuserprofiledb');
-	$handler->deleteAll($criteria);
-
-    $criteria = new Criteria('useruuid', $uuid);
-	$handler = & xoops_getmodulehandler('profusersettingsdb');
-	$handler->deleteAll($criteria);
-
-    $criteria = new Criteria('useruuid', $uuid);
-	$handler = & xoops_getmodulehandler('profusernotesdb');
-	$handler->deleteAll($criteria);
-
-    $criteria = new Criteria('creatoruuid', $uuid);
-	$handler = & xoops_getmodulehandler('profuserpicksdb');
-	$handler->deleteAll($criteria);
-
-    $criteria = new Criteria('creatoruuid', $uuid);
-	$handler = & xoops_getmodulehandler('profclassifiedsdb');
-	$handler->deleteAll($criteria);
+	delete_records(PROFILE_USERPROFILE_TBL,	'useruuid',    $uuid);
+	delete_records(PROFILE_USERSETTINGS_TBL,'useruuid',    $uuid);
+	delete_records(PROFILE_USERNOTES_TBL, 	'useruuid',    $uuid);
+	delete_records(PROFILE_USERPICKS_TBL, 	'creatoruuid', $uuid);
+	delete_records(PROFILE_CLASSIFIEDS_TBL, 'creatoruuid', $uuid);
 
     return;
 }
