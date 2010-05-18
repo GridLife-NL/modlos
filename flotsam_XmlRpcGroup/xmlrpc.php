@@ -18,9 +18,7 @@
     */
 
 
-	// Modified by Fumi.Iseki for Xoops Cube '09 5/31
-
-	if (!defined("XOOPS_ROOT_PATH")) exit();
+	// Modified by Fumi.Iseki '09 5/31
 
     include("phpxmlrpclib/xmlrpc.inc");
     include("phpxmlrpclib/xmlrpcs.inc");
@@ -152,7 +150,7 @@
 		{
 			return $error;
 		}
-	
+	 
         global $groupEnforceGroupPerms, $requestingAgent, $uuidZero, $groupDBCon;
 		global $osagent, $osgroup, $osgroupinvite, $osgroupmembership, $osgroupnotice, $osgrouprolemembership, $osrole;
 

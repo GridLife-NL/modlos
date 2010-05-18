@@ -2,78 +2,81 @@
 
 require_once (realpath(dirname(__FILE__)."/../../../config.php"));
 
-define('MDLOPNSM_DIR_NAME', basename(dirname(dirname(__FILE__))));
-define('MDLOPNSM_BLK_URL',  $CFG->wwwroot.'/blocks/'.MDLOPNSM_DIR_NAME);
-define('MDLOPNSM_BLK_PATH', $CFG->dirroot.'/blocks/'.MDLOPNSM_DIR_NAME);
-
-
 global $CFG;
+define('CMS_DIR_NAME',    basename(dirname(dirname(__FILE__))));
+define('CMS_MODULE_URL',  $CFG->wwwroot.'/blocks/'.CMS_DIR_NAME);
+define('CMS_MODULE_PATH', $CFG->dirroot.'/blocks/'.CMS_DIR_NAME);
+
+
 $GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
 
 
-// module_path is top directory of this block
-global $module_path;
-$module_path = MDLOPNSM_BLK_PATH.'/';
-
-
 // for OpenSim DB
-define("OPENSIM_DB_HOST",  $CFG->mdlopnsm_sql_server_name);
-define("OPENSIM_DB_NAME",  $CFG->mdlopnsm_sql_db_name);
-define("OPENSIM_DB_USER",  $CFG->mdlopnsm_sql_db_user);
-define("OPENSIM_DB_PASS",  $CFG->mdlopnsm_sql_db_pass);
-define("OPENSIM_HMREGION", $CFG->mdlopnsm_home_region);
+define('OPENSIM_DB_HOST',  $CFG->mdlopnsm_sql_server_name);
+define('OPENSIM_DB_NAME',  $CFG->mdlopnsm_sql_db_name);
+define('OPENSIM_DB_USER',  $CFG->mdlopnsm_sql_db_user);
+define('OPENSIM_DB_PASS',  $CFG->mdlopnsm_sql_db_pass);
+define('OPENSIM_HMREGION', $CFG->mdlopnsm_home_region);
 
 
-// for WebIF DB
-define("WEBIF_DB_HOST",    $CFG->dbhost);
-define("WEBIF_DB_NAME",    $CFG->dbname);
-define("WEBIF_DB_USER",    $CFG->dbuser);
-define("WEBIF_DB_PASS",    $CFG->dbpass);
-define("WEBIF_DB_PREFIX",  $CFG->prefix."block_mdlos_");
+// for CMS/LMS DB
+define('CMS_DB_HOST',      $CFG->dbhost);
+define('CMS_DB_NAME',      $CFG->dbname);
+define('CMS_DB_USER',      $CFG->dbuser);
+define('CMS_DB_PASS',      $CFG->dbpass);
+define('CMS_DB_PREFIX',    $CFG->prefix.'block_mdlos_');
 
 
-// XML Group
-define("XMLGROUP_RKEY",    $CFG->mdlopnsm_groupdb_read_key);
-define("XMLGROUP_WKEY",	   $CFG->mdlopnsm_groupdb_write_key);
+// XML Group.  see also xmlgroups_config.php 
+define('XMLGROUP_ACTIVE_TBL',       CMS_DB_PREFIX.'grp_active');
+define('XMLGROUP_LIST_TBL',         CMS_DB_PREFIX.'grp_list');
+define('XMLGROUP_INVITE_TBL',       CMS_DB_PREFIX.'grp_invite');
+define('XMLGROUP_MEMBERSHIP_TBL',   CMS_DB_PREFIX.'grp_mbrship');
+define('XMLGROUP_NOTICE_TBL',       CMS_DB_PREFIX.'grp_notice');
+define('XMLGROUP_ROLE_MEMBER_TBL',  CMS_DB_PREFIX.'grp_rolembrship');
+define('XMLGROUP_ROLE_TBL',         CMS_DB_PREFIX.'grp_role');
+
+define('XMLGROUP_RKEY',    $CFG->mdlopnsm_groupdb_read_key);
+define('XMLGROUP_WKEY',	   $CFG->mdlopnsm_groupdb_write_key);
 
 
 // Currency DB for helpers.php
-define("CURRENCY_DB_HOST", WEBIF_DB_HOST);
-define("CURRENCY_DB_NAME", WEBIF_DB_NAME);
-define("CURRENCY_DB_USER", WEBIF_DB_USER);
-define("CURRENCY_DB_PASS", WEBIF_DB_PASS);
-define("CURRENCY_BANKER",  $CFG->mdlopnsm_banker_avatar);
+define('CURRENCY_DB_HOST', CMS_DB_HOST);
+define('CURRENCY_DB_NAME', CMS_DB_NAME);
+define('CURRENCY_DB_USER', CMS_DB_USER);
+define('CURRENCY_DB_PASS', CMS_DB_PASS);
+define('CURRENCY_BANKER',  $CFG->mdlopnsm_banker_avatar);
 
-define("CURRENCY_MONEY_TBL",       WEBIF_DB_PREFIX."economy_money");
-define("CURRENCY_TRANSACTION_TBL", WEBIF_DB_PREFIX."economy_transactions");
+define('CURRENCY_MONEY_TBL',       CMS_DB_PREFIX.'ecnmy_money');
+define('CURRENCY_TRANSACTION_TBL', CMS_DB_PREFIX.'ecnmy_trnsctn');
 
 
 // Offline Message
-define("OFFLINE_DB_HOST",  WEBIF_DB_HOST);
-define("OFFLINE_DB_NAME",  WEBIF_DB_NAME);
-define("OFFLINE_DB_USER",  WEBIF_DB_USER);
-define("OFFLINE_DB_PASS",  WEBIF_DB_PASS);
+define('OFFLINE_DB_HOST',  CMS_DB_HOST);
+define('OFFLINE_DB_NAME',  CMS_DB_NAME);
+define('OFFLINE_DB_USER',  CMS_DB_USER);
+define('OFFLINE_DB_PASS',  CMS_DB_PASS);
 
-define("OFFLINE_MESSAGE_TBL", WEBIF_DB_PREFIX."offline_message");
+define('OFFLINE_MESSAGE_TBL', CMS_DB_PREFIX.'offline_message');
 
 
-// Avatar Profile
-define("PROFILE_CLASSIFIEDS_TBL",   WEBIF_DB_PREFIX."prof_classifieds");
-define("PROFILE_USERNOTES_TBL",  	WEBIF_DB_PREFIX."prof_usernotes");
-define("PROFILE_USERPICKS_TBL",  	WEBIF_DB_PREFIX."prof_userpicks");
-define("PROFILE_USERPROFILE_TBL",  	WEBIF_DB_PREFIX."prof_userprofile");
-define("PROFILE_USERSETTINGS_TBL",	WEBIF_DB_PREFIX."prof_usersettings");
+// Avatar Profile. see also profile_config.php 
+define('PROFILE_CLASSIFIEDS_TBL',   CMS_DB_PREFIX.'prof_classifieds');
+define('PROFILE_USERNOTES_TBL',  	CMS_DB_PREFIX.'prof_usernotes');
+define('PROFILE_USERPICKS_TBL',  	CMS_DB_PREFIX.'prof_userpicks');
+define('PROFILE_USERPROFILE_TBL',  	CMS_DB_PREFIX.'prof_userprofile');
+define('PROFILE_USERSETTINGS_TBL',	CMS_DB_PREFIX.'prof_usersetting');
 
 
 // for Avatar State
-define("AVATAR_STATE_NOTSYNC", 	"0");
-define("AVATAR_STATE_ACTIVE",  	"1");
-define("AVATAR_STATE_INACTIVE",	"5");		// Max Number of state
+define('AVATAR_STATE_NOTSYNC', 	'0');
+define('AVATAR_STATE_ACTIVE',  	'1');
+define('AVATAR_STATE_INACTIVE',	'5');		// Max Number of state
 
-// editable
-define("AVATAR_NOT_EDITABLE",	"0");
-define("AVATAR_EDITABLE",	 	"1");
-define("AVATAR_OWNER_EDITABLE",	"2");
+// Editable
+define('AVATAR_NOT_EDITABLE',	'0');
+define('AVATAR_EDITABLE',	 	'1');
+define('AVATAR_OWNER_EDITABLE',	'2');
 
 
 // for Currency

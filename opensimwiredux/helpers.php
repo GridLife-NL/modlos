@@ -11,7 +11,7 @@
 #        documentation and/or other materials provided with the distribution.
 #      * Neither the name of the OpenSim Project nor the
 #        names of its contributors may be used to endorse or promote products
-#        derived from this software without specific prior written permission.
+#        derived FROM this software without specific prior written permission.
 # 
 #  THIS SOFTWARE IS PROVIDED BY THE DEVELOPERS ``AS IS'' AND ANY
 #  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -24,6 +24,14 @@
 #  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # 
+
+#
+# need external variable  by Fumi.Iseki
+#	class DB
+# 	CURRENCY_DB_HOST, CURRENCY_DB_NAME, CURRENCY_DB_USER, CURRENCY_DB_PASS
+#	CURRENCY_MONEY_TBL,	CURRENCY_TRANSACTION_TBL
+# 
+#
 
 ####################################################################
 
@@ -52,19 +60,17 @@ function convert_to_real($currency)
 {
 	if($currency == 0) return 0;
 
-	$db=new DB;
-	$db->set_DB(XOOPS_DB_HOST, XOOPS_DB_NAME, XOOPS_DB_USER, XOOPS_DB_PASS);
+	$db = new DB;
+	$db->set_DB(CURRENCY_DB_HOST, CURRENCY_DB_NAME, CURRENCY_DB_USER, CURRENCY_DB_PASS);
 
 	# Get the currency conversion ratio in USD Cents per Money Unit
 	# Actually, it's whatever currency your credit card processor uses
 
-	$db->query("select CentsPerMoneyUnit from ".XOPNSIM_CURRENCY_TBL." limit 1");
+	$db->query("SELECT CentsPerMoneyUnit FROM ".CURRENCY_MONEY_TBL." limit 1");
 	list($CentsPerMoneyUnit) = $db->next_record();
+	$db->close();
 
-	if (!$CentsPerMoneyUnit)
-	{
-		$CentsPerMoneyUnit = 0;
-	}	
+	if (!$CentsPerMoneyUnit) $CentsPerMoneyUnit = 0;
 		
 	# Multiply the cents per unit times the requested amount
 
@@ -83,19 +89,25 @@ function convert_to_real($currency)
 function update_simulator_balance($agentId)
 {
 	$db = new DB;
-	$sql = "select serverIP,serverHttpPort,serverURI from ".OPENSIM_AGENTS_TBL.
-			" inner join ".OPENSIM_REGIONS_TBL." on ".OPENSIM_REGIONS_TBL.".uuid = ".OPENSIM_AGENTS_TBL.".currentRegion ".
-			" where ".OPENSIM_AGENTS_TBL.".UUID = '".$db->escape($agentId)."'";
 
+	if ($db->exist_table("Presence")) {
+		$sql = "SELECT serverIP,serverHttpPort,serverURI FROM Presence".
+				" INNER JOIN regions ON regions.uuid=Presence.RegionID WHERE Presence.UserID='".$db->escape($agentId)."'";
+	}
+	else {
+		$sql = "SELECT serverIP,serverHttpPort,serverURI FROM agents".
+				" INNER JOIN regions ON regions.uuid=agents.currentRegion WHERE agents.UUID='".$db->escape($agentId)."'";
+	}
 	$db->query($sql);
 	$results = $db->next_record();
-	if ($results)
-	{
+	$db->close();
+
+	if ($results) {
 		$serverip  = $results["serverIP"];
 		$httpport  = $results["serverHttpPort"];
 		$serveruri = $results["serverURI"];
 	
-		$req      = array('agentId'=>$agentId);
+		$req      = array('agentId' => $agentId);
 		$params   = array($req);
 
 		$request  = xmlrpc_encode_request('balanceUpdateRequest', $params);
@@ -108,20 +120,24 @@ function update_simulator_balance($agentId)
 function user_alert($agentId, $soundId, $text)
 {
     $db = new DB;
-    $sql = "select serverIP,serverHttpPort,serverURI,regionSecret from ".OPENSIM_AGENTS_TBL.
-			" inner join ".OPENSIM_REGIONS_TBL." on ".OPENSIM_REGIONS_TBL.".uuid = ".OPENSIM_AGENTS_TBL.".currentRegion ".
-			" where ".OPENSIM_AGENTS_TBL.".UUID = '".$db->escape($agentId)."'";
-    
-    $db->query($sql);
 
+	if ($db->exist_table("Presence")) {
+    	$sql = "SELECT serverIP,serverHttpPort,serverURI,regionSecret FROM Presence".
+				" INNER JOIN regions ON regions.uuid=Presence.RegionID WHERE Presence.UserID='".$db->escape($agentId)."'";
+	}
+	else {
+    	$sql = "SELECT serverIP,serverHttpPort,serverURI,regionSecret FROM agents".
+				" INNRT JOIN regions ON regions.uuid=agents.currentRegion WHERE agents.UUID='".$db->escape($agentId)."'";
+	}
+    $db->query($sql);
     $results = $db->next_record();
-    if ($results)
-    {
+	$db->close();
+
+    if ($results) {
         $serverip  = $results["serverIP"];
         $httpport  = $results["serverHttpPort"];
 		$serveruri = $results["serverURI"];
 		$secret    = $results["regionSecret"];
-        
         
         $req = array('agentId'=>$agentId, 'soundID'=>$soundId, 'text'=>$text, 'secret'=>$secret);
         $params = array($req);
@@ -138,78 +154,76 @@ function move_money($sourceId, $destId, $amount, $aggregatePermInventory,
 		$regionGenerated,$ipGenerated)
 {
 	$db = new DB;
-	
-	# select current region
-	$sql = "select currentRegion from ".OPENSIM_AGENTS_TBL.
-			" where ".OPENSIM_AGENTS_TBL.".UUID = '".$db->escape($sourceId)."'";
-    
+	# SELECT current region
+	if ($db->exist_table("Presence")) {
+		$sql = "SELECT RegionID FROM Presence WHERE UserID='".$db->escape($sourceId)."'";
+	}
+	else {
+		$sql = "SELECT currentRegion FROM agents WHERE UUID='".$db->escape($sourceId)."'";
+	}
     $db->query($sql);
 
     $results = $db->next_record();
-    if ($results)
-    {
-        $currentRegion = $results["currentRegion"];
-	}
-
+    if ($results) $currentRegion = $results["currentRegion"];
 	$db->close();
 
+	// CURRENCY
 	$db = new DB;
-	$db->set_DB(XOOPS_DB_HOST, XOOPS_DB_NAME, XOOPS_DB_USER, XOOPS_DB_PASS);
+	$db->set_DB(CURRENCY_DB_HOST, CURRENCY_DB_NAME, CURRENCY_DB_USER, CURRENCY_DB_PASS);
 
 	# Add Cash to one account
-	$sql = "insert into ".XOPNSIM_TRANSACTION_TBL." (sourceId,destId,amount,flags,".
+	$sql = "INSERT INTO ".CURRENCY_TRANSACTION_TBL." (sourceId,destId,amount,flags,".
 			"aggregatePermInventory,aggregatePermNextOwner,transactionType,".
 			"description,timeOccurred,RegionGenerated,ipGenerated) ".
-			"values ('".
-			$db->escape($sourceId)."','".
-			$db->escape($destId)."',".
-			$db->escape($amount).",".
-			$db->escape($aggregatePermInventory).",".
-			$db->escape($aggregatePermNextOwner).",".
-			$db->escape($flags).",".
-			$db->escape($transactionType).",'".
-			$db->escape($description)."',".
-			time().",'".
-			$db->escape($currentRegion)."','".
-			$db->escape($ipGenerated)."')";
-	
+			"VALUES ('".
+				$db->escape($sourceId)."','".
+				$db->escape($destId)."',".
+				$db->escape($amount).",".
+				$db->escape($aggregatePermInventory).",".
+				$db->escape($aggregatePermNextOwner).",".
+				$db->escape($flags).",".
+				$db->escape($transactionType).",'".
+				$db->escape($description)."',".
+				time().",'".
+				$db->escape($currentRegion)."','".
+				$db->escape($ipGenerated)."')";
 	$db->query($sql);
 
-	# Remove Cash from the other account
+	# Remove Cash FROM the other account
 	
-	$sql = "insert into ".XOPNSIM_TRANSACTION_TBL." (sourceId,destId,amount,flags,".
+	$sql = "INSERT INTO ".CURRENCY_TRANSACTION_TBL." (sourceId,destId,amount,flags,".
 			"aggregatePermInventory,aggregatePermNextOwner,transactionType,".
 			"description,timeOccurred,RegionGenerated,ipGenerated) ".
-			"values ('".
-			$db->escape($destId)."','".
-			$db->escape($sourceId)."',".
-			$db->escape(-$amount).",".
-			$db->escape($aggregatePermInventory).",".
-			$db->escape($aggregatePermNextOwner).",".
-			$db->escape($flags).",".
-			$db->escape($transactionType).",'".
-			$db->escape($description)."',".
-			time().",'".
-			$db->escape($currentRegion)."','".
-			$db->escape($ipGenerated)."')";
-
+			"VALUES ('".
+				$db->escape($destId)."','".
+				$db->escape($sourceId)."',".
+				$db->escape(-$amount).",".
+				$db->escape($aggregatePermInventory).",".
+				$db->escape($aggregatePermNextOwner).",".
+				$db->escape($flags).",".
+				$db->escape($transactionType).",'".
+				$db->escape($description)."',".
+				time().",'".
+				$db->escape($currentRegion)."','".
+				$db->escape($ipGenerated)."')";
 	$db->query($sql);
+	$db->close();
 }
 
 
 
 function get_balance($avatarId)
 {
-    $db=new DB;
-	$db->set_DB(XOOPS_DB_HOST, XOOPS_DB_NAME, XOOPS_DB_USER, XOOPS_DB_PASS);
+    $db = new DB;
+	$db->set_DB(CURRENCY_DB_HOST, CURRENCY_DB_NAME, CURRENCY_DB_USER, CURRENCY_DB_PASS);
 
     $cash = 0;
-    $sql="SELECT SUM(amount) FROM ".XOPNSIM_TRANSACTION_TBL.
-            " WHERE destId='".$db->escape($avatarId)."'";
+    $sql = "SELECT SUM(amount) FROM ".CURRENCY_TRANSACTION_TBL." WHERE destId='".$db->escape($avatarId)."'";
 	$db->query($sql);
 
     list($cash) = $db->next_record();
 
+	$db -> close();
     return (integer)$cash;
 }
 
@@ -222,9 +236,7 @@ function do_call($host, $port, $uri, $request)
     	$dec = explode(":", $uri);
     	if (!strncasecmp($dec[0], "http", 4)) $url = "$dec[0]:$dec[1]";
 	}   
-	if ($url=="") {
-    	$url ="http://$serverIP";
-	}
+	if ($url=="") $url ="http://$serverIP";
 	$url = "$url:$serverHttpPort/";
 
     $header[] = "Content-type: text/xml";
@@ -238,8 +250,7 @@ function do_call($host, $port, $uri, $request)
     curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
     
     $data = curl_exec($ch);       
-    if (!curl_errno($ch))
-	{
+    if (!curl_errno($ch)) {
         curl_close($ch);
         return $data;
     }
@@ -249,15 +260,21 @@ function do_call($host, $port, $uri, $request)
 
 function agent_name($agentId)
 {
-	$db=new DB;
+	$db = new DB;
 
-	$sql="select username, lastname from ".OPENSIM_USERS_TBL." where UUID='".$agentId."'";
+	if ($db->exist_table("UserAccounts")){
+		$sql = "SELECT FirstName,LastName FROM UserAccounts WHERE PrincipalID='".$agentId."'";
+	}
+	else {
+		$sql = "SELECT username, lastname FROM users WHERE UUID='".$agentId."'";
+	}
 	$db->query($sql);
 
-	$record=$db->next_record();
+	$record = $db->next_record();
+	$db->close();
 	if(!$record) return "";
 
-	$name=implode(" ", array($record[0], $record[1]));
+	$name = implode(" ", array($record[0], $record[1]));
 
 	return $name;
 }

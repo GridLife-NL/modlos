@@ -24,16 +24,11 @@
 #  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS#  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-// Modified by Fumi.Iseki for Xoops Cube '09 5/31
+// Modified by Fumi.Iseki for CMS/LMS '09 5/31
 
-//define('_LEGACY_PREVENT_EXEC_COMMON_', 1);
-//define('_LEGACY_PREVENT_LOAD_CORE_', 1);
-require_once '../../../mainfile.php';
-
-
-include("config.php");
-include("opensim_mysql.php");
-require("helpers.php");
+include("./config.php");
+include("./opensim.mysql.php");
+require("./helpers.php");
 
 ###################### No user serviceable parts below #####################
 #
@@ -72,55 +67,41 @@ function buy_land_prep($method_name, $params, $app_data)
     #
 
     $db = new DB;
-    $db->query("select UUID from ".OPENSIM_AGENTS_TBL." where ".
-            "UUID='".           $db->escape($agentid).  "' and ".
-            "secureSessionID='".$db->escape($sessionid)."'");
 
+	if ($db->exist_table("Presence")){
+    	$db->query("SELECT UserID FROM Presence WHERE UserID='".$db->escape($agentid)."' AND SecureSessionID='".$db->escape($sessionid)."'");
+	}
+	else {
+    	$db->query("SELECT UUID FROM agents WHERE UUID='".$db->escape($agentid)."' AND secureSessionID='".$db->escape($sessionid)."'");
+	}
     list($UUID) = $db->next_record();
+	$db->close();
 
-    if($UUID)
-	{
-		$membership_levels = array(
-				'levels' => array(
-						'id'          => "00000000-0000-0000-0000-000000000000",
-						'description' => "some level"));
-	
-		$landUse = array(
-				'upgrade' => False,
-				'action'  => "".SYSURL."");
-
-		$currency = array(
-				'estimatedCost' => convert_to_real($amount));
-
-		$membership = array(
-				'upgrade' => False,
-				'action'  => "".SYSURL."",
-				'levels'  => $membership_levels);
-
-		$response_xml = xmlrpc_encode(array(
-				'success'    => True,
-				'currency'   => $currency,
-				'membership' => $membership,
-				'landUse'    => $landUse,
-				'currency'   => $currency,
-				'confirm'    => $confirmvalue));
-
+    if($UUID) {
+		$membership_levels = array('levels' => array('id' => "00000000-0000-0000-0000-000000000000", 'description' => "some level"));
+		$landUse    = array('upgrade' => False, 'action' => "".SYSURL."");
+		$currency   = array('estimatedCost' => convert_to_real($amount));
+		$membership = array('upgrade' => False, 'action' => "".SYSURL."", 'levels' => $membership_levels);
+		$response_xml = xmlrpc_encode(array('success'    => True,
+											'currency'   => $currency,
+											'membership' => $membership,
+											'landUse'    => $landUse,
+											'currency'   => $currency,
+											'confirm'    => $confirmvalue));
 		header("Content-type: text/xml");
 		print $response_xml;
 	}
-	else
-	{
+	else {
 		header("Content-type: text/xml");
-		$response_xml = xmlrpc_encode(array(
-				'success'      => False,
-				'errorMessage' => "\n\nUnable to Authenticate\n\nClick URL for more info.",
-				'errorURI'     => "".SYSURL.""));
-
+		$response_xml = xmlrpc_encode(array( 'success'      => False,
+											 'errorMessage' => "\n\nUnable to Authenticate\n\nClick URL for more info.",
+											 'errorURI'     => "".SYSURL.""));
 		print $response_xml;
 	}
 
 	return "";
 }
+
 
 #
 # Perform the buy
@@ -146,47 +127,39 @@ function buy_land($method_name, $params, $app_data)
     #
 
     $db = new DB;
-    $db->query("select UUID from ".OPENSIM_AGENTS_TBL." where ".
-            "UUID='".           $db->escape($agentid).  "' and ".
-            "secureSessionID='".$db->escape($sessionid)."'");
 
+	if ($db->exist_table("Presence")){
+    	$db->query("SELECT UserID FROM Presence WHERE UserID='".$db->escape($agentid)."' AND SecureSessionID='".$db->escape($sessionid)."'");
+	}
+	else {
+    	$db->query("SELECT UUID FROM agents WHERE UUID='".$db->escape($agentid)."' AND secureSessionID='".$db->escape($sessionid)."'");
+	}
     list($UUID) = $db->next_record();
+	$db->close();
 
-    if($UUID)
-	{
-		if($amount > 0)
-		{
-			if(!process_transaction($agentid, $real, $ipAddress))
-			{
+    if ($UUID) {
+		if($amount > 0) {
+			if(!process_transaction($agentid, $real, $ipAddress)) {
 				header("Content-type: text/xml");
 				$response_xml = xmlrpc_encode(array(
 						'success'      => False,
-						'errorMessage' => "\n\nThe gateway has declined your transaction. Please update your payment method and try again later.",
+						'errorMessage' => "\n\nThe gateway has declined your transaction. Please update your payment method AND try again later.",
 						'errorURI'     => "".SYSURL.""));
-
 				print $response_xml;
-
 				return "";
 			}
-			move_money($economy_source_account, $agentid, $amount, 0, 0, 0, 0,
-			                    "Currency purchase",0,$ipAddress);
+			move_money($economy_source_account, $agentid, $amount, 0, 0, 0, 0, "Currency purchase",0,$ipAddress);
 		}
-
 		header("Content-type: text/xml");
 		
-		$response_xml = xmlrpc_encode(array(
-				'success' => True));
-
+		$response_xml = xmlrpc_encode(array('success' => True));
 		print $response_xml;
 	}
-	else
-	{
+	else {
 		header("Content-type: text/xml");
-		$response_xml = xmlrpc_encode(array(
-				'success'      => False,
-				'errorMessage' => "\n\nUnable to Authenticate\n\nClick URL for more info.",
-				'errorURI'     => "".SYSURL.""));
-
+		$response_xml = xmlrpc_encode(array('success'      => False,
+											'errorMessage' => "\n\nUnable to Authenticate\n\nClick URL for more info.",
+											'errorURI'     => "".SYSURL.""));
 		print $response_xml;
 	}
 	return "";

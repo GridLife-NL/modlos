@@ -11,7 +11,7 @@
 //I'd contact the original developer for licensing info, but his website is broken.
 
 //
-// Modified by Fumi.Iseki for Xoops Cube and Moodle  2010 3/29
+// Modified by Fumi.Iseki for CMS/LMS '10 3/29
 //
 
 

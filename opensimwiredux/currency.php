@@ -11,7 +11,7 @@
 #        documentation and/or other materials provided with the distribution.
 #      * Neither the name of the OpenSim Project nor the
 #        names of its contributors may be used to endorse or promote products
-#        derived from this software without specific prior written permission.
+#        derived FROM this software without specific prior written permission.
 # 
 #  THIS SOFTWARE IS PROVIDED BY THE DEVELOPERS ``AS IS'' AND ANY
 #  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -45,16 +45,13 @@
 # If placed in the opensimwiredux web directory, it will share the db module
 #
 
-//define('_LEGACY_PREVENT_EXEC_COMMON_', 1);
-//define('_LEGACY_PREVENT_LOAD_CORE_', 1);
-require_once '../../../mainfile.php';
-
 #
 # These match opensimwiredux
 #
-include("config.php");
-include("opensim_mysql.php");
-require("helpers.php");
+
+include("./config.php");
+include("./opensim.mysql.php");
+require("./helpers.php");
 
 ###################### No user serviceable parts below #####################
 
@@ -82,7 +79,6 @@ function get_currency_quote($method_name, $params, $app_data)
 	$confirmvalue = "1234567883789";
 
 	$req       = $params[0];
-
 	$agentid   = $req['agentId'];
 	$sessionid = $req['secureSessionId'];
 	$amount    = $req['currencyBuy'];
@@ -92,36 +88,29 @@ function get_currency_quote($method_name, $params, $app_data)
 	#
 
 	$db = new DB;
-	$db->query("select UUID from ".OPENSIM_AGENTS_TBL." where ".
-			"UUID='".           $db->escape($agentid).  "' and ".
-			"secureSessionID='".$db->escape($sessionid)."'");
 
+	if ($db->exist_table("Presence")) {
+		$db->query("SELECT UserID FROM Presence WHERE UserID='".$db->escape($agentid)."' AND SecureSessionID='".$db->escape($sessionid)."'");
+	}
+	else {
+		$db->query("SELECT UUID FROM agents WHERE UUID='".$db->escape($agentid)."' AND secureSessionID='".$db->escape($sessionid)."'");
+	}
 	list($UUID) = $db->next_record();
+	$db->close();
 
-	if($UUID)
-	{
+	if ($UUID) {
 		$estimatedcost = convert_to_real($amount);
-		
-		$currency = array('estimatedCost'=>$estimatedcost,
-				'currencyBuy'=>$amount);
-		
+		$currency = array('estimatedCost'=> $estimatedcost, 'currencyBuy'=> $amount);
 		header("Content-type: text/xml");
-		$response_xml = xmlrpc_encode(array(
-				'success'  => True,
-				'currency' => $currency,
-				'confirm'  => $confirmvalue));
-
+		$response_xml = xmlrpc_encode(array('success'=> True, 'currency'=> $currency, 'confirm'=> $confirmvalue));
 		//error_log("1:->".$response_xml);
 		print $response_xml;
 	}
-	else
-	{
+	else {
 		header("Content-type: text/xml");
-		$response_xml = xmlrpc_encode(array(
-				'success'      => False,
-				'errorMessage' => "Unable to Authenticate\n\nClick URL for more info.",
-				'errorURI'     => "".SYSURL.""));
-
+		$response_xml = xmlrpc_encode(array('success'	  => False,
+											'errorMessage'=> "Unable to Authenticate\n\nClick URL for more info.",
+											'errorURI'	  => "".SYSURL.""));
 		//error_log("2:-> $sql<br />".$response_xml);
 		print $response_xml;
 	}
@@ -129,10 +118,10 @@ function get_currency_quote($method_name, $params, $app_data)
 	return "";
 }
 
+
 #
 # Viewer buys currency
 #
-
 xmlrpc_server_register_method($xmlrpc_server, "buyCurrency", "buy_currency");
 
 function buy_currency($method_name, $params, $app_data)
@@ -142,7 +131,6 @@ function buy_currency($method_name, $params, $app_data)
 	global $low_amount_error;
 
 	$req       = $params[0];
-
 	$agentid   = $req['agentId'];
 	$sessionid = $req['secureSessionId'];
 	$amount    = $req['currencyBuy'];
@@ -153,67 +141,51 @@ function buy_currency($method_name, $params, $app_data)
 	#
 
 	$db = new DB;
-	$db->query("select UUID from ".OPENSIM_AGENTS_TBL." where ".
-			"UUID='".           $db->escape($agentid).  "' and ".
-			"secureSessionID='".$db->escape($sessionid)."'");
 
+	if ($db->exist_table("Presence")) {
+		$db->query("SELECT UserID FROM Presence WHERE UserID='".$db->escape($agentid)."' AND SecureSessionID='".$db->escape($sessionid)."'");
+	}
+	else {
+		$db->query("SELECT UUID FROM agents WHERE UUID='".$db->escape($agentid)."' AND secureSessionID='".$db->escape($sessionid)."'");
+	}
 	list($UUID) = $db->next_record();
+	$db->close();
 
-	if($UUID)
-	{
+	if ($UUID) {
 		$cost = convert_to_real($amount);
-
-		if($cost < $minimum_real)
-		{
+		if ($cost<$minimum_real) {
 			$error=sprintf($low_amount_error, $minimum_real/100.0);
-
 			header("Content-type: text/xml");
-			$response_xml = xmlrpc_encode(array(
-					'success'      => False,
-					'errorMessage' => $error,
-					'errorURI'     => "".SYSURL.""));
-
+			$response_xml = xmlrpc_encode(array('success'=> False, 'errorMessage'=> $error, 'errorURI'=> "".SYSURL.""));
 			//error_log("3:->".$response_xml);
 			print $response_xml;
-
 			return "";
 		}
 
 		$transactionResult = process_transaction($agentid,$cost,$ipAddress);
 		
-		if ($transactionResult)
-		{
+		if ($transactionResult) {
 			header("Content-type: text/xml");
-			$response_xml = xmlrpc_encode(array(
-					'success' => True));
-
+			$response_xml = xmlrpc_encode(array('success' => True));
 			//error_log("4:->".$response_xml);
 			print $response_xml;
-
-			move_money($economy_source_account, $agentid, $amount, 0, 0, 0, 0,
-					"Currency purchase",0,$ipAddress);
-
+			move_money($economy_source_account, $agentid, $amount, 0, 0, 0, 0, "Currency purchase",0,$ipAddress);
 			update_simulator_balance($agentid);
 		}
-		else
-		{
+		else {
 			header("Content-type: text/xml");
-			$response_xml = xmlrpc_encode(array(
-					'success'      => False,
-					'errorMessage' => "We were unable to process the transaction.  The gateway denied your charge",
-					'errorURI'     => "".SYSURL.""));
-
+			$response_xml = xmlrpc_encode(array('success'      => False,
+												'errorMessage' => "We were unable to process the transaction.  The gateway denied your charge",
+												'errorURI'     => "".SYSURL.""));
 			//error_log("5:->".$response_xml);
 			print $response_xml;
 		}
 	}
-	else 
-	{
+	else {
 		header("Content-type: text/xml");
-		$response_xml = xmlrpc_encode(array(
-					'success'      => False,
-					'errorMessage' => "Unable to Authenticate\n\nClick URL for more info.",
-					'errorURI'     => "".SYSURL.""));
+		$response_xml = xmlrpc_encode(array('success'      => False,
+											'errorMessage' => "Unable to Authenticate\n\nClick URL for more info.",
+											'errorURI'     => "".SYSURL.""));
 		//error_log("6:->".$response_xml);
 		print $response_xml;
 	}
@@ -249,50 +221,43 @@ function balance_request($method_name, $params, $app_data)
     # Validate region secret
     #
 
-    $db=new DB;
-    $sql="select UUID from ".OPENSIM_REGIONS_TBL.
-            " where UUID='".  $db->escape($regionid)."' and ".
-            " regionSecret='".$db->escape($secret)  ."'";
-
+    $db = new DB;
+    $sql = "select UUID FROM regions WHERE UUID='".$db->escape($regionid)."' AND regionSecret='".$db->escape($secret)."'";
     $db->query($sql);
-
     list($region_id) = $db->next_record();
 
-    if ($region_id)
-    {
+    if ($region_id) {
         # We have a region, check agent session
-
-        $sql = "select UUID from ".OPENSIM_AGENTS_TBL.
-                " where UUID='".     $db->escape($agentid)  ."' and ".
-                " secureSessionID='".$db->escape($sessionid)."' and ".
-                " agentOnline=1 and ".
-                " currentRegion='".  $db->escape($regionid) ."'";
-
+		if ($db->exist_table("Presence")) {
+        	$sql = "SELECT UserID FROM Presence WHERE UserID='".$db->escape($agentid)."' AND ".
+                									" SecureSessionID='".$db->escape($sessionid)."' AND ".
+                									" Online='true' AND RegionID='".$db->escape($regionid) ."'";
+		}
+		else {
+        	$sql = "SELECT UUID FROM agents WHERE UUID='".$db->escape($agentid)."' AND ".
+                								" secureSessionID='".$db->escape($sessionid)."' AND ".
+                								" agentOnline='1' AND currentRegion='".$db->escape($regionid)."'";
+		}
         $db->query($sql);
         list($user_id) = $db->next_record();
 
-        if($user_id)
-        {
-            $response_xml = xmlrpc_encode(array(
-                    'success' => True,
-                    'agentId' => $agentid,
-                    'funds'   => (integer)get_balance($agentid)));
+        if ($user_id) {
+            $response_xml = xmlrpc_encode(array('success' => True,
+                    							'agentId' => $agentid,
+                    							'funds'   => (integer)get_balance($agentid)));
         }
-        else
-        {
-            $response_xml = xmlrpc_encode(array(
-                    'success'      => False,
-                    'errorMessage' => "Could not authenticate your avatar. Money operations may be unavailable",
-                    'errorURI'     => " "));
+        else {
+            $response_xml = xmlrpc_encode(array('success'      => False,
+                    							'errorMessage' => "Could not authenticate your avatar. Money operations may be unavailable",
+                    							'errorURI'     => " "));
         }
     }
-    else
-    {
-        $response_xml = xmlrpc_encode(array(
-                'success'      => False,
-                'errorMessage' => "This region is not authorized to check your balance. Money operations may be unavailable",
-                'errorURI'     => " "));
+    else {
+        $response_xml = xmlrpc_encode(array('success'      => False,
+                							'errorMessage' => "This region is not authorized to check your balance. Money operations may be unavailable",
+               								'errorURI'     => " "));
     }
+	$db->close();
 
     header("Content-type: text/xml");
 	//error_log("7:->".$response_xml);
@@ -332,120 +297,96 @@ function region_move_money($method_name, $params, $app_data)
     # Validate region secret
     #
 
-    $db=new DB;
-    $sql="select UUID from ".OPENSIM_REGIONS_TBL.
-            " where UUID='".  $db->escape($regionid)."' and ".
-            " regionSecret='".$db->escape($secret)  ."'";
+    $db = new DB;
 
+    $sql = "SELECT UUID FROM regions WHERE UUID='".$db->escape($regionid)."' AND regionSecret='".$db->escape($secret)."'";
     $db->query($sql);
-
     list($region_id) = $db->next_record();
 
-    if ($region_id)
-    {
+    if ($region_id) {
         # We have a region, check agent session
-
-        $sql = "select UUID from ".OPENSIM_AGENTS_TBL.
-                " where UUID='".     $db->escape($agentid)  ."' and ".
-                " secureSessionID='".$db->escape($sessionid)."' and ".
-                " agentOnline=1 and ".
-                " currentRegion='".  $db->escape($regionid) ."'";
-
+		if ($db->exist_table("Presence")) {
+        	$sql = "SELECT UserID FROM Presence WHERE UserID='".$db->escape($agentid)."' AND ".
+                									" SecureSessionID='".$db->escape($sessionid)."' AND ".
+                									" Online='true' AND RegionID='".$db->escape($regionid)."'";
+		}
+		else {
+        	$sql = "SELECT UUID FROM agents WHERE UUID='".$db->escape($agentid)."' AND ".
+                								" secureSessionID='".$db->escape($sessionid)."' AND ".
+                								" agentOnline='1' AND  currentRegion='".$db->escape($regionid)."'";
+		}
         $db->query($sql);
         list($user_id) = $db->next_record();
 
-        if($user_id)
-        {
-			if(get_balance($agentid) < $cash)
-			{
-				$response_xml = xmlrpc_encode(array(
-						'success'      => False,
-						'errorMessage' => "You do not have sufficient funds for this purchase",
-						'errorURI'     => " "));
+        if ($user_id) {
+			if(get_balance($agentid) < $cash) {
+				$response_xml = xmlrpc_encode(array('success'      => False,
+													'errorMessage' => "You do not have sufficient funds for this purchase",
+													'errorURI'     => " "));
 			}
-			else
-			{
-				if($destid == "00000000-0000-0000-0000-000000000000")
-					$destid=$economy_sink_account;
+			else {
+				if ($destid=="00000000-0000-0000-0000-000000000000") $destid=$economy_sink_account;
 
-				if($transactiontype == 1101)
-				{
+				if ($transactiontype==1101) {
 					user_alert($agentid, "00000000-0000-0000-0000-000000000000", "You paid L$".$cash." to upload.");
-					$description="Asset upload fee";
+					$description = "Asset upload fee";
 				}
-				else if($transactiontype == 5001) 
-				{
-					$destName=agent_name($destid);
-					$sourceName=agent_name($agentid);
-
+				else if($transactiontype==5001) {
+					$destName   = agent_name($destid);
+					$sourceName = agent_name($agentid);
 					user_alert($agentid, "00000000-0000-0000-0000-000000000000", "You paid ".$destName." L$".$cash);
-					user_alert($destid, "00000000-0000-0000-0000-000000000000", $sourceName." paid you L$".$cash);
-				
-					$description="Gift";
+					user_alert($destid,  "00000000-0000-0000-0000-000000000000", $sourceName." paid you L$".$cash);
+					$description = "Gift";
 				}
-				else if($transactiontype == 5008) 
-				{
-					$destName=agent_name($destid);
-					$sourceName=agent_name($agentid);
-
+				else if($transactiontype==5008) {
+					$destName   = agent_name($destid);
+					$sourceName = agent_name($agentid);
 					user_alert($agentid, "00000000-0000-0000-0000-000000000000", "You paid ".$destName." L$".$cash);
-					user_alert($destid, "00000000-0000-0000-0000-000000000000", $sourceName." paid you L$".$cash);
+					user_alert($destid,  "00000000-0000-0000-0000-000000000000", $sourceName." paid you L$".$cash);
 				}
-				else if($transactiontype == 2) 
-				{
-					$destName=agent_name($destid);
-					$sourceName=agent_name($agentid);
-
+				else if($transactiontype==2) {
+					$destName   = agent_name($destid);
+					$sourceName = agent_name($agentid);
 					user_alert($agentid, "00000000-0000-0000-0000-000000000000", "You paid ".$destName." L$".$cash);
-					user_alert($destid, "00000000-0000-0000-0000-000000000000", $sourceName." paid you L$".$cash);
+					user_alert($destid,  "00000000-0000-0000-0000-000000000000", $sourceName." paid you L$".$cash);
 				}
-				else if($transactiontype == 0) 
-				{
+				else if($transactiontype==0) {
 
-					if($destid == $economy_sink_account)
-					{
+					if($destid==$economy_sink_account) {
 						user_alert($agentid, "00000000-0000-0000-0000-000000000000", "You paid L$".$cash." for a parcel of land.");
 					}
-					else
-					{
-						$destName=agent_name($destid);
-						$sourceName=agent_name($agentid);
-
+					else {
+						$destName   = agent_name($destid);
+						$sourceName = agent_name($agentid);
 						user_alert($agentid, "00000000-0000-0000-0000-000000000000", "You paid ".$destName." L$".$cash." for a parcel of land.");
-						user_alert($destid, "00000000-0000-0000-0000-000000000000", $sourceName." paid you L$".$cash." for a parcel of land");
+						user_alert($destid,  "00000000-0000-0000-0000-000000000000", $sourceName." paid you L$".$cash." for a parcel of land");
 					}
 				
 					$description="Land purchase";
 				}
 
-				move_money($agentid, $destid, $cash,
-						$aggregatePermInventory, $aggregatePermNextOwner,
-						$flags, $transactiontype, $description,
-						$regionid, $ipAddress);
+				move_money($agentid, $destid, $cash,$aggregatePermInventory, $aggregatePermNextOwner,
+									 $flags, $transactiontype, $description, $regionid, $ipAddress);
 			
-				$response_xml = xmlrpc_encode(array(
-						'success'        => True,
-						'agentId'        => $agentid,
-						'funds'          => get_balance($agentid),
-						'funds2'         => get_balance($destid),
-						'currencySecret' => " "));
+				$response_xml = xmlrpc_encode(array('success'        => True,
+													'agentId'        => $agentid,
+													'funds'          => get_balance($agentid),
+													'funds2'         => get_balance($destid),
+													'currencySecret' => " "));
 			}
 		}
-		else
-		{
-			$response_xml = xmlrpc_encode(array(
-					'success'      => False,
-					'errorMessage' => "Unable to authenticate avatar. Money operations may be unavailable",
-					'errorURI'     => " "));
+		else {
+			$response_xml = xmlrpc_encode(array('success'      => False,
+												'errorMessage' => "Unable to authenticate avatar. Money operations may be unavailable",
+												'errorURI'     => " "));
 		}
 	}
-	else
-	{
-		$response_xml = xmlrpc_encode(array(
-				'success'      => False,
-				'errorMessage' => "This region is not authorized to manage your money. Money operations may be unavailable",
-				'errorURI'     => " "));
+	else {
+		$response_xml = xmlrpc_encode(array('success'      => False,
+											'errorMessage' => "This region is not authorized to manage your money. Money operations may be unavailable",
+											'errorURI'     => " "));
 	}
+	$db->close();
 
 	header("Content-type: text/xml");
 	//error_log("8:->".$response_xml);
@@ -477,57 +418,51 @@ function claimUser_func($method_name, $params, $app_data)
     # Validate region secret
     #
 
-    $db=new DB;
-    $sql="select UUID from ".OPENSIM_REGIONS_TBL.
-            " where UUID='".  $db->escape($regionid)."' and ".
-            " regionSecret='".$db->escape($secret)  ."'";
+    $db = new DB;
 
+    $sql = "SELECT UUID FROM regions WHERE UUID='".$db->escape($regionid)."' AND regionSecret='".$db->escape($secret)."'";
     $db->query($sql);
-
     list($region_id) = $db->next_record();
 
-    if ($region_id)
-    {
+    if ($region_id) {
         # We have a region, check agent session
-
-        $sql = "select UUID from ".OPENSIM_AGENTS_TBL.
-                " where UUID='".     $db->escape($agentid)  ."' and ".
-                " secureSessionID='".$db->escape($sessionid)."' and ".
-                " agentOnline=1";
-
+		if ($db->exist_table("Presence")) {
+        	$sql = "SELECT UserID FROM Presence WHERE UserID='".$db->escape($agentid)."' AND ".
+                									" SecureSessionID='".$db->escape($sessionid)."' AND Online='true'";
+		}
+		else {
+        	$sql = "SELECT UUID FROM agents WHERE UUID='".$db->escape($agentid)."' AND ".
+                								" secureSessionID='".$db->escape($sessionid)."' AND agentOnline='1'";
+		}
         $db->query($sql);
         list($user_id) = $db->next_record();
 
-        if($user_id)
-        {
-			$sql="update ".OPENSIM_AGENTS_TBL." set ".
-					" currentRegion='".$db->escape($regionid)."' ".
-					" where UUID='".   $db->escape($agentid) ."'";
-
+        if ($user_id) {
+			if ($db->exist_table("Presence")) {
+				$sql = "UPDATE Presence SET RegionID='".$db->escape($regionid)."' WHERE UserID='". $db->escape($agentid)."'";
+			}
+			else {
+				$sql = "UPDATE agents SET currentRegion='".$db->escape($regionid)."' WHERE UUID='".$db->escape($agentid)."'";
+			}
 			$db->query($sql);
-
 			$db->next_record();
-			$response_xml = xmlrpc_encode(array(
-					'success'        => True,
-					'agentId'        => $agentid,
-					'funds'          => (integer)get_balance($agentid),
-					'currencySecret' => " "));
+			$response_xml = xmlrpc_encode(array('success'        => True,
+												'agentId'        => $agentid,
+												'funds'          => (integer)get_balance($agentid),
+												'currencySecret' => " "));
 		}
-		else
-		{
-			$response_xml = xmlrpc_encode(array(
-					'success'      => False,
-					'errorMessage' => "Unable to authenticate avatar. Money operations may be unavailable",
-					'errorURI'     => " "));
+		else {
+			$response_xml = xmlrpc_encode(array('success'      => False,
+												'errorMessage' => "Unable to authenticate avatar. Money operations may be unavailable",
+												'errorURI'     => " "));
 		}
 	}
-	else
-	{
-		$response_xml = xmlrpc_encode(array(
-				'success'      => False,
-				'errorMessage' => "This region is not authorized to manage your money. Money operations may be unavailable",
-				'errorURI'     => " "));
+	else {
+		$response_xml = xmlrpc_encode(array('success'      => False,
+											'errorMessage' => "This region is not authorized to manage your money. Money operations may be unavailable",
+											'errorURI'     => " "));
 	}
+	$db->close();
 
 	header("Content-type: text/xml");
 	//error_log("9:->".$response_xml);
