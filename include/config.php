@@ -1,4 +1,9 @@
 <?php
+//
+// Configuration file for Moodle
+//										by Fumi.Iseki
+//
+//
 
 require_once (realpath(dirname(__FILE__)."/../../../config.php"));
 
@@ -9,6 +14,7 @@ define('CMS_MODULE_PATH', $CFG->dirroot.'/blocks/'.CMS_DIR_NAME);
 
 
 $GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
+
 
 
 // for OpenSim DB
