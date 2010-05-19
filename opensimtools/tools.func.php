@@ -9,16 +9,16 @@
 
 
 /****************************************************************
- Function List
- 
-
- function  isAlphabetNumeric($str)
- function  isGUID($uuid)
-
- function  make_random_hash()
- function  make_random_guid()
-
-*****************************************************************/
+ * Function List
+ *
+ *
+ * function  isAlphabetNumeric($str)
+ * function  isGUID($uuid)
+ *
+ * function  make_random_hash()
+ * function  make_random_guid()
+ *
+ ****************************************************************/
 
 
 
