@@ -11,6 +11,7 @@ require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 if (!defined('CMS_MODULE_PATH')) exit();
 require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
+
 $isGuest = isguest();
 if ($isGuest) {
 	exit('<h4>guest user is not allowed!!</h4>');
@@ -78,7 +79,7 @@ if ($rginfo!=null) {
 	$owner_uuid	 	= $rginfo['owner_uuid'];
 }
 else {
-	exit('<h4>cannot get region information!!</h4>');
+	exit("<h4>cannot get region information!! ($region)</h4>");
 }
 
 $server = "";
