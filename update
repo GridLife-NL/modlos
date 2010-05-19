@@ -2,5 +2,7 @@ svn update
 svn update osprofile
 svn update flotsam_XmlRpcGroup
 svn update opensimwiredux
+svn update opensim.phplib
 (cd xoopensim && ./update)
+
 chown -R www.www .
