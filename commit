@@ -2,3 +2,4 @@ svn ci -m ""
 (cd opensimwiredux && svn ci -m "")
 (cd flotsam_XmlRpcGroup && svn ci -m "")
 (cd osprofile && svn ci -m "")
+(cd opensim.phplib && svn ci -m "")
