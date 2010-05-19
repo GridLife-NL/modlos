@@ -39,31 +39,8 @@ foreach($users as $user) {
 }
 
 
-
-
-//if ($frm = data_submitted() and confirm_sesskey()) {
-if ($frm = data_submitted()) {
-
-
-print("===============> $frm->rgnadmin");
-print("===============> $frm->voice_mode");
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-if ($hasPermit and !empty($_POST)) {
+// POST
+if ($hasPermit and data_submitted() and confirm_sesskey()) {
 	$rgnadmin = optional_param('rgnadmin', '', PARAM_TEXT);
 	if ($rgnadmin!="") {
 		opensim_set_region_owner($region, $rgnadmin);
