@@ -258,7 +258,7 @@ $string['mdlos_synchro_submit'] 	= 'データベース同期の実行';
 $string['mdlos_synchro_contens'] 	= 'OpenSimデータベースと Moodleデータベースとの同期';
 $string['mdlos_synchronized'] 		= 'OpenSimデータベースとの同期完了！';
 
-$string['mdlos_return_tab'] 		= '戻る';
+$string['mdlos_return_tab'] 		= 'コースに戻る';
 
 $string['mdlos_access_forbidden'] 	= 'このページへのアクセスは許可されてません';
 

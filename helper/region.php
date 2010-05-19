@@ -38,6 +38,31 @@ foreach($users as $user) {
 	$col++;
 }
 
+
+
+
+//if ($frm = data_submitted() and confirm_sesskey()) {
+if ($frm = data_submitted()) {
+
+
+print("===============> $frm->rgnadmin");
+print("===============> $frm->voice_mode");
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 if ($hasPermit and !empty($_POST)) {
 	$rgnadmin = optional_param('rgnadmin', '', PARAM_TEXT);
 	if ($rgnadmin!="") {

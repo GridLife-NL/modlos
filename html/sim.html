@@ -48,7 +48,7 @@
         <tr>
           <td class="styleText">
             <b><?php print $admin_user?>:&nbsp;
-              <a href="<?php print $module_url.'/helper/agent.php?agent='.$owner_uuid.$course?>"><?php print $owner_name?></a>
+              <a href="<?php print $module_url.'/helper/agent.php?agent='.$owner_uuid.$course?>"><?php print htmlspecialchars($owner_name)?></a>
             </b>
           </td>
         </tr>
@@ -65,9 +65,9 @@
             <select wide="32" name="rgnadmin">
               <?php foreach($avatars as $avatar) {?>
                 <?php if ($avatar['name']==$owner_name) {?>
-                  <option value="<?php print $avatar['uuid']?>" selected><?php print $avatar['name']?></option>
+                  <option value="<?php print $avatar['uuid']?>" selected><?php print htmlspecialchars($avatar['name'])?></option>
                 <?php } else {?>
-                  <option value="<?php print $avatar['uuid']?>" ><?php print $avatar['name']?></option>
+                  <option value="<?php print $avatar['uuid']?>" ><?php print htmlspecialchars($avatar['name'])?></option>
                 <?php }?>
               <?php }?>
             </select>&nbsp;&nbsp;

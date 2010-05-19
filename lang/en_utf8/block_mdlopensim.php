@@ -261,7 +261,7 @@ $string['mdlos_synchro_submit'] 	= 'Synchro DB';
 $string['mdlos_synchro_contents'] 	= 'Synchrnsize DB?';
 $string['mdlos_synchronized'] 		= 'Synchronized OpenSim DB!!';
 
-$string['mdlos_return_tab'] 		= 'Return';
+$string['mdlos_return_tab'] 		= 'Return to Course';
 
 $string['mdlos_access_forbidden'] 	= 'Forbidden Access to this Page!!';
 

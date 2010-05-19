@@ -20,7 +20,7 @@
     <td width="55%" valign="top">
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr><td>&nbsp;</td></tr>
-        <tr><td><span class="styleTitel"><?php print $user_ttl.":&nbsp;".$firstN."&nbsp;&nbsp;".$lastN?></span></td></tr>
+        <tr><td><span class="styleTitel"><?php print $user_ttl.":&nbsp;".htmlspecialchars($firstN)."&nbsp;&nbsp;".htmlspecialchars($lastN)?></span></td></tr>
         <?php if ($hasPermit) {?>
           <tr><td>&nbsp;</td></tr>
           <tr><td class="styleText"><b><?php print $uuid_ttl.":&nbsp;".$UUID?></b></td></tr>
@@ -34,9 +34,9 @@
           <td class="styleText"><b><?php print $ownername.":&nbsp;"?><font color="#105BA7">
             <?php if ($userinfo and $owner!=' - ') {?>
               <?php if ($courseid!=0) {?>
-                <a href="<?php print $CFG->wwwroot.'/user/view.php?id='.$userid.$course?>" target="_blank"><?php print $owner?></a>
+                <a href="<?php print $CFG->wwwroot.'/user/view.php?id='.$userid.$course?>" target="_blank"><?php print htmlspecialchars($owner)?></a>
               <?php } else {?>
-                <a href="<?php print $CFG->wwwroot.'/user/view.php?id='.$userid?>" target="_blank"><?php print $owner?></a>
+                <a href="<?php print $CFG->wwwroot.'/user/view.php?id='.$userid?>" target="_blank"><?php print htmlspecialchars($owner)?></a>
               <?php }?>
             <?php } else {?>
               <?php print $owner?>
@@ -66,7 +66,9 @@
         </tr>
         <tr><td class="styleText">&nbsp;</td></tr>
         <tr>
-          <td class="styleText"><b><?php print $home_region?>:&nbsp;<a href="<?php print $module_url?>/helper/region.php?region=<?php print $regionUUID?>"><?php print $regionName?></b></a></td>
+          <td class="styleText"><b><?php print $home_region?>:&nbsp;<a href="<?php print $module_url?>/helper/region.php?region=<?php print $regionUUID?>">
+            <?php print htmlspecialchars($regionName)?>
+          </a></b></td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr><td><span class="styleText"><u><b><?php print $profile_ttl?></b></u></span></td></tr>
@@ -74,7 +76,7 @@
         <tr>
           <td><span class="styleText">
             <?php if ($profileTXT!="") {?>
-              <?php print $profileTXT?>
+              <?php print htmlspecialchars($profileTXT)?>
             <?php } else {?>
               <?php print $has_noprofile?>
             <?php }?>

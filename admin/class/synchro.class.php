@@ -50,9 +50,9 @@ class  SynchroDataBase
 				}
 
 				opensim_supply_passwordSalt();
-				opensim_succession_presence(XOPNSIM_HMREGION);
+				opensim_succession_data(OPENSIM_HMREGION);
 				$profs = opensim_get_avatar_profiles();
-				xoopensim_set_profiles($profs, false);		// not over write
+				mdlopensim_set_profiles($profs, false);		// not over write
 
 				$this->synchroDB();
 			}
@@ -81,10 +81,10 @@ class  SynchroDataBase
 			$opsim_user['uid']   = "";
 			$opsim_user['state'] = "";
 			if (array_key_exists($opsim_user['UUID'], $xoops_users)) {
-				xoopensim_update_usertable($opsim_user);
+				mdleopensim_update_usertable($opsim_user);
 			}
 			else {
-				xoopensim_insert_usertable($opsim_user);
+				mdlopensim_insert_usertable($opsim_user);
 			}
 		}
 
@@ -93,7 +93,7 @@ class  SynchroDataBase
 			$xoops_uuid = $xoops_user['UUID'];
 			if (!array_key_exists($xoops_uuid, $opsim_users)) {
 				$xoops_user['state'] = XOPNSIM_STATE_INACTIVE;
-				xoopensim_delete_usertable($xoops_user);
+				mdlopensim_delete_usertable($xoops_user);
 			}
 		}
 

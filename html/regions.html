@@ -23,7 +23,7 @@
       <td width="30"  height="40" valign="bottom" background="<?php print $module_url?>/images/main/regions_middle.jpg"><br /><b>No.</b></td>
       <td width="250" height="40" valign="bottom" background="<?php print $module_url?>/images/main/regions_middle.jpg"><br />
         <a style="cursor:pointer" onclick="document.location.href='<?php print $this->action?>?order=name<?php print $course.$pstart.$plimit?>'">
-          <b><u><?php print $region_name?></u></b>
+          <b><u><?php print htmlspecialchars($region_name)?></u></b>
         </a>
       </td>
       <td width="100" valign="bottom" background="<?php print $module_url?>/images/main/regions_middle.jpg"><br />
@@ -38,7 +38,7 @@
       </td>
       <td width="200" valign="bottom" background="<?php print $module_url?>/images/main/regions_middle.jpg"><br />
         <a style="cursor:pointer" onclick="document.location.href='<?php print $this->action?>?order=owner<?php print $course.$pstart.$plimit?>'">
-          <b><u><?php print $estate_owner?></u></b>
+          <b><u><?php print htmlspecialchars($estate_owner)?></u></b>
         </a>
       </td>
       <td width="200" valign="bottom" background="<?php print $module_url?>/images/main/regions_middle.jpg"><br />
