@@ -141,6 +141,8 @@ $string['mdlos_disclaimer'] 		= 'Disclaimer';
 $string['mdlos_disclaimer_agree'] 	= 'I agree to the above';
 $string['mdlos_need_agree_disclaimer']='You need to agree disclaimer for avatar create'; 
 
+$string['mdlos_sesskey_error']      = 'Invalid session key is detected!!';
+
 $string['mdlos_username_error'] 	= 'User Name Error!!';
 $string['mdlos_ownername_error'] 	= 'Owner Name Error!!';
 

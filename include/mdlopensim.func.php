@@ -97,7 +97,7 @@ function  mdlopensim_insert_usertable($user)
 	else if (array_key_exists('username', $user)) $firstname = $user['username'];
 	else return false;
 
-	$insobj->UUID 	   = $user['UUID'];
+	$insobj->uuid 	   = $user['UUID'];
 	$insobj->firstname = $firstname;
 	$insobj->lastname  = $user['lastname'];
 
@@ -105,7 +105,7 @@ function  mdlopensim_insert_usertable($user)
 	else                  	  $insobj->uid = 0;
 
 	if ($user['state']!="")   $insobj->state = $user['state'];
-	else					  $insobj->state = 1;
+	else					  $insobj->state = '1';
 
 	if ($user['created']!="") $insobj->time = $user['created'];
 	else 					  $insobj->time = time();
@@ -117,7 +117,12 @@ function  mdlopensim_insert_usertable($user)
 	else                              $insobj->hmregion = "";
 
 	$ret = insert_record(CMS_DB_PREFIX.'users', $insobj);
-	if (!$ret) return false;
+print("=======> ".CMS_DB_PREFIX.'users'."   INSERT $insobj->uuid <br />");
+
+	if (!$ret) {
+print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF<br />");
+		return false;
+	}
 	return true;
 }
 
@@ -323,10 +328,10 @@ function print_tabnav($currenttab, $course)
 
 	if ($hasPermit) {
 		if ($CFG->mdlopnsm_activate_lastname) {
-			$toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
+			$toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/actions/lastnames.php?course='.$courseid, 
 																	'<b>'.get_string('mdlos_lastnames_tab','block_mdlopensim').'</b>');
 		}
-		$toprow[] = new tabobject('synchrodb', CMS_MODULE_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
+		$toprow[] = new tabobject('synchrodb', CMS_MODULE_URL.'/admin/actions/synchrodb.php?course='.$courseid, 
 																	'<b>'.get_string('mdlos_synchro_tab','block_mdlopensim').'</b>');
 		if (isadmin()) {
 			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmdlopensim', 
