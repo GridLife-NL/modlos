@@ -15,10 +15,8 @@ $action = 'synchrodb';
 print_tabheader($action, $course);
 
 require_once(CMS_MODULE_PATH."/admin/class/synchrodb.class.php");
-print ("AAAAAAAAAA");
-die();
-$syncro = new SynchroDataBase($courseid);
-$syncro->print_page();
+$synchro = new SynchroDataBase($courseid);
+$synchro->print_page();
 
 print_footer($course);
 	

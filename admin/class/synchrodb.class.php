@@ -1,6 +1,6 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
-//	syncro.class.php
+//	synchro.class.php
 //
 //	OpenSimのDBと MoodleのDBの同期をとる．
 //
@@ -35,19 +35,33 @@ class  SynchroDataBase
 			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'));
 		}
 
-		$this->action_url = _OPENSIM_MODULE_URL."/admin/actions/syncrodb.php?action=synchro";
+		$this->action_url = _OPENSIM_MODULE_URL."/admin/actions/synchrodb.php?action=synchro";
 	}
 
 
 
 	function  execute()
 	{
-		if ($this->hasPermit and data_submitted() and confirm_sesskey()) {
+		if (!$this->hasPermit) {
+			$this->hasError = true;
+			$this->errorMsg = get_string("mdlos_permission_error", "block_mdlopensim");
+			return false;
+		}
+
+		if (data_submitted()) {			// POST
+			if (!confirm_sesskey()) {
+				$this->hasError = true;
+				$this->errorMsg = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				return false;
+			}
+
 			$quest = optinal_param('quest', 'no', PARAM_ALPHA);
 			if ($quest=="yes") {
 				$ret = opensim_check_db();
 				if (!$ret['grid_status']) {
-					error(get_string('mdlos_db_connect_error', 'block_mdlopensim'));
+					$this->hasError = true;
+					$this->errorMsg = get_string('mdlos_db_connect_error', 'block_mdlopensim');
+					return false;
 				}
 
 				opensim_supply_passwordSalt();
@@ -56,7 +70,7 @@ class  SynchroDataBase
 				$profs = opensim_get_avatars_profiles();
 				if ($profs!=null) mdlopensim_set_profiles($profs, false);		// not over write
 
-				$this->synchroDB();
+				$this->synchronized = $this->synchroDB();
 			}
 		}
 	}
@@ -67,7 +81,6 @@ class  SynchroDataBase
 	{
 		// OpenSim DB
 		$opsim_users = opensim_get_avatars_infos();
-		if ($opsim_users==null) return;
 
 		// Moodle DB
 		$modobj = & $handler->getObjects();
@@ -98,7 +111,7 @@ class  SynchroDataBase
 			}
 		}
 
-		$this->synchronized = true;
+		return true;
 	}
 
 
@@ -109,13 +122,13 @@ class  SynchroDataBase
 
         $this->execute();
 
-        $grid_name  	= $CFG->mdlopnsm_grid_name;
-		$syncro_db_ttl 	= get_string("mdlos_synchro_db", "block_mdlopensim");
-		$syncronized_ttl= get_string("mdlos_synchronized", "block_mdlopensim");
-		$content		= get_string("mdlos_synchro_contents'", "block_mdlopensim");
-		$syncro_submit	= get_string("mdlos_synchro_submit", "block_mdlopensim");
+        $grid_name  	  = $CFG->mdlopnsm_grid_name;
+		$synchro_db_ttl   = get_string("mdlos_synchro_db", "block_mdlopensim");
+		$synchronized_msg = get_string("mdlos_synchronized", "block_mdlopensim");
+		$content		  = get_string("mdlos_synchro_contents'", "block_mdlopensim");
+		$synchro_submit	  = get_string("mdlos_synchro_submit", "block_mdlopensim");
 
-		include(CMS_MODULE_PATH."/admin/html/syncrodb.html");
+		include(CMS_MODULE_PATH."/admin/html/synchro.html");
 	}
 }
 

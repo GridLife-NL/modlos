@@ -136,8 +136,11 @@ $string['mdlos_mismatch_uid'] 		= 'User ID が一致しません';
 $string['mdlos_mismatch_passwd'] 	= 'パスワードが一致しません';
 
 $string['mdlos_disclaimer'] 		= '使用許諾';
-$string['mdlos_disclaimer_agree'] 	= '私は使用許諾に同意ます';
+$string['mdlos_disclaimer_agree'] 	= '私は使用許諾に同意します';
 $string['mdlos_need_agree_disclaimer']='使用許諾に同意しなけれアバターを作ることは出来ません'; 
+
+$string['mdlos_permission_error'] 	= 'このページを表示するための権限がありません';
+$string['mdlos_sesskey_error'] 		= '無効なセッションキーを検出しました';
 
 $string['mdlos_username_error'] 	= 'ユーザネームのエラー';
 $string['mdlos_ownername_error'] 	= 'オーナーネームのエラー';
@@ -255,7 +258,7 @@ $string['mdlos_lastnames'] 			= 'ラストネーム管理';
 $string['mdlos_synchro_tab'] 		= 'DB同期';
 $string['mdlos_synchro_db'] 		= 'データベース同期';
 $string['mdlos_synchro_submit'] 	= 'データベース同期の実行';
-$string['mdlos_synchro_contens'] 	= 'OpenSimデータベースと Moodleデータベースとの同期';
+$string['mdlos_synchro_contents'] 	= 'OpenSimデータベースと Moodleデータベースとの同期';
 $string['mdlos_synchronized'] 		= 'OpenSimデータベースとの同期完了！';
 
 $string['mdlos_return_tab'] 		= 'コースに戻る';

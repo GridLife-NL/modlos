@@ -323,10 +323,10 @@ function print_tabnav($currenttab, $course)
 
 	if ($hasPermit) {
 		if ($CFG->mdlopnsm_activate_lastname) {
-			$toprow[] = new tabobject('lastname', CMS_MODULE_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
+			$toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
 																	'<b>'.get_string('mdlos_lastnames_tab','block_mdlopensim').'</b>');
 		}
-		$toprow[] = new tabobject('syncdb', CMS_MODULE_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
+		$toprow[] = new tabobject('synchrodb', CMS_MODULE_URL.'/admin/settings.php?section=blocksettingmdlopensim', 
 																	'<b>'.get_string('mdlos_synchro_tab','block_mdlopensim').'</b>');
 		if (isadmin()) {
 			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmdlopensim', 
@@ -340,7 +340,6 @@ function print_tabnav($currenttab, $course)
 	else {
 		$toprow[] = new tabobject('', $CFG->wwwroot, '<b>'.get_string('mdlos_return_tab', 'block_mdlopensim').'</b>');
 	}
-
 
 	$tabs = array($toprow);
 

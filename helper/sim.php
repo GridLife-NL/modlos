@@ -2,7 +2,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // Region の個別情報を表示する．
 //
-// usage... http://xxx/yyy/zzz/region.php?region=3a9379b7-1821-4b04-ab97-e38df166bac1
+// usage... http://xxx/yyy/zzz/sim.php?region=3a9379b7-1821-4b04-ab97-e38df166bac1
 //
 
 require_once(realpath(dirname(__FILE__)."/../../../config.php"));
@@ -27,7 +27,7 @@ $hasPermit = hasPermit($courseid);
 
 global $CFG;
 $grid_name  = $CFG->mdlopnsm_grid_name;
-$action_url = CMS_MODULE_URL."/helper/region.php";
+$action_url = CMS_MODULE_URL."/helper/sim.php";
 
 
 //////////////
