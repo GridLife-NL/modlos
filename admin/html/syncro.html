@@ -1,0 +1,32 @@
+
+<h2><center><? php print $grid_name.":&nbsp;".$syncro_db_ttl?></center></h2>
+<br />
+
+<? php if (!$this->synchronized) {?>
+  <form action="<? php $this->action_url?>" method="POST">
+    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+
+      <tr>
+        <td width="50"  class="head"><? php $content?></td>
+      </tr>
+ 
+    </table>
+    <br />
+    <input type="hidden" name="sesskey" value="<?php print sesskey() ?>" />
+    <input type="hidden" name="quest" value="yes" />
+    <input type="submit" value="<?php print $syncro_submit?>" /> 
+  </form>
+
+<?php } else {?>
+  <h2><font color=#2222FF><?php print $syncronized_msg ?></font></h2>
+<?php }?>
+
+<br />
+<br />
+<br />
+<hr />
+<?php if ($this->hasError) {?>
+  <ul>
+    <li><font color="#f01010"><b><?php print $this->errorMsg?></b></font></li>
+  </ul>
+<?php }?>

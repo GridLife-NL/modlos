@@ -21,6 +21,8 @@ class  SynchroDataBase
 	var $hashPermit;
 	var $courseid;
 	var	$synchronized = false;
+	var	$hasError = false;
+	var	$errorMsg = "";
 
 
 
@@ -69,9 +71,8 @@ class  SynchroDataBase
 		if ($opsim_users==null) return;
 
 		// Moodle DB
-		$handler = & xoops_getmodulehandler('usersdb');
-		$modobj  = & $handler->getObjects();
-		$xoops_users = array();
+		$modobj = & $handler->getObjects();
+		$moodle_users = array();
 		foreach ($modobj as $userobj) {
 			$xoops_uuid = $userobj->getVar('UUID');
 			$xoops_users[$xoops_uuid] = $userobj->gets();
@@ -103,18 +104,19 @@ class  SynchroDataBase
 
 
 
-	function  executeView($render) 
+	function  print_page() 
 	{
-		$grid_name  = $CFG->mslod_grid_name;
+        global $CFG;
 
+        $this->execute();
 
-		$render->setAttribute('admin_menu',   $admin_menu);
-		$render->setAttribute('grid_name',	  $grid_name);
-		$render->setAttribute('synchronized', $this->synchronized);
-		$render->setAttribute('action_url',   $this->action_url);
-		$render->setAttribute('actionForm',   $this->mActionForm);
+        $grid_name  	= $CFG->mdlopnsm_grid_name;
+		$syncro_db_ttl 	= get_string("mdlos_synchro_db", "block_mdlopensim");
+		$syncronized_ttl= get_string("mdlos_synchronized", "block_mdlopensim");
+		$content		= get_string("mdlos_synchro_contents'", "block_mdlopensim");
+		$syncro_submit	= get_string("mdlos_synchro_submit", "block_mdlopensim");
 
-		include(CMS_MODULE_PATH.'/admin/html/synchro.html');
+		include(CMS_MODULE_PATH."/admin/html/syncrodb.html");
 	}
 }
 
