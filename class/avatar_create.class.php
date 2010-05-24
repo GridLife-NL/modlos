@@ -72,7 +72,7 @@ class  AvatarCreate
 	function  execute()
 	{
 		// Region Name
-		$this->regionNames = opensim_get_region_names("ORDER BY regionName ASC");
+		$this->regionNames = opensim_get_regions_names("ORDER BY regionName ASC");
 
 		// Form
 		$this->mActionForm->prepare();

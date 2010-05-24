@@ -141,7 +141,7 @@ class  AvatarsList
 		//$usersdbHandler = & xoops_getmodulehandler('usersdb');
 
 		// OpenSim DB
-		$users = opensim_get_avatar_infos($this->sql_condition);
+		$users = opensim_get_avatars_infos($this->sql_condition);
 
 		$DbLink = new DB;
 		$colum  = 0;

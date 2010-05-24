@@ -41,7 +41,7 @@ class  SynchroDataBase
 
 	function  execute()
 	{
-		if (!empty($_POST)) {
+		if ($this->hasPermit and data_submitted() and confirm_sesskey()) {
 			$quest = optinal_param('quest', 'no', PARAM_ALPHA);
 			if ($quest=="yes") {
 				$ret = opensim_check_db();

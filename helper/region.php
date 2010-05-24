@@ -32,7 +32,7 @@ $action_url = CMS_MODULE_URL."/helper/region.php";
 
 //////////////
 $col = 0;
-$users = opensim_get_avatar_infos();
+$users = opensim_get_avatars_infos();
 foreach($users as $user) {
 	$avatars[$col]['name'] = $user['firstname']." ".$user['lastname'];
 	$avatars[$col]['uuid'] = $user['UUID'];

@@ -118,7 +118,7 @@ class  RegionsList
 		if ($this->plimit != 100) $this->icon[6] = "icon_limit_100_on";
 
 		//
-		$regions = opensim_get_region_infos($this->sql_condition);
+		$regions = opensim_get_regions_infos($this->sql_condition);
 		$colum  = 0;
 		foreach($regions as $region) {
 			$this->db_data[$colum] = $region;

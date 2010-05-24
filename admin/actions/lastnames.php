@@ -14,8 +14,8 @@ $action = 'regions_list';
 
 print_tabheader($action, $course);
 
-require_once(CMS_MODULE_PATH."/admin/class/syncrodb.class.php");
-$regions = new SyncroDataBase($courseid);
+require_once(CMS_MODULE_PATH."/admin/class/lastnames.class.php");
+$regions = new LastNames($courseid);
 $regions->print_page();
 
 print_footer($course);
