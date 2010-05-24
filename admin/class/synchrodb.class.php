@@ -14,7 +14,6 @@ if (!defined('CMS_MODULE_PATH')) exit();
 require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
-
 class  SynchroDataBase
 {
 	var $action_url;
