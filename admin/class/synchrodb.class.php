@@ -51,8 +51,9 @@ class  SynchroDataBase
 
 				opensim_supply_passwordSalt();
 				opensim_succession_data(OPENSIM_HMREGION);
-				$profs = opensim_get_avatar_profiles();
-				mdlopensim_set_profiles($profs, false);		// not over write
+				opensim_recreate_presence();
+				$profs = opensim_get_avatars_profiles();
+				if ($profs!=null) mdlopensim_set_profiles($profs, false);		// not over write
 
 				$this->synchroDB();
 			}
@@ -64,7 +65,7 @@ class  SynchroDataBase
 	function synchroDB()
 	{
 		// OpenSim DB
-		$opsim_users = opensim_get_avatar_infos();
+		$opsim_users = opensim_get_avatars_infos();
 		if ($opsim_users==null) return;
 
 		// Moodle DB
