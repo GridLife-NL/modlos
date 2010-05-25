@@ -38,18 +38,40 @@ foreach($users as $user) {
 	$avatars[$col]['uuid'] = $user['UUID'];
 	$col++;
 }
+$avatar_num = $col;
 
+
+$vcmode = "";
+$rginfo = "";
 
 // POST
 if ($hasPermit and data_submitted() and confirm_sesskey()) {
+	//
 	$rgnadmin = optional_param('rgnadmin', '', PARAM_TEXT);
-	if ($rgnadmin!="") {
-		opensim_set_region_owner($region, $rgnadmin);
+	if (!isGUID($rgnadmin)) {   // owner name
+		$rgnuuid = opensim_get_avatar_uuid($rgnadmin);
+		if (!isGUID($rgnuuid)) {
+			exit("<h4>unknown avatar name!! ($rgnadmin)</h4>");
+		}
+		$rgnadmin = $rgnuuid;
 	}
+
+	$rginfo = opensim_get_region_info($region);
+	if ($rginfo!=null && $rginfo['owner_uuid']!=$rgnadmin) {
+		$ret = opensim_set_region_owner($region, $rgnadmin);
+		if (!$ret) exit("<h4>updating of region owner is fail!! ($region, $rgnadmin)</h4>");
+		$rgninfo = null;
+	}
+		
 	$voice_mode = optional_param('voice_mode', '', PARAM_TEXT);
-	if ($voice_mode!="") {
-		opensim_set_voice_mode($region, $voice_mode);
-	}
+	if (isNumeric($voice_mode)) {
+		$vcmode = opensim_get_voice_mode($region);
+		if ($vcmode!=$voice_mode) {
+			$ret = opensim_set_voice_mode($region, $voice_mode);
+			if (!$ret) exit("<h4>updating of voice mode is fail!! ($region, $voice_mode)</h4>");
+			$vcmode = "";
+		}
+	}	
 }
 
 
@@ -61,13 +83,13 @@ $voice_modes[0]['title'] = get_string("mdlos_voice_inactive_chnl","block_mdlopen
 $voice_modes[1]['title'] = get_string("mdlos_voice_private_chnl", "block_mdlopensim");
 $voice_modes[2]['title'] = get_string("mdlos_voice_percel_chnl",  "block_mdlopensim");
 
-$vcmode = opensim_get_voice_mode($region);
+if ($vcmode=="") $vcmode = opensim_get_voice_mode($region);
 $vcmode_title = $voice_modes[$vcmode]['title'];
 
 
 //////////////
 $owner_name = $owner_uuid = "";
-$rginfo = opensim_get_region_info($region);
+if ($rgnifo=="") $rginfo = opensim_get_region_info($region);
 if ($rginfo!=null) {
 	$regionName	 	= $rginfo['regionName'];
 	$serverIP		= $rginfo['serverIP'];
@@ -96,6 +118,9 @@ $guid = str_replace("-", "", $region);
 $locX = $locX/256;
 $locY = $locY/256;
 
+
+$avatar_select = true;
+if ($avatar_num>100) $avatar_select = false;
 
 //////////////
 $course 	  	= "&amp;course=".$courseid;

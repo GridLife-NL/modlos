@@ -75,7 +75,7 @@ class  RegionsList
 
 	function  execute()
 	{
-		$this->number    = opensim_get_region_num();
+		$this->number    = opensim_get_regions_num();
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
 		if ($this->sitemax==0) $this->sitemax = 1; 
@@ -117,14 +117,21 @@ class  RegionsList
 		if ($this->plimit != 50)  $this->icon[5] = "icon_limit_50_on";
 		if ($this->plimit != 100) $this->icon[6] = "icon_limit_100_on";
 
+
+		$voice_mode[0] = $regions_list_ttl= get_string("mdlos_voice_inactive_chnl", "block_mdlopensim");
+		$voice_mode[1] = $regions_list_ttl= get_string("mdlos_voice_private_chnl",  "block_mdlopensim");
+		$voice_mode[2] = $regions_list_ttl= get_string("mdlos_voice_percel_chnl",   "block_mdlopensim");
+
 		//
 		$regions = opensim_get_regions_infos($this->sql_condition);
-		$colum  = 0;
+		$colum = 0;
 		foreach($regions as $region) {
 			$this->db_data[$colum] = $region;
-			$this->db_data[$colum]['num']  = $colum;
-			$this->db_data[$colum]['locX'] = $this->db_data[$colum]['locX']/256;
-			$this->db_data[$colum]['locY'] = $this->db_data[$colum]['locY']/256;
+			$this->db_data[$colum]['num']   = $colum;
+			$this->db_data[$colum]['locX']  = $this->db_data[$colum]['locX']/256;
+			$this->db_data[$colum]['locY']  = $this->db_data[$colum]['locY']/256;
+			$vcmode = opensim_get_voice_mode($region['UUID']);
+			$this->db_data[$colum]['voice'] = $voice_mode[$vcmode];
 			$colum++;
 		}
 
@@ -147,15 +154,16 @@ class  RegionsList
 		$pstart		     = "&amp;pstart=$this->pstart";
 		$plimit		   	 = "&amp;plimit=$this->plimit";
 
-		$regions_list_ttl= get_string("mdlos_regions_list", "block_mdlopensim");
-		$location_x    	 = get_string("mdlos_location_x",   "block_mdlopensim");
-		$location_y      = get_string("mdlos_location_y",   "block_mdlopensim");
-		$region_name     = get_string("mdlos_region_name",  "block_mdlopensim");
-		$estate_owner    = get_string("mdlos_estate_owner", "block_mdlopensim");
-		$ip_address      = get_string("mdlos_ipaddr",		"block_mdlopensim");
-		$regions_found   = get_string("mdlos_regions_found","block_mdlopensim");
-		$page_num	     = get_string("mdlos_page",		    "block_mdlopensim");
-		$page_num_of     = get_string("mdlos_page_of",	    "block_mdlopensim");
+		$regions_list_ttl= get_string("mdlos_regions_list",   "block_mdlopensim");
+		$location_x    	 = get_string("mdlos_location_x",     "block_mdlopensim");
+		$location_y      = get_string("mdlos_location_y",     "block_mdlopensim");
+		$region_name     = get_string("mdlos_region_name",    "block_mdlopensim");
+		$estate_owner    = get_string("mdlos_estate_owner",   "block_mdlopensim");
+		$ip_address      = get_string("mdlos_ipaddr",		  "block_mdlopensim");
+		$regions_found   = get_string("mdlos_regions_found",  "block_mdlopensim");
+		$page_num	     = get_string("mdlos_page",		      "block_mdlopensim");
+		$page_num_of     = get_string("mdlos_page_of",	      "block_mdlopensim");
+		$voice_chat_mode = get_string("mdlos_voice_chat_mode","block_mdlopensim");
 
 		//$region_owner = get_string("mdlos_region_owner", "block_mdlopensim");
 		//$estate_id    = get_string("mdlos_estate_id",    "block_mdlopensim");

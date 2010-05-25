@@ -62,15 +62,19 @@
         <?php if ($hasPermit) {?>
           <tr><td class="styleText">
             <!--<?php print $region_owner?>&nbsp;&nbsp; -->
-            <select wide="32" name="rgnadmin">
-              <?php foreach($avatars as $avatar) {?>
-                <?php if ($avatar['name']==$owner_name) {?>
-                  <option value="<?php print $avatar['uuid']?>" selected><?php print htmlspecialchars($avatar['name'])?></option>
-                <?php } else {?>
-                  <option value="<?php print $avatar['uuid']?>" ><?php print htmlspecialchars($avatar['name'])?></option>
+            <?php if ($avatar_select) {?>
+              <select wide="32" name="rgnadmin">
+                <?php foreach($avatars as $avatar) {?>
+                  <?php if ($avatar['name']==$owner_name) {?>
+                    <option value="<?php print $avatar['uuid']?>" selected><?php print htmlspecialchars($avatar['name'])?></option>
+                  <?php } else {?>
+                    <option value="<?php print $avatar['uuid']?>" ><?php print htmlspecialchars($avatar['name'])?></option>
+                  <?php }?>
                 <?php }?>
-              <?php }?>
-            </select>&nbsp;&nbsp;
+              </select>&nbsp;&nbsp;
+            <?php } else {?>
+              <input type="text" name="rgnadmin"  size="15" value="<?php print $owner_name?>"  style="height:20">
+            <?php }?>
 
             <!-- <?php print $voice_mode?>&nbsp;&nbsp; -->
             <select wide="32" name="voice_mode">

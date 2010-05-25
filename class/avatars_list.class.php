@@ -94,7 +94,7 @@ class  AvatarsList
 
 	function  execute()
 	{
-		$this->number    = opensim_get_avatar_num();
+		$this->number    = opensim_get_avatars_num();
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
 		if ($this->sitemax==0) $this->sitemax = 1;
