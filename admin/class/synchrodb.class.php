@@ -64,11 +64,11 @@ class  SynchroDataBase
 					return false;
 				}
 
-				//opensim_supply_passwordSalt();
-				//opensim_succession_data(OPENSIM_HMREGION);
-				//opensim_recreate_presence();
-				//$profs = opensim_get_avatars_profiles();
-				//if ($profs!=null) mdlopensim_set_profiles($profs, false);		// not over write
+				opensim_supply_passwordSalt();
+				opensim_succession_data(OPENSIM_HMREGION);
+				opensim_recreate_presence();
+				$profs = opensim_get_avatars_profiles_from_users();
+				if ($profs!=null) mdlopensim_set_profiles($profs, false);		// not over write
 
 				$this->synchronized = $this->synchroDB();
 			}
@@ -91,19 +91,22 @@ class  SynchroDataBase
 			$mdlos_uuid = $user->uuid;
 			$mdlos_users[$mdlos_uuid]['id'] 	   = $user->id;
 			$mdlos_users[$mdlos_uuid]['UUID'] 	   = $user->uuid;
-			$mdlos_users[$mdlos_uuid]['user_id']   = $user->user_id;
+			$mdlos_users[$mdlos_uuid]['uid']	   = $user->user_id;
 			$mdlos_users[$mdlos_uuid]['firstname'] = $user->firstname;
 			$mdlos_users[$mdlos_uuid]['lastname']  = $user->lastname;
 			$mdlos_users[$mdlos_uuid]['hmregion']  = $user->hmregion;
 			$mdlos_users[$mdlos_uuid]['state']     = $user->state;
-			$mdlos_users[$mdlos_uuid]['tim']  	   = $user->time;
+			$mdlos_users[$mdlos_uuid]['time']  	   = $user->time;
 		}
 
 		// OpenSimにデータがある場合は，Mdlopensim のデータを OpenSimにあわせる．
 		foreach ($opsim_users as $opsim_user) {
-			$opsim_user['user_id'] = "";
-			$opsim_user['state']   = "";
+			$opsim_user['uid']   = 0;
+			$opsim_user['time']  = time();
+			$opsim_user['state'] = AVATAR_STATE_ACTIVE;
+
 			if (array_key_exists($opsim_user['UUID'], $mdlos_users)) {
+				$opsim_user['id'] = $mdlos_users[$opsim_user['UUID']]['id'];
 				mdlopensim_update_usertable($opsim_user);
 			}
 			else {
@@ -112,15 +115,13 @@ class  SynchroDataBase
 		}
 
 		// OpenSimに対応データが無い場合はデータを消す．
-/*
 		foreach ($mdlos_users as $mdlos_user) {
 			$moodle_uuid = $mdlos_user['UUID'];
-			//if (!array_key_exists($moodle_uuid, $opsim_users)) {
+			if (!array_key_exists($moodle_uuid, $opsim_users)) {
 				$mdlos_user['state'] = AVATAR_STATE_INACTIVE;
 				mdlopensim_delete_usertable($mdlos_user);
-			//}
+			}
 		}
-*/
 
 		return true;
 	}

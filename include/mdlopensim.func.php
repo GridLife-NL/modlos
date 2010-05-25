@@ -89,33 +89,34 @@ function  mdlopensim_delete_banneddb($uuid)
 //
 // usertable DB
 //
-// called by synchrodb.class.php : UUID, firstname, lastname, hmregion, created    are setted in user[]
-// called by create.class.php    : UUID, firstname, lastname, hmregion, state, uid   are setted in user[]
+//	UUID, firstname, lastname, uid, state, time, hmregion are setted in $user[]
+//		hmregion is UUID or name of region
 //
 function  mdlopensim_insert_usertable($user)
 {
-	if (array_key_exists('firstname', $user))     $firstname = $user['firstname'];
-	else if (array_key_exists('username', $user)) $firstname = $user['username'];
-	else return false;
+	if (!isGUID($user['UUID'])) return false;
 
 	$insobj->uuid 	   = $user['UUID'];
-	$insobj->firstname = $firstname;
+	$insobj->firstname = $user['firstname'];
 	$insobj->lastname  = $user['lastname'];
 
-	if ($user['uid']!="") 	  $insobj->user_id = $user['uid'];
-	else                  	  $insobj->user_id = 0;
+	if ($user['uid']!="") 	$insobj->user_id = $user['uid'];
+	else                  	$insobj->user_id = 0;
 
-	if ($user['state']!="")   $insobj->state = $user['state'];
-	else					  $insobj->state = '1';
+	if ($user['state']!="")	$insobj->state = $user['state'];
+	else				 	$insobj->state = AVATAR_STATE_ACTIVE;
 
-	if ($user['created']!="") $insobj->time = $user['created'];
-	else 					  $insobj->time = time();
+	if ($user['time']!="") 	$insobj->time = $user['time'];
+	else 					$insobj->time = time();
 
-	$regionName = opensim_get_region_name_by_id($user['hmregion']);
-	if ($regionName!="")              $insobj->hmregion = $regionName;
-	else if ($user['hmregion']!="")   $insobj->hmregion = $user['hmregion'];
-	else if ($user['homeRegion']!="") $insobj->hmregion = $user['homeRegion'];
-	else                              $insobj->hmregion = "";
+	if (isGUID($user['hmregion'])) {
+		$regionName = opensim_get_region_name($user['hmregion']);
+		if ($regionName!="")$insobj->hmregion = $regionName;
+		else 				$insobj->hmregion = $user['hmregion'];
+	}
+	else {
+		$insobj->hmregion = $user['hmregion'];
+	}
 
 	$ret = insert_record('mdlos_users', $insobj);
 
@@ -125,34 +126,35 @@ function  mdlopensim_insert_usertable($user)
 
 
 
+//oooooooooooooooooooooooooooooooo
 //
 // update (Moodle's)uid, hmregion, state, time of users (Moodle DB).
 //
 function  mdlopensim_update_usertable($user)
 {
-	if ($user['id']=="" && $user['UUID']=="") return false;
+	if ($user['id']=="" && !isGUID($user['UUID'])) return false;
 
-	if ($user['id']=="") {
-		$updobj = get_record('mdlos_users', 'uuid', $user['UUID']);		
-	}
-	else {
+	if ($user['id']!="") {
 		$updobj->id = $user['id'];
 	}
-
-	if ($user['user_id']!="") $updobj->user_id = $user['user_id'];
-	if ($user['state']!="")   $updobj->state   = $user['state'];
-
-	if ($user['hmregion']!="") {
-		$regionName = opensim_get_region_name_by_id($user['hmregion']);
-		if ($regionName!="") $updobj->hmregion = $regionName;
-		else $updobj->hmregion = $user['hmregion'];
-	}
-	else if ($user['homeRegion']!="") {
-		$insobj->hmregion = $user['homeRegion'];
+	else {
+		$updobj = get_record('mdlos_users', 'uuid', $user['UUID']);		
 	}
 
-	if ($user['created']!="")  $updobj->time = $user['created'];
-	else 					   $updobj->time = time();
+	if ($user['uid']!="") 	$updobj->user_id = $user['uid'];
+	if ($user['state']!="")	$updobj->state   = $user['state'];
+
+	if ($user['time']!="")	$updobj->time = $user['time'];
+	else 					$updobj->time = time();
+
+	if (isGuid($user['hmregion'])) {
+		$regionName = opensim_get_region_name($user['hmregion']);
+		if ($regionName!="")$updobj->hmregion = $regionName;
+		else 				$updobj->hmregion = $user['hmregion'];
+	}
+	else if ($user['hmregion']!="") {
+		$insobj->hmregion = $user['hmregion'];
+	}
 
 	$ret = update_record('mdlos_users', $updobj);
 
@@ -165,10 +167,16 @@ function  mdlopensim_update_usertable($user)
 
 function  mdlopensim_delete_usertable($user)
 {
-	if (!isGUID($user['UUID'])) return false;
-	if ($user['state']==AVATAR_STATE_ACTIVE) return false;		// active
+	if ($user['id']=="" && $user['UUID']=="") return false;
+	if ($user['state']==AVATAR_STATE_ACTIVE)  return false;		// active
 
-	$ret = delete_records('mdlos_users', 'uuid', $user['UUID']);
+	if ($user['id']!="") {
+		$ret = delete_records('mdlos_users',   'id', $user['id']);
+	}
+	else {
+		$ret = delete_records('mdlos_users', 'uuid', $user['UUID']);
+	}
+
 	if (!$ret) return false;
 	return true;
 }

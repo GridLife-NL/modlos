@@ -257,7 +257,7 @@ $string['mdlos_lastnames'] 			= 'ラストネーム管理';
 $string['mdlos_synchro_tab'] 		= 'DB 同期';
 $string['mdlos_synchro_db'] 		= 'データベース同期';
 $string['mdlos_synchro_submit'] 	= 'データベース同期の実行';
-$string['mdlos_synchro_contents'] 	= 'OpenSimデータベースと Mdlopensimデータベースとの同期を取りますか？';
+$string['mdlos_synchro_contents'] 	= 'OpenSimデータベースと Mdlopensimデータベースとの同期を取ります';
 $string['mdlos_synchronized'] 		= 'OpenSimデータベースとの同期完了！';
 
 $string['mdlos_return_tab'] 		= 'コースに戻る';
