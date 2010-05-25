@@ -85,11 +85,12 @@ function  mdlopensim_delete_banneddb($uuid)
 
 
 
+//oooooooooooooooooooooooooooooooo
 //
 // usertable DB
 //
-// called by synchro.class.php : UUID, username,  lastname, homeRegion, created    are setted in user[]
-// called by create.class.php  : UUID, firstname, lastname, hmregion, state, uid   are setted in user[]
+// called by synchrodb.class.php : UUID, firstname, lastname, hmregion, created    are setted in user[]
+// called by create.class.php    : UUID, firstname, lastname, hmregion, state, uid   are setted in user[]
 //
 function  mdlopensim_insert_usertable($user)
 {
@@ -116,14 +117,9 @@ function  mdlopensim_insert_usertable($user)
 	else if ($user['homeRegion']!="") $insobj->hmregion = $user['homeRegion'];
 	else                              $insobj->hmregion = "";
 
-print_r($insobj);
 	$ret = insert_record('mdlos_users', $insobj);
-print("=======> users   INSERT $insobj->uuid <br />");
 
-	if (!$ret) {
-print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF $ret <br />");
-		return false;
-	}
+	if (!$ret) return false;
 	return true;
 }
 
@@ -134,22 +130,36 @@ print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF $ret <br />");
 //
 function  mdlopensim_update_usertable($user)
 {
-	if ($user['id']!="") 	 $updobj->id      = $user['uid'];
-	if ($user['uid']!="") 	 $updobj->user_id = $user['uid'];
-	if ($user['state']!="")  $updobj->state   = $user['state'];
+	if ($user['id']=="" && $user['UUID']=="") return false;
 
-	$regionName = opensim_get_region_name_by_id($user['hmregion']);
-	if ($regionName!="")            $updobj->hmregion = $regionName;
-	else if ($user['hmregion']!="") $updobj->hmregion = $user['hmregion'];
-	else                            $updobj->hmregion = "";
+	if ($user['id']=="") {
+		$updobj = get_record('mdlos_users', 'uuid', $user['UUID']);		
+	}
+	else {
+		$updobj->id = $user['id'];
+	}
+
+	if ($user['user_id']!="") $updobj->user_id = $user['user_id'];
+	if ($user['state']!="")   $updobj->state   = $user['state'];
+
+	if ($user['hmregion']!="") {
+		$regionName = opensim_get_region_name_by_id($user['hmregion']);
+		if ($regionName!="") $updobj->hmregion = $regionName;
+		else $updobj->hmregion = $user['hmregion'];
+	}
+	else if ($user['homeRegion']!="") {
+		$insobj->hmregion = $user['homeRegion'];
+	}
 
 	if ($user['created']!="")  $updobj->time = $user['created'];
 	else 					   $updobj->time = time();
 
-	$ret = update_record('mdlos_users', $insobj);
+	$ret = update_record('mdlos_users', $updobj);
+
 	if (!$ret) return false;
 	return true;
 }
+	
 
 
 

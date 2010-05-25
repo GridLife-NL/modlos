@@ -85,22 +85,24 @@ class  SynchroDataBase
 		$opsim_users = opensim_get_avatars_infos();
 
 		// Mdlopensim DB を配列に変換
-		$db_users = get_records('block_mdlos_users');
+		$db_users = get_records('mdlos_users');
 		$mdlos_users = array();
 		foreach ($db_users as $user) {
 			$mdlos_uuid = $user->uuid;
+			$mdlos_users[$mdlos_uuid]['id'] 	   = $user->id;
 			$mdlos_users[$mdlos_uuid]['UUID'] 	   = $user->uuid;
-			$mdlos_users[$mdlos_uuid]['uid']  	   = $user->uid;
+			$mdlos_users[$mdlos_uuid]['user_id']   = $user->user_id;
 			$mdlos_users[$mdlos_uuid]['firstname'] = $user->firstname;
 			$mdlos_users[$mdlos_uuid]['lastname']  = $user->lastname;
+			$mdlos_users[$mdlos_uuid]['hmregion']  = $user->hmregion;
 			$mdlos_users[$mdlos_uuid]['state']     = $user->state;
 			$mdlos_users[$mdlos_uuid]['tim']  	   = $user->time;
 		}
 
 		// OpenSimにデータがある場合は，Mdlopensim のデータを OpenSimにあわせる．
 		foreach ($opsim_users as $opsim_user) {
-			$opsim_user['uid']   = "";
-			$opsim_user['state'] = "";
+			$opsim_user['user_id'] = "";
+			$opsim_user['state']   = "";
 			if (array_key_exists($opsim_user['UUID'], $mdlos_users)) {
 				mdlopensim_update_usertable($opsim_user);
 			}
@@ -113,10 +115,10 @@ class  SynchroDataBase
 /*
 		foreach ($mdlos_users as $mdlos_user) {
 			$moodle_uuid = $mdlos_user['UUID'];
-			if (!array_key_exists($moodle_uuid, $opsim_users)) {
+			//if (!array_key_exists($moodle_uuid, $opsim_users)) {
 				$mdlos_user['state'] = AVATAR_STATE_INACTIVE;
 				mdlopensim_delete_usertable($mdlos_user);
-			}
+			//}
 		}
 */
 
