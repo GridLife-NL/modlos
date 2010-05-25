@@ -118,7 +118,7 @@ function  mdlopensim_insert_usertable($user)
 
 print_r($insobj);
 	$ret = insert_record('mdlos_users', $insobj);
-print("=======> ".CMS_DB_PREFIX.'users'."   INSERT $insobj->uuid <br />");
+print("=======> users   INSERT $insobj->uuid <br />");
 
 	if (!$ret) {
 print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF $ret <br />");
