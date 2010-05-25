@@ -5,13 +5,13 @@
 <?php if (!$this->synchronized) {?>
   <form action="<?php $this->action_url?>" method="POST">
     <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
-
       <tr>
-        <td width="50"  class="head"><? php $content?></td>
+        <td width="50" class="head"><?php print $content?></td>
       </tr>
- 
     </table>
-    <br />
+
+    <br /><br /><br />
+
     <input type="hidden" name="sesskey" value="<?php print sesskey() ?>" />
     <input type="hidden" name="course"  value="<?php print $this->courseid ?>" />
     <input type="hidden" name="quest"   value="yes" />
@@ -21,12 +21,11 @@
   </form>
 
 <?php } else {?>
-  <h2>sss<font color=#2222FF><?php print $synchronized_msg ?></font></h2>
+  <h2><font color=#2222FF><?php print $synchronized_msg ?></font></h2>
 <?php }?>
 
-<br />
-<br />
-<br />
+<br /><br /><br />
+
 <hr />
 <?php if ($this->hasError) {?>
   <ul>

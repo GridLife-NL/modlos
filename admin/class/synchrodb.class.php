@@ -110,6 +110,7 @@ class  SynchroDataBase
 		}
 
 		// OpenSimに対応データが無い場合はデータを消す．
+/*
 		foreach ($mdlos_users as $mdlos_user) {
 			$moodle_uuid = $mdlos_user['UUID'];
 			if (!array_key_exists($moodle_uuid, $opsim_users)) {
@@ -117,6 +118,7 @@ class  SynchroDataBase
 				mdlopensim_delete_usertable($mdlos_user);
 			}
 		}
+*/
 
 		return true;
 	}
@@ -132,8 +134,9 @@ class  SynchroDataBase
         $grid_name  	  = $CFG->mdlopnsm_grid_name;
 		$synchro_db_ttl   = get_string("mdlos_synchro_db", 		 "block_mdlopensim");
 		$synchronized_msg = get_string("mdlos_synchronized", 	 "block_mdlopensim");
-		$content		  = get_string("mdlos_synchro_contents'","block_mdlopensim");
 		$synchro_submit	  = get_string("mdlos_synchro_submit", 	 "block_mdlopensim");
+		$content		  = get_string("mdlos_synchro_contents", "block_mdlopensim");
+		$content		  = "<center>".$content."</center>";
 
 		include(CMS_MODULE_PATH."/admin/html/synchro.html");
 	}

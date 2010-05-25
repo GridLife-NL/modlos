@@ -260,7 +260,7 @@ $string['mdlos_lastnames'] 			= 'Lastnames Management';
 $string['mdlos_synchro_tab'] 		= 'Synchro DB';
 $string['mdlos_synchro_db'] 		= 'Synchronization of Data Base';
 $string['mdlos_synchro_submit'] 	= 'Synchro DB';
-$string['mdlos_synchro_contents'] 	= 'Synchrnsize DB?';
+$string['mdlos_synchro_contents'] 	= 'Synchronize with OpenSim DB?';
 $string['mdlos_synchronized'] 		= 'Synchronized OpenSim DB!!';
 
 $string['mdlos_return_tab'] 		= 'Return to Course';

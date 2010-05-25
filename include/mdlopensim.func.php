@@ -41,13 +41,13 @@ require_once(CMS_MODULE_PATH."/include/opensim.func.php");
 // Active/Inactive Avatar
 function  mdlopensim_activate_avatar($uuid)
 {
-	$ban = get_record(CMS_DB_PREFIX.'banned', 'uuid', $uuid);
+	$ban = get_record('mdlos_banned', 'uuid', $uuid);
 	if (!$ban) return false;
 
 	$ret = opensim_set_password($uuid, $ban->agentinfo);
 	if (!$ret) return false;
 
-	$ret = delete_records(CMS_DB_PREFIX.'banned', 'uuid', $uuid);
+	$ret = delete_records('mdlos_banned', 'uuid', $uuid);
 	if (!$ret) return false;
 	return true;
 }
@@ -64,10 +64,10 @@ function  mdlopensim_inactivate_avatar($uuid)
 	$insobj->uuid 	   = $uuid;
 	$insobj->agentinfo = $passwdhash;
 	$insobj->time 	   = time();
-	$ret = insert_record(CMS_DB_PREFIX.'banned', $insobj);
+	$ret = insert_record('mdlos_banned', $insobj);
 	if (!$ret) return false;
 
-	$ret = opensim_set_password($uuid, "invalid password");
+	$ret = opensim_set_password($uuid, "invalid_password");
 	if (!$ret) mdlopensim_delete_banneddb($uuid);
 
 	return $ret;
@@ -77,7 +77,7 @@ function  mdlopensim_inactivate_avatar($uuid)
 
 function  mdlopensim_delete_banneddb($uuid)
 {
-	$ret = delete_records(CMS_DB_PREFIX.'banned', 'uuid', $uuid);
+	$ret = delete_records('mdlos_banned', 'uuid', $uuid);
 	if (!$ret) return false;
 	return true;
 }
@@ -101,8 +101,8 @@ function  mdlopensim_insert_usertable($user)
 	$insobj->firstname = $firstname;
 	$insobj->lastname  = $user['lastname'];
 
-	if ($user['uid']!="") 	  $insobj->uid = $user['uid'];
-	else                  	  $insobj->uid = 0;
+	if ($user['uid']!="") 	  $insobj->user_id = $user['uid'];
+	else                  	  $insobj->user_id = 0;
 
 	if ($user['state']!="")   $insobj->state = $user['state'];
 	else					  $insobj->state = '1';
@@ -116,11 +116,12 @@ function  mdlopensim_insert_usertable($user)
 	else if ($user['homeRegion']!="") $insobj->hmregion = $user['homeRegion'];
 	else                              $insobj->hmregion = "";
 
-	$ret = insert_record(CMS_DB_PREFIX.'users', $insobj);
+print_r($insobj);
+	$ret = insert_record('mdlos_users', $insobj);
 print("=======> ".CMS_DB_PREFIX.'users'."   INSERT $insobj->uuid <br />");
 
 	if (!$ret) {
-print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF<br />");
+print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF $ret <br />");
 		return false;
 	}
 	return true;
@@ -133,8 +134,9 @@ print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF<br />");
 //
 function  mdlopensim_update_usertable($user)
 {
-	if ($user['uid']!="") 	 $updobj->uid   = $user['uid'];
-	if ($user['state']!="")  $updobj->state = $user['state'];
+	if ($user['id']!="") 	 $updobj->id      = $user['uid'];
+	if ($user['uid']!="") 	 $updobj->user_id = $user['uid'];
+	if ($user['state']!="")  $updobj->state   = $user['state'];
 
 	$regionName = opensim_get_region_name_by_id($user['hmregion']);
 	if ($regionName!="")            $updobj->hmregion = $regionName;
@@ -144,7 +146,7 @@ function  mdlopensim_update_usertable($user)
 	if ($user['created']!="")  $updobj->time = $user['created'];
 	else 					   $updobj->time = time();
 
-	$ret = update_record(CMS_DB_PREFIX.'users', $insobj);
+	$ret = update_record('mdlos_users', $insobj);
 	if (!$ret) return false;
 	return true;
 }
@@ -156,7 +158,7 @@ function  mdlopensim_delete_usertable($user)
 	if (!isGUID($user['UUID'])) return false;
 	if ($user['state']==AVATAR_STATE_ACTIVE) return false;		// active
 
-	$ret = delete_records(CMS_DB_PREFIX.'users', 'uuid', $user['UUID']);
+	$ret = delete_records('mdlos_users', 'uuid', $user['UUID']);
 	if (!$ret) return false;
 	return true;
 }

@@ -18,60 +18,71 @@ $GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
 
 
 // for OpenSim DB
-define('OPENSIM_DB_HOST',  $CFG->mdlopnsm_sql_server_name);
-define('OPENSIM_DB_NAME',  $CFG->mdlopnsm_sql_db_name);
-define('OPENSIM_DB_USER',  $CFG->mdlopnsm_sql_db_user);
-define('OPENSIM_DB_PASS',  $CFG->mdlopnsm_sql_db_pass);
-define('OPENSIM_HMREGION', $CFG->mdlopnsm_home_region);
+define('OPENSIM_DB_HOST',  			$CFG->mdlopnsm_sql_server_name);
+define('OPENSIM_DB_NAME',  			$CFG->mdlopnsm_sql_db_name);
+define('OPENSIM_DB_USER',  			$CFG->mdlopnsm_sql_db_user);
+define('OPENSIM_DB_PASS',  			$CFG->mdlopnsm_sql_db_pass);
+define('OPENSIM_HMREGION', 			$CFG->mdlopnsm_home_region);
 
 
 // for CMS/LMS DB
-define('CMS_DB_HOST',      $CFG->dbhost);
-define('CMS_DB_NAME',      $CFG->dbname);
-define('CMS_DB_USER',      $CFG->dbuser);
-define('CMS_DB_PASS',      $CFG->dbpass);
-define('CMS_DB_PREFIX',    $CFG->prefix.'block_mdlos_');
+define('CMS_DB_HOST',      			$CFG->dbhost);
+define('CMS_DB_NAME',      			$CFG->dbname);
+define('CMS_DB_USER',      			$CFG->dbuser);
+define('CMS_DB_PASS',      			$CFG->dbpass);
+
+//define('CMS_DB_PREFIX',    		$CFG->prefix.'mdlos_');
+define('MDL_DB_PREFIX',    			'mdlos_');
 
 
 // XML Group.  see also xmlgroups_config.php 
-define('XMLGROUP_ACTIVE_TBL',       CMS_DB_PREFIX.'grp_active');
-define('XMLGROUP_LIST_TBL',         CMS_DB_PREFIX.'grp_list');
-define('XMLGROUP_INVITE_TBL',       CMS_DB_PREFIX.'grp_invite');
-define('XMLGROUP_MEMBERSHIP_TBL',   CMS_DB_PREFIX.'grp_mbrship');
-define('XMLGROUP_NOTICE_TBL',       CMS_DB_PREFIX.'grp_notice');
-define('XMLGROUP_ROLE_MEMBER_TBL',  CMS_DB_PREFIX.'grp_rolembrship');
-define('XMLGROUP_ROLE_TBL',         CMS_DB_PREFIX.'grp_role');
+define('MDLGROUP_ACTIVE_TBL',       MDL_DB_PREFIX.'group_active');
+define('MDLGROUP_LIST_TBL',         MDL_DB_PREFIX.'group_list');
+define('MDLGROUP_INVITE_TBL',       MDL_DB_PREFIX.'group_invite');
+define('MDLGROUP_MEMBERSHIP_TBL',   MDL_DB_PREFIX.'group_membership');
+define('MDLGROUP_NOTICE_TBL',       MDL_DB_PREFIX.'group_notice');
+define('MDLGROUP_ROLE_MEMBER_TBL',  MDL_DB_PREFIX.'group_rolemembership');
+define('MDLGROUP_ROLE_TBL',         MDL_DB_PREFIX.'group_role');
 
-define('XMLGROUP_RKEY',    $CFG->mdlopnsm_groupdb_read_key);
-define('XMLGROUP_WKEY',	   $CFG->mdlopnsm_groupdb_write_key);
+define('XMLGROUP_ACTIVE_TBL',       $CFG->prefix.MDLGROUP_ACTIVE_TBL);
+define('XMLGROUP_LIST_TBL',         $CFG->prefix.MDLGROUP_LIST_TBL);
+define('XMLGROUP_INVITE_TBL',       $CFG->prefix.MDLGROUP_INVITE_TBL);
+define('XMLGROUP_MEMBERSHIP_TBL',   $CFG->prefix.MDLGROUP_MEMBERSHIP_TBL);
+define('XMLGROUP_NOTICE_TBL',       $CFG->prefix.MDLGROUP_NOTICE_TBL);
+define('XMLGROUP_ROLE_MEMBER_TBL',  $CFG->prefix.MDLGROUP_ROLE_MEMBER_TBL);
+define('XMLGROUP_ROLE_TBL',         $CFG->prefix.MDLGROUP_ROLE_TBL);
+
+define('XMLGROUP_RKEY',    			$CFG->mdlopnsm_groupdb_read_key);
+define('XMLGROUP_WKEY',	   			$CFG->mdlopnsm_groupdb_write_key);
 
 
 // Currency DB for helpers.php
-define('CURRENCY_DB_HOST', CMS_DB_HOST);
-define('CURRENCY_DB_NAME', CMS_DB_NAME);
-define('CURRENCY_DB_USER', CMS_DB_USER);
-define('CURRENCY_DB_PASS', CMS_DB_PASS);
-define('CURRENCY_BANKER',  $CFG->mdlopnsm_banker_avatar);
+define('CURRENCY_DB_HOST', 			CMS_DB_HOST);
+define('CURRENCY_DB_NAME', 			CMS_DB_NAME);
+define('CURRENCY_DB_USER', 			CMS_DB_USER);
+define('CURRENCY_DB_PASS', 			CMS_DB_PASS);
+define('CURRENCY_BANKER',  			$CFG->mdlopnsm_banker_avatar);
 
-define('CURRENCY_MONEY_TBL',       CMS_DB_PREFIX.'ecnmy_money');
-define('CURRENCY_TRANSACTION_TBL', CMS_DB_PREFIX.'ecnmy_trnsctn');
+define('CURRENCY_MONEY_TBL',		MDL_DB_PREFIX.'economy_money');
+define('CURRENCY_MONEY_TBL',		MDL_DB_PREFIX.'economy_money');
+define('CURRENCY_TRANSACTION_TBL',	MDL_DB_PREFIX.'economy_transactions');
 
 
 // Offline Message
-define('OFFLINE_DB_HOST',  CMS_DB_HOST);
-define('OFFLINE_DB_NAME',  CMS_DB_NAME);
-define('OFFLINE_DB_USER',  CMS_DB_USER);
-define('OFFLINE_DB_PASS',  CMS_DB_PASS);
+define('OFFLINE_DB_HOST',  			CMS_DB_HOST);
+define('OFFLINE_DB_NAME',  			CMS_DB_NAME);
+define('OFFLINE_DB_USER',  			CMS_DB_USER);
+define('OFFLINE_DB_PASS',  			CMS_DB_PASS);
 
-define('OFFLINE_MESSAGE_TBL', CMS_DB_PREFIX.'offline_message');
+define('OFFLINE_MESSAGE_TBL', 		CMS_DB_PREFIX.'offline_message');
 
 
 // Avatar Profile. see also profile_config.php 
-define('PROFILE_CLASSIFIEDS_TBL',   CMS_DB_PREFIX.'prof_classifieds');
-define('PROFILE_USERNOTES_TBL',  	CMS_DB_PREFIX.'prof_usernotes');
-define('PROFILE_USERPICKS_TBL',  	CMS_DB_PREFIX.'prof_userpicks');
-define('PROFILE_USERPROFILE_TBL',  	CMS_DB_PREFIX.'prof_userprofile');
-define('PROFILE_USERSETTINGS_TBL',	CMS_DB_PREFIX.'prof_usersetting');
+define('PROFILE_CLASSIFIEDS_TBL',   CMS_DB_PREFIX.'profile_classifieds');
+define('PROFILE_USERNOTES_TBL',  	CMS_DB_PREFIX.'profile_usernotes');
+define('PROFILE_USERPICKS_TBL',  	CMS_DB_PREFIX.'profile_userpicks');
+define('PROFILE_USERPROFILE_TBL',  	CMS_DB_PREFIX.'profile_userprofile');
+define('PROFILE_USERSETTINGS_TBL',	CMS_DB_PREFIX.'profile_usersettings');
 
 
 // for Avatar State
