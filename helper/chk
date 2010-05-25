@@ -1,0 +1,15 @@
+php -l agent.php
+php -l config.php
+php -l currency.php
+php -l helpers.php
+php -l landtool.php
+php -l mute.php
+php -l offline.php
+php -l opensim.mysql.php
+php -l profile.php
+php -l profile_config.php
+php -l sim.php
+php -l world_map.php
+php -l xmlgroups.php
+php -l xmlgroups_config.php
+php -l xmlrpc.php

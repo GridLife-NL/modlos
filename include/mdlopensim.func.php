@@ -176,7 +176,7 @@ function  mdlopensim_delete_groupdb($uuid, $delallgrp=false)
 	if (!$ret) return false;
 
 	if ($delallgrp) {
-		$groupobjs = get_records(XMLGROUP_LIST_TBL, 'founderid', $uuid);
+		$groupobjs = get_records(MDL_XMLGROUP_LIST_TBL, 'founderid', $uuid);
 		if ($groupobjs==null) return false;
 
 		foreach($groupobjs as $groupdata) {
@@ -192,10 +192,10 @@ function  mdlopensim_delete_groupdb($uuid, $delallgrp=false)
 
 function  mdlopensim_delete_groupdb_by_uuid($uuid)
 {
-	delete_records(XMLGROUP_ACTIVE_TBL, 	'agentid', $uuid);
-	delete_records(XMLGROUP_INVITE_TBL, 	'agentid', $uuid);
-	delete_records(XMLGROUP_MEMBERSHIP_TBL, 'agentid', $uuid);
-	delete_records(XMLGROUP_ROLE_MEMBER_TBL,'agentid', $uuid);
+	delete_records(MDL_XMLGROUP_ACTIVE_TBL, 	'agentid', $uuid);
+	delete_records(MDL_XMLGROUP_INVITE_TBL, 	'agentid', $uuid);
+	delete_records(MDL_XMLGROUP_MEMBERSHIP_TBL, 'agentid', $uuid);
+	delete_records(MDL_XMLGROUP_ROLE_MEMBER_TBL,'agentid', $uuid);
 
 	return true;
 }
@@ -204,13 +204,13 @@ function  mdlopensim_delete_groupdb_by_uuid($uuid)
 
 function  mdlopensim_delete_groupdb_by_gpid($gpid)
 {
-	delete_records(XMLGROUP_ACTIVE_TBL, 	'activegroupid', $gpid);
-	delete_records(XMLGROUP_LIST_TBL, 		'groupid', $gpid);
-	delete_records(XMLGROUP_INVITE_TBL, 	'groupid', $gpid);
-	delete_records(XMLGROUP_MEMBERSHIP_TBL,	'groupid', $gpid);
-	delete_records(XMLGROUP_NOTICE_TBL, 	'groupid', $gpid);
-	delete_records(XMLGROUP_ROLE_TBL, 		'groupid', $gpid);
-	delete_records(XMLGROUP_ROLE_MEMBER_TBL,'groupid', $gpid);
+	delete_records(MDL_XMLGROUP_ACTIVE_TBL, 	'activegroupid', $gpid);
+	delete_records(MDL_XMLGROUP_LIST_TBL, 		'groupid', $gpid);
+	delete_records(MDL_XMLGROUP_INVITE_TBL, 	'groupid', $gpid);
+	delete_records(MDL_XMLGROUP_MEMBERSHIP_TBL,	'groupid', $gpid);
+	delete_records(MDL_XMLGROUP_NOTICE_TBL, 	'groupid', $gpid);
+	delete_records(MDL_XMLGROUP_ROLE_TBL, 		'groupid', $gpid);
+	delete_records(MDL_XMLGROUP_ROLE_MEMBER_TBL,'groupid', $gpid);
 
 	return true;
 }
@@ -227,7 +227,7 @@ function  mdlopensim_set_profiles($profs, $ovwrite=true)
 	foreach($profs as $prof) {
 		if ($prof['UUID']!="") {
 			$insert = false;
-			$prfobj = get_record(PROFILE_USERPROFILE_TBL, 'useruuid', $prof['UUID']);
+			$prfobj = get_record(MDL_PROFILE_USERPROFILE_TBL, 'useruuid', $prof['UUID']);
 			if (!$prfobj) $insert = true;
 
 			$prfobj->useruuid = $prof['UUID'];
@@ -247,10 +247,10 @@ function  mdlopensim_set_profiles($profs, $ovwrite=true)
 			if ($prof['FirstImage'])		$prfobj->profilefirstimag 	  = $prof['FirstImage'];
 	
 			if ($insert) {
-				$rslt = insert_record(PROFILE_USERPROFILE_TBL, $prfobj);
+				$rslt = insert_record(MDL_PROFILE_USERPROFILE_TBL, $prfobj);
 			}
 			else if ($ovwrite) {
-				$rslt = update_record(PROFILE_USERPROFILE_TBL, $prfobj);
+				$rslt = update_record(MDL_PROFILE_USERPROFILE_TBL, $prfobj);
 			}
 		}
 	}
@@ -259,7 +259,7 @@ function  mdlopensim_set_profiles($profs, $ovwrite=true)
 	foreach($profs as $prof) {
 		if ($prof['UUID']!="") {
 			$insert = false;
-			$setobj = get_record(PROFILE_USERSETTINGS_TBL, 'useruuid', $prof['UUID']);
+			$setobj = get_record(MDL_PROFILE_USERSETTINGS_TBL, 'useruuid', $prof['UUID']);
 			if (!$setobj) $insert = true;
 
 			$setobj->useruuid = $prof['UUID'];
@@ -269,10 +269,10 @@ function  mdlopensim_set_profiles($profs, $ovwrite=true)
 			if ($prof['Email']!="")		$setobj->email    	= $prof['Email'];
 
 			if ($insert) {
-				$rslt = insert_record(PROFILE_USERSETTINGS_TBL, $setobj);
+				$rslt = insert_record(MDL_PROFILE_USERSETTINGS_TBL, $setobj);
 			}
 			else if ($ovwrite) {
-				$rslt = update_record(PROFILE_USERSETTINGS_TBL, $setobj);
+				$rslt = update_record(MDL_PROFILE_USERSETTINGS_TBL, $setobj);
 			}
 		}
 	}
@@ -285,11 +285,11 @@ function  mdlopensim_set_profiles($profs, $ovwrite=true)
 
 function  mdlopensim_delete_profiles($uuid)
 {
-	delete_records(PROFILE_USERPROFILE_TBL,	'useruuid',    $uuid);
-	delete_records(PROFILE_USERSETTINGS_TBL,'useruuid',    $uuid);
-	delete_records(PROFILE_USERNOTES_TBL, 	'useruuid',    $uuid);
-	delete_records(PROFILE_USERPICKS_TBL, 	'creatoruuid', $uuid);
-	delete_records(PROFILE_CLASSIFIEDS_TBL, 'creatoruuid', $uuid);
+	delete_records(MDL_PROFILE_USERPROFILE_TBL,	'useruuid',    $uuid);
+	delete_records(MDL_PROFILE_USERSETTINGS_TBL,'useruuid',    $uuid);
+	delete_records(MDL_PROFILE_USERNOTES_TBL, 	'useruuid',    $uuid);
+	delete_records(MDL_PROFILE_USERPICKS_TBL, 	'creatoruuid', $uuid);
+	delete_records(MDL_PROFILE_CLASSIFIEDS_TBL, 'creatoruuid', $uuid);
 
     return;
 }
