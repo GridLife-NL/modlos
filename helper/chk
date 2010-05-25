@@ -5,7 +5,7 @@ php -l helpers.php
 php -l landtool.php
 php -l mute.php
 php -l offline.php
-php -l opensim.mysql.php
+php -l mysql.func.php
 php -l profile.php
 php -l profile_config.php
 php -l sim.php
