@@ -35,7 +35,7 @@ class  SynchroDataBase
 			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'));
 		}
 
-		$this->action_url = _OPENSIM_MODULE_URL."/admin/actions/synchrodb.php";
+		$this->action_url = CMS_MODULE_URL."/admin/actions/synchrodb.php";
 	}
 
 

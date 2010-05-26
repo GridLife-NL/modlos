@@ -5,15 +5,12 @@
 //										by Fumi.Iseki
 //
 
-if (!defined('XOOPS_ROOT_PATH')) exit();
-
-require_once _OPENSIM_MODULE_PATH.'/class/AbstructAction.class.php';
-require_once _OPENSIM_MODULE_PATH.'/class/xoopensimLastnamesForm.class.php';
-require_once _OPENSIM_MODULE_PATH.'/include/xoopensim.func.php';
+if (!defined('CMS_MODULE_PATH')) exit();
+require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
 
-class  LastnamesProc
+class  LastNames
 {
 	var $action_url;
 	var $dbhandler;
@@ -28,15 +25,17 @@ class  LastnamesProc
 
 
 
-	function  lastnamesAction($controller) 
+	function  LastNames($controller) 
 	{
-		$this->mActionForm = & new Xoopensim_LastnamesForm();
-		if (!$this->mActionForm->isAdmin) {
-			$controller->executeRedirect(_OPENSIM_MODULE_URL, 2, _AM_XPNSM_ACCESS_FORBIDDEN);
+		require_login($courseid);
+
+		$this->courseid  = $courseid;
+		$this->hasPermit = hasPermit($courseid);
+		if (!$this->hasPermit) {
+			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'));
 		}
 
-		$this->action_url = _OPENSIM_MODULE_URL."/admin/?action=lastnames";
-		$this->lastnames  = $this->mActionForm->lastNames;
+		$this->action_url = CMS_MODULE_URL."/admin/actions/synchrodb.php";
 	}
 
 
@@ -44,24 +43,32 @@ class  LastnamesProc
 	function  execute()
 	{
 		// Form	
-		$this->mActionForm->prepare();
-		if (xoops_getenv("REQUEST_METHOD")=="POST") {
-			$this->mActionForm->fetch();
-			$this->mActionForm->validate();
-		}
-		$this->mActionForm->load();
+		if (data_submitted()) {
+			if (!$this->hasPermit) {
+				$this->hasError = true;
+				$this->errorMsg = get_string('mdlos_access_forbidden', 'block_mdlopensim');
+				return false;
+			}
 
-		if (xoops_getenv("REQUEST_METHOD")=="POST" and  !$this->mActionForm->hasError()) {
-			$add = $this->mActionForm->get('submit_add');
-			$lft = $this->mActionForm->get('submit_left');
-			$rgt = $this->mActionForm->get('submit_right');
-			$del = $this->mActionForm->get('submit_delete');
+			if (!confirm_sesskey()) {
+				$this->hasError = true;
+				$this->errorMsg = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				return false;
+			}
 
-			$this->select_inactive = $this->mActionForm->get('select_left');
-			$this->select_active   = $this->mActionForm->get('select_right');
-			$this->addname         = $this->mActionForm->get('addname');
+			$quest = optional_param('quest', 'no', PARAM_ALPHA);
 
-			if     ($add!="") $this->action_add();
+
+			$add = optional_param('submit_add',	   '', );
+			$lft = optional_param('submit_left',   '', );
+			$rgt = optional_param('submit_right',  '', );
+			$del = optional_param('submit_delete', '', );
+
+			$this->select_inactive = optional_param('select_left'i, '',);
+			$this->select_active   = optional_param('select_right', '',);
+			$this->addname		   = optional_param('addname',		'',);
+
+			if	   ($add!="") $this->action_add();
 			elseif ($lft!="") $this->action_move_active();
 			elseif ($rgt!="") $this->action_move_inactive();
 			elseif ($del!="") $this->action_delete();
@@ -70,18 +77,17 @@ class  LastnamesProc
 
 
 
-	function  executeView($render) 
+	function  print_page() 
 	{
-		$root = & XCube_Root::getSingleton();
-		$grid_name  = $root->mContext->mModuleConfig['grid_name'];
-		$admin_menu = $root->mContext->mModule->getAdminMenu();
+		global $CFG;
+
+		$this->exexute();
 
 		foreach ($this->lastnames as $lastname=>$state) {
 			if ($state=='1') $this->lastnames_active[]   = $lastname;
 			else 			 $this->lastnames_inactive[] = $lastname;
 		}
 
-		$render->setTemplateName('xoopensim_lastnames.html');
 
 		$render->setAttribute('grid_name', 		$grid_name);
 		$render->setAttribute('admin_menu',		$admin_menu);
@@ -92,6 +98,8 @@ class  LastnamesProc
 		$render->setAttribute('select2_title',	_MD_XPNSM_INACTIVE_LIST);
 		$render->setAttribute('select1', 		$this->lastnames_active);
 		$render->setAttribute('select2', 		$this->lastnames_inactive);
+
+		include(CMS_MODULE_PATH."/admin/html/lastnames.html");
 	}
 
 
