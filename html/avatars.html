@@ -150,13 +150,13 @@
                 <tr>
                   <td width=40 ><b>&nbsp;<?php print $number_ttl?></b></td>
                   <td width=50 >&nbsp;</b></td>
-                  <td width=80 ><b><?php print $edit_ttl?></b></td>
+                  <td width=60 ><b><?php print $edit_ttl?></b></td>
                   <td width=150><b><?php print $firstname_ttl?></b></td>
                   <td width=150><b><?php print $lastname_ttl?></b></td>
-                  <td width=200><b><?php print $lastlogin_ttl?></b></td>
+                  <td width=250><b><?php print $lastlogin_ttl?></b></td>
                   <td width=150><b><?php print $status_ttl?></b></td>
                   <td width=150><b><?php print $crntregion_ttl?></b></td>
-                  <td width=100><b><?php print $owner_ttl?></b></td>
+                  <td width=250><b><?php print $owner_ttl?></b></td>
                   <td>&nbsp;</td>
                 </tr>
 
@@ -176,7 +176,7 @@
                         <img src="<?php print $module_url?>/images/icons/icon_user.gif">
                       </a>
                     </td>
-                    <td width=80>
+                    <td width=60>
                     <?php if ($dat['editable']==AVATAR_EDITABLE) {?>
                       <a href="<?php print $this->edit_url.$course. '&amp;uuid='.$dat['UUID']?>" ><font color=#cc1010><b><u><?php print $editable_ttl?></u></b></font></a>
                     <?php } elseif ($dat['editable']==AVATAR_OWNER_EDITABLE and $dat['state']==AVATAR_STATE_ACTIVE) {?>
@@ -214,7 +214,7 @@
                         <?php }?>
                       </a>
                     </td>
-                    <td width=100>
+                    <td width=250>
                       <?php if ($userinfo and $dat['uname']!=' - ') { ?>
                         <a href="<?php print $moodle_url.'/user/view.php?id='.$dat['uid'].$course?>" target="_blank"><b><u><?php print $dat['uname']?></u></b></a>
                       <?php } else {?>
