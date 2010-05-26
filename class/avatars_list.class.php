@@ -58,7 +58,7 @@ class  AvatarsList
 		$sql_order = "ORDER BY created ASC";
 
 		// firstname & lastname
-		$this->firstname = optional_param('firsrname', '', PARAM_TEXT);
+		$this->firstname = optional_param('firstname', '', PARAM_TEXT);
 		$this->lastname  = optional_param('lastname',  '', PARAM_TEXT);
 		if (!isAlphabetNumeric($this->firstname)) $this->firstname = "";
 		if (!isAlphabetNumeric($this->lastname))  $this->lastname  = "";
@@ -90,9 +90,9 @@ class  AvatarsList
 
 		$this->sql_countcnd  = " WHERE $sql_validuser $sql_firstname $sql_lastname";
 		$this->sql_condition = " WHERE $sql_validuser $sql_firstname $sql_lastname $sql_order $sql_limit";
-		$this->action_url    = CMS_MODULE_URL."/?action=avatars";
-		$this->edit_url      = CMS_MODULE_URL."/?action=edit";
-		$this->owner_url     = CMS_MODULE_URL."/?action=owner";
+		$this->action_url    = CMS_MODULE_URL."/actions/avatars_list.php";
+		$this->edit_url      = CMS_MODULE_URL."/actions/edit_avatar.php";
+		$this->owner_url     = CMS_MODULE_URL."/actions/owner_avatar.php";
 	}
 
 
@@ -156,7 +156,6 @@ class  AvatarsList
 			$this->db_data[$colum]['state']		= AVATAR_STATE_NOTSYNC;
 			$this->db_data[$colum]['editable']	= AVATAR_NOT_EDITABLE;
 
-
 			$created = $this->db_data[$colum]['created'];
 			if ($created==null or $created=="" or $created=='0') {
 				$this->db_data[$colum]['born'] = ' - ';
@@ -183,9 +182,10 @@ class  AvatarsList
 			}
 
 			// serach Moodle DB
-			$avatadata = get_record('mdlos_users', 'uuid', $UUID);
-			if ($avatadata!=null) {
-				$uid = $avatadata->user_id;
+			$uid = -1;
+			$avatardata = get_record('mdlos_users', 'uuid', $UUID);
+			if ($avatardata!=null) {
+				$uid = $avatardata->user_id;
 				$this->db_data[$colum]['state'] = $avatardata->state;
 				if ($uid>0) {
 					$user_info = get_record('user', 'id', $uid, 'deleted', '0');
@@ -221,21 +221,35 @@ class  AvatarsList
 
         $grid_name 		= $CFG->mdlopnsm_grid_name;
         $content   		= $CFG->mdlopnsm_avatars_content;
+		$userinfo		= $CFG->mdlopnsm_userinfo_link;
+		$moodle_url		= $CFG->wwwroot;
 		$module_url		= CMS_MODULE_URL;
-        $course        	= "&amp;course=$this->courseid";
-        $pstart0        = "&amp;pstart=$this->pnum[0]";
-        $pstart1        = "&amp;pstart=$this->pnum[1]";
-        $pstart2        = "&amp;pstart=$this->pnum[2]";
+
+        $course        	= "?course=$this->courseid";
+        $pstart_        = "&amp;pstart=";
+        $plimit_        = "&amp;plimit=";
         $plimit         = "&amp;plimit=$this->plimit";
 
-
-		$page_num			= get_string("mdlos_page","block_mdlopensim");
-		$page_num_of		= get_string("mdlos_page_of","block_mdlopensim");
-		$user_search		= get_string("mdlos_user_search","block_mdlopensim");
-		$avatars_list_ttl	= get_string('mdlos_avatars_list', 'block_mdlopensim'));
-		$firstname_ttl 		= get_string('mdlos_firstname', 'block_mdlopensim'));
-		$lastname_ttl 		= get_string('mdlos_lastname', 'block_mdlopensim'));
-		$users_found	  	= get_string('mdlos_users_found', 'block_mdlopensim'));
+		$avatars_list	= get_string('mdlos_avatars_list', 	'block_mdlopensim');
+		$number_ttl		= get_string('mdlos_no',			'block_mdlopensim');
+		$edit_ttl		= get_string('mdlos_edit',			'block_mdlopensim');
+		$editable_ttl	= get_string('mdlos_edit_ttl',		'block_mdlopensim');
+		$lastlogin_ttl	= get_string('mdlos_lastlogin',		'block_mdlopensim');
+		$status_ttl		= get_string('mdlos_status',		'block_mdlopensim');
+		$crntregion_ttl	= get_string('mdlos_crntregion',	'block_mdlopensim');
+		$owner_ttl		= get_string('mdlos_owner',			'block_mdlopensim');
+		$get_owner_ttl	= get_string('mdlos_get_owner_ttl',	'block_mdlopensim');
+		$firstname_ttl 	= get_string('mdlos_firstname', 	'block_mdlopensim');
+		$lastname_ttl 	= get_string('mdlos_lastname', 		'block_mdlopensim');
+		$avatar_notsync	= get_string('mdlos_not_syncdb',	'block_mdlopensim');
+		$avatar_online	= get_string('mdlos_online_ttl',	'block_mdlopensim');
+		$avatar_active	= get_string('mdlos_active',		'block_mdlopensim');
+		$avatar_inactive= get_string('mdlos_inactive',		'block_mdlopensim');
+		$unknown_status	= get_string('mdlos_unknown_status','block_mdlopensim');
+		$page_num		= get_string('mdlos_page',			'block_mdlopensim');
+		$page_num_of	= get_string('mdlos_page_of',		'block_mdlopensim');
+		$user_search	= get_string('mdlos_user_search',	'block_mdlopensim');
+		$users_found  	= get_string('mdlos_users_found', 	'block_mdlopensim');
 
         include(CMS_MODULE_PATH."/html/avatars.html");
 	}

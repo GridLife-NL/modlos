@@ -149,6 +149,7 @@ class  RegionsList
 		$grid_name       = $CFG->mdlopnsm_grid_name;
 		$content         = $CFG->mdlopnsm_regions_content;
 		$module_url	     = CMS_MODULE_URL;
+
 		$order		     = "?order=$this->order";
 		$course		     = "&amp;course=$this->courseid";
 		$pstart		     = "&amp;pstart=$this->pstart";
@@ -164,7 +165,6 @@ class  RegionsList
 		$page_num	     = get_string("mdlos_page",		      "block_mdlopensim");
 		$page_num_of     = get_string("mdlos_page_of",	      "block_mdlopensim");
 		$voice_chat_mode = get_string("mdlos_voice_chat_mode","block_mdlopensim");
-
 		//$region_owner = get_string("mdlos_region_owner", "block_mdlopensim");
 		//$estate_id    = get_string("mdlos_estate_id",    "block_mdlopensim");
 
