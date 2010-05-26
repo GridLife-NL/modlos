@@ -109,7 +109,6 @@ $inactive_ttl	= get_string("mdlos_inactive",		"block_mdlopensim");
 $online_ttl		= get_string("mdlos_online_ttl",	"block_mdlopensim");
 $offline_ttl	= get_string("mdlos_offline_ttl",	"block_mdlopensim");
 $profile_ttl	= get_string("mdlos_profile",		"block_mdlopensim");
-
 $born_on	  	= get_string("mdlos_born_on",		"block_mdlopensim");
 $lastlogin	  	= get_string("mdlos_lastlogin",		"block_mdlopensim");
 $ownername	  	= get_string("mdlos_ownername",		"block_mdlopensim");
