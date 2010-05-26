@@ -6,8 +6,7 @@ require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 if (!defined('CMS_MODULE_PATH')) exit();
 require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
-$isGuest = isguest();
-if ($isGuest) {
+if (isguest()) {
 	exit('<h4>guest user is not allowed!!</h4>');
 }
 
@@ -47,13 +46,13 @@ if ($agent) {
 		$serverIP		= $avinfo['serverIP'];
 		$serverHttpPort	= $avinfo['serverHttpPort'];
 		$serverURI		= $avinfo['serverURI'];
-		$agentOnline	= $avinfo['agentOnline'];
+		$agentOnline	= $avinfo['online'];
 		$profileTXT 	= $avinfp['profileTXT'];
 	}
 
 	// Moodle DB
-	if ($mdlos = get_record('block_mdlos_users', 'UUID', $agent)) {
-		$userid = $mdlos->uid;
+	if ($mdlos = get_record('mdlos_users', 'uuid', $agent)) {
+		$userid = $mdlos->user_id;
 		$state  = $mdlos->state;
 		if ($moodle = get_record("user", "id", $userid)) {
 			$owner  = getUserName($moodle->firstname, $moodle->lastname);
@@ -62,7 +61,7 @@ if ($agent) {
 
 	// osprofile
 	if ($profileTXT=="") {
-		if ($rec = get_record('block_mdlos_prof_userprofile', 'useruuid', $agent, '', '', '', '', 'profileAboutText')) {
+		if ($rec = get_record(MDL_PROFILE_USERPROFILE_TBL, 'useruuid', $agent, '', '', '', '', 'profileAboutText')) {
 			$profileTXT = $rec->profileAboutText;
 		}
 	}
