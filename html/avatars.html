@@ -1,7 +1,3 @@
-<!--
-<h2><center><{$grid_name}>&nbsp;:&nbsp;<{$smarty.const._MD_XPNSM_AVATARS_LIST}></center></h2>
-<br />
--->
 
 <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" >
   <tr>
@@ -9,8 +5,8 @@
       <table width="100%" border="0" cellspacing="0" cellpadding="1">
         <tr>
           <td bgcolor="#E8E8E8">
-            <h2><div align="center"><{$grid_name}>&nbsp;:&nbsp;<{$smarty.const._MD_XPNSM_AVATARS_LIST}></div></h2>
-            <{$content}>
+            <h2><div align="center"><?php print $grid_name."&nbsp;:&nbsp;".$avatars_list_ttl?></div></h2>
+            <?php print $content?>
           </td>
         </tr>
       </table>
@@ -26,73 +22,73 @@
 
       <table cellpadding=0 cellspacing=0 width=100%>
         <tr>
-          <td width=200><font color=#FFFFFF><b>&nbsp;<{$number}> <{$smarty.const._MD_XPNSM_USERS_FOUND}></b></font></td>
+          <td width=200><font color=#FFFFFF><b>&nbsp;<?php print $this->number." ".$users_found ?></b></font></td>
           <td>
 
             <table cellpadding=1 cellspacing=0>
               <tr>
                 <td>
-                  <{if $icon[0]=="on"}>
-                    <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=0&amp;plimit=<{$plimit}>" target="_self">
-                  <{/if}>
-                    <img src=<{$module_url}>/images/icons/icon_back_more_<{$icon[0]}>.gif width=15 height=15 border="0">
-                  <{if $icon[0]=="on"}>
+                  <?php if ($this->icon[0]=="on") {?>
+                    <a href="<?php print $this->action_url.$course.$lnk_firstname.$lnk_lastname.$plimit.'&amp;pstart=0'?>" target="_self">
+                  <?php }?>
+                    <img src="<?php print $module_url.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+                  <?php if ($this->icon[0]=="on") {?>
                     </a>
-                  <{/if}>
+                  <?php }?>
                 </td>
                 <td>
-                  <{if $icon[0]=="on"}>
-                    <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=<{$pnum[0]}>&amp;plimit=<{$plimit}>" target="_self">
-                  <{/if}>
-                    <img src=<{$module_url}>/images/icons/icon_back_one_<{$icon[0]}>.gif width=15 height=15 border="0">
-                  <{if $icon[0]=="on"}>
+                  <?php if ($this->icon[0]=="on") {?>
+                    <a href="<?php print $this->action_url.$course.$lnk_firstname.$lnk_lastname.$pstart0.$plimit?>" target="_self">
+                  <?php }?>
+                    <img src="<?php print $module_url.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+                  <?php if ($this->icon[0]=="on") {?>
                     </a>
-                  <{/if}>
+                  <?php }?>
                 </td>
 
                 <td width=200 align=center>
                   <font color="#000000">
-                    <{$smarty.const._MD_XPNSM_PAGE}> <{$sitestart}> <{$smarty.const._MD_XPNSM_PAGE_OF}> <{$sitemax}>&nbsp;&nbsp;
+                    <?php print $page_num." ".$sitestart." ".$page_num_of." ".$sitemax?>&nbsp;&nbsp;
                   </font>
                 </td>
 
                 <td>
-                  <{if $icon[1]=="on"}>
-                    <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=<{$pnum[1]}>&amp;plimit=<{$plimit}>" target="_self">
-                  <{/if}>
-                      <img src=<{$module_url}>/images/icons/icon_forward_one_<{$icon[1]}>.gif width=15 height=15 border="0">
-                  <{if $icon[1]=="on"}>
+                  <?php if ($this->icon[1]=="on") {?>
+                    <a href="<?php print $this->action_url.$course.$lnk_firstname.$lnk_lastname.$pstart1.$plimit?>" target="_self">
+                  <?php }?>
+                      <img src="<?php print $module_url.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+                  <?php if ($this->icon[1]=="on") {?>
                     </a>
-                  <{/if}>
+                  <?php }?>
                 </td>
                 <td>
-                  <{if $icon[1]=="on"}>
-                    <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=<{$pnum[2]}>&amp;plimit=<{$plimit}>" target="_self">
-                  <{/if}>
-                      <img src=<{$module_url}>/images/icons/icon_forward_more_<{$icon[1]}>.gif width=15 height=15 border="0">
-                  <{if $icon[1]=="on"}>
+                  <?php if ($this->icon[1]=="on") {?>
+                    <a href="<?php print $this->action_url.$course.$lnk_firstname.$lnk_lastname.$pstart2.$plimit?>" target="_self">
+                  <?php }?>
+                      <img src="<?php print $module_url.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+                  <?php if ($this->icon[1]=="on") {?>
                     </a>
-                  <{/if}>
+                  <?php }?>
                 </td>
 
                 <td width="10"></td>
                 <td>
-                  <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=0&amp;plimit=10" target="_self">
-                    <img src=<{$module_url}>/images/icons/<{$icon[3]}>.gif width=15 height=15 border="0" ALT="Limit 10"></a>
+                  <a href="<?php print $this->action_url.$course.$lnk_firstname.$lnk_lastname.'pstart=0&amp;plimit=10'?>" target="_self">
+                    <img src="<?php print $module_url.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" ALT="Limit 10"></a>
                 </td>
                 <td>
-                  <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=0&amp;plimit=25" target="_self">
-                    <img src=<{$module_url}>/images/icons/<{$icon[4]}>.gif width=15 height=15 border="0" ALT="Limit 25">
+                  <a href="<?php print $this->action_url.$course.$lnk_firstname.$lnk_lastname.'pstart=0&amp;plimit=25'?>" target="_self">
+                    <img src="<?php print $module_url.'images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" ALT="Limit 25">
                   </a>
                 </td>
                 <td>
-                  <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=0&amp;plimit=50" target="_self">
-                    <img src=<{$module_url}>/images/icons/<{$icon[5]}>.gif width=15 height=15 border="0" ALT="Limit 50">
+                  <a href="<?php print $this->action_url.$course.$lnk_firstname.$lnk_lastname.'pstart=0&amp;plimit=50'?>" target="_self">
+                    <img src="<?php print $module_url.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" ALT="Limit 50">
                   </a>
                 </td>
                 <td>
-                  <a href="<{$action_url}>&amp;<{$lnk_firstname}><{$lnk_lastname}>pstart=0&amp;plimit=100" target="_self">
-                    <img src=<{$module_url}>/images/icons/<{$icon[6]}>.gif width=15 height=15 border="0" ALT="Limit 100">
+                  <a href="<?php print $this->action_url.$course.$lnk_firstname.$lnk_lastname.'pstart=0&amp;plimit=100'?>" target="_self">
+                    <img src="<?php print $module_url.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" ALT="Limit 100">
                   </a>
                 </td>
                 <td></td>
@@ -108,18 +104,18 @@
 
 
 <table width="95%" cellpadding="3" cellspacing="1" bgcolor="#547FDB">
-  <form command1="<{$action_url}>" method="POST">    
+  <form command1="<?php print $this->action_url?>" method="POST">    
     <tr>
-      <td><b><{$smarty.const._MD_XPNSM_USER_SEARCH}></b><br /></td>
+      <td><b><?php print $user_search?></b><br /></td>
     </tr>
     <tr>
       <td bgcolor="#FFFFFF">
         <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFFFFF">
           <tr>
-            <td><font color="#000000"><{$smarty.const._MD_XPNSM_FIRSTNAME}></font></td>
-            <td><input type="TEXT" name="firstname" size="15" value="<{$firstname}>" style="height:20"></td>
-            <td><font color="#000000"><{$smarty.const._MD_XPNSM_LASTNAME}></td>
-            <td><input type="TEXT" name="lastname"  size="15" value="<{$lastname}>"  style="height:20"></td>
+            <td><font color="#000000"><?php print $firstnam_ttl?></font></td>
+            <td><input type="TEXT" name="firstname" size="15" value="<?php print $this->firstname?>" style="height:20"></td>
+            <td><font color="#000000"><?php print $lstname_ttl?></td>
+            <td><input type="TEXT" name="lastname"  size="15" value="<?php print $this->lastname?>"  style="height:20"></td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td><input type="Submit" value="Search" style="height:20"></td>
@@ -142,15 +138,15 @@
             <td bgcolor=#547FDB>
               <table cellpadding=2 cellspacing=0 border=0 width=100%>
                 <tr>
-                  <td width=40 ><b>&nbsp;<{$smarty.const._MD_XPNSM_NO}></b></td>
+                  <td width=40 ><b>&nbsp;<?php print $NO?></b></td>
                   <td width=50 >&nbsp;</b></td>
-                  <td width=80 ><b><{$smarty.const._MD_XPNSM_EDIT}></b></td>
-                  <td width=150><b><{$smarty.const._MD_XPNSM_FIRSTNAME}></b></td>
-                  <td width=150><b><{$smarty.const._MD_XPNSM_LASTNAME}></b></td>
-                  <td width=200><b><{$smarty.const._MD_XPNSM_LASTLOGIN}></b></td>
-                  <td width=150><b><{$smarty.const._MD_XPNSM_STATUS}></b></td>
-                  <td width=150><b><{$smarty.const._MD_XPNSM_CRNTREGION}></b></td>
-                  <td width=100><b><{$smarty.const._MD_XPNSM_OWNER}></b></td>
+                  <td width=80 ><b><?php print $EDIT?></b></td>
+                  <td width=150><b><?php print $MD_XPNSM_FIRSTNAME?></b></td>
+                  <td width=150><b><?php print $MD_XPNSM_LASTNAME?></b></td>
+                  <td width=200><b><?php print $MD_XPNSM_LASTLOGIN?></b></td>
+                  <td width=150><b><?php print $MD_XPNSM_STATUS?></b></td>
+                  <td width=150><b><?php print $MD_XPNSM_CRNTREGION?></b></td>
+                  <td width=100><b><?php print $MD_XPNSM_OWNER?></b></td>
                   <td>&nbsp;</td>
                 </tr>
 
@@ -158,66 +154,66 @@
                   <td td colspan="10">&nbsp;</td>
                 </tr>
 
-                <{foreach from=$db_data item="dat"}>
-                  <{if $dat.num%2==0 }>                
+                <?php foreach($db_data as $dat) {?>
+                  <?php if ($dat.num%2==0) { ?>                
                   <tr style='background-color: #F0F0F0'>
-                  <{else}>
+                  <?php } else {?>
                   <tr style='background-color: #FFFFFF'>
-                  <{/if}>
-                    <td width=40><font color=#000><b>&nbsp;<{$dat.num+1+$pstart}></b></font></td>
+                  <?php }?>
+                    <td width=40><font color=#000><b>&nbsp;<?php print $dat.num+1+$pstart?></b></font></td>
                     <td width=50 height=26>
-                      <a style="cursor:pointer" onClick="window.open('<{$module_url}>/helper/agent.php?agent=<{$dat.UUID}>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
-                        <img src="<{$module_url}>/images/icons/icon_user.gif">
+                      <a style="cursor:pointer" onClick="window.open('<?php print $module_url?>/helper/agent.php?agent=<?php print $dat.UUID?>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+                        <img src="<?php print $module_url?>/images/icons/icon_user.gif">
                       </a>
                     </td>
                     <td width=80>
-                    <{if $dat.editable==$can_edit}>
-                      <a href="<{$edit_url}>&amp;uuid=<{$dat.UUID}>" ><font color=#cc1010><b><{$smarty.const._MD_XPNSM_EDIT_TTL}></b></font></a>
-                    <{elseif $dat.editable==$owner_edit and $dat.state==XOPNSIM_STATE_ACTIVE}>
-                      <a href="<{$owner_url}>&amp;uuid=<{$dat.UUID}>"><font color=#aa5050><b><{$smarty.const._MD_XPNSM_GET_OWNER_TTL}></b></font></a>
-                    <{else}>
+                    <?php if ($dat.editable==$can_edit) {?>
+                      <a href="<?php print $edit_url?>&amp;uuid=<?php print $dat.UUID?>" ><font color=#cc1010><b><u><?php print $_MD_XPNSM_EDIT_TTL?></u></b></font></a>
+                    <?php } elseif ($dat.editable==$owner_edit and $dat.state==AVATAR_STATE_ACTIVE) {?>
+                      <a href="<?php print $owner_url?>&amp;uuid=<?php print $dat.UUID?>"><font color=#aa5050><b><u><?php print $_MD_XPNSM_GET_OWNER_TTL?></u></b></font></a>
+                    <?php } else {?>
                       &nbsp;-&nbsp;
-                    <{/if}>
+                    <?php }?>
                     </td>
-                    <td width=150><font color=#000060><b><{$dat.firstname}></b></font></td>
-                    <td width=150><font color=#000060><b><{$dat.lastname}></b></font></td>
-                    <td width=200><font color=#444444><b><{$dat.lastin}></b></font></td>
+                    <td width=150><font color=#000060><b><?php print $dat.firstname?></b></font></td>
+                    <td width=150><font color=#000060><b><?php print $dat.lastname?></b></font></td>
+                    <td width=200><font color=#444444><b><?php print $dat.lastin?></b></font></td>
                     <td width=150>
                       <b>
-                        <{if $dat.state==XOPNSIM_STATE_NOTSYNC }>
-                          <font color=#FF0000><{$smarty.const._MD_XPNSM_NOT_SYNCDB}></font>
-                        <{elseif $dat.state==XOPNSIM_STATE_ACTIVE }>
-                          <{if $dat.online}>
-                            <font color=#005500><{$smarty.const._MD_XPNSM_ONLINE_TTL}></font>
-                          <{else}>
-                            <font color=#0000FF><{$smarty.const._MD_XPNSM_ACTIVE}></font>
-                          <{/if}>
-                        <{elseif $dat.state==XOPNSIM_STATE_INACTIVE }>
-                          <font color=#FF0000><{$smarty.const._MD_XPNSM_INACTIVE}></font>
-                        <{else}>
-                          <font color=#FF0000><{$smarty.const._MD_XPNSM_UNKNOWN_STATUS}></font>
-                        <{/if}>
+                        <?php if ($dat.state==AVATAR_STATE_NOTSYNC) { ?>
+                          <font color=#FF0000><?php print $_MD_XPNSM_NOT_SYNCDB?></font>
+                        <?php } elseif ($dat.state==AVATAR_STATE_ACTIVE) { ?>
+                          <?php if ($dat.online) {?>
+                            <font color=#005500><?php print $_MD_XPNSM_ONLINE_TTL?></font>
+                          <?php } else {?>
+                            <font color=#0000FF><?php print $_MD_XPNSM_ACTIVE?></font>
+                          <?php }?>
+                        <?php } elseif ($dat.state==AVATAR_STATE_INACTIVE) { ?>
+                          <font color=#FF0000><?php print $_MD_XPNSM_INACTIVE?></font>
+                        <?php } else {?>
+                          <font color=#FF0000><?php print $_MD_XPNSM_UNKNOWN_STATUS?></font>
+                        <?php }?>
                       </b>
                     </td>
                     <td width=150>
-                      <{if $dat.region!=' - ' }>
-                        <a style="cursor:pointer" onClick="window.open('<{$module_url}>/helper/sim.php?region=<{$dat.region_id}>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
-                          <b><{$dat.region}></b>
-                        </a>
-                      <{else}>
-                        <b><{$dat.region}></b>
-                      <{/if}>
+                      <a style="cursor:pointer" onClick="window.open('<?php print $module_url?>/helper/sim.php?region=<?php print $dat.region_id?>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+                        <?php if ($dat.online) {?>
+                          <b><u><font color=#005500><?php print $dat.region?></font></u></b>
+                        <?php } else {?>
+                          <b><u><?php print $dat.region?></u></b>
+                        <?php }?>
+                      </a>
                     </td>
                     <td width=100>
-                      <{if $userinfo and $dat.uname!=' - ' }>
-                        <a href="<{$smarty.const.XOOPS_URL}>/userinfo.php?uid=<{$dat.uid}>"><b><{$dat.uname}></b></a>
-                      <{else}>
-                        <b><{$dat.uname}></b>
-                      <{/if}>
+                      <?php if ($userinfo and $dat.uname!=' - ') { ?>
+                        <a href="<?php print $XOOPS_URL?>/userinfo.php?uid=<?php print $dat.uid?>"><b><u><?php print $dat.uname?></u></b></a>
+                      <?php } else {?>
+                        <b><?php print $dat.uname?></b>
+                      <?php }?>
                     </td>
                     <td>&nbsp;</td>
                   </tr>
-                <{/foreach}>
+                <?php }?>
               </table>
             </td>
           </tr>

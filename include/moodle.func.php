@@ -20,5 +20,28 @@ function hasPermit($courseid)
 
 
 
+function getUserName($firstname, $lastname)
+{
+	global $CFG;
+
+
+	if ($CFG->fullnamedisplay=='lastname firstname') {
+		$username = $lastname." ".$firstname;
+	}
+	else if ($CFG->fullnamedisplay=='firstname') {
+		$username = $firstname;
+	}
+	else {
+		$username = $firstname." ".$lastname;
+	}
+
+	if ($username==" ") $username = "";
+
+	return $username;
+}
+
+
+
+
 
 ?>

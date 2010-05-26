@@ -56,7 +56,7 @@ if ($agent) {
 		$userid = $mdlos->uid;
 		$state  = $mdlos->state;
 		if ($moodle = get_record("user", "id", $userid)) {
-			$owner = $moodle->firstname." ".$moodle->lastname;
+			$owner  = getUserName($moodle->firstname, $moodle->lastname);
 		}
 	}
 

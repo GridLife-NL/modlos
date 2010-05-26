@@ -41,7 +41,7 @@ class  RegionsList
 	function  set_condition() 
 	{
 		$this->order = optional_param('order', '', PARAM_TEXT);
-		if ($this->order!="" and !preg_match("/^[a-z]+$/", $this->order)) $this->order = "";
+		if (!isAlphabetNumeric($this->order)) $this->order = "";
 
 		$db_ver = opensim_get_db_version(); 
 		if ($db_ver=="0.0") {
@@ -149,8 +149,8 @@ class  RegionsList
 		$grid_name       = $CFG->mdlopnsm_grid_name;
 		$content         = $CFG->mdlopnsm_regions_content;
 		$module_url	     = CMS_MODULE_URL;
-		$course		     = "&amp;course=$this->courseid";
 		$order		     = "?order=$this->order";
+		$course		     = "&amp;course=$this->courseid";
 		$pstart		     = "&amp;pstart=$this->pstart";
 		$plimit		   	 = "&amp;plimit=$this->plimit";
 
