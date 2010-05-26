@@ -224,7 +224,12 @@ $string['mdlos_userinfo_link_desc'] = 'ページ上に Xoopsユーザの名前�
 									  'なお，セキュリティ上の問題から，<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>'.
 									  'UserInfoProtector</a>などを使用して，他のユーザのアカウント画面の表示を禁止している場合などにこれを有効にすると，煩わしいだけとなる．';
 $string['mdlos_cprt_sloodle'] 		= 'Sloodleとの連携';
-$string['mdlos_cprt_sloodle_desc'] 	= 'Sloodleがインストールされている場合，Mdlopensimで認識した OpenSimのアバターとMoodleユーザの対応を Sloodleのデータベースにも書き込む';
+$string['mdlos_cprt_sloodle_desc'] 	= 'Sloodleがインストールされている場合，Sloodleでの OpenSimアバターとMoodleユーザの対応を Mdlopensim側でも使用する';
+$string['mdlos_prty_sloodle']       = 'Sloodleデータの優先';
+$string['mdlos_prty_sloodle_desc']  = 'Sloodle と Mdlopensimでアバター対応のデータが競合した場合に Sloodleの方を優先する';
+
+$string['mdlos_date_format']  		= '日付データのフォーマット';
+$string['mdlos_date_format_desc']  	= 'Mdlopensimで使用する日付表示のフォーマットを指定する';
 
 $string['mdlos_db_status_cntnt'] 	= 'データベース状態のページのコンテンツ';
 $string['mdlos_db_status_cntnt_desc']='Mdlopensim のデータベース状態のページのコンテンツ．HTMLタグ使用可能';

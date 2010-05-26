@@ -31,6 +31,7 @@ class  AvatarsList
 	var $number;
 	var $sitemax;
 	var $sitestart;
+	var $date_format;
 
 	// SQL
 	var $lnk_firstname = "";
@@ -42,9 +43,12 @@ class  AvatarsList
 
 	function  AvatarsList($courseid)
 	{
-		$this->courseid  = $courseid;
-		$this->isGuest   = isguest();
-		$this->hasPermit = hasPermit($courseid);
+		global $CFG;
+
+		$this->courseid  	= $courseid;
+		$this->isGuest   	= isguest();
+		$this->hasPermit	= hasPermit($courseid);
+		$this->date_format 	= $CFG->mdlopnsm_date_format;
 	}
 
 
@@ -99,6 +103,7 @@ class  AvatarsList
 
 	function  execute()
 	{
+
 		$this->number    = count(opensim_get_avatars_infos($this->sql_countcnd));;
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
@@ -169,7 +174,8 @@ class  AvatarsList
 				$this->db_data[$colum]['lastin'] = ' - ';
 			}
 			else {
-				$this->db_data[$colum]['lastin'] = date("Y.m.d - H:i", $lastlogin);
+				//$this->db_data[$colum]['lastin'] = date("Y.m.d - H:i", $lastlogin);
+				$this->db_data[$colum]['lastin'] = date($this->date_format, $lastlogin);
 			}
 
 			// Agent Online Info
@@ -222,6 +228,7 @@ class  AvatarsList
         $grid_name 		= $CFG->mdlopnsm_grid_name;
         $content   		= $CFG->mdlopnsm_avatars_content;
 		$userinfo		= $CFG->mdlopnsm_userinfo_link;
+		$date_format	= $CFG->mdlopnsm_date_format;
 		$moodle_url		= $CFG->wwwroot;
 		$module_url		= CMS_MODULE_URL;
 

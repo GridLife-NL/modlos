@@ -226,8 +226,12 @@ $string['mdlos_userinfo_link_desc'] = 'It is specified whether to put the link f
 									  '<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>UserInfoProtector</a>. '.
 									  'In that case, if this is checked, it is very annoying.';
 $string['mdlos_cprt_sloodle']       = 'Cooperation with Sloodle';
-$string['mdlos_cprt_sloodle_desc']  = 'If Sloodle is installed, the avatar of OpenSim and the Moodle user\'s correspondence that recognized by Mdlopensim '.
-									  'are written to the DB of Sloodle.';
+$string['mdlos_cprt_sloodle_desc']  = 'If Sloodle is installed, Mdlopensim reads/writes the Sloodle DB.';
+$string['mdlos_prty_sloodle']       = 'It gives priority to Sloodle data';
+$string['mdlos_prty_sloodle_desc']  = 'It gives priority to Sloodle, when OpenSim avatar data competes by Mdlopensim with Sloodle.';
+
+$string['mdlos_date_format']		= 'Display format of date(time)';
+$string['mdlos_date_format_desc']	= 'Specify display format of date and time';
 
 $string['mdlos_db_status_cntnt'] 	= 'DB Status Content';
 $string['mdlos_db_status_cntnt_desc']='Specify content of DB status page';

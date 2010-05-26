@@ -71,13 +71,13 @@ if ($agent) {
 		$born = ' - ';
 	}
 	else {
-		$born = date("Y M d (D) - A g:i", $created);
+		$born = date($CFG->mdlopnsm_date_format, $created);
 	}
 	if ($lastlogin==null or $lastlogin=="" or $lastlogin=='0') {
 		$lastin = ' - ';
 	}
 	else {
-		$lastin = date("Y M d (D) - A g:i", $lastlogin);
+		$lastin = date($CFG->mdlopnsm_date_format, $lastlogin);
 	}
 }
 
