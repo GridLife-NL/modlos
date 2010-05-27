@@ -63,6 +63,7 @@ $string['mdlos_unknown_status'] 	= '不明';
 $string['mdlos_active_list'] 		= '使用可能リスト';
 $string['mdlos_inactive_list'] 		= '使用停止リスト';
 
+$string['mdlos_show_home'] 			= 'ホーム';
 $string['mdlos_show_db'] 			= 'データベース';
 $string['mdlos_world_map'] 			= 'ワールドマップ';
 $string['mdlos_user_info'] 			= 'ユーザ情報';

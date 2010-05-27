@@ -333,8 +333,8 @@ function print_tabnav($currenttab, $course)
 
 	///////
 	$toprow = array();
-	$toprow[] = new tabobject('show_db', CMS_MODULE_URL.'/actions/show_db.php?course='.$courseid, 
-																	'<b>'.get_string('mdlos_show_db','block_mdlopensim').'</b>');
+	$toprow[] = new tabobject('show_home', CMS_MODULE_URL.'/actions/show_home.php?course='.$courseid, 
+																	'<b>'.get_string('mdlos_show_home','block_mdlopensim').'</b>');
 	$toprow[] = new tabobject('map_action', CMS_MODULE_URL.'/actions/map_action.php?course='.$courseid, 
 																	'<b>'.get_string('mdlos_world_map','block_mdlopensim').'</b>');
 	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php?course='.$courseid, 
