@@ -1,0 +1,81 @@
+
+<h2><center><?php print $grid_name.":&nbsp;".$lastnames_ttl?></center></h2>
+<br />
+
+<div style="margin-left:15%; margin-right:15%">
+
+<form name="assignform" id="assignform" action="<?php print $this->action_url?>" method="POST">
+
+  <table border="2" cellpadding="0" cellspacing="0" align="center">
+    <tr height=22>
+      <td style="width:45%; font-size:120%; text-align:center">
+        <b><?php print $select1_title?></b>
+      </td>
+
+      <td style="width:10%"></td>
+
+      <td style="width:45%; font-size:120%; text-align:center">
+        <b><?php print $select2_title?></b>
+      </td>
+    </tr>
+
+    <tr>
+      <td valign="top">
+        <select name="select_left[]" size="20" id="select_left" multiple
+                  onFocus="document.assignform.submit_left.disabled=true;
+                           document.assignform.submit_right.disabled=false;
+                           document.assignform.submit_add.disabled=true;" >
+          <?php foreach($select1 as $slct1) {?>
+            <option value=<?php print $slct1?> ><?php print $slct1?></option>
+          <?php }?>
+        </select>
+        <br />
+        <input type="text" name="addname" size="24" value="" 
+                  onFocus ="document.assignform.submit_left.disabled=true;
+                            document.assignform.submit_right.disabled=true;
+                            document.assignform.submit_add.disabled=false;" >
+        <input name="submit_add"    type="submit" id="submit_add"    value="add" />
+      </td>
+
+      <td valign="top" style="text-align:center">
+		<input type="hidden" name="sesskey" value="<?php print sesskey() ?>" />
+		<input type="hidden" name="course"  value="<?php print $this->courseid ?>" />
+        <br />
+        <input name="submit_left"   type="submit" id="submit_left"   value="&larr;" />
+        <br />
+        <input name="submit_right"  type="submit" id="submit_right"  value="&rarr;" />
+        <br /><br />
+        <input name="submit_delete" type="submit" id="submit_delete" value="del" />
+        <br />
+      </td>
+
+      <td valign="top">
+        <select name="select_right[]" size="20" id="select_right" multiple
+                  onFocus="document.assignform.submit_left.disabled=false;
+                           document.assignform.submit_right.disabled=true;
+                           document.assignform.submit_add.disabled=true;" >
+          <?php foreach($select2 as $slct2) {?>
+            <option value=<?php print $slct2?> ><?php print $slct2?></option>
+          <?php }?>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+</form>
+</div>
+<br />
+
+<!-- Error Message -->
+<br />
+<br />
+<hr />
+<?php if ($this->hasError) {?>
+  <ul>
+    <?php foreach($this->errorMsg as $mesg) {?>
+       <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
+    <?php }?>
+  </ul>
+<?php }?>
+<br />
+
