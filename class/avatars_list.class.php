@@ -205,7 +205,7 @@ class  AvatarsList
 
 			$this->db_data[$colum]['uid'] = $uid;
 
-			if ($this->isAdmin or $this->userid==$uid) {
+			if ($this->hasPermit or $this->userid==$uid) {
 				$this->db_data[$colum]['editable'] = AVATAR_EDITABLE;
 			}
 			elseif ($uid==0) {

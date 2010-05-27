@@ -54,6 +54,9 @@ define('MDL_PROFILE_USERPICKS_TBL',  	MDL_DB_PREFIX.'profile_userpicks');
 define('MDL_PROFILE_USERPROFILE_TBL',  	MDL_DB_PREFIX.'profile_userprofile');
 define('MDL_PROFILE_USERSETTINGS_TBL',	MDL_DB_PREFIX.'profile_usersettings');
 
+define('MDL_SLOODLE_USERS_TBL',			'sloodle_users');
+
+
 
 
 // XML Group.  see also xmlgroups_config.php 

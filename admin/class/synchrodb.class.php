@@ -80,10 +80,12 @@ class  SynchroDataBase
 
 	function synchroDB()
 	{
+		global $CFG;
+
 		// OpenSim DB
 		$opsim_users = opensim_get_avatars_infos();
 
-		// Mdlopensim DB を配列に変換
+		// Mdlopensim DB を読んで配列に変換
 		$db_users = get_records('mdlos_users');
 		$mdlos_users = array();
 		foreach ($db_users as $user) {
@@ -119,6 +121,24 @@ class  SynchroDataBase
 			if (!array_key_exists($moodle_uuid, $opsim_users)) {
 				$mdlos_user['state'] = AVATAR_STATE_INACTIVE;
 				mdlopensim_delete_usertable($mdlos_user);
+			}
+		}
+
+
+		// Sloodle連携
+		if ($CFG->mdlopnsm_cooperate_sloodle) {
+			$sloodles = get_records(MDL_SLOODLE_USERS_TBL);
+			if (is_array($sloodles)) {
+				foreach($sloodles as $sloodle) {
+					$mdl = get_record('mdlos_users', 'uuid', $sloodle->uuid);
+					if ($mdl!=null) {
+						if (($mdl->user_id>0 and $CFG->mdlopnsm_priority_sloodle) or
+							($mdl->user_id==0)) { 
+							$mdl->user_id = $sloodle->userid;
+							update_record('mdlos_users', $mdl);
+						}
+					}
+				}
 			}
 		}
 

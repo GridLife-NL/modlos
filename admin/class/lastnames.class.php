@@ -48,9 +48,9 @@ class  LastNames
 
 	function  execute()
 	{
-		$obj = get_records('mdlos_lastnames');
-		if ($obj!=null) {
-			foreach($obj as $name) {
+		$objs = get_records('mdlos_lastnames');
+		if (is_array($objs)) {
+			foreach($objs as $name) {
 				$this->lastnames[$name->lastname] = $name->state;
 			}
 		}
