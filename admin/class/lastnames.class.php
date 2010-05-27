@@ -27,7 +27,7 @@ class  LastNames
 	var $select_inactive   	= array();		// move to inactive
 	var $addname;
 
-	var $hasError = "";
+	var $hasError = false;
 	var $errorMsg = array();
 
 

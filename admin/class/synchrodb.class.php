@@ -21,7 +21,7 @@ class  SynchroDataBase
 	var $courseid;
 	var	$synchronized = false;
 	var	$hasError = false;
-	var	$errorMsg = "";
+	var	$errorMsg = array();
 
 
 
@@ -44,13 +44,13 @@ class  SynchroDataBase
 		if (data_submitted()) {		// POST
 			if (!$this->hasPermit) {
 				$this->hasError = true;
-				$this->errorMsg = get_string('mdlos_access_forbidden', 'block_mdlopensim');
+				$this->errorMsg[] = get_string('mdlos_access_forbidden', 'block_mdlopensim');
 				return false;
 			}
 
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
-				$this->errorMsg = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
 				return false;
 			}
 
@@ -59,7 +59,7 @@ class  SynchroDataBase
 				$ret = opensim_check_db();
 				if (!$ret['grid_status']) {
 					$this->hasError = true;
-					$this->errorMsg = get_string('mdlos_db_connect_error', 'block_mdlopensim');
+					$this->errorMsg[] = get_string('mdlos_db_connect_error', 'block_mdlopensim');
 					return false;
 				}
 

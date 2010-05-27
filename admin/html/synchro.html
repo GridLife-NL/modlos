@@ -23,14 +23,18 @@
 <?php } else {?>
   <h3><font color=#2222FF><center><?php print $synchronized_msg ?></center></font></h3>
 <?php }?>
-
 <br />
+
+<!-- Error Message -->
 <br />
 <br />
 <hr />
 <?php if ($this->hasError) {?>
   <ul>
-    <li><font color="#f01010"><b><?php print $this->errorMsg?></b></font></li>
+    <?php foreach($this->errorMsg as $mesg) {?>
+       <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
+    <?php }?>
   </ul>
 <?php }?>
 <br />
+

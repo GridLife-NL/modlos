@@ -141,10 +141,13 @@ $string['mdlos_disclaimer'] 		= '使用許諾';
 $string['mdlos_disclaimer_agree'] 	= '私は使用許諾に同意します';
 $string['mdlos_need_agree_disclaimer']='使用許諾に同意しなけれアバターを作ることは出来ません'; 
 
-$string['mdlos_sesskey_error'] 		= '無効なセッションキーを検出しました';
+$string['mdlos_invalid_lastname']  	= '不正なラストネームです!!';
+$string['mdlos_exist_lastname']  	= '既に存在するラストネームです!!';
+$string['mdlos_not_exist_lastname']	= '存在しないラストネームです!!';
 
-$string['mdlos_username_error'] 	= 'ユーザネームのエラー';
-$string['mdlos_ownername_error'] 	= 'オーナーネームのエラー';
+$string['mdlos_sesskey_error'] 		= '無効なセッションキーを検出しました!!';
+$string['mdlos_username_error'] 	= 'ユーザネームのエラー!!';
+$string['mdlos_ownername_error'] 	= 'オーナーネームのエラー!!';
 
 $string['mdlos_db_connect_error']	= 'OpenSim のデータベースに接続できません!!';
 $string['mdlos_avatar_name_error']	= '不正なアバター名です!!';
