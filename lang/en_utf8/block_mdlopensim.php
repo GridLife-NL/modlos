@@ -125,7 +125,10 @@ $string['mdlos_passwd_mismatch'] 	= 'Password is mismatch.';
 $string['mdlos_alphabet_numeric'] 	= 'Input Only Alphabet or Numeric';
 $string['mdlos_state_max'] 			= 'Status Value is too big. It rather than {0}';
 $string['mdlos_state_min'] 			= 'Status Value is too small. It is over {0}';
-$string['mdlos_invalid_lastname'] 	= 'Invalid Last Name';
+$string['mdlos_invalid_uuid']   	= 'Invalid UUID!!';
+$string['mdlos_invalid_lastname']   = 'Invalid lastname!!';
+$string['mdlos_exist_lastname']     = 'Already exist lastname!!';
+$string['mdlos_not_exist_lastname'] = 'Not exist lastname!!';
 $string['mdlos_active_avatar'] 		= 'Avatar is Active';
 $string['mdlos_moodle_user_name'] 	= 'Moodle User Name';
 $string['mdlos_admin'] 				= 'Admin';
@@ -142,10 +145,6 @@ $string['mdlos_mismatch_passwd'] 	= 'Passwrod is mismatch';
 $string['mdlos_disclaimer'] 		= 'Disclaimer';
 $string['mdlos_disclaimer_agree'] 	= 'I agree to the above';
 $string['mdlos_need_agree_disclaimer']='You need to agree disclaimer for avatar create'; 
-
-$string['mdlos_invalid_lastname']   = 'Invalid lastname!!';
-$string['mdlos_exist_lastname']     = 'Already exist lastname!!';
-$string['mdlos_not_exist_lastname'] = 'Not exist lastname!!';
 
 $string['mdlos_sesskey_error']      = 'Invalid session key is detected!!';
 $string['mdlos_username_error'] 	= 'User Name Error!!';
@@ -211,9 +210,9 @@ $string['mdlos_dst_region_desc'] 	= 'Soecify default home region (SIM)';
 $string['mdlos_use_https'] 			= 'Do you use HTTPS with POST';
 $string['mdlos_use_https_desc'] 	= 'Do you use HTTPS, when you send important data (ex. password) to Mdlopensim with POST method?'. 
 									  'It is not necessary to select it, when the whole of this site is already https or use https login to Moodle.';
-$string['mdlos_https_url'] 			= 'Moodle Top URL of HTTPS';
-$string['mdlos_https_url_desc'] 	= 'Specify HTTPS URL of Moodle Module.'.
-								  	  'If this is blank (default), http: of $CFG->wwwroot was changed into https: is used. ';
+$string['mdlos_https_url'] 			= 'Moodle Block URL of HTTPS';
+$string['mdlos_https_url_desc'] 	= 'Specify HTTPS URL (include /blocks) of Moodle Block.'.
+								  	  'If this is blank (default), http: of $CFG->wwwroot/blocks was changed into https: is used. ';
 
 $string['mdlos_grpdb_rkey'] 		= 'Group Database Read Key';
 $string['mdlos_grpdb_rkey_desc'] 	= 'Specify same read key code with XmlRpcServiceReadKey in [Groups] section of OpenSim.ini';

@@ -5,20 +5,21 @@ require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
 
-class  AvatarCreate
+class  CreateAvatar
 {
 	var $regionNames  = array();
 	var $actvLastName = 0;
 
-	var $isAdmin    = false;
+	var $hasPermit 	= false;
+	var $module_url	= "";
 	var $action_url = "";
-    var $userid     = 0;		// owner id of this process
+	var $userid	 = 0;		// owner id of this process
 	var $created_avatar = false;
 
 	// Xoops DB
 	var $UUID	   = "";
 	var $nx_UUID   = "";
-	var $uid       = 0;			// owner id of avatar
+	var $uid	   = 0;			// owner id of avatar
 	var $firstname = "";
 	var $lastname  = "";
 	var $hmregion  = "";
@@ -26,35 +27,40 @@ class  AvatarCreate
 
 
 
-	function  createAction() 
+	function  CreateAction($courseid)
 	{
 		global $CFG;
 
+		require_login($courseid);
+
+		$this->hasPermit = hasPermit($courseid);
+		if (!$this->hasPermit) {
+			error('<h4>'.get_string('mdlos_access_forbidden', 'block_mdlopensim').'</h4>');
+		}
+
 		// for HTTPS
-/*
 		$use_https = $CFG->mdlopnsm_use_https;
 		if ($use_https) {
-			$https_url = $CFG->mdlopnsm_https_url
+			$https_url = $CFG->mdlopnsm_https_url;
+
 			if ($https_url!="") {
-				$module_url = $https_url.'/'._OPENSIM_DIR_NAME;
+				$this->module_url = $https_url.CMS_DIR_NAME;
 			}
 			else {
-				$module_url = ereg_replace('^http:', 'https:', XOOPS_MODULE_URL).'/'._OPENSIM_DIR_NAME;
+				$this->module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
 			}
 		}
 		else {
-			//$module_url = XOOPS_MODULE_URL.'/'._OPENSIM_DIR_NAME;
-			$module_url = _OPENSIM_MODULE_URL;
+			$this->module_url = CMS_MODULE_URL;
 		}
-*/
+		$this->action_url = $this->module_url."/actions/create_avatar.php";
 
-		$this->action_url	= $module_url."/?action=create";
-		$this->isAdmin		= isadmin();
-		$this->userid		= $this->mActionForm->uid;
+
+
 		$this->actvLastName	= $this->mActionForm->actvLastName;
 
 		// Number of Avatars Check
-		if (!$this->isAdmin) {
+		if (!$this->hasPermit) {
 			$usersdbHandler = & xoops_getmodulehandler('usersdb');
 			$criteria = & new CriteriaCompo();
 			$criteria->add(new Criteria('uid', $root->mContext->mXoopsUser->get('uid')));
@@ -83,7 +89,7 @@ class  AvatarCreate
 		$this->mActionForm->load();
 
 		$this->handler = & xoops_getmodulehandler('usersdb');
-		if ($this->isAdmin) {
+		if ($this->hasPermit) {
 			do {
 				$uuid = make_random_guid();
 				$modobj = $this->handler->get($uuid);
@@ -96,12 +102,12 @@ class  AvatarCreate
 			$this->lastname  = $this->mActionForm->get('lastname');
 			$this->passwd	 = $this->mActionForm->get('passwd');
 			$this->hmregion  = $this->mActionForm->get('hmregion');
-			if($this->isAdmin) $this->ownername = $this->mActionForm->get('ownername');
-			if($this->isAdmin) $this->UUID		= $this->mActionForm->get('UUID');
+			if($this->hasPermit) $this->ownername = $this->mActionForm->get('ownername');
+			if($this->hasPermit) $this->UUID		= $this->mActionForm->get('UUID');
 		}
 		else {
 			$this->hmregion  = $this->mController->mRoot->mContext->mModuleConfig['home_region'];
-			$this->UUID      = $this->nx_UUID;
+			$this->UUID	  = $this->nx_UUID;
 		}
 
 		if ($this->ownername=="") $this->ownername = $this->mActionForm->uname;
@@ -113,7 +119,7 @@ class  AvatarCreate
 
 
 
-	function  executeView($render) 
+	function  print_page() 
 	{
 		$context = & XCube_Root::getSingleton()->mContext;
 
@@ -122,7 +128,7 @@ class  AvatarCreate
 
 		$render->setAttribute('grid_name',		$grid_name);
 		$render->setAttribute('action_url', 	$this->action_url);
-		$render->setAttribute('isAdmin',		$this->isAdmin);
+		$render->setAttribute('hasPermit',		$this->hasPermit);
 
 		$render->setAttribute('actvLastName', 	$this->actvLastName);
 		$render->setAttribute('lastNames',  	$this->mActionForm->lastNames);
@@ -135,7 +141,7 @@ class  AvatarCreate
 		$render->setAttribute('passwd', 		$this->passwd);
 		$render->setAttribute('hmregion', 		$this->hmregion);
 		$render->setAttribute('ownername',		$this->ownername);
-		$render->setAttribute('nx_UUID',      	$this->nx_UUID);
+		$render->setAttribute('nx_UUID',	  	$this->nx_UUID);
 		$render->setAttribute('UUID', 		  	$this->UUID);
 
 		$render->setAttribute('isDisclaimer',	$context->mModuleConfig['activate_disclaimer']);
@@ -151,6 +157,8 @@ class  AvatarCreate
 			$render->setAttribute('pv_firstname', $this->firstname);
 			$render->setAttribute('pv_lastname',  $this->lastname);
 		}
+
+		include(CMS_MODULE_PATH."/html/create.html");
 	}
 
 
@@ -171,7 +179,7 @@ class  AvatarCreate
 		}
 
 		// Create UUID
-		if (!$this->isAdmin or !isGUID($this->UUID)) {
+		if (!$this->hasPermit or !isGUID($this->UUID)) {
 			do {
 				$uuid = make_random_guid();
 				$modobj = $this->handler->get($uuid);
@@ -187,16 +195,16 @@ class  AvatarCreate
 		}
 
 		// Xoops DB
-		if ($this->isAdmin) $this->uid = get_userid_by_name($this->ownername);
+		if ($this->hasPermit) $this->uid = get_userid_by_name($this->ownername);
 		else 				$this->uid = $this->userid;
 
 		// Xoopensim DB
-		$new_user['UUID']      = $this->UUID;
+		$new_user['UUID']	  = $this->UUID;
 		$new_user['uid']	   = $this->uid;
 		$new_user['firstname'] = $this->firstname;
 		$new_user['lastname']  = $this->lastname;
 		$new_user['hmregion']  = $this->hmregion;
-		$new_user['state']     = "";
+		$new_user['state']	 = "";
 
 		//$ret = xoopensim_insrt_usertable($modHandler, $new_user);
 		$ret = xoopensim_insert_usertable($new_user);

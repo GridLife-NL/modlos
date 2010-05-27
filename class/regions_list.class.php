@@ -45,7 +45,7 @@ class  RegionsList
 
 		$db_ver = opensim_get_db_version(); 
 		if ($db_ver=="0.0") {
-			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'));
+			error('<h4>'.get_string('mdlos_db_connect_error', 'block_mdlopensim').'</h4>');
 		}
 
 		if ($this->order=="name")       $sql_order = " ORDER BY regionName ASC";

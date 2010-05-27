@@ -6,7 +6,7 @@
   <{xoops_token form=$actionForm}>
   <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
 
-  <{if $isAdmin}>
+  <{if $this->hasPermit}>
     <tr>
       <td width="100" class="head"><{$smarty.const._MD_XPNSM_UUID}></td>
       <td width="400" class="even"><{xoops_input name="UUID" id="UUID" size="46" maxlength="36" value="$nx_UUID"}></td>
@@ -63,7 +63,7 @@
 	  </td>
     </tr>
 
-	<{if $isAdmin}>
+	<{if $this->hasPermit}>
       <tr>
         <td class="head"><{$smarty.const._MD_XPNSM_OWNERNAME}></td>
         <td class="odd"><{xoops_input name="ownername" size="32" maxlength="30" value=$pv_ownername }></td>
@@ -71,7 +71,7 @@
     <{/if}>
 
 
-	<{if $isDisclaimer and !$isAdmin }>
+	<{if $isDisclaimer and !$this->hasPermit }>
       <tr>
         <td class="head"><{$smarty.const._MD_XPNSM_DISCLAIMER}></td>
         <td class="odd">
@@ -104,7 +104,7 @@
   <{if $created_avatar}>
     <h3><font color=#1010e0><{$smarty.const._MD_XPNSM_AVATAR_CREATED}></font></h3>
     <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
-	  <{if $isAdmin}>
+	  <{if $this->hasPermit}>
         <tr>
           <td width="100" class="head"><{$smarty.const._MD_XPNSM_UUID}></td>
           <td width="400" class="even"><{$UUID}></td>	
@@ -122,7 +122,7 @@
         <td class="head"><{$smarty.const._MD_XPNSM_HOME_REGION}></td>
         <td class="odd" ><{$hmregion}></td>	
       </tr>
-      <{if $isAdmin}>
+      <{if $this->hasPermit}>
         <tr>
           <td class="head"><{$smarty.const._MD_XPNSM_OWNERNAME}></td>
           <td class="even"><{$ownername}></td>	
@@ -131,4 +131,19 @@
     </table>
   <{/if}>
 <{/if}>
+<br />
+
+
+<!-- Error Message -->
+<br />
+<br />
+<hr />
+<?php if ($this->hasError) {?>
+  <ul>
+    <?php foreach($this->errorMsg as $mesg) {?>
+       <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
+    <?php }?>
+  </ul>
+<?php }?>
+<br />
 

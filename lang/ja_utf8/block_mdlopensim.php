@@ -124,6 +124,9 @@ $string['mdlos_alphabet_numeric'] 	= '半角英数字のみの使用となりま
 $string['mdlos_sate_max'] 			= 'ステータスが大きすぎます．{0}以上';
 $string['mdlos_sate_min'] 			= 'ステータスが小さすぎます．{0}以下';
 $string['mdlos_invalid_lastname'] 	= '無効なラストネームです';
+$string['mdlos_invalid_uuid'] 		= '無効な UUIDです';
+$string['mdlos_exist_lastname']  	= '既に存在するラストネームです!!';
+$string['mdlos_not_exist_lastname']	= '存在しないラストネームです!!';
 $string['mdlos_active_avatar'] 		= '有効なアバター';
 $string['mdlos_moodle_user_name'] 	= 'MoodleのユーザID';
 $string['mdlos_admin'] 				= '管理者';
@@ -140,10 +143,6 @@ $string['mdlos_mismatch_passwd'] 	= 'パスワードが一致しません';
 $string['mdlos_disclaimer'] 		= '使用許諾';
 $string['mdlos_disclaimer_agree'] 	= '私は使用許諾に同意します';
 $string['mdlos_need_agree_disclaimer']='使用許諾に同意しなけれアバターを作ることは出来ません'; 
-
-$string['mdlos_invalid_lastname']  	= '不正なラストネームです!!';
-$string['mdlos_exist_lastname']  	= '既に存在するラストネームです!!';
-$string['mdlos_not_exist_lastname']	= '存在しないラストネームです!!';
 
 $string['mdlos_sesskey_error'] 		= '無効なセッションキーを検出しました!!';
 $string['mdlos_username_error'] 	= 'ユーザネームのエラー!!';
@@ -209,9 +208,9 @@ $string['mdlos_dst_region_desc'] 	= 'アバター作成時のデフォルトの�
 $string['mdlos_use_https'] 			= 'POST時に HTTPSを使用';
 $string['mdlos_use_https_desc'] 	= 'パスワードなどの重要なデータの POST時に HTTPSを使用するかどうかを選択する．'.
 									  '既にサイト全体が HTTPSの場合，またはMoodleへのログイン時にHTTPSを使用している場合には選択する必要はない．';
-$string['mdlos_https_url'] 			= 'HTTPSの URL';
-$string['mdlos_https_url_desc'] 	= 'HTTPSを使用する場合は，Moodle のモジュールの HTTPSでの URLを指定する．'.
-									  '省略した場合は，$CFG->wwwroot の http: を https: に変換したものを使用する';
+$string['mdlos_https_url'] 			= 'Moodle のブロックのHTTPSでの URL';
+$string['mdlos_https_url_desc'] 	= 'HTTPSを使用する場合は，Moodleのブロックの HTTPSでの URL(/blocksを含む)を指定する．'.
+									  '省略した場合は，$CFG->wwwroot/blocks の http: を https: に変換したものを使用する';
 
 $string['mdlos_grpdb_rkey'] 		= 'Flotsam グループデータベース読み込みアクセスキー';
 $string['mdlos_grpdb_rkey_desc'] 	= 'Flotsam Group Function を使用する場合に指定する読み込み用キー．'.

@@ -32,7 +32,9 @@ class  SynchroDataBase
 		$this->courseid  = $courseid;
 		$this->hasPermit = hasPermit($courseid);
 		if (!$this->hasPermit) {
-			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'));
+			$this->hasError = true;
+			$this->errorMsg[] = get_string('mdlos_access_forbidden', 'block_mdlopensim');
+			return;
 		}
 		$this->action_url = CMS_MODULE_URL."/admin/actions/synchrodb.php";
 	}

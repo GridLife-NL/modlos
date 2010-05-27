@@ -1,23 +1,29 @@
 <?php
 
-if (!defined('XOOPS_ROOT_PATH')) exit();
-
-require_once(CMS_MODULE_PATH."/include/xoopensim.func.php");
-require_once(CMS_MODULE_PATH."/class/AbstructAction.class.php");
-require_once(CMS_MODULE_PATH."/class/xoopensimEditForm.class.php");
+if (!defined('CMS_MODULE_PATH')) exit();
+require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
 
-class  editAction extends Abstruct_Action
+
+class  EditAvatar
 {
-	var $mController;
+	global $CFG;
+
 	var $regionNames = array();
 
-	var $isAdmin    = false;
+	var $hasPermit  = false;
+	var $courseid 	= 0;
+	var $module_url = "";
 	var $action_url = "";
+
 	var $delete_url = "";
 	var $userid	    = 0;			// owner id of this process
 	var $updated_avatar = false;
+
+	var $hasError	= false;
+	var $errorMsg 	= array();
+
 
 	// Xoops DB
 	var $avatar    = null;
@@ -32,53 +38,51 @@ class  editAction extends Abstruct_Action
 
 
 
-	function  editAction($controller) 
+	function  EditAvatar($courseid) 
 	{
-		$this->mController = $controller;
+		global $CFG;
 
-		$root = & XCube_Root::getSingleton();
-		if ($root->mContext->mUser->isInRole('Site.GuestUser')) {
-			$controller->executeRedirect(CMS_MODULE_URL, 2, _MD_XPNSM_ACCESS_FORBIDDEN);
+		require_login($courseid);
+	
+		$this->hasPermit = hasPermit($courseid);
+		if (!$this->hasPermit) {
+			error('<h4>'.get_string('mdlos_access_forbidden', 'block_mdlopensim').'</h4>');
 		}
 
 		// for HTTPS
-		$use_https = $root->mContext->mModuleConfig['use_https'];
+		$use_https = $CFG->mdlopnsm_use_https;
 		if ($use_https) {
-			$https_url = $root->mContext->mModuleConfig['https_url'];
+			$https_url = $CFG->mdlopnsm_https_url;
 			if ($https_url!="") {
-				$module_url = $https_url.'/'.CMS_DIR_NAME;
+				$this->module_url = $https_url.CMS_DIR_NAME;
 			}
 			else {
-				$module_url = ereg_replace('^http:', 'https:', XOOPS_MODULE_URL).'/'.CMS_DIR_NAME;
+				$this->module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
 			}
 		}
 		else {
-			//$module_url = XOOPS_MODULE_URL.'/'.CMS_DIR_NAME;
-			$module_url = CMS_MODULE_URL;
+			$this->module_url = CMS_MODULE_URL;
 		}
+		$this->action_url = $this->module_url."/actions/edit_avatar.php";
 
-		$this->action_url  	= $module_url."/?action=edit";
-		$this->mActionForm 	= & new Xoopensim_EditForm();
-		$this->isAdmin	   	= $this->mActionForm->isAdmin;
-		$this->userid 	   	= $this->mActionForm->uid;
 
 		// get UUID from POST or GET
-		$this->UUID = $root->mContext->mRequest->getRequest('uuid');
+		$this->UUID = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($this->UUID)) {
-			$controller->executeRedirect(CMS_MODULE_URL, 3, _MD_XPNSM_BAD_UUID);
+			$this->hasError = true;
+			$this->errorMsg[] = get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($this->addname)";
+			return;
 		}
-		$this->delete_url = CMS_MODULE_URL."/?action=delete&uuid=".$this->UUID;
 
-		// get uid from Xoops DB
-		$usersdbHandler = & xoops_getmodulehandler('usersdb');
-		$avatardata = & $usersdbHandler->get($this->UUID);
-		if ($avatardata==null) {
-			$controller->executeRedirect(CMS_MODULE_URL, 3, _MD_XPNSM_NOT_EXIST_UUID);
-		}
+//////////////////
+		$this->delete_url = CMS_MODULE_URL."/?action=delete&uuid=".$this->UUID;
+//////////////////
+
+		// get uid from Moodle DB
 		$this->uid    = $avatardata->get('uid');				// uid of avatar in editing from DB
 		$this->ostate = $avatardata->get('state');
 
-		if (!$this->isAdmin and $this->userid!=$this->uid) {
+		if (!$this->hasPermit and $this->userid!=$this->uid) {
 			$controller->executeRedirect(CMS_MODULE_URL, 3, _MD_XPNSM_ACCESS_FORBIDDEN);
 		}
 
@@ -90,6 +94,24 @@ class  editAction extends Abstruct_Action
 
 	function  execute()
 	{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		// OpenSim DB
         $this->regionNames = opensim_get_regions_names("ORDER BY regionName ASC");
 
@@ -114,7 +136,7 @@ class  editAction extends Abstruct_Action
 			$this->passwd	 = $this->mActionForm->get('passwd');
 			$this->hmregion  = $this->mActionForm->get('hmregion');
 			$this->state 	 = $this->mActionForm->get('state');
-			if ($this->isAdmin) $this->ownername = $this->mActionForm->get('ownername');
+			if ($this->hasPermit) $this->ownername = $this->mActionForm->get('ownername');
 			if ($this->ownername=="") $this->ownername = $this->mActionForm->uname;
 
 			$this->updated_avatar = $this->updateAvatar();
@@ -123,22 +145,22 @@ class  editAction extends Abstruct_Action
 			$this->passwd	 = "";
 			$this->hmregion  = $this->avatar->get('hmregion');
 			$this->state  	 = $this->avatar->get('state');
-			if ($this->isAdmin) $this->ownername = get_username_by_id($this->uid);
+			if ($this->hasPermit) $this->ownername = get_username_by_id($this->uid);
 			if ($this->ownername=="") $this->ownername = $this->mActionForm->uname;
 		}
 	}
 
 
 
-	function  executeView($render) 
+	function  print_page() 
 	{
-		$render->setTemplateName('xoopensim_edit.html');
-		$grid_name = $this->mController->mRoot->mContext->mModuleConfig['grid_name'];
+		global $CFG;
 
-		$render->setAttribute('grid_name',		$grid_name);
+		$grid_name		= $CFG->mdlopnsm_grid_name;
+
 		$render->setAttribute('action_url', 	$this->action_url);
 		$render->setAttribute('delete_url', 	$this->delete_url);
-		$render->setAttribute('isAdmin',		$this->isAdmin);
+		$render->setAttribute('hasPermit',		$this->hasPermit);
 
 		$render->setAttribute('regionNames', 	$this->regionNames);
 		$render->setAttribute('actionForm', 	$this->mActionForm);
@@ -151,6 +173,8 @@ class  editAction extends Abstruct_Action
 		$render->setAttribute('hmregion', 		$this->hmregion);
 		$render->setAttribute('ownername', 		$this->ownername);
 		$render->setAttribute('state',			$this->state);
+
+		include(CMS_MODULE_PATH."/html/edit.html");
 	}
 
 
@@ -200,7 +224,7 @@ class  editAction extends Abstruct_Action
 		}
 
 		// Xoops DB
-		if ($this->isAdmin) $this->uid = get_userid_by_name($this->ownername);
+		if ($this->hasPermit) $this->uid = get_userid_by_name($this->ownername);
 		else                $this->uid = $this->userid;
 
 		$update_user['UUID']      = $this->UUID;
