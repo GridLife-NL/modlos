@@ -9,8 +9,8 @@ if (!defined('CMS_MODULE_PATH')) exit();
 require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
-define('SATE_OFF', '0');
-define('SATE_ON',  '1');
+define('STATE_OFF', '0');
+define('STATE_ON',  '1');
 
 
 
@@ -26,6 +26,9 @@ class  LastNames
 	var $select_active		= array();		// move to active
 	var $select_inactive   	= array();		// move to inactive
 	var $addname;
+
+	var $hasError = "";
+	var $errorMsg = array();
 
 
 
@@ -45,21 +48,27 @@ class  LastNames
 
 	function  execute()
 	{
+		$obj = get_records('mdlos_lastnames');
+		if ($obj!=null) {
+			foreach($obj as $name) {
+				$this->lastnames[$name->lastname] = $name->state;
+			}
+		}
+
+
 		// Form	
 		if (data_submitted()) {
 			if (!$this->hasPermit) {
 				$this->hasError = true;
-				$this->errorMsg = get_string('mdlos_access_forbidden', 'block_mdlopensim');
+				$this->errorMsg[] = get_string('mdlos_access_forbidden', 'block_mdlopensim');
 				return false;
 			}
 
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
-				$this->errorMsg = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
 				return false;
 			}
-
-			$quest = optional_param('quest', 'no', PARAM_ALPHA);
 
 			$add = optional_param('submit_add',	   '', PARAM_TEXT);
 			$lft = optional_param('submit_left',   '', PARAM_TEXT);
@@ -87,7 +96,7 @@ class  LastNames
 
 		foreach ($this->lastnames as $lastname=>$state) {
 			if ($state==STATE_ON) $this->lastnames_active[]   = $lastname;
-			else 				  $this->lastnames_inactive[] = $lastname;
+			else				  $this->lastnames_inactive[] = $lastname;
 		}
 
 		$grid_name		= $CFG->mdlopnsm_grid_name;
@@ -95,8 +104,8 @@ class  LastNames
 		$select1 		= $this->lastnames_active;
 		$select2 		= $this->lastnames_inactive;
 
-		$lastnames_ttl	= get_string('mdlos_lastnames', 'block_mdlopensim');
-		$select1_title	= get_string('mdlos_active_list', 'block_mdlopensim');
+		$lastnames_ttl	= get_string('mdlos_lastnames', 	'block_mdlopensim');
+		$select1_title	= get_string('mdlos_active_list', 	'block_mdlopensim');
 		$select2_title	= get_string('mdlos_inactive_list', 'block_mdlopensim');
 
 		include(CMS_MODULE_PATH."/admin/html/lastnames.html");
@@ -106,14 +115,22 @@ class  LastNames
 
 	function  action_add()
 	{
-		if (!isAlphabetNemericSpecial($this->addname)) return;
+		if (!isAlphabetNumericSpecial($this->addname)) {
+			$this->hasError = true;
+			$this->errorMsg[] = get_string('mdlos_invalid_lastname', 'block_mdlopensim')." ($this->addname)";
+			return;
+		}
 
-		$ret = get_record("
+		$obj = get_record('mdlos_lastnames', 'lastname', $this->addname);
+		if ($obj!=null) {
+			$this->hasError = true;
+			$this->errorMsg[] = get_string('mdlos_exist_lastname', 'block_mdlopensim')." ($this->addname)";
+			return;
+		}
 
-		$obj = $this->mActionForm->dbhandler->create();
-		$obj->assignVar('lastname', $this->addname);
-		$obj->assignVar('state', STATE_ON);
-		$this->mActionForm->dbhandler->insert($obj);
+		$obj->lastname = $this->addname;
+		$obj->state    = STATE_ON;
+		insert_record('mdlos_lastnames', $obj);
 
 		$this->lastnames[$this->addname] = STATE_ON;
 	}
@@ -123,10 +140,16 @@ class  LastNames
 	function  action_move_active()
 	{
 		foreach($this->select_active as $name) {
-			$obj = $this->mActionForm->dbhandler->get($name);
-			$obj->assignVar('state', STATE_ON);
-			$this->mActionForm->dbhandler->insert($obj);
-			$this->lastnames[$name] = STATE_ON;
+			$obj = get_record('mdlos_lastnames', 'lastname', $name);
+			if ($obj==null) {
+				if (!$this->hasError) $this->hasError = true;
+				$this->errorMsg[] = get_string('mdlos_not_exist_lastname', 'block_mdlopensim')." ($name)";
+			}
+			else {
+				$obj->state = STATE_ON;
+				update_record('mdlos_lastnames', $obj);
+				$this->lastnames[$name] = STATE_ON;
+			}
 		}
 	}
 
@@ -135,10 +158,16 @@ class  LastNames
 	function  action_move_inactive()
 	{
 		foreach($this->select_inactive as $name) {
-			$obj = $this->mActionForm->dbhandler->get($name);
-			$obj->assignVar('state', STATE_OFF);
-			$this->mActionForm->dbhandler->insert($obj);
-			$this->lastnames[$name] = STATE_OFF;
+			$obj = get_record('mdlos_lastnames', 'lastname', $name);
+			if ($obj==null) {
+				if (!$this->hasError) $this->hasError = true;
+				$this->errorMsg[] = get_string('mdlos_not_exist_lastname', 'block_mdlopensim')." ($name)";
+			}
+			else {
+				$obj->state = STATE_OFF;
+				update_record('mdlos_lastnames', $obj);
+				$this->lastnames[$name] = STATE_OFF;
+			}
 		}
 	}
 
@@ -147,14 +176,12 @@ class  LastNames
 	function  action_delete()
 	{
 		foreach($this->select_active as $name) {
-			$obj = $this->mActionForm->dbhandler->get($name);
-			$this->mActionForm->dbhandler->delete($obj);
+			delete_records('mdlos_lastnames', 'lastname', $name);
 			unset($this->lastnames[$name]);
 		}
 
 		foreach($this->select_inactive as $name) {
-			$obj = $this->mActionForm->dbhandler->get($name);
-			$this->mActionForm->dbhandler->delete($obj);
+			delete_records('mdlos_lastnames', 'lastname', $name);
 			unset($this->lastnames[$name]);
 		}
 	}
