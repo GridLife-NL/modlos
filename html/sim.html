@@ -1,5 +1,6 @@
 <html>
 <head>
+
 <style type="text/css">
 .styleTitel {
 	font-size: 16px;
@@ -7,8 +8,11 @@
 	color: #105BA7;
 	font-family: Arial, Helvetica, sans-serif;
 }
-
-.styleText {font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #666666;}
+.styleText {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #666666;
+}
 .styleTopTitle {
 	font-size: 20px;
 	font-weight: bold;
@@ -19,8 +23,8 @@
 <title><?php print $grid_name."&nbsp;:&nbsp;".$region_info_ttl?></title>
 </head>
 
-<body>
 
+<body>
 <?php if ($hasPermit) {?>
 <form action="<?php print $action_url?>" method="POST">
 <?php }?>

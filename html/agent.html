@@ -1,16 +1,40 @@
 <html>
-
 <head>
+
 <style type="text/css">
-.styleTitel {font-size: 16px; font-weight: bold; color: #105BA7; font-family: Arial, Helvetica, sans-serif;}
-.styleText {font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #444444;}
-.styleTopTitle {font-size: 20px; font-weight: bold;	font-family: Arial, Helvetica, sans-serif;}
-.styleOnline {font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #009900;}
-.styleOffline {font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #FF0000;}
-.styleplace {color: #FFFFFF;font-size: 3px;}
+.styleTitel {
+	font-size: 16px;
+	font-weight: bold; color: #105BA7;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.styleText {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #444444;
+}
+.styleTopTitle {
+	font-size: 20px; font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.styleOnline {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #009900;
+}
+.styleOffline {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #FF0000;
+}
+.styleplace {
+	color: #FFFFFF;
+	font-size: 3px;
+}
 </style>
+
 <title><?php print $grid_name."&nbsp;:&nbsp;".$user_info_ttl?></title>
 </head>
+
 
 <body>
 <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -76,7 +100,7 @@
         <tr>
           <td><span class="styleText">
             <?php if ($profileTXT!="") {?>
-              <?php print htmlspecialchars($profileTXT)?>
+              <?php print $profileTXT?>
             <?php } else {?>
               <?php print $has_noprofile?>
             <?php }?>
