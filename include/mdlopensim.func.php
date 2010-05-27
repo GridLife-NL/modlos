@@ -342,7 +342,7 @@ function print_tabnav($currenttab, $course)
 	if (!isGuest()) {
 		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php?course='.$courseid, 
 																	'<b>'.get_string('mdlos_avatars_list','block_mdlopensim').'</b>');
-		$toprow[] = new tabobject('avatar_create', CMS_MODULE_URL.'/actions/avatar_create.php?course='. $courseid, 
+		$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php?course='. $courseid, 
 																	'<b>'.get_string('mdlos_avatar_create','block_mdlopensim').'</b>');
 	}
 

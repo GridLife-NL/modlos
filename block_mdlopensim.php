@@ -52,7 +52,7 @@ class block_mdlopensim extends block_base
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('mdlos_regions_list','block_mdlopensim').'</a><br />';
 		if (!isguest()) {
 			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list?course='.$id.'">'.get_string('mdlos_avatars_list','block_mdlopensim').'</a><br />';
-			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatar_create?course='.$id.'">'.get_string('mdlos_avatar_create','block_mdlopensim').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar?course='.$id.'">'.get_string('mdlos_avatar_create','block_mdlopensim').'</a><br />';
 /*
 			if (isadmin()) {
 				$this->content->text.= '<hr />';
