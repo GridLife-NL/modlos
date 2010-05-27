@@ -9,11 +9,15 @@ if (!defined('CMS_MODULE_PATH')) exit();
 require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
+define('SATE_OFF', '0');
+define('SATE_ON',  '1');
+
+
 
 class  LastNames
 {
 	var $action_url;
-	var $dbhandler;
+	var $courseid;
 
 	var $lastnames			= array();
 	var $lastnames_active	= array();
@@ -34,7 +38,6 @@ class  LastNames
 		if (!$this->hasPermit) {
 			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'));
 		}
-
 		$this->action_url = CMS_MODULE_URL."/admin/actions/lastnames.php";
 	}
 
@@ -58,15 +61,14 @@ class  LastNames
 
 			$quest = optional_param('quest', 'no', PARAM_ALPHA);
 
+			$add = optional_param('submit_add',	   '', PARAM_TEXT);
+			$lft = optional_param('submit_left',   '', PARAM_TEXT);
+			$rgt = optional_param('submit_right',  '', PARAM_TEXT);
+			$del = optional_param('submit_delete', '', PARAM_TEXT);
 
-			$add = optional_param('submit_add',	   '', );
-			$lft = optional_param('submit_left',   '', );
-			$rgt = optional_param('submit_right',  '', );
-			$del = optional_param('submit_delete', '', );
-
-			$this->select_inactive = optional_param('select_left'i, '',);
-			$this->select_active   = optional_param('select_right', '',);
-			$this->addname		   = optional_param('addname',		'',);
+			$this->select_inactive = optional_param('select_left',  '', PARAM_TEXT);
+			$this->select_active   = optional_param('select_right', '', PARAM_TEXT);
+			$this->addname		   = optional_param('addname',		'', PARAM_TEXT);
 
 			if	   ($add!="") $this->action_add();
 			elseif ($lft!="") $this->action_move_active();
@@ -81,30 +83,21 @@ class  LastNames
 	{
 		global $CFG;
 
-		$this->exexute();
+		$this->execute();
 
 		foreach ($this->lastnames as $lastname=>$state) {
-			if ($state=='1') $this->lastnames_active[]   = $lastname;
-			else 			 $this->lastnames_inactive[] = $lastname;
+			if ($state==STATE_ON) $this->lastnames_active[]   = $lastname;
+			else 				  $this->lastnames_inactive[] = $lastname;
 		}
 
-		$grid_name			= $CFG->mdlopnsm_grid_name;
-		$module_url			= CMS_MODULE_URL;
+		$grid_name		= $CFG->mdlopnsm_grid_name;
+		$module_url		= CMS_MODULE_URL;
+		$select1 		= $this->lastnames_active;
+		$select2 		= $this->lastnames_inactive;
 
-
-		$lastnames_ttl		= get_string('mdlos_lastnames', 'block_mdlopensim');
-		$lastnames_ttl		= get_string('mdlos_lastnames', 'block_mdlopensim');
-
-
-		$render->setAttribute('grid_name', 		$grid_name);
-		$render->setAttribute('admin_menu',		$admin_menu);
-		$render->setAttribute('action_url', 	$this->action_url);
-		$render->setAttribute('actionForm', 	$this->mActionForm);
-
-		$render->setAttribute('select1_title',	_MD_XPNSM_ACTIVE_LIST);
-		$render->setAttribute('select2_title',	_MD_XPNSM_INACTIVE_LIST);
-		$render->setAttribute('select1', 		$this->lastnames_active);
-		$render->setAttribute('select2', 		$this->lastnames_inactive);
+		$lastnames_ttl	= get_string('mdlos_lastnames', 'block_mdlopensim');
+		$select1_title	= get_string('mdlos_active_list', 'block_mdlopensim');
+		$select2_title	= get_string('mdlos_inactive_list', 'block_mdlopensim');
 
 		include(CMS_MODULE_PATH."/admin/html/lastnames.html");
 	}
@@ -113,14 +106,16 @@ class  LastNames
 
 	function  action_add()
 	{
-		if ($this->addname=="") return;
+		if (!isAlphabetNemericSpecial($this->addname)) return;
+
+		$ret = get_record("
 
 		$obj = $this->mActionForm->dbhandler->create();
 		$obj->assignVar('lastname', $this->addname);
-		$obj->assignVar('state', '1');
+		$obj->assignVar('state', STATE_ON);
 		$this->mActionForm->dbhandler->insert($obj);
 
-		$this->lastnames[$this->addname] = '1';
+		$this->lastnames[$this->addname] = STATE_ON;
 	}
 
 
@@ -129,20 +124,21 @@ class  LastNames
 	{
 		foreach($this->select_active as $name) {
 			$obj = $this->mActionForm->dbhandler->get($name);
-			$obj->assignVar('state', '1');
+			$obj->assignVar('state', STATE_ON);
 			$this->mActionForm->dbhandler->insert($obj);
-			$this->lastnames[$name] = '1';
+			$this->lastnames[$name] = STATE_ON;
 		}
 	}
+
 
 
 	function  action_move_inactive()
 	{
 		foreach($this->select_inactive as $name) {
 			$obj = $this->mActionForm->dbhandler->get($name);
-			$obj->assignVar('state', '0');
+			$obj->assignVar('state', STATE_OFF);
 			$this->mActionForm->dbhandler->insert($obj);
-			$this->lastnames[$name] = '0';
+			$this->lastnames[$name] = STATE_OFF;
 		}
 	}
 

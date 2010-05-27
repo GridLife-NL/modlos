@@ -14,7 +14,7 @@ class  AvatarsList
 	var $action_url;
 	var $edit_url;
 	var $owner_url;
-	var $courseid = 0;
+	var $courseid;
 
 	var $hasPermit = false;
 	var $isGuest = true;

@@ -9,7 +9,7 @@ require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
 
-class  ShowDataBase
+class  ShowHome
 {
 	var	$grid_status;
 	var $now_online;
@@ -19,7 +19,7 @@ class  ShowDataBase
 	var $courseid;
 
 
-	function  ShowDataBase($courseid) 
+	function  ShowHome($courseid) 
 	{
 		$this->courseid = $courseid;
 
@@ -63,9 +63,8 @@ class  ShowDataBase
 		$visitors_last30days= get_string("mdlos_visitors_last30days", "block_mdlopensim");
 		$online_now 		= get_string("mdlos_online_now", 		  "block_mdlopensim");
 
-		include(CMS_MODULE_PATH."/html/show_db.html");
+		include(CMS_MODULE_PATH."/html/show_home.html");
 	}
-
 
 }
 
