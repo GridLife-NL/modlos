@@ -45,6 +45,8 @@ class  AvatarsList
 	{
 		global $CFG;
 
+		require_login($courseid);
+
 		$this->courseid  	= $courseid;
 		$this->isGuest   	= isguest();
 		$this->hasPermit	= hasPermit($courseid);

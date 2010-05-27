@@ -35,7 +35,7 @@ class  LastNames
 			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'));
 		}
 
-		$this->action_url = CMS_MODULE_URL."/admin/actions/synchrodb.php";
+		$this->action_url = CMS_MODULE_URL."/admin/actions/lastnames.php";
 	}
 
 
@@ -87,6 +87,13 @@ class  LastNames
 			if ($state=='1') $this->lastnames_active[]   = $lastname;
 			else 			 $this->lastnames_inactive[] = $lastname;
 		}
+
+		$grid_name			= $CFG->mdlopnsm_grid_name;
+		$module_url			= CMS_MODULE_URL;
+
+
+		$lastnames_ttl		= get_string('mdlos_lastnames', 'block_mdlopensim');
+		$lastnames_ttl		= get_string('mdlos_lastnames', 'block_mdlopensim');
 
 
 		$render->setAttribute('grid_name', 		$grid_name);

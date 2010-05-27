@@ -34,7 +34,6 @@ class  SynchroDataBase
 		if (!$this->hasPermit) {
 			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'));
 		}
-
 		$this->action_url = CMS_MODULE_URL."/admin/actions/synchrodb.php";
 	}
 
