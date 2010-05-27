@@ -100,7 +100,7 @@
         <tr>
           <td><span class="styleText">
             <?php if ($profileTXT!="") {?>
-              <?php print $profileTXT?>
+              <?php print htmlspecialchars($profileTXT)?>
             <?php } else {?>
               <?php print $has_noprofile?>
             <?php }?>
