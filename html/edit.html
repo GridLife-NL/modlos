@@ -1,0 +1,141 @@
+
+<h2><center><{$grid_name}>&nbsp;:&nbsp;<{$smarty.const._MD_XPNSM_AVATAR_EDIT}></center></h2>
+<br />
+
+<form name="assignform" id="assignform" action="<{$action_url}>" method="POST">
+  <{xoops_token form=$actionForm}>
+
+  <input type="hidden" name="uuid" value="<{$UUID}>" />
+
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+
+    <tr>
+      <td width="100" class="head"><{$smarty.const._MD_XPNSM_FIRSTNAME}></td>
+      <td width="400" class="even"><b><{$firstname}></b></td>
+    </tr>
+
+    <tr>
+      <td class="head"><{$smarty.const._MD_XPNSM_LASTNAME}></td>
+      <td class="odd"><b><{$lastname}></b></td>
+    </tr>
+
+    <tr>
+      <td class="head"><{$smarty.const._MD_XPNSM_PASSWORD}></td>
+      <{if $state==AVATAR_STATE_ACTIVE }>
+        <td class="even"><{xoops_input type="password" name="passwd" size="32" maxlength="16" value=""}></td>
+      <{else}>
+        <td class="even">&nbsp;</td>
+      <{/if}>
+    </tr>
+
+    <tr>
+      <td class="head"><{$smarty.const._MD_XPNSM_CONFIRM_PASS}></td>
+      <{if $state==AVATAR_STATE_ACTIVE }>
+        <td class="odd"><{xoops_input type="password" name="confirm_pass" size="32" maxlength="16" value=""}></td>
+      <{else}>
+        <td class="even">&nbsp;</td>
+      <{/if}>
+    </tr>
+
+
+    <tr>
+      <td class="head"><{$smarty.const._MD_XPNSM_HOME_REGION}></td>
+      <td class="even">
+        <select wide="25" name="hmregion">
+          <{foreach from=$regionNames item="region"}>
+            <{if $region|xoops_escape==$hmregion}>
+              <option value="<{$region}>" selected><{$region|xoops_escape}></option>
+            <{else}>
+              <option value="<{$region}>" ><{$region|xoops_escape}></option>
+            <{/if}>
+          <{/foreach}>
+		</select>
+	  </td>
+    </tr>
+
+    <tr>
+      <td class="head"><{$smarty.const._MD_XPNSM_STATUS}></td>
+      <td class="odd">
+        <input type="radio" name="state" value="<{$smarty.const.AVATAR_STATE_ACTIVE}>"   <{if $state==AVATAR_STATE_ACTIVE  }>checked<{/if}> /><{$smarty.const._MD_XPNSM_ACTIVE}>&nbsp;|
+        <input type="radio" name="state" value="<{$smarty.const.AVATAR_STATE_INACTIVE}>" <{if $state==AVATAR_STATE_INACTIVE}>checked<{/if}> /><{$smarty.const._MD_XPNSM_INACTIVE}>
+      </td>
+    </tr>
+
+
+    <{if $isAdmin}>
+      <tr>
+        <td class="head"><{$smarty.const._MD_XPNSM_OWNERNAME}></td>
+        <td class="even"><{xoops_input name="ownername" size="32" maxlength="30" value=$ownername}></td>
+      </tr>
+    <{/if}>
+
+
+  </table>
+  <br />
+  <input name="submit_update" type="submit" id="submit_update" value="<{$smarty.const._MD_XPNSM_UPDATE_TTL}>" />&nbsp;
+  <input type="reset"  value="<{$smarty.const._MD_XPNSM_RESET_TTL}>" />
+  <{if $state!=1 }>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <!--<a href="<{$delete_url}>" ><font color=#f01010><{$smarty.const._MD_XPNSM_DELETE}></font></a>
+    -->
+    <input name="submit_delete" type="submit" id="submit_delete" value="<{$smarty.const._MD_XPNSM_DELETE_TTL}>" />
+  <{/if}>
+</form>
+
+
+<br />
+<hr />
+<{if $actionForm->hasError()}>
+  <ul>
+    <{foreach item="errval" from=$actionForm->getErrorMessages()}>
+      <li><font color="#f01010"><b><{$errval}></b></font></li>
+    <{/foreach}>
+  </ul>
+  <br />
+<{else}>
+  <{if $updated_avatar}>
+    <h3><font color=#1010e0><{$smarty.const._MD_XPNSM_AVATAR_UPDATED}></font></h3>
+    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
+      <{if $isAdmin}>
+        <tr>
+          <td width="100" class="head"><{$smarty.const._MD_XPNSM_UUID}></td>
+          <td width="400" class="even"><{$UUID}></td>	
+        </tr>
+      <{/if}>
+
+      <tr>
+        <td class="head"><{$smarty.const._MD_XPNSM_FIRSTNAME}></td>
+        <td class="odd" ><{$firstname}></td>	
+      </tr>
+      <tr>
+        <td class="head"><{$smarty.const._MD_XPNSM_LASTNAME}></td>
+        <td class="even"><{$lastname}></td>	
+      </tr>
+      <tr>
+        <td class="head"><{$smarty.const._MD_XPNSM_HOME_REGION}></td>
+        <td class="odd" ><{$hmregion}></td>	
+      </tr>
+      <tr>
+        <td class="head"><{$smarty.const._MD_XPNSM_STATUS}></td>
+        <td class="even" >
+          <{if $state==0}>
+            <font color=#FF0000><{$smarty.const._MD_XPNSM_NOT_SYNCDB}></font>
+          <{elseif $state==1}>
+            <font color=#0000FF><{$smarty.const._MD_XPNSM_ACTIVE}></font>
+          <{elseif $state==5}>
+            <font color=#FF0000><{$smarty.const._MD_XPNSM_INACTIVE}></font>
+          <{else}>
+            <font color=#FF0000><{$smarty.const._MD_XPNSM_UNKNOWN_STATUS}></font>
+          <{/if}>
+        </td>
+      </tr>
+      <{if $isAdmin and $ownername!="" }>
+        <tr>
+          <td class="head"><{$smarty.const._MD_XPNSM_OWNERNAME}></td>
+          <td class="odd"><{$ownername}></td>	
+        </tr>
+      <{/if}>
+    </table>
+  <{/if}>
+<{/if}>
+
