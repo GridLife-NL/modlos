@@ -65,7 +65,7 @@ $string['mdlos_unknown_status'] 	= 'unknown Status';
 $string['mdlos_active_list'] 		= 'Active List';
 $string['mdlos_inactive_list'] 		= 'Inactive List';
 
-$string['mdlos_show_home'] 			= 'Home';
+$string['mdlos_show_home'] 			= 'Home Page';
 $string['mdlos_show_db'] 			= 'Data Base';
 $string['mdlos_world_map'] 			= 'World Map';
 $string['mdlos_user_info'] 			= 'User Information';
