@@ -46,6 +46,7 @@ $string['mdlos_avatar_delete_ttl'] 	= 'DELETE AVATAR';
 $string['mdlos_avatar_own_ttl'] 	= 'OWN AVATAR';
 $string['mdlos_avatar_dlt_cncld_ttl']='AVATAR delete CANCELED';
 
+$string['mdlos_home_page'] 			= 'Home Page';
 $string['mdlos_db_status'] 			= 'DB Status';
 $string['mdlos_total_users'] 		= 'Total Users';
 $string['mdlos_total_regions'] 		= 'Total Regions';
@@ -234,6 +235,8 @@ $string['mdlos_prty_sloodle_desc']  = 'It gives priority to Sloodle, when OpenSi
 $string['mdlos_date_format']		= 'Display format of date(time)';
 $string['mdlos_date_format_desc']	= 'Specify display format of date and time';
 
+$string['mdlos_home_cntnt'] 		= 'Home (Top) Page Content';
+$string['mdlos_home_cntnt_desc']	= 'Specify content of Mdlopensim home (top) page';
 $string['mdlos_db_status_cntnt'] 	= 'DB Status Content';
 $string['mdlos_db_status_cntnt_desc']='Specify content of DB status page';
 $string['mdlos_rg_cntnt'] 			= 'Regions List Content';

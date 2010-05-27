@@ -45,6 +45,7 @@ $string['mdlos_avatar_delete_ttl'] 	= '削除';
 $string['mdlos_avatar_own_ttl'] 	= '変更';
 $string['mdlos_avatar_dlt_cncld_ttl']='取消し';
 
+$string['mdlos_home_page'] 			= 'トップページ';
 $string['mdlos_db_status'] 			= 'データベースの状態';
 $string['mdlos_total_users'] 		= '全体のユーザ人数';
 $string['mdlos_total_regions'] 		= '全体のリージョン数';
@@ -63,7 +64,7 @@ $string['mdlos_unknown_status'] 	= '不明';
 $string['mdlos_active_list'] 		= '使用可能リスト';
 $string['mdlos_inactive_list'] 		= '使用停止リスト';
 
-$string['mdlos_show_home'] 			= 'ホーム';
+$string['mdlos_show_home'] 			= 'トップページ';
 $string['mdlos_show_db'] 			= 'データベース';
 $string['mdlos_world_map'] 			= 'ワールドマップ';
 $string['mdlos_user_info'] 			= 'ユーザ情報';
@@ -232,6 +233,8 @@ $string['mdlos_prty_sloodle_desc']  = 'Sloodle と Mdlopensimでアバター対�
 $string['mdlos_date_format']  		= '日付データのフォーマット';
 $string['mdlos_date_format_desc']  	= 'Mdlopensimで使用する日付表示のフォーマットを指定する';
 
+$string['mdlos_home_cntnt'] 		= 'トップページのコンテンツ';
+$string['mdlos_home_cntnt_desc']	= 'Mdlopensim のトップ（ホーム）ページのコンテンツ．HTMLタグ使用可能';
 $string['mdlos_db_status_cntnt'] 	= 'データベース状態のページのコンテンツ';
 $string['mdlos_db_status_cntnt_desc']='Mdlopensim のデータベース状態のページのコンテンツ．HTMLタグ使用可能';
 $string['mdlos_rg_cntnt'] 			= 'リージョンリストページのコンテンツ';

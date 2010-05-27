@@ -104,9 +104,9 @@ $settings->add(new admin_setting_configcheckbox('mdlopnsm_priority_sloodle',
 					get_string('mdlos_prty_sloodle', 'block_mdlopensim'),
                    	get_string('mdlos_prty_sloodle_desc', 'block_mdlopensim'), 1));
 
-$settings->add(new admin_setting_configtextarea('mdlopnsm_db_status_content',
-					get_string('mdlos_db_status_cntnt', 'block_mdlopensim'),
-                   	get_string('mdlos_db_status_cntnt_desc', 'block_mdlopensim'), "<h2><center>Welcome to Moodle OpenSim Interface</center></h2>", PARAM_RAW));
+$settings->add(new admin_setting_configtextarea('mdlopnsm_home_content',
+					get_string('mdlos_home_cntnt', 'block_mdlopensim'),
+                   	get_string('mdlos_home_cntnt_desc', 'block_mdlopensim'), "<h2><center>Welcome to Moodle OpenSim Interface</center></h2>", PARAM_RAW));
 
 $settings->add(new admin_setting_configtextarea('mdlopnsm_regions_content', 
 					get_string('mdlos_rg_cntnt', 'block_mdlopensim'),
