@@ -1,16 +1,12 @@
 <?php
 
-if (!defined('XOOPS_ROOT_PATH')) exit();
-
-require_once(CMS_MODULE_PATH."/include/xoopensim.func.php");
-require_once(CMS_MODULE_PATH."/class/AbstructAction.class.php");
-require_once(CMS_MODULE_PATH."/class/xoopensimCreateForm.class.php");
+if (!defined('CMS_MODULE_PATH')) exit();
+require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
-class  createAction extends Abstruct_Action
+
+class  AvatarCreate
 {
-	var $mController;
-	var $handler      = null;
 	var $regionNames  = array();
 	var $actvLastName = 0;
 
@@ -30,34 +26,30 @@ class  createAction extends Abstruct_Action
 
 
 
-	function  createAction($controller) 
+	function  createAction() 
 	{
-		$this->mController = $controller;
-
-		$root = & XCube_Root::getSingleton();
-		if ($root->mContext->mUser->isInRole('Site.GuestUser')) {
-			$controller->executeRedirect(CMS_MODULE_URL, 2, _MD_XPNSM_ACCESS_FORBIDDEN);
-		}
+		global $CFG;
 
 		// for HTTPS
-		$use_https = $root->mContext->mModuleConfig['use_https'];
+/*
+		$use_https = $CFG->mdlopnsm_use_https;
 		if ($use_https) {
-			$https_url = $root->mContext->mModuleConfig['https_url'];
+			$https_url = $CFG->mdlopnsm_https_url
 			if ($https_url!="") {
-				$module_url = $https_url.'/'.CMS_DIR_NAME;
+				$module_url = $https_url.'/'._OPENSIM_DIR_NAME;
 			}
 			else {
-				$module_url = ereg_replace('^http:', 'https:', XOOPS_MODULE_URL).'/'.CMS_DIR_NAME;
+				$module_url = ereg_replace('^http:', 'https:', XOOPS_MODULE_URL).'/'._OPENSIM_DIR_NAME;
 			}
 		}
 		else {
-			//$module_url = XOOPS_MODULE_URL.'/'.CMS_DIR_NAME;
-			$module_url = CMS_MODULE_URL;
+			//$module_url = XOOPS_MODULE_URL.'/'._OPENSIM_DIR_NAME;
+			$module_url = _OPENSIM_MODULE_URL;
 		}
+*/
 
 		$this->action_url	= $module_url."/?action=create";
-		$this->mActionForm	= & new Xoopensim_CreateForm();
-		$this->isAdmin		= $this->mActionForm->isAdmin;
+		$this->isAdmin		= isadmin();
 		$this->userid		= $this->mActionForm->uid;
 		$this->actvLastName	= $this->mActionForm->actvLastName;
 
@@ -70,7 +62,7 @@ class  createAction extends Abstruct_Action
 
 			$max_avatars = $controller->mRoot->mContext->mModuleConfig['max_own_avatars'];
 			if ($max_avatars>=0 and $avatars_num>=$max_avatars) {
-				$controller->executeRedirect(CMS_MODULE_URL, 3, _MD_XPNSM_OVER_MAX_AVATARS);
+				$controller->executeRedirect(_OPENSIM_MODULE_URL, 3, _MD_XPNSM_OVER_MAX_AVATARS);
 			}
 		}
 	}
@@ -165,9 +157,7 @@ class  createAction extends Abstruct_Action
 
 	function createAvatar()
 	{
-		//$context = & XCube_Root::getSingleton()->mContext;
-		//$userAssetURI	  = $context->mModuleConfig['asset_uri'];
-		//$userInventoryURI = $context->mModuleConfig['inventory_uri'];
+		$context = & XCube_Root::getSingleton()->mContext;
 
 		// User Check
 		$criteria  = & new CriteriaCompo();
@@ -206,8 +196,7 @@ class  createAction extends Abstruct_Action
 		$new_user['firstname'] = $this->firstname;
 		$new_user['lastname']  = $this->lastname;
 		$new_user['hmregion']  = $this->hmregion;
-		$new_user['time']      = time();
-		$new_user['state']     = AVATAR_STATE_ACTIVE;
+		$new_user['state']     = "";
 
 		//$ret = xoopensim_insrt_usertable($modHandler, $new_user);
 		$ret = xoopensim_insert_usertable($new_user);
