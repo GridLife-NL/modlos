@@ -7,8 +7,8 @@ if (!defined('CMS_MODULE_PATH')) exit();
 require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
-$courseid = optional_param('course', '0', PARAM_INT);
-$course = get_record('course', 'id', $courseid);
+$course_id = optional_param('course', '0', PARAM_INT);
+$course = get_record('course', 'id', $course_id);
 $action = "map_action";
 
 

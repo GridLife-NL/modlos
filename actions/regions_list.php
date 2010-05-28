@@ -7,15 +7,15 @@ if (!defined('CMS_MODULE_PATH')) exit();
 require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
-$courseid = optional_param('course', '0', PARAM_INT);
-$course = get_record('course', 'id', $courseid);
+$course_id = optional_param('course', '0', PARAM_INT);
+$course = get_record('course', 'id', $course_id);
 $action = 'regions_list';
 
 
 print_tabheader($action, $course);
 
 require_once(CMS_MODULE_PATH."/class/regions_list.class.php");
-$regions = new RegionsList($courseid);
+$regions = new RegionsList($course_id);
 $regions->print_page();
 
 print_footer($course);

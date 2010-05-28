@@ -17,37 +17,50 @@ class  EditAvatar
 	var $module_url = "";
 	var $action_url = "";
 
-	var $delete_url = "";
-	var $userid	    = 0;			// owner id of this process
-	var $updated_avatar = false;
+var $delete_url = "";
+var $userid		= 0;			// owner id of this process
+var $updated_avatar = false;
 
 	var $hasError	= false;
 	var $errorMsg 	= array();
 
 
-	// Xoops DB
-	var $avatar    = null;
+	// Moodle DB
+	var $avatar	= null;
 	var $UUID	   = "";
 	var $uid 	   = 0;				// owner id of avatar
-	var $firstname = "";
-	var $lastname  = "";
-	var $hmregion  = "";
-	var $state     = 0;
-	var $ostate    = 0;
-	var $ownername = "";			// owner name of avatar
+var $firstname = "";
+var $lastname  = "";
+var $hmregion  = "";
+var $state	 = 0;
+	var $ostate	= 0;
+var $ownername = "";			// owner name of avatar
 
 
 
 	function  EditAvatar($courseid) 
 	{
-		global $CFG;
+		global $CFG, $USER;
 
 		require_login($courseid);
-	
-		$this->hasPermit = hasPermit($courseid);
-		if (!$this->hasPermit) {
+
+		// get UUID from POST or GET
+		$uuid = required_param('UUID', PARAM_TEXT);
+		if (!isGUID($uuid)) {
+			error('<h4>'.get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)</h4>";
+		}
+		$this->UUID = $uuid;
+
+		// get uid from Moodle DB
+		$avatar = get_record('mdlos_users', 'uuid', $this->UUID);
+		$this->uid	  = $avatar->user_id;				// uid of avatar in editing from DB
+		$this->ostate = $avatar->state;
+		$this->avatar = $avatar;
+
+		if (!$this->hasPermit and $USER->id!=$this->uid) {
 			error('<h4>'.get_string('mdlos_access_forbidden', 'block_mdlopensim').'</h4>');
 		}
+
 
 		// for HTTPS
 		$use_https = $CFG->mdlopnsm_use_https;
@@ -65,72 +78,34 @@ class  EditAvatar
 		}
 		$this->action_url = $this->module_url."/actions/edit_avatar.php";
 
-
-		// get UUID from POST or GET
-		$this->UUID = optional_param('uuid', '', PARAM_TEXT);
-		if (!isGUID($this->UUID)) {
-			$this->hasError = true;
-			$this->errorMsg[] = get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($this->addname)";
-			return;
-		}
-
 //////////////////
 		$this->delete_url = CMS_MODULE_URL."/?action=delete&uuid=".$this->UUID;
 //////////////////
-
-		// get uid from Moodle DB
-		$this->uid    = $avatardata->get('uid');				// uid of avatar in editing from DB
-		$this->ostate = $avatardata->get('state');
-
-		if (!$this->hasPermit and $this->userid!=$this->uid) {
-			$controller->executeRedirect(CMS_MODULE_URL, 3, _MD_XPNSM_ACCESS_FORBIDDEN);
-		}
-
-		// get User Info from Xoops DB
-		$this->avatar = $avatardata;
 	}
 
 
 
 	function  execute()
 	{
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		// OpenSim DB
-        $this->regionNames = opensim_get_regions_names("ORDER BY regionName ASC");
+		$this->regionNames = opensim_get_regions_names("ORDER BY regionName ASC");
 
 		// Form
-		$this->mActionForm->prepare();
-		if (xoops_getenv("REQUEST_METHOD")=="POST") {
-			$this->mActionForm->fetch();
-			$this->mActionForm->validate();
-		}
-		$this->mActionForm->load();
+		if (data_submitted()) {
+			if (!confirm_sesskey()) { 
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				return false;
+			}
 
-		$this->firstname = $this->avatar->get('firstname');
-		$this->lastname  = $this->avatar->get('lastname');
+			$this->firstname = $this->avatar->get('firstname');
+			$this->lastname  = $this->avatar->get('lastname');
 
-		if (xoops_getenv("REQUEST_METHOD")=="POST" and  !$this->mActionForm->hasError()) {
-			$del = $this->mActionForm->get('submit_delete');
+			$del = optional_param('submit_delete', '', PARAM_TEXT);
 			if ($del!="") {
-				$this->mController->executeForward($this->delete_url);
-				exit("<h4>delete page open error!!</h4>");
+				$this->hasError = true;
+				$this->errorMsg[] = "delete page open error!!");
+				return false;
 			}
 
 			$this->passwd	 = $this->mActionForm->get('passwd');
@@ -225,9 +200,9 @@ class  EditAvatar
 
 		// Xoops DB
 		if ($this->hasPermit) $this->uid = get_userid_by_name($this->ownername);
-		else                $this->uid = $this->userid;
+		else				$this->uid = $this->userid;
 
-		$update_user['UUID']      = $this->UUID;
+		$update_user['UUID']	  = $this->UUID;
 		$update_user['uid']		  = $this->uid;
 		$update_user['firstname'] = $this->firstname;
 		$update_user['lastname']  = $this->lastname;

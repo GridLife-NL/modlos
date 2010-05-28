@@ -11,7 +11,7 @@ class  RegionsList
 	var $pnum = array();
 	var $action;
 	var $action_url;
-	var $courseid = 0;
+	var $course_id = 0;
 
 	var $hasPermit = false;
 	var $isGuest = true;
@@ -29,11 +29,14 @@ class  RegionsList
 
 
 
-	function  RegionsList($courseid)
+	function  RegionsList($course_id)
 	{
-		$this->courseid  = $courseid;
-		$this->isGuest   = isguest();
-		$this->hasPermit = hasPermit($courseid);
+		$this->course_id  = $course_id;
+		$this->isGuest    = isguest();
+		$this->hasPermit  = hasPermit($course_id);
+
+		$this->action 	  = "regions_list.php";
+		$this->action_url = CMS_MODULE_URL."/actions/".$this->action;
 	}
 
 
@@ -64,9 +67,6 @@ class  RegionsList
 		// SQL Condition
 		$sql_limit = "LIMIT $this->pstart, $this->plimit";
 		$this->sql_condition = " $sql_order $sql_limit";
-
-		$this->action = "regions_list.php";
-		$this->action_url = CMS_MODULE_URL."/actions/".$this->action;
 
 		return;
 	}
@@ -148,12 +148,15 @@ class  RegionsList
 
 		$grid_name       = $CFG->mdlopnsm_grid_name;
 		$content         = $CFG->mdlopnsm_regions_content;
-		$module_url	     = CMS_MODULE_URL;
 
-		$order		     = "?order=$this->order";
-		$course		     = "&amp;course=$this->courseid";
-		$pstart		     = "&amp;pstart=$this->pstart";
-		$plimit		   	 = "&amp;plimit=$this->plimit";
+		$course_param	 = "";
+		if ($this->course_id>0) $course_param = "&amp;course=$this->course_id";
+
+		$order_param	 = "?order=$this->order";
+		$pstart_param	 = "&amp;pstart=$this->pstart";
+		$plimit_param	 = "&amp;plimit=$this->plimit";
+		$pstart_		 = "&amp;pstart=";
+		$plimit_		 = "&amp;plimit=";
 
 		$regions_list_ttl= get_string("mdlos_regions_list",   "block_mdlopensim");
 		$location_x    	 = get_string("mdlos_location_x",     "block_mdlopensim");

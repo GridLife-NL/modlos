@@ -52,7 +52,7 @@
         <tr>
           <td class="styleText">
             <b><?php print $admin_user?>:&nbsp;
-              <a href="<?php print $module_url.'/helper/agent.php?agent='.$owner_uuid.$course?>"><?php print htmlspecialchars($owner_name)?></a>
+              <a href="<?php print CMS_MODULE_URL.'/helper/agent.php?agent='.$owner_uuid.$course_param?>"><?php print htmlspecialchars($owner_name)?></a>
             </b>
           </td>
         </tr>
@@ -93,7 +93,7 @@
 
             <input type="hidden" name="sesskey" value="<?php print sesskey() ?>" />
             <input type="hidden" name="region"  value="<?php print $region ?>" />
-            <input type="hidden" name="course"  value="<?php print $courseid ?>" />
+            <input type="hidden" name="course"  value="<?php print $course_id ?>" />
             <input type="submit" value="<?php print $change_ttl?>" />
           </td></tr>
         <?php }?>

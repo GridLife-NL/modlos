@@ -18,12 +18,12 @@ if ($isGuest) {
 }
 
 
-$courseid = optional_param('course', '0', PARAM_INT);
-$region   = required_param('region', PARAM_TEXT);
+$course_id = optional_param('course', '0', PARAM_INT);
+$region    = required_param('region', PARAM_TEXT);
 if (!isGUID($region)) exit("<h4>bad region uuid!! ($region)</h4>");
 
-require_login($courseid);
-$hasPermit = hasPermit($courseid);
+require_login($course_id);
+$hasPermit = hasPermit($course_id);
 
 global $CFG;
 $grid_name  = $CFG->mdlopnsm_grid_name;
@@ -123,7 +123,8 @@ $avatar_select = true;
 if ($avatar_num>100) $avatar_select = false;
 
 //////////////
-$course 	  	= "&amp;course=".$courseid;
+$course_param = "";
+if ($course_id>0) $course_param	= "&amp;course=".$course_id;
 
 $region_info_ttl= get_string("mdlos_region_info",	 "block_mdlopensim");
 $region_ttl   	= get_string("mdlos_region",   		 "block_mdlopensim");

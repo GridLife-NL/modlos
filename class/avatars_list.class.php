@@ -14,7 +14,10 @@ class  AvatarsList
 	var $action_url;
 	var $edit_url;
 	var $owner_url;
-	var $courseid;
+	var $course_url;
+	var $avatar_url;
+
+	var $course_param = "";
 
 	var $hasPermit = false;
 	var $isGuest = true;
@@ -41,16 +44,27 @@ class  AvatarsList
 
 
 
-	function  AvatarsList($courseid)
+	function  AvatarsList($course_id)
 	{
 		global $CFG;
 
-		require_login($courseid);
+		require_login($course_id);
 
-		$this->courseid  	= $courseid;
+		$this->course_id  	= $course_id;
 		$this->isGuest   	= isguest();
-		$this->hasPermit	= hasPermit($courseid);
+		$this->hasPermit	= hasPermit($course_id);
 		$this->date_format 	= $CFG->mdlopnsm_date_format;
+
+		$this->action_url	= CMS_MODULE_URL."/actions/avatars_list.php?course=$this->course_id";
+		$this->edit_url		= CMS_MODULE_URL."/actions/edit_avatar.php?course=$this->course_id";
+		$this->owner_url	= CMS_MODULE_URL."/actions/owner_avatar.php?course=$this->course_id";
+		$this->avatar_url 	= $CFG->wwwroot."/user/view.php";
+
+		$this->course_url = $CFG->wwwroot;
+		if ($course_id>0) {
+			$this->course_url  .= "/course/view.php?id=".$course_id;
+			$this->course_param = "&amp;course=".$course_id;
+		}
 	}
 
 
@@ -58,7 +72,7 @@ class  AvatarsList
 	{
 		$this->db_ver  = opensim_get_db_version();
 		if ($db_ver=="0.0") {
-			error('<h4>'.get_string('mdlos_db_connect_error', 'block_mdlopensim').'</h4>');
+			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'), $this->course_url);
 		}
 
 		$sql_order = "ORDER BY created ASC";
@@ -93,19 +107,14 @@ class  AvatarsList
 
 		// SQL Condition
 		$sql_limit = "LIMIT $this->pstart, $this->plimit";
-
 		$this->sql_countcnd  = " WHERE $sql_validuser $sql_firstname $sql_lastname";
 		$this->sql_condition = " WHERE $sql_validuser $sql_firstname $sql_lastname $sql_order $sql_limit";
-		$this->action_url    = CMS_MODULE_URL."/actions/avatars_list.php";
-		$this->edit_url      = CMS_MODULE_URL."/actions/edit_avatar.php";
-		$this->owner_url     = CMS_MODULE_URL."/actions/owner_avatar.php";
 	}
 
 
 
 	function  execute()
 	{
-
 		$this->number    = count(opensim_get_avatars_infos($this->sql_countcnd));;
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
@@ -168,7 +177,7 @@ class  AvatarsList
 				$this->db_data[$colum]['born'] = ' - ';
 			}
 			else {
-				$this->db_data[$colum]['born'] = date("Y.m.d", $created);
+				$this->db_data[$colum]['born'] = date($this->date_format, $created);
 			}
 
 			$lastlogin = $this->db_data[$colum]['lastlogin'];
@@ -176,7 +185,6 @@ class  AvatarsList
 				$this->db_data[$colum]['lastin'] = ' - ';
 			}
 			else {
-				//$this->db_data[$colum]['lastin'] = date("Y.m.d - H:i", $lastlogin);
 				$this->db_data[$colum]['lastin'] = date($this->date_format, $lastlogin);
 			}
 
@@ -231,10 +239,7 @@ class  AvatarsList
         $content   		= $CFG->mdlopnsm_avatars_content;
 		$userinfo		= $CFG->mdlopnsm_userinfo_link;
 		$date_format	= $CFG->mdlopnsm_date_format;
-		$moodle_url		= $CFG->wwwroot;
-		$module_url		= CMS_MODULE_URL;
 
-        $course        	= "?course=$this->courseid";
         $pstart_        = "&amp;pstart=";
         $plimit_        = "&amp;plimit=";
         $plimit         = "&amp;plimit=$this->plimit";

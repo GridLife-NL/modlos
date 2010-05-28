@@ -318,40 +318,36 @@ function print_tabnav($currenttab, $course)
 {
 	global $CFG;
 
-	if (empty($currenttab)) {
-		$currenttab = 'world_map';
-	}
+	if (empty($currenttab)) $currenttab = 'world_map';
+	if (empty($course)) $course_id = 0;
+	else 				$course_id = $course->id;
 
-	if (empty($course)) {
-		$courseid = 0;
-	}
-	else {
-		$courseid = $course->id;
-	}
-	$hasPermit = hasPermit($courseid);
+	$hasPermit = hasPermit($course_id);
 
+	$course_param = "";
+	if ($course_id>0) $course_param = '?course='.$course_id;
 
 	///////
 	$toprow = array();
-	$toprow[] = new tabobject('show_home', CMS_MODULE_URL.'/actions/show_home.php?course='.$courseid, 
+	$toprow[] = new tabobject('show_home', CMS_MODULE_URL.'/actions/show_home.php'.$course_param, 
 																	'<b>'.get_string('mdlos_show_home','block_mdlopensim').'</b>');
-	$toprow[] = new tabobject('map_action', CMS_MODULE_URL.'/actions/map_action.php?course='.$courseid, 
+	$toprow[] = new tabobject('map_action', CMS_MODULE_URL.'/actions/map_action.php'.$course_param, 
 																	'<b>'.get_string('mdlos_world_map','block_mdlopensim').'</b>');
-	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php?course='.$courseid, 
+	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$course_param, 
 																	'<b>'.get_string('mdlos_regions_list','block_mdlopensim').'</b>');
 	if (!isGuest()) {
-		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php?course='.$courseid, 
+		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param, 
 																	'<b>'.get_string('mdlos_avatars_list','block_mdlopensim').'</b>');
-		$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php?course='. $courseid, 
+		$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $course_param, 
 																	'<b>'.get_string('mdlos_avatar_create','block_mdlopensim').'</b>');
 	}
 
 	if ($hasPermit) {
 		if ($CFG->mdlopnsm_activate_lastname) {
-			$toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/actions/lastnames.php?course='.$courseid, 
+			$toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/actions/lastnames.php'.$course_param, 
 																	'<b>'.get_string('mdlos_lastnames_tab','block_mdlopensim').'</b>');
 		}
-		$toprow[] = new tabobject('synchrodb', CMS_MODULE_URL.'/admin/actions/synchrodb.php?course='.$courseid, 
+		$toprow[] = new tabobject('synchrodb', CMS_MODULE_URL.'/admin/actions/synchrodb.php'.$course_param, 
 																	'<b>'.get_string('mdlos_synchro_tab','block_mdlopensim').'</b>');
 		if (isadmin()) {
 			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmdlopensim', 
@@ -359,8 +355,8 @@ function print_tabnav($currenttab, $course)
 		}
 	}
 
-	if ($courseid!=0) {
-		$toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$courseid, '<b>'.get_string('mdlos_return_tab', 'block_mdlopensim').'</b>');
+	if ($course_id>0) {
+		$toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, '<b>'.get_string('mdlos_return_tab', 'block_mdlopensim').'</b>');
 	}
 	else {
 		$toprow[] = new tabobject('', $CFG->wwwroot, '<b>'.get_string('mdlos_return_tab', 'block_mdlopensim').'</b>');

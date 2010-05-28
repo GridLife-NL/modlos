@@ -11,12 +11,12 @@ if (isguest()) {
 }
 
 
-$courseid = optional_param('course', '0', PARAM_INT);
-$agent 	  = required_param('agent', PARAM_TEXT);
+$course_id = optional_param('course', '0', PARAM_INT);
+$agent 	   = required_param('agent', PARAM_TEXT);
 if (!isGUID($agent)) exit("<h4>bad agent uuid!! ($agent)</h4>");
 
-require_login($courseid);
-$hasPermit  = hasPermit($courseid);
+require_login($course_id);
+$hasPermit  = hasPermit($course_id);
 
 global $CFG;
 $grid_name  = $CFG->mdlopnsm_grid_name;
@@ -95,8 +95,9 @@ $guid = str_replace("-", "", $UUID);
 
 
 ///////////////
-$module_url	  	= CMS_MODULE_URL;
-$course       	= "&amp;course=".$courseid;
+
+$course_param = "";
+if ($course_id>0) $course_param = "&amp;course=".$course_id;
 
 $user_info_ttl  = get_string("mdlos_user_info",		"block_mdlopensim");
 $avatar_info_ttl= get_string("mdlos_avatar_info",	"block_mdlopensim");

@@ -16,12 +16,12 @@ class  ShowHome
 	var $lastmonth_online;
 	var $user_count;
 	var $region_count;
-	var $courseid;
+	var $course_id;
 
 
-	function  ShowHome($courseid) 
+	function  ShowHome($course_id) 
 	{
-		$this->courseid = $courseid;
+		$this->course_id = $course_id;			// not use in this version
 
 		$this->grid_status 		= false;
 		$this->now_online 		= '0';
@@ -53,7 +53,6 @@ class  ShowHome
 
 		$grid_name       	= $CFG->mdlopnsm_grid_name;
 		$content         	= $CFG->mdlopnsm_home_content;
-		$module_url 		= CMS_MODULE_URL;
 
 		$home_page 			= get_string("mdlos_home_page", 		  "block_mdlopensim");
 		$online_ttl 		= get_string("mdlos_online_ttl", 		  "block_mdlopensim");
