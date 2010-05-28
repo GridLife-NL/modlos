@@ -165,6 +165,7 @@ $string['mdlos_sloodle_delete_error']='It failed in deleting avatar of Sloodle!!
 $string['mdlos_user_delete_error']  = 'It failed in deleting user of Mdlopensim!!';
 $string['mdlos_passwd_update_error']= 'It failed in updating password!!';
 $string['mdlos_hmrgn_update_error'] = 'It failed in updating home region of avatar!!';
+$string['mdlos_sloodle_update_error']='It failed in updating data of Sloodle!!';
 $string['mdlos_inactivate_error']   = 'It failed in the inactivation of avatar!!';
 $string['mdlos_activate_error']     = 'It failed in the activation of avatar!!';
 

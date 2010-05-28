@@ -207,7 +207,7 @@ class  AvatarsList
 				if ($uid>0) {
 					$user_info = get_record('user', 'id', $uid, 'deleted', '0');
 					if ($user_info!=null) {
-						$this->db_data[$colum]['uname'] = getUserName($user_info->firstname, $user_info->lastname);
+						$this->db_data[$colum]['uname'] = get_local_user_name($user_info->firstname, $user_info->lastname);
 					}
 				}
 			}

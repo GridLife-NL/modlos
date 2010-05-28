@@ -3,154 +3,144 @@
 <br />
 
 <form name="assignform" id="assignform" action="<?php print $action_url?>" method="POST">
-  <?php print xoops_token form=$actionForm?>
 
-  <input type="hidden" name="uuid" value="<?php print $UUID?>" />
+  <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
+  <input type="hidden" name="uuid"    value="<?php print $this->UUID?>" />
+  <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
 
   <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
 
     <tr>
-      <td width="100" class="head"><?php print $smarty.const._MD_XPNSM_FIRSTNAME?></td>
-      <td width="400" class="even"><b><?php print $firstname?></b></td>
+      <td width="100" class="head"><?php print $firstname_ttl?></td>
+      <td width="400" class="even"><b><?php print $this->firstname?></b></td>
     </tr>
 
     <tr>
-      <td class="head"><?php print $smarty.const._MD_XPNSM_LASTNAME?></td>
-      <td class="odd"><b><?php print $lastname?></b></td>
+      <td class="head"><?php print $lastname_ttl?></td>
+      <td class="odd" ><b><?php print $this->lastname?></b></td>
     </tr>
 
     <tr>
-      <td class="head"><?php print $smarty.const._MD_XPNSM_PASSWORD?></td>
-      <?php print if $state==AVATAR_STATE_ACTIVE ?>
-        <td class="even"><?php print xoops_input type="password" name="passwd" size="32" maxlength="16" value=""?></td>
-      <?php print else?>
+      <td class="head"><?php print $passwd_ttl?></td>
+      <?php if ($this->state==AVATAR_STATE_ACTIVE) {?>
+        <td class="even"><input type="password" name="passwd" size="32" maxlength="16" value="" /></td>
+      <?php } else {?>
         <td class="even">&nbsp;</td>
-      <?php print /if?>
+      <?php }?>
     </tr>
 
     <tr>
-      <td class="head"><?php print $smarty.const._MD_XPNSM_CONFIRM_PASS?></td>
-      <?php print if $state==AVATAR_STATE_ACTIVE ?>
-        <td class="odd"><?php print xoops_input type="password" name="confirm_pass" size="32" maxlength="16" value=""?></td>
-      <?php print else?>
+      <td class="head"><?php print $confirm_pass_ttl?></td>
+      <?php if ($state==AVATAR_STATE_ACTIVE) {?>
+        <td class="odd"><input type="password" name="confirm_pass" size="32" maxlength="16" value="" /></td>
+      <?php } else {?>
         <td class="even">&nbsp;</td>
-      <?php print /if?>
+      <?php }?>
     </tr>
 
 
     <tr>
-      <td class="head"><?php print $smarty.const._MD_XPNSM_HOME_REGION?></td>
+      <td class="head"><?php print $home_region_ttl?></td>
       <td class="even">
         <select wide="25" name="hmregion">
-          <?php print foreach from=$regionNames item="region"?>
-            <?php print if $region|xoops_escape==$hmregion?>
-              <option value="<?php print $region?>" selected><?php print $region|xoops_escape?></option>
-            <?php print else?>
-              <option value="<?php print $region?>" ><?php print $region|xoops_escape?></option>
-            <?php print /if?>
-          <?php print /foreach?>
+          <?php foreach ($regionNames as $region) {?>
+            <?php if ($region==$hmregion) {?>
+              <option value="<?php print $region?>" selected><?php print $region?></option>
+            <?php } else {?>
+              <option value="<?php print $region?>" ><?php print $region?></option>
+            <?php }?>
+          <?php }?>
 		</select>
 	  </td>
     </tr>
 
     <tr>
-      <td class="head"><?php print $smarty.const._MD_XPNSM_STATUS?></td>
+      <td class="head"><?php print $status_ttl?></td>
       <td class="odd">
-        <input type="radio" name="state" value="<?php print $smarty.const.AVATAR_STATE_ACTIVE?>"   <?php print if $state==AVATAR_STATE_ACTIVE  ?>checked<?php print /if?> /><?php print $smarty.const._MD_XPNSM_ACTIVE?>&nbsp;|
-        <input type="radio" name="state" value="<?php print $smarty.const.AVATAR_STATE_INACTIVE?>" <?php print if $state==AVATAR_STATE_INACTIVE?>checked<?php print /if?> /><?php print $smarty.const._MD_XPNSM_INACTIVE?>
+        <input type="radio" name="state" value="<?php print AVATAR_STATE_ACTIVE?>"   <?php if ($this->state==AVATAR_STATE_ACTIVE) {?>checked<?php }?> /><?php print $active_ttl?>&nbsp;|
+        <input type="radio" name="state" value="<?php print AVATAR_STATE_INACTIVE?>" <?php if ($this->state==AVATAR_STATE_INACTIVE) {?>checked<?php }?> /><?php print $inactive_ttl?>
       </td>
     </tr>
 
 
-    <?php print if $this->hasPermit?>
+    <?php if ($this->hasPermit) {?>
       <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_OWNERNAME?></td>
-        <td class="even"><?php print xoops_input name="ownername" size="32" maxlength="30" value=$ownername?></td>
+        <td class="head"><?php print $owner_ttl?></td>
+        <td class="even"><input name="ownername" size="32" maxlength="30" value=<?php print $this->ownername?> /></td>
       </tr>
-    <?php print /if?>
+    <?php }?>
 
 
   </table>
   <br />
-  <input name="submit_update" type="submit" id="submit_update" value="<?php print $smarty.const._MD_XPNSM_UPDATE_TTL?>" />&nbsp;
-  <input type="reset"  value="<?php print $smarty.const._MD_XPNSM_RESET_TTL?>" />
-  <?php print if $state!=1 ?>
+  <input name="submit_update" type="submit" id="submit_update" value="<?php print $update_ttl?>" />&nbsp;
+  <input type="reset"  value="<?php print $reset_ttl?>" />
+  <?php if ($state!=1) { ?>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <!--<a href="<?php print $delete_url?>" ><font color=#f01010><?php print $smarty.const._MD_XPNSM_DELETE?></font></a>
+    <!--<a href="<?php print $this->delete_url?>" ><font color=#f01010><?php print $delete_ttl?></font></a>
     -->
-    <input name="submit_delete" type="submit" id="submit_delete" value="<?php print $smarty.const._MD_XPNSM_DELETE_TTL?>" />
-  <?php print /if?>
+    <input name="submit_delete" type="submit" id="submit_delete" value="<?php print $delete_ttl?>" />
+  <?php }?>
 </form>
-
-
-<br />
-<hr />
-<?php print if $actionForm->hasError()?>
-  <ul>
-    <?php print foreach item="errval" from=$actionForm->getErrorMessages()?>
-      <li><font color="#f01010"><b><?php print $errval?></b></font></li>
-    <?php print /foreach?>
-  </ul>
-  <br />
-<?php print else?>
-  <?php print if $updated_avatar?>
-    <h3><font color=#1010e0><?php print $smarty.const._MD_XPNSM_AVATAR_UPDATED?></font></h3>
-    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
-      <?php print if $this->hasPermit?>
-        <tr>
-          <td width="100" class="head"><?php print $smarty.const._MD_XPNSM_UUID?></td>
-          <td width="400" class="even"><?php print $UUID?></td>	
-        </tr>
-      <?php print /if?>
-
-      <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_FIRSTNAME?></td>
-        <td class="odd" ><?php print $firstname?></td>	
-      </tr>
-      <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_LASTNAME?></td>
-        <td class="even"><?php print $lastname?></td>	
-      </tr>
-      <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_HOME_REGION?></td>
-        <td class="odd" ><?php print $hmregion?></td>	
-      </tr>
-      <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_STATUS?></td>
-        <td class="even" >
-          <?php print if $state==0?>
-            <font color=#FF0000><?php print $smarty.const._MD_XPNSM_NOT_SYNCDB?></font>
-          <?php print elseif $state==1?>
-            <font color=#0000FF><?php print $smarty.const._MD_XPNSM_ACTIVE?></font>
-          <?php print elseif $state==5?>
-            <font color=#FF0000><?php print $smarty.const._MD_XPNSM_INACTIVE?></font>
-          <?php print else?>
-            <font color=#FF0000><?php print $smarty.const._MD_XPNSM_UNKNOWN_STATUS?></font>
-          <?php print /if?>
-        </td>
-      </tr>
-      <?php print if $this->hasPermit and $ownername!="" ?>
-        <tr>
-          <td class="head"><?php print $smarty.const._MD_XPNSM_OWNERNAME?></td>
-          <td class="odd"><?php print $ownername?></td>	
-        </tr>
-      <?php print /if?>
-    </table>
-  <?php print /if?>
-<?php print /if?>
 <br />
 
 
-<!-- Error Message -->
 <br />
 <br />
 <hr />
 <?php if ($this->hasError) {?>
   <ul>
-    <?php foreach($this->errorMsg as $mesg) {?>
-       <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
+    <?php foreach ($this->errorMsg as $mseg) {?>
+      <li><font color="#f01010"><b><?php print $mesg?></b></font></li>
     <?php }?>
   </ul>
+  <br />
+
+<?php } else {?>
+  <?php if ($this->updated_avatar) {?>
+    <h3><font color=#1010e0><?php print $this->avatar_updated?></font></h3>
+    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
+      <?php if ($this->hasPermit) {?>
+        <tr>
+          <td width="100" class="head"><?php print $UUID_ttl?></td>
+          <td width="400" class="even"><?php print $this->UUID?></td>	
+        </tr>
+      <?php }?>
+
+      <tr>
+        <td class="head"><?php print $firstname_ttl?></td>
+        <td class="odd" ><?php print $this->firstname?></td>	
+      </tr>
+      <tr>
+        <td class="head"><?php print $lastname_ttl?></td>
+        <td class="even"><?php print $this->lastname?></td>	
+      </tr>
+      <tr>
+        <td class="head"><?php print $home_region_ttl?></td>
+        <td class="odd" ><?php print $this->hmregion?></td>	
+      </tr>
+      <tr>
+        <td class="head"><?php print $status_ttl?></td>
+        <td class="even" >
+          <?php if ($this->state==AVATAR_STATE_NOTSYNC) {?>
+            <font color=#FF0000><?php print $not_syncdb_ttl?></font>
+          <?php } elseif ($this->state==AVATAR_STATE_ACTIVE) {?>
+            <font color=#0000FF><?php print $active_ttl?></font>
+          <?php } elseif ($this->state==AVATAR_STATE_INACTIVE) { ?>
+            <font color=#FF0000><?php print $inactive_ttl?></font>
+          <?php } else {?>
+            <font color=#FF0000><?php print $unknown_status?></font>
+          <?php }?>
+        </td>
+      </tr>
+      <?php if ($this->hasPermit and $this->ownername!="") {?>
+        <tr>
+          <td class="head"><?php print $ownername_ttl ?></td>
+          <td class="odd" ><?php print $this->ownername?></td>	
+        </tr>
+      <?php }?>
+    </table>
+  <?php }?>
 <?php }?>
 <br />
 

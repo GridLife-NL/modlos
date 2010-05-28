@@ -163,6 +163,7 @@ $string['mdlos_sloodle_delete_error']='Sloodle のユーザの削除に失敗し
 $string['mdlos_user_delete_error']	= 'Mdlopensim のユーザの削除に失敗しました!!';
 $string['mdlos_passwd_update_error']= 'パスワードの更新に失敗しました!!';
 $string['mdlos_hmrgn_update_error']	= 'ホームリージョンの更新に失敗しました!!';
+$string['mdlos_sloodle_update_error']='Sloodleのユーザデータの更新に失敗しました!!';
 $string['mdlos_inactivate_error']	= 'アバターの無効化に失敗しました!!';
 $string['mdlos_activate_error']		= 'アバターの有効化に失敗しました!!';
 

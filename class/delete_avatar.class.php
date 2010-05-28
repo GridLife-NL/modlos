@@ -16,18 +16,18 @@ class  DeleteAvatar
 	var $course_id	= 0;
 	var $course_param = "";
 
-	var $hasError  = false;
-	var $errorMsg  = array();
+	var $hasError  	= false;
+	var $errorMsg  	= array();
 
 	// Moodle DB
-	var $avatar	= null;
-	var $UUID	   = "";
-	var $uid 	   = 0;			// owner of avatar
-	var $firstname = "";
-	var $lastname  = "";
-	var $hmregion  = "";
-	var $state	 = -1;
-	var $ownername = "";
+	var $avatar	   	= null;
+	var $UUID	   	= "";
+	var $uid 	   	= 0;			// owner of avatar
+	var $firstname 	= "";
+	var $lastname  	= "";
+	var $hmregion  	= "";
+	var $state	   	= -1;
+	var $ownername 	= "";
 
 
 
@@ -38,26 +38,10 @@ class  DeleteAvatar
 		require_login($course_id);
 
 		if ($course_id>0) $this->course_param = "&amp;course=".$course_id;
-
 		$this->course_id  = $course_id;
-		$this->action_url = CMS_MODULE_URL."/delete_avatar.php".$this->course_param;
-		$this->cancel_url = CMS_MODULE_URL."/avatars_list.php". $this->course_param;
-		$this->return_url = CMS_MODULE_URL."/avatars_list.php". $this->course_param;
-
-		$this->firstname  = optional_param('firstname', '', PARAM_TEXT);
-		$this->lastname   = optional_param('lastname',  '', PARAM_TEXT);
-		$this->hmregion	  = optional_param('hmregion',  '', PARAM_TEXT);
-
-		if (!isAlphabetNumericSpecial($this->firstname), true) {
-			error(get_string('mdlos_invalid_firstname', 'block_mdlopensim')." ($this->firstname)", $this->return_url);
-		}
-		if (!isAlphabetNumericSpecial($this->lastname), true) { 
-			error(get_string('mdlos_invalid_lastname',  'block_mdlopensim')." ($this->lastname)",  $this->return_url);
-		}
-		if (!isAlphabetNumericSpecial($this->hmrehion), true) { 
-			error(get_string('mdlos_invalid_regionname','block_mdlopensim')." ($this->hmrehion)",  $this->return_url);
-		}
-		$this->ownername  = getUserName($USER->firstname, $USER->lastname);
+		$this->action_url = CMS_MODULE_URL."/actions/delete_avatar.php".$this->course_param;
+		$this->cancel_url = CMS_MODULE_URL."/actions/avatars_list.php". $this->course_param;
+		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $this->course_param;
 
 
 		// get UUID from POST or GET
@@ -67,12 +51,13 @@ class  DeleteAvatar
 		}
 		$this->UUID	= $uuid;
 
-		// get uid from Moodle DB
+		// get uid from Mdlopensim DB
 		$avatar = get_record('mdlos_users', 'uuid', $this->UUID);
 		$this->uid	  = $avatar->user_id;				// uid of avatar in editing from DB
 		$this->state  = $avatar->state;
 		$this->avatar = $avatar;
 
+		$this->hasPermit = hasPermit();
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
 			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $this->return_url);
 		}
@@ -85,6 +70,9 @@ class  DeleteAvatar
 
 	function  execute()
 	{
+		$this->firstname  = $this->avatar->firstname;
+		$this->lastname   = $this->avatar->lastname;
+
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
@@ -155,7 +143,7 @@ class  DeleteAvatar
 		}
 
 		mdlopensim_delete_banneddb($this->UUID);
-		mdlopensim_delete_groupdb($this->UUID, false);
+		mdlopensim_delete_groupdb ($this->UUID, false);
 		mdlopensim_delete_profiles($this->UUID);
 
 		// OpenSim

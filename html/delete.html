@@ -4,7 +4,7 @@
 
 <?php if (!$this->deleted_avatar) {?>
 <form action="<?php print $this->action_url?>" method="POST">
-  <input type="hidden" name="uuid"   value="<?php print $UUID?>" />
+  <input type="hidden" name="UUID"   value="<?php print $UUID?>" />
 <?php }?>
 
   <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
@@ -13,17 +13,17 @@
     <?php }?>
     <tr>
       <td width="100" class="head"><?php print $firstname_ttl?></td>
-      <td width="400" class="even"><?php print $firstname?></td>
+      <td width="400" class="even"><?php print $this->firstname?></td>
     </tr>
 
     <tr>
       <td class="head"><?php print $lastname_ttl?></td>
-      <td class="odd" ><?php print $lastname?></td>
+      <td class="odd" ><?php print $this->lastname?></td>
     </tr>
 
     <tr>
       <td class="head"><?php print $home_region_ttl?></td>
-      <td class="even"><?php print $hmregion?></td>
+      <td class="even"><?php print $this->hmregion?></td>
     </tr>
 
     <tr>
@@ -44,17 +44,17 @@
     <?php if ($this->hasPermit) {?>
       <tr>
         <td class="head"><?php print $ownername_ttl?></td>
-        <td class="even"><?php print $ownername?></td>	
+        <td class="even"><?php print $this->ownername?></td>	
       </tr>
     <?php }?>
 
   </table>
   <br />
-  <input type="hidden" name="course" value="<?php print $this->course_id?>" />
+  <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
+  <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
   <?php if ($this->deleted_avatar) {?>
     &nbsp;&nbsp;<a href=<?php print $this->return_url?>><b><?php print $return_ttl?></b></a>
   <?php } else {?>
-    <input type="hidden" name="sesskey" value="<?php print  sesskey() ?>" />
     <input name="submit_delete" type="submit" value="<?php print $delete_ttl?>" />&nbsp;
     <input name="cancel_delete" type="submit" value="<?php print $cancel_ttl?>" />
   <?php }?>
