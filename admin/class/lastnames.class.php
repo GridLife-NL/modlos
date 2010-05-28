@@ -17,7 +17,7 @@ define('STATE_ON',  '1');
 class  LastNames
 {
 	var $action_url;
-	var $courseid;
+	var $course_id = 0;
 
 	var $lastnames			= array();
 	var $lastnames_active	= array();
@@ -32,12 +32,12 @@ class  LastNames
 
 
 
-	function  LastNames($courseid) 
+	function  LastNames($course_id) 
 	{
-		require_login($courseid);
+		require_login($course_id);
 
-		$this->courseid  = $courseid;
-		$this->hasPermit = hasPermit($courseid);
+		$this->course_id  = $course_id;
+		$this->hasPermit = hasPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string('mdlos_access_forbidden', 'block_mdlopensim');
@@ -102,7 +102,6 @@ class  LastNames
 		}
 
 		$grid_name		= $CFG->mdlopnsm_grid_name;
-		$module_url		= CMS_MODULE_URL;
 		$select1 		= $this->lastnames_active;
 		$select2 		= $this->lastnames_inactive;
 

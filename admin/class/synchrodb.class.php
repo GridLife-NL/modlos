@@ -18,19 +18,19 @@ class  SynchroDataBase
 {
 	var $action_url;
 	var $hashPermit;
-	var $courseid;
+	var $course_id = 0;
 	var	$synchronized = false;
 	var	$hasError = false;
 	var	$errorMsg = array();
 
 
 
-	function  SynchroDataBase($courseid) 
+	function  SynchroDataBase($course_id) 
 	{
-		require_login($courseid);
+		require_login($course_id);
 
-		$this->courseid  = $courseid;
-		$this->hasPermit = hasPermit($courseid);
+		$this->course_id  = $course_id;
+		$this->hasPermit = hasPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string('mdlos_access_forbidden', 'block_mdlopensim');
@@ -159,8 +159,7 @@ class  SynchroDataBase
 		$synchro_db_ttl   = get_string("mdlos_synchro_db", 		 "block_mdlopensim");
 		$synchronized_msg = get_string("mdlos_synchronized", 	 "block_mdlopensim");
 		$synchro_submit	  = get_string("mdlos_synchro_submit", 	 "block_mdlopensim");
-		$content		  = get_string("mdlos_synchro_contents", "block_mdlopensim");
-		$content		  = "<center>".$content."</center>";
+		$content		  = "<center>".get_string("mdlos_synchro_contents", "block_mdlopensim")."</center>";
 
 		include(CMS_MODULE_PATH."/admin/html/synchro.html");
 	}

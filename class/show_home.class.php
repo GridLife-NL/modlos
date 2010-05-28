@@ -16,13 +16,10 @@ class  ShowHome
 	var $lastmonth_online;
 	var $user_count;
 	var $region_count;
-	var $course_id;
 
 
 	function  ShowHome($course_id) 
 	{
-		$this->course_id = $course_id;			// not use in this version
-
 		$this->grid_status 		= false;
 		$this->now_online 		= '0';
 		$this->lastmonth_online = '0';

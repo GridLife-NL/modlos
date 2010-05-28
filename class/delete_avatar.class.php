@@ -7,40 +7,65 @@ require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 class  DeleteAvatar
 {
-	var $hasPermit    = false;
+	var $hasPermit	= false;
 	var $action_url = "";
 	var $cancel_url = "";
 	var $return_url = "";
-	var $userid	    = 0;		// owner of this process
 	var $deleted_avatar = false;
+
+	var $course_id	= 0;
+	var $course_param = "";
 
 	var $hasError  = false;
 	var $errorMsg  = array();
 
 	// Moodle DB
-	var $avatar    = null;
+	var $avatar	= null;
 	var $UUID	   = "";
 	var $uid 	   = 0;			// owner of avatar
 	var $firstname = "";
 	var $lastname  = "";
 	var $hmregion  = "";
-	var $state     = -1;
+	var $state	 = -1;
 	var $ownername = "";
 
 
-	function  DeleteAvatar($courseid) 
+
+	function  DeleteAvatar($course_id) 
 	{
 		global $CFG, $USER;
 
-		require_login($courseid);
+		require_login($course_id);
+
+		if ($course_id>0) $this->course_param = "&amp;course=".$course_id;
+
+		$this->course_id  = $course_id;
+		$this->action_url = CMS_MODULE_URL."/delete_avatar.php".$this->course_param;
+		$this->cancel_url = CMS_MODULE_URL."/avatars_list.php". $this->course_param;
+		$this->return_url = CMS_MODULE_URL."/avatars_list.php". $this->course_param;
+
+		$this->firstname  = optional_param('firstname', '', PARAM_TEXT);
+		$this->lastname   = optional_param('lastname',  '', PARAM_TEXT);
+		$this->hmregion	  = optional_param('hmregion',  '', PARAM_TEXT);
+
+		if (!isAlphabetNumericSpecial($this->firstname), true) {
+			error(get_string('mdlos_invalid_firstname', 'block_mdlopensim')." ($this->firstname)", $this->return_url);
+		}
+		if (!isAlphabetNumericSpecial($this->lastname), true) { 
+			error(get_string('mdlos_invalid_lastname',  'block_mdlopensim')." ($this->lastname)",  $this->return_url);
+		}
+		if (!isAlphabetNumericSpecial($this->hmrehion), true) { 
+			error(get_string('mdlos_invalid_regionname','block_mdlopensim')." ($this->hmrehion)",  $this->return_url);
+		}
+		$this->ownername  = getUserName($USER->firstname, $USER->lastname);
+
 
 		// get UUID from POST or GET
 		$uuid = required_param('UUID', PARAM_TEXT);
 		if (!isGUID($uuid)) {
-			error('<h4>'.get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)</h4>";
+			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)", $this->return_url);
 		}
-		$this->UUID 	= $uuid;
-		$this->courseid = $courseid;
+		$this->UUID	= $uuid;
 
 		// get uid from Moodle DB
 		$avatar = get_record('mdlos_users', 'uuid', $this->UUID);
@@ -49,20 +74,11 @@ class  DeleteAvatar
 		$this->avatar = $avatar;
 
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			error('<h4>'.get_string('mdlos_access_forbidden', 'block_mdlopensim').'</h4>');
+			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $this->return_url);
 		}
 		if ($this->state==AVATAR_STATE_ACTIVE) {
-			error('<h4>'.get_string('mdlos_active_avatar', 'block_mdlopensim').'</h4>';
+			error(get_string('mdlos_active_avatar', 'block_mdlopensim'),  $this->return_url);
 		}
-
-		$this->firstname  = optional_param('firstname', '', PARAM_TEXT);
-		$this->lastname   = optional_param('lastname',  '', PARAM_TEXT);
-		$this->hmregion	  = optional_param('hmregion',  '', PARAM_TEXT));
-		$this->ownername  = getUserName($USER->firstname, $USER->lastname);
-
-		$this->action_url = CMS_MODULE_URL."/delete_avatar.php?course=$this->courseid";
-		$this->cancel_url = CMS_MODULE_URL."/avatars_list.php?course=$this->courseid";
-		$this->return_url = CMS_MODULE_URL."/avatars_list.php?course=$this->courseid";
 	}
 
 
@@ -81,8 +97,8 @@ class  DeleteAvatar
 				$this->deleted_avatar = $this->del_avatar();
 			}
 			else {
-				redirect($this->cancel_url, 1);
-            }
+				redirect($this->cancel_url, get_string('mdlos_avatar_dlt_canceled', 'block_mdlopensim'), 2);
+			}
 		}
 	}
 
@@ -96,6 +112,22 @@ class  DeleteAvatar
 
 		$grid_name = $CFG->mdlopnsm_grid_name;
 
+		$avatar_delete_ttl	= get_string("mdlos_avatar_delete",  	"block_mdlopensim");
+		$firstname_ttl		= get_string("mdlos_firstname",  		"block_mdlopensim");
+		$lastname_ttl		= get_string("mdlos_lastname",  		"block_mdlopensim");
+		$home_region_ttl	= get_string("mdlos_home_region",  		"block_mdlopensim");
+		$status_ttl			= get_string("mdlos_status", 	 		"block_mdlopensim");
+		$not_syncdb_ttl 	= get_string("mdlos_not_syncdb",		"block_mdlopensim");
+		$active_ttl			= get_string("mdlos_active",			"block_mdlopensim");
+		$inactive_ttl		= get_string("mdlos_inactive",			"block_mdlopensim");
+		$unknown_status		= get_string("mdlos_unknown_status",	"block_mdlopensim");
+		$ownername_ttl		= get_string("mdlos_ownername",			"block_mdlopensim");
+		$delete_ttl			= get_string("mdlos_delete_ttl",		"block_mdlopensim");
+		$cancel_ttl			= get_string("mdlos_cancel_ttl",		"block_mdlopensim");
+		$return_ttl			= get_string("mdlos_return_ttl",		"block_mdlopensim");
+		$avatar_deleted		= get_string("mdlos_avatar_deleted", 	"block_mdlopensim");
+		$avatar_dlt_confrm	= get_string("mdlos_avatar_dlt_confrm", "block_mdlopensim");
+
 		include(CMS_MODULE_PATH."/html/delete.html");
 	}
 
@@ -104,20 +136,22 @@ class  DeleteAvatar
 
 	function del_avatar()
 	{
+		global $CFG;
+
 		if (!isGUID($this->UUID)) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string("mdlos_invalid_uuid", "block_mdlopensim");
 			return false;
 		}
 
-		// Xoops DB
+		// Moodle DB
 		$delete_user['UUID']  = $this->UUID;
 		$delete_user['state'] = $this->state;
 
 		$ret = mdlopensim_delete_usertable($delete_user);
 		if (!$ret) {
-			$this->mActionForm->addErrorMessage(_MD_XPNSM_XOOPS_DELETE_ERROR);
-			return false;
+			$this->hasError = true;
+			$this->errorMsg[] = get_string("mdlos_user_delete_error", "block_mdlopensim");
 		}
 
 		mdlopensim_delete_banneddb($this->UUID);
@@ -131,7 +165,16 @@ class  DeleteAvatar
 			$this->errorMsg[] = get_string("mdlos_opensim_delete_error", "block_mdlopensim");
 		}
 
-		return $ret;
+		// Sloodle
+		if ($CFG->mdlopnsm_cooperate_sloodle) {
+			$ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $this->UUID);
+			if (!$ret) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_sloodle_delete_error", "block_mdlopensim");
+			}
+		}
+
+		return $this->hasError;
 	}
 }
 

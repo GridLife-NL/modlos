@@ -11,7 +11,9 @@ class  RegionsList
 	var $pnum = array();
 	var $action;
 	var $action_url;
-	var $course_id = 0;
+	var $course_url;
+
+	var $course_param = "";
 
 	var $hasPermit = false;
 	var $isGuest = true;
@@ -31,12 +33,19 @@ class  RegionsList
 
 	function  RegionsList($course_id)
 	{
-		$this->course_id  = $course_id;
+		global $CFG;
+
 		$this->isGuest    = isguest();
 		$this->hasPermit  = hasPermit($course_id);
 
 		$this->action 	  = "regions_list.php";
 		$this->action_url = CMS_MODULE_URL."/actions/".$this->action;
+
+		$this->course_url = $CFG->wwwroot;
+		if ($course_id>0) {
+			$this->course_url  .= "/course/view.php?id=".$course_id;
+			$this->course_param = "&amp;course=".$course_id;
+		}
 	}
 
 
@@ -48,7 +57,7 @@ class  RegionsList
 
 		$db_ver = opensim_get_db_version(); 
 		if ($db_ver=="0.0") {
-			error('<h4>'.get_string('mdlos_db_connect_error', 'block_mdlopensim').'</h4>');
+			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'), $this->course_url);
 		}
 
 		if ($this->order=="name")       $sql_order = " ORDER BY regionName ASC";
@@ -149,9 +158,7 @@ class  RegionsList
 		$grid_name       = $CFG->mdlopnsm_grid_name;
 		$content         = $CFG->mdlopnsm_regions_content;
 
-		$course_param	 = "";
-		if ($this->course_id>0) $course_param = "&amp;course=$this->course_id";
-
+		$course_param 	 = $this->course_param;
 		$order_param	 = "?order=$this->order";
 		$pstart_param	 = "&amp;pstart=$this->pstart";
 		$plimit_param	 = "&amp;plimit=$this->plimit";
@@ -168,8 +175,6 @@ class  RegionsList
 		$page_num	     = get_string("mdlos_page",		      "block_mdlopensim");
 		$page_num_of     = get_string("mdlos_page_of",	      "block_mdlopensim");
 		$voice_chat_mode = get_string("mdlos_voice_chat_mode","block_mdlopensim");
-		//$region_owner = get_string("mdlos_region_owner", "block_mdlopensim");
-		//$estate_id    = get_string("mdlos_estate_id",    "block_mdlopensim");
 
 		include(CMS_MODULE_PATH."/html/regions.html");
 	}

@@ -20,9 +20,8 @@ class  AvatarsList
 	var $course_param = "";
 
 	var $hasPermit = false;
-	var $isGuest = true;
-	var $userid  = 0;
-	var $db_ver  = "";
+	var $isGuest   = true;
+	var $db_ver    = "";
 
 	// Page Control
 	var $Cpstart = 0;
@@ -55,16 +54,16 @@ class  AvatarsList
 		$this->hasPermit	= hasPermit($course_id);
 		$this->date_format 	= $CFG->mdlopnsm_date_format;
 
-		$this->action_url	= CMS_MODULE_URL."/actions/avatars_list.php?course=$this->course_id";
-		$this->edit_url		= CMS_MODULE_URL."/actions/edit_avatar.php?course=$this->course_id";
-		$this->owner_url	= CMS_MODULE_URL."/actions/owner_avatar.php?course=$this->course_id";
-		$this->avatar_url 	= $CFG->wwwroot."/user/view.php";
-
 		$this->course_url = $CFG->wwwroot;
 		if ($course_id>0) {
 			$this->course_url  .= "/course/view.php?id=".$course_id;
 			$this->course_param = "&amp;course=".$course_id;
 		}
+
+		$this->action_url	= CMS_MODULE_URL."/actions/avatars_list.php".$this->course_param;
+		$this->edit_url		= CMS_MODULE_URL."/actions/edit_avatar.php". $this->course_param;
+		$this->owner_url	= CMS_MODULE_URL."/actions/owner_avatar.php".$this->course_param;
+		$this->avatar_url 	= $CFG->wwwroot."/user/view.php";
 	}
 
 
@@ -115,6 +114,8 @@ class  AvatarsList
 
 	function  execute()
 	{
+		global $USER;
+
 		$this->number    = count(opensim_get_avatars_infos($this->sql_countcnd));;
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
@@ -213,7 +214,7 @@ class  AvatarsList
 
 			$this->db_data[$colum]['uid'] = $uid;
 
-			if ($this->hasPermit or $this->userid==$uid) {
+			if ($this->hasPermit or $USER->id==$uid) {
 				$this->db_data[$colum]['editable'] = AVATAR_EDITABLE;
 			}
 			elseif ($uid==0) {
@@ -255,10 +256,10 @@ class  AvatarsList
 		$get_owner_ttl	= get_string('mdlos_get_owner_ttl',	'block_mdlopensim');
 		$firstname_ttl 	= get_string('mdlos_firstname', 	'block_mdlopensim');
 		$lastname_ttl 	= get_string('mdlos_lastname', 		'block_mdlopensim');
-		$avatar_notsync	= get_string('mdlos_not_syncdb',	'block_mdlopensim');
-		$avatar_online	= get_string('mdlos_online_ttl',	'block_mdlopensim');
-		$avatar_active	= get_string('mdlos_active',		'block_mdlopensim');
-		$avatar_inactive= get_string('mdlos_inactive',		'block_mdlopensim');
+		$not_syncdb_ttl = get_string("mdlos_not_syncdb",	"block_mdlopensim");
+		$online_ttl     = get_string("mdlos_online_ttl",	"block_mdlopensim");
+		$active_ttl		= get_string('mdlos_active',		'block_mdlopensim');
+		$inactive_ttl	= get_string('mdlos_inactive',		'block_mdlopensim');
 		$unknown_status	= get_string('mdlos_unknown_status','block_mdlopensim');
 		$page_num		= get_string('mdlos_page',			'block_mdlopensim');
 		$page_num_of	= get_string('mdlos_page_of',		'block_mdlopensim');

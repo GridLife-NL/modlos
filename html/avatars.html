@@ -191,15 +191,15 @@
                     <td width=150>
                       <b>
                         <?php if ($dat['state']==AVATAR_STATE_NOTSYNC) { ?>
-                          <font color=#FF0000><?php print $avatar_notsync?></font>
+                          <font color=#FF0000><?php print $not_syncdb_ttl?></font>
                         <?php } elseif ($dat['state']==AVATAR_STATE_ACTIVE) { ?>
                           <?php if ($dat['online']) {?>
-                            <font color=#005500><?php print $avatar_online?></font>
+                            <font color=#005500><?php print $online_ttl?></font>
                           <?php } else {?>
-                            <font color=#0000FF><?php print $avatar_active?></font>
+                            <font color=#0000FF><?php print $active_ttl?></font>
                           <?php }?>
                         <?php } elseif ($dat['state']==AVATAR_STATE_INACTIVE) { ?>
-                          <font color=#FF0000><?php print $avatar_inactive?></font>
+                          <font color=#FF0000><?php print $inactive_ttl?></font>
                         <?php } else {?>
                           <font color=#FF0000><?php print $unknown_status?></font>
                         <?php }?>

@@ -110,11 +110,11 @@ $inactive_ttl	= get_string("mdlos_inactive",		"block_mdlopensim");
 $online_ttl		= get_string("mdlos_online_ttl",	"block_mdlopensim");
 $offline_ttl	= get_string("mdlos_offline_ttl",	"block_mdlopensim");
 $profile_ttl	= get_string("mdlos_profile",		"block_mdlopensim");
-$born_on	  	= get_string("mdlos_born_on",		"block_mdlopensim");
-$lastlogin	  	= get_string("mdlos_lastlogin",		"block_mdlopensim");
-$ownername	  	= get_string("mdlos_ownername",		"block_mdlopensim");
+$born_on_ttl  	= get_string("mdlos_born_on",		"block_mdlopensim");
+$lastlogin_ttl 	= get_string("mdlos_lastlogin",		"block_mdlopensim");
+$home_region_ttl= get_string("mdlos_home_region",	"block_mdlopensim");
+$ownername_ttl	= get_string("mdlos_ownername",		"block_mdlopensim");
 $unknown_status	= get_string("mdlos_unknown_status","block_mdlopensim");
-$home_region	= get_string("mdlos_home_region",	"block_mdlopensim");
 $has_noprofile	= get_string("mdlos_has_noprofile",	"block_mdlopensim");
 
 include(CMS_MODULE_PATH."/html/agent.html");

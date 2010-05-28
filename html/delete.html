@@ -1,77 +1,80 @@
 
-<h2><center><{$grid_name}>&nbsp;:&nbsp;<{$smarty.const._MD_XPNSM_AVATAR_DELETE}></center></h2>
+<h2><center><?php print $grid_name."&nbsp;:&nbsp;".$avatar_delete?></center></h2>
 <br />
 
-<{if !$deleted_avatar}>
-<form action="<{$action_url}>" method="POST">
-  <{xoops_token form=$actionForm}>
-  <input type="hidden" name="uuid" value="<{$UUID}>" />
-<{/if}>
+<?php if (!$this->deleted_avatar) {?>
+<form action="<?php print $this->action_url?>" method="POST">
+  <input type="hidden" name="uuid"   value="<?php print $UUID?>" />
+<?php }?>
 
   <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
-    <{if !$deleted_avatar}>
-    <tr><b><font color=#e01010><{$smarty.const._MD_XPNSM_AVATAR_DLT_CONFRM}></font></b></tr> 
-    <{/if}>
+    <?php if (!$this->deleted_avatar) {?>
+    <tr><b><font color=#e01010><?php print $avatar_dlt_confrm?></font></b></tr> 
+    <?php }?>
     <tr>
-      <td width="100" class="head"><{$smarty.const._MD_XPNSM_FIRSTNAME}></td>
-      <td width="400" class="even"><{$firstname}></td>
+      <td width="100" class="head"><?php print $firstname_ttl?></td>
+      <td width="400" class="even"><?php print $firstname?></td>
     </tr>
 
     <tr>
-      <td class="head"><{$smarty.const._MD_XPNSM_LASTNAME}></td>
-      <td class="odd"><{$lastname}></td>
+      <td class="head"><?php print $lastname_ttl?></td>
+      <td class="odd" ><?php print $lastname?></td>
     </tr>
 
     <tr>
-      <td class="head"><{$smarty.const._MD_XPNSM_HOME_REGION}></td>
-      <td class="even"><{$hmregion}></td>
+      <td class="head"><?php print $home_region_ttl?></td>
+      <td class="even"><?php print $hmregion?></td>
     </tr>
 
     <tr>
-      <td class="head"><{$smarty.const._MD_XPNSM_STATUS}></td>
+      <td class="head"><?php print $status_ttl?></td>
       <td class="odd" >
-        <{if $state==AVATAR_STATE_NOTSYNC }>
-          <font color=#FF0000><{$smarty.const._MD_XPNSM_NOT_SYNCDB}></font>
-        <{elseif $state==AVATAR_STATE_ACTIVE }>
-          <font color=#0000FF><{$smarty.const._MD_XPNSM_ACTIVE}></font>
-        <{elseif $state==AVATAR_STATE_INACTIVE }>
-          <font color=#FF0000><{$smarty.const._MD_XPNSM_INACTIVE}></font>
-        <{else}>
-          <font color=#FF0000><{$smarty.const._MD_XPNSM_UNKNOWN_STATUS}></font>
-        <{/if}>
+        <?php if ($this->state==AVATAR_STATE_NOTSYNC) {?>
+          <font color=#FF0000><?php print $not_syncdb_ttl?></font>
+        <?php } elseif ($this->state==AVATAR_STATE_ACTIVE) {?>
+          <font color=#0000FF><?php print $active_ttl?></font>
+        <?php } elseif ($this->state==AVATAR_STATE_INACTIVE) { ?>
+          <font color=#FF0000><?php print $inactive_ttl?></font>
+        <?php } else {?>
+          <font color=#FF0000><?php print $unknown_status?></font>
+        <?php }?>
       </td>
     </tr>
 
-    <{if $isAdmin}>
+    <?php if ($this->hasPermit) {?>
       <tr>
-        <td class="head"><{$smarty.const._MD_XPNSM_OWNERNAME}></td>
-        <td class="even"><{$ownername}></td>	
+        <td class="head"><?php print $ownername_ttl?></td>
+        <td class="even"><?php print $ownername?></td>	
       </tr>
-    <{/if}>
+    <?php }?>
 
   </table>
   <br />
-  <{if $deleted_avatar}>
-    &nbsp;&nbsp;<a href=<{$return_url}>><b><{$smarty.const._MD_XPNSM_RETURN_TTL}></b></a>
-  <{else}>
-    <input name="submit_delete" type="submit" value="<{$smarty.const._MD_XPNSM_DELETE_TTL}>" />&nbsp;
-    <input name="cancel_delete" type="submit" value="<{$smarty.const._MD_XPNSM_CANCEL_TTL}>" />
-  <{/if}>
+  <input type="hidden" name="course" value="<?php print $this->course_id?>" />
+  <?php if ($this->deleted_avatar) {?>
+    &nbsp;&nbsp;<a href=<?php print $this->return_url?>><b><?php print $return_ttl?></b></a>
+  <?php } else {?>
+    <input type="hidden" name="sesskey" value="<?php print  sesskey() ?>" />
+    <input name="submit_delete" type="submit" value="<?php print $delete_ttl?>" />&nbsp;
+    <input name="cancel_delete" type="submit" value="<?php print $cancel_ttl?>" />
+  <?php }?>
 </form>
 
 
 <br />
+<br />
 <hr />
-<{if $actionForm->hasError()}>
+<?php if ($this->hasError) {?>
   <ul>
-    <{foreach item="errval" from=$actionForm->getErrorMessages() }>
-      <li><font color="#f01010"><b><{$errval}></b></font></li>
-    <{/foreach}>
+    <?php foreach($this->errorMsg as $mesg) {?>
+      <li><font color="#f02022"><b><?php print  $mesg?></b></font></li>
+    <?php }?>
   </ul>
-  <br />
-<{else}>
-  <{if $deleted_avatar}>
-    <h3><font color=#2020e0><{$smarty.const._MD_XPNSM_AVATAR_DELETED}></font></h3>
-  <{/if}>
-<{/if}>
+<?php } else {?>
+  <?php if ($this->deleted_avatar) {?>
+    <h3><font color=#2020e0><?php print $avatar_deleted?></font></h3>
+  <?php }?>
+<?php }?>
+<br />
+
 
