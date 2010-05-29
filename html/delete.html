@@ -1,5 +1,10 @@
 
-<h2><center><?php print $grid_name."&nbsp;:&nbsp;".$avatar_delete?></center></h2>
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/edit.css")?>
+</style>
+
+
+<h2><center><?php print $grid_name."&nbsp;:&nbsp;".$avatar_delete_ttl?></center></h2>
 <br />
 
 <?php if (!$this->deleted_avatar) {?>
@@ -7,13 +12,14 @@
   <input type="hidden" name="uuid"   value="<?php print $this->UUID?>" />
 <?php }?>
 
-  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
+  <table width="400" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+
     <?php if (!$this->deleted_avatar) {?>
-    <tr><b><font color=#e01010><?php print $avatar_dlt_confrm?></font></b></tr> 
+    <tr><td colspan="2"><b><center><font color=#e01010><?php print $avatar_dlt_confrm?></center></font></b></td></tr> 
     <?php }?>
     <tr>
       <td width="100" class="head"><?php print $firstname_ttl?></td>
-      <td width="400" class="even"><?php print $this->firstname?></td>
+      <td width="250" class="even"><?php print $this->firstname?></td>
     </tr>
 
     <tr>
@@ -50,15 +56,19 @@
 
   </table>
   <br />
-  <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
-  <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
-  <?php if ($this->deleted_avatar) {?>
-    &nbsp;&nbsp;<a href=<?php print $this->return_url?>><b><?php print $return_ttl?></b></a>
-  <?php } else {?>
-    <input name="submit_delete" type="submit" value="<?php print $delete_ttl?>" />&nbsp;
-    <input name="cancel_delete" type="submit" value="<?php print $cancel_ttl?>" />
-  <?php }?>
+
+  <div align="center">
+    <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
+    <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
+    <?php if ($this->deleted_avatar) {?>
+      &nbsp;&nbsp;<a href=<?php print $this->return_url?>><b><?php print $return_ttl?></b></a>
+    <?php } else {?>
+      <input name="submit_delete" type="submit" value="<?php print $delete_ttl?>" />&nbsp;
+      <input name="cancel_delete" type="submit" value="<?php print $cancel_ttl?>" />
+    <?php }?>
+  </dev>
 </form>
+<br />
 
 
 <br />

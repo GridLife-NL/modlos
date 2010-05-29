@@ -106,18 +106,18 @@ function  mdlopensim_set_avatar_info($avatar, $use_sloodle=false)
 	}
 
 	// Sloodle
-	if ($user_sloodle and $ret) {
+	if ($use_sloodle and $ret) {
 		$updobj = get_record(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
 		if ($updobj==null) {
-			if ($avatar['uuid']>0) $insobj->userid = $avatar['uid'];
-			else 				   $insobj->userid = 0;
+			if ($avatar['uid']>0) $insobj->userid = $avatar['uid'];
+			else 				  $insobj->userid = 0;
 			$insobj->uuid 	= $avatar['UUID'];
 			$insobj->avname = $avatar['firstname']." ".$avatar['lastname'];
 			if ($insobj->avname==" ") $insobj->avname = "";
 			$insobj->lastactive = time();
 			$ret = insert_record(MDL_SLOODLE_USERS_TBL, $insobj);
 		}
-		else if ($avatar['uuid']>0) {
+		else if ($avatar['uid']>0) {
 			$updobj->userid = $avatar['uid'];
 			$updobj->lastactive = time();
 			$ret = update_record(MDL_SLOODLE_USERS_TBL, $updobj);

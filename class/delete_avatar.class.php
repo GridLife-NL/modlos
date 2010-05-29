@@ -14,6 +14,8 @@ class  DeleteAvatar
 	var $deleted_avatar = false;
 
 	var $course_id	= 0;
+	var $use_sloodle= false;
+	var $pri_sloodle= false;
 
 	var $hasError  	= false;
 	var $errorMsg  	= array();
@@ -36,9 +38,9 @@ class  DeleteAvatar
 
 		require_login($course_id);
 
-		$this->course_param = "?course=".$course_id;
+		$course_param = "?course=".$course_id;
 		$this->course_id  = $course_id;
-		$this->action_url = CMS_MODULE_URL."/actions/delete_avatar.php".$course_param;
+		$this->action_url = CMS_MODULE_URL."/actions/delete_avatar.php";
 		$this->cancel_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
 		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
 
@@ -50,11 +52,23 @@ class  DeleteAvatar
 		}
 		$this->UUID	= $uuid;
 
-		// get uid from Mdlopensim DB
-		$avatar = get_record('mdlos_users', 'uuid', $this->UUID);
-		$this->uid	  = $avatar->user_id;				// uid of avatar in editing from DB
-		$this->state  = $avatar->state;
-		$this->avatar = $avatar;
+
+		$this->use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
+		$this->pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
+
+		// get uid from Mdlopensim and Sloodle DB
+		$avatar = mdlopensim_get_avatar_info($this->UUID, $this->use_sloodle, $this->pri_sloodle);
+		$this->uid	  	= $avatar['uid'];
+		$this->state  	= $avatar['state'];
+		$this->hmregion = $avatar['hmregion'];
+		$this->firstname= $avatar['firstname'];
+		$this->lastname = $avatar['lastname'];
+		$this->avatar 	= $avatar;
+
+		$user_info = get_userinfo_by_id($this->uid);
+		if ($user_info!=null) {
+			$this->ownername = get_local_user_name($user_info->firstname, $user_info->lastname);
+		}
 
 		$this->hasPermit = hasPermit();
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
@@ -69,9 +83,6 @@ class  DeleteAvatar
 
 	function  execute()
 	{
-		$this->firstname  = $this->avatar->firstname;
-		$this->lastname   = $this->avatar->lastname;
-
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
@@ -84,7 +95,7 @@ class  DeleteAvatar
 				$this->deleted_avatar = $this->del_avatar();
 			}
 			else {
-				redirect($this->cancel_url, get_string('mdlos_avatar_dlt_canceled', 'block_mdlopensim'), 2);
+				redirect($this->cancel_url, get_string('mdlos_avatar_dlt_canceled', 'block_mdlopensim'), 0);
 			}
 		}
 	}
@@ -131,34 +142,26 @@ class  DeleteAvatar
 			return false;
 		}
 
-		// Moodle DB
+		// delete from Mdlopensim and Sloodle DB
 		$delete_user['UUID']  = $this->UUID;
 		$delete_user['state'] = $this->state;
 
-		$ret = mdlopensim_delete_usertable($delete_user);
+		$ret = mdlopensim_delete_avatar_info($delete_user, $this->use_sloodle);
 		if (!$ret) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string("mdlos_user_delete_error", "block_mdlopensim");
 		}
 
+		// delete from Mdlopensim Group DB
 		mdlopensim_delete_banneddb($this->UUID);
 		mdlopensim_delete_groupdb ($this->UUID, false);
 		mdlopensim_delete_profiles($this->UUID);
 
-		// OpenSim
+		// delete form OpenSim
 		$ret = opensim_delete_avatar($this->UUID);
 		if (!$ret) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string("mdlos_opensim_delete_error", "block_mdlopensim");
-		}
-
-		// Sloodle
-		if ($CFG->mdlopnsm_cooperate_sloodle) {
-			$ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $this->UUID);
-			if (!$ret) {
-				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_sloodle_delete_error", "block_mdlopensim");
-			}
 		}
 
 		if ($this->hasError) return false;

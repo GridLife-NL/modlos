@@ -1,18 +1,6 @@
 
 <style type="text/css">
-.head {
-    font-weight: bold;
-    color: #105BA7;
-	background-color: #ddd;
-}
-.odd {
-    font-weight: bold;
-	background-color: #eee;
-}
-.even {
-    font-weight: bold;
-	background-color: #eee;
-}
+  <?php include(CMS_MODULE_PATH."/html/edit.css")?>
 </style>
 
 
@@ -55,7 +43,6 @@
       <?php }?>
     </tr>
 
-
     <tr>
       <td class="head"><?php print $home_region_ttl?></td>
       <td class="even">
@@ -79,7 +66,6 @@
       </td>
     </tr>
 
-
     <?php if ($this->hasPermit) {?>
       <tr>
         <td class="head"><?php print $owner_ttl?></td>
@@ -87,8 +73,8 @@
       </tr>
     <?php }?>
 
-
   </table>
+
   <br />
   <div align="center">
     <input name="submit_update" type="submit" id="submit_update" value="<?php print $update_ttl?>" />&nbsp;
@@ -99,6 +85,7 @@
       <input name="submit_delete" type="submit" id="submit_delete" value="<?php print $delete_ttl?>" />
     <?php }?>
   </dev>
+
 </form>
 <br />
 
@@ -120,7 +107,7 @@
     <table width="400" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" >
       <?php if ($this->hasPermit) {?>
         <tr>
-          <td width="100" class="head"><?php print $UUID_ttl?></td>
+          <td width="100" class="head"><?php print $uuid_ttl?></td>
           <td width="250" class="even"><?php print $this->UUID?></td>	
         </tr>
       <?php }?>

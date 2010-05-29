@@ -38,11 +38,11 @@ class  EditAvatar
 
 
 
-	function  EditAvatar($courseid) 
+	function  EditAvatar($course_id) 
 	{
 		global $CFG, $USER;
 
-		require_login($courseid);
+		require_login($course_id);
 
 		// for HTTPS
 		$use_https = $CFG->mdlopnsm_use_https;
@@ -59,10 +59,11 @@ class  EditAvatar
 			$this->module_url = CMS_MODULE_URL;
 		}
 
+
 		$course_param = "?course=".$course_id;
 		$this->course_id  = $course_id;
-		$this->action_url = CMS_MODULE_URL."/actions/edit_avatar.php".  $course_param;
-		$this->delere_url = CMS_MODULE_URL."/actions/delete_avatar.php".$course_param;
+		$this->action_url = $this->module_url."/actions/edit_avatar.php";
+		$this->delete_url = CMS_MODULE_URL."/actions/delete_avatar.php".$course_param;
 		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
 
 		// get UUID from POST or GET
@@ -78,9 +79,12 @@ class  EditAvatar
 
 		// get uid from Mdlopensim and Sloodle DB
 		$avatar = mdlopensim_get_avatar_info($this->UUID, $this->use_sloodle, $this->pri_sloodle);
-		$this->uid	  = $avatar['uid'];
-		$this->ostate = $avatar['state'];
-		$this->avatar = $avatar;
+		$this->uid	  	= $avatar['uid'];
+		$this->ostate 	= $avatar['state'];
+		$this->firstname= $avatar['firstname'];
+		$this->lastname = $avatar['lastname'];
+		$this->avatar 	= $avatar;
+
 
 		$this->hasPermit = hasPermit();
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
@@ -97,10 +101,6 @@ class  EditAvatar
 		// OpenSim DB
 		$this->regionNames = opensim_get_regions_names("ORDER BY regionName ASC");
 
-		// This name could not be changed 
-		$this->firstname = $this->avatar['firstname'];
-		$this->lastname  = $this->avatar['lastname'];
-
 		// Form
 		if (data_submitted()) {
 			if (!confirm_sesskey()) { 
@@ -109,6 +109,7 @@ class  EditAvatar
 				return false;
 			}
 
+			// Cancel
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
 			if ($del!="") {
 				redirect($this->delete_url."&amp;uuid=".$this->UUID, "Please wait....", 0);
@@ -197,7 +198,7 @@ class  EditAvatar
 		$delete_ttl	  		= get_string('mdlos_delete_ttl', 	'block_mdlopensim');
 		$reset_ttl	  		= get_string('mdlos_reset_ttl', 	'block_mdlopensim');
 		$avatar_updated	  	= get_string('mdlos_avatar_updated','block_mdlopensim');
-		$uuid_title	  		= get_string('mdlos_uuid',			'block_mdlopensim');
+		$uuid_ttl	  		= get_string('mdlos_uuid',			'block_mdlopensim');
 
 		include(CMS_MODULE_PATH."/html/edit.html");
 	}

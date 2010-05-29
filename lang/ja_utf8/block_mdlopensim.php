@@ -46,10 +46,10 @@ $string['mdlos_avatar_own_ttl'] 	= '変更';
 $string['mdlos_avatar_dlt_cncld_ttl']='取消し';
 
 $string['mdlos_home_page'] 			= 'トップページ';
-$string['mdlos_db_status'] 			= 'データベースの状態';
+$string['mdlos_db_status'] 			= 'データベース';
 $string['mdlos_total_users'] 		= '全体のユーザ人数';
 $string['mdlos_total_regions'] 		= '全体のリージョン数';
-$string['mdlos_visitors_last30days']= '過去30日間のログイン人数';
+$string['mdlos_visitors_last30days']= '過去30日間の利用者数';
 $string['mdlos_online_now'] 		= 'オンライン中のユーザ数';
 
 $string['mdlos_user'] 				= 'ユーザ';
