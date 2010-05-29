@@ -180,8 +180,6 @@ class  EditAvatar
 	{
 		global $CFG;
 
-		$this->execute();
-
 		$grid_name = $CFG->mdlopnsm_grid_name;
 
 		$avatar_edit   		= get_string('mdlos_avatar_edit',	'block_mdlopensim');

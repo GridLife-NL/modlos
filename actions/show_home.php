@@ -16,6 +16,7 @@ print_tabheader($action, $course);
 
 require_once(CMS_MODULE_PATH."/class/show_home.class.php");
 $showhome = new ShowHome($course_id);
+$showhome->execute();
 $showhome->print_page();
 
 print_footer($course);

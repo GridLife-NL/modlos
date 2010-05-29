@@ -46,8 +46,6 @@ class  ShowHome
 	{
 		global $CFG;
 
-		$this->execute();
-
 		$grid_name       	= $CFG->mdlopnsm_grid_name;
 		$content         	= $CFG->mdlopnsm_home_content;
 

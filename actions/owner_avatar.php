@@ -15,8 +15,9 @@ $action = 'owner_avatar';
 print_tabheader($action, $course);
 
 require_once(CMS_MODULE_PATH."/class/owner_avatar.class.php");
-$regions = new OwnerAvatar($course_id);
-$regions->print_page();
+$avatar = new OwnerAvatar($course_id);
+$avatar->execute();
+$avatar->print_page();
 
 print_footer($course);
 	

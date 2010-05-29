@@ -93,15 +93,18 @@ class  CreateAvatar
 				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
 				return false;
 			}
+		}
 
-			if ($this->hasPermit) {
-				do {
-					$uuid = make_random_guid();
-					$modobj = mdlopensim_get_avara_info($uuid);
-				} while ($modobj!=null);
-				$this->nx_UUID = $uuid;
-			}
+		if ($this->hasPermit) {
+			do {
+				$uuid = make_random_guid();
+				$modobj = mdlopensim_get_avara_info($uuid);
+			} while ($modobj!=null);
+			$this->nx_UUID = $uuid;
+		}
 
+
+		if (data_submitted()) {
 			$this->firstname= $optional_param('firstname', 	'', PARAM_TEXT);
 			$this->lastname = $optional_param('lastname',  	'', PARAM_TEXT);
 			$this->passwd	= $optional_param('passwd', 	'', PARAM_TEXT);
@@ -111,25 +114,36 @@ class  CreateAvatar
 				$this->ownername = $optional_param('ownername', '', PARAM_TEXT);
 				$this->UUID		 = $optional_param('UUID', '', PARAM_TEXT);
 			}
+			if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
+
+
+
+			
+
+
+
+
+
+
+
+			if (!$this->hasError) {
+				$this->created_avatar = $this->createAvatar();
+			}
 		}
 		else {
 			$this->hmregion = $CFG->mdlopnsm_home_region;
 			$this->UUID	  	= $this->nx_UUID;
+			$this->ownername = get_display_username($USER->firstname, $USER->lastname);
 		}
-
-		if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
-
-		if (xoops_getenv("REQUEST_METHOD")=="POST" and  !$this->mActionForm->hasError()) {
-
-		$this->created_avatar = $this->createAvatar();
 	}
 
 
 
 	function  print_page() 
 	{
+		global $CFG;
 
-		$render->setTemplateName('xoopensim_create.html');
+		$grid_name = $CFG->mdlopnsm_grid_name;
 		$grid_name = $context->mModuleConfig['grid_name'];
 
 		$render->setAttribute('grid_name',		$grid_name);

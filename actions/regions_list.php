@@ -16,6 +16,8 @@ print_tabheader($action, $course);
 
 require_once(CMS_MODULE_PATH."/class/regions_list.class.php");
 $regions = new RegionsList($course_id);
+$regions->set_condition();
+$regions->execute();
 $regions->print_page();
 
 print_footer($course);

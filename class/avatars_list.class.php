@@ -248,9 +248,6 @@ class  AvatarsList
 	{
         global $CFG;
 
-        $this->set_condition();
-        $this->execute();
-
         $grid_name 		= $CFG->mdlopnsm_grid_name;
         $content   		= $CFG->mdlopnsm_avatars_content;
 		$userinfo		= $CFG->mdlopnsm_userinfo_link;

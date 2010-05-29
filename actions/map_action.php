@@ -18,7 +18,6 @@ $grid_name = $CFG->mdlopnsm_grid_name;
 $world_map = get_string("mdlos_world_map", "block_mdlopensim");
 $object_url = CMS_MODULE_URL.'/helper/world_map.php';
 
-
 print_tabheader($action, $course);
 
 include(CMS_MODULE_PATH."/html/object.html");

@@ -15,6 +15,7 @@ class  OwnerAvatar
 	var $updated_owner = false;
 
 	var $course_id	= 0;
+	var $userid		= 0;
 	var $use_sloodle= false;
 	var $pri_sloodle= false;
 
@@ -28,8 +29,8 @@ class  OwnerAvatar
 var $firstname  = "";
 var $lastname	= "";
 	var $state		= "";
-var $passwd	 	= "";
-var $ownername 	= "";
+//var $passwd	 	= "";
+	var $ownername 	= "";
 
 
 	function  OwnerAvatar($course_id) 
@@ -55,12 +56,14 @@ var $ownername 	= "";
 		}
 
 		$course_param 		= "?course=".$course_id;
-		$this->course_id		= $course_id;
-		$this->hasPermit		= hasPsermit($course_id);
+		$this->course_id	= $course_id;
+		$this->hasPermit	= hasPsermit($course_id);
 		$this->action_url  	= $this->module_url."/actions/owner_avatar.php";
 		$this->return_url  	= CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
 		$this->use_sloodle 	= $CFG->mdlopnsm_cooperate_sloodle;
 		$this->pri_sloodle 	= $CFG->mdlopnsm_priority_sloodle;
+		$this->userid		= $USER->id;
+		$this->ownername	= get_diaplay_username($USER->firstname, $USER->lastname);
 
 		// Number of Avatars Check
 		if (!$this->hasPermit) {
@@ -108,11 +111,9 @@ var $ownername 	= "";
 				 return false;
 			}
 
-			if (xoops_getenv("REQUEST_METHOD")=="POST" and  !$this->mActionForm->hasError()) {
-				$this->passwd = $this->mActionForm->get('passwd');
-				$postuid = $this->mActionForm->get('userid');
-				$this->updated_owner = $this->updateOwner($postuid);
-			}
+			$passwd  = $optional_param('passwd', '', PARAM_TEXT);
+			$postuid = $optional_param('userid', '', PARAM_TEXT);
+			$this->updated_owner = $this->updateOwner($postuid, $passwd);
 		}
 	}
 
@@ -121,8 +122,6 @@ var $ownername 	= "";
 	function  print_page() 
 	{
 		global $CFG;
-
-		$this->execute();
 
 		$grid_name = $CFG->mdlopnsm_grid_name;
 
@@ -148,7 +147,7 @@ var $ownername 	= "";
 
 
 
-	function updateOwner($uid)
+	function updateOwner($uid, $passwd)
 	{
 		if ($uid==0) return false;
 		if ($uid!=$this->userid) {
@@ -173,7 +172,7 @@ var $ownername 	= "";
 			}
 		}
 
-		$this->avatar->assignVar('uid',  $this->userid);
+		$this->avatar->assignVar('uid',  $this->user_id);
 		$this->avatar->assignVar('time', time());
 		$this->dbhandler->insert($this->avatar);
 		return true;
