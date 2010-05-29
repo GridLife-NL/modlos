@@ -6,6 +6,7 @@
  * function  mdlopensim_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
  * function  mdlopensim_set_avatar_info($avatar, $use_sloodle=false)
  * function  mdlopensim_delete_avatar_info($avatar, $use_sloodle=false)
+ * function  mdlopensim_get_avatars_num($uuid, $use_sloodle=false)
  *
  * function  mdlopensim_insert_usertable($user)
  * function  mdlopensim_update_usertable($user)
@@ -143,6 +144,33 @@ function  mdlopensim_delete_avatar_info($avatar, $use_sloodle=false)
 
 	return $ret;
 }
+
+
+
+function  mdlopensim_get_avatars_num($id, $use_sloodle=false)
+{
+	if (!isNumeric($id)) return null;
+
+	$avatars = get_records('mdlos_users', 'user_id', $id);
+	$num = count($avatars);
+
+	if ($use_sloodle) {
+		$sloodles = get_records(MDL_SLOODLE_USERS_TBL, 'userid', $id);
+		foreach ($sloodle as $sloodle) {
+			$match = false;
+			foreach ($avatas as $avatar) {
+				if ($sloodle->uuid==$avatar->uuid) {
+					$match = true;
+					break;
+				}
+			}
+			if (!$match) $num++;
+		}
+	}
+
+	return $num;
+}
+
 
 
 

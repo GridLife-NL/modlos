@@ -67,13 +67,14 @@ class  DeleteAvatar
 
 		$user_info = get_userinfo_by_id($this->uid);
 		if ($user_info!=null) {
-			$this->ownername = get_local_user_name($user_info->firstname, $user_info->lastname);
+			$this->ownername = get_display_username($user_info->firstname, $user_info->lastname);
 		}
 
-		$this->hasPermit = hasPermit();
+		$this->hasPermit = hasPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
 			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $this->return_url);
 		}
+
 		if ($this->state==AVATAR_STATE_ACTIVE) {
 			error(get_string('mdlos_active_avatar', 'block_mdlopensim'),  $this->return_url);
 		}
@@ -134,8 +135,6 @@ class  DeleteAvatar
 
 	function del_avatar()
 	{
-		global $CFG;
-
 		if (!isGUID($this->UUID)) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string("mdlos_invalid_uuid", "block_mdlopensim");

@@ -8,22 +8,31 @@ require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 class  CreateAvatar
 {
 	var $regionNames  = array();
-	var $actvLastName = 0;
+	var $actvLastName = false;
 
 	var $hasPermit 	= false;
 	var $module_url	= "";
-	var $action_url = "";
-	var $userid	 = 0;		// owner id of this process
+	var $action_url	= "";
+	var $course_url	= "";
+
 	var $created_avatar = false;
 
-	// Xoops DB
-	var $UUID	   = "";
-	var $nx_UUID   = "";
-	var $uid	   = 0;			// owner id of avatar
-	var $firstname = "";
-	var $lastname  = "";
-	var $hmregion  = "";
-	var $ownername = "";		// owner name of avatar
+	var $course_id  = 0;
+	var $use_sloodle= false;
+	var $pri_sloodle= false;
+
+	var $hasError   = false;
+	var $errorMsg   = array();
+
+	// Moodle DB
+	var $UUID	   	= "";
+	var $nx_UUID   	= "";
+	var $uid	   	= 0;			// owner id of avatar
+	var $firstname 	= "";
+	var $lastname  	= "";
+	var $passwd 	= "";
+	var $hmregion  	= "";
+	var $ownername 	= "";		// owner name of avatar
 
 
 
@@ -32,11 +41,6 @@ class  CreateAvatar
 		global $CFG;
 
 		require_login($courseid);
-
-		$this->hasPermit = hasPermit($courseid);
-		if (!$this->hasPermit) {
-			error('<h4>'.get_string('mdlos_access_forbidden', 'block_mdlopensim').'</h4>');
-		}
 
 		// for HTTPS
 		$use_https = $CFG->mdlopnsm_use_https;
@@ -53,22 +57,25 @@ class  CreateAvatar
 		else {
 			$this->module_url = CMS_MODULE_URL;
 		}
-		$this->action_url = $this->module_url."/actions/create_avatar.php";
 
+		$this->course_id   	= $course_id;
+		$this->hasPermit	= hasPsermit($course_id);
+		$this->action_url  	= $this->module_url."/actions/create_avatar.php";
+		$this->course_url 	= $CFG->wwwroot;
+		$this->use_sloodle 	= $CFG->mdlopnsm_cooperate_sloodle;
+		$this->pri_sloodle 	= $CFG->mdlopnsm_priority_sloodle;
+		$this->actvLastName	= $CFG->mdlopnsm_activate_lastname;
 
-
-		$this->actvLastName	= $this->mActionForm->actvLastName;
+		if ($course_id>0) {
+			$this->course_url.= "/course/view.php?id=".$course_id;
+		}
 
 		// Number of Avatars Check
 		if (!$this->hasPermit) {
-			$usersdbHandler = & xoops_getmodulehandler('usersdb');
-			$criteria = & new CriteriaCompo();
-			$criteria->add(new Criteria('uid', $root->mContext->mXoopsUser->get('uid')));
-			$avatars_num = $usersdbHandler->getCount($criteria);
-
-			$max_avatars = $controller->mRoot->mContext->mModuleConfig['max_own_avatars'];
+			$avatars_num = mdlopensim_get_avatars_num($USER->id);
+			$max_avatars = $CFG->mdlopnsm_max_own_avatars;
 			if ($max_avatars>=0 and $avatars_num>=$max_avatars) {
-				$controller->executeRedirect(_OPENSIM_MODULE_URL, 3, _MD_XPNSM_OVER_MAX_AVATARS);
+				error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($avatars_num >= $max_avatars)", $this->course_url);
 			}
 		}
 	}
@@ -80,48 +87,47 @@ class  CreateAvatar
 		// Region Name
 		$this->regionNames = opensim_get_regions_names("ORDER BY regionName ASC");
 
-		// Form
-		$this->mActionForm->prepare();
-		if (xoops_getenv("REQUEST_METHOD")=="POST") {
-			$this->mActionForm->fetch();
-			$this->mActionForm->validate();
-		}
-		$this->mActionForm->load();
+		if (data_submitted()) {
+			if (!confirm_sesskey()) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				return false;
+			}
 
-		$this->handler = & xoops_getmodulehandler('usersdb');
-		if ($this->hasPermit) {
-			do {
-				$uuid = make_random_guid();
-				$modobj = $this->handler->get($uuid);
-			} while ($modobj!=null);
-			$this->nx_UUID = $uuid;
-		}
+			if ($this->hasPermit) {
+				do {
+					$uuid = make_random_guid();
+					$modobj = mdlopensim_get_avara_info($uuid);
+				} while ($modobj!=null);
+				$this->nx_UUID = $uuid;
+			}
 
-		if (xoops_getenv("REQUEST_METHOD")=="POST") {
-			$this->firstname = $this->mActionForm->get('firstname');
-			$this->lastname  = $this->mActionForm->get('lastname');
-			$this->passwd	 = $this->mActionForm->get('passwd');
-			$this->hmregion  = $this->mActionForm->get('hmregion');
-			if($this->hasPermit) $this->ownername = $this->mActionForm->get('ownername');
-			if($this->hasPermit) $this->UUID		= $this->mActionForm->get('UUID');
+			$this->firstname= $optional_param('firstname', 	'', PARAM_TEXT);
+			$this->lastname = $optional_param('lastname',  	'', PARAM_TEXT);
+			$this->passwd	= $optional_param('passwd', 	'', PARAM_TEXT);
+			$confirm_pass	= $optional_param('confirm_pass','',PARAM_TEXT);
+			$this->hmregion = $optional_param('hmregion', 	'', PARAM_TEXT);
+			if($this->hasPermit) {
+				$this->ownername = $optional_param('ownername', '', PARAM_TEXT);
+				$this->UUID		 = $optional_param('UUID', '', PARAM_TEXT);
+			}
 		}
 		else {
-			$this->hmregion  = $this->mController->mRoot->mContext->mModuleConfig['home_region'];
-			$this->UUID	  = $this->nx_UUID;
+			$this->hmregion = $CFG->mdlopnsm_home_region;
+			$this->UUID	  	= $this->nx_UUID;
 		}
 
-		if ($this->ownername=="") $this->ownername = $this->mActionForm->uname;
+		if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
 
 		if (xoops_getenv("REQUEST_METHOD")=="POST" and  !$this->mActionForm->hasError()) {
-			$this->created_avatar = $this->createAvatar();
-		}
+
+		$this->created_avatar = $this->createAvatar();
 	}
 
 
 
 	function  print_page() 
 	{
-		$context = & XCube_Root::getSingleton()->mContext;
 
 		$render->setTemplateName('xoopensim_create.html');
 		$grid_name = $context->mModuleConfig['grid_name'];
@@ -194,9 +200,9 @@ class  CreateAvatar
 			return false;
 		}
 
-		// Xoops DB
+		// Moodle DB
 		if ($this->hasPermit) $this->uid = get_userid_by_name($this->ownername);
-		else 				$this->uid = $this->userid;
+		else 				  $this->uid = $this->userid;
 
 		// Xoopensim DB
 		$new_user['UUID']	  = $this->UUID;

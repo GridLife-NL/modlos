@@ -111,7 +111,7 @@
 
 <!-- search -->
 <table width="85%" cellpadding=3 border=0 bordercolor="#547FDB" cellspacing=1 bgcolor="#547FDB" align="center">
-  <form command1="<?php print $this->action_url?>" method="POST">    
+  <form command1="<?php print $this->search_url?>" method="POST">    
     <tr>
       <td><b><?php print $user_search?></b><br /></td>
     </tr>
@@ -129,6 +129,8 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
+			<input type="hidden" name="sesskey" value="<?php print sesskey() ?>" />
+			<input type="hidden" name="course"  value="<?php print $this->course_id?>" />
             <td><input type="Submit" value="Search" style="height:20"></td>
           </tr>
         </table>
@@ -215,12 +217,12 @@
                       </a>
                     </td>
                     <td width=250>
-                      <?php if ($userinfo and $dat['uname']!=' - ') { ?>
+                      <?php if ($userinfo and $dat['ownername']!=' - ') { ?>
                         <a href="<?php print $this->avatar_url.'?id='.$dat['uid'].$course_amp?>" target="_blank">
-                          <b><u><?php print $dat['uname']?></u></b>
+                          <b><u><?php print $dat['ownername']?></u></b>
                         </a>
                       <?php } else {?>
-                        <b><?php print $dat['uname']?></b>
+                        <b><?php print $dat['ownername']?></b>
                       <?php }?>
                     </td>
                     <td>&nbsp;</td>

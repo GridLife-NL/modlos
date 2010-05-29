@@ -51,7 +51,7 @@ class  ShowHome
 		$grid_name       	= $CFG->mdlopnsm_grid_name;
 		$content         	= $CFG->mdlopnsm_home_content;
 
-		$home_page 			= get_string("mdlos_home_page", 		  "block_mdlopensim");
+		$db_status 			= get_string("mdlos_db_status", 		  "block_mdlopensim");
 		$online_ttl 		= get_string("mdlos_online_ttl", 		  "block_mdlopensim");
 		$offline_ttl 		= get_string("mdlos_offline_ttl", 		  "block_mdlopensim");
 		$total_users 		= get_string("mdlos_total_users", 		  "block_mdlopensim");

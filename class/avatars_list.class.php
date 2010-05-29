@@ -14,9 +14,11 @@ class  AvatarsList
 	var $action_url;
 	var $edit_url;
 	var $owner_url;
+	var $search_url;
 	var $course_url;
 	var $avatar_url;
 
+	var $course_id  = 0;
 	var $course_amp	= "";
 
 	var $hasPermit 	= false;
@@ -54,17 +56,20 @@ class  AvatarsList
 		$this->hasPermit	= hasPermit($course_id);
 		$this->date_format 	= $CFG->mdlopnsm_date_format;
 
-		$this->course_url = $CFG->wwwroot;
 		$course_param = "?course=".$course_id;
+		$this->course_id  = $course_id;
+
+		$this->action_url = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
+		$this->edit_url	  = CMS_MODULE_URL."/actions/edit_avatar.php". $course_param;
+		$this->owner_url  = CMS_MODULE_URL."/actions/owner_avatar.php".$course_param;
+		$this->search_url = CMS_MODULE_URL."/actions/avatars_list.php";
+		$this->avatar_url = $CFG->wwwroot."/user/view.php";
+
+		$this->course_url = $CFG->wwwroot;
 		if ($course_id>0) {
 			$this->course_url.= "/course/view.php?id=".$course_id;
 			$this->course_amp = "&amp;course=".$course_id;
 		}
-
-		$this->action_url	= CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
-		$this->edit_url		= CMS_MODULE_URL."/actions/edit_avatar.php". $course_param;
-		$this->owner_url	= CMS_MODULE_URL."/actions/owner_avatar.php".$course_param;
-		$this->avatar_url 	= $CFG->wwwroot."/user/view.php";
 	}
 
 
@@ -75,7 +80,12 @@ class  AvatarsList
 			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'), $this->course_url);
 		}
 
-		$sql_order = "ORDER BY created ASC";
+		// Post Check
+		if (data_submitted()) {
+			if (!confirm_sesskey()) {
+				error(get_string('mdlos_sesskey_error', 'block_mdlopensim'), $this->action_url);
+			}
+		}
 
 		// firstname & lastname
 		$this->firstname = optional_param('firstname', '', PARAM_TEXT);
@@ -106,6 +116,7 @@ class  AvatarsList
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 
 		// SQL Condition
+		$sql_order = "ORDER BY created ASC";
 		$sql_limit = "LIMIT $this->pstart, $this->plimit";
 		$this->sql_countcnd  = " WHERE $sql_validuser $sql_firstname $sql_lastname";
 		$this->sql_condition = " WHERE $sql_validuser $sql_firstname $sql_lastname $sql_order $sql_limit";
@@ -171,7 +182,7 @@ class  AvatarsList
 		foreach($users as $user) {
 			$this->db_data[$colum]				= $user;
 			$this->db_data[$colum]['num']		= $colum;
-			$this->db_data[$colum]['uname']		= ' - ';        // user name in Xoops
+			$this->db_data[$colum]['ownername']	= ' - ';
 			$this->db_data[$colum]['region_id']	= $user['hmregion'];
 			$this->db_data[$colum]['region']	= opensim_get_region_name($user['hmregion'], $DbLink);
 			$this->db_data[$colum]['state']		= AVATAR_STATE_NOTSYNC;
@@ -211,7 +222,7 @@ class  AvatarsList
 				if ($uid>0) {
 					$user_info = get_record('user', 'id', $uid, 'deleted', '0');
 					if ($user_info!=null) {
-						$this->db_data[$colum]['uname'] = get_local_user_name($user_info->firstname, $user_info->lastname);
+						$this->db_data[$colum]['ownername'] = get_display_username($user_info->firstname, $user_info->lastname);
 					}
 				}
 			}

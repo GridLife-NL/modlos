@@ -58,7 +58,7 @@ if ($agent) {
 		$userid = $avatar['uid'];
 		$state  = $avatar['state'];
 		if ($moodle = get_record("user", "id", $userid)) {
-			$owner  = get_local_user_name($moodle->firstname, $moodle->lastname);
+			$owner  = get_display_username($moodle->firstname, $moodle->lastname);
 		}
 	}
 

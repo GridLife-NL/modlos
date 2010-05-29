@@ -1,5 +1,8 @@
 <?php
 
+if (!defined('CMS_MODULE_PATH')) exit();
+require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
+
 
 
 class  OwnerAvatar
@@ -7,30 +10,33 @@ class  OwnerAvatar
 	var $hashPermit = false;
 	var $module_url = ""
 	var $action_url = "";
-	var $userid		= '0';
-	var $uname		= "";
+	var $return_url = "";
+
 	var $updated_owner = false;
 
-	// Xoops DB
-	var $dbhandler  = null;
+	var $course_id	= 0;
+	var $use_sloodle= false;
+	var $pri_sloodle= false;
+
+	var $hasError	= false;
+	var $errorMsg	= array();
+
+	// Moodle DB
 	var $avatar	 	= null;
 	var $UUID		= "";
-	var $firstname  = "";
-	var $lastname   = "";
-	var $passwd	 	= "";
+	var $uid		= "";
+var $firstname  = "";
+var $lastname	= "";
+	var $state		= "";
+var $passwd	 	= "";
+var $ownername 	= "";
 
 
-
-	function  OwnerAvatar($courseid) 
+	function  OwnerAvatar($course_id) 
 	{
-		global $CFG;
+		global $CFG, $USER;
 
-		require_login($courseid);
-
-		$this->hasPermit = hasPermit($courseid);
-		if (!$this->hasPermit) {
-			error("<h4>".get_string('mdlos_access_forbidden', 'block_mdlopensim')."</h4>");
-		}
+		require_login($course_id);
 
 		// for HTTPS
 		$use_https = $CFG->mdlopnsm_use_https;
@@ -47,90 +53,95 @@ class  OwnerAvatar
 		else {
 			$this->module_url = CMS_MODULE_URL;
 		}
-		$this->action_url = $this->module_url."/actions/create_avatar.php";
 
-
-		$this->userid 	   	= $this->mActionForm->uid;			// execute user id
-		$this->uname 	   	= $this->mActionForm->uname;		// execute user name
+		$course_param 		= "?course=".$course_id;
+		$this->course_id		= $course_id;
+		$this->hasPermit		= hasPsermit($course_id);
+		$this->action_url  	= $this->module_url."/actions/owner_avatar.php";
+		$this->return_url  	= CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
+		$this->use_sloodle 	= $CFG->mdlopnsm_cooperate_sloodle;
+		$this->pri_sloodle 	= $CFG->mdlopnsm_priority_sloodle;
 
 		// Number of Avatars Check
-		if (!$this->hashPermit) {
-			$usersdbHandler = & xoops_getmodulehandler('usersdb');
-			$criteria = & new CriteriaCompo();
-			$criteria->add(new Criteria('uid', $root->mContext->mXoopsUser->get('uid')));
-			$avatars_num = $usersdbHandler->getCount($criteria);
-			$max_avatars = $controller->mRoot->mContext->mModuleConfig['max_own_avatars'];
+		if (!$this->hasPermit) {
+			$avatars_num = mdlopensim_get_avatars_num($USER->id);
+			$max_avatars = $CFG->mdlopnsm_max_own_avatars;
 			if ($max_avatars>=0 and $avatars_num>=$max_avatars) {
-				$controller->executeRedirect(CMS_MODULE_URL."/?action=avatars", 3, _MD_XPNSM_OVER_MAX_AVATARS);
+				error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($avatars_num >= $max_avatars)", $this->return_url);
 			}
 		}
 
 		// get UUID from POST or GET
-		$this->UUID = $root->mContext->mRequest->getRequest('uuid');
+		$this->UUID = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($this->UUID)) {
-			$controller->executeRedirect(CMS_MODULE_URL, 3, _MD_XPNSM_BAD_UUID);
+			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($this->UUID)", $this->return_url);
 		}
 
-		// check Xoops DB
-		$this->dbhandler = & xoops_getmodulehandler('usersdb');
-		$avatardata = & $this->dbhandler->get($this->UUID);
-		if ($avatardata==null) {
-			$controller->executeRedirect(CMS_MODULE_URL, 3, _MD_XPNSM_NOT_EXIST_UUID);
+		// check Mdlopensim DB
+		$avatar = mdlopensim_get_avatar_info($this->UUID);
+		if ($avatar==null) {
+			error(get_string('mdlos_not_exist_uuid', 'block_mdlopensim')." ($this->UUID)", $this->return_url);
 		}
-
-		$uid = $avatardata->get('uid');							// uid of avatar in editing from DB
+		$this->uid = $avatar['uid'];
 		if ($uid!=0) {
-			$controller->executeRedirect(CMS_MODULE_URL, 3, _MD_XPNSM_ACCESS_FORBIDDEN);
+			error(get_string('mdlos_owner_forbidden', 'block_mdlopensim'), $this->return_url);
 		}
-
-		$state = $avatardata->get('state');
+		$this->state = $avatar['state'];
 		if ($state!=AVATAR_STATE_ACTIVE) {
-			$controller->executeRedirect(CMS_MODULE_URL, 3, _MD_XPNSM_STATE_INVALID);
+			error(get_string('mdlos_owner_forbidden', 'block_mdlopensim'), $this->return_url);
 		}
+		$this->firstname = $avatar['firstname'];
+		$this->lastname  = $avatar['lastname'];
 
-		// get User Info from Xoops DB
-		$this->avatar = $avatardata;
+		// get User Info from Moodle DB
+		$this->avatar = $avatar;
 	}
 
 
 
 	function  execute()
 	{
-		// Form
-		$this->mActionForm->prepare();
-		if (xoops_getenv("REQUEST_METHOD")=="POST") {
-			$this->mActionForm->fetch();
-			$this->mActionForm->validate();
-		}
-		$this->mActionForm->load();
+		if (data_submitted()) {
+			if (!confirm_sesskey()) {
+				 $this->hasError = true;
+				 $this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				 return false;
+			}
 
-		$this->firstname = $this->avatar->get('firstname');
-		$this->lastname  = $this->avatar->get('lastname');
-
-		if (xoops_getenv("REQUEST_METHOD")=="POST" and  !$this->mActionForm->hasError()) {
-			$this->passwd = $this->mActionForm->get('passwd');
-			$postuid = $this->mActionForm->get('userid');
-			$this->updated_owner = $this->updateOwner($postuid);
+			if (xoops_getenv("REQUEST_METHOD")=="POST" and  !$this->mActionForm->hasError()) {
+				$this->passwd = $this->mActionForm->get('passwd');
+				$postuid = $this->mActionForm->get('userid');
+				$this->updated_owner = $this->updateOwner($postuid);
+			}
 		}
 	}
 
 
 
-	function  print_page($render) 
+	function  print_page() 
 	{
-		$render->setTemplateName('xoopensim_owner.html');
-		$grid_name = $this->mController->mRoot->mContext->mModuleConfig['grid_name'];
+		global $CFG;
 
-		$render->setAttribute('grid_name',		$grid_name);
-		$render->setAttribute('action_url', 	$this->action_url);
-		$render->setAttribute('actionForm', 	$this->mActionForm);
-		$render->setAttribute('updated_owner',	$this->updated_owner);
-		$render->setAttribute('firstname', 		$this->firstname);
-		$render->setAttribute('lastname', 		$this->lastname);
+		$this->execute();
 
-		$render->setAttribute('userid',			$this->userid);
-		$render->setAttribute('ownername',		$this->uname);
-		$render->setAttribute('UUID', 			$this->UUID);
+		$grid_name = $CFG->mdlopnsm_grid_name;
+
+		$avatar_edit		= get_string('mdlos_avatar_edit',	'block_mdlopensim');
+		$firstname_ttl	  = get_string('mdlos_firstname',	 'block_mdlopensim');
+		$lastname_ttl		= get_string('mdlos_lastname',	  'block_mdlopensim');
+		$passwd_ttl		 = get_string('mdlos_password',	  'block_mdlopensim');
+		$confirm_pass_ttl	= get_string('mdlos_confirm_pass',  'block_mdlopensim');
+		$home_region_ttl	= get_string('mdlos_home_region',	'block_mdlopensim');
+		$status_ttl		 = get_string('mdlos_status',		'block_mdlopensim');
+		$active_ttl		 = get_string('mdlos_active',		'block_mdlopensim');
+		$inactive_ttl		= get_string('mdlos_inactive',	  'block_mdlopensim');
+		$owner_ttl		  = get_string('mdlos_owner',		 'block_mdlopensim');
+		$ownername_ttl	  = get_string('mdlos_ownername',	 'block_mdlopensim');
+		$update_ttl		 = get_string('mdlos_update_ttl',	'block_mdlopensim');
+		$delete_ttl		 = get_string('mdlos_delete_ttl',	'block_mdlopensim');
+		$reset_ttl		  = get_string('mdlos_reset_ttl',	 'block_mdlopensim');
+		$avatar_updated	 = get_string('mdlos_avatar_updated','block_mdlopensim');
+		$uuid_ttl			= get_string('mdlos_uuid',		  'block_mdlopensim');
 
 		include(CMS_MODULE_PATH."/html/owner.html");
 	}

@@ -144,6 +144,7 @@ $string['mdlos_bad_uuid'] 			= 'Specified UUID is Illegal';
 $string['mdlos_not_exist_uuid'] 	= 'Specified UUID is Not Exist';
 $string['mdlos_mismatch_uid'] 		= 'UID is mismatch';
 $string['mdlos_mismatch_passwd'] 	= 'Passwrod is mismatch';
+$string['mdlos_owner_forbidden']    = 'Cannot change owner of this avatar';
 
 $string['mdlos_disclaimer'] 		= 'Disclaimer';
 $string['mdlos_disclaimer_agree'] 	= 'I agree to the above';

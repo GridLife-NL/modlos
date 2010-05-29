@@ -15,8 +15,8 @@ class  EditAvatar
 	var $delete_url = "";
 	var $return_url = "";
 	var $module_url = "";
-	var $updated_avatar = false;
 
+	var $updated_avatar = false;
 	var $course_id	= 0;
 	var $use_sloodle= false;
 	var $pri_sloodle= false;
@@ -27,14 +27,14 @@ class  EditAvatar
 	// Moodle DB
 	var $avatar		= null;
 	var $UUID		= "";
-	var $uid 	   	= 0;				// owner id of avatar
+	var $uid 	   	= 0;
 	var $firstname 	= "";
 	var $lastname  	= "";
 	var $passwd  	= "";
 	var $hmregion  	= "";
 	var $state	 	= 0;
 	var $ostate		= 0;
-	var $ownername 	= "";			// owner name of avatar
+	var $ownername 	= "";
 
 
 
@@ -59,12 +59,12 @@ class  EditAvatar
 			$this->module_url = CMS_MODULE_URL;
 		}
 
-
 		$course_param = "?course=".$course_id;
 		$this->course_id  = $course_id;
 		$this->action_url = $this->module_url."/actions/edit_avatar.php";
 		$this->delete_url = CMS_MODULE_URL."/actions/delete_avatar.php".$course_param;
 		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
+
 
 		// get UUID from POST or GET
 		$uuid = optional_param('uuid', '', PARAM_TEXT);
@@ -86,7 +86,7 @@ class  EditAvatar
 		$this->avatar 	= $avatar;
 
 
-		$this->hasPermit = hasPermit();
+		$this->hasPermit = hasPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
 			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $this->return_url);
 		}
@@ -133,13 +133,14 @@ class  EditAvatar
 
 			// Moodle User ID
 			if ($this->hasPermit) 	  $this->ownername = optional_param('ownername', '', PARAM_TEXT);
-			if ($this->ownername=="") $this->ownername = get_local_user_name($USER->firstname, $USER->lastname);
+			if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
 
 			if ($this->hasPermit) {
-				$user_info = get_userinfo_by_name($this->ownername);				
+				$names = get_names_from_display_username($this->ownername);
+				$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);				
 				if ($user_info==null) {
 					$this->hasError = true;
-					$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." ($this->ownername)";
+					$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." (".$names['firstname']." ".$names['lastname'].")";
 					return false;
 				}
 				$this->uid = $user_info->id;
@@ -167,9 +168,9 @@ class  EditAvatar
 
 			if ($this->hasPermit and $this->uid>0) {
 				$user_info = get_userinfo_by_id($this->uid);
-				$this->ownername = get_local_user_name($user_info->firstname, $user_info->lastname);
+				$this->ownername = get_display_username($user_info->firstname, $user_info->lastname);
 			}
-			if ($this->ownername=="") $this->ownername = get_local_user_name($USER->firstname, $USER->lastname);
+			if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
 		}
 	}
 
@@ -207,8 +208,6 @@ class  EditAvatar
 
 	function updateAvatar()
 	{
-		global $USER;
-
 		// Update password of OpenSim DB
 		if ($this->passwd!="") {
 			$passwdsalt = make_random_hash();

@@ -142,6 +142,7 @@ $string['mdlos_bad_uuid'] 			= '不正な UUID です';
 $string['mdlos_not_exist_uuid'] 	= '存在しない UUID です';
 $string['mdlos_mismatch_uid'] 		= 'User ID が一致しません';
 $string['mdlos_mismatch_passwd'] 	= 'パスワードが一致しません';
+$string['mdlos_owner_forbidden'] 	= 'このアバターのオーナは変更できません';
 
 $string['mdlos_disclaimer'] 		= '使用許諾';
 $string['mdlos_disclaimer_agree'] 	= '私は使用許諾に同意します';
