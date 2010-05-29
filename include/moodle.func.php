@@ -28,7 +28,6 @@ function  get_local_user_name($firstname, $lastname)
 {
 	global $CFG;
 
-
 	if ($CFG->fullnamedisplay=='lastname firstname') {
 		$username = $lastname." ".$firstname;
 	}

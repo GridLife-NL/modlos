@@ -7,21 +7,21 @@ require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 class  RegionsList
 {
-	var $icon = array();
-	var $pnum = array();
+	var $icon 		= array();
+	var $pnum 		= array();
 	var $action;
 	var $action_url;
 	var $course_url;
 
-	var $course_param = "";
+	var $course_amp	= "";
 
-	var $hasPermit = false;
-	var $isGuest = true;
-	var $db_ver  = "";
+	var $hasPermit 	= false;
+	var $isGuest 	= true;
+	var $db_ver  	= "";
 
-	var $Cpstart = 0;
-	var $Cplimit = 25;
-	var $order   = "";
+	var $Cpstart 	= 0;
+	var $Cplimit 	= 25;
+	var $order   	= "";
 	var $pstart;
 	var $plimit;
 	var $number;
@@ -43,8 +43,8 @@ class  RegionsList
 
 		$this->course_url = $CFG->wwwroot;
 		if ($course_id>0) {
-			$this->course_url  .= "/course/view.php?id=".$course_id;
-			$this->course_param = "&amp;course=".$course_id;
+			$this->course_url.= "/course/view.php?id=".$course_id;
+			$this->course_amp = "&amp;course=".$course_id;
 		}
 	}
 
@@ -158,10 +158,10 @@ class  RegionsList
 		$grid_name       = $CFG->mdlopnsm_grid_name;
 		$content         = $CFG->mdlopnsm_regions_content;
 
-		$course_param 	 = $this->course_param;
 		$order_param	 = "?order=$this->order";
-		$pstart_param	 = "&amp;pstart=$this->pstart";
-		$plimit_param	 = "&amp;plimit=$this->plimit";
+		$course_amp 	 = $this->course_amp;
+		$pstart_amp	 	 = "&amp;pstart=$this->pstart";
+		$plimit_amp	 	 = "&amp;plimit=$this->plimit";
 		$pstart_		 = "&amp;pstart=";
 		$plimit_		 = "&amp;plimit=";
 

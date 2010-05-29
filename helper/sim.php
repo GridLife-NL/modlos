@@ -123,8 +123,8 @@ $avatar_select = true;
 if ($avatar_num>100) $avatar_select = false;
 
 //////////////
-$course_param = "";
-if ($course_id>0) $course_param	= "&amp;course=".$course_id;
+$course_amp = "";
+if ($course_id>0) $course_amp = "&amp;course=".$course_id;
 
 $region_info_ttl= get_string("mdlos_region_info",	 "block_mdlopensim");
 $region_ttl   	= get_string("mdlos_region",   		 "block_mdlopensim");

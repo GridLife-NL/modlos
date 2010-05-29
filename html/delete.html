@@ -4,7 +4,7 @@
 
 <?php if (!$this->deleted_avatar) {?>
 <form action="<?php print $this->action_url?>" method="POST">
-  <input type="hidden" name="UUID"   value="<?php print $UUID?>" />
+  <input type="hidden" name="uuid"   value="<?php print $this->UUID?>" />
 <?php }?>
 
   <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
@@ -67,7 +67,7 @@
 <?php if ($this->hasError) {?>
   <ul>
     <?php foreach($this->errorMsg as $mesg) {?>
-      <li><font color="#f02022"><b><?php print  $mesg?></b></font></li>
+      <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
     <?php }?>
   </ul>
 <?php } else {?>

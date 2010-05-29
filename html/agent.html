@@ -4,7 +4,8 @@
 <style type="text/css">
 .styleTitel {
 	font-size: 16px;
-	font-weight: bold; color: #105BA7;
+	font-weight: bold;
+	color: #105BA7;
 	font-family: Arial, Helvetica, sans-serif;
 }
 .styleText {
@@ -57,7 +58,7 @@
         <tr>
           <td class="styleText"><b><?php print $ownername_ttl.":&nbsp;"?><font color="#105BA7">
             <?php if ($userinfo and $owner!=' - ') {?>
-              <a href="<?php print $CFG->wwwroot.'/user/view.php?id='.$userid.$course_param?>" target="_blank"><?php print $owner?></a>
+              <a href="<?php print $CFG->wwwroot.'/user/view.php?id='.$userid.$course_amp?>" target="_blank"><?php print $owner?></a>
             <?php } else {?>
               <?php print $owner?>
             <?php }?>
@@ -86,7 +87,7 @@
         </tr>
         <tr><td class="styleText">&nbsp;</td></tr>
         <tr>
-          <td class="styleText"><b><?php print $home_region_ttl?>:&nbsp;<a href="<?php print CMS_MODULE_URL.'/helper/sim.php?region='.$regionUUID.$course_param?>">
+          <td class="styleText"><b><?php print $home_region_ttl?>:&nbsp;<a href="<?php print CMS_MODULE_URL.'/helper/sim.php?region='.$regionUUID.$course_amp?>">
             <?php print htmlspecialchars($regionName)?>
           </a></b></td>
         </tr>

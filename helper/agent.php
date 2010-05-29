@@ -19,6 +19,8 @@ require_login($course_id);
 $hasPermit  = hasPermit($course_id);
 
 global $CFG;
+$use_sloodle= $CFG->mdlopnsm_cooperate_sloodle;
+$pri_sloodle= $CFG->mdlopnsm_priority_sloodle;
 $grid_name  = $CFG->mdlopnsm_grid_name;
 $userinfo   = $CFG->mdlopnsm_userinfo_link;
 $action_url = CMS_MODULE_URL."/helper/agent.php";
@@ -50,10 +52,11 @@ if ($agent) {
 		$profileTXT 	= $avinfp['profileTXT'];
 	}
 
-	// Moodle DB
-	if ($mdlos = get_record('mdlos_users', 'uuid', $agent)) {
-		$userid = $mdlos->user_id;
-		$state  = $mdlos->state;
+	// Mdlopensim and Sloodle DB
+	$avatar = mdlopensim_get_avatar_info($agent, $use_sloodle, $pri_sloodle);
+	if ($avatar!=null) {
+		$userid = $avatar['uid'];
+		$state  = $avatar['state'];
 		if ($moodle = get_record("user", "id", $userid)) {
 			$owner  = get_local_user_name($moodle->firstname, $moodle->lastname);
 		}
@@ -96,8 +99,8 @@ $guid = str_replace("-", "", $UUID);
 
 ///////////////
 
-$course_param = "";
-if ($course_id>0) $course_param = "&amp;course=".$course_id;
+$course_amp = "";
+if ($course_id>0) $course_amp = "&amp;course=".$course_id;
 
 $user_info_ttl  = get_string("mdlos_user_info",		"block_mdlopensim");
 $avatar_info_ttl= get_string("mdlos_avatar_info",	"block_mdlopensim");

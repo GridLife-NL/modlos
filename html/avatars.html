@@ -31,7 +31,7 @@
                 <!-- icon line -->
                 <td width="50">
                   <?php if ($this->icon[0]=="on") {?>
-                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit.$pstart_.'0'?>" target="_self">
+                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.'0'?>" target="_self">
                   <?php }?>
                     <img src="<?php print CMS_MODULE_URL.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[0]=="on") {?>
@@ -41,7 +41,7 @@
 
                 <td width="50">
                   <?php if ($this->icon[0]=="on") {?>
-                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit.$pstart_.$this->pnum[0]?>" target="_self">
+                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
                   <?php }?>
                     <img src="<?php print CMS_MODULE_URL.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[0]=="on") {?>
@@ -57,7 +57,7 @@
 
                 <td width="50">
                   <?php if ($this->icon[1]=="on") {?>
-                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit.$pstart_.$this->pnum[1]?>" target="_self">
+                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
                   <?php }?>
                       <img src="<?php print CMS_MODULE_URL.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[1]=="on") {?>
@@ -67,7 +67,7 @@
 
                 <td width="50">
                   <?php if ($this->icon[1]=="on") {?>
-                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit.$pstart_.$this->pnum[2]?>" target="_self">
+                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
                   <?php }?>
                       <img src="<?php print CMS_MODULE_URL.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[1]=="on") {?>
@@ -172,7 +172,7 @@
                   <?php }?>
                     <td width=40><font color=#000><b>&nbsp;<?php print $dat['num']+1+$this->pstart?></b></font></td>
                     <td width=50 height=26>
-                      <a style="cursor:pointer" onClick="window.open('<?php print CMS_MODULE_URL.'/helper/agent.php?agent='.$dat['UUID'].$this->course_param?>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+                      <a style="cursor:pointer" onClick="window.open('<?php print CMS_MODULE_URL.'/helper/agent.php?agent='.$dat['UUID'].$course_amp?>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
                         <img src="<?php print CMS_MODULE_URL?>/images/icons/icon_user.gif">
                       </a>
                     </td>
@@ -206,7 +206,7 @@
                       </b>
                     </td>
                     <td width=150>
-                      <a style="cursor:pointer" onClick="window.open('<?php print CMS_MODULE_URL.'/helper/sim.php?region='.$dat['region_id'].$this->course_param?>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+                      <a style="cursor:pointer" onClick="window.open('<?php print CMS_MODULE_URL.'/helper/sim.php?region='.$dat['region_id'].$course_amp?>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
                         <?php if ($dat['online']) {?>
                           <b><u><font color=#005500><?php print $dat['region']?></font></u></b>
                         <?php } else {?>
@@ -216,7 +216,7 @@
                     </td>
                     <td width=250>
                       <?php if ($userinfo and $dat['uname']!=' - ') { ?>
-                        <a href="<?php print $this->avatar_url.'?id='.$dat['uid'].$this->course_param?>" target="_blank">
+                        <a href="<?php print $this->avatar_url.'?id='.$dat['uid'].$course_amp?>" target="_blank">
                           <b><u><?php print $dat['uname']?></u></b>
                         </a>
                       <?php } else {?>

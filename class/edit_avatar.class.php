@@ -17,8 +17,9 @@ class  EditAvatar
 	var $module_url = "";
 	var $updated_avatar = false;
 
-	var $course_id 	= 0;
-	var $course_param = "";
+	var $course_id	= 0;
+	var $use_sloodle= false;
+	var $pri_sloodle= false;
 
 	var $hasError	= false;
 	var $errorMsg 	= array();
@@ -58,24 +59,27 @@ class  EditAvatar
 			$this->module_url = CMS_MODULE_URL;
 		}
 
-		if ($course_id>0) $this->course_param = "&amp;course=".$course_id;
+		$course_param = "?course=".$course_id;
 		$this->course_id  = $course_id;
-		$this->action_url = CMS_MODULE_URL."/actions/edit_avatar.php".  $this->course_param;
-		$this->delere_url = CMS_MODULE_URL."/actions/delete_avatar.php".$this->course_param;
-		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $this->course_param;
-
+		$this->action_url = CMS_MODULE_URL."/actions/edit_avatar.php".  $course_param;
+		$this->delere_url = CMS_MODULE_URL."/actions/delete_avatar.php".$course_param;
+		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
 
 		// get UUID from POST or GET
-		$uuid = required_param('UUID', PARAM_TEXT);
+		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
 			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)", $this->return_url);
 		}
 		$this->UUID = $uuid;
 
-		// get uid from Mdlopensim DB
-		$avatar = get_record('mdlos_users', 'uuid', $this->UUID);
-		$this->uid	  = $avatar->user_id;				// uid of avatar in editing from DB
-		$this->ostate = $avatar->state;
+
+		$this->use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
+		$this->pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
+
+		// get uid from Mdlopensim and Sloodle DB
+		$avatar = mdlopensim_get_avatar_info($this->UUID, $this->use_sloodle, $this->pri_sloodle);
+		$this->uid	  = $avatar['uid'];
+		$this->ostate = $avatar['state'];
 		$this->avatar = $avatar;
 
 		$this->hasPermit = hasPermit();
@@ -93,8 +97,9 @@ class  EditAvatar
 		// OpenSim DB
 		$this->regionNames = opensim_get_regions_names("ORDER BY regionName ASC");
 
-		$this->firstname = $this->avatar->firstname;
-		$this->lastname  = $this->avatar->lastname;
+		// This name could not be changed 
+		$this->firstname = $this->avatar['firstname'];
+		$this->lastname  = $this->avatar['lastname'];
 
 		// Form
 		if (data_submitted()) {
@@ -106,24 +111,48 @@ class  EditAvatar
 
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
 			if ($del!="") {
-				redirect($this->delete_url);
+				redirect($this->delete_url."&amp;uuid=".$this->UUID, "Please wait....", 0);
 				$this->hasError = true;
-				$this->errorMsg[] = "delete page open error!!";
+				$this->errorMsg[] = "avatar delete page open error!!";
 				return false;
 			}
 
-			$this->passwd	= optional_param('passwd',   '', PARAM_TEXT);
+
 			$this->hmregion = optional_param('hmregion', '', PARAM_TEXT);
-			$this->state 	= optional_param('state',	  '', PARAM_TEXT);
+			$this->state 	= optional_param('state',	 '', PARAM_TEXT);
+			$confirm_pass	= optional_param('confirm_pass','', PARAM_TEXT);
+
+			// password
+			$this->passwd	= optional_param('passwd',   '', PARAM_TEXT);
+			if ($this->passwd!="" and ($this->passwd!=$confirm_pass)) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_passwd_mismatch", "block_mdlopensim");
+				return false;
+			}
+
+			// Moodle User ID
+			if ($this->hasPermit) 	  $this->ownername = optional_param('ownername', '', PARAM_TEXT);
+			if ($this->ownername=="") $this->ownername = get_local_user_name($USER->firstname, $USER->lastname);
 
 			if ($this->hasPermit) {
-				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
 				$user_info = get_userinfo_by_name($this->ownername);				
-				if ($user_info!=null) $this->uid = $user_info->id;
+				if ($user_info==null) {
+					$this->hasError = true;
+					$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." ($this->ownername)";
+					return false;
+				}
+				$this->uid = $user_info->id;
 			}
-			if ($this->ownername=="") {
-				$this->ownername = get_local_user_name($USER->firstname, $USER->lastname);
+			else {
 				$this->uid = $USER->id;
+			}
+
+			// Home Region
+ 			$region_uuid = opensim_get_region_uuid($this->hmregion);
+			if ($region_uuid==null) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_invalid_regionname'", "block_mdlopensim")." ($this->hmregion)";
+				return false;
 			}
 
 			//////////
@@ -132,20 +161,14 @@ class  EditAvatar
 		}
 		else {
 			$this->passwd	= "";
-			$this->hmregion = $this->avatar->hmregion;
-			$this->state  	= $this->avatar->state;
+			$this->hmregion = $this->avatar['hmregion'];
+			$this->state  	= $this->avatar['state'];
 
-			if ($this->hasPermit) {
+			if ($this->hasPermit and $this->uid>0) {
 				$user_info = get_userinfo_by_id($this->uid);
-				if ($user_info!=null) {
-					$this->ownername = get_local_user_name($user_info->firstname, $user_info->lastname);
-					$this->uid = $user_info->id;
-				}
+				$this->ownername = get_local_user_name($user_info->firstname, $user_info->lastname);
 			}
-			if ($this->ownername=="") {
-				$this->ownername = get_User_Name($USER->firstname, $USER->lastname);
-				$this->uid = $USER->id;
-			}
+			if ($this->ownername=="") $this->ownername = get_local_user_name($USER->firstname, $USER->lastname);
 		}
 	}
 
@@ -155,9 +178,11 @@ class  EditAvatar
 	{
 		global $CFG;
 
+		$this->execute();
+
 		$grid_name = $CFG->mdlopnsm_grid_name;
 
-		$avatar_dit   		= get_string('mdlos_avatar_edit',	'block_mdlopensim');
+		$avatar_edit   		= get_string('mdlos_avatar_edit',	'block_mdlopensim');
 		$firstname_ttl  	= get_string('mdlos_firstname',	 	'block_mdlopensim');
 		$lastname_ttl   	= get_string('mdlos_lastname',		'block_mdlopensim');
 		$passwd_ttl  		= get_string('mdlos_password',	 	'block_mdlopensim');
@@ -183,7 +208,7 @@ class  EditAvatar
 	{
 		global $USER;
 
-		// OpenSim DB
+		// Update password of OpenSim DB
 		if ($this->passwd!="") {
 			$passwdsalt = make_random_hash();
 			$passwdhash = md5(md5($this->passwd).":".$passwdsalt);
@@ -196,6 +221,7 @@ class  EditAvatar
 			}
 		}
 
+		// update Home Region
 		if ($this->hmregion!="") {
 			$ret = opensim_set_home_region($this->UUID, $this->hmregion);
 			if (!$ret) {
@@ -205,9 +231,7 @@ class  EditAvatar
 			}
 		}
 
-
 		// State
-		$errno = 0;
 		if ($this->state!=$this->ostate) {
 			// XXXXXX -> InAcvtive
 			if ($this->state==AVATAR_STATE_INACTIVE) {
@@ -229,8 +253,8 @@ class  EditAvatar
 			}
 		}
 
-		// Mdlopensim DB
-		$update_user['id']	  	  = $this->avatar->id;
+		// Mdlopensim and Sloodle DB
+		$update_user['id']	  	  = $this->avatar['id'];
 		$update_user['UUID']	  = $this->UUID;
 		$update_user['uid']		  = $this->uid;
 		$update_user['firstname'] = $this->firstname;
@@ -239,22 +263,14 @@ class  EditAvatar
 		$update_user['state']	  = $this->state;
 		$update_user['time']	  = time();
 
-		$ret = mdlopensim_update_usertable($update_user);
+		$ret = mdlopensim_set_avatar_info($update_user, $this->use_sloodle);
 		if (!$ret) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string("mdlos_update_error", "block_mdlopensim");
 		}
 
-		// Sloodle
-		if ($CFG->mdlopnsm_cooperate_sloodle) {
-			$ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $this->UUID);
-			if (!$ret) {
-				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_sloodle_update_error", "block_mdlopensim");
-			}
-		}
-
-		return $this->hasError;
+		if ($this->hasError) return false;
+		return true;
 	}
 
 }

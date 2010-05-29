@@ -14,7 +14,6 @@ class  DeleteAvatar
 	var $deleted_avatar = false;
 
 	var $course_id	= 0;
-	var $course_param = "";
 
 	var $hasError  	= false;
 	var $errorMsg  	= array();
@@ -37,15 +36,15 @@ class  DeleteAvatar
 
 		require_login($course_id);
 
-		if ($course_id>0) $this->course_param = "&amp;course=".$course_id;
+		$this->course_param = "?course=".$course_id;
 		$this->course_id  = $course_id;
-		$this->action_url = CMS_MODULE_URL."/actions/delete_avatar.php".$this->course_param;
-		$this->cancel_url = CMS_MODULE_URL."/actions/avatars_list.php". $this->course_param;
-		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $this->course_param;
+		$this->action_url = CMS_MODULE_URL."/actions/delete_avatar.php".$course_param;
+		$this->cancel_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
+		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
 
 
 		// get UUID from POST or GET
-		$uuid = required_param('UUID', PARAM_TEXT);
+		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
 			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)", $this->return_url);
 		}
@@ -162,7 +161,8 @@ class  DeleteAvatar
 			}
 		}
 
-		return $this->hasError;
+		if ($this->hasError) return false;
+		return true;
 	}
 }
 

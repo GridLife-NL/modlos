@@ -110,6 +110,9 @@ define('AVATAR_NOT_EDITABLE',	'0');
 define('AVATAR_EDITABLE',	 	'1');
 define('AVATAR_OWNER_EDITABLE',	'2');
 
+// Lastname
+define('AVATAR_LASTN_INACTIVE',	'0');
+define('AVATAR_LASTN_ACTIVE',  	'1');
 
 // for Currency
 // Key of the account that all fees go to:

@@ -9,9 +9,6 @@ if (!defined('CMS_MODULE_PATH')) exit();
 require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
-define('STATE_OFF', '0');
-define('STATE_ON',  '1');
-
 
 
 class  LastNames
@@ -97,8 +94,8 @@ class  LastNames
 		$this->execute();
 
 		foreach ($this->lastnames as $lastname=>$state) {
-			if ($state==STATE_ON) $this->lastnames_active[]   = $lastname;
-			else				  $this->lastnames_inactive[] = $lastname;
+			if ($state==AVATAR_LASTN_ACTIVE) $this->lastnames_active[]   = $lastname;
+			else							 $this->lastnames_inactive[] = $lastname;
 		}
 
 		$grid_name		= $CFG->mdlopnsm_grid_name;
@@ -130,10 +127,10 @@ class  LastNames
 		}
 
 		$obj->lastname = $this->addname;
-		$obj->state    = STATE_ON;
+		$obj->state    = AVATAR_LASTN_ACTIVE;
 		insert_record('mdlos_lastnames', $obj);
 
-		$this->lastnames[$this->addname] = STATE_ON;
+		$this->lastnames[$this->addname] = AVATAR_LASTN_ACTIVE;
 	}
 
 
@@ -147,9 +144,9 @@ class  LastNames
 				$this->errorMsg[] = get_string('mdlos_not_exist_lastname', 'block_mdlopensim')." ($name)";
 			}
 			else {
-				$obj->state = STATE_ON;
+				$obj->state = AVATAR_LASTN_ACTIVE;
 				update_record('mdlos_lastnames', $obj);
-				$this->lastnames[$name] = STATE_ON;
+				$this->lastnames[$name] = AVATAR_LASTN_ACTIVE;
 			}
 		}
 	}
@@ -165,9 +162,9 @@ class  LastNames
 				$this->errorMsg[] = get_string('mdlos_not_exist_lastname', 'block_mdlopensim')." ($name)";
 			}
 			else {
-				$obj->state = STATE_OFF;
+				$obj->state = AVATAR_LASTN_INACTIVE;
 				update_record('mdlos_lastnames', $obj);
-				$this->lastnames[$name] = STATE_OFF;
+				$this->lastnames[$name] = AVATAR_LASTN_INACTIVE;
 			}
 		}
 	}

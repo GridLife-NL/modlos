@@ -8,26 +8,26 @@ require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 class  AvatarsList
 {
-	var $db_data = array();
-	var $icon = array();
-	var $pnum = array();
+	var $db_data 	= array();
+	var $icon 		= array();
+	var $pnum 		= array();
 	var $action_url;
 	var $edit_url;
 	var $owner_url;
 	var $course_url;
 	var $avatar_url;
 
-	var $course_param = "";
+	var $course_amp	= "";
 
-	var $hasPermit = false;
-	var $isGuest   = true;
-	var $db_ver    = "";
+	var $hasPermit 	= false;
+	var $isGuest   	= true;
+	var $db_ver    	= "";
 
 	// Page Control
-	var $Cpstart = 0;
-	var $Cplimit = 25;
-	var $firstname = "";
-	var $lastname  = "";
+	var $Cpstart 	= 0;
+	var $Cplimit 	= 25;
+	var $firstname 	= "";
+	var $lastname  	= "";
 	var $pstart;
 	var $plimit;
 	var $number;
@@ -55,14 +55,15 @@ class  AvatarsList
 		$this->date_format 	= $CFG->mdlopnsm_date_format;
 
 		$this->course_url = $CFG->wwwroot;
+		$course_param = "?course=".$course_id;
 		if ($course_id>0) {
-			$this->course_url  .= "/course/view.php?id=".$course_id;
-			$this->course_param = "&amp;course=".$course_id;
+			$this->course_url.= "/course/view.php?id=".$course_id;
+			$this->course_amp = "&amp;course=".$course_id;
 		}
 
-		$this->action_url	= CMS_MODULE_URL."/actions/avatars_list.php".$this->course_param;
-		$this->edit_url		= CMS_MODULE_URL."/actions/edit_avatar.php". $this->course_param;
-		$this->owner_url	= CMS_MODULE_URL."/actions/owner_avatar.php".$this->course_param;
+		$this->action_url	= CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
+		$this->edit_url		= CMS_MODULE_URL."/actions/edit_avatar.php". $course_param;
+		$this->owner_url	= CMS_MODULE_URL."/actions/owner_avatar.php".$course_param;
 		$this->avatar_url 	= $CFG->wwwroot."/user/view.php";
 	}
 
@@ -114,7 +115,10 @@ class  AvatarsList
 
 	function  execute()
 	{
-		global $USER;
+		global $CFG, $USER;
+
+		$use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
+		$pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
 
 		$this->number    = count(opensim_get_avatars_infos($this->sql_countcnd));;
 		$this->sitemax   = ceil ($this->number/$this->plimit);
@@ -198,12 +202,12 @@ class  AvatarsList
 				$this->db_data[$colum]['region'] 	= opensim_get_region_name($online['region'], $DbLink);
 			}
 
-			// serach Moodle DB
+			// serach Moodle, Mdlopensim and Sloodle DB
 			$uid = -1;
-			$avatardata = get_record('mdlos_users', 'uuid', $UUID);
+			$avatardata = mdlopensim_get_avatar_info($UUID, $use_sloodle, $pri_sloodle);
 			if ($avatardata!=null) {
-				$uid = $avatardata->user_id;
-				$this->db_data[$colum]['state'] = $avatardata->state;
+				$uid = $avatardata['uid'];
+				$this->db_data[$colum]['state'] = $avatardata['state'];
 				if ($uid>0) {
 					$user_info = get_record('user', 'id', $uid, 'deleted', '0');
 					if ($user_info!=null) {
@@ -241,9 +245,10 @@ class  AvatarsList
 		$userinfo		= $CFG->mdlopnsm_userinfo_link;
 		$date_format	= $CFG->mdlopnsm_date_format;
 
+		$course_amp		= $this->course_amp;
+        $plimit_amp     = "&amp;plimit=$this->plimit";
         $pstart_        = "&amp;pstart=";
         $plimit_        = "&amp;plimit=";
-        $plimit         = "&amp;plimit=$this->plimit";
 
 		$avatars_list	= get_string('mdlos_avatars_list', 	'block_mdlopensim');
 		$number_ttl		= get_string('mdlos_no',			'block_mdlopensim');
