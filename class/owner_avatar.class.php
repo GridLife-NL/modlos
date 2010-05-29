@@ -112,8 +112,22 @@ var $lastname	= "";
 			}
 
 			$passwd  = $optional_param('passwd', '', PARAM_TEXT);
-			$postuid = $optional_param('userid', '', PARAM_TEXT);
-			$this->updated_owner = $this->updateOwner($postuid, $passwd);
+			if (!isAlphabetNumericSpecial($passwd)) {
+				 $this->hasError = true;
+				 $this->errorMsg[] = get_string("mdlos_invalid_passwd", "block_mdlopensim")." ($psswd)";
+			}
+			$postuid = $optional_param('userid', '', PARAM_INT);
+			if (!isNumeric($postuid)) {
+				 $this->hasError = true;
+				 $this->errorMsg[] = get_string("mdlos_invalid_uid", "block_mdlopensim")." ($postuid)";
+			}
+
+			if (!$this->hasError) {
+				$this->updated_owner = $this->updateOwner($postuid, $passwd);
+			}
+			
+			if ($this->hasError) return false;
+			return true;
 		}
 	}
 

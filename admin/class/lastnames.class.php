@@ -91,8 +91,6 @@ class  LastNames
 	{
 		global $CFG;
 
-		$this->execute();
-
 		foreach ($this->lastnames as $lastname=>$state) {
 			if ($state==AVATAR_LASTN_ACTIVE) $this->lastnames_active[]   = $lastname;
 			else							 $this->lastnames_inactive[] = $lastname;

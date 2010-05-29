@@ -32,7 +32,7 @@ class  CreateAvatar
 	var $lastname  	= "";
 	var $passwd 	= "";
 	var $hmregion  	= "";
-	var $ownername 	= "";		// owner name of avatar
+	var $ownername 	= "";			// owner name of avatar
 
 
 
@@ -116,25 +116,48 @@ class  CreateAvatar
 			}
 			if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
 
-
-
-			
-
-
-
-
-
-
+			// Check
+			if (!isGUID($this->UUID, true)) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_invalid_uuid", "block_mdlopensim")." ($this->UUID)";
+			}
+			if (!isAlphabetNumericSpecial($this->firstname)) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_invalid_firstname", "block_mdlopensim")." ($this->firstname)";
+			}
+			if (!isAlphabetNumericSpecial($this->lastname)) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_invalid_last", "block_mdlopensim")." ($this->lastname)";
+			}
+			if (!isAlphabetNumericSpecial($this->passwd)) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_invalid_passwd", "block_mdlopensim")." ($this->passwd)";
+			}
+			if ($this->passwd!=$confirm_pass) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_mismatch_passwd", "block_mdlopensim");
+			}
+			if (!isAlphabetNumericSpecial($this->hmregion)) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_invalid_regionname", "block_mdlopensim")." ($this->hmregion)";
+			}
+			if (!isAlphabetNumericSpecial($this->ownername)) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_invalid_username", "block_mdlopensim")." ($this->ownername)";
+			}
 
 			if (!$this->hasError) {
 				$this->created_avatar = $this->createAvatar();
 			}
 		}
 		else {
-			$this->hmregion = $CFG->mdlopnsm_home_region;
-			$this->UUID	  	= $this->nx_UUID;
+			$this->hmregion  = $CFG->mdlopnsm_home_region;
+			$this->UUID		 = $this->nx_UUID;
 			$this->ownername = get_display_username($USER->firstname, $USER->lastname);
 		}
+
+		if ($this->hasError) return false;
+		return true;
 	}
 
 
@@ -144,7 +167,6 @@ class  CreateAvatar
 		global $CFG;
 
 		$grid_name = $CFG->mdlopnsm_grid_name;
-		$grid_name = $context->mModuleConfig['grid_name'];
 
 		$render->setAttribute('grid_name',		$grid_name);
 		$render->setAttribute('action_url', 	$this->action_url);
@@ -185,16 +207,13 @@ class  CreateAvatar
 
 	function createAvatar()
 	{
-		$context = & XCube_Root::getSingleton()->mContext;
+		global $USER;
 
 		// User Check
-		$criteria  = & new CriteriaCompo();
-		$criteria->add(new Criteria('firstname', $this->firstname));
-		$criteria->add(new Criteria('lastname',  $this->lastname));
-
-		$modobj = & $this->handler->getObjects($criteria);
-		if ($modobj!=null) {
-			$this->mActionForm->addErrorMessage(_MD_XPNSM_ALREADY_NAME_ERROR);
+		$avuuid = opensim_get_avatar_uuid($this->firstname." ".$this->lastname);
+		if ($avuuid!=null) {
+			$this->hasError = true;
+			$this->errorMsg[] = get_string("mdlos_already_name_error", "block_mdlopensim")." ($this->firstname $this->lastname)";
 			return false;
 		}
 
@@ -210,27 +229,41 @@ class  CreateAvatar
 		// OpenSim DB
 		$rslt = opensim_create_avatar($this->UUID, $this->firstname, $this->lastname, $this->passwd, $this->hmregion);
 		if (!$rslt) {
-			$this->mActionForm->addErrorMessage(_MD_XPNSM_OPNSM_CREATE_ERROR);
+			$this->hasError = true;
+			$this->errorMsg[] = get_string("mdlos_opensim_create_error", "block_mdlopensim")." ($this->UUID)";
 			return false;
 		}
 
 		// Moodle DB
-		if ($this->hasPermit) $this->uid = get_userid_by_name($this->ownername);
-		else 				  $this->uid = $this->userid;
+		if ($this->hasPermit) {
+			$names = get_names_from_display_username($this->ownername);
+			$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);
+			if ($user_info==null) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." (".$names['firstname']." ".$names['lastname'].")";
+				return false;
+			}
+			$this->uid = $user_info->id;
+		}
+		else {
+			$this->uid = $USER->id;
+		}
 
-		// Xoopensim DB
-		$new_user['UUID']	  = $this->UUID;
-		$new_user['uid']	   = $this->uid;
-		$new_user['firstname'] = $this->firstname;
-		$new_user['lastname']  = $this->lastname;
-		$new_user['hmregion']  = $this->hmregion;
-		$new_user['state']	 = "";
+		$new_user['UUID']		= $this->UUID;
+		$new_user['uid']	   	= $this->uid;
+		$new_user['firstname'] 	= $this->firstname;
+		$new_user['lastname']  	= $this->lastname;
+		$new_user['hmregion']  	= $this->hmregion;
+		$new_user['state']	 	= AVATAR_STATE_ACTIVE;;
 
-		//$ret = xoopensim_insrt_usertable($modHandler, $new_user);
-		$ret = xoopensim_insert_usertable($new_user);
-		if (!$ret) $this->mActionForm->addErrorMessage(_MD_XPNSM_XOOPS_CREATE_ERROR);
+		$ret = mdlopensim_set_avatar_info($new_user, $this->use_sloodle);
+		if (!$ret) {
+			$this->hasError = true;
+			$this->errorMsg[] = get_string("mdlos_create_error", "block_mdlopensim");
+		}
 
-		return $ret;
+		if (!$this->hasError) return false;
+		return true;
 	}
 
 }

@@ -153,8 +153,6 @@ class  SynchroDataBase
 	{
         global $CFG;
 
-        $this->execute();
-
         $grid_name  	  = $CFG->mdlopnsm_grid_name;
 		$synchro_db_ttl   = get_string("mdlos_synchro_db", 		 "block_mdlopensim");
 		$synchronized_msg = get_string("mdlos_synchronized", 	 "block_mdlopensim");
