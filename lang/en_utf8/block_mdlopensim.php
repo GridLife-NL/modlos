@@ -37,6 +37,7 @@ $string['mdlos_delete_ttl'] 		= 'DELETE';
 $string['mdlos_get_owner_ttl'] 		= 'OWNER';
 $string['mdlos_update_ttl'] 		= 'UPDATE';
 $string['mdlos_create_ttl'] 		= 'CREATE';
+$string['mdlos_return_ttl'] 		= 'RETURN';
 
 $string['mdlos_avatar_reset_ttl'] 	= 'RESET AVATAR';
 $string['mdlos_avatar_create_ttl'] 	= 'CREATE AVATAR';
@@ -134,6 +135,7 @@ $string['mdlos_invalid_uuid']   	= 'Invalid UUID!!';
 $string['mdlos_invalid_uid']   		= 'Invalid user ID!!';
 $string['mdlos_invalid_passwd']   	= 'Invalid password!!';
 $string['mdlos_invalid_username']   = 'Invalid user name!!';
+$string['mdlos_invalid_ownername']  = 'Invalid owner name!!';
 $string['mdlos_exist_lastname']     = 'Already exist lastname!!';
 $string['mdlos_not_exist_lastname'] = 'Not exist lastname!!';
 $string['mdlos_active_avatar'] 		= 'Avatar is Active';

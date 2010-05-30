@@ -8,18 +8,18 @@
 <br />
 
 <form action="<?php print $this->action_url?>" method="POST">
-  <table width="400" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+  <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
 
   <?php if ($this->hasPermit) {?>
     <tr>
       <td width="100" class="head"><?php print $uuid_ttl?></td>
-      <td width="250" class="even"><input name="UUID" id="UUID" size="46" maxlength="36" value="$this->nx_UUID" /></td>
+      <td width="320" class="even"><input name="UUID" id="UUID" size="52" maxlength="36" value="<?php print $this->nx_UUID?>" /></td>
     </tr>
   <?php }?>
 
     <tr>
       <td width="100" class="head"><?php print $firstname_ttl?></td>
-      <td width="250" class="even"><input name="firstname" id="firstname" size="32" maxlength="30" value="$pv_firstname" /></td>
+      <td width="320" class="even"><input name="firstname" id="firstname" size="32" maxlength="30" value="<?php print $pv_firstname?>" /></td>
     </tr>
 
     <tr>
@@ -36,7 +36,7 @@
             <?php }?>
           </select>
         <?php } else {?>
-          <input name="lastname" size="32" maxlength="30" value="$pv_lastname" />
+          <input name="lastname" size="32" maxlength="30" value="<?php print $pv_lastname?>" />
         <?php }?>
       </td>
     </tr>
@@ -70,7 +70,7 @@
 	<?php if ($this->hasPermit) {?>
       <tr>
         <td class="head"><?php print $ownername_ttl?></td>
-        <td class="odd"><input name="ownername" size="32" maxlength="30" value=$pv_ownername /></td>
+        <td class="odd"><input name="ownername" size="32" maxlength="30" value="<?php print $pv_ownername?>" /></td>
       </tr>
     <?php }?>
 
@@ -79,7 +79,7 @@
       <tr>
         <td class="head"><?php print $disclaimer_ttl?></td>
         <td class="odd">
-          <textarea name="disclaimer" cols="50" rows="8" readonly="readonly"><?php print $disclaimer?></textarea><br />
+          <textarea name="disclaimer" cols="40" rows="5" readonly="readonly"><?php print $disclaimer?></textarea><br />
       	  <label><input name="agree" type="checkbox" value="agree" />&nbsp;<?php print $disclaim_agree?></label>
         </td>
       </tr>
@@ -106,21 +106,22 @@
 <br />
 <hr />
 <?php if ($this->hasError) {?>
-  <ul>
-    <?php foreach($this->errorMsg as $mesg) {?>
-       <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
-    <?php }?>
-  </ul>
-<br />
+  <div align="center">
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+         <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
+      <?php }?>
+    </ul>
+  </div>
 
 <?php } else {?>
   <?php if ($this->created_avatar) {?>
-    <h3><font color=#1010e0><?php print $avatar_created?></font></h3>
-    <table width="400" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+    <h3><font color=#1010e0><center><?php print $avatar_created?></center></font></h3>
+    <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
 	  <?php if ($this->hasPermit) {?>
         <tr>
           <td width="100" class="head"><?php print $uuid_ttl?></td>
-          <td width="250" class="even"><?php print $this->UUID?></td>	
+          <td width="320" class="even"><?php print $this->UUID?></td>	
         </tr>
       <?php }?>
       <tr>

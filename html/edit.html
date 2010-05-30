@@ -13,11 +13,11 @@
   <input type="hidden" name="uuid"    value="<?php print $this->UUID?>" />
   <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
 
-  <table width="400" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+  <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
 
     <tr>
       <td width="100" class="head"><?php print $firstname_ttl?></td>
-      <td width="250" class="even"><b><?php print $this->firstname?></b></td>
+      <td width="320" class="even"><b><?php print $this->firstname?></b></td>
     </tr>
 
     <tr>
@@ -84,7 +84,7 @@
       <!--<a href="<?php print $this->delete_url?>" ><font color=#f01010><?php print $delete_ttl?></font></a> -->
       <input name="submit_delete" type="submit" id="submit_delete" value="<?php print $delete_ttl?>" />
     <?php }?>
-  </dev>
+  </div>
 
 </form>
 <br />
@@ -94,21 +94,22 @@
 <br />
 <hr />
 <?php if ($this->hasError) {?>
-  <ul>
-    <?php foreach ($this->errorMsg as $mesg) {?>
-      <li><font color="#f01010"><b><?php print $mesg?></b></font></li>
-    <?php }?>
-  </ul>
-  <br />
+  <div align="center">
+    <ul>
+      <?php foreach ($this->errorMsg as $mesg) {?>
+        <li><font color="#f01010"><b><?php print $mesg?></b></font></li>
+      <?php }?>
+    </ul>
+  </div>
 
 <?php } else {?>
   <?php if ($this->updated_avatar) {?>
     <h3><font color=#1010e0><center><?php print $avatar_updated?></center></font></h3>
-    <table width="400" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" >
+    <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" >
       <?php if ($this->hasPermit) {?>
         <tr>
           <td width="100" class="head"><?php print $uuid_ttl?></td>
-          <td width="250" class="even"><?php print $this->UUID?></td>	
+          <td width="320" class="even"><?php print $this->UUID?></td>	
         </tr>
       <?php }?>
 

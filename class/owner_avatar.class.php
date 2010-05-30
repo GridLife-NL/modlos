@@ -53,12 +53,12 @@ class  OwnerAvatar
 		$course_param 	   = "?course=".$course_id;
 		$return_url  	   = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
 		$this->course_id   = $course_id;
-		$this->hasPermit   = hasPsermit($course_id);
+		$this->hasPermit   = hasPermit($course_id);
 		$this->action_url  = $module_url."/actions/owner_avatar.php";
 		$this->use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
 		$this->pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
 		$this->user_id	   = $USER->id;
-		$this->ownername   = get_diaplay_username($USER->firstname, $USER->lastname);
+		$this->ownername   = get_display_username($USER->firstname, $USER->lastname);
 
 		// Number of Avatars Check
 		if (!$this->hasPermit) {
@@ -101,15 +101,14 @@ class  OwnerAvatar
 			if (!confirm_sesskey()) {
 				 $this->hasError = true;
 				 $this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
-				 return false;
 			}
 
-			$this->passwd  = $optional_param('passwd', '', PARAM_TEXT);
+			$this->passwd  = optional_param('passwd', '', PARAM_TEXT);
 			if (!isAlphabetNumericSpecial($this->passwd)) {
 				 $this->hasError = true;
 				 $this->errorMsg[] = get_string("mdlos_invalid_passwd", "block_mdlopensim")." ($this->passwd)";
 			}
-			$posted_uid = $optional_param('userid', '', PARAM_INT);
+			$posted_uid = optional_param('userid', '', PARAM_INT);
 			if (!isNumeric($posted_uid)) {
 				 $this->hasError = true;
 				 $this->errorMsg[] = get_string("mdlos_invalid_uid", "block_mdlopensim")." ($posted_uid)";

@@ -104,18 +104,12 @@ class  EditAvatar
 			if (!confirm_sesskey()) { 
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
-				return false;
 			}
 
 			// Cancel
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
-			if ($del!="") {
-				redirect($this->delete_url."&amp;uuid=".$this->UUID, "Please wait....", 0);
-				$this->hasError = true;
-				$this->errorMsg[] = "avatar delete page open error!!";
-				return false;
-			}
-
+			if ($del!="") redirect($this->delete_url."&amp;uuid=".$this->UUID, "Please wait....", 0);
+			
 
 			$this->hmregion = optional_param('hmregion', '', PARAM_TEXT);
 			$this->state 	= optional_param('state',	 '', PARAM_TEXT);
@@ -123,10 +117,9 @@ class  EditAvatar
 
 			// password
 			$this->passwd	= optional_param('passwd',   '', PARAM_TEXT);
-			if ($this->passwd!="" and ($this->passwd!=$confirm_pass)) {
+			if ($this->passwd!=$confirm_pass) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_passwd_mismatch", "block_mdlopensim");
-				return false;
 			}
 
 			// Moodle User ID
@@ -139,9 +132,10 @@ class  EditAvatar
 				if ($user_info==null) {
 					$this->hasError = true;
 					$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." (".$names['firstname']." ".$names['lastname'].")";
-					return false;
 				}
-				$this->uid = $user_info->id;
+				else {
+					$this->uid = $user_info->id;
+				}
 			}
 			else {
 				$this->uid = $USER->id;
@@ -152,8 +146,9 @@ class  EditAvatar
 			if ($region_uuid==null) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_invalid_regionname'", "block_mdlopensim")." ($this->hmregion)";
-				return false;
 			}
+
+			if ($this->hasError) return false;
 
 			//////////
 			$this->updated_avatar = $this->updateAvatar();

@@ -12,14 +12,14 @@
   <input type="hidden" name="uuid"   value="<?php print $this->UUID?>" />
 <?php }?>
 
-  <table width="400" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+  <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
 
     <?php if (!$this->deleted_avatar) {?>
     <tr><td colspan="2"><b><center><font color=#e01010><?php print $avatar_dlt_confrm?></center></font></b></td></tr> 
     <?php }?>
     <tr>
       <td width="100" class="head"><?php print $firstname_ttl?></td>
-      <td width="250" class="even"><?php print $this->firstname?></td>
+      <td width="320" class="even"><?php print $this->firstname?></td>
     </tr>
 
     <tr>
@@ -66,24 +66,31 @@
       <input name="submit_delete" type="submit" value="<?php print $delete_ttl?>" />&nbsp;
       <input name="cancel_delete" type="submit" value="<?php print $cancel_ttl?>" />
     <?php }?>
-  </dev>
+  </div>
 </form>
 <br />
+
 
 <!-- print Message -->
 <br />
 <br />
 <hr />
 <?php if ($this->hasError) {?>
-  <ul>
-    <?php foreach($this->errorMsg as $mesg) {?>
-      <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
-    <?php }?>
-  </ul>
+
+  <div align="center">
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
+      <?php }?>
+    </ul>
+  </div>
+
 <?php } else {?>
+
   <?php if ($this->deleted_avatar) {?>
-    <h3><font color=#2020e0><?php print $avatar_deleted?></font></h3>
+    <h3><font color=#2020e0><center><?php print $avatar_deleted?></center></font></h3>
   <?php }?>
+
 <?php }?>
 <br />
 

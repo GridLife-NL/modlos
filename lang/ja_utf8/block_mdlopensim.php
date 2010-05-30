@@ -36,6 +36,7 @@ $string['mdlos_delete_ttl'] 		= '削除';
 $string['mdlos_get_owner_ttl'] 		= 'OWNER';
 $string['mdlos_update_ttl'] 		= '更新';
 $string['mdlos_craete_ttl'] 		= '作成';
+$string['mdlos_return_ttl'] 		= '戻る';
 
 $string['mdlos_avatar_reset_ttl'] 	= 'リセット';
 $string['mdlos_avatar_create_ttl'] 	= '作成';
@@ -77,7 +78,7 @@ $string['mdlos_avatar_info'] 		= 'アバター情報';
 $string['mdlos_avatar_created'] 	= 'アバターを作成しました';
 $string['mdlos_avatar_updated'] 	= 'アバターのデータを更新しました';
 $string['mdlos_avatar_gotted'] 		= 'アバターを手に入れました';
-$string['mdlos_avatar_gotted_error']= 'アバターを手に失敗しました';
+$string['mdlos_avatar_gotted_error']= 'アバターの入手に失敗しました';
 $string['mdlos_avatar_deleted'] 	= 'アバターを削除しました';
 
 $string['mdlos_avatar_create'] 		= 'アバター作成';
@@ -132,6 +133,7 @@ $string['mdlos_invalid_uuid'] 		= '無効な UUIDです';
 $string['mdlos_invalid_uid'] 		= '無効なユーザIDです';
 $string['mdlos_invalid_passwd'] 	= '無効なパスワードです';
 $string['mdlos_invalid_username'] 	= '無効なユーザ名です';
+$string['mdlos_invalid_ownername'] 	= '無効なオーナ名です';
 $string['mdlos_exist_lastname']  	= '既に存在するラストネームです!!';
 $string['mdlos_not_exist_lastname']	= '存在しないラストネームです!!';
 $string['mdlos_active_avatar'] 		= '有効なアバター';
@@ -172,7 +174,7 @@ $string['mdlos_sloodle_update_error']='Sloodleのユーザデータの更新に�
 $string['mdlos_inactivate_error']	= 'アバターの無効化に失敗しました!!';
 $string['mdlos_activate_error']		= 'アバターの有効化に失敗しました!!';
 
-$string['mdlos_voice_chat_mode']	= 'ボイスチャットモード';
+$string['mdlos_voice_chat_mode']	= 'ボイスチャネル';
 $string['mdlos_voice_chat_mode_chng']='モード変更';
 $string['mdlos_voice_inactive_chnl']= 'ボイス無効';
 $string['mdlos_voice_private_chnl']	= 'プライベートチャネル';

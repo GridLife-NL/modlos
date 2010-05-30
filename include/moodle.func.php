@@ -16,6 +16,8 @@
 
 function  hasPermit($course_id)
 {
+	return false;
+
     if (isguest()) return false;
     if (isadmin()) return true;
 	if ($course_id==null) return false;

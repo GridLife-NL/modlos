@@ -87,21 +87,19 @@ class  DeleteAvatar
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
-				return false;
 			}
 
+			if ($this->hasError) return false;
+
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
-			if ($del!="") {
-				///////
-				$this->deleted_avatar = $this->del_avatar();
-				if (!$this->deleted_avatar) {
-					$this->hasError = true;
-					$this->errorMsg[] = get_string("mdlos_opensim_delete_error", "block_mdlopensim");
-					return false;
-				}
-			}
-			else {
-				redirect($this->cancel_url, get_string('mdlos_avatar_dlt_canceled', 'block_mdlopensim'), 0);
+			if ($del=="") redirect($this->cancel_url, get_string('mdlos_avatar_dlt_canceled', 'block_mdlopensim'), 0);
+
+			//
+			$this->deleted_avatar = $this->del_avatar();
+			if (!$this->deleted_avatar) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_opensim_delete_error", "block_mdlopensim");
+				return false;
 			}
 		}
 		return true;

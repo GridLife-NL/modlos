@@ -12,6 +12,8 @@
  * function  mdlopensim_update_usertable($user)
  * function  mdlopensim_delete_usertable($user)
  *
+ * function  mdlopensim_get_lastnames($sort="")
+ *
  * function  mdlopensim_delete_groupdb($uuid, $delallgrp=false)
  * function  mdlopensim_delete_groupdb_by_gpid($gpid)
  * function  mdlopensim_delete_groupdb_by_uuid($uuid)
@@ -48,6 +50,7 @@ function  mdlopensim_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=fal
 
 	$avatar = get_record('mdlos_users', 'uuid', $uuid);		
 
+	$sloodle = null;
 	if ($use_sloodle) {
 		$sloodle = get_record(MDL_SLOODLE_USERS_TBL, 'uuid', $uuid);
 		if ($sloodle!=null) {
@@ -71,15 +74,19 @@ function  mdlopensim_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=fal
 		}
 	}
 	
+	if ($avatar==null and $sloodle==null) return null;
+	if ($avatar->firstname=="" or $avatar->lastname=="") return null;
 
-	$avatar_info['UUID'] = $uuid;
+
+	//
+	$avatar_info['UUID'] 	  = $uuid;
+	$avatar_info['firstname'] = $avatar->firstname;
+	$avatar_info['lastname']  = $avatar->lastname;
 
 	if ($avatar->id>0) 			$avatar_info['id'] 		  = $avatar->id;
 	else 						$avatar_info['id'] 		  = "";
 	if ($avatar->user_id!="")  	$avatar_info['uid'] 	  = $avatar->user_id;
 	else                       	$avatar_info['uid'] 	  = '0';
-	if ($avatar->firstname!="")	$avatar_info['firstname'] = $avatar->firstname;
-	if ($avatar->lastname!="")	$avatar_info['lastname']  = $avatar->lastname;
 	if ($avatar->hmregion!="")	$avatar_info['hmregion']  = $avatar->hmregion;
 	else					   	$avatar_info['hmregion']  = opensim_get_home_region($uuid);
 	if ($avatar->state!="")    	$avatar_info['state'] 	  = $avatar->state;
@@ -262,6 +269,26 @@ function  mdlopensim_delete_usertable($user)
 
 	return $ret;
 }
+
+
+
+
+//
+// Last Names
+//
+
+function  mdlopensim_get_lastnames($sort="")
+{
+	$lastnames = array();
+
+	$lastns = get_records("mdlos_lastnames", 'state', AVATAR_LASTN_ACTIVE, $sort, 'lastname');
+	foreach ($lastns as $lastn) {
+		$lastnames[] = $lastn->lastname;
+	}
+
+	return $lastnames;
+}
+
 
 
 

@@ -34,7 +34,7 @@ class  CreateAvatar
 
 
 
-	function  CreateAction($courseid)
+	function  CreateAvatar($courseid)
 	{
 		global $CFG;
 
@@ -58,7 +58,7 @@ class  CreateAvatar
 
 
 		$this->course_id	= $course_id;
-		$this->hasPermit	= hasPsermit($course_id);
+		$this->hasPermit	= hasPermit($course_id);
 		$this->action_url  	= $module_url."/actions/create_avatar.php";
 		$this->use_sloodle 	= $CFG->mdlopnsm_cooperate_sloodle;
 		$this->pri_sloodle 	= $CFG->mdlopnsm_priority_sloodle;
@@ -82,36 +82,32 @@ class  CreateAvatar
 	{
 		// Region Name
 		$this->regionNames = opensim_get_regions_names("ORDER BY regionName ASC");
-		$this->lastNames   = get_records("mdlos_lastnames", 'state', AVATAR_LASTN_ACTIVE, "", 'lastname');
+		$this->lastNames   = mdlopensim_get_lastnames();
 
-print_r($this->lastNames);
-die();
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
-				return false;
 			}
 		}
 
 		if ($this->hasPermit) {
 			do {
-				$uuid = make_random_guid();
-				$modobj = mdlopensim_get_avara_info($uuid);
+				$uuid   = make_random_guid();
+				$modobj = mdlopensim_get_avatar_info($uuid);
 			} while ($modobj!=null);
 			$this->nx_UUID = $uuid;
 		}
 
-
 		if (data_submitted()) {
-			$this->firstname= $optional_param('firstname', 	'', PARAM_TEXT);
-			$this->lastname = $optional_param('lastname',  	'', PARAM_TEXT);
-			$this->passwd	= $optional_param('passwd', 	'', PARAM_TEXT);
-			$confirm_pass	= $optional_param('confirm_pass','',PARAM_TEXT);
-			$this->hmregion = $optional_param('hmregion', 	'', PARAM_TEXT);
+			$this->firstname= optional_param('firstname', 	'', PARAM_TEXT);
+			$this->lastname = optional_param('lastname',  	'', PARAM_TEXT);
+			$this->passwd	= optional_param('passwd', 	'', PARAM_TEXT);
+			$confirm_pass	= optional_param('confirm_pass','',PARAM_TEXT);
+			$this->hmregion = optional_param('hmregion', 	'', PARAM_TEXT);
 			if($this->hasPermit) {
-				$this->ownername = $optional_param('ownername', '', PARAM_TEXT);
-				$this->UUID		 = $optional_param('UUID', '', PARAM_TEXT);
+				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
+				$this->UUID		 = optional_param('UUID', '', PARAM_TEXT);
 			}
 			if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
 
@@ -142,12 +138,12 @@ die();
 			}
 			if (!isAlphabetNumericSpecial($this->ownername)) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_invalid_username", "block_mdlopensim")." ($this->ownername)";
+				$this->errorMsg[] = get_string("mdlos_invalid_ownername", "block_mdlopensim")." ($this->ownername)";
 			}
 			if ($this->hasError) return false;
 
 			/////
-			$this->created_avatar = $this->createAvatar();
+			$this->created_avatar = $this->create_avatar();
 			if (!$this->created_avatar) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_create_error", "block_mdlopensim");
@@ -185,10 +181,9 @@ die();
 		$reset_ttl			= get_string('mdlos_reset_ttl',	  	'block_mdlopensim');
 		$avatar_created		= get_string('mdlos_avatar_created','block_mdlopensim');
 
-		$disclaimer_ttl		= get_string('mdlos_disclaime',	  	'block_mdlopensim');
+		$disclaimer_ttl		= get_string('mdlos_disclaimer',  	'block_mdlopensim');
 		$disclaim_agree		= get_string('mdlos_disclaimer_agree', 'block_mdlopensim');
 		$disclaim_need_agree= get_string('mdlos_need_agree_disclaimer',	'block_mdlopensim');
-
 
 		// 
 		$pv_ownername = $this->ownername;
@@ -206,7 +201,7 @@ die();
 
 
 
-	function createAvatar()
+	function create_avatar()
 	{
 		global $USER;
 
