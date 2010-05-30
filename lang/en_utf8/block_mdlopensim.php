@@ -102,14 +102,14 @@ $string['mdlos_region'] 			= 'Region';
 $string['mdlos_region_info'] 		= 'Region Information';
 $string['mdlos_region_name'] 		= 'Region Name';
 $string['mdlos_regions_found'] 		= 'Regions Found';
-$string['mdlos_location_x'] 		= 'Location: X';
-$string['mdlos_location_y'] 		= 'Location: Y';
+$string['mdlos_location_x'] 		= 'Loc: X';
+$string['mdlos_location_y'] 		= 'Loc: Y';
 $string['mdlos_page'] 				= 'Page';
 $string['mdlos_page_of'] 			= 'of';
 $string['mdlos_coordinates'] 		= 'Coordinates';
 
 $string['mdlos_region_owner']       = 'Region Owner';
-$string['mdlos_estate_owner']       = 'Administrator';
+$string['mdlos_estate_owner']       = 'Admin';
 $string['mdlos_estate_id']          = 'Estate ID';
 $string['mdlos_region_owner_chng']  = 'Region Owner Change';
 
@@ -174,7 +174,7 @@ $string['mdlos_sloodle_update_error']='It failed in updating data of Sloodle!!';
 $string['mdlos_inactivate_error']   = 'It failed in the inactivation of avatar!!';
 $string['mdlos_activate_error']     = 'It failed in the activation of avatar!!';
 
-$string['mdlos_voice_chat_mode']    = 'Voice Chat Mode';
+$string['mdlos_voice_chat_mode']    = 'Voice Channel';
 $string['mdlos_voice_chat_mode_chng']='Change Mode';
 $string['mdlos_voice_inactive_chnl']= 'Inactive Voice';
 $string['mdlos_voice_private_chnl'] = 'Private Channel';

@@ -8,6 +8,7 @@ require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 class  CreateAvatar
 {
 	var $regionNames  = array();
+	var $lastNames    = array();
 	var $actvLastName = false;
 
 	var $hasPermit 	= false;
@@ -18,13 +19,13 @@ class  CreateAvatar
 	var $use_sloodle= false;
 	var $pri_sloodle= false;
 
-	var $hasError   = false;
-	var $errorMsg   = array();
+	var $hasError	= false;
+	var $errorMsg	= array();
 
 	// Moodle DB
-	var $UUID	   	= "";
-	var $nx_UUID   	= "";
-	var $uid	   	= 0;			// owner id of avatar
+	var $UUID		= "";
+	var $nx_UUID	= "";
+	var $uid		= 0;			// owner id of avatar
 	var $firstname 	= "";
 	var $lastname  	= "";
 	var $passwd 	= "";
@@ -56,7 +57,7 @@ class  CreateAvatar
 		}
 
 
-		$this->course_id   	= $course_id;
+		$this->course_id	= $course_id;
 		$this->hasPermit	= hasPsermit($course_id);
 		$this->action_url  	= $module_url."/actions/create_avatar.php";
 		$this->use_sloodle 	= $CFG->mdlopnsm_cooperate_sloodle;
@@ -81,7 +82,10 @@ class  CreateAvatar
 	{
 		// Region Name
 		$this->regionNames = opensim_get_regions_names("ORDER BY regionName ASC");
+		$this->lastNames   = get_records("mdlos_lastnames", 'state', AVATAR_LASTN_ACTIVE, "", 'lastname');
 
+print_r($this->lastNames);
+die();
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
@@ -165,38 +169,36 @@ class  CreateAvatar
 	{
 		global $CFG;
 
-		$grid_name = $CFG->mdlopnsm_grid_name;
+		$grid_name 	  = $CFG->mdlopnsm_grid_name;
+		$isDisclaimer = $CFG->mdlopnsm_activate_disclaimer;
+		$disclaimer	  = $CFG->mdlopnsm_disclaimer_content;
 
-		$render->setAttribute('grid_name',		$grid_name);
-		$render->setAttribute('action_url', 	$this->action_url);
-		$render->setAttribute('hasPermit',		$this->hasPermit);
+		$avatar_create_ttl	= get_string('mdlos_avatar_create',	'block_mdlopensim');
+		$uuid_ttl			= get_string('mdlos_uuid',			'block_mdlopensim');
+		$firstname_ttl		= get_string('mdlos_firstname',	  	'block_mdlopensim');
+		$lastname_ttl		= get_string('mdlos_lastname',		'block_mdlopensim');
+		$passwd_ttl			= get_string('mdlos_password',		'block_mdlopensim');
+		$confirm_pass_ttl	= get_string('mdlos_confirm_pass',  'block_mdlopensim');
+		$home_region_ttl	= get_string('mdlos_home_region',	'block_mdlopensim');
+		$ownername_ttl		= get_string('mdlos_ownername',	  	'block_mdlopensim');
+		$create_ttl			= get_string('mdlos_create_ttl',	'block_mdlopensim');
+		$reset_ttl			= get_string('mdlos_reset_ttl',	  	'block_mdlopensim');
+		$avatar_created		= get_string('mdlos_avatar_created','block_mdlopensim');
 
-		$render->setAttribute('actvLastName', 	$this->actvLastName);
-		$render->setAttribute('lastNames',  	$this->mActionForm->lastNames);
-		$render->setAttribute('regionNames', 	$this->regionNames);
-		$render->setAttribute('created_avatar',	$this->created_avatar);
-		$render->setAttribute('actionForm', 	$this->mActionForm);
+		$disclaimer_ttl		= get_string('mdlos_disclaime',	  	'block_mdlopensim');
+		$disclaim_agree		= get_string('mdlos_disclaimer_agree', 'block_mdlopensim');
+		$disclaim_need_agree= get_string('mdlos_need_agree_disclaimer',	'block_mdlopensim');
 
-		$render->setAttribute('firstname', 		$this->firstname);
-		$render->setAttribute('lastname', 		$this->lastname);
-		$render->setAttribute('passwd', 		$this->passwd);
-		$render->setAttribute('hmregion', 		$this->hmregion);
-		$render->setAttribute('ownername',		$this->ownername);
-		$render->setAttribute('nx_UUID',	  	$this->nx_UUID);
-		$render->setAttribute('UUID', 		  	$this->UUID);
-
-		$render->setAttribute('isDisclaimer',	$context->mModuleConfig['activate_disclaimer']);
-		$render->setAttribute('disclaimer',		$context->mModuleConfig['disclaimer_content']);
 
 		// 
-		$render->setAttribute('pv_ownername', $this->ownername);
+		$pv_ownername = $this->ownername;
 		if ($this->created_avatar) {
-			$render->setAttribute('pv_firstname', "");
-			$render->setAttribute('pv_lastname',  "");
+			$pv_firstname = "";
+			$pv_lastname  = "";
 		}
 		else {
-			$render->setAttribute('pv_firstname', $this->firstname);
-			$render->setAttribute('pv_lastname',  $this->lastname);
+			$pv_firstname = $this->firstname;
+			$pv_lastname  = $this->lastname;
 		}
 
 		include(CMS_MODULE_PATH."/html/create.html");
@@ -249,7 +251,7 @@ class  CreateAvatar
 		}
 
 		$new_user['UUID']		= $this->UUID;
-		$new_user['uid']	   	= $this->uid;
+		$new_user['uid']			= $this->uid;
 		$new_user['firstname'] 	= $this->firstname;
 		$new_user['lastname']  	= $this->lastname;
 		$new_user['hmregion']  	= $this->hmregion;

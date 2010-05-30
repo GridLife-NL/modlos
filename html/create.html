@@ -4,87 +4,86 @@
 </style>
 
 
-<h2><center><?php print $grid_name?>&nbsp;:&nbsp;<?php print $smarty.const._MD_XPNSM_AVATAR_CREATE?></center></h2>
+<h2><center><?php print $grid_name."&nbsp;:&nbsp;".$avatar_create_ttl?></center></h2>
 <br />
 
-<form action="<?php print $action_url?>" method="POST">
-  <?php print xoops_token form=$actionForm?>
-  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+<form action="<?php print $this->action_url?>" method="POST">
+  <table width="400" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
 
-  <?php if $this->hasPermit?>
+  <?php if ($this->hasPermit) {?>
     <tr>
-      <td width="100" class="head"><?php print $smarty.const._MD_XPNSM_UUID?></td>
-      <td width="400" class="even"><?php print xoops_input name="UUID" id="UUID" size="46" maxlength="36" value="$nx_UUID"?></td>
+      <td width="100" class="head"><?php print $uuid_ttl?></td>
+      <td width="250" class="even"><input name="UUID" id="UUID" size="46" maxlength="36" value="$this->nx_UUID" /></td>
     </tr>
   <?php }?>
 
     <tr>
-      <td width="100" class="head"><?php print $smarty.const._MD_XPNSM_FIRSTNAME?></td>
-      <td width="400" class="even"><?php print xoops_input name="firstname" id="firstname" size="32" maxlength="30" value="$pv_firstname"?></td>
+      <td width="100" class="head"><?php print $firstname_ttl?></td>
+      <td width="250" class="even"><input name="firstname" id="firstname" size="32" maxlength="30" value="$pv_firstname" /></td>
     </tr>
 
     <tr>
-      <td class="head"><?php print $smarty.const._MD_XPNSM_LASTNAME?></td>
+      <td class="head"><?php print $lastname_ttl?></td>
       <td class="odd">
-        <?php if $actvLastName=='1'?>
+        <?php if ($this->actvLastName==AVATAR_LASTN_ACTIVE) {?>
           <select class="box" wide="25" name="lastname">
-            <?php print foreach from=$lastNames item="lname"?>
-              <?php if $lname|xoops_escape==$pv_lastname?>
-                <option value="<?php print $lname?>" selected><?php print $lname|xoops_escape?></option>
-              <?php print else?>
-                <option value="<?php print $lname?>" ><?php print $lname|xoops_escape?></option>
+            <?php foreach ($this->lastNames as $lname) {?>
+              <?php if ($lname==$pv_lastname) {?>
+                <option value="<?php print $lname?>" selected><?php print $lname?></option>
+              <?php } else {?>
+                <option value="<?php print $lname?>" ><?php print $lname?></option>
               <?php }?> 
-            <?php print /foreach?>
+            <?php }?>
           </select>
-        <?php print else?>
-          <?php print xoops_input name="lastname" size="32" maxlength="30" value="$pv_lastname"?>
+        <?php } else {?>
+          <input name="lastname" size="32" maxlength="30" value="$pv_lastname" />
         <?php }?>
       </td>
     </tr>
 
     <tr>
-      <td class="head"><?php print $smarty.const._MD_XPNSM_PASSWORD?></td>
-      <td class="even"><?php print xoops_input type="password" name="passwd" size="32" maxlength="16" value=""?></td>
+      <td class="head"><?php print $passwd_ttl?></td>
+      <td class="even"><input type="password" name="passwd" size="32" maxlength="16" value="" /></td>
     </tr>
 
     <tr>
-      <td class="head"><?php print $smarty.const._MD_XPNSM_CONFIRM_PASS?></td>
-      <td class="odd"><?php print xoops_input type="password" name="confirm_pass" size="32" maxlength="16" value=""?></td>
+      <td class="head"><?php print $confirm_pass_ttl?></td>
+      <td class="odd"><input type="password" name="confirm_pass" size="32" maxlength="16" value="" /></td>
     </tr>
 
 
     <tr>
-      <td class="head"><?php print $smarty.const._MD_XPNSM_HOME_REGION?></td>
+      <td class="head"><?php print $home_region_ttl?></td>
       <td class="even">
         <select wide="25" name="hmregion">
-          <?php print foreach from=$regionNames item="region"?>
-            <?php if $region|xoops_escape==$hmregion?>
-              <option value="<?php print $region?>" selected><?php print $region|xoops_escape?></option>
-            <?php print else?>
-              <option value="<?php print $region?>" ><?php print $region|xoops_escape?></option>
+          <?php foreach ($this->regionNames as $region) {?>
+            <?php if ($region==$this->hmregion) {?>
+              <option value="<?php print $region?>" selected><?php print $region?></option>
+            <?php } else {?>
+              <option value="<?php print $region?>" ><?php print $region?></option>
             <?php }?>
-          <?php print /foreach?>
+          <?php }?>
 		</select>
 	  </td>
     </tr>
 
-	<?php if $this->hasPermit?>
+	<?php if ($this->hasPermit) {?>
       <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_OWNERNAME?></td>
-        <td class="odd"><?php print xoops_input name="ownername" size="32" maxlength="30" value=$pv_ownername ?></td>
+        <td class="head"><?php print $ownername_ttl?></td>
+        <td class="odd"><input name="ownername" size="32" maxlength="30" value=$pv_ownername /></td>
       </tr>
     <?php }?>
 
 
-	<?php if $isDisclaimer and !$this->hasPermit ?>
+	<?php if ($isDisclaimer and !$this->hasPermit) {?>
       <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_DISCLAIMER?></td>
+        <td class="head"><?php print $disclaimer_ttl?></td>
         <td class="odd">
           <textarea name="disclaimer" cols="50" rows="8" readonly="readonly"><?php print $disclaimer?></textarea><br />
-      	  <label><?php print xoops_input name="agree" type="checkbox" value="agree" ?>&nbsp;<?php print $smarty.const._MD_XPNSM_DISCLAIMER_AGREE?></label>
+      	  <label><input name="agree" type="checkbox" value="agree" />&nbsp;<?php print $disclaim_agree?></label>
         </td>
       </tr>
-    <?php print else?>
+    <?php } else {?>
       <input type="hidden" name="agree" value="agree" />
     <?php }?>
 
@@ -95,56 +94,14 @@
   <div align="center">
     <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
     <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
-    <input type="submit" value="<?php print $smarty.const._MD_XPNSM_CREATE_TTL?>" />&nbsp;
-    <input type="reset"  value="<?php print $smarty.const._MD_XPNSM_RESET_TTL?>" />
+    <input type="submit" value="<?php print $create_ttl?>" />&nbsp;
+    <input type="reset"  value="<?php print $reset_ttl?>" />
   </div>
 </form>
-
-
-<br />
-<hr />
-<?php if $actionForm->hasError()?>
-  <ul>
-    <?php print foreach item="errval" from=$actionForm->getErrorMessages()?>
-      <li><font color="#f01010"><b><?php print $errval?></b></font></li>
-    <?php print /foreach?>
-  </ul>
-  <br />
-<?php print else?>
-  <?php if $created_avatar?>
-    <h3><font color=#1010e0><?php print $smarty.const._MD_XPNSM_AVATAR_CREATED?></font></h3>
-    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
-	  <?php if $this->hasPermit?>
-        <tr>
-          <td width="100" class="head"><?php print $smarty.const._MD_XPNSM_UUID?></td>
-          <td width="400" class="even"><?php print $UUID?></td>	
-        </tr>
-      <?php }?>
-      <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_FIRSTNAME?></td>
-        <td class="odd" ><?php print $firstname?></td>
-      </tr>
-      <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_LASTNAME?></td>
-        <td class="even"><?php print $lastname?></td>	
-      </tr>
-      <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_HOME_REGION?></td>
-        <td class="odd" ><?php print $hmregion?></td>	
-      </tr>
-      <?php if $this->hasPermit?>
-        <tr>
-          <td class="head"><?php print $smarty.const._MD_XPNSM_OWNERNAME?></td>
-          <td class="even"><?php print $ownername?></td>	
-        </tr>
-      <?php }?>
-    </table>
-  <?php }?>
-<?php }?>
 <br />
 
 
-<!-- Error Message -->
+<!-- print Messages -->
 <br />
 <br />
 <hr />
@@ -154,6 +111,37 @@
        <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
     <?php }?>
   </ul>
-<?php }?>
 <br />
 
+<?php } else {?>
+  <?php if ($this->created_avatar) {?>
+    <h3><font color=#1010e0><?php print $avatar_created?></font></h3>
+    <table width="400" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+	  <?php if ($this->hasPermit) {?>
+        <tr>
+          <td width="100" class="head"><?php print $uuid_ttl?></td>
+          <td width="250" class="even"><?php print $this->UUID?></td>	
+        </tr>
+      <?php }?>
+      <tr>
+        <td class="head"><?php print $firstname_ttl?></td>
+        <td class="odd" ><?php print $this->firstname?></td>
+      </tr>
+      <tr>
+        <td class="head"><?php print $lastname_ttl?></td>
+        <td class="even"><?php print $this->lastname?></td>	
+      </tr>
+      <tr>
+        <td class="head"><?php print $home_region_ttl?></td>
+        <td class="odd" ><?php print $this->hmregion?></td>	
+      </tr>
+      <?php if ($this->hasPermit) {?>
+        <tr>
+          <td class="head"><?php print $ownername_ttl?></td>
+          <td class="even"><?php print $ownername?></td>	
+        </tr>
+      <?php }?>
+    </table>
+  <?php }?>
+<?php }?>
+<br />
