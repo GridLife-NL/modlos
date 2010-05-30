@@ -75,12 +75,12 @@
     <?php }?>
 
 
-	<?php if ($isDisclaimer and !$this->hasPermit) {?>
+	<?php if ($this->isDisclaimer and !$this->hasPermit) {?>
       <tr>
         <td class="head"><?php print $disclaimer_ttl?></td>
         <td class="odd">
           <textarea name="disclaimer" cols="40" rows="5" readonly="readonly"><?php print $disclaimer?></textarea><br />
-      	  <label><input name="agree" type="checkbox" value="agree" />&nbsp;<?php print $disclaim_agree?></label>
+      	  <label><input name="agree" type="checkbox" value="agree"  />&nbsp;<?php print $disclaim_agree?></label>
         </td>
       </tr>
     <?php } else {?>
@@ -125,8 +125,8 @@
         </tr>
       <?php }?>
       <tr>
-        <td class="head"><?php print $firstname_ttl?></td>
-        <td class="odd" ><?php print $this->firstname?></td>
+        <td width="100" class="head"><?php print $firstname_ttl?></td>
+        <td width="320" class="odd" ><?php print $this->firstname?></td>
       </tr>
       <tr>
         <td class="head"><?php print $lastname_ttl?></td>

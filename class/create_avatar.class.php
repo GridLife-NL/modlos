@@ -18,6 +18,7 @@ class  CreateAvatar
 	var $course_id  = 0;
 	var $use_sloodle= false;
 	var $pri_sloodle= false;
+	var	$isDisclaimer=false;
 
 	var $hasError	= false;
 	var $errorMsg	= array();
@@ -36,7 +37,7 @@ class  CreateAvatar
 
 	function  CreateAvatar($courseid)
 	{
-		global $CFG;
+		global $CFG, $USER;
 
 		require_login($courseid);
 
@@ -63,6 +64,7 @@ class  CreateAvatar
 		$this->use_sloodle 	= $CFG->mdlopnsm_cooperate_sloodle;
 		$this->pri_sloodle 	= $CFG->mdlopnsm_priority_sloodle;
 		$this->actvLastName	= $CFG->mdlopnsm_activate_lastname;
+		$this->isDisclaimer = $CFG->mdlopnsm_activate_disclaimer;
 
 		// Number of Avatars Check
 		if (!$this->hasPermit) {
@@ -80,6 +82,8 @@ class  CreateAvatar
 
 	function  execute()
 	{
+		global $CFG, $USER;
+
 		// Region Name
 		$this->regionNames = opensim_get_regions_names("ORDER BY regionName ASC");
 		$this->lastNames   = mdlopensim_get_lastnames();
@@ -128,6 +132,10 @@ class  CreateAvatar
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_invalid_passwd", "block_mdlopensim")." ($this->passwd)";
 			}
+			if (strlen($this->passwd)<AVATAR_PASSWD_MINLEN) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_passwd_minlength", "block_mdlopensim")." (".AVATAR_PASSWD_MINLEN.")";
+			}
 			if ($this->passwd!=$confirm_pass) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_mismatch_passwd", "block_mdlopensim");
@@ -136,9 +144,12 @@ class  CreateAvatar
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_invalid_regionname", "block_mdlopensim")." ($this->hmregion)";
 			}
-			if (!isAlphabetNumericSpecial($this->ownername)) {
-				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_invalid_ownername", "block_mdlopensim")." ($this->ownername)";
+			if ($this->isDisclaimer and !$this->hasPermit) {
+				$agree = optional_param('agree', '', PARAM_ALPHA);
+				if ($agree!='agree') {
+					$this->hasError = true;
+					$this->errorMsg[] = get_string("mdlos_need_agree_disclaimer", "block_mdlopensim");
+				}
 			}
 			if ($this->hasError) return false;
 
@@ -166,7 +177,6 @@ class  CreateAvatar
 		global $CFG;
 
 		$grid_name 	  = $CFG->mdlopnsm_grid_name;
-		$isDisclaimer = $CFG->mdlopnsm_activate_disclaimer;
 		$disclaimer	  = $CFG->mdlopnsm_disclaimer_content;
 
 		$avatar_create_ttl	= get_string('mdlos_avatar_create',	'block_mdlopensim');
@@ -216,8 +226,8 @@ class  CreateAvatar
 		// Create UUID
 		if (!$this->hasPermit or !isGUID($this->UUID)) {
 			do {
-				$uuid = make_random_guid();
-				$modobj = $this->handler->get($uuid);
+				$uuid   = make_random_guid();
+				$modobj = mdlopensim_get_avatar_info($uuid);
 			} while ($modobj!=null);
 			$this->UUID = $uuid;
 		}

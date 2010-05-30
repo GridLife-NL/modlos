@@ -114,6 +114,10 @@ define('AVATAR_OWNER_EDITABLE',	'2');
 define('AVATAR_LASTN_INACTIVE',	'0');
 define('AVATAR_LASTN_ACTIVE',  	'1');
 
+// Password
+define('AVATAR_PASSWD_MINLEN',	'8');
+
+
 // for Currency
 // Key of the account that all fees go to:
 $economy_sink_account   = CURRENCY_BANKER;

@@ -121,6 +121,10 @@ class  EditAvatar
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_passwd_mismatch", "block_mdlopensim");
 			}
+			if (strlen($this->passwd)<AVATAR_PASSWD_MINLEN) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_passwd_minlength", "block_mdlopensim")." (".AVATAR_PASSWD_MINLEN.")";
+			}
 
 			// Moodle User ID
 			if ($this->hasPermit) 	  $this->ownername = optional_param('ownername', '', PARAM_TEXT);
