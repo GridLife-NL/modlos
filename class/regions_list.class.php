@@ -11,13 +11,12 @@ class  RegionsList
 	var $pnum 		= array();
 	var $action;
 	var $action_url;
-	var $course_url;
 
+	var $course_id	= "";
 	var $course_amp	= "";
 
 	var $hasPermit 	= false;
 	var $isGuest 	= true;
-	var $db_ver  	= "";
 
 	var $Cpstart 	= 0;
 	var $Cplimit 	= 25;
@@ -37,15 +36,11 @@ class  RegionsList
 
 		$this->isGuest    = isguest();
 		$this->hasPermit  = hasPermit($course_id);
-
+		$this->course_id  = $course_id;
 		$this->action 	  = "regions_list.php";
 		$this->action_url = CMS_MODULE_URL."/actions/".$this->action;
 
-		$this->course_url = $CFG->wwwroot;
-		if ($course_id>0) {
-			$this->course_url.= "/course/view.php?id=".$course_id;
-			$this->course_amp = "&amp;course=".$course_id;
-		}
+		if ($course_id>0) $this->course_amp = "&amp;course=".$course_id;
 	}
 
 
@@ -57,7 +52,9 @@ class  RegionsList
 
 		$db_ver = opensim_get_db_version(); 
 		if ($db_ver=="0.0") {
-			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'), $this->course_url);
+			$course_url = $CFG->wwwroot;
+			if ($course_id>0) $course_url .= "/course/view.php?id=".$this->course_id;
+			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'), $course_url);
 		}
 
 		if ($this->order=="name")       $sql_order = " ORDER BY regionName ASC";

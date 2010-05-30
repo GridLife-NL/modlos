@@ -4,30 +4,29 @@
 </style>
 
 
-<h2><center><?php print $grid_name."&nbsp;:&nbsp;".$avatar_own?></center></h2>
+<h2><center><?php print $grid_name."&nbsp;:&nbsp;".$avatar_own_ttl?></center></h2>
 <br />
 
-<form name="assignform" id="assignform" action="<?php print $action_url?>" method="POST">
-  <?php print xoops_token form=$actionForm?>
+<form name="assignform" id="assignform" action="<?php print $this->action_url?>" method="POST">
 
-  <input type="hidden" name="userid" value="<?php print $userid?>" />
-  <input type="hidden" name="uuid"   value="<?php print $UUID?>" />
+  <input type="hidden" name="userid" value="<?php print $this->user_id?>" />
+  <input type="hidden" name="uuid"   value="<?php print $this->UUID?>" />
 
-  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+  <table width="400" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
 
     <tr>
-      <td width="100" class="head"><?php print $smarty.const._MD_XPNSM_FIRSTNAME?></td>
-      <td width="400" class="even"><b><?php print $firstname?></b></td>
+      <td width="100" class="head"><?php print $firstname_ttl?></td>
+      <td width="250" class="even"><b><?php print $this->firstname?></b></td>
     </tr>
 
     <tr>
-      <td class="head"><?php print $smarty.const._MD_XPNSM_LASTNAME?></td>
-      <td class="odd"><b><?php print $lastname?></b></td>
+      <td class="head"><?php print $lastname_ttl?></td>
+      <td class="odd"><b><?php print $this->lastname?></b></td>
     </tr>
 
     <tr>
-      <td class="head"><?php print $smarty.const._MD_XPNSM_PASSWORD?></td>
-      <td class="even"><?php print xoops_input type="password" name="passwd" size="32" maxlength="16" value=""?></td>
+      <td class="head"><?php print $passwd_ttl?></td>
+      <td class="even"><input type="password" name="passwd" size="32" maxlength="16"  /></td>
     </tr>
 
   </table>
@@ -35,57 +34,45 @@
   <div align="center">
     <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
     <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
-    <input type="submit" value="<?php print $smarty.const._MD_XPNSM_AVATAR_OWN_TTL?>" />&nbsp;
-    <input type="reset"  value="<?php print $smarty.const._MD_XPNSM_RESET_TTL?>" />
+    <input type="submit" value="<?php print $avatar_own_ttl?>" />&nbsp;
+    <input type="reset"  value="<?php print $reset_ttl?>" />
   </dev>
 </form>
-
-
-<br />
-<hr />
-<?php if $actionForm->hasError()?>
-  <ul>
-    <?php print foreach item="errval" from=$actionForm->getErrorMessages()?>
-      <li><font color="#f01010"><b><?php print $errval?></b></font></li>
-    <?php print /foreach?>
-  </ul>
-  <br />
-<?php print else?>
-  <?php if $updated_owner?>
-    <h3><font color=#1010e0><?php print $smarty.const._MD_XPNSM_AVATAR_GOTTED?></font></h3>
-    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
-      <tr>
-        <td width="100" class="head"><?php print $smarty.const._MD_XPNSM_UUID?></td>
-        <td width="400" class="even"><?php print $UUID?></td>	
-      </tr>
-      <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_FIRSTNAME?></td>
-        <td class="odd" ><?php print $firstname?></td>	
-      </tr>
-      <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_LASTNAME?></td>
-        <td class="even"><?php print $lastname?></td>	
-      </tr>
-      <tr>
-        <td class="head"><?php print $smarty.const._MD_XPNSM_OWNERNAME?></td>
-        <td class="odd"><?php print $ownername?></td>	
-      </tr>
-    </table>
-  <?php }?>
-<?php }?>
 <br />
 
 
-<!-- Error Message -->
+<!-- print Messages -->
 <br />
 <br />
 <hr />
 <?php if ($this->hasError) {?>
   <ul>
     <?php foreach($this->errorMsg as $mesg) {?>
-       <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
+      <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
     <?php }?>
   </ul>
+<?php } else {?>
+  <?php if ($this->updated_avatar) {?>
+    <h3><font color=#1010e0><?php print $avatar_get?></font></h3>
+    <table width="400" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+      <tr>
+        <td width="100" class="head"><?php print $uuid_ttl?></td>
+        <td width="250" class="even"><?php print $this->UUID?></td>	
+      </tr>
+      <tr>
+        <td class="head"><?php print $firstname_ttl?></td>
+        <td class="odd" ><?php print $this->firstname?></td>	
+      </tr>
+      <tr>
+        <td class="head"><?php print $lastname_ttl?></td>
+        <td class="even"><?php print $this->lastname?></td>	
+      </tr>
+      <tr>
+        <td class="head"><?php print $smarty.ownername_ttl?></td>
+        <td class="odd"><?php print $this->ownername?></td>	
+      </tr>
+    </table>
+  <?php }?>
 <?php }?>
 <br />
 

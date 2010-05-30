@@ -10,7 +10,6 @@ class  DeleteAvatar
 	var $hasPermit	= false;
 	var $action_url = "";
 	var $cancel_url = "";
-	var $return_url = "";
 	var $deleted_avatar = false;
 
 	var $course_id	= 0;
@@ -42,13 +41,13 @@ class  DeleteAvatar
 		$this->course_id  = $course_id;
 		$this->action_url = CMS_MODULE_URL."/actions/delete_avatar.php";
 		$this->cancel_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
-		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
 
 
 		// get UUID from POST or GET
+		$return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
 		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
-			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)", $this->return_url);
+			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)", $return_url);
 		}
 		$this->UUID	= $uuid;
 
@@ -72,11 +71,11 @@ class  DeleteAvatar
 
 		$this->hasPermit = hasPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $this->return_url);
+			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $return_url);
 		}
 
 		if ($this->state==AVATAR_STATE_ACTIVE) {
-			error(get_string('mdlos_active_avatar', 'block_mdlopensim'),  $this->return_url);
+			error(get_string('mdlos_active_avatar', 'block_mdlopensim'),  $return_url);
 		}
 	}
 

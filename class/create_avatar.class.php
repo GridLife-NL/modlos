@@ -11,10 +11,7 @@ class  CreateAvatar
 	var $actvLastName = false;
 
 	var $hasPermit 	= false;
-	var $module_url	= "";
 	var $action_url	= "";
-	var $course_url	= "";
-
 	var $created_avatar = false;
 
 	var $course_id  = 0;
@@ -48,32 +45,32 @@ class  CreateAvatar
 			$https_url = $CFG->mdlopnsm_https_url;
 
 			if ($https_url!="") {
-				$this->module_url = $https_url.CMS_DIR_NAME;
+				$module_url = $https_url.CMS_DIR_NAME;
 			}
 			else {
-				$this->module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
+				$module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
 			}
 		}
 		else {
-			$this->module_url = CMS_MODULE_URL;
+			$module_url = CMS_MODULE_URL;
 		}
+
 
 		$this->course_id   	= $course_id;
 		$this->hasPermit	= hasPsermit($course_id);
-		$this->action_url  	= $this->module_url."/actions/create_avatar.php";
-		$this->course_url 	= $CFG->wwwroot;
+		$this->action_url  	= $module_url."/actions/create_avatar.php";
 		$this->use_sloodle 	= $CFG->mdlopnsm_cooperate_sloodle;
 		$this->pri_sloodle 	= $CFG->mdlopnsm_priority_sloodle;
 		$this->actvLastName	= $CFG->mdlopnsm_activate_lastname;
-
-		if ($course_id>0) $this->course_url.= "/course/view.php?id=".$course_id;
 
 		// Number of Avatars Check
 		if (!$this->hasPermit) {
 			$avatars_num = mdlopensim_get_avatars_num($USER->id);
 			$max_avatars = $CFG->mdlopnsm_max_own_avatars;
 			if ($max_avatars>=0 and $avatars_num>=$max_avatars) {
-				error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($avatars_num >= $max_avatars)", $this->course_url);
+				$course_url = $CFG->wwwroot;
+				if ($course_id>0) $course_url.= "/course/view.php?id=".$course_id;
+				error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($avatars_num >= $max_avatars)", $course_url);
 			}
 		}
 	}

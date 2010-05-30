@@ -11,11 +11,11 @@ class  AvatarsList
 	var $db_data 	= array();
 	var $icon 		= array();
 	var $pnum 		= array();
+
 	var $action_url;
 	var $edit_url;
 	var $owner_url;
 	var $search_url;
-	var $course_url;
 	var $avatar_url;
 
 	var $course_id  = 0;
@@ -23,7 +23,6 @@ class  AvatarsList
 
 	var $hasPermit 	= false;
 	var $isGuest   	= true;
-	var $db_ver    	= "";
 
 	// Page Control
 	var $Cpstart 	= 0;
@@ -51,12 +50,11 @@ class  AvatarsList
 
 		require_login($course_id);
 
-		$this->course_id  	= $course_id;
-		$this->isGuest   	= isguest();
-		$this->hasPermit	= hasPermit($course_id);
-		$this->date_format 	= $CFG->mdlopnsm_date_format;
-
-		$course_param = "?course=".$course_id;
+		$this->course_id  = $course_id;
+		$this->isGuest    = isguest();
+		$this->hasPermit  = hasPermit($course_id);
+		$this->date_format= $CFG->mdlopnsm_date_format;
+		$course_param 	  = "?course=".$course_id;
 		$this->course_id  = $course_id;
 
 		$this->action_url = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
@@ -65,19 +63,18 @@ class  AvatarsList
 		$this->search_url = CMS_MODULE_URL."/actions/avatars_list.php";
 		$this->avatar_url = $CFG->wwwroot."/user/view.php";
 
-		$this->course_url = $CFG->wwwroot;
-		if ($course_id>0) {
-			$this->course_url.= "/course/view.php?id=".$course_id;
-			$this->course_amp = "&amp;course=".$course_id;
-		}
+		if ($course_id>0) $this->course_amp = "&amp;course=".$course_id;
 	}
+
 
 
 	function  set_condition() 
 	{
-		$this->db_ver  = opensim_get_db_version();
+		$db_ver = opensim_get_db_version();
 		if ($db_ver=="0.0") {
-			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'), $this->course_url);
+			$course_url = $CFG->wwwroot;
+			if ($ithis->course_id>0) $course_url.= "/course/view.php?id=".$course_id;
+			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'), $course_url);
 		}
 
 		// Post Check
@@ -95,13 +92,13 @@ class  AvatarsList
 
 		$sql_validuser = $sql_firstname = $sql_lastname = "";
 		if ($this->firstname=="" and $this->lastname=="") {
-			if ($this->db_ver=="0.6") $sql_validuser = "username!=''";
-			else                      $sql_validuser = "FirstName!=''";
+			if ($db_ver=="0.6") $sql_validuser = "username!=''";
+			else                $sql_validuser = "FirstName!=''";
 		}
 		else {
 			if ($this->firstname!="") { 
-				if ($this->db_ver=="0.6") $sql_firstname = "username  LIKE '$this->firstname'";
-				else                      $sql_firstname = "FirstName LIKE '$this->firstname'";
+				if ($db_ver=="0.6") $sql_firstname = "username  LIKE '$this->firstname'";
+				else                $sql_firstname = "FirstName LIKE '$this->firstname'";
 				$this->lnk_firstname = "&amp;firstname=$this->firstname";
 			}
 			if ($this->lastname!="") { 

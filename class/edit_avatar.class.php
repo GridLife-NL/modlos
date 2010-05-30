@@ -13,8 +13,6 @@ class  EditAvatar
 	var $hasPermit	= false;
 	var $action_url = "";
 	var $delete_url = "";
-	var $return_url = "";
-	var $module_url = "";
 
 	var $updated_avatar = false;
 	var $course_id	= 0;
@@ -49,27 +47,27 @@ class  EditAvatar
 		if ($use_https) {
 			$https_url = $CFG->mdlopnsm_https_url;
 			if ($https_url!="") {
-				$this->module_url = $https_url."/".CMS_DIR_NAME;
+				$module_url = $https_url."/".CMS_DIR_NAME;
 			}
 			else {
-				$this->module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
+				$module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
 			}
 		}
 		else {
-			$this->module_url = CMS_MODULE_URL;
+			$module_url = CMS_MODULE_URL;
 		}
 
 		$course_param = "?course=".$course_id;
 		$this->course_id  = $course_id;
-		$this->action_url = $this->module_url."/actions/edit_avatar.php";
+		$this->action_url = $module_url."/actions/edit_avatar.php";
 		$this->delete_url = CMS_MODULE_URL."/actions/delete_avatar.php".$course_param;
-		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
 
 
 		// get UUID from POST or GET
+		$return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
 		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
-			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)", $this->return_url);
+			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)", $return_url);
 		}
 		$this->UUID = $uuid;
 
@@ -88,7 +86,7 @@ class  EditAvatar
 
 		$this->hasPermit = hasPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $this->return_url);
+			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $return_url);
 		}
 	}
 
