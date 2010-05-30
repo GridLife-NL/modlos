@@ -22,9 +22,9 @@ class block_mdlopensim extends block_base
 	{
 		global $CFG;
 
-		$this->title   = get_string('mdlopensim', 'block_mdlopensim');
-		$this->version = 2010051222;
-		$this->release = '0.9.0';
+		$this->title   = get_string('mdlopensim_menu', 'block_mdlopensim');
+		$this->version = 2010053019;
+		$this->release = '1.0.0b';
 
 		$this->grid_name = $CFG->mdlopnsm_grid_name;
 		$this->grid_status = false;
@@ -79,7 +79,7 @@ class block_mdlopensim extends block_base
 		$this->content->text.= get_string('mdlos_visitors_last30days','block_mdlopensim').": <b>".$this->lastmonth_online."</b><br />";		
 		$this->content->text.= get_string('mdlos_online_now','block_mdlopensim').": <b>".$this->now_online."</b><br />";		
 
-		$this->content->footer = '<hr /><i>Moodle OpenSim '.$this->release.'</i>';
+		$this->content->footer = '<hr /><i>Mdlopensim '.$this->release.'</i>';
 
 		return $this->content;
 	}

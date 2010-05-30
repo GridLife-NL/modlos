@@ -1,7 +1,8 @@
 <?php
 
-$string['mdlopensim'] 				= 'Moodle OpenSim';
-$string['mdlopnsm']   				= 'Moodle OpenSim';
+$string['mdlopensim'] 				= 'Mdlopensim';
+$string['mdlopnsm']   				= 'Mdlopensim';
+$string['mdlopensim_menu'] 			= 'Mdlopensim Menu';
 
 
 // Main
