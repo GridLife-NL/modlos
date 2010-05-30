@@ -66,9 +66,7 @@ class  CreateAvatar
 		$this->pri_sloodle 	= $CFG->mdlopnsm_priority_sloodle;
 		$this->actvLastName	= $CFG->mdlopnsm_activate_lastname;
 
-		if ($course_id>0) {
-			$this->course_url.= "/course/view.php?id=".$course_id;
-		}
+		if ($course_id>0) $this->course_url.= "/course/view.php?id=".$course_id;
 
 		// Number of Avatars Check
 		if (!$this->hasPermit) {
@@ -145,9 +143,14 @@ class  CreateAvatar
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_invalid_username", "block_mdlopensim")." ($this->ownername)";
 			}
+			if ($this->hasError) return false;
 
-			if (!$this->hasError) {
-				$this->created_avatar = $this->createAvatar();
+			/////
+			$this->created_avatar = $this->createAvatar();
+			if (!$this->created_avatar) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_create_error", "block_mdlopensim");
+				return false;
 			}
 		}
 		else {
@@ -156,7 +159,6 @@ class  CreateAvatar
 			$this->ownername = get_display_username($USER->firstname, $USER->lastname);
 		}
 
-		if ($this->hasError) return false;
 		return true;
 	}
 
@@ -257,13 +259,7 @@ class  CreateAvatar
 		$new_user['state']	 	= AVATAR_STATE_ACTIVE;;
 
 		$ret = mdlopensim_set_avatar_info($new_user, $this->use_sloodle);
-		if (!$ret) {
-			$this->hasError = true;
-			$this->errorMsg[] = get_string("mdlos_create_error", "block_mdlopensim");
-		}
-
-		if (!$this->hasError) return false;
-		return true;
+		return $ret;
 	}
 
 }

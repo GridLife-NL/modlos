@@ -93,12 +93,19 @@ class  DeleteAvatar
 
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
 			if ($del!="") {
+				///////
 				$this->deleted_avatar = $this->del_avatar();
+				if (!$this->deleted_avatar) {
+					$this->hasError = true;
+					$this->errorMsg[] = get_string("mdlos_opensim_delete_error", "block_mdlopensim");
+					return false;
+				}
 			}
 			else {
 				redirect($this->cancel_url, get_string('mdlos_avatar_dlt_canceled', 'block_mdlopensim'), 0);
 			}
 		}
+		return true;
 	}
 
 
@@ -156,13 +163,7 @@ class  DeleteAvatar
 
 		// delete form OpenSim
 		$ret = opensim_delete_avatar($this->UUID);
-		if (!$ret) {
-			$this->hasError = true;
-			$this->errorMsg[] = get_string("mdlos_opensim_delete_error", "block_mdlopensim");
-		}
-
-		if ($this->hasError) return false;
-		return true;
+		return $ret;
 	}
 }
 

@@ -78,6 +78,7 @@ $string['mdlos_avatar_info'] 		= 'Avatar Information';
 $string['mdlos_avatar_created'] 	= 'Avatar Created!!';
 $string['mdlos_avatar_updated'] 	= 'Avatar Updated!!';
 $string['mdlos_avatar_gotted'] 		= 'Avatar Get!!';
+$string['mdlos_avatar_gotted_error']= 'Failed to get Avatar!!';
 $string['mdlos_avatar_deleted'] 	= 'Avatar Deleted!!';
 
 $string['mdlos_avatar_create'] 		= 'Create Avatar';

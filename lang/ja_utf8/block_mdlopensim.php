@@ -77,6 +77,7 @@ $string['mdlos_avatar_info'] 		= 'アバター情報';
 $string['mdlos_avatar_created'] 	= 'アバターを作成しました';
 $string['mdlos_avatar_updated'] 	= 'アバターのデータを更新しました';
 $string['mdlos_avatar_gotted'] 		= 'アバターを手に入れました';
+$string['mdlos_avatar_gotted_error']= 'アバターを手に失敗しました';
 $string['mdlos_avatar_deleted'] 	= 'アバターを削除しました';
 
 $string['mdlos_avatar_create'] 		= 'アバター作成';

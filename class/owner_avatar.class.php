@@ -8,14 +8,14 @@ require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 class  OwnerAvatar
 {
 	var $hashPermit = false;
-	var $module_url = ""
+	var $module_url = "";
 	var $action_url = "";
 	var $return_url = "";
 
 	var $updated_owner = false;
 
 	var $course_id	= 0;
-	var $userid		= 0;
+	var $user_id	= 0;
 	var $use_sloodle= false;
 	var $pri_sloodle= false;
 
@@ -26,10 +26,8 @@ class  OwnerAvatar
 	var $avatar	 	= null;
 	var $UUID		= "";
 	var $uid		= "";
-var $firstname  = "";
-var $lastname	= "";
 	var $state		= "";
-//var $passwd	 	= "";
+	var $passwd	 	= "";
 	var $ownername 	= "";
 
 
@@ -55,15 +53,15 @@ var $lastname	= "";
 			$this->module_url = CMS_MODULE_URL;
 		}
 
-		$course_param 		= "?course=".$course_id;
-		$this->course_id	= $course_id;
-		$this->hasPermit	= hasPsermit($course_id);
-		$this->action_url  	= $this->module_url."/actions/owner_avatar.php";
-		$this->return_url  	= CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
-		$this->use_sloodle 	= $CFG->mdlopnsm_cooperate_sloodle;
-		$this->pri_sloodle 	= $CFG->mdlopnsm_priority_sloodle;
-		$this->userid		= $USER->id;
-		$this->ownername	= get_diaplay_username($USER->firstname, $USER->lastname);
+		$course_param 	   = "?course=".$course_id;
+		$this->course_id   = $course_id;
+		$this->hasPermit   = hasPsermit($course_id);
+		$this->action_url  = $this->module_url."/actions/owner_avatar.php";
+		$this->return_url  = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
+		$this->use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
+		$this->pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
+		$this->user_id	   = $USER->id;
+		$this->ownername   = get_diaplay_username($USER->firstname, $USER->lastname);
 
 		// Number of Avatars Check
 		if (!$this->hasPermit) {
@@ -93,8 +91,6 @@ var $lastname	= "";
 		if ($state!=AVATAR_STATE_ACTIVE) {
 			error(get_string('mdlos_owner_forbidden', 'block_mdlopensim'), $this->return_url);
 		}
-		$this->firstname = $avatar['firstname'];
-		$this->lastname  = $avatar['lastname'];
 
 		// get User Info from Moodle DB
 		$this->avatar = $avatar;
@@ -111,24 +107,27 @@ var $lastname	= "";
 				 return false;
 			}
 
-			$passwd  = $optional_param('passwd', '', PARAM_TEXT);
-			if (!isAlphabetNumericSpecial($passwd)) {
+			$this->passwd  = $optional_param('passwd', '', PARAM_TEXT);
+			if (!isAlphabetNumericSpecial($this->passwd)) {
 				 $this->hasError = true;
-				 $this->errorMsg[] = get_string("mdlos_invalid_passwd", "block_mdlopensim")." ($psswd)";
+				 $this->errorMsg[] = get_string("mdlos_invalid_passwd", "block_mdlopensim")." ($this->passwd)";
 			}
-			$postuid = $optional_param('userid', '', PARAM_INT);
-			if (!isNumeric($postuid)) {
+			$posted_uid = $optional_param('userid', '', PARAM_INT);
+			if (!isNumeric($posted_uid)) {
 				 $this->hasError = true;
-				 $this->errorMsg[] = get_string("mdlos_invalid_uid", "block_mdlopensim")." ($postuid)";
+				 $this->errorMsg[] = get_string("mdlos_invalid_uid", "block_mdlopensim")." ($posted_uid)";
 			}
-
-			if (!$this->hasError) {
-				$this->updated_owner = $this->updateOwner($postuid, $passwd);
-			}
-			
 			if ($this->hasError) return false;
-			return true;
+
+			/////
+			$this->updated_owner = $this->updateOwner($posted_uid);
+			if (!$this->updated_owner) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_avatar_gotted_error", "block_mdlopensim");
+				return false;
+			}
 		}
+		return true;
 	}
 
 
@@ -161,11 +160,12 @@ var $lastname	= "";
 
 
 
-	function updateOwner($uid, $passwd)
+	function updateOwner($posted_uid)
 	{
-		if ($uid==0) return false;
-		if ($uid!=$this->userid) {
-			$this->mActionForm->addErrorMessage(_MD_XPNSM_MISMATCH_UID);
+		if ($posted_uid==0) return false;
+		if ($posted_uid!=$this->user_id) {
+			$this->hasError = true;
+			$this->errorMsg[] = get_string("mdlos_mismatch_uid", "block_mdlopensim")." ($posted_uid != $this->user_id)";
 			return false;
 		}
 
@@ -174,22 +174,26 @@ var $lastname	= "";
 		$chkpass = md5($this->passwd);
 		if ($passwd['passwordSalt']=="") {
 			if ($chkpass!=$passwd['passwordHash']) {
-				$this->mActionForm->addErrorMessage(_MD_XPNSM_MISMATCH_PASSWD);
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_mismatch_passwd", "block_mdlopensim")." (....passwordSalt is null)";
 				return false;
 			}
 		}
 		else {
 			$chkpass = md5($chkpass.":".$passwd['passwordSalt']);
 			if ($chkpass!=$passwd['passwordHash']) {
-				$this->mActionForm->addErrorMessage(_MD_XPNSM_MISMATCH_PASSWD);
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_mismatch_passwd", "block_mdlopensim");
 				return false;
 			}
 		}
 
-		$this->avatar->assignVar('uid',  $this->user_id);
-		$this->avatar->assignVar('time', time());
-		$this->dbhandler->insert($this->avatar);
-		return true;
+		$this->avatar['uid']  = $this->user_id;
+		$this->avatar['time'] = time();
+
+		/////
+		$ret = mdlopensim_set_avatar_info($this->avatar, $this->use_sloodle);
+		return $ret;
 	}
 
 }

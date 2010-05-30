@@ -120,6 +120,8 @@ class  AvatarsList
 		$sql_limit = "LIMIT $this->pstart, $this->plimit";
 		$this->sql_countcnd  = " WHERE $sql_validuser $sql_firstname $sql_lastname";
 		$this->sql_condition = " WHERE $sql_validuser $sql_firstname $sql_lastname $sql_order $sql_limit";
+
+		return true;
 	}
 
 
@@ -240,6 +242,7 @@ class  AvatarsList
 		}
 
 		$DbLink->close();
+		return true;
 	}
 
 

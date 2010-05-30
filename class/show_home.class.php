@@ -32,12 +32,15 @@ class  ShowHome
 	function  execute()
 	{
 		$ret = opensim_check_db();
+		if ($ret==null) return false;
 
 		$this->grid_status      = $ret['grid_status'];
 		$this->now_online       = $ret['now_online'];
 		$this->lastmonth_online = $ret['lastmonth_online'];
 		$this->user_count       = $ret['user_count'];
 		$this->region_count     = $ret['region_count'];
+		
+		return true;
 	}
 
 

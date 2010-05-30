@@ -159,7 +159,11 @@ class  EditAvatar
 
 			//////////
 			$this->updated_avatar = $this->updateAvatar();
-			//////////
+			if (!$this->updated_avatar) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string("mdlos_update_error", "block_mdlopensim");
+				return false;
+			}
 		}
 		else {
 			$this->passwd	= "";
@@ -172,6 +176,8 @@ class  EditAvatar
 			}
 			if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
 		}
+
+		return true;
 	}
 
 
@@ -262,13 +268,7 @@ class  EditAvatar
 		$update_user['time']	  = time();
 
 		$ret = mdlopensim_set_avatar_info($update_user, $this->use_sloodle);
-		if (!$ret) {
-			$this->hasError = true;
-			$this->errorMsg[] = get_string("mdlos_update_error", "block_mdlopensim");
-		}
-
-		if ($this->hasError) return false;
-		return true;
+		return $ret;
 	}
 
 }

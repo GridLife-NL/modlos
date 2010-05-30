@@ -77,7 +77,7 @@ class  RegionsList
 		$sql_limit = "LIMIT $this->pstart, $this->plimit";
 		$this->sql_condition = " $sql_order $sql_limit";
 
-		return;
+		return true;
 	}
 
 
@@ -144,6 +144,7 @@ class  RegionsList
 			$colum++;
 		}
 
+		return true;
 	}
 
 
