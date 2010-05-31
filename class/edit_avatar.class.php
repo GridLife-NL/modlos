@@ -111,12 +111,15 @@ class  EditAvatar
 			if ($del!="") redirect($this->delete_url."&amp;uuid=".$this->UUID, "Please wait....", 0);
 			
 
+			$state 	= optional_param('state',	 '', PARAM_INT);
+			if ($state>0x80) $this->state = $this->ostate & ($state^0x7f);
+			else 			 $this->state = $this->ostate | $state;
+
 			$this->hmregion = optional_param('hmregion', '', PARAM_TEXT);
-			$this->state 	= optional_param('state',	 '', PARAM_TEXT);
-			$confirm_pass	= optional_param('confirm_pass','', PARAM_TEXT);
 
 			// password
-			$this->passwd	= optional_param('passwd',   '', PARAM_TEXT);
+			$confirm_pass = optional_param('confirm_pass','', PARAM_TEXT);
+			$this->passwd = optional_param('passwd',   '', PARAM_TEXT);
 			if ($this->passwd!=$confirm_pass) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_passwd_mismatch", "block_mdlopensim");
