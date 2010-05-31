@@ -78,8 +78,8 @@ $string['mdlos_editable_list'] 		= '編集可能アバターリスト';
 $string['mdlos_avatar_info'] 		= 'アバター情報';
 $string['mdlos_avatar_created'] 	= 'アバターを作成しました';
 $string['mdlos_avatar_updated'] 	= 'アバターのデータを更新しました';
-$string['mdlos_avatar_gotted'] 		= 'アバターを手に入れました';
-$string['mdlos_avatar_gotted_error']= 'アバターの入手に失敗しました';
+$string['mdlos_avatar_gotted'] 		= 'このアバターを Moodleのユーザに関連付けて管理します';
+$string['mdlos_avatar_gotted_error']= 'アバターの関連付けに失敗しました';
 $string['mdlos_avatar_deleted'] 	= 'アバターを削除しました';
 
 $string['mdlos_avatar_create'] 		= 'アバター作成';
@@ -89,6 +89,9 @@ $string['mdlos_avatar_submit'] 		= 'アバター作成';
 $string['mdlos_avatar_edit'] 		= 'アバター編集';
 $string['mdlos_avatar_reset'] 		= 'リセット';
 $string['mdlos_avatar_own'] 		= 'オーナー変更';
+
+$string['mdlos_manage_avatar']		= 'アバターの管理';
+$string['mdlos_manage_out']			= 'このアバターの関連付けを中止';
 
 $string['mdlos_avatar_upd_submit'] 	= 'アバター更新';
 $string['mdlos_avatar_dlt_submit'] 	= 'アバター削除';

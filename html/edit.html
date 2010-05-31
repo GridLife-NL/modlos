@@ -60,16 +60,21 @@
 
     <tr>
       <td class="head"><?php print $status_ttl?></td>
-      <td class="odd">
+      <td class="odd" >
         <input type="radio" name="state" value="<?php print AVATAR_STATE_ACTIVE?>" <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>checked<?php }?> /><?php print $active_ttl?>&nbsp;|
         <input type="radio" name="state" value="<?php print AVATAR_STATE_INACTIVE?>" <?php if ($this->state&AVATAR_STATE_INACTIVE) {?>checked<?php } ?> /><?php print $inactive_ttl?>
       </td>
     </tr>
 
+    <tr>
+      <td class="head"><?php print $manage_avatar_ttl?></td>
+      <td class="even"><input name="nomanage" type="checkbox" value="manage_out" />&nbsp;<?php print $manage_out?></td>
+    </tr> 
+
     <?php if ($this->hasPermit) {?>
       <tr>
         <td class="head"><?php print $owner_ttl?></td>
-        <td class="even"><input name="ownername" size="32" maxlength="30" value="<?php print $this->ownername?>" /></td>
+        <td class="odd" ><input name="ownername" size="32" maxlength="30" value="<?php print $this->ownername?>" /></td>
       </tr>
     <?php }?>
 
@@ -139,7 +144,7 @@
           <?php }?>
         </td>
       </tr>
-      <?php if ($this->hasPermit and $this->ownername!="") {?>
+      <?php if ($this->hasPermit or $this->ownername!="") {?>
         <tr>
           <td class="head"><?php print $ownername_ttl ?></td>
           <td class="odd" ><?php print $this->ownername?></td>	

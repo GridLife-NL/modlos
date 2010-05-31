@@ -124,12 +124,12 @@ class  EditAvatar
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_passwd_mismatch", "block_mdlopensim");
 			}
-			if (strlen($this->passwd)<AVATAR_PASSWD_MINLEN) {
+			if ($this->passwd!="" and strlen($this->passwd)<AVATAR_PASSWD_MINLEN) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string("mdlos_passwd_minlength", "block_mdlopensim")." (".AVATAR_PASSWD_MINLEN.")";
 			}
 
-			// Moodle User ID
+			// Owner Name
 			$nomanage = optional_param('nomanage', '', PARAM_ALPHA);
 			if ($nomanage=="") {
 				if ($this->hasPermit) {
@@ -153,7 +153,6 @@ class  EditAvatar
 				$this->uid = '0';
 			}
 
-
 			// Home Region
  			$region_uuid = opensim_get_region_uuid($this->hmregion);
 			if ($region_uuid==null) {
@@ -162,6 +161,7 @@ class  EditAvatar
 			}
 
 			if ($this->hasError) return false;
+
 
 			//////////
 			$this->updated_avatar = $this->updateAvatar();
@@ -210,6 +210,8 @@ class  EditAvatar
 		$reset_ttl	  		= get_string('mdlos_reset_ttl', 	'block_mdlopensim');
 		$avatar_updated	  	= get_string('mdlos_avatar_updated','block_mdlopensim');
 		$uuid_ttl	  		= get_string('mdlos_uuid',			'block_mdlopensim');
+		$manage_avatar_ttl	= get_string('mdlos_manage_avatar',	'block_mdlopensim');
+		$manage_out			= get_string('mdlos_manage_out',	'block_mdlopensim');
 
 		include(CMS_MODULE_PATH."/html/edit.html");
 	}

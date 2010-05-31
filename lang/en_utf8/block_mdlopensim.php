@@ -79,8 +79,8 @@ $string['mdlos_editable_list'] 		= 'Editable Avatars List';
 $string['mdlos_avatar_info'] 		= 'Avatar Information';
 $string['mdlos_avatar_created'] 	= 'Avatar Created!!';
 $string['mdlos_avatar_updated'] 	= 'Avatar Updated!!';
-$string['mdlos_avatar_gotted'] 		= 'Avatar Get!!';
-$string['mdlos_avatar_gotted_error']= 'Failed to get Avatar!!';
+$string['mdlos_avatar_gotted'] 		= 'Get a this Avatar by relationship with Moodle User';
+$string['mdlos_avatar_gotted_error']= 'Failed to get a relationship with Moodle User!!';
 $string['mdlos_avatar_deleted'] 	= 'Avatar Deleted!!';
 
 $string['mdlos_avatar_create'] 		= 'Create Avatar';
@@ -90,6 +90,9 @@ $string['mdlos_avatar_submit'] 		= 'Create Avatar';
 $string['mdlos_avatar_edit'] 		= 'Edit Avatar';
 $string['mdlos_avatar_reset'] 		= 'Reset';
 $string['mdlos_avatar_own'] 		= 'Own Avatar';
+
+$string['mdlos_manage_avatar']      = 'Avatar Management';
+$string['mdlos_manage_out']         = 'The relationship of this avatar with Moodle is stop';
 
 $string['mdlos_avatar_upd_submit'] 	= 'Update Avatar';
 $string['mdlos_avatar_dlt_submit'] 	= 'Delete Avatar';
