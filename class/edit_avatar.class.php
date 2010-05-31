@@ -130,23 +130,29 @@ class  EditAvatar
 			}
 
 			// Moodle User ID
-			if ($this->hasPermit) 	  $this->ownername = optional_param('ownername', '', PARAM_TEXT);
-			if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
-
-			if ($this->hasPermit) {
-				$names = get_names_from_display_username($this->ownername);
-				$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);				
-				if ($user_info==null) {
-					$this->hasError = true;
-					$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." (".$names['firstname']." ".$names['lastname'].")";
+			$nomanage = optional_param('nomanage', '', PARAM_ALPHA);
+			if ($nomanage=="") {
+				if ($this->hasPermit) {
+					$this->ownername = optional_param('ownername', '', PARAM_TEXT);
+					if ($this->ownername!="") {
+						$names = get_names_from_display_username($this->ownername);
+						$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);				
+						if ($user_info==null) {
+							$this->hasError = true;
+							$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." (".$names['firstname']." ".$names['lastname'].")";
+						}
+					}
 				}
-				else {
+				if ($this->ownername=="") {
+					$this->ownername = get_display_username($USER->firstname, $USER->lastname);
 					$this->uid = $user_info->id;
 				}
 			}
 			else {
-				$this->uid = $USER->id;
+				$this->ownername = "";
+				$this->uid = '0';
 			}
+
 
 			// Home Region
  			$region_uuid = opensim_get_region_uuid($this->hmregion);
@@ -174,7 +180,7 @@ class  EditAvatar
 				$user_info = get_userinfo_by_id($this->uid);
 				$this->ownername = get_display_username($user_info->firstname, $user_info->lastname);
 			}
-			if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
+			else $this->ownername = get_display_username($USER->firstname, $USER->lastname);
 		}
 
 		return true;
