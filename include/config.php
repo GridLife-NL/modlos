@@ -101,9 +101,13 @@ define('PROFILE_USERSETTINGS_TBL',	$CFG->prefix.MDL_PROFILE_USERSETTINGS_TBL);
 
 
 // for Avatar State
-define('AVATAR_STATE_NOTSYNC', 	'0');
-define('AVATAR_STATE_ACTIVE',  	'1');
-define('AVATAR_STATE_INACTIVE',	'5');		// Max Number of state
+define('AVATAR_STATE_NOSTATE', 	'0');		// 0x00
+define('AVATAR_STATE_SYNCDB',  	'1');		// 0x01
+define('AVATAR_STATE_SLOODLE', 	'2');		// 0x02
+define('AVATAR_STATE_INACTIVE',	'4');		// 0x04
+
+define('AVATAR_STATE_NOSLOODLE','130');		// 0x82
+define('AVATAR_STATE_ACTIVE',	'132');		// 0x84
 
 // Editable
 define('AVATAR_NOT_EDITABLE',	'0');

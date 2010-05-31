@@ -83,7 +83,7 @@ class  OwnerAvatar
 		if ($avatar['uid']!=0) {
 			error(get_string('mdlos_owner_forbidden', 'block_mdlopensim')." (User ID is not 0)", $return_url);
 		}
-		if ($avatar['state']!=AVATAR_STATE_ACTIVE) {
+		if (!($avatar['state']&AVATAR_STATE_SYNCDB)) {
 			error(get_string('mdlos_owner_forbidden', 'block_mdlopensim')." (not Acrive)", $return_url);
 		}
 		$this->firstname = $avatar['firstname'];

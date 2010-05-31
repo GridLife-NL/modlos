@@ -106,7 +106,7 @@ class  SynchroDataBase
 		foreach ($opsim_users as $opsim_user) {
 			$opsim_user['uid']   = 0;
 			$opsim_user['time']  = time();
-			$opsim_user['state'] = AVATAR_STATE_ACTIVE;
+			$opsim_user['state'] = AVATAR_STATE_SYNCDB;
 
 			if (array_key_exists($opsim_user['UUID'], $mdlos_users)) {
 				$opsim_user['id'] = $mdlos_users[$opsim_user['UUID']]['id'];
@@ -121,7 +121,7 @@ class  SynchroDataBase
 		foreach ($mdlos_users as $mdlos_user) {
 			$moodle_uuid = $mdlos_user['UUID'];
 			if (!array_key_exists($moodle_uuid, $opsim_users)) {
-				$mdlos_user['state'] = AVATAR_STATE_INACTIVE;
+				$mdlos_user['state'] &= AVATAR_STATE_INACTIVE;
 				mdlopensim_delete_usertable($mdlos_user);
 			}
 		}

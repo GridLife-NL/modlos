@@ -106,12 +106,12 @@ class  CreateAvatar
 		if (data_submitted()) {
 			$this->firstname= optional_param('firstname', 	'', PARAM_TEXT);
 			$this->lastname = optional_param('lastname',  	'', PARAM_TEXT);
-			$this->passwd	= optional_param('passwd', 	'', PARAM_TEXT);
-			$confirm_pass	= optional_param('confirm_pass','',PARAM_TEXT);
+			$this->passwd	= optional_param('passwd', 	'', 	PARAM_TEXT);
+			$confirm_pass	= optional_param('confirm_pass', '',PARAM_TEXT);
 			$this->hmregion = optional_param('hmregion', 	'', PARAM_TEXT);
 			if($this->hasPermit) {
 				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
-				$this->UUID		 = optional_param('UUID', '', PARAM_TEXT);
+				$this->UUID		 = optional_param('UUID', 	   '', PARAM_TEXT);
 			}
 			if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
 
@@ -260,7 +260,7 @@ class  CreateAvatar
 		$new_user['firstname'] 	= $this->firstname;
 		$new_user['lastname']  	= $this->lastname;
 		$new_user['hmregion']  	= $this->hmregion;
-		$new_user['state']	 	= AVATAR_STATE_ACTIVE;;
+		$new_user['state']	 	= AVATAR_STATE_SYNCDB;
 
 		$ret = mdlopensim_set_avatar_info($new_user, $this->use_sloodle);
 		return $ret;

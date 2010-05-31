@@ -234,8 +234,8 @@ class  EditAvatar
 
 		// State
 		if ($this->state!=$this->ostate) {
-			// XXXXXX -> InAcvtive
-			if ($this->state==AVATAR_STATE_INACTIVE) {
+			// Avtive -> InAcvtive
+			if (!($this->ostate&AVATAR_STATE_INACTIVE) and $this->state&AVATAR_STATE_INACTIVE) {
 				$ret = mdlopensim_inactivate_avatar($this->UUID);
 				if (!$ret) {
 					$this->hasError = true;
@@ -244,7 +244,7 @@ class  EditAvatar
 				}
 			}
 			// InActive -> Acvtive
-			elseif ($this->ostate==AVATAR_STATE_INACTIVE and $this->state==AVATAR_STATE_ACTIVE) {
+			elseif ($this->ostate&AVATAR_STATE_INACTIVE and !($this->state&AVATAR_STATE_INACTIVE)) {
 				$ret = mdlopensim_activate_avatar($this->UUID);
 				if (!$ret) {
 					$this->hasError = true;

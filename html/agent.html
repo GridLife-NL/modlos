@@ -68,15 +68,16 @@
         <tr><td>&nbsp;</td></tr>
         <tr>
           <td class="styleText"><b><?php print $status_ttl?>:&nbsp;
-            <?php if ($state==AVATAR_STATE_NOTSYNC) {?>
+            <?php if (!($state&AVATAR_STATE_SYNCDB)) {?>
               <font color=#FF0000><?php print $not_syncdb_ttl?></font>
-            <?php } elseif ($state==AVATAR_STATE_ACTIVE) {?>
-              <font color=#0000FF><?php print $active_ttl?></font>
-            <?php } elseif ($state==AVATAR_STATE_INACTIVE) {?>
+            <?php } elseif ($state&AVATAR_STATE_INACTIVE) {?>
               <font color=#FF0000><?php print $inactive_ttl?></font>
+            <?php } elseif ($state&AVATAR_STATE_SYNCDB) {?>
+              <font color=#0000FF><?php print $active_ttl?></font>
             <?php } else {?>
               <font color=#FF0000><?php print $unknown_status."(".$state.")"?></font>
             <?php }?>
+
             <?php if ($agentOnline) {?>
               [<span class='styleOnline'><?php print $online_ttl?></span>]
             <?php } else {?>

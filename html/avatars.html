@@ -181,7 +181,7 @@
                     <td width=60>
                     <?php if ($dat['editable']==AVATAR_EDITABLE) {?>
                       <a href="<?php print $this->edit_url. '&amp;uuid='.$dat['UUID']?>" ><font color=#cc1010><b><u><?php print $editable_ttl?></u></b></font></a>
-                    <?php } elseif ($dat['editable']==AVATAR_OWNER_EDITABLE and $dat['state']==AVATAR_STATE_ACTIVE) {?>
+                    <?php } elseif ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {?>
                       <a href="<?php print $this->owner_url.'&amp;uuid='.$dat['UUID']?>"><font color=#aa5050><b><u><?php print $get_owner_ttl?></u></b></font></a>
                     <?php } else {?>
                       &nbsp;-&nbsp;
@@ -192,16 +192,16 @@
                     <td width=250><font color=#444444><b><?php print $dat['lastin']?></b></font></td>
                     <td width=150>
                       <b>
-                        <?php if ($dat['state']==AVATAR_STATE_NOTSYNC) { ?>
+                        <?php if (!($dat['state']&AVATAR_STATE_SYNCDB)) { ?>
                           <font color=#FF0000><?php print $not_syncdb_ttl?></font>
-                        <?php } elseif ($dat['state']==AVATAR_STATE_ACTIVE) { ?>
+                        <?php } elseif ($dat['state']&AVATAR_STATE_INACTIVE) { ?>
+                          <font color=#FF0000><?php print $inactive_ttl?></font>
+                        <?php } elseif ($dat['state']&AVATAR_STATE_SYNCDB) { ?>
                           <?php if ($dat['online']) {?>
                             <font color=#005500><?php print $online_ttl?></font>
                           <?php } else {?>
                             <font color=#0000FF><?php print $active_ttl?></font>
                           <?php }?>
-                        <?php } elseif ($dat['state']==AVATAR_STATE_INACTIVE) { ?>
-                          <font color=#FF0000><?php print $inactive_ttl?></font>
                         <?php } else {?>
                           <font color=#FF0000><?php print $unknown_status?></font>
                         <?php }?>

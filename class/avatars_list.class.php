@@ -184,7 +184,7 @@ class  AvatarsList
 			$this->db_data[$colum]['ownername']	= ' - ';
 			$this->db_data[$colum]['region_id']	= $user['hmregion'];
 			$this->db_data[$colum]['region']	= opensim_get_region_name($user['hmregion'], $DbLink);
-			$this->db_data[$colum]['state']		= AVATAR_STATE_NOTSYNC;
+			$this->db_data[$colum]['state']		= AVATAR_STATE_NOSTATE;
 			$this->db_data[$colum]['editable']	= AVATAR_NOT_EDITABLE;
 
 			$created = $this->db_data[$colum]['created'];

@@ -74,7 +74,7 @@ class  DeleteAvatar
 			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $return_url);
 		}
 
-		if ($this->state==AVATAR_STATE_ACTIVE) {
+		if (!($this->state&AVATAR_STATE_INACTIVE)) {
 			error(get_string('mdlos_active_avatar', 'block_mdlopensim'),  $return_url);
 		}
 	}

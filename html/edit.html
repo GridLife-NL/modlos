@@ -27,7 +27,7 @@
 
     <tr>
       <td class="head"><?php print $passwd_ttl?></td>
-      <?php if ($this->state==AVATAR_STATE_ACTIVE) {?>
+      <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>
         <td class="even"><input type="password" name="passwd" size="32" maxlength="16" /></td>
       <?php } else {?>
         <td class="even">&nbsp;</td>
@@ -36,7 +36,7 @@
 
     <tr>
       <td class="head"><?php print $confirm_pass_ttl?></td>
-      <?php if ($this->state==AVATAR_STATE_ACTIVE) {?>
+      <?php if (!($this->state==AVATAR_STATE_INACTIVE)) {?>
         <td class="odd"><input type="password" name="confirm_pass" size="32" maxlength="16" /></td>
       <?php } else {?>
         <td class="even">&nbsp;</td>
@@ -61,8 +61,8 @@
     <tr>
       <td class="head"><?php print $status_ttl?></td>
       <td class="odd">
-        <input type="radio" name="state" value="<?php print AVATAR_STATE_ACTIVE?>"   <?php if ($this->state==AVATAR_STATE_ACTIVE) {?>checked<?php }?> /><?php print $active_ttl?>&nbsp;|
-        <input type="radio" name="state" value="<?php print AVATAR_STATE_INACTIVE?>" <?php if ($this->state==AVATAR_STATE_INACTIVE) {?>checked<?php }?> /><?php print $inactive_ttl?>
+        <input type="radio" name="state" value="<?php print AVATAR_STATE_ACTIVE?>" <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>checked<?php }?> /><?php print $active_ttl?>&nbsp;|
+        <input type="radio" name="state" value="<?php print AVATAR_STATE_INACTIVE?>" <?php if ($this->state&AVATAR_STATE_INACTIVE) {?>checked<?php } ?> /><?php print $inactive_ttl?>
       </td>
     </tr>
 
@@ -79,7 +79,7 @@
   <div align="center">
     <input name="submit_update" type="submit" id="submit_update" value="<?php print $update_ttl?>" />&nbsp;
     <input type="reset"  value="<?php print $reset_ttl?>" />
-    <?php if ($this->state==AVATAR_STATE_INACTIVE) { ?>
+    <?php if ($this->state&AVATAR_STATE_INACTIVE) { ?>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <!--<a href="<?php print $this->delete_url?>" ><font color=#f01010><?php print $delete_ttl?></font></a> -->
       <input name="submit_delete" type="submit" id="submit_delete" value="<?php print $delete_ttl?>" />
@@ -128,12 +128,12 @@
       <tr>
         <td class="head"><?php print $status_ttl?></td>
         <td class="even" >
-          <?php if ($this->state==AVATAR_STATE_NOTSYNC) {?>
+          <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
             <font color=#FF0000><?php print $not_syncdb_ttl?></font>
-          <?php } elseif ($this->state==AVATAR_STATE_ACTIVE) {?>
-            <font color=#0000FF><?php print $active_ttl?></font>
-          <?php } elseif ($this->state==AVATAR_STATE_INACTIVE) { ?>
+          <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
             <font color=#FF0000><?php print $inactive_ttl?></font>
+          <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
+            <font color=#0000FF><?php print $active_ttl?></font>
           <?php } else {?>
             <font color=#FF0000><?php print $unknown_status?></font>
           <?php }?>

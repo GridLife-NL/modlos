@@ -90,7 +90,7 @@ function  mdlopensim_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=fal
 	if ($avatar->hmregion!="")	$avatar_info['hmregion']  = $avatar->hmregion;
 	else					   	$avatar_info['hmregion']  = opensim_get_home_region($uuid);
 	if ($avatar->state!="")    	$avatar_info['state'] 	  = $avatar->state;
-	else					   	$avatar_info['state'] 	  = AVATAR_STATE_NOTSYNC;
+	else					   	$avatar_info['state'] 	  = AVATAR_STATE_NOSTATE;
 	if ($avatar->time!="")     	$avatar_info['time'] 	  = $avatar->time;
 	else						$avatar_info['time']	  = time();
 
@@ -200,7 +200,7 @@ function  mdlopensim_insert_usertable($user)
 	if ($user['uid']!="") 	$insobj->user_id = $user['uid'];
 	else                  	$insobj->user_id = 0;
 	if ($user['state']!="")	$insobj->state 	 = $user['state'];
-	else				 	$insobj->state 	 = AVATAR_STATE_ACTIVE;
+	else				 	$insobj->state 	 = AVATAR_STATE_SYNCDB;
 	if ($user['time']!="") 	$insobj->time 	 = $user['time'];
 	else 					$insobj->time 	 = time();
 
@@ -238,7 +238,7 @@ function  mdlopensim_update_usertable($user, $updobj=null)
 	if ($user['time']!="")	$updobj->time 	 = $user['time'];
 	else 					$updobj->time 	 = time();
 
-	if (isGuid($user['hmregion'])) {
+	if (isGUID($user['hmregion'])) {
 		$regionName = opensim_get_region_name($user['hmregion']);
 		if ($regionName!="")$updobj->hmregion = $regionName;
 		else 				$updobj->hmregion = $user['hmregion'];
@@ -257,8 +257,8 @@ function  mdlopensim_update_usertable($user, $updobj=null)
 
 function  mdlopensim_delete_usertable($user)
 {
-	if ($user['id']=="" and $user['UUID']=="") return false;
-	if ($user['state']==AVATAR_STATE_ACTIVE)   return false;		// active
+	if ($user['id']=="" and !isGUID($user['UUID'])) return false;
+	if ($user['state']&AVATAR_STATE_SYNCDB)	return false;		// active
 
 	if ($user['id']!="") {
 		$ret = delete_records('mdlos_users',   'id', $user['id']);
