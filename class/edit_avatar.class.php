@@ -141,6 +141,7 @@ class  EditAvatar
 							$this->hasError = true;
 							$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." (".$names['firstname']." ".$names['lastname'].")";
 						}
+						else $this->uid = $user_info->id;
 					}
 				}
 				if ($this->ownername=="") {
