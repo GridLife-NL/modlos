@@ -106,7 +106,7 @@ class  SynchroDataBase
 		foreach ($opsim_users as $opsim_user) {
 			$opsim_user['uid']   = 0;
 			$opsim_user['time']  = time();
-			$opsim_user['state'] = AVATAR_STATE_SYNCDB;
+			$opsim_user['state'] = AVATAR_STATE_SYNCDB | AVATAR_STATE_SLOODLE;
 
 			if (array_key_exists($opsim_user['UUID'], $mdlos_users)) {
 				$opsim_user['id'] = $mdlos_users[$opsim_user['UUID']]['id'];
@@ -134,8 +134,7 @@ class  SynchroDataBase
 				foreach($sloodles as $sloodle) {
 					$mdl = get_record('mdlos_users', 'uuid', $sloodle->uuid);
 					if ($mdl!=null) {
-						if (($mdl->user_id>0 and $CFG->mdlopnsm_priority_sloodle) or
-							($mdl->user_id==0)) { 
+						if (($mdl->user_id>0 and $CFG->mdlopnsm_priority_sloodle) or ($mdl->user_id==0)) { 
 							$mdl->user_id = $sloodle->userid;
 							update_record('mdlos_users', $mdl);
 						}

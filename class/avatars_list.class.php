@@ -20,6 +20,7 @@ class  AvatarsList
 
 	var $course_id  = 0;
 	var $course_amp	= "";
+	var $use_sloodle= false;
 
 	var $hasPermit 	= false;
 	var $isGuest   	= true;
@@ -56,6 +57,7 @@ class  AvatarsList
 		$this->date_format= $CFG->mdlopnsm_date_format;
 		$course_param 	  = "?course=".$course_id;
 		$this->course_id  = $course_id;
+        $this->use_sloodle= $CFG->mdlopnsm_cooperate_sloodle;
 
 		$this->action_url = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
 		$this->edit_url	  = CMS_MODULE_URL."/actions/edit_avatar.php". $course_param;
@@ -278,6 +280,7 @@ class  AvatarsList
 		$page_num_of	= get_string('mdlos_page_of',		'block_mdlopensim');
 		$user_search	= get_string('mdlos_user_search',	'block_mdlopensim');
 		$users_found  	= get_string('mdlos_users_found', 	'block_mdlopensim');
+		$sloodle_ttl  	= get_string('mdlos_sloodle_short',	'block_mdlopensim');
 
         include(CMS_MODULE_PATH."/html/avatars.html");
 	}

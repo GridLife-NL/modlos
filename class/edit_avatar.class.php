@@ -46,17 +46,12 @@ class  EditAvatar
 		$use_https = $CFG->mdlopnsm_use_https;
 		if ($use_https) {
 			$https_url = $CFG->mdlopnsm_https_url;
-			if ($https_url!="") {
-				$module_url = $https_url."/".CMS_DIR_NAME;
-			}
-			else {
-				$module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
-			}
+			if ($https_url!="") $module_url = $https_url."/".CMS_DIR_NAME;
+			else 				$module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
 		}
-		else {
-			$module_url = CMS_MODULE_URL;
-		}
+		else $module_url = CMS_MODULE_URL;
 
+		//
 		$course_param = "?course=".$course_id;
 		$this->course_id  = $course_id;
 		$this->action_url = $module_url."/actions/edit_avatar.php";
@@ -106,15 +101,22 @@ class  EditAvatar
 				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
 			}
 
-			// Cancel
+			// Delete Avatar
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
 			if ($del!="") redirect($this->delete_url."&amp;uuid=".$this->UUID, "Please wait....", 0);
 			
 
-			$state 	= optional_param('state',	 '', PARAM_INT);
+			// Sate (Active/Inactive)
+			$state 	= optional_param('state', '', PARAM_INT);
 			if ($state>0x80) $this->state = $this->ostate & ($state^0x7f);
 			else 			 $this->state = $this->ostate | $state;
 
+			// Sloodle
+			$sloodle = optional_param('sloodle', '', PARAM_ALPHA);
+			if ($sloodle!="") $this->state = $this->state | AVATAR_STATE_SLOODLE;
+			else			  $this->state = $this->state & (AVATAR_STATE_SLOODLE^0xff);
+
+			//
 			$this->hmregion = optional_param('hmregion', '', PARAM_TEXT);
 
 			// password
@@ -129,30 +131,39 @@ class  EditAvatar
 				$this->errorMsg[] = get_string("mdlos_passwd_minlength", "block_mdlopensim")." (".AVATAR_PASSWD_MINLEN.")";
 			}
 
+
 			// Owner Name
-			$nomanage = optional_param('nomanage', '', PARAM_ALPHA);
-			if ($nomanage=="") {
-				if ($this->hasPermit) {
-					$this->ownername = optional_param('ownername', '', PARAM_TEXT);
-					if ($this->ownername!="") {
-						$names = get_names_from_display_username($this->ownername);
-						$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);				
-						if ($user_info==null) {
-							$this->hasError = true;
-							$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." (".$names['firstname']." ".$names['lastname'].")";
-						}
-						else $this->uid = $user_info->id;
+			if ($this->hasPermit) {		// for admin
+				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
+				if ($this->ownername!="") {
+					$names = get_names_from_display_username($this->ownername);
+					$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);				
+					if ($user_info!=null) {
+						$this->uid = $user_info->id;
+					}
+					else {
+						$this->hasError = true;
+						$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." (".$names['firstname']." ".$names['lastname'].")";
+						$this->ownername = get_display_username($USER->firstname, $USER->lastname);
+						$this->uid = $USER->id;
 					}
 				}
-				if ($this->ownername=="") {
-					$this->ownername = get_display_username($USER->firstname, $USER->lastname);
-					$this->uid = $user_info->id;
+				else {
+					$this->uid = '0';
 				}
 			}
-			else {
-				$this->ownername = "";
-				$this->uid = '0';
+			else {	// user
+				$nomanage = optional_param('nomanage', '', PARAM_ALPHA);
+				if ($nomanage=="") {
+					$this->ownername = get_display_username($USER->firstname, $USER->lastname);
+					$this->uid = $USER->id;
+				}
+				else {
+					$this->ownername = "";
+					$this->uid = '0';
+				}
 			}
+
 
 			// Home Region
  			$region_uuid = opensim_get_region_uuid($this->hmregion);
@@ -213,6 +224,8 @@ class  EditAvatar
 		$uuid_ttl	  		= get_string('mdlos_uuid',			'block_mdlopensim');
 		$manage_avatar_ttl	= get_string('mdlos_manage_avatar',	'block_mdlopensim');
 		$manage_out			= get_string('mdlos_manage_out',	'block_mdlopensim');
+		$sloodle_ttl		= get_string('mdlos_sloodle_ttl',	'block_mdlopensim');
+		$manage_sloodle		= get_string('mdlos_manage_sloodle','block_mdlopensim');
 
 		include(CMS_MODULE_PATH."/html/edit.html");
 	}

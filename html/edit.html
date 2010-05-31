@@ -13,7 +13,7 @@
   <input type="hidden" name="uuid"    value="<?php print $this->UUID?>" />
   <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
 
-  <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+  <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 
     <tr>
       <td width="100" class="head"><?php print $firstname_ttl?></td>
@@ -66,16 +66,23 @@
       </td>
     </tr>
 
-    <tr>
-      <td class="head"><?php print $manage_avatar_ttl?></td>
-      <td class="even"><input name="nomanage" type="checkbox" value="manage_out" />&nbsp;<?php print $manage_out?></td>
-    </tr> 
+    <?php if ($this->use_sloodle) {?>
+      <tr>
+        <td class="head"><?php print $sloodle_ttl?></td>
+        <td class="even"><input name="sloodle" type="checkbox" value="sloodle" <?php if ($this->state&AVATAR_STATE_SLOODLE) {?>checked<?php }?> />&nbsp;<?php print $manage_sloodle?></td>
+      </tr>
+    <?php }?>
 
     <?php if ($this->hasPermit) {?>
       <tr>
         <td class="head"><?php print $owner_ttl?></td>
         <td class="odd" ><input name="ownername" size="32" maxlength="30" value="<?php print $this->ownername?>" /></td>
       </tr>
+    <?php } else {?>
+      <tr>
+        <td class="head"><?php print $manage_avatar_ttl?></td>
+        <td class="even"><input name="nomanage" type="checkbox" value="manage_out" />&nbsp;<?php print $manage_out?></td>
+      </tr> 
     <?php }?>
 
   </table>
@@ -110,17 +117,17 @@
 <?php } else {?>
   <?php if ($this->updated_avatar) {?>
     <h3><font color=#1010e0><center><?php print $avatar_updated?></center></font></h3>
-    <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF" >
+    <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff" >
       <?php if ($this->hasPermit) {?>
         <tr>
           <td width="100" class="head"><?php print $uuid_ttl?></td>
-          <td width="320" class="even"><?php print $this->UUID?></td>	
+          <td width="320" class="even"><font color="#2060B0"><?php print $this->UUID?></font></td>	
         </tr>
       <?php }?>
 
       <tr>
-        <td class="head"><?php print $firstname_ttl?></td>
-        <td class="odd" ><?php print $this->firstname?></td>	
+        <td width="100" class="head"><?php print $firstname_ttl?></td>
+        <td width="320" class="odd" ><?php print $this->firstname?></td>	
       </tr>
       <tr>
         <td class="head"><?php print $lastname_ttl?></td>
@@ -134,17 +141,22 @@
         <td class="head"><?php print $status_ttl?></td>
         <td class="even" >
           <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
-            <font color=#FF0000><?php print $not_syncdb_ttl?></font>
+            <font color=#ee0000><?php print $not_syncdb_ttl?>
           <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
-            <font color=#FF0000><?php print $inactive_ttl?></font>
+            <font color=#ee0000><?php print $inactive_ttl?>
           <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
-            <font color=#0000FF><?php print $active_ttl?></font>
+            <font color=#005500><?php print $active_ttl?>
           <?php } else {?>
-            <font color=#FF0000><?php print $unknown_status?></font>
+            <font color=#ee0000><?php print $unknown_status?>
           <?php }?>
+          <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
+            ,&nbsp;<?php print $sloodle_ttl?>
+          <?php }?>
+            </font>
+
         </td>
       </tr>
-      <?php if ($this->hasPermit or $this->ownername!="") {?>
+      <?php if ($this->hasPermit or $this->ownername=="") {?>
         <tr>
           <td class="head"><?php print $ownername_ttl ?></td>
           <td class="odd" ><?php print $this->ownername?></td>	

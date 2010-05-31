@@ -91,7 +91,10 @@ $string['mdlos_avatar_reset'] 		= 'リセット';
 $string['mdlos_avatar_own'] 		= 'オーナー変更';
 
 $string['mdlos_manage_avatar']		= 'アバターの管理';
-$string['mdlos_manage_out']			= 'このアバターの関連付けを中止';
+$string['mdlos_manage_out']			= 'アバターの関連付けを中止';
+$string['mdlos_sloodle_ttl']		= 'SLOODLE';
+$string['mdlos_sloodle_short']		= 'SLDL';
+$string['mdlos_manage_sloodle']		= 'Sloodle との連携';
 
 $string['mdlos_avatar_upd_submit'] 	= 'アバター更新';
 $string['mdlos_avatar_dlt_submit'] 	= 'アバター削除';

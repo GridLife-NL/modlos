@@ -117,17 +117,24 @@ function  mdlopensim_set_avatar_info($avatar, $use_sloodle=false)
 	if ($use_sloodle and $ret) {
 		$updobj = get_record(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
 		if ($updobj==null) {
-			$insobj->userid = $avatar['uid'];
-			$insobj->uuid 	= $avatar['UUID'];
-			$insobj->avname = $avatar['firstname']." ".$avatar['lastname'];
-			if ($insobj->avname==" ") $insobj->avname = "";
-			$insobj->lastactive = time();
-			$ret = insert_record(MDL_SLOODLE_USERS_TBL, $insobj);
+			if ($avatar['state']&AVATAR_STATE_SLOODLE) {
+				$insobj->userid = $avatar['uid'];
+				$insobj->uuid 	= $avatar['UUID'];
+				$insobj->avname = $avatar['firstname']." ".$avatar['lastname'];
+				if ($insobj->avname==" ") $insobj->avname = "";
+				$insobj->lastactive = time();
+				$ret = insert_record(MDL_SLOODLE_USERS_TBL, $insobj);
+			}
 		}
 		else {
-			$updobj->userid = $avatar['uid'];
-			$updobj->lastactive = time();
-			$ret = update_record(MDL_SLOODLE_USERS_TBL, $updobj);
+			if ($avatar['state']&AVATAR_STATE_SLOODLE) {
+				$updobj->userid = $avatar['uid'];
+				$updobj->lastactive = time();
+				$ret = update_record(MDL_SLOODLE_USERS_TBL, $updobj);
+			}
+			else {
+				$ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
+			}
 		}
 	}
 
@@ -144,11 +151,10 @@ function  mdlopensim_delete_avatar_info($avatar, $use_sloodle=false)
 	$ret = mdlopensim_delete_usertable($avatar);
 
 	// Sloodle
-	if ($use_sloodle and $ret) {
-		$ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
-	}
+	if ($use_sloodle and $ret) $ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
 
-	return $ret;
+	if (!$ret) return false;
+	return true;
 }
 
 
@@ -257,7 +263,7 @@ function  mdlopensim_update_usertable($user, $updobj=null)
 function  mdlopensim_delete_usertable($user)
 {
 	if ($user['id']=="" and !isGUID($user['UUID'])) return false;
-	if ($user['state']&AVATAR_STATE_SYNCDB)	return false;		// active
+	if (!($user['state']&AVATAR_STATE_INACTIVE)) return false;		// active
 
 	if ($user['id']!="") {
 		$ret = delete_records('mdlos_users',   'id', $user['id']);
@@ -266,7 +272,8 @@ function  mdlopensim_delete_usertable($user)
 		$ret = delete_records('mdlos_users', 'uuid', $user['UUID']);
 	}
 
-	return $ret;
+	if (!$ret) return false;
+	return true;
 }
 
 

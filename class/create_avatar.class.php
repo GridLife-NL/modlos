@@ -14,6 +14,7 @@ class  CreateAvatar
 	var $hasPermit 	= false;
 	var $action_url	= "";
 	var $created_avatar = false;
+	var	$avatars_num= 0;
 
 	var $course_id  = 0;
 	var $use_sloodle= false;
@@ -45,19 +46,12 @@ class  CreateAvatar
 		$use_https = $CFG->mdlopnsm_use_https;
 		if ($use_https) {
 			$https_url = $CFG->mdlopnsm_https_url;
-
-			if ($https_url!="") {
-				$module_url = $https_url.CMS_DIR_NAME;
-			}
-			else {
-				$module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
-			}
+			if ($https_url!="") $module_url = $https_url.CMS_DIR_NAME;
+			else 				$module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
 		}
-		else {
-			$module_url = CMS_MODULE_URL;
-		}
+		else $module_url = CMS_MODULE_URL;
 
-
+		//
 		$this->course_id	= $course_id;
 		$this->hasPermit	= hasPermit($course_id);
 		$this->action_url  	= $module_url."/actions/create_avatar.php";
@@ -67,15 +61,16 @@ class  CreateAvatar
 		$this->isDisclaimer = $CFG->mdlopnsm_activate_disclaimer;
 
 		// Number of Avatars Check
+		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
 		if (!$this->hasPermit) {
-			$avatars_num = mdlopensim_get_avatars_num($USER->id);
 			$max_avatars = $CFG->mdlopnsm_max_own_avatars;
-			if ($max_avatars>=0 and $avatars_num>=$max_avatars) {
+			if ($max_avatars>=0 and $this->avatars_num>=$max_avatars) {
 				$course_url = $CFG->wwwroot;
 				if ($course_id>0) $course_url.= "/course/view.php?id=".$course_id;
-				error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($avatars_num >= $max_avatars)", $course_url);
+				error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($this->avatars_num >= $max_avatars)", $course_url);
 			}
 		}
+
 	}
 
 
@@ -113,7 +108,7 @@ class  CreateAvatar
 				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
 				$this->UUID		 = optional_param('UUID', 	   '', PARAM_TEXT);
 			}
-			if ($this->ownername=="") $this->ownername = get_display_username($USER->firstname, $USER->lastname);
+			else $this->ownername = get_display_username($USER->firstname, $USER->lastname);
 
 			// Check
 			if (!isGUID($this->UUID, true)) {
@@ -179,7 +174,7 @@ class  CreateAvatar
 		$grid_name 	  = $CFG->mdlopnsm_grid_name;
 		$disclaimer	  = $CFG->mdlopnsm_disclaimer_content;
 
-		$avatar_create_ttl	= get_string('mdlos_avatar_create',	'block_mdlopensim');
+		$avatar_create_ttl  = get_string('mdlos_avatar_create',	'block_mdlopensim');
 		$uuid_ttl			= get_string('mdlos_uuid',			'block_mdlopensim');
 		$firstname_ttl		= get_string('mdlos_firstname',	  	'block_mdlopensim');
 		$lastname_ttl		= get_string('mdlos_lastname',		'block_mdlopensim');
@@ -190,6 +185,8 @@ class  CreateAvatar
 		$create_ttl			= get_string('mdlos_create_ttl',	'block_mdlopensim');
 		$reset_ttl			= get_string('mdlos_reset_ttl',	  	'block_mdlopensim');
 		$avatar_created		= get_string('mdlos_avatar_created','block_mdlopensim');
+		$sloodle_ttl 		= get_string('mdlos_sloodle_ttl',	'block_mdlopensim');
+		$manage_sloodle		= get_string('mdlos_manage_sloodle','block_mdlopensim');
 
 		$disclaimer_ttl		= get_string('mdlos_disclaimer',  	'block_mdlopensim');
 		$disclaim_agree		= get_string('mdlos_disclaimer_agree', 'block_mdlopensim');
@@ -240,27 +237,34 @@ class  CreateAvatar
 			return false;
 		}
 
-		// Moodle DB
+		// User ID of Moodle
 		if ($this->hasPermit) {
-			$names = get_names_from_display_username($this->ownername);
-			$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);
-			if ($user_info==null) {
-				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." (".$names['firstname']." ".$names['lastname'].")";
-				return false;
+			if ($this->ownername!="") {
+				$names = get_names_from_display_username($this->ownername);
+				$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);
+				if ($user_info==null) {
+					$this->hasError = true;
+					$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." (".$names['firstname']." ".$names['lastname'].")";
+					return false;
+				}
+				$this->uid = $user_info->id;
 			}
-			$this->uid = $user_info->id;
+			else $this->uid = '0';
 		}
-		else {
-			$this->uid = $USER->id;
-		}
+		else $this->uid = $USER->id;
+
+		// Sloodle
+		$sloodle = optional_param('sloodle', '', PARAM_ALPHA);
+		if ($sloodle!="") $state = AVATAR_STATE_SYNCDB | AVATAR_STATE_SLOODLE;
+		else 			  $state = AVATAR_STATE_SYNCDB;
+
 
 		$new_user['UUID']		= $this->UUID;
-		$new_user['uid']			= $this->uid;
+		$new_user['uid']		= $this->uid;
 		$new_user['firstname'] 	= $this->firstname;
 		$new_user['lastname']  	= $this->lastname;
 		$new_user['hmregion']  	= $this->hmregion;
-		$new_user['state']	 	= AVATAR_STATE_SYNCDB;
+		$new_user['state']	 	= $state;
 
 		$ret = mdlopensim_set_avatar_info($new_user, $this->use_sloodle);
 		return $ret;

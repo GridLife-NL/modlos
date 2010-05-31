@@ -128,6 +128,8 @@ class  DeleteAvatar
 		$return_ttl			= get_string("mdlos_return_ttl",		"block_mdlopensim");
 		$avatar_deleted		= get_string("mdlos_avatar_deleted", 	"block_mdlopensim");
 		$avatar_dlt_confrm	= get_string("mdlos_avatar_dlt_confrm", "block_mdlopensim");
+		$sloodle_ttl 		= get_string('mdlos_sloodle_ttl',		'block_mdlopensim');
+		$manage_sloodle     = get_string('mdlos_manage_sloodle',	'block_mdlopensim');
 
 		include(CMS_MODULE_PATH."/html/delete.html");
 	}

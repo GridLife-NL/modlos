@@ -12,7 +12,7 @@
   <input type="hidden" name="uuid"   value="<?php print $this->UUID?>" />
 <?php }?>
 
-  <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+  <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 
     <?php if (!$this->deleted_avatar) {?>
     <tr><td colspan="2"><b><center><font color=#e01010><?php print $avatar_dlt_confrm?></center></font></b></td></tr> 
@@ -36,14 +36,18 @@
       <td class="head"><?php print $status_ttl?></td>
       <td class="odd" >
         <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
-          <font color=#FF0000><?php print $not_syncdb_ttl?></font>
+          <font color=#ee0000><?php print $not_syncdb_ttl?>
         <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
-          <font color=#FF0000><?php print $inactive_ttl?></font>
+          <font color=#ee0000><?php print $inactive_ttl?>
         <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
-          <font color=#0000FF><?php print $active_ttl?></font>
+          <font color=#005500><?php print $active_ttl?>
         <?php } else {?>
-          <font color=#FF0000><?php print $unknown_status?></font>
+          <font color=#ee0000><?php print $unknown_status?>
         <?php }?>
+        <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
+          ,&nbsp;<?php print $sloodle_ttl?>
+        <?php }?>
+        </font>
       </td>
     </tr>
 

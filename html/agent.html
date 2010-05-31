@@ -20,15 +20,15 @@
 .styleOnline {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 13px;
-	color: #009900;
+	color: #0000aa;
 }
 .styleOffline {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 13px;
-	color: #FF0000;
+	color: #ee0000;
 }
 .styleplace {
-	color: #FFFFFF;
+	color: #ffffff;
 	font-size: 3px;
 }
 </style>
@@ -69,19 +69,23 @@
         <tr>
           <td class="styleText"><b><?php print $status_ttl?>:&nbsp;
             <?php if (!($state&AVATAR_STATE_SYNCDB)) {?>
-              <font color=#FF0000><?php print $not_syncdb_ttl?></font>
+              <font color=#ee0000><?php print $not_syncdb_ttl?><
             <?php } elseif ($state&AVATAR_STATE_INACTIVE) {?>
-              <font color=#FF0000><?php print $inactive_ttl?></font>
+              <font color=#ee0000><?php print $inactive_ttl?>
             <?php } elseif ($state&AVATAR_STATE_SYNCDB) {?>
-              <font color=#0000FF><?php print $active_ttl?></font>
+              <font color=#005500><?php print $active_ttl?>
             <?php } else {?>
-              <font color=#FF0000><?php print $unknown_status."(".$state.")"?></font>
+              <font color=#ee0000><?php print $unknown_status."(".$state.")"?>
             <?php }?>
+            <?php if ($state&AVATAR_STATE_SLOODLE and $owner!=' - ' and $use_sloodle) {?>
+              ,&nbsp;<?php print $sloodle_ttl?>
+            <?php }?>
+              </font>
 
             <?php if ($agentOnline) {?>
-              [<span class='styleOnline'><?php print $online_ttl?></span>]
+              &nbsp;[<span class='styleOnline'><?php print $online_ttl?></span>]
             <?php } else {?>
-              [<span class='styleOffline'><?php print $offline_ttl?></span>]
+              &nbsp;[<span class='styleOffline'><?php print $offline_ttl?></span>]
             <?php }?>
             </b>
           </td>
@@ -117,7 +121,7 @@
             <div align="center">
               <table width="256" height="256" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td bgcolor="#FFFFFF" background="<?php print CMS_MODULE_URL?>/images/info.jpg">&nbsp;</td>
+                  <td bgcolor="#ffffff" background="<?php print CMS_MODULE_URL?>/images/info.jpg">&nbsp;</td>
                 </tr>
               </table>
             </div>

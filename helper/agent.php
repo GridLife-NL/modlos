@@ -119,6 +119,8 @@ $home_region_ttl= get_string("mdlos_home_region",	"block_mdlopensim");
 $ownername_ttl	= get_string("mdlos_ownername",		"block_mdlopensim");
 $unknown_status	= get_string("mdlos_unknown_status","block_mdlopensim");
 $has_noprofile	= get_string("mdlos_has_noprofile",	"block_mdlopensim");
+$sloodle_ttl 	= get_string('mdlos_sloodle_short',	'block_mdlopensim');
+
 
 include(CMS_MODULE_PATH."/html/agent.html");
 

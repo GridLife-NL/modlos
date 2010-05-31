@@ -8,7 +8,7 @@
 <br />
 
 <form action="<?php print $this->action_url?>" method="POST">
-  <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+  <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 
   <?php if ($this->hasPermit) {?>
     <tr>
@@ -67,10 +67,19 @@
 	  </td>
     </tr>
 
+    <?php if ($this->use_sloodle and $this->avatars_num>0) {?>
+      <tr>
+        <td class="head"><?php print $sloodle_ttl?></td>
+        <td class="odd "><input name="sloodle" type="checkbox" value="sloodle" />&nbsp;<?php print $manage_sloodle?></td>
+      </tr>
+    <?php } else {?>
+      <input type="hidden" name="sloodle" value="sloodle" />
+    <?php }?>
+
 	<?php if ($this->hasPermit) {?>
       <tr>
         <td class="head"><?php print $ownername_ttl?></td>
-        <td class="odd"><input name="ownername" size="32" maxlength="30" value="<?php print $pv_ownername?>" /></td>
+        <td class="even"><input name="ownername" size="32" maxlength="30" value="<?php print $pv_ownername?>" /></td>
       </tr>
     <?php }?>
 
@@ -117,11 +126,11 @@
 <?php } else {?>
   <?php if ($this->created_avatar) {?>
     <h3><font color=#1010e0><center><?php print $avatar_created?></center></font></h3>
-    <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+    <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 	  <?php if ($this->hasPermit) {?>
         <tr>
           <td width="100" class="head"><?php print $uuid_ttl?></td>
-          <td width="320" class="even"><?php print $this->UUID?></td>	
+          <td width="320" class="even"><font color="#2060B0"><?php print $this->UUID?></font></td>	
         </tr>
       <?php }?>
       <tr>
@@ -136,12 +145,14 @@
         <td class="head"><?php print $home_region_ttl?></td>
         <td class="odd" ><?php print $this->hmregion?></td>	
       </tr>
+
       <?php if ($this->hasPermit) {?>
         <tr>
           <td class="head"><?php print $ownername_ttl?></td>
-          <td class="even"><?php print $ownername?></td>	
+          <td class="even"><?php print $this->ownername?></td>	
         </tr>
       <?php }?>
+
     </table>
   <?php }?>
 <?php }?>

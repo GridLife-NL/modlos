@@ -38,18 +38,12 @@ class  OwnerAvatar
 		$use_https = $CFG->mdlopnsm_use_https;
 		if ($use_https) {
 			$https_url = $CFG->mdlopnsm_https_url;
-
-			if ($https_url!="") {
-				$module_url = $https_url.CMS_DIR_NAME;
-			}
-			else {
-				$module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
-			}
+			if ($https_url!="") $module_url = $https_url.CMS_DIR_NAME;
+			else 				$module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
 		}
-		else {
-			$module_url = CMS_MODULE_URL;
-		}
+		else $module_url = CMS_MODULE_URL;
 
+		//
 		$course_param 	   = "?course=".$course_id;
 		$return_url  	   = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
 		$this->course_id   = $course_id;

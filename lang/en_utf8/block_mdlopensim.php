@@ -91,13 +91,16 @@ $string['mdlos_avatar_edit'] 		= 'Edit Avatar';
 $string['mdlos_avatar_reset'] 		= 'Reset';
 $string['mdlos_avatar_own'] 		= 'Own Avatar';
 
-$string['mdlos_manage_avatar']      = 'Avatar Management';
-$string['mdlos_manage_out']         = 'The relationship of this avatar with Moodle is stop';
+$string['mdlos_manage_avatar']      = 'Management';
+$string['mdlos_manage_out']         = 'The relationship with Moodle is DISABLED!';
+$string['mdlos_sloodle_ttl']        = 'SLOODLE';
+$string['mdlos_sloodle_short']      = 'SLDL';
+$string['mdlos_manage_sloodle']     = 'Cooperation with Sloodle';
 
 $string['mdlos_avatar_upd_submit'] 	= 'Update Avatar';
 $string['mdlos_avatar_dlt_submit'] 	= 'Delete Avatar';
 $string['mdlos_avatar_dlt_canceled']= 'Avatar Delete Canceled';
-$string['mdlos_avatar_dlt_confrm']  = 'Is Avatar really deleted?';
+$string['mdlos_avatar_dlt_confrm']  = 'Is Avatar really DELETE?';
 
 $string['mdlos_users_found'] 		= 'Users Found';
 $string['mdlos_nouser_found'] 		= 'User not Found';
