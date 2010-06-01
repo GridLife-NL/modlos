@@ -5,7 +5,7 @@
 .styleTitel {
 	font-size: 16px;
 	font-weight: bold;
-	color: #105BA7;
+	color: #105ba7;
 	font-family: Arial, Helvetica, sans-serif;
 }
 .styleText {
@@ -14,18 +14,19 @@
 	color: #444444;
 }
 .styleTopTitle {
-	font-size: 20px; font-weight: bold;
+	font-size: 20px; 
+	font-weight: bold;
 	font-family: Arial, Helvetica, sans-serif;
 }
 .styleOnline {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 13px;
-	color: #0000aa;
+	color: #009900;
 }
 .styleOffline {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 13px;
-	color: #ee0000;
+	color: #cc0000;
 }
 .styleplace {
 	color: #ffffff;
@@ -56,7 +57,7 @@
         <tr><td class="styleText"><b><?php print $lastlogin_ttl.":&nbsp;".$lastin?></b></td></tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-          <td class="styleText"><b><?php print $ownername_ttl.":&nbsp;"?><font color="#105BA7">
+          <td class="styleText"><b><?php print $ownername_ttl.":&nbsp;"?><font color="#105ba7">
             <?php if ($userinfo and $owner!=' - ') {?>
               <a href="<?php print $CFG->wwwroot.'/user/view.php?id='.$userid.$course_amp?>" target="_blank"><?php print $owner?></a>
             <?php } else {?>
@@ -69,13 +70,13 @@
         <tr>
           <td class="styleText"><b><?php print $status_ttl?>:&nbsp;
             <?php if (!($state&AVATAR_STATE_SYNCDB)) {?>
-              <font color=#ee0000><?php print $not_syncdb_ttl?>
+              <font color=#cc0000><?php print $not_syncdb_ttl?>
             <?php } elseif ($state&AVATAR_STATE_INACTIVE) {?>
-              <font color=#ee0000><?php print $inactive_ttl?>
+              <font color=#cc0000><?php print $inactive_ttl?>
             <?php } elseif ($state&AVATAR_STATE_SYNCDB) {?>
-              <font color=#005500><?php print $active_ttl?>
+              <font color=#0000cc><?php print $active_ttl?>
             <?php } else {?>
-              <font color=#ee0000><?php print $unknown_status."(".$state.")"?>
+              <font color=#cc0000><?php print $unknown_status."(".$state.")"?>
             <?php }?>
             <?php if ($state&AVATAR_STATE_SLOODLE and $owner!=' - ' and $use_sloodle) {?>
               ,&nbsp;<?php print $sloodle_ttl?>
@@ -83,18 +84,18 @@
               </font>
 
             <?php if ($agentOnline) {?>
-              &nbsp;[<span class='styleOnline'><?php print $online_ttl?></span>]
+              &nbsp;<span class='styleOnline'>[<?php print $online_ttl?>]</span>
             <?php } else {?>
-              &nbsp;[<span class='styleOffline'><?php print $offline_ttl?></span>]
+              &nbsp;<span class='styleOffline'>[<?php print $offline_ttl?>]</span>
             <?php }?>
             </b>
           </td>
         </tr>
         <tr><td class="styleText">&nbsp;</td></tr>
         <tr>
-          <td class="styleText"><b><?php print $home_region_ttl?>:&nbsp;<a href="<?php print CMS_MODULE_URL.'/helper/sim.php?region='.$regionUUID.$course_amp?>">
-            <?php print htmlspecialchars($regionName)?>
-          </a></b></td>
+          <td class="styleText"><b><?php print $home_region_ttl?>:&nbsp;
+            <a href="<?php print CMS_MODULE_URL.'/helper/sim.php?region='.$regionUUID.$course_amp?>"><font color="#0055cc"><?php print $regionName?></font></a>
+          </b></td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr><td><span class="styleText"><u><b><?php print $profile_ttl?></b></u></span></td></tr>

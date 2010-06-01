@@ -213,8 +213,8 @@ class  AvatarsList
 			$online = opensim_get_avatar_online($UUID, $DbLink);
 			$this->db_data[$colum]['online'] = $online['online'];
 			if ($online['online']) {
-				$this->db_data[$colum]['region_id']	= $online['region'];
-				$this->db_data[$colum]['region'] 	= opensim_get_region_name($online['region'], $DbLink);
+				$this->db_data[$colum]['region_id']	= $online['region_id'];
+				$this->db_data[$colum]['region'] 	= $online['region_name'];
 			}
 
 			// serach Moodle, Mdlopensim and Sloodle DB

@@ -40,7 +40,6 @@ if ($agent) {
 		$UUID 			= $avinfo['UUID'];
 		$firstN			= $avinfo['firstname'];
 		$lastN			= $avinfo['lastname'];
-		$fullname		= $avinfo['fullname'];       
 		$created		= $avinfo['created'];
 		$lastlogin		= $avinfo['lastlogin'];
 		$regionUUID		= $avinfo['regionUUID'];
@@ -48,8 +47,12 @@ if ($agent) {
 		$serverIP		= $avinfo['serverIP'];
 		$serverHttpPort	= $avinfo['serverHttpPort'];
 		$serverURI		= $avinfo['serverURI'];
-		$agentOnline	= $avinfo['online'];
 		$profileTXT 	= $avinfp['profileTXT'];
+
+		$online			= opensim_get_avatar_online($UUID);
+		$agentOnline	= $online['online'];
+		$crrntRegion	= $online['region_id'];
+		//$crrntRegion  = $online['region_name'];
 	}
 
 	// Mdlopensim and Sloodle DB
