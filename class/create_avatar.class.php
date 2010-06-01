@@ -36,11 +36,11 @@ class  CreateAvatar
 
 
 
-	function  CreateAvatar($courseid)
+	function  CreateAvatar($course_id)
 	{
 		global $CFG, $USER;
 
-		require_login($courseid);
+		require_login($course_id);
 
 		// for HTTPS
 		$use_https = $CFG->mdlopnsm_use_https;
