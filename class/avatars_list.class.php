@@ -132,7 +132,10 @@ class  AvatarsList
 		$use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
 		$pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
 
-		$this->number    = count(opensim_get_avatars_infos($this->sql_countcnd));;
+		$dummy = opensim_get_avatars_infos($this->sql_countcnd);
+		if (is_array($dummy)) $this->number = count($dummy);
+		else $this->number = 0;
+
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
 		if ($this->sitemax==0) $this->sitemax = 1;

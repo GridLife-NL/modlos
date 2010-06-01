@@ -164,7 +164,8 @@ function  mdlopensim_get_avatars_num($id, $use_sloodle=false)
 	if (!isNumeric($id)) return null;
 
 	$avatars = get_records('mdlos_users', 'user_id', $id);
-	$num = count($avatars);
+	if (is_array($avatars)) $num = count($avatars);
+	else $num = 0;
 
 	if ($use_sloodle) {
 		$sloodles = get_records(MDL_SLOODLE_USERS_TBL, 'userid', $id);
