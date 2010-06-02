@@ -14,8 +14,12 @@ class  OwnerAvatar
 
 	var $course_id	= 0;
 	var $user_id	= 0;
-	var $use_sloodle= false;
-	var $pri_sloodle= false;
+
+	var $use_sloodle = false;
+	var $pri_sloodle = false;
+	var $avatars_num = 0;
+	var $max_avatars = 0;
+	var $isAvatarMax = false;
 
 	var $hasError	= false;
 	var $errorMsg	= array();
@@ -56,13 +60,14 @@ class  OwnerAvatar
 		$this->ownername   = get_display_username($USER->firstname, $USER->lastname);
 
 		// Number of Avatars Check
-		if (!$this->hasPermit) {
-			$avatars_num = mdlopensim_get_avatars_num($USER->id);
-			$max_avatars = $CFG->mdlopnsm_max_own_avatars;
-			if ($max_avatars>=0 and $avatars_num>=$max_avatars) {
-				error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($avatars_num >= $max_avatars)", $this->return_url);
-			}
+		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
+
+		if ($isAvatarMax) {
+			error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($this->avatars_num >= $this->max_avatars)", $this->return_url);
 		}
+
 
 		// get UUID from POST or GET
 		$this->UUID = optional_param('uuid', '', PARAM_TEXT);

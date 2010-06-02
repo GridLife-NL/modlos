@@ -13,12 +13,15 @@ class  EditAvatar
 	var $hasPermit	= false;
 	var $action_url = "";
 	var $delete_url = "";
+	var $course_id	= 0;
 
 	var $updated_avatar = false;
-	var $course_id	= 0;
-	var $use_sloodle= false;
-	var $pri_sloodle= false;
-	var $avatars_num= false;
+
+	var $use_sloodle = false;
+	var $pri_sloodle = false;
+	var $avatars_num = false;
+	var $max_avatars = false;
+	var $isAvatarMax = false;
 
 	var $hasError	= false;
 	var $errorMsg 	= array();
@@ -67,10 +70,9 @@ class  EditAvatar
 		}
 		$this->UUID = $uuid;
 
-
 		$this->use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
 		$this->pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
-		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
+
 
 		// get uid from Mdlopensim and Sloodle DB
 		$avatar = mdlopensim_get_avatar_info($this->UUID, $this->use_sloodle, $this->pri_sloodle);
@@ -85,6 +87,10 @@ class  EditAvatar
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
 			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $return_url);
 		}
+
+		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 	}
 
 

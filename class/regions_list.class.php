@@ -15,6 +15,10 @@ class  RegionsList
 	var $course_id	= "";
 	var $course_amp	= "";
 
+	var $avatars_num = 0;
+	var $max_avatars = 0;
+	var $isAvatarMax = false;
+
 	var $hasPermit 	= false;
 	var $isGuest 	= true;
 
@@ -32,13 +36,17 @@ class  RegionsList
 
 	function  RegionsList($course_id)
 	{
-		global $CFG;
+		global $CFG, $USER;
 
 		$this->isGuest    = isguest();
 		$this->hasPermit  = hasPermit($course_id);
 		$this->course_id  = $course_id;
 		$this->action 	  = "regions_list.php";
 		$this->action_url = CMS_MODULE_URL."/actions/".$this->action;
+
+		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 
 		if ($course_id>0) $this->course_amp = "&amp;course=".$course_id;
 	}

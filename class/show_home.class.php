@@ -17,14 +17,26 @@ class  ShowHome
 	var $user_count;
 	var $region_count;
 
+	var $avatars_num = 0;
+	var $max_avatars = 0;
+	var $isAvatarMax = false;
+	var $hasPermit	 = false;
+
 
 	function  ShowHome($course_id) 
 	{
+		global $CFG, $USER;
+
 		$this->grid_status 		= false;
 		$this->now_online 		= '0';
 		$this->lastmonth_online = '0';
 		$this->user_count 		= '0';
 		$this->region_count 	= '0';
+		$this->hasPermit		= hasPermit($course_id);
+
+		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 	}
 
 

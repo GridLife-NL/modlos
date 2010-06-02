@@ -11,11 +11,15 @@ class  DeleteAvatar
 	var $action_url = "";
 	var $cancel_url = "";
 	var $return_url = "";
+	var $course_id	= 0;
+
 	var $deleted_avatar = false;
 
-	var $course_id	= 0;
-	var $use_sloodle= false;
-	var $pri_sloodle= false;
+	var $use_sloodle = false;
+	var $pri_sloodle = false;
+	var $avatars_num = 0;
+	var $max_avatars = 0;
+	var $isAvatarMax = false;
 
 	var $hasError  	= false;
 	var $errorMsg  	= array();
@@ -52,7 +56,6 @@ class  DeleteAvatar
 		}
 		$this->UUID	= $uuid;
 
-
 		$this->use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
 		$this->pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
 
@@ -78,6 +81,10 @@ class  DeleteAvatar
 		if (!($this->state&AVATAR_STATE_INACTIVE)) {
 			error(get_string('mdlos_active_avatar', 'block_mdlopensim'),  $this->return_url);
 		}
+
+		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 	}
 
 

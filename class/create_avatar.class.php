@@ -17,7 +17,7 @@ class  CreateAvatar
 
 	var	$avatars_num = 0;
 	var	$max_avatars = 0;
-	var	$creatable   = true;
+	var	$isAvatarMax = false;
 
 	var $course_id  = 0;
 	var $use_sloodle= false;
@@ -63,12 +63,12 @@ class  CreateAvatar
 		$this->actvLastName	= $CFG->mdlopnsm_activate_lastname;
 		$this->isDisclaimer = $CFG->mdlopnsm_activate_disclaimer;
 
-		$this->avatars_num  = mdlopensim_get_avatars_num($USER->id);
-		$this->max_avatars  = $CFG->mdlopnsm_max_own_avatars;
-		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->creatable = false;
+		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 
 		// Number of Avatars Check
-		if (!$this->creatable) {
+		if ($this->isAvatarMax) {
 			$course_url = $CFG->wwwroot;
 			if ($course_id>0) $course_url.= "/course/view.php?id=".$course_id;
 			error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($this->avatars_num >= $this->max_avatars)", $course_url);

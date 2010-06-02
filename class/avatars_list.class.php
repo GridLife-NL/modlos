@@ -20,8 +20,8 @@ class  AvatarsList
 
 	var $course_id  = 0;
 	var $course_amp	= "";
-	var $use_sloodle= false;
 
+	var $use_sloodle = false;
 	var $avatars_num = 0;
 	var $max_avatars = 0;
 	var $isAvatarMax = false;
@@ -75,16 +75,6 @@ class  AvatarsList
 
 		if ($course_id>0) $this->course_amp = "&amp;course=".$course_id;
 	}
-
-
-
-
-	function  is_avatar_max()
-	{
-		//return $this->isAvatarMax;
-		return true;
-	}
-
 
 
 
