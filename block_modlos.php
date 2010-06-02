@@ -28,7 +28,7 @@ class block_modlos extends block_base
 		$this->version = 2010053019;
 		$this->release = '1.0.0b';
 
-		$this->grid_name = $CFG->mdlopnsm_grid_name;
+		$this->grid_name = $CFG->modlos_grid_name;
 		$this->grid_status = false;
 		$this->now_online = '0';
 		$this->lastmonth_online = '0';
@@ -57,7 +57,7 @@ class block_modlos extends block_base
 
 			$isAvatarMax = false;
 			$avatars_num = modlos_get_avatars_num($USER->id);
-			$max_avatars = $CFG->mdlopnsm_max_own_avatars;
+			$max_avatars = $CFG->modlos_max_own_avatars;
 			if (!hasPermit($id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
 
 			if (!$isAvatarMax) {
