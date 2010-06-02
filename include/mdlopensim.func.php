@@ -25,8 +25,8 @@
  * function  mdlopensim_inactivate_avatar($uuid)
  * function  mdlopensim_delete_banneddb($uuid)
  *
- * function  print_tabnav($currenttab, $course)
- * function  print_tabheader($currenttab, $course)
+ * function  print_tabnav($currenttab, $course, $creatable=true)
+ * function  print_tabheader($currenttab, $course, $creatable=true)
  *
  ****************************************************************/
 
@@ -486,7 +486,7 @@ function  mdlopensim_delete_banneddb($uuid)
 // Tab Header
 //
 
-function print_tabnav($currenttab, $course)
+function  print_tabnav($currenttab, $course, $creatable=true)
 {
 	global $CFG;
 
@@ -510,8 +510,10 @@ function print_tabnav($currenttab, $course)
 	if (!isGuest()) {
 		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param, 
 																	'<b>'.get_string('mdlos_avatars_list','block_mdlopensim').'</b>');
-		$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $course_param, 
+		if ($creatable) {
+			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $course_param, 
 																	'<b>'.get_string('mdlos_avatar_create','block_mdlopensim').'</b>');
+		}
 	}
 
 	if ($hasPermit) {
@@ -541,7 +543,8 @@ function print_tabnav($currenttab, $course)
 
 
 
-function print_tabheader($currenttab, $course)
+
+function  print_tabheader($currenttab, $course, $creatable=true)
 {
 	global $CFG;
 
@@ -564,7 +567,7 @@ function print_tabheader($currenttab, $course)
 	}
 
 
-	print_tabnav($currenttab, $course);
+	print_tabnav($currenttab, $course, $creatable);
 }
 
 

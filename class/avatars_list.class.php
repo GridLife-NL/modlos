@@ -22,6 +22,10 @@ class  AvatarsList
 	var $course_amp	= "";
 	var $use_sloodle= false;
 
+	var $avatars_num = 0;
+	var $max_avatars = 0;
+	var $isAvatarMax = false;
+
 	var $hasPermit 	= false;
 	var $isGuest   	= true;
 
@@ -47,26 +51,41 @@ class  AvatarsList
 
 	function  AvatarsList($course_id)
 	{
-		global $CFG;
+		global $CFG, $USER;
 
 		require_login($course_id);
 
-		$this->course_id  = $course_id;
-		$this->isGuest    = isguest();
-		$this->hasPermit  = hasPermit($course_id);
-		$this->date_format= $CFG->mdlopnsm_date_format;
-		$course_param 	  = "?course=".$course_id;
-		$this->course_id  = $course_id;
-        $this->use_sloodle= $CFG->mdlopnsm_cooperate_sloodle;
+		$this->course_id   = $course_id;
+		$this->isGuest     = isguest();
+		$this->hasPermit   = hasPermit($course_id);
+		$this->date_format = $CFG->mdlopnsm_date_format;
+		$course_param 	   = "?course=".$course_id;
+		$this->course_id   = $course_id;
+        $this->use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
 
-		$this->action_url = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
-		$this->edit_url	  = CMS_MODULE_URL."/actions/edit_avatar.php". $course_param;
-		$this->owner_url  = CMS_MODULE_URL."/actions/owner_avatar.php".$course_param;
-		$this->search_url = CMS_MODULE_URL."/actions/avatars_list.php";
-		$this->avatar_url = $CFG->wwwroot."/user/view.php";
+		$this->action_url  = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
+		$this->edit_url	   = CMS_MODULE_URL."/actions/edit_avatar.php". $course_param;
+		$this->owner_url   = CMS_MODULE_URL."/actions/owner_avatar.php".$course_param;
+		$this->search_url  = CMS_MODULE_URL."/actions/avatars_list.php";
+		$this->avatar_url  = $CFG->wwwroot."/user/view.php";
+
+		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 
 		if ($course_id>0) $this->course_amp = "&amp;course=".$course_id;
 	}
+
+
+
+
+	function  is_avatar_max()
+	{
+		//return $this->isAvatarMax;
+		return true;
+	}
+
+
 
 
 
@@ -237,7 +256,9 @@ class  AvatarsList
 				$this->db_data[$colum]['editable'] = AVATAR_EDITABLE;
 			}
 			elseif ($uid==0) {
-				$this->db_data[$colum]['editable'] = AVATAR_OWNER_EDITABLE;
+				if (!$this->isAvatarMax) {
+					$this->db_data[$colum]['editable'] = AVATAR_OWNER_EDITABLE;
+				}
 			}
 
 			$colum++;
