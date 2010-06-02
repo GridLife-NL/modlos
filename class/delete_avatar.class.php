@@ -10,6 +10,7 @@ class  DeleteAvatar
 	var $hasPermit	= false;
 	var $action_url = "";
 	var $cancel_url = "";
+	var $return_url = "";
 	var $deleted_avatar = false;
 
 	var $course_id	= 0;
@@ -44,10 +45,10 @@ class  DeleteAvatar
 
 
 		// get UUID from POST or GET
-		$return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
+		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
 		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
-			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)", $return_url);
+			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)", $this->return_url);
 		}
 		$this->UUID	= $uuid;
 
@@ -71,11 +72,11 @@ class  DeleteAvatar
 
 		$this->hasPermit = hasPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $return_url);
+			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $this->return_url);
 		}
 
 		if (!($this->state&AVATAR_STATE_INACTIVE)) {
-			error(get_string('mdlos_active_avatar', 'block_mdlopensim'),  $return_url);
+			error(get_string('mdlos_active_avatar', 'block_mdlopensim'),  $this->return_url);
 		}
 	}
 
@@ -112,6 +113,7 @@ class  DeleteAvatar
 		global $CFG;
 
 		$grid_name = $CFG->mdlopnsm_grid_name;
+		$showPostForm = !$this->deleted_avatar or $this->hasError;
 
 		$avatar_delete_ttl	= get_string("mdlos_avatar_delete",  	"block_mdlopensim");
 		$firstname_ttl		= get_string("mdlos_firstname",  		"block_mdlopensim");
@@ -128,8 +130,9 @@ class  DeleteAvatar
 		$return_ttl			= get_string("mdlos_return_ttl",		"block_mdlopensim");
 		$avatar_deleted		= get_string("mdlos_avatar_deleted", 	"block_mdlopensim");
 		$avatar_dlt_confrm	= get_string("mdlos_avatar_dlt_confrm", "block_mdlopensim");
-		$sloodle_ttl 		= get_string('mdlos_sloodle_ttl',		'block_mdlopensim');
-		$manage_sloodle     = get_string('mdlos_manage_sloodle',	'block_mdlopensim');
+		$sloodle_ttl		= get_string('mdlos_sloodle_ttl',		'block_mdlopensim');
+		$manage_sloodle		= get_string('mdlos_manage_sloodle',	'block_mdlopensim');
+		$state_deleted		= get_string('mdlos_state_deleted',		'block_mdlopensim');
 
 		include(CMS_MODULE_PATH."/html/delete.html");
 	}

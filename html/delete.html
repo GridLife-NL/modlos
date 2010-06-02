@@ -7,68 +7,71 @@
 <h2><center><?php print $grid_name."&nbsp;:&nbsp;".$avatar_delete_ttl?></center></h2>
 <br />
 
-<?php if (!$this->deleted_avatar) {?>
-<form action="<?php print $this->action_url?>" method="POST">
-  <input type="hidden" name="uuid"   value="<?php print $this->UUID?>" />
+<?php if ($showPostForm) {?>
+  <form action="<?php print $this->action_url?>" method="POST">
+<?php } else {?>
+  <form action="<?php print $this->return_url?>" method="GET">
 <?php }?>
 
-  <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
-
-    <?php if (!$this->deleted_avatar) {?>
-    <tr><td colspan="2"><b><center><font color=#e01010><?php print $avatar_dlt_confrm?></center></font></b></td></tr> 
-    <?php }?>
-    <tr>
-      <td width="100" class="head"><?php print $firstname_ttl?></td>
-      <td width="320" class="even"><?php print $this->firstname?></td>
-    </tr>
-
-    <tr>
-      <td class="head"><?php print $lastname_ttl?></td>
-      <td class="odd" ><?php print $this->lastname?></td>
-    </tr>
-
-    <tr>
-      <td class="head"><?php print $home_region_ttl?></td>
-      <td class="even"><?php print $this->hmregion?></td>
-    </tr>
-
-    <tr>
-      <td class="head"><?php print $status_ttl?></td>
-      <td class="odd" >
-        <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
-          <font color=#ee0000><?php print $not_syncdb_ttl?>
-        <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
-          <font color=#ee0000><?php print $inactive_ttl?>
-        <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
-          <font color=#005500><?php print $active_ttl?>
-        <?php } else {?>
-          <font color=#ee0000><?php print $unknown_status?>
-        <?php }?>
-        <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
-          ,&nbsp;<?php print $sloodle_ttl?>
-        <?php }?>
-        </font>
-      </td>
-    </tr>
-
-    <?php if ($this->hasPermit) {?>
+    <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
       <tr>
-        <td class="head"><?php print $ownername_ttl?></td>
-        <td class="even"><?php print $this->ownername?></td>	
+        <td width="100" class="head"><?php print $firstname_ttl?></td>
+        <td width="320" class="even"><?php print $this->firstname?></td>
       </tr>
-    <?php }?>
 
-  </table>
+      <tr>
+        <td class="head"><?php print $lastname_ttl?></td>
+        <td class="odd" ><?php print $this->lastname?></td>
+      </tr>
+
+      <tr>
+        <td class="head"><?php print $home_region_ttl?></td>
+        <td class="even"><?php print $this->hmregion?></td>
+      </tr>
+
+      <tr>
+        <td class="head"><?php print $status_ttl?></td>
+        <td class="odd" >
+          <?php if ($this->deleted_avatar) {?>
+            <font color=#cc0000><?php print $state_deleted?></font>
+          <?php } else {?>
+            <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
+              <font color=#cc0000><?php print $not_syncdb_ttl?>
+            <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
+              <font color=#cc0000><?php print $inactive_ttl?>
+            <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
+              <font color=#005500><?php print $active_ttl?>
+            <?php } else {?>
+              <font color=#cc0000><?php print $unknown_status?>
+            <?php }?>
+            <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
+              ,&nbsp;<?php print $sloodle_ttl?>
+            <?php }?>
+            </font>
+          <?php }?>
+        </td>
+      </tr>
+
+      <?php if ($this->hasPermit) {?>
+        <tr>
+          <td class="head"><?php print $ownername_ttl?></td>
+          <td class="even"><?php print $this->ownername?></td>	
+        </tr>
+      <?php }?>
+
+    </table>
   <br />
 
   <div align="center">
-    <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
-    <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
-    <?php if ($this->deleted_avatar) {?>
-      &nbsp;&nbsp;<a href=<?php print $this->return_url?>><b><?php print $return_ttl?></b></a>
-    <?php } else {?>
+    <?php if ($showPostForm) {?>
+      <input type="hidden" name="uuid"   value="<?php print $this->UUID?>" />
+      <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
+      <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
       <input name="submit_delete" type="submit" value="<?php print $delete_ttl?>" />&nbsp;
       <input name="cancel_delete" type="submit" value="<?php print $cancel_ttl?>" />
+    <?php } else {?>
+      <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
+      <input name="submit_return" type="submit" value="<?php print $return_ttl?>" />
     <?php }?>
   </div>
 </form>
@@ -76,8 +79,6 @@
 
 
 <!-- print Message -->
-<br />
-<br />
 <hr />
 <?php if ($this->hasError) {?>
 
@@ -93,6 +94,8 @@
 
   <?php if ($this->deleted_avatar) {?>
     <h3><font color=#2020e0><center><?php print $avatar_deleted?></center></font></h3>
+  <?php } else {?>
+    <h3><font color=#e01080><center><?php print $avatar_dlt_confrm?></center></font></b></h3>
   <?php }?>
 
 <?php }?>

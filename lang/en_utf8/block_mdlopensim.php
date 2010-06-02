@@ -19,6 +19,7 @@ $string['mdlos_lastlogin'] 			= 'Last Login';
 $string['mdlos_crntregion'] 		= 'Region';
 $string['mdlos_state'] 				= 'State';
 $string['mdlos_state_invalid']	 	= 'Invalid State';
+$string['mdlos_state_deleted'] 		= 'Deleted';
 $string['mdlos_status'] 			= 'Status';
 $string['mdlos_grid_status'] 		= 'Grid Status';
 $string['mdlos_no'] 				= 'No.';

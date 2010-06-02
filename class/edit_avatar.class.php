@@ -18,6 +18,7 @@ class  EditAvatar
 	var $course_id	= 0;
 	var $use_sloodle= false;
 	var $pri_sloodle= false;
+	var $avatars_num= false;
 
 	var $hasError	= false;
 	var $errorMsg 	= array();
@@ -69,6 +70,7 @@ class  EditAvatar
 
 		$this->use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
 		$this->pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
+		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
 
 		// get uid from Mdlopensim and Sloodle DB
 		$avatar = mdlopensim_get_avatar_info($this->UUID, $this->use_sloodle, $this->pri_sloodle);

@@ -62,15 +62,21 @@
       <td class="head"><?php print $status_ttl?></td>
       <td class="odd" >
         <input type="radio" name="state" value="<?php print AVATAR_STATE_ACTIVE?>" <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>checked<?php }?> /><?php print $active_ttl?>&nbsp;|
-        <input type="radio" name="state" value="<?php print AVATAR_STATE_INACTIVE?>" <?php if ($this->state&AVATAR_STATE_INACTIVE) {?>checked<?php } ?> /><?php print $inactive_ttl?>
+        <input type="radio" name="state" value="<?php print AVATAR_STATE_INACTIVE?>" <?php if ($this->state&AVATAR_STATE_INACTIVE) {?>checked<?php }?> /><?php print $inactive_ttl?>
       </td>
     </tr>
 
     <?php if ($this->use_sloodle) {?>
-      <tr>
-        <td class="head"><?php print $sloodle_ttl?></td>
-        <td class="even"><input name="sloodle" type="checkbox" value="sloodle" <?php if ($this->state&AVATAR_STATE_SLOODLE) {?>checked<?php }?> />&nbsp;<?php print $manage_sloodle?></td>
-      </tr>
+      <?php if ($this->avatars_num>1 or $this->hasPermit) {?>
+        <tr>
+          <td class="head"><?php print $sloodle_ttl?></td>
+          <td class="even">
+            <input name="sloodle" type="checkbox" value="sloodle" <?php if ($this->state&AVATAR_STATE_SLOODLE) {?>checked<?php }?> />&nbsp;<?php print $manage_sloodle?>i
+          </td>
+        </tr>
+      <?php } else {?>
+        <input type="hidden" name="sloodle" value="sloodle" />
+      <?php }?>
     <?php }?>
 
     <?php if ($this->hasPermit) {?>
@@ -101,9 +107,8 @@
 </form>
 <br />
 
+
 <!-- print Message -->
-<br />
-<br />
 <hr />
 <?php if ($this->hasError) {?>
   <div align="center">
@@ -121,7 +126,7 @@
       <?php if ($this->hasPermit) {?>
         <tr>
           <td width="100" class="head"><?php print $uuid_ttl?></td>
-          <td width="320" class="even"><font color="#2060B0"><?php print $this->UUID?></font></td>	
+          <td width="320" class="even"><font color="#2060b0"><?php print $this->UUID?></font></td>	
         </tr>
       <?php }?>
 
@@ -141,13 +146,13 @@
         <td class="head"><?php print $status_ttl?></td>
         <td class="even" >
           <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
-            <font color=#ee0000><?php print $not_syncdb_ttl?>
+            <font color=#cc0000><?php print $not_syncdb_ttl?>
           <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
-            <font color=#ee0000><?php print $inactive_ttl?>
+            <font color=#cc0000><?php print $inactive_ttl?>
           <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
             <font color=#005500><?php print $active_ttl?>
           <?php } else {?>
-            <font color=#ee0000><?php print $unknown_status?>
+            <font color=#cc0000><?php print $unknown_status?>
           <?php }?>
           <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
             ,&nbsp;<?php print $sloodle_ttl?>

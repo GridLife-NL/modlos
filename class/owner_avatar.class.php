@@ -9,6 +9,7 @@ class  OwnerAvatar
 {
 	var $hashPermit = false;
 	var $action_url = "";
+	var $return_url = "";
 	var $updated_owner = false;
 
 	var $course_id	= 0;
@@ -45,7 +46,7 @@ class  OwnerAvatar
 
 		//
 		$course_param 	   = "?course=".$course_id;
-		$return_url  	   = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
+		$this->return_url  = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
 		$this->course_id   = $course_id;
 		$this->hasPermit   = hasPermit($course_id);
 		$this->action_url  = $module_url."/actions/owner_avatar.php";
@@ -59,26 +60,26 @@ class  OwnerAvatar
 			$avatars_num = mdlopensim_get_avatars_num($USER->id);
 			$max_avatars = $CFG->mdlopnsm_max_own_avatars;
 			if ($max_avatars>=0 and $avatars_num>=$max_avatars) {
-				error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($avatars_num >= $max_avatars)", $return_url);
+				error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($avatars_num >= $max_avatars)", $this->return_url);
 			}
 		}
 
 		// get UUID from POST or GET
 		$this->UUID = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($this->UUID)) {
-			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($this->UUID)", $return_url);
+			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($this->UUID)", $this->return_url);
 		}
 
 		// check Mdlopensim DB
 		$avatar = mdlopensim_get_avatar_info($this->UUID);
 		if ($avatar==null) {
-			error(get_string('mdlos_not_exist_uuid', 'block_mdlopensim')." ($this->UUID)", $return_url);
+			error(get_string('mdlos_not_exist_uuid', 'block_mdlopensim')." ($this->UUID)", $this->return_url);
 		}
 		if ($avatar['uid']!=0) {
-			error(get_string('mdlos_owner_forbidden', 'block_mdlopensim')." (User ID is not 0)", $return_url);
+			error(get_string('mdlos_owner_forbidden', 'block_mdlopensim')." (User ID is not 0)", $this->return_url);
 		}
 		if (!($avatar['state']&AVATAR_STATE_SYNCDB)) {
-			error(get_string('mdlos_owner_forbidden', 'block_mdlopensim')." (not Acrive)", $return_url);
+			error(get_string('mdlos_owner_forbidden', 'block_mdlopensim')." (not Acrive)", $this->return_url);
 		}
 		$this->firstname = $avatar['firstname'];
 		$this->lastname  = $avatar['lastname'];
@@ -126,7 +127,8 @@ class  OwnerAvatar
 	{
 		global $CFG;
 
-		$grid_name = $CFG->mdlopnsm_grid_name;
+		$grid_name 	  = $CFG->mdlopnsm_grid_name;
+		$showPostForm = !$this->updated_owner or $this->hasError;
 
 		$avatar_own_ttl		= get_string('mdlos_avatar_own',	'block_mdlopensim');
 		$firstname_ttl		= get_string('mdlos_firstname',		'block_mdlopensim');
@@ -134,6 +136,7 @@ class  OwnerAvatar
 		$passwd_ttl		 	= get_string('mdlos_password',	  	'block_mdlopensim');
 		$avatar_own_ttl		= get_string('mdlos_avatar_own_ttl','block_mdlopensim');
 		$reset_ttl			= get_string('mdlos_reset_ttl',		'block_mdlopensim');
+		$return_ttl			= get_string('mdlos_return_ttl',	'block_mdlopensim');
 		$uuid_ttl			= get_string('mdlos_uuid',			'block_mdlopensim');
 		$ownername_ttl		= get_string('mdlos_ownername',	 	'block_mdlopensim');
 		$avatar_get			= get_string('mdlos_avatar_gotted',	'block_mdlopensim');
