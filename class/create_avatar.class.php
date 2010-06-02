@@ -73,7 +73,6 @@ class  CreateAvatar
 			if ($course_id>0) $course_url.= "/course/view.php?id=".$course_id;
 			error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($this->avatars_num >= $this->max_avatars)", $course_url);
 		}
-
 	}
 
 
