@@ -4,7 +4,9 @@ require_once(realpath(dirname(__FILE__)."/../../config.php"));
 require_once(realpath(dirname(__FILE__)."/include/config.php"));
 
 if (!defined('CMS_MODULE_PATH')) exit();
+
 require_once(CMS_MODULE_PATH."/include/opensim.mysql.php");
+require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
 
 
 
@@ -37,7 +39,7 @@ class block_mdlopensim extends block_base
 
 	function get_content()
 	{
-		global $CFG;
+		global $CFG, $USER;
 
 		if ($this->content!=NULL) {
 			return $this->content;
@@ -52,7 +54,15 @@ class block_mdlopensim extends block_base
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('mdlos_regions_list','block_mdlopensim').'</a><br />';
 		if (!isguest()) {
 			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list?course='.$id.'">'.get_string('mdlos_avatars_list','block_mdlopensim').'</a><br />';
-			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar?course='.$id.'">'.get_string('mdlos_avatar_create','block_mdlopensim').'</a><br />';
+
+			$isAvatarMax = false;
+			$avatars_num = mdlopensim_get_avatars_num($USER->id);
+			$max_avatars = $CFG->mdlopnsm_max_own_avatars;
+			if (!hasPermit($id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
+
+			if (!$isAvatarMax) {
+				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar?course='.$id.'">'.get_string('mdlos_avatar_create','block_mdlopensim').'</a><br />';
+			}
 /*
 			if (isadmin()) {
 				$this->content->text.= '<hr />';
