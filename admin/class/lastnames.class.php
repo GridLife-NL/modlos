@@ -6,7 +6,7 @@
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
+require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
 
 
@@ -37,7 +37,7 @@ class  LastNames
 		$this->hasPermit = hasPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
-			$this->errorMsg[] = get_string('mdlos_access_forbidden', 'block_mdlopensim');
+			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 			return;
 		}
 		$this->action_url = CMS_MODULE_URL."/admin/actions/lastnames.php";
@@ -47,7 +47,7 @@ class  LastNames
 
 	function  execute()
 	{
-		$objs = get_records('mdlos_lastnames');
+		$objs = get_records('modlos_lastnames');
 		if (is_array($objs)) {
 			foreach($objs as $name) {
 				$this->lastnames[$name->lastname] = $name->state;
@@ -59,13 +59,13 @@ class  LastNames
 		if (data_submitted()) {
 			if (!$this->hasPermit) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('mdlos_access_forbidden', 'block_mdlopensim');
+				$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 				return false;
 			}
 
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				$this->errorMsg[] = get_string("modlos_sesskey_error", "block_modlos");
 				return false;
 			}
 
@@ -96,13 +96,13 @@ class  LastNames
 			else							 $this->lastnames_inactive[] = $lastname;
 		}
 
-		$grid_name		= $CFG->mdlopnsm_grid_name;
+		$grid_name		= $CFG->modlos_grid_name;
 		$select1 		= $this->lastnames_active;
 		$select2 		= $this->lastnames_inactive;
 
-		$lastnames_ttl	= get_string('mdlos_lastnames', 	'block_mdlopensim');
-		$select1_title	= get_string('mdlos_active_list', 	'block_mdlopensim');
-		$select2_title	= get_string('mdlos_inactive_list', 'block_mdlopensim');
+		$lastnames_ttl	= get_string('modlos_lastnames', 	'block_modlos');
+		$select1_title	= get_string('modlos_active_list', 	'block_modlos');
+		$select2_title	= get_string('modlos_inactive_list', 'block_modlos');
 
 		include(CMS_MODULE_PATH."/admin/html/lastnames.html");
 	}
@@ -113,20 +113,20 @@ class  LastNames
 	{
 		if (!isAlphabetNumericSpecial($this->addname)) {
 			$this->hasError = true;
-			$this->errorMsg[] = get_string('mdlos_invalid_lastname', 'block_mdlopensim')." ($this->addname)";
+			$this->errorMsg[] = get_string('modlos_invalid_lastname', 'block_modlos')." ($this->addname)";
 			return;
 		}
 
-		$obj = get_record('mdlos_lastnames', 'lastname', $this->addname);
+		$obj = get_record('modlos_lastnames', 'lastname', $this->addname);
 		if ($obj!=null) {
 			$this->hasError = true;
-			$this->errorMsg[] = get_string('mdlos_exist_lastname', 'block_mdlopensim')." ($this->addname)";
+			$this->errorMsg[] = get_string('modlos_exist_lastname', 'block_modlos')." ($this->addname)";
 			return;
 		}
 
 		$obj->lastname = $this->addname;
 		$obj->state    = AVATAR_LASTN_ACTIVE;
-		insert_record('mdlos_lastnames', $obj);
+		insert_record('modlos_lastnames', $obj);
 
 		$this->lastnames[$this->addname] = AVATAR_LASTN_ACTIVE;
 	}
@@ -136,14 +136,14 @@ class  LastNames
 	function  action_move_active()
 	{
 		foreach($this->select_active as $name) {
-			$obj = get_record('mdlos_lastnames', 'lastname', $name);
+			$obj = get_record('modlos_lastnames', 'lastname', $name);
 			if ($obj==null) {
 				if (!$this->hasError) $this->hasError = true;
-				$this->errorMsg[] = get_string('mdlos_not_exist_lastname', 'block_mdlopensim')." ($name)";
+				$this->errorMsg[] = get_string('modlos_not_exist_lastname', 'block_modlos')." ($name)";
 			}
 			else {
 				$obj->state = AVATAR_LASTN_ACTIVE;
-				update_record('mdlos_lastnames', $obj);
+				update_record('modlos_lastnames', $obj);
 				$this->lastnames[$name] = AVATAR_LASTN_ACTIVE;
 			}
 		}
@@ -154,14 +154,14 @@ class  LastNames
 	function  action_move_inactive()
 	{
 		foreach($this->select_inactive as $name) {
-			$obj = get_record('mdlos_lastnames', 'lastname', $name);
+			$obj = get_record('modlos_lastnames', 'lastname', $name);
 			if ($obj==null) {
 				if (!$this->hasError) $this->hasError = true;
-				$this->errorMsg[] = get_string('mdlos_not_exist_lastname', 'block_mdlopensim')." ($name)";
+				$this->errorMsg[] = get_string('modlos_not_exist_lastname', 'block_modlos')." ($name)";
 			}
 			else {
 				$obj->state = AVATAR_LASTN_INACTIVE;
-				update_record('mdlos_lastnames', $obj);
+				update_record('modlos_lastnames', $obj);
 				$this->lastnames[$name] = AVATAR_LASTN_INACTIVE;
 			}
 		}
@@ -172,12 +172,12 @@ class  LastNames
 	function  action_delete()
 	{
 		foreach($this->select_active as $name) {
-			delete_records('mdlos_lastnames', 'lastname', $name);
+			delete_records('modlos_lastnames', 'lastname', $name);
 			unset($this->lastnames[$name]);
 		}
 
 		foreach($this->select_inactive as $name) {
-			delete_records('mdlos_lastnames', 'lastname', $name);
+			delete_records('modlos_lastnames', 'lastname', $name);
 			unset($this->lastnames[$name]);
 		}
 	}

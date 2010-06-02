@@ -1,8 +1,9 @@
 <?php
 
 if (!defined('CMS_MODULE_PATH')) exit();
+
 require_once(CMS_MODULE_PATH."/include/moodle.func.php");
-require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
+require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
 
 
@@ -58,10 +59,10 @@ class  AvatarsList
 		$this->course_id   = $course_id;
 		$this->isGuest     = isguest();
 		$this->hasPermit   = hasPermit($course_id);
-		$this->date_format = $CFG->mdlopnsm_date_format;
+		$this->date_format = $CFG->modlos_date_format;
 		$course_param 	   = "?course=".$course_id;
 		$this->course_id   = $course_id;
-        $this->use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
+        $this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
 		$this->action_url  = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
 		$this->edit_url	   = CMS_MODULE_URL."/actions/edit_avatar.php". $course_param;
@@ -69,8 +70,8 @@ class  AvatarsList
 		$this->search_url  = CMS_MODULE_URL."/actions/avatars_list.php";
 		$this->avatar_url  = $CFG->wwwroot."/user/view.php";
 
-		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
-		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		$this->avatars_num = modlos_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 
 		if ($course_id>0) $this->course_amp = "&amp;course=".$course_id;
@@ -85,13 +86,13 @@ class  AvatarsList
 		if ($db_ver=="0.0") {
 			$course_url = $CFG->wwwroot;
 			if ($ithis->course_id>0) $course_url.= "/course/view.php?id=".$course_id;
-			error(get_string('mdlos_db_connect_error', 'block_mdlopensim'), $course_url);
+			error(get_string('modlos_db_connect_error', 'block_modlos'), $course_url);
 		}
 
 		// Post Check
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
-				error(get_string('mdlos_sesskey_error', 'block_mdlopensim'), $this->action_url);
+				error(get_string('modlos_sesskey_error', 'block_modlos'), $this->action_url);
 			}
 		}
 
@@ -138,8 +139,8 @@ class  AvatarsList
 	{
 		global $CFG, $USER;
 
-		$use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
-		$pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
+		$use_sloodle = $CFG->modlos_cooperate_sloodle;
+		$pri_sloodle = $CFG->modlos_priority_sloodle;
 
 		$dummy = opensim_get_avatars_infos($this->sql_countcnd);
 		if (is_array($dummy)) $this->number = count($dummy);
@@ -226,9 +227,9 @@ class  AvatarsList
 				$this->db_data[$colum]['region'] 	= $online['region_name'];
 			}
 
-			// serach Moodle, Mdlopensim and Sloodle DB
+			// serach Moodle, Modlos and Sloodle DB
 			$uid = -1;
-			$avatardata = mdlopensim_get_avatar_info($UUID, $use_sloodle, $pri_sloodle);
+			$avatardata = modlos_get_avatar_info($UUID, $use_sloodle, $pri_sloodle);
 			if ($avatardata!=null) {
 				$uid = $avatardata['uid'];
 				$this->db_data[$colum]['state'] = $avatardata['state'];
@@ -264,37 +265,37 @@ class  AvatarsList
 	{
         global $CFG;
 
-        $grid_name 		= $CFG->mdlopnsm_grid_name;
-        $content   		= $CFG->mdlopnsm_avatars_content;
-		$userinfo		= $CFG->mdlopnsm_userinfo_link;
-		$date_format	= $CFG->mdlopnsm_date_format;
+        $grid_name 		= $CFG->modlos_grid_name;
+        $content   		= $CFG->modlos_avatars_content;
+		$userinfo		= $CFG->modlos_userinfo_link;
+		$date_format	= $CFG->modlos_date_format;
 
 		$course_amp		= $this->course_amp;
         $plimit_amp     = "&amp;plimit=$this->plimit";
         $pstart_        = "&amp;pstart=";
         $plimit_        = "&amp;plimit=";
 
-		$avatars_list	= get_string('mdlos_avatars_list', 	'block_mdlopensim');
-		$number_ttl		= get_string('mdlos_no',			'block_mdlopensim');
-		$edit_ttl		= get_string('mdlos_edit',			'block_mdlopensim');
-		$editable_ttl	= get_string('mdlos_edit_ttl',		'block_mdlopensim');
-		$lastlogin_ttl	= get_string('mdlos_lastlogin',		'block_mdlopensim');
-		$status_ttl		= get_string('mdlos_status',		'block_mdlopensim');
-		$crntregion_ttl	= get_string('mdlos_crntregion',	'block_mdlopensim');
-		$owner_ttl		= get_string('mdlos_owner',			'block_mdlopensim');
-		$get_owner_ttl	= get_string('mdlos_get_owner_ttl',	'block_mdlopensim');
-		$firstname_ttl 	= get_string('mdlos_firstname', 	'block_mdlopensim');
-		$lastname_ttl 	= get_string('mdlos_lastname', 		'block_mdlopensim');
-		$not_syncdb_ttl = get_string("mdlos_not_syncdb",	"block_mdlopensim");
-		$online_ttl     = get_string("mdlos_online_ttl",	"block_mdlopensim");
-		$active_ttl		= get_string('mdlos_active',		'block_mdlopensim');
-		$inactive_ttl	= get_string('mdlos_inactive',		'block_mdlopensim');
-		$unknown_status	= get_string('mdlos_unknown_status','block_mdlopensim');
-		$page_num		= get_string('mdlos_page',			'block_mdlopensim');
-		$page_num_of	= get_string('mdlos_page_of',		'block_mdlopensim');
-		$user_search	= get_string('mdlos_user_search',	'block_mdlopensim');
-		$users_found  	= get_string('mdlos_users_found', 	'block_mdlopensim');
-		$sloodle_ttl  	= get_string('mdlos_sloodle_short',	'block_mdlopensim');
+		$avatars_list	= get_string('modlos_avatars_list',  'block_modlos');
+		$number_ttl		= get_string('modlos_no',			 'block_modlos');
+		$edit_ttl		= get_string('modlos_edit',			 'block_modlos');
+		$editable_ttl	= get_string('modlos_edit_ttl',		 'block_modlos');
+		$lastlogin_ttl	= get_string('modlos_lastlogin',	 'block_modlos');
+		$status_ttl		= get_string('modlos_status',		 'block_modlos');
+		$crntregion_ttl	= get_string('modlos_crntregion',	 'block_modlos');
+		$owner_ttl		= get_string('modlos_owner',		 'block_modlos');
+		$get_owner_ttl	= get_string('modlos_get_owner_ttl', 'block_modlos');
+		$firstname_ttl 	= get_string('modlos_firstname', 	 'block_modlos');
+		$lastname_ttl 	= get_string('modlos_lastname', 	 'block_modlos');
+		$not_syncdb_ttl = get_string('modlos_not_syncdb',	 'block_modlos');
+		$online_ttl     = get_string('modlos_online_ttl',	 'block_modlos');
+		$active_ttl		= get_string('modlos_active',		 'block_modlos');
+		$inactive_ttl	= get_string('modlos_inactive',		 'block_modlos');
+		$unknown_status	= get_string('modlos_unknown_status','block_modlos');
+		$page_num		= get_string('modlos_page',			 'block_modlos');
+		$page_num_of	= get_string('modlos_page_of',		 'block_modlos');
+		$user_search	= get_string('modlos_user_search',	 'block_modlos');
+		$users_found  	= get_string('modlos_users_found', 	 'block_modlos');
+		$sloodle_ttl  	= get_string('modlos_sloodle_short', 'block_modlos');
 
         include(CMS_MODULE_PATH."/html/avatars.html");
 	}

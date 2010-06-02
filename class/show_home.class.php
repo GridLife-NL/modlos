@@ -5,7 +5,7 @@
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
+require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
 
 
@@ -34,8 +34,8 @@ class  ShowHome
 		$this->region_count 	= '0';
 		$this->hasPermit		= hasPermit($course_id);
 
-		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
-		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		$this->avatars_num = modlos_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 	}
 
@@ -61,16 +61,16 @@ class  ShowHome
 	{
 		global $CFG;
 
-		$grid_name       	= $CFG->mdlopnsm_grid_name;
-		$content         	= $CFG->mdlopnsm_home_content;
+		$grid_name       	= $CFG->modlos_grid_name;
+		$content         	= $CFG->modlos_home_content;
 
-		$db_status 			= get_string("mdlos_db_status", 		  "block_mdlopensim");
-		$online_ttl 		= get_string("mdlos_online_ttl", 		  "block_mdlopensim");
-		$offline_ttl 		= get_string("mdlos_offline_ttl", 		  "block_mdlopensim");
-		$total_users 		= get_string("mdlos_total_users", 		  "block_mdlopensim");
-		$total_regions 		= get_string("mdlos_total_regions", 	  "block_mdlopensim");
-		$visitors_last30days= get_string("mdlos_visitors_last30days", "block_mdlopensim");
-		$online_now 		= get_string("mdlos_online_now", 		  "block_mdlopensim");
+		$db_status 			= get_string("modlos_db_status", 		  "block_modlos");
+		$online_ttl 		= get_string("modlos_online_ttl", 		  "block_modlos");
+		$offline_ttl 		= get_string("modlos_offline_ttl", 		  "block_modlos");
+		$total_users 		= get_string("modlos_total_users", 		  "block_modlos");
+		$total_regions 		= get_string("modlos_total_regions", 	  "block_modlos");
+		$visitors_last30days= get_string("modlos_visitors_last30days","block_modlos");
+		$online_now 		= get_string("modlos_online_now", 		  "block_modlos");
 
 		include(CMS_MODULE_PATH."/html/show_home.html");
 	}

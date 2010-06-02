@@ -1,7 +1,8 @@
 <?php
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
+
+require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
 
 
@@ -46,9 +47,9 @@ class  CreateAvatar
 		require_login($course_id);
 
 		// for HTTPS
-		$use_https = $CFG->mdlopnsm_use_https;
+		$use_https = $CFG->modlos_use_https;
 		if ($use_https) {
-			$https_url = $CFG->mdlopnsm_https_url;
+			$https_url = $CFG->modlos_https_url;
 			if ($https_url!="") $module_url = $https_url.CMS_DIR_NAME;
 			else 				$module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
 		}
@@ -58,20 +59,20 @@ class  CreateAvatar
 		$this->course_id	= $course_id;
 		$this->hasPermit	= hasPermit($course_id);
 		$this->action_url  	= $module_url."/actions/create_avatar.php";
-		$this->use_sloodle 	= $CFG->mdlopnsm_cooperate_sloodle;
-		$this->pri_sloodle 	= $CFG->mdlopnsm_priority_sloodle;
-		$this->actvLastName	= $CFG->mdlopnsm_activate_lastname;
-		$this->isDisclaimer = $CFG->mdlopnsm_activate_disclaimer;
+		$this->use_sloodle 	= $CFG->modlos_cooperate_sloodle;
+		$this->pri_sloodle 	= $CFG->modlos_priority_sloodle;
+		$this->actvLastName	= $CFG->modlos_activate_lastname;
+		$this->isDisclaimer = $CFG->modlos_activate_disclaimer;
 
-		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
-		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		$this->avatars_num = modlos_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 
 		// Number of Avatars Check
 		if ($this->isAvatarMax) {
 			$course_url = $CFG->wwwroot;
 			if ($course_id>0) $course_url.= "/course/view.php?id=".$course_id;
-			error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($this->avatars_num >= $this->max_avatars)", $course_url);
+			error(get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)", $course_url);
 		}
 	}
 
@@ -83,19 +84,19 @@ class  CreateAvatar
 
 		// Region Name
 		$this->regionNames = opensim_get_regions_names("ORDER BY regionName ASC");
-		$this->lastNames   = mdlopensim_get_lastnames();
+		$this->lastNames   = modlos_get_lastnames();
 
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				$this->errorMsg[] = get_string("modlos_sesskey_error", "block_modlos");
 			}
 		}
 
 		if ($this->hasPermit) {
 			do {
 				$uuid   = make_random_guid();
-				$modobj = mdlopensim_get_avatar_info($uuid);
+				$modobj = modlos_get_avatar_info($uuid);
 			} while ($modobj!=null);
 			$this->nx_UUID = $uuid;
 		}
@@ -115,37 +116,37 @@ class  CreateAvatar
 			// Check
 			if (!isGUID($this->UUID, true)) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_invalid_uuid", "block_mdlopensim")." ($this->UUID)";
+				$this->errorMsg[] = get_string("modlos_invalid_uuid", "block_modlos")." ($this->UUID)";
 			}
 			if (!isAlphabetNumericSpecial($this->firstname)) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_invalid_firstname", "block_mdlopensim")." ($this->firstname)";
+				$this->errorMsg[] = get_string("modlos_invalid_firstname", "block_modlos")." ($this->firstname)";
 			}
 			if (!isAlphabetNumericSpecial($this->lastname)) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_invalid_last", "block_mdlopensim")." ($this->lastname)";
+				$this->errorMsg[] = get_string("modlos_invalid_last", "block_modlos")." ($this->lastname)";
 			}
 			if (!isAlphabetNumericSpecial($this->passwd)) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_invalid_passwd", "block_mdlopensim")." ($this->passwd)";
+				$this->errorMsg[] = get_string("modlos_invalid_passwd", "block_modlos")." ($this->passwd)";
 			}
 			if (strlen($this->passwd)<AVATAR_PASSWD_MINLEN) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_passwd_minlength", "block_mdlopensim")." (".AVATAR_PASSWD_MINLEN.")";
+				$this->errorMsg[] = get_string("modlos_passwd_minlength", "block_modlos")." (".AVATAR_PASSWD_MINLEN.")";
 			}
 			if ($this->passwd!=$confirm_pass) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_mismatch_passwd", "block_mdlopensim");
+				$this->errorMsg[] = get_string("modlos_mismatch_passwd", "block_modlos");
 			}
 			if (!isAlphabetNumericSpecial($this->hmregion)) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_invalid_regionname", "block_mdlopensim")." ($this->hmregion)";
+				$this->errorMsg[] = get_string("modlos_invalid_regionname", "block_modlos")." ($this->hmregion)";
 			}
 			if ($this->isDisclaimer and !$this->hasPermit) {
 				$agree = optional_param('agree', '', PARAM_ALPHA);
 				if ($agree!='agree') {
 					$this->hasError = true;
-					$this->errorMsg[] = get_string("mdlos_need_agree_disclaimer", "block_mdlopensim");
+					$this->errorMsg[] = get_string("modlos_need_agree_disclaimer", "block_modlos");
 				}
 			}
 			if ($this->hasError) return false;
@@ -154,12 +155,12 @@ class  CreateAvatar
 			$this->created_avatar = $this->create_avatar();
 			if (!$this->created_avatar) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_create_error", "block_mdlopensim");
+				$this->errorMsg[] = get_string("modlos_create_error", "block_modlos");
 				return false;
 			}
 		}
 		else {
-			$this->hmregion  = $CFG->mdlopnsm_home_region;
+			$this->hmregion  = $CFG->modlos_home_region;
 			$this->UUID		 = $this->nx_UUID;
 			$this->ownername = get_display_username($USER->firstname, $USER->lastname);
 		}
@@ -173,26 +174,26 @@ class  CreateAvatar
 	{
 		global $CFG;
 
-		$grid_name 	  = $CFG->mdlopnsm_grid_name;
-		$disclaimer	  = $CFG->mdlopnsm_disclaimer_content;
+		$grid_name 	  = $CFG->modlos_grid_name;
+		$disclaimer	  = $CFG->modlos_disclaimer_content;
 
-		$avatar_create_ttl  = get_string('mdlos_avatar_create',	'block_mdlopensim');
-		$uuid_ttl			= get_string('mdlos_uuid',			'block_mdlopensim');
-		$firstname_ttl		= get_string('mdlos_firstname',	  	'block_mdlopensim');
-		$lastname_ttl		= get_string('mdlos_lastname',		'block_mdlopensim');
-		$passwd_ttl			= get_string('mdlos_password',		'block_mdlopensim');
-		$confirm_pass_ttl	= get_string('mdlos_confirm_pass',  'block_mdlopensim');
-		$home_region_ttl	= get_string('mdlos_home_region',	'block_mdlopensim');
-		$ownername_ttl		= get_string('mdlos_ownername',	  	'block_mdlopensim');
-		$create_ttl			= get_string('mdlos_create_ttl',	'block_mdlopensim');
-		$reset_ttl			= get_string('mdlos_reset_ttl',	  	'block_mdlopensim');
-		$avatar_created		= get_string('mdlos_avatar_created','block_mdlopensim');
-		$sloodle_ttl 		= get_string('mdlos_sloodle_ttl',	'block_mdlopensim');
-		$manage_sloodle		= get_string('mdlos_manage_sloodle','block_mdlopensim');
+		$avatar_create_ttl  = get_string('modlos_avatar_create', 'block_modlos');
+		$uuid_ttl			= get_string('modlos_uuid',			 'block_modlos');
+		$firstname_ttl		= get_string('modlos_firstname',	 'block_modlos');
+		$lastname_ttl		= get_string('modlos_lastname',		 'block_modlos');
+		$passwd_ttl			= get_string('modlos_password',		 'block_modlos');
+		$confirm_pass_ttl	= get_string('modlos_confirm_pass',  'block_modlos');
+		$home_region_ttl	= get_string('modlos_home_region',	 'block_modlos');
+		$ownername_ttl		= get_string('modlos_ownername',	 'block_modlos');
+		$create_ttl			= get_string('modlos_create_ttl',	 'block_modlos');
+		$reset_ttl			= get_string('modlos_reset_ttl',	 'block_modlos');
+		$avatar_created		= get_string('modlos_avatar_created','block_modlos');
+		$sloodle_ttl 		= get_string('modlos_sloodle_ttl',	 'block_modlos');
+		$manage_sloodle		= get_string('modlos_manage_sloodle','block_modlos');
 
-		$disclaimer_ttl		= get_string('mdlos_disclaimer',  	'block_mdlopensim');
-		$disclaim_agree		= get_string('mdlos_disclaimer_agree', 'block_mdlopensim');
-		$disclaim_need_agree= get_string('mdlos_need_agree_disclaimer',	'block_mdlopensim');
+		$disclaimer_ttl		= get_string('modlos_disclaimer',  	 'block_modlos');
+		$disclaim_agree		= get_string('modlos_disclaimer_agree','block_modlos');
+		$disclaim_need_agree= get_string('modlos_need_agree_disclaimer','block_modlos');
 
 		// 
 		$pv_ownername = $this->ownername;
@@ -218,7 +219,7 @@ class  CreateAvatar
 		$avuuid = opensim_get_avatar_uuid($this->firstname." ".$this->lastname);
 		if ($avuuid!=null) {
 			$this->hasError = true;
-			$this->errorMsg[] = get_string("mdlos_already_name_error", "block_mdlopensim")." ($this->firstname $this->lastname)";
+			$this->errorMsg[] = get_string("modlos_already_name_error", "block_modlos")." ($this->firstname $this->lastname)";
 			return false;
 		}
 
@@ -226,7 +227,7 @@ class  CreateAvatar
 		if (!$this->hasPermit or !isGUID($this->UUID)) {
 			do {
 				$uuid   = make_random_guid();
-				$modobj = mdlopensim_get_avatar_info($uuid);
+				$modobj = modlos_get_avatar_info($uuid);
 			} while ($modobj!=null);
 			$this->UUID = $uuid;
 		}
@@ -235,7 +236,7 @@ class  CreateAvatar
 		$rslt = opensim_create_avatar($this->UUID, $this->firstname, $this->lastname, $this->passwd, $this->hmregion);
 		if (!$rslt) {
 			$this->hasError = true;
-			$this->errorMsg[] = get_string("mdlos_opensim_create_error", "block_mdlopensim")." ($this->UUID)";
+			$this->errorMsg[] = get_string("modlos_opensim_create_error", "block_modlos")." ($this->UUID)";
 			return false;
 		}
 
@@ -246,7 +247,7 @@ class  CreateAvatar
 				$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);
 				if ($user_info==null) {
 					$this->hasError = true;
-					$this->errorMsg[] = get_string("mdlos_nouser_found", "block_mdlopensim")." (".$names['firstname']." ".$names['lastname'].")";
+					$this->errorMsg[] = get_string("modlos_nouser_found", "block_modlos")." (".$names['firstname']." ".$names['lastname'].")";
 					return false;
 				}
 				$this->uid = $user_info->id;
@@ -268,7 +269,7 @@ class  CreateAvatar
 		$new_user['hmregion']  	= $this->hmregion;
 		$new_user['state']	 	= $state;
 
-		$ret = mdlopensim_set_avatar_info($new_user, $this->use_sloodle);
+		$ret = modlos_set_avatar_info($new_user, $this->use_sloodle);
 		return $ret;
 	}
 

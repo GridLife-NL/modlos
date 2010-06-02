@@ -11,7 +11,7 @@
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
+require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
 
 class  SynchroDataBase
@@ -33,7 +33,7 @@ class  SynchroDataBase
 		$this->hasPermit = hasPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
-			$this->errorMsg[] = get_string('mdlos_access_forbidden', 'block_mdlopensim');
+			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 			return;
 		}
 		$this->action_url = CMS_MODULE_URL."/admin/actions/synchrodb.php";
@@ -46,13 +46,13 @@ class  SynchroDataBase
 		if (data_submitted()) {		// POST
 			if (!$this->hasPermit) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('mdlos_access_forbidden', 'block_mdlopensim');
+				$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 				return false;
 			}
 
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				$this->errorMsg[] = get_string("modlos_sesskey_error", "block_modlos");
 				return false;
 			}
 
@@ -61,7 +61,7 @@ class  SynchroDataBase
 				$ret = opensim_check_db();
 				if (!$ret['grid_status']) {
 					$this->hasError = true;
-					$this->errorMsg[] = get_string('mdlos_db_connect_error', 'block_mdlopensim');
+					$this->errorMsg[] = get_string('modlos_db_connect_error', 'block_modlos');
 					return false;
 				}
 
@@ -69,7 +69,7 @@ class  SynchroDataBase
 				opensim_succession_data(OPENSIM_HMREGION);
 				opensim_recreate_presence();
 				$profs = opensim_get_avatars_profiles_from_users();
-				if ($profs!=null) mdlopensim_set_profiles($profs, false);		// not over write
+				if ($profs!=null) modlos_set_profiles($profs, false);		// not over write
 
 				$this->synchronized = $this->synchroDB();
 			}
@@ -87,56 +87,56 @@ class  SynchroDataBase
 		// OpenSim DB
 		$opsim_users = opensim_get_avatars_infos();
 
-		// Mdlopensim DB を読んで配列に変換
-		$db_users = get_records('mdlos_users');
-		$mdlos_users = array();
+		// Modlos DB を読んで配列に変換
+		$db_users = get_records('modlos_users');
+		$modlos_users = array();
 		foreach ($db_users as $user) {
-			$mdlos_uuid = $user->uuid;
-			$mdlos_users[$mdlos_uuid]['id'] 	   = $user->id;
-			$mdlos_users[$mdlos_uuid]['UUID'] 	   = $user->uuid;
-			$mdlos_users[$mdlos_uuid]['uid']	   = $user->user_id;
-			$mdlos_users[$mdlos_uuid]['firstname'] = $user->firstname;
-			$mdlos_users[$mdlos_uuid]['lastname']  = $user->lastname;
-			$mdlos_users[$mdlos_uuid]['hmregion']  = $user->hmregion;
-			$mdlos_users[$mdlos_uuid]['state']     = $user->state;
-			$mdlos_users[$mdlos_uuid]['time']  	   = $user->time;
+			$modlos_uuid = $user->uuid;
+			$modlos_users[$modlos_uuid]['id'] 	   = $user->id;
+			$modlos_users[$modlos_uuid]['UUID'] 	   = $user->uuid;
+			$modlos_users[$modlos_uuid]['uid']	   = $user->user_id;
+			$modlos_users[$modlos_uuid]['firstname'] = $user->firstname;
+			$modlos_users[$modlos_uuid]['lastname']  = $user->lastname;
+			$modlos_users[$modlos_uuid]['hmregion']  = $user->hmregion;
+			$modlos_users[$modlos_uuid]['state']     = $user->state;
+			$modlos_users[$modlos_uuid]['time']  	   = $user->time;
 		}
 
-		// OpenSimにデータがある場合は，Mdlopensim のデータを OpenSimにあわせる．
+		// OpenSimにデータがある場合は，Modlos のデータを OpenSimにあわせる．
 		foreach ($opsim_users as $opsim_user) {
 			$opsim_user['uid']   = 0;
 			$opsim_user['time']  = time();
 			$opsim_user['state'] = AVATAR_STATE_SYNCDB | AVATAR_STATE_SLOODLE;
 
-			if (array_key_exists($opsim_user['UUID'], $mdlos_users)) {
-				$opsim_user['id'] = $mdlos_users[$opsim_user['UUID']]['id'];
-				mdlopensim_update_usertable($opsim_user);
+			if (array_key_exists($opsim_user['UUID'], $modlos_users)) {
+				$opsim_user['id'] = $modlos_users[$opsim_user['UUID']]['id'];
+				modlos_update_usertable($opsim_user);
 			}
 			else {
-				mdlopensim_insert_usertable($opsim_user);
+				modlos_insert_usertable($opsim_user);
 			}
 		}
 
 		// OpenSimに対応データが無い場合はデータを消す．
-		foreach ($mdlos_users as $mdlos_user) {
-			$moodle_uuid = $mdlos_user['UUID'];
+		foreach ($modlos_users as $modlos_user) {
+			$moodle_uuid = $modlos_user['UUID'];
 			if (!array_key_exists($moodle_uuid, $opsim_users)) {
-				$mdlos_user['state'] &= AVATAR_STATE_INACTIVE;
-				mdlopensim_delete_usertable($mdlos_user);
+				$modlos_user['state'] &= AVATAR_STATE_INACTIVE;
+				modlos_delete_usertable($modlos_user);
 			}
 		}
 
 
 		// Sloodle連携
-		if ($CFG->mdlopnsm_cooperate_sloodle) {
+		if ($CFG->modlos_cooperate_sloodle) {
 			$sloodles = get_records(MDL_SLOODLE_USERS_TBL);
 			if (is_array($sloodles)) {
 				foreach($sloodles as $sloodle) {
-					$mdl = get_record('mdlos_users', 'uuid', $sloodle->uuid);
+					$mdl = get_record('modlos_users', 'uuid', $sloodle->uuid);
 					if ($mdl!=null) {
-						if (($mdl->user_id>0 and $CFG->mdlopnsm_priority_sloodle) or ($mdl->user_id==0)) { 
+						if (($mdl->user_id>0 and $CFG->modlos_priority_sloodle) or ($mdl->user_id==0)) { 
 							$mdl->user_id = $sloodle->userid;
-							update_record('mdlos_users', $mdl);
+							update_record('modlos_users', $mdl);
 						}
 					}
 				}
@@ -152,11 +152,11 @@ class  SynchroDataBase
 	{
         global $CFG;
 
-        $grid_name  	  = $CFG->mdlopnsm_grid_name;
-		$synchro_db_ttl   = get_string("mdlos_synchro_db", 		 "block_mdlopensim");
-		$synchronized_msg = get_string("mdlos_synchronized", 	 "block_mdlopensim");
-		$synchro_submit	  = get_string("mdlos_synchro_submit", 	 "block_mdlopensim");
-		$content		  = "<center>".get_string("mdlos_synchro_contents", "block_mdlopensim")."</center>";
+        $grid_name  	  = $CFG->modlos_grid_name;
+		$synchro_db_ttl   = get_string("modlos_synchro_db", 		 "block_modlos");
+		$synchronized_msg = get_string("modlos_synchronized", 	 "block_modlos");
+		$synchro_submit	  = get_string("modlos_synchro_submit", 	 "block_modlos");
+		$content		  = "<center>".get_string("modlos_synchro_contents", "block_modlos")."</center>";
 
 		include(CMS_MODULE_PATH."/admin/html/synchro.html");
 	}

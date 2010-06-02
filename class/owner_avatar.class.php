@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
+require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
 
 
@@ -40,9 +40,9 @@ class  OwnerAvatar
 		require_login($course_id);
 
 		// for HTTPS
-		$use_https = $CFG->mdlopnsm_use_https;
+		$use_https = $CFG->modlos_use_https;
 		if ($use_https) {
-			$https_url = $CFG->mdlopnsm_https_url;
+			$https_url = $CFG->modlos_https_url;
 			if ($https_url!="") $module_url = $https_url.CMS_DIR_NAME;
 			else 				$module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
 		}
@@ -54,37 +54,37 @@ class  OwnerAvatar
 		$this->course_id   = $course_id;
 		$this->hasPermit   = hasPermit($course_id);
 		$this->action_url  = $module_url."/actions/owner_avatar.php";
-		$this->use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
-		$this->pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
+		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
+		$this->pri_sloodle = $CFG->modlos_priority_sloodle;
 		$this->user_id	   = $USER->id;
 		$this->ownername   = get_display_username($USER->firstname, $USER->lastname);
 
 		// Number of Avatars Check
-		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
-		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		$this->avatars_num = modlos_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 
 		if ($isAvatarMax) {
-			error(get_string('mdlos_over_max_avatars', 'block_mdlopensim')." ($this->avatars_num >= $this->max_avatars)", $this->return_url);
+			error(get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)", $this->return_url);
 		}
 
 
 		// get UUID from POST or GET
 		$this->UUID = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($this->UUID)) {
-			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($this->UUID)", $this->return_url);
+			error(get_string('modlos_invalid_uuid', 'block_modlos')." ($this->UUID)", $this->return_url);
 		}
 
-		// check Mdlopensim DB
-		$avatar = mdlopensim_get_avatar_info($this->UUID);
+		// check Modlos DB
+		$avatar = modlos_get_avatar_info($this->UUID);
 		if ($avatar==null) {
-			error(get_string('mdlos_not_exist_uuid', 'block_mdlopensim')." ($this->UUID)", $this->return_url);
+			error(get_string('modlos_not_exist_uuid', 'block_modlos')." ($this->UUID)", $this->return_url);
 		}
 		if ($avatar['uid']!=0) {
-			error(get_string('mdlos_owner_forbidden', 'block_mdlopensim')." (User ID is not 0)", $this->return_url);
+			error(get_string('modlos_owner_forbidden', 'block_modlos')." (User ID is not 0)", $this->return_url);
 		}
 		if (!($avatar['state']&AVATAR_STATE_SYNCDB)) {
-			error(get_string('mdlos_owner_forbidden', 'block_mdlopensim')." (not Acrive)", $this->return_url);
+			error(get_string('modlos_owner_forbidden', 'block_modlos')." (not Acrive)", $this->return_url);
 		}
 		$this->firstname = $avatar['firstname'];
 		$this->lastname  = $avatar['lastname'];
@@ -100,18 +100,18 @@ class  OwnerAvatar
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
 				 $this->hasError = true;
-				 $this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				 $this->errorMsg[] = get_string("modlos_sesskey_error", "block_modlos");
 			}
 
 			$this->passwd  = optional_param('passwd', '', PARAM_TEXT);
 			if (!isAlphabetNumericSpecial($this->passwd)) {
 				 $this->hasError = true;
-				 $this->errorMsg[] = get_string("mdlos_invalid_passwd", "block_mdlopensim")." ($this->passwd)";
+				 $this->errorMsg[] = get_string("modlos_invalid_passwd", "block_modlos")." ($this->passwd)";
 			}
 			$posted_uid = optional_param('userid', '', PARAM_INT);
 			if (!isNumeric($posted_uid)) {
 				 $this->hasError = true;
-				 $this->errorMsg[] = get_string("mdlos_invalid_uid", "block_mdlopensim")." ($posted_uid)";
+				 $this->errorMsg[] = get_string("modlos_invalid_uid", "block_modlos")." ($posted_uid)";
 			}
 			if ($this->hasError) return false;
 
@@ -119,7 +119,7 @@ class  OwnerAvatar
 			$this->updated_owner = $this->updateOwner($posted_uid);
 			if (!$this->updated_owner) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_avatar_gotted_error", "block_mdlopensim");
+				$this->errorMsg[] = get_string("modlos_avatar_gotted_error", "block_modlos");
 				return false;
 			}
 		}
@@ -132,19 +132,19 @@ class  OwnerAvatar
 	{
 		global $CFG;
 
-		$grid_name 	  = $CFG->mdlopnsm_grid_name;
+		$grid_name 	  = $CFG->modlos_grid_name;
 		$showPostForm = !$this->updated_owner or $this->hasError;
 
-		$avatar_own_ttl		= get_string('mdlos_avatar_own',	'block_mdlopensim');
-		$firstname_ttl		= get_string('mdlos_firstname',		'block_mdlopensim');
-		$lastname_ttl		= get_string('mdlos_lastname',		'block_mdlopensim');
-		$passwd_ttl		 	= get_string('mdlos_password',	  	'block_mdlopensim');
-		$avatar_own_ttl		= get_string('mdlos_avatar_own_ttl','block_mdlopensim');
-		$reset_ttl			= get_string('mdlos_reset_ttl',		'block_mdlopensim');
-		$return_ttl			= get_string('mdlos_return_ttl',	'block_mdlopensim');
-		$uuid_ttl			= get_string('mdlos_uuid',			'block_mdlopensim');
-		$ownername_ttl		= get_string('mdlos_ownername',	 	'block_mdlopensim');
-		$avatar_get			= get_string('mdlos_avatar_gotted',	'block_mdlopensim');
+		$avatar_own_ttl	= get_string('modlos_avatar_own',	 'block_modlos');
+		$firstname_ttl	= get_string('modlos_firstname',	 'block_modlos');
+		$lastname_ttl	= get_string('modlos_lastname',		 'block_modlos');
+		$passwd_ttl		= get_string('modlos_password',	  	 'block_modlos');
+		$avatar_own_ttl	= get_string('modlos_avatar_own_ttl','block_modlos');
+		$reset_ttl		= get_string('modlos_reset_ttl',	 'block_modlos');
+		$return_ttl		= get_string('modlos_return_ttl',	 'block_modlos');
+		$uuid_ttl		= get_string('modlos_uuid',			 'block_modlos');
+		$ownername_ttl	= get_string('modlos_ownername',	 'block_modlos');
+		$avatar_get		= get_string('modlos_avatar_gotted', 'block_modlos');
 
 		include(CMS_MODULE_PATH."/html/owner.html");
 	}
@@ -156,7 +156,7 @@ class  OwnerAvatar
 		if ($posted_uid==0) return false;
 		if ($posted_uid!=$this->user_id) {
 			$this->hasError = true;
-			$this->errorMsg[] = get_string("mdlos_mismatch_uid", "block_mdlopensim")." ($posted_uid != $this->user_id)";
+			$this->errorMsg[] = get_string("modlos_mismatch_uid", "block_modlos")." ($posted_uid != $this->user_id)";
 			return false;
 		}
 
@@ -166,7 +166,7 @@ class  OwnerAvatar
 		if ($passwd['passwordSalt']=="") {
 			if ($chkpass!=$passwd['passwordHash']) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_mismatch_passwd", "block_mdlopensim")." (....passwordSalt is null)";
+				$this->errorMsg[] = get_string("modlos_mismatch_passwd", "block_modlos")." (....passwordSalt is null)";
 				return false;
 			}
 		}
@@ -174,7 +174,7 @@ class  OwnerAvatar
 			$chkpass = md5($chkpass.":".$passwd['passwordSalt']);
 			if ($chkpass!=$passwd['passwordHash']) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_mismatch_passwd", "block_mdlopensim");
+				$this->errorMsg[] = get_string("modlos_mismatch_passwd", "block_modlos");
 				return false;
 			}
 		}
@@ -183,7 +183,7 @@ class  OwnerAvatar
 		$this->avatar['time'] = time();
 
 		/////
-		$ret = mdlopensim_set_avatar_info($this->avatar, $this->use_sloodle);
+		$ret = modlos_set_avatar_info($this->avatar, $this->use_sloodle);
 		return $ret;
 	}
 

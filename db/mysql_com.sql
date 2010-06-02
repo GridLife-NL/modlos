@@ -3,7 +3,7 @@
 -- for Basic
 -- --------------------------------------------------------
 
-CREATE TABLE `block_mdlos_users` (
+CREATE TABLE `block_modlos_users` (
 	`UUID` 		varchar(36)  NOT NULL default '',
 	`uid`       mediumint(8) unsigned NOT NULL default 0,
 	`firstname` varchar(32)  NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE `block_mdlos_users` (
 ) TYPE=MyISAM;
 
 
-CREATE TABLE `block_mdlos_banned` (
+CREATE TABLE `block_modlos_banned` (
 	`UUID` 		varchar(36)  NOT NULL,
   	`agentinfo` varchar(255) NOT NULL,
 	`time` 		varchar(255) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE `block_mdlos_banned` (
 ) TYPE=MyISAM;
 
 
-CREATE TABLE `block_mdlos_codetable` (
+CREATE TABLE `block_modlos_codetable` (
 	`UUID` 	varchar(36)  NOT NULL,
 	`code` 	varchar(255) NOT NULL,
 	`info` 	varchar(255) NOT NULL,
@@ -33,14 +33,14 @@ CREATE TABLE `block_mdlos_codetable` (
 ) TYPE=MyISAM;
 
 
-CREATE TABLE `block_mdlos_lastnames` (
+CREATE TABLE `block_modlos_lastnames` (
 	`lastname` 	varchar(255) NOT NULL,
 	`state` 	varchar(5)   NOT NULL default '1',
 	PRIMARY KEY  (`lastname`)
 ) TYPE=MyISAM;
 
 
-INSERT INTO `block_mdlos_lastnames` (`lastname`, `state`) VALUES 
+INSERT INTO `block_modlos_lastnames` (`lastname`, `state`) VALUES 
 ('Infosys', '1'),
 ('Manage', '1'),
 ('Env', '1'),
@@ -55,17 +55,17 @@ INSERT INTO `block_mdlos_lastnames` (`lastname`, `state`) VALUES
 -- for Economy
 -- --------------------------------------------------------
 
-CREATE TABLE `block_mdlos_economy_money` (
+CREATE TABLE `block_modlos_economy_money` (
 	`id` 				INT AUTO_INCREMENT NOT NULL,
 	`CentsPerMoneyUnit` INT NOT NULL DEFAULT '0',
 	PRIMARY KEY (id)
 ) ENGINE=InnoDB ROW_FORMAT=DEFAULT;
 
 
-INSERT INTO `block_mdlos_economy_money` (`id`, `CentsPerMoneyUnit`) values (1, 0.5);
+INSERT INTO `block_modlos_economy_money` (`id`, `CentsPerMoneyUnit`) values (1, 0.5);
 
 
-CREATE TABLE `block_mdlos_economy_transactions` (
+CREATE TABLE `block_modlos_economy_transactions` (
 	`id` 		int(11) NOT NULL auto_increment,
 	`sourceId` 	varchar(36) NOT NULL,
 	`destId` 	varchar(36) NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE `block_mdlos_economy_transactions` (
 -- Table structure for table `group_active`
 -- 
 
-CREATE TABLE `block_mdlos_group_active` (
+CREATE TABLE `block_modlos_group_active` (
 	`AgentID` 		varchar(64) NOT NULL default '',
 	`ActiveGroupID` varchar(64) NOT NULL default '',
 	PRIMARY KEY  	(`AgentID`)
@@ -102,7 +102,7 @@ CREATE TABLE `block_mdlos_group_active` (
 -- Table structure for table `group_list`
 -- 
 
-CREATE TABLE `block_mdlos_group_list` (
+CREATE TABLE `block_modlos_group_list` (
 	`GroupID` 		varchar(64) NOT NULL default '',
 	`Name` 			varchar(255) NOT NULL default '',
 	`Charter` 		text NOT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE `block_mdlos_group_list` (
 -- Table structure for table `group_invite`
 -- 
 
-CREATE TABLE `block_mdlos_group_invite` (
+CREATE TABLE `block_modlos_group_invite` (
 	`InviteID` 	varchar(64) NOT NULL default '',
 	`GroupID` 	varchar(64) NOT NULL default '',
 	`RoleID` 	varchar(64) NOT NULL default '',
@@ -141,7 +141,7 @@ CREATE TABLE `block_mdlos_group_invite` (
 -- Table structure for table `group_membership`
 -- 
 
-CREATE TABLE `block_mdlos_group_membership` (
+CREATE TABLE `block_modlos_group_membership` (
 	`GroupID` 		 varchar(64) NOT NULL default '',
 	`AgentID` 		 varchar(64) NOT NULL default '',
 	`SelectedRoleID` varchar(64) NOT NULL default '',
@@ -157,7 +157,7 @@ CREATE TABLE `block_mdlos_group_membership` (
 -- Table structure for table `group_notice`
 -- 
 
-CREATE TABLE `block_mdlos_group_notice` (
+CREATE TABLE `block_modlos_group_notice` (
 	`GroupID` 	varchar(64) NOT NULL default '',
 	`NoticeID` 	varchar(64) NOT NULL default '',
 	`Timestamp` int(10) unsigned NOT NULL default '0',
@@ -175,7 +175,7 @@ CREATE TABLE `block_mdlos_group_notice` (
 -- Table structure for table `group_rolemembership`
 -- 
 
-CREATE TABLE `block_mdlos_group_rolemembership` (
+CREATE TABLE `block_modlos_group_rolemembership` (
 	`GroupID` 	varchar(64) NOT NULL default '',
 	`RoleID` 	varchar(64) NOT NULL default '',
 	`AgentID` 	varchar(64) NOT NULL default '',
@@ -188,7 +188,7 @@ CREATE TABLE `block_mdlos_group_rolemembership` (
 -- Table structure for table `role`
 -- 
 
-CREATE TABLE `block_mdlos_group_role` (
+CREATE TABLE `block_modlos_group_role` (
 	`GroupID` 	varchar(64) NOT NULL default '',
 	`RoleID` 	varchar(64) NOT NULL default '',
 	`Name` 		varchar(255) NOT NULL default '',
@@ -204,7 +204,7 @@ CREATE TABLE `block_mdlos_group_role` (
 -- for Offline Message
 -- --------------------------------------------------------
 
-CREATE TABLE `block_mdlos_offline_message` (
+CREATE TABLE `block_modlos_offline_message` (
 	`to_uuid`		varchar(36) NOT NULL,
 	`from_uuid`		varchar(36) NOT NULL,
 	`message`		text NOT NULL,
@@ -217,7 +217,7 @@ CREATE TABLE `block_mdlos_offline_message` (
 -- for Profile
 -- --------------------------------------------------------
 
-CREATE TABLE `block_mdlos_prof_classifieds` (
+CREATE TABLE `block_modlos_prof_classifieds` (
   `classifieduuid` 	char(36) NOT NULL,
   `creatoruuid` 	char(36) NOT NULL,
   `creationdate` 	int(20) NOT NULL,
@@ -237,7 +237,7 @@ CREATE TABLE `block_mdlos_prof_classifieds` (
 ) TYPE=MyISAM;
 
 
-CREATE TABLE `block_mdlos_prof_usernotes` (
+CREATE TABLE `block_modlos_prof_usernotes` (
   `id`        		int(11) NOT NULL auto_increment,
   `useruuid` 		varchar(36) NOT NULL,
   `targetuuid` 		varchar(36) NOT NULL,
@@ -247,7 +247,7 @@ CREATE TABLE `block_mdlos_prof_usernotes` (
 ) TYPE=MyISAM;
 
 
-CREATE TABLE `block_mdlos_prof_userpicks` (
+CREATE TABLE `block_modlos_prof_userpicks` (
   `pickuuid` 		varchar(36) NOT NULL,
   `creatoruuid` 	varchar(36) NOT NULL,
   `toppick` 		enum('true','false') NOT NULL,
@@ -265,7 +265,7 @@ CREATE TABLE `block_mdlos_prof_userpicks` (
 ) TYPE=MyISAM;
 
 
-CREATE TABLE `block_mdlos_prof_userprofile` (
+CREATE TABLE `block_modlos_prof_userprofile` (
   `useruuid` 			 varchar(36) NOT NULL,
   `profilePartner` 		 varchar(36) NOT NULL,
   `profileImage` 		 varchar(36) NOT NULL,
@@ -284,7 +284,7 @@ CREATE TABLE `block_mdlos_prof_userprofile` (
 ) TYPE=MyISAM;
 
 
-CREATE TABLE `block_mdlos_prof_usersettings` (
+CREATE TABLE `block_modlos_prof_usersettings` (
   `useruuid` 		varchar(36) NOT NULL,
   `imviaemail` 		enum('true','false') NOT NULL,
   `visible` 		enum('true','false') NOT NULL,

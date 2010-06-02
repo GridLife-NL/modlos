@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
+require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
 
 
@@ -52,15 +52,15 @@ class  DeleteAvatar
 		$this->return_url = CMS_MODULE_URL."/actions/avatars_list.php". $course_param;
 		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
-			error(get_string('mdlos_invalid_uuid', 'block_mdlopensim')." ($uuid)", $this->return_url);
+			error(get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)", $this->return_url);
 		}
 		$this->UUID	= $uuid;
 
-		$this->use_sloodle = $CFG->mdlopnsm_cooperate_sloodle;
-		$this->pri_sloodle = $CFG->mdlopnsm_priority_sloodle;
+		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
+		$this->pri_sloodle = $CFG->modlos_priority_sloodle;
 
-		// get uid from Mdlopensim and Sloodle DB
-		$avatar = mdlopensim_get_avatar_info($this->UUID, $this->use_sloodle, $this->pri_sloodle);
+		// get uid from Modlos and Sloodle DB
+		$avatar = modlos_get_avatar_info($this->UUID, $this->use_sloodle, $this->pri_sloodle);
 		$this->uid	  	= $avatar['uid'];
 		$this->state  	= $avatar['state'];
 		$this->hmregion = $avatar['hmregion'];
@@ -75,15 +75,15 @@ class  DeleteAvatar
 
 		$this->hasPermit = hasPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			error(get_string('mdlos_access_forbidden', 'block_mdlopensim'), $this->return_url);
+			error(get_string('modlos_access_forbidden', 'block_modlos'), $this->return_url);
 		}
 
 		if (!($this->state&AVATAR_STATE_INACTIVE)) {
-			error(get_string('mdlos_active_avatar', 'block_mdlopensim'),  $this->return_url);
+			error(get_string('modlos_active_avatar', 'block_modlos'),  $this->return_url);
 		}
 
-		$this->avatars_num = mdlopensim_get_avatars_num($USER->id);
-		$this->max_avatars = $CFG->mdlopnsm_max_own_avatars;
+		$this->avatars_num = modlos_get_avatars_num($USER->id);
+		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 	}
 
@@ -94,19 +94,19 @@ class  DeleteAvatar
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_sesskey_error", "block_mdlopensim");
+				$this->errorMsg[] = get_string("modlos_sesskey_error", "block_modlos");
 			}
 
 			if ($this->hasError) return false;
 
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
-			if ($del=="") redirect($this->cancel_url, get_string('mdlos_avatar_dlt_canceled', 'block_mdlopensim'), 0);
+			if ($del=="") redirect($this->cancel_url, get_string('modlos_avatar_dlt_canceled', 'block_modlos'), 0);
 
 			//
 			$this->deleted_avatar = $this->del_avatar();
 			if (!$this->deleted_avatar) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("mdlos_opensim_delete_error", "block_mdlopensim");
+				$this->errorMsg[] = get_string("modlos_opensim_delete_error", "block_modlos");
 				return false;
 			}
 		}
@@ -119,27 +119,27 @@ class  DeleteAvatar
 	{
 		global $CFG;
 
-		$grid_name = $CFG->mdlopnsm_grid_name;
+		$grid_name = $CFG->modlos_grid_name;
 		$showPostForm = !$this->deleted_avatar or $this->hasError;
 
-		$avatar_delete_ttl	= get_string("mdlos_avatar_delete",  	"block_mdlopensim");
-		$firstname_ttl		= get_string("mdlos_firstname",  		"block_mdlopensim");
-		$lastname_ttl		= get_string("mdlos_lastname",  		"block_mdlopensim");
-		$home_region_ttl	= get_string("mdlos_home_region",  		"block_mdlopensim");
-		$status_ttl			= get_string("mdlos_status", 	 		"block_mdlopensim");
-		$not_syncdb_ttl 	= get_string("mdlos_not_syncdb",		"block_mdlopensim");
-		$active_ttl			= get_string("mdlos_active",			"block_mdlopensim");
-		$inactive_ttl		= get_string("mdlos_inactive",			"block_mdlopensim");
-		$unknown_status		= get_string("mdlos_unknown_status",	"block_mdlopensim");
-		$ownername_ttl		= get_string("mdlos_ownername",			"block_mdlopensim");
-		$delete_ttl			= get_string("mdlos_delete_ttl",		"block_mdlopensim");
-		$cancel_ttl			= get_string("mdlos_cancel_ttl",		"block_mdlopensim");
-		$return_ttl			= get_string("mdlos_return_ttl",		"block_mdlopensim");
-		$avatar_deleted		= get_string("mdlos_avatar_deleted", 	"block_mdlopensim");
-		$avatar_dlt_confrm	= get_string("mdlos_avatar_dlt_confrm", "block_mdlopensim");
-		$sloodle_ttl		= get_string('mdlos_sloodle_ttl',		'block_mdlopensim');
-		$manage_sloodle		= get_string('mdlos_manage_sloodle',	'block_mdlopensim');
-		$state_deleted		= get_string('mdlos_state_deleted',		'block_mdlopensim');
+		$avatar_delete_ttl	= get_string("modlos_avatar_delete",  	"block_modlos");
+		$firstname_ttl		= get_string("modlos_firstname",  		"block_modlos");
+		$lastname_ttl		= get_string("modlos_lastname",  		"block_modlos");
+		$home_region_ttl	= get_string("modlos_home_region",  	"block_modlos");
+		$status_ttl			= get_string("modlos_status", 	 		"block_modlos");
+		$not_syncdb_ttl 	= get_string("modlos_not_syncdb",		"block_modlos");
+		$active_ttl			= get_string("modlos_active",			"block_modlos");
+		$inactive_ttl		= get_string("modlos_inactive",			"block_modlos");
+		$unknown_status		= get_string("modlos_unknown_status",	"block_modlos");
+		$ownername_ttl		= get_string("modlos_ownername",		"block_modlos");
+		$delete_ttl			= get_string("modlos_delete_ttl",		"block_modlos");
+		$cancel_ttl			= get_string("modlos_cancel_ttl",		"block_modlos");
+		$return_ttl			= get_string("modlos_return_ttl",		"block_modlos");
+		$avatar_deleted		= get_string("modlos_avatar_deleted", 	"block_modlos");
+		$avatar_dlt_confrm	= get_string("modlos_avatar_dlt_confrm","block_modlos");
+		$sloodle_ttl		= get_string('modlos_sloodle_ttl',		'block_modlos');
+		$manage_sloodle		= get_string('modlos_manage_sloodle',	'block_modlos');
+		$state_deleted		= get_string('modlos_state_deleted',	'block_modlos');
 
 		include(CMS_MODULE_PATH."/html/delete.html");
 	}
@@ -151,24 +151,24 @@ class  DeleteAvatar
 	{
 		if (!isGUID($this->UUID)) {
 			$this->hasError = true;
-			$this->errorMsg[] = get_string("mdlos_invalid_uuid", "block_mdlopensim");
+			$this->errorMsg[] = get_string("modlos_invalid_uuid", "block_modlos");
 			return false;
 		}
 
-		// delete from Mdlopensim and Sloodle DB
+		// delete from Modlos and Sloodle DB
 		$delete_user['UUID']  = $this->UUID;
 		$delete_user['state'] = $this->state;
 
-		$ret = mdlopensim_delete_avatar_info($delete_user, $this->use_sloodle);
+		$ret = modlos_delete_avatar_info($delete_user, $this->use_sloodle);
 		if (!$ret) {
 			$this->hasError = true;
-			$this->errorMsg[] = get_string("mdlos_user_delete_error", "block_mdlopensim");
+			$this->errorMsg[] = get_string("modlos_user_delete_error", "block_modlos");
 		}
 
-		// delete from Mdlopensim Group DB
-		mdlopensim_delete_banneddb($this->UUID);
-		mdlopensim_delete_groupdb ($this->UUID, false);
-		mdlopensim_delete_profiles($this->UUID);
+		// delete from Modlos Group DB
+		modlos_delete_banneddb($this->UUID);
+		modlos_delete_groupdb ($this->UUID, false);
+		modlos_delete_profiles($this->UUID);
 
 		// delete form OpenSim
 		$ret = opensim_delete_avatar($this->UUID);

@@ -6,11 +6,11 @@ require_once(realpath(dirname(__FILE__)."/include/config.php"));
 if (!defined('CMS_MODULE_PATH')) exit();
 
 require_once(CMS_MODULE_PATH."/include/opensim.mysql.php");
-require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
+require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
 
 
-class block_mdlopensim extends block_base 
+class block_modlos extends block_base 
 {
 	var $grid_name;
 	var $grid_status;
@@ -24,7 +24,7 @@ class block_mdlopensim extends block_base
 	{
 		global $CFG;
 
-		$this->title   = get_string('mdlopensim_menu', 'block_mdlopensim');
+		$this->title   = get_string('modlos_menu', 'block_modlos');
 		$this->version = 2010053019;
 		$this->release = '1.0.0b';
 
@@ -49,25 +49,25 @@ class block_mdlopensim extends block_base
 
 		$this->content = new stdClass;
 
-		$this->content->text = '<a href="'.CMS_MODULE_URL.'/actions/show_home.php?course='.$id.'">'.get_string('mdlos_show_home','block_mdlopensim').'</a><br />';
-		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.get_string('mdlos_world_map','block_mdlopensim').'</a><br />';
-		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('mdlos_regions_list','block_mdlopensim').'</a><br />';
+		$this->content->text = '<a href="'.CMS_MODULE_URL.'/actions/show_home.php?course='.$id.'">'.get_string('modlos_show_home','block_modlos').'</a><br />';
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.get_string('modlos_world_map','block_modlos').'</a><br />';
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
 		if (!isguest()) {
-			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list?course='.$id.'">'.get_string('mdlos_avatars_list','block_mdlopensim').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list?course='.$id.'">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';
 
 			$isAvatarMax = false;
-			$avatars_num = mdlopensim_get_avatars_num($USER->id);
+			$avatars_num = modlos_get_avatars_num($USER->id);
 			$max_avatars = $CFG->mdlopnsm_max_own_avatars;
 			if (!hasPermit($id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
 
 			if (!$isAvatarMax) {
-				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar?course='.$id.'">'.get_string('mdlos_avatar_create','block_mdlopensim').'</a><br />';
+				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar?course='.$id.'">'.get_string('modlos_avatar_create','block_modlos').'</a><br />';
 			}
 /*
 			if (isadmin()) {
 				$this->content->text.= '<hr />';
-				$this->content->text.= '<a href="'.$CFG->wwwroot.'/admin/settings.php?section=blocksettingmdlopensim">'.
-										get_string('mdlos_general_setting_menu','block_mdlopensim').'</a><br />';
+				$this->content->text.= '<a href="'.$CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos">'.
+										get_string('modlos_general_setting_menu','block_modlos').'</a><br />';
 			}
 */
 		}
@@ -81,13 +81,13 @@ class block_mdlopensim extends block_base
 		$this->region_count		= $db_state['region_count'];
 
 		$this->content->text.= "<center><b>".$this->grid_name."</b></center>";		
-		$this->content->text.= get_string('mdlos_db_status','block_mdlopensim').": ";		
+		$this->content->text.= get_string('modlos_db_status','block_modlos').": ";		
 		if ($this->grid_status) $this->content->text.= "<b><font color=\"#129212\">ONLINE</font></b><br />";		
 		else					$this->content->text.= "<b><font color=\"#ea0202\">OFFLINE</font></b><br />";		
-		$this->content->text.= get_string('mdlos_total_users','block_mdlopensim').": <b>".$this->user_count."</b><br />";		
-		$this->content->text.= get_string('mdlos_total_regions','block_mdlopensim').": <b>".$this->region_count."</b><br />";		
-		$this->content->text.= get_string('mdlos_visitors_last30days','block_mdlopensim').": <b>".$this->lastmonth_online."</b><br />";		
-		$this->content->text.= get_string('mdlos_online_now','block_mdlopensim').": <b>".$this->now_online."</b><br />";		
+		$this->content->text.= get_string('modlos_total_users','block_modlos').": <b>".$this->user_count."</b><br />";		
+		$this->content->text.= get_string('modlos_total_regions','block_modlos').": <b>".$this->region_count."</b><br />";		
+		$this->content->text.= get_string('modlos_visitors_last30days','block_modlos').": <b>".$this->lastmonth_online."</b><br />";		
+		$this->content->text.= get_string('modlos_online_now','block_modlos').": <b>".$this->now_online."</b><br />";		
 
 		$this->content->footer = '<hr /><i>Mdlopensim '.$this->release.'</i>';
 
