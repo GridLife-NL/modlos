@@ -1,29 +1,29 @@
 <?php
 /****************************************************************
- *	mdlopensim.func.php by Fumi.Iseki for Mdlopensim
+ *	modlos.func.php by Fumi.Iseki for Modlos
  *
  *
- * function  mdlopensim_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
- * function  mdlopensim_set_avatar_info($avatar, $use_sloodle=false)
- * function  mdlopensim_delete_avatar_info($avatar, $use_sloodle=false)
- * function  mdlopensim_get_avatars_num($uuid, $use_sloodle=false)
+ * function  modlos_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
+ * function  modlos_set_avatar_info($avatar, $use_sloodle=false)
+ * function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
+ * function  modlos_get_avatars_num($uuid, $use_sloodle=false)
  *
- * function  mdlopensim_insert_usertable($user)
- * function  mdlopensim_update_usertable($user)
- * function  mdlopensim_delete_usertable($user)
+ * function  modlos_insert_usertable($user)
+ * function  modlos_update_usertable($user)
+ * function  modlos_delete_usertable($user)
  *
- * function  mdlopensim_get_lastnames($sort="")
+ * function  modlos_get_lastnames($sort="")
  *
- * function  mdlopensim_delete_groupdb($uuid, $delallgrp=false)
- * function  mdlopensim_delete_groupdb_by_gpid($gpid)
- * function  mdlopensim_delete_groupdb_by_uuid($uuid)
+ * function  modlos_delete_groupdb($uuid, $delallgrp=false)
+ * function  modlos_delete_groupdb_by_gpid($gpid)
+ * function  modlos_delete_groupdb_by_uuid($uuid)
  *
- * function  mdlopensim_set_profiles($profs, $ovwrite=true)
- * function  mdlopensim_delete_profiles($uuid)
+ * function  modlos_set_profiles($profs, $ovwrite=true)
+ * function  modlos_delete_profiles($uuid)
  *
- * function  mdlopensim_activate_avatar($uuid)
- * function  mdlopensim_inactivate_avatar($uuid)
- * function  mdlopensim_delete_banneddb($uuid)
+ * function  modlos_activate_avatar($uuid)
+ * function  modlos_inactivate_avatar($uuid)
+ * function  modlos_delete_banneddb($uuid)
  *
  * function  print_tabnav($currenttab, $course, $creatable=true)
  * function  print_tabheader($currenttab, $course, $creatable=true)
@@ -41,14 +41,14 @@ require_once(CMS_MODULE_PATH."/include/opensim.mysql.php");
 
 
 //
-// for Mdlopensim and Sloodle
+// for Modlos and Sloodle
 //
 
-function  mdlopensim_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
+function  modlos_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
 {
 	if (!isGUID($uuid)) return null;
 
-	$avatar = get_record('mdlos_users', 'uuid', $uuid);		
+	$avatar = get_record('modlos_users', 'uuid', $uuid);		
 
 	$sloodle = null;
 	if ($use_sloodle) {
@@ -100,17 +100,17 @@ function  mdlopensim_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=fal
 
 
 
-function  mdlopensim_set_avatar_info($avatar, $use_sloodle=false)
+function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 {
 	if (!isGUID($avatar['UUID'])) return false;
 
-	// Mdlopensim
-	$obj = get_record('mdlos_users', 'uuid', $avatar['UUID']);		
+	// Modlos
+	$obj = get_record('modlos_users', 'uuid', $avatar['UUID']);		
 	if ($obj==null) {
-		$ret = mdlopensim_insert_usertable($avatar);
+		$ret = modlos_insert_usertable($avatar);
 	}
 	else {
-		$ret = mdlopensim_update_usertable($avatar, $obj);
+		$ret = modlos_update_usertable($avatar, $obj);
 	}
 
 	// Sloodle
@@ -144,11 +144,11 @@ function  mdlopensim_set_avatar_info($avatar, $use_sloodle=false)
 
 
 
-function  mdlopensim_delete_avatar_info($avatar, $use_sloodle=false)
+function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 {
 	if (!isGUID($avatar['UUID'])) return false;
 
-	$ret = mdlopensim_delete_usertable($avatar);
+	$ret = modlos_delete_usertable($avatar);
 
 	// Sloodle
 	if ($use_sloodle and $ret) $ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
@@ -159,11 +159,11 @@ function  mdlopensim_delete_avatar_info($avatar, $use_sloodle=false)
 
 
 
-function  mdlopensim_get_avatars_num($id, $use_sloodle=false)
+function  modlos_get_avatars_num($id, $use_sloodle=false)
 {
 	if (!isNumeric($id)) return null;
 
-	$avatars = get_records('mdlos_users', 'user_id', $id);
+	$avatars = get_records('modlos_users', 'user_id', $id);
 	if (is_array($avatars)) $num = count($avatars);
 	else $num = 0;
 
@@ -195,7 +195,7 @@ function  mdlopensim_get_avatars_num($id, $use_sloodle=false)
 //		hmregion is UUID or name of region
 //
 
-function  mdlopensim_insert_usertable($user)
+function  modlos_insert_usertable($user)
 {
 	if (!isGUID($user['UUID'])) return false;
 
@@ -219,7 +219,7 @@ function  mdlopensim_insert_usertable($user)
 		$insobj->hmregion = $user['hmregion'];
 	}
 
-	$ret = insert_record('mdlos_users', $insobj);
+	$ret = insert_record('modlos_users', $insobj);
 
 	return $ret;
 }
@@ -229,12 +229,12 @@ function  mdlopensim_insert_usertable($user)
 //
 // update (Moodle's)uid, hmregion, state, time of users (Moodle DB).
 //
-function  mdlopensim_update_usertable($user, $updobj=null)
+function  modlos_update_usertable($user, $updobj=null)
 {
 	if (!isGUID($user['UUID'])) return false;
 
 	if ($updobj==null) {
-		$updobj = get_record('mdlos_users', 'uuid', $user['UUID']);		
+		$updobj = get_record('modlos_users', 'uuid', $user['UUID']);		
 		if ($updobj==null) return false;
 	}
 
@@ -253,7 +253,7 @@ function  mdlopensim_update_usertable($user, $updobj=null)
 		$updobj->hmregion = $user['hmregion'];
 	}
 
-	$ret = update_record('mdlos_users', $updobj);
+	$ret = update_record('modlos_users', $updobj);
 
 	return $ret;
 }
@@ -261,16 +261,16 @@ function  mdlopensim_update_usertable($user, $updobj=null)
 
 
 
-function  mdlopensim_delete_usertable($user)
+function  modlos_delete_usertable($user)
 {
 	if ($user['id']=="" and !isGUID($user['UUID'])) return false;
 	if (!($user['state']&AVATAR_STATE_INACTIVE)) return false;		// active
 
 	if ($user['id']!="") {
-		$ret = delete_records('mdlos_users',   'id', $user['id']);
+		$ret = delete_records('modlos_users',   'id', $user['id']);
 	}
 	else {
-		$ret = delete_records('mdlos_users', 'uuid', $user['UUID']);
+		$ret = delete_records('modlos_users', 'uuid', $user['UUID']);
 	}
 
 	if (!$ret) return false;
@@ -284,11 +284,11 @@ function  mdlopensim_delete_usertable($user)
 // Last Names
 //
 
-function  mdlopensim_get_lastnames($sort="")
+function  modlos_get_lastnames($sort="")
 {
 	$lastnames = array();
 
-	$lastns = get_records("mdlos_lastnames", 'state', AVATAR_LASTN_ACTIVE, $sort, 'lastname');
+	$lastns = get_records("modlos_lastnames", 'state', AVATAR_LASTN_ACTIVE, $sort, 'lastname');
 	foreach ($lastns as $lastn) {
 		$lastnames[] = $lastn->lastname;
 	}
@@ -304,9 +304,9 @@ function  mdlopensim_get_lastnames($sort="")
 // Group DB
 //
 
-function  mdlopensim_delete_groupdb($uuid, $delallgrp=false)
+function  modlos_delete_groupdb($uuid, $delallgrp=false)
 {
-	$ret = mdlopensim_delete_groupdb_by_uuid($uuid);
+	$ret = modlos_delete_groupdb_by_uuid($uuid);
 	if (!$ret) return false;
 
 	if ($delallgrp) {
@@ -314,7 +314,7 @@ function  mdlopensim_delete_groupdb($uuid, $delallgrp=false)
 		if ($groupobjs==null) return false;
 
 		foreach($groupobjs as $groupdata) {
-			$ret = mdlopensim_delete_groupdb_by_gpid($groupdata->GroupID);
+			$ret = modlos_delete_groupdb_by_gpid($groupdata->GroupID);
 			if (!$ret) return false;
 		}
 	}
@@ -324,7 +324,7 @@ function  mdlopensim_delete_groupdb($uuid, $delallgrp=false)
 
 
 
-function  mdlopensim_delete_groupdb_by_uuid($uuid)
+function  modlos_delete_groupdb_by_uuid($uuid)
 {
 	delete_records(MDL_XMLGROUP_ACTIVE_TBL, 	'agentid', $uuid);
 	delete_records(MDL_XMLGROUP_INVITE_TBL, 	'agentid', $uuid);
@@ -336,7 +336,7 @@ function  mdlopensim_delete_groupdb_by_uuid($uuid)
 
 
 
-function  mdlopensim_delete_groupdb_by_gpid($gpid)
+function  modlos_delete_groupdb_by_gpid($gpid)
 {
 	delete_records(MDL_XMLGROUP_ACTIVE_TBL, 	'activegroupid', $gpid);
 	delete_records(MDL_XMLGROUP_LIST_TBL, 		'groupid', $gpid);
@@ -356,7 +356,7 @@ function  mdlopensim_delete_groupdb_by_gpid($gpid)
 //
 
 // called from synchro.class.php
-function  mdlopensim_set_profiles($profs, $ovwrite=true)
+function  modlos_set_profiles($profs, $ovwrite=true)
 {
 	foreach($profs as $prof) {
 		if ($prof['UUID']!="") {
@@ -417,7 +417,7 @@ function  mdlopensim_set_profiles($profs, $ovwrite=true)
 
 
 
-function  mdlopensim_delete_profiles($uuid)
+function  modlos_delete_profiles($uuid)
 {
 	delete_records(MDL_PROFILE_USERPROFILE_TBL,	'useruuid',    $uuid);
 	delete_records(MDL_PROFILE_USERSETTINGS_TBL,'useruuid',    $uuid);
@@ -435,22 +435,22 @@ function  mdlopensim_delete_profiles($uuid)
 //
 
 // Active/Inactive Avatar
-function  mdlopensim_activate_avatar($uuid)
+function  modlos_activate_avatar($uuid)
 {
-	$ban = get_record('mdlos_banned', 'uuid', $uuid);
+	$ban = get_record('modlos_banned', 'uuid', $uuid);
 	if (!$ban) return false;
 
 	$ret = opensim_set_password($uuid, $ban->agentinfo);
 	if (!$ret) return false;
 
-	$ret = delete_records('mdlos_banned', 'uuid', $uuid);
+	$ret = delete_records('modlos_banned', 'uuid', $uuid);
 	if (!$ret) return false;
 	return true;
 }
 
 
 
-function  mdlopensim_inactivate_avatar($uuid)
+function  modlos_inactivate_avatar($uuid)
 {
 	$passwd = opensim_get_password($uuid);
 	if ($passwd==null) return false;
@@ -461,20 +461,20 @@ function  mdlopensim_inactivate_avatar($uuid)
 	$insobj->uuid 	   = $uuid;
 	$insobj->agentinfo = $passwdhash;
 	$insobj->time 	   = time();
-	$ret = insert_record('mdlos_banned', $insobj);
+	$ret = insert_record('modlos_banned', $insobj);
 	if (!$ret) return false;
 
 	$ret = opensim_set_password($uuid, "invalid_password");
-	if (!$ret) mdlopensim_delete_banneddb($uuid);
+	if (!$ret) modlos_delete_banneddb($uuid);
 
 	return $ret;
 }
 
 
 
-function  mdlopensim_delete_banneddb($uuid)
+function  modlos_delete_banneddb($uuid)
 {
-	$ret = delete_records('mdlos_banned', 'uuid', $uuid);
+	$ret = delete_records('modlos_banned', 'uuid', $uuid);
 	if (!$ret) return false;
 	return true;
 }
@@ -502,38 +502,38 @@ function  print_tabnav($currenttab, $course, $creatable=true)
 	///////
 	$toprow = array();
 	$toprow[] = new tabobject('show_home', CMS_MODULE_URL.'/actions/show_home.php'.$course_param, 
-																	'<b>'.get_string('mdlos_show_home','block_mdlopensim').'</b>');
+																	'<b>'.get_string('modlos_show_home','block_modlos').'</b>');
 	$toprow[] = new tabobject('map_action', CMS_MODULE_URL.'/actions/map_action.php'.$course_param, 
-																	'<b>'.get_string('mdlos_world_map','block_mdlopensim').'</b>');
+																	'<b>'.get_string('modlos_world_map','block_modlos').'</b>');
 	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$course_param, 
-																	'<b>'.get_string('mdlos_regions_list','block_mdlopensim').'</b>');
+																	'<b>'.get_string('modlos_regions_list','block_modlos').'</b>');
 	if (!isGuest()) {
 		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param, 
-																	'<b>'.get_string('mdlos_avatars_list','block_mdlopensim').'</b>');
+																	'<b>'.get_string('modlos_avatars_list','block_modlos').'</b>');
 		if ($creatable) {
 			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $course_param, 
-																	'<b>'.get_string('mdlos_avatar_create','block_mdlopensim').'</b>');
+																	'<b>'.get_string('modlos_avatar_create','block_modlos').'</b>');
 		}
 	}
 
 	if ($hasPermit) {
-		if ($CFG->mdlopnsm_activate_lastname) {
+		if ($CFG->modlos_activate_lastname) {
 			$toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/actions/lastnames.php'.$course_param, 
-																	'<b>'.get_string('mdlos_lastnames_tab','block_mdlopensim').'</b>');
+																	'<b>'.get_string('modlos_lastnames_tab','block_modlos').'</b>');
 		}
 		$toprow[] = new tabobject('synchrodb', CMS_MODULE_URL.'/admin/actions/synchrodb.php'.$course_param, 
-																	'<b>'.get_string('mdlos_synchro_tab','block_mdlopensim').'</b>');
+																	'<b>'.get_string('modlos_synchro_tab','block_modlos').'</b>');
 		if (isadmin()) {
-			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmdlopensim', 
-																	'<b>'.get_string('mdlos_general_setting_tab','block_mdlopensim').'</b>');
+			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos', 
+																	'<b>'.get_string('modlos_general_setting_tab','block_modlos').'</b>');
 		}
 	}
 
 	if ($course_id>0) {
-		$toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, '<b>'.get_string('mdlos_return_tab', 'block_mdlopensim').'</b>');
+		$toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, '<b>'.get_string('modlos_return_tab', 'block_modlos').'</b>');
 	}
 	else {
-		$toprow[] = new tabobject('', $CFG->wwwroot, '<b>'.get_string('mdlos_return_tab', 'block_mdlopensim').'</b>');
+		$toprow[] = new tabobject('', $CFG->wwwroot, '<b>'.get_string('modlos_return_tab', 'block_modlos').'</b>');
 	}
 
 	$tabs = array($toprow);
@@ -551,18 +551,18 @@ function  print_tabheader($currenttab, $course, $creatable=true)
 	// Print Navi Header
 	if (empty($course)) {
 		// TOP Page
-		print_header(get_string('mdlopensim','block_mdlopensim'), " ",
-					 get_string('mdlopensim','block_mdlopensim'), "", "", true, "&nbsp;", navmenu(NULL));
+		print_header(get_string('modlos','block_modlos'), " ",
+					 get_string('modlos','block_modlos'), "", "", true, "&nbsp;", navmenu(NULL));
 	}
 	else {
 		if ($course->category) {
-			print_header("$course->shortname: ".get_string('mdlopensim','block_mdlopensim'), $course->fullname,
+			print_header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
 					 '<a href="'.$CFG->wwwroot."/course/view.php?id={$course->id}\">$course->shortname</a> -> ".
-					 get_string('mdlopensim','block_mdlopensim'), "", "", true, "&nbsp;", navmenu($course));
+					 get_string('modlos','block_modlos'), "", "", true, "&nbsp;", navmenu($course));
 		}
 		else {
-			print_header("$course->shortname: ".get_string('mdlopensim','block_mdlopensim'), $course->fullname,
-					 get_string('mdlopensim','block_mdlopensim'), "", "", true, "&nbsp;", navmenu($course));
+			print_header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
+					 get_string('modlos','block_modlos'), "", "", true, "&nbsp;", navmenu($course));
 		}
 	}
 

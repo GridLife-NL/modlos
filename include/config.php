@@ -18,11 +18,11 @@ $GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
 
 
 // for OpenSim DB
-define('OPENSIM_DB_HOST', $CFG->mdlopnsm_sql_server_name);
-define('OPENSIM_DB_NAME', $CFG->mdlopnsm_sql_db_name);
-define('OPENSIM_DB_USER', $CFG->mdlopnsm_sql_db_user);
-define('OPENSIM_DB_PASS', $CFG->mdlopnsm_sql_db_pass);
-define('OPENSIM_HMREGION',$CFG->mdlopnsm_home_region);
+define('OPENSIM_DB_HOST', $CFG->modlos_sql_server_name);
+define('OPENSIM_DB_NAME', $CFG->modlos_sql_db_name);
+define('OPENSIM_DB_USER', $CFG->modlos_sql_db_user);
+define('OPENSIM_DB_PASS', $CFG->modlos_sql_db_pass);
+define('OPENSIM_HMREGION',$CFG->modlos_home_region);
 
 
 // for CMS/LMS DB
@@ -31,7 +31,7 @@ define('CMS_DB_NAME',     $CFG->dbname);
 define('CMS_DB_USER',     $CFG->dbuser);
 define('CMS_DB_PASS',     $CFG->dbpass);
 
-define('MDL_DB_PREFIX',   'mdlos_');
+define('MDL_DB_PREFIX',   'modlos_');
 
 
 // SQL DB Table definition
@@ -68,8 +68,8 @@ define('XMLGROUP_NOTICE_TBL',       $CFG->prefix.MDL_XMLGROUP_NOTICE_TBL);
 define('XMLGROUP_ROLE_MEMBER_TBL',  $CFG->prefix.MDL_XMLGROUP_ROLE_MEMBER_TBL);
 define('XMLGROUP_ROLE_TBL',         $CFG->prefix.MDL_XMLGROUP_ROLE_TBL);
 
-define('XMLGROUP_RKEY',    			$CFG->mdlopnsm_groupdb_read_key);
-define('XMLGROUP_WKEY',	   			$CFG->mdlopnsm_groupdb_write_key);
+define('XMLGROUP_RKEY',    			$CFG->modlos_groupdb_read_key);
+define('XMLGROUP_WKEY',	   			$CFG->modlos_groupdb_write_key);
 
 
 // Currency DB for helpers.php
@@ -77,7 +77,7 @@ define('CURRENCY_DB_HOST', 			CMS_DB_HOST);
 define('CURRENCY_DB_NAME', 			CMS_DB_NAME);
 define('CURRENCY_DB_USER', 			CMS_DB_USER);
 define('CURRENCY_DB_PASS', 			CMS_DB_PASS);
-define('CURRENCY_BANKER',  			$CFG->mdlopnsm_banker_avatar);
+define('CURRENCY_BANKER',  			$CFG->modlos_banker_avatar);
 
 define('CURRENCY_MONEY_TBL',		$CFG->prefix.MDL_CURRENCY_MONEY_TBL);
 define('CURRENCY_TRANSACTION_TBL',	$CFG->prefix.MDL_CURRENCY_TRANSACTION_TBL);

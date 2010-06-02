@@ -9,7 +9,7 @@ require_once(realpath(dirname(__FILE__)."/../../../config.php"));
 require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
+require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
 
 $isGuest = isguest();
@@ -26,7 +26,7 @@ require_login($course_id);
 $hasPermit = hasPermit($course_id);
 
 global $CFG;
-$grid_name  = $CFG->mdlopnsm_grid_name;
+$grid_name  = $CFG->modlos_grid_name;
 $action_url = CMS_MODULE_URL."/helper/sim.php";
 
 
@@ -79,9 +79,9 @@ if ($hasPermit and data_submitted() and confirm_sesskey()) {
 $voice_modes[0]['id']	 = '0';
 $voice_modes[1]['id']	 = '1';
 $voice_modes[2]['id']	 = '2';
-$voice_modes[0]['title'] = get_string("mdlos_voice_inactive_chnl","block_mdlopensim");
-$voice_modes[1]['title'] = get_string("mdlos_voice_private_chnl", "block_mdlopensim");
-$voice_modes[2]['title'] = get_string("mdlos_voice_percel_chnl",  "block_mdlopensim");
+$voice_modes[0]['title'] = get_string("modlos_voice_inactive_chnl","block_modlos");
+$voice_modes[1]['title'] = get_string("modlos_voice_private_chnl", "block_modlos");
+$voice_modes[2]['title'] = get_string("modlos_voice_percel_chnl",  "block_modlos");
 
 if ($vcmode=="") $vcmode = opensim_get_voice_mode($region);
 $vcmode_title = $voice_modes[$vcmode]['title'];
@@ -126,15 +126,15 @@ if ($avatar_num>100) $avatar_select = false;
 $course_amp = "";
 if ($course_id>0) $course_amp = "&amp;course=".$course_id;
 
-$region_info_ttl= get_string("mdlos_region_info",	 "block_mdlopensim");
-$region_ttl   	= get_string("mdlos_region",   		 "block_mdlopensim");
-$uuid_ttl     	= get_string("mdlos_uuid",    		 "block_mdlopensim");
-$change_ttl   	= get_string("mdlos_change",		 "block_mdlopensim");
+$region_info_ttl= get_string("modlos_region_info",	 "block_modlos");
+$region_ttl   	= get_string("modlos_region",   		 "block_modlos");
+$uuid_ttl     	= get_string("modlos_uuid",    		 "block_modlos");
+$change_ttl   	= get_string("modlos_change",		 "block_modlos");
 
-$coordinates  	= get_string("mdlos_coordinates", 	 "block_mdlopensim");
-$admin_user   	= get_string("mdlos_admin_user",  	 "block_mdlopensim");
-$region_owner 	= get_string("mdlos_region_owner",	 "block_mdlopensim");
-$voice_mode	  	= get_string("mdlos_voice_chat_mode","block_mdlopensim");
+$coordinates  	= get_string("modlos_coordinates", 	 "block_modlos");
+$admin_user   	= get_string("modlos_admin_user",  	 "block_modlos");
+$region_owner 	= get_string("modlos_region_owner",	 "block_modlos");
+$voice_mode	  	= get_string("modlos_voice_chat_mode","block_modlos");
 
 include(CMS_MODULE_PATH."/html/sim.html");
 

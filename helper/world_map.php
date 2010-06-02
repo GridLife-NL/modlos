@@ -10,16 +10,16 @@ $allow_zoom = true;
 
 global $CFG;
 
-$grid_name = $CFG->mdlopnsm_grid_name;
-$mapstartX = $CFG->mdlopnsm_map_start_x;
-$mapstartY = $CFG->mdlopnsm_map_start_y;
+$grid_name = $CFG->modlos_grid_name;
+$mapstartX = $CFG->modlos_map_start_x;
+$mapstartY = $CFG->modlos_map_start_y;
 
 $centerX = optional_param('ctX',  $mapstartX, PARAM_INT);
 $centerY = optional_param('ctY',  $mapstartY, PARAM_INT);
-$tsize   = optional_param('size', $CFG->mdlopnsm_map_size, PARAM_INT);
+$tsize   = optional_param('size', $CFG->modlos_map_size, PARAM_INT);
 
 
-$size = $CFG->mdlopnsm_map_size;
+$size = $CFG->modlos_map_size;
 if ($allow_zoom) {
 	if($tsize==16 or $tsize==32 or $tsize==64 or $tsize==128 or $tsize==256 or $tsize==512) {
 		$size = $tsize;

@@ -4,7 +4,7 @@ require_once(realpath(dirname(__FILE__)."/../../../config.php"));
 require_once(realpath(dirname(__FILE__)."/../include/config.php"));
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/mdlopensim.func.php");
+require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
 if (isguest()) {
 	exit('<h4>guest user is not allowed!!</h4>');
@@ -19,10 +19,10 @@ require_login($course_id);
 $hasPermit  = hasPermit($course_id);
 
 global $CFG;
-$use_sloodle= $CFG->mdlopnsm_cooperate_sloodle;
-$pri_sloodle= $CFG->mdlopnsm_priority_sloodle;
-$grid_name  = $CFG->mdlopnsm_grid_name;
-$userinfo   = $CFG->mdlopnsm_userinfo_link;
+$use_sloodle= $CFG->modlos_cooperate_sloodle;
+$pri_sloodle= $CFG->modlos_priority_sloodle;
+$grid_name  = $CFG->modlos_grid_name;
+$userinfo   = $CFG->modlos_userinfo_link;
 $action_url = CMS_MODULE_URL."/helper/agent.php";
 
 
@@ -55,8 +55,8 @@ if ($agent) {
 		//$crrntRegion  = $online['region_name'];
 	}
 
-	// Mdlopensim and Sloodle DB
-	$avatar = mdlopensim_get_avatar_info($agent, $use_sloodle, $pri_sloodle);
+	// Modlos and Sloodle DB
+	$avatar = modlos_get_avatar_info($agent, $use_sloodle, $pri_sloodle);
 	if ($avatar!=null) {
 		$userid = $avatar['uid'];
 		$state  = $avatar['state'];
@@ -77,13 +77,13 @@ if ($agent) {
 		$born = ' - ';
 	}
 	else {
-		$born = date($CFG->mdlopnsm_date_format, $created);
+		$born = date($CFG->modlos_date_format, $created);
 	}
 	if ($lastlogin==null or $lastlogin=="" or $lastlogin=='0') {
 		$lastin = ' - ';
 	}
 	else {
-		$lastin = date($CFG->mdlopnsm_date_format, $lastlogin);
+		$lastin = date($CFG->modlos_date_format, $lastlogin);
 	}
 }
 
@@ -105,24 +105,24 @@ $guid = str_replace("-", "", $UUID);
 $course_amp = "";
 if ($course_id>0) $course_amp = "&amp;course=".$course_id;
 
-$user_info_ttl  = get_string("mdlos_user_info",		"block_mdlopensim");
-$avatar_info_ttl= get_string("mdlos_avatar_info",	"block_mdlopensim");
-$user_ttl	  	= get_string("mdlos_user",			"block_mdlopensim");
-$uuid_ttl	  	= get_string("mdlos_uuid",			"block_mdlopensim");
-$status_ttl	  	= get_string("mdlos_status",		"block_mdlopensim");
-$not_syncdb_ttl	= get_string("mdlos_not_syncdb",	"block_mdlopensim");
-$active_ttl   	= get_string("mdlos_active",		"block_mdlopensim");
-$inactive_ttl	= get_string("mdlos_inactive",		"block_mdlopensim");
-$online_ttl		= get_string("mdlos_online_ttl",	"block_mdlopensim");
-$offline_ttl	= get_string("mdlos_offline_ttl",	"block_mdlopensim");
-$profile_ttl	= get_string("mdlos_profile",		"block_mdlopensim");
-$born_on_ttl  	= get_string("mdlos_born_on",		"block_mdlopensim");
-$lastlogin_ttl 	= get_string("mdlos_lastlogin",		"block_mdlopensim");
-$home_region_ttl= get_string("mdlos_home_region",	"block_mdlopensim");
-$ownername_ttl	= get_string("mdlos_ownername",		"block_mdlopensim");
-$unknown_status	= get_string("mdlos_unknown_status","block_mdlopensim");
-$has_noprofile	= get_string("mdlos_has_noprofile",	"block_mdlopensim");
-$sloodle_ttl 	= get_string('mdlos_sloodle_short',	'block_mdlopensim');
+$user_info_ttl  = get_string("modlos_user_info",	 "block_modlos");
+$avatar_info_ttl= get_string("modlos_avatar_info",	 "block_modlos");
+$user_ttl	  	= get_string("modlos_user",			 "block_modlos");
+$uuid_ttl	  	= get_string("modlos_uuid",			 "block_modlos");
+$status_ttl	  	= get_string("modlos_status",		 "block_modlos");
+$not_syncdb_ttl	= get_string("modlos_not_syncdb",	 "block_modlos");
+$active_ttl   	= get_string("modlos_active",		 "block_modlos");
+$inactive_ttl	= get_string("modlos_inactive",		 "block_modlos");
+$online_ttl		= get_string("modlos_online_ttl",	 "block_modlos");
+$offline_ttl	= get_string("modlos_offline_ttl",	 "block_modlos");
+$profile_ttl	= get_string("modlos_profile",		 "block_modlos");
+$born_on_ttl  	= get_string("modlos_born_on",		 "block_modlos");
+$lastlogin_ttl 	= get_string("modlos_lastlogin",	 "block_modlos");
+$home_region_ttl= get_string("modlos_home_region",	 "block_modlos");
+$ownername_ttl	= get_string("modlos_ownername",	 "block_modlos");
+$unknown_status	= get_string("modlos_unknown_status","block_modlos");
+$has_noprofile	= get_string("modlos_has_noprofile", "block_modlos");
+$sloodle_ttl 	= get_string('modlos_sloodle_short', 'block_modlos');
 
 
 include(CMS_MODULE_PATH."/html/agent.html");

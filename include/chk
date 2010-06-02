@@ -1,6 +1,6 @@
 php -l config.php
 php -l map_script.php
-php -l mdlopensim.func.php
+php -l modlos.func.php
 php -l moodle.func.php
 php -l mysql.func.php
 php -l opensim.mysql.php
