@@ -5,7 +5,7 @@
 //
 //
 
-require_once (realpath(dirname(__FILE__)."/../../../config.php"));
+require_once (realpath(dirname(__FILE__).'/../../../config.php'));
 
 global $CFG;
 define('CMS_DIR_NAME',    basename(dirname(dirname(__FILE__))));
@@ -133,6 +133,6 @@ $economy_source_account = CURRENCY_BANKER;
 $minimum_real = 1;
 
 // Error message if the amount is not reached:
-$low_amount_error = "You tried to buy less than the minimum amount of currency. You cannot buy currency for less than US$ %.2f.";
+$low_amount_error = 'You tried to buy less than the minimum amount of currency. You cannot buy currency for less than US$ %.2f.';
 
 ?>

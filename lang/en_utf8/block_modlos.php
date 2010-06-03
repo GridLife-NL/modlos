@@ -141,6 +141,7 @@ $string['modlos_invalid_uid']   	= 'Invalid user ID!!';
 $string['modlos_invalid_passwd']   	= 'Invalid password!!';
 $string['modlos_invalid_username']  = 'Invalid user name!!';
 $string['modlos_invalid_ownername'] = 'Invalid owner name!!';
+$string['modlos_or_notconnect_db']	= 'or perhaps, not connect to DB!';
 $string['modlos_exist_lastname']    = 'Already exist lastname!!';
 $string['modlos_not_exist_lastname']= 'Not exist lastname!!';
 $string['modlos_active_avatar'] 	= 'Avatar is Active';

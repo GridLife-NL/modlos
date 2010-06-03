@@ -4,34 +4,34 @@
 </style>
 
 
-<h2><center><?php print $grid_name."&nbsp;:&nbsp;".$avatar_own_ttl?></center></h2>
+<h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_own_ttl?></center></h2>
 <br />
 
 <?php if ($showPostForm) {?>
-  <form name="assignform" id="assignform" action="<?php print $this->action_url?>" method="POST">
+  <form name="assignform" id="assignform" action="<?php echo $this->action_url?>" method="POST">
 <?php } else {?>
-  <form name="assignform" id="assignform" action="<?php print $this->return_url?>" method="GET">
+  <form name="assignform" id="assignform" action="<?php echo $this->return_url?>" method="GET">
 <?php }?>
 
     <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 
       <tr>
-        <td width="100" class="head"><?php print $firstname_ttl?></td>
-        <td width="320" class="even"><b><?php print $this->firstname?></b></td>
+        <td width="100" class="head"><?php echo $firstname_ttl?></td>
+        <td width="320" class="even"><b><?php echo $this->firstname?></b></td>
       </tr>
 
       <tr>
-        <td class="head"><?php print $lastname_ttl?></td>
-        <td class="odd"><b><?php print $this->lastname?></b></td>
+        <td class="head"><?php echo $lastname_ttl?></td>
+        <td class="odd"><b><?php echo $this->lastname?></b></td>
       </tr>
 
       <tr>
         <?php if ($showPostForm) {?>
-          <td class="head"><?php print $passwd_ttl?></td>
+          <td class="head"><?php echo $passwd_ttl?></td>
           <td class="even"><input type="password" name="passwd" size="32" maxlength="16"  /></td>
         <?php } else {?>
-          <td class="head"><?php print $ownername_ttl?></td>
-          <td class="even"><?php print $this->ownername?></td>	
+          <td class="head"><?php echo $ownername_ttl?></td>
+          <td class="even"><?php echo $this->ownername?></td>	
         <?php }?>
       </tr>
 
@@ -40,15 +40,15 @@
     <br />
     <div align="center">
       <?php if ($showPostForm) {?>
-        <input type="hidden" name="userid"  value="<?php print $this->user_id?>" />
-        <input type="hidden" name="uuid"    value="<?php print $this->UUID?>" />
-        <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
-        <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
-        <input type="submit" value="<?php print $avatar_own_ttl?>" />&nbsp;
-        <input type="reset"  value="<?php print $reset_ttl?>" />
+        <input type="hidden" name="userid"  value="<?php echo $this->user_id?>" />
+        <input type="hidden" name="uuid"    value="<?php echo $this->UUID?>" />
+        <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+        <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+        <input type="submit" value="<?php echo $avatar_own_ttl?>" />&nbsp;
+        <input type="reset"  value="<?php echo $reset_ttl?>" />
       <?php } else {?>
-        <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
-        <input type="submit" value="<?php print $return_ttl?>" />
+        <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+        <input type="submit" value="<?php echo $return_ttl?>" />
       <?php }?>
     </div>
   </form>
@@ -56,20 +56,20 @@
 <br />
 
 
-<!-- print Messages -->
+<!-- echo Messages -->
 <hr />
 <?php if ($this->hasError) {?>
   <div align="center">
     <ul>
       <?php foreach($this->errorMsg as $mesg) {?>
-        <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
+        <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
       <?php }?>
     </ul>
   </div>
 
 <?php } else {?>
   <?php if ($this->updated_owner) {?>	<!-- !$showPostForm -->
-    <h3><font color=#1010e0><center><?php print $avatar_get?></center></font></h3>
+    <h3><font color=#1010e0><center><?php echo $avatar_get?></center></font></h3>
   <?php }?>
 <?php }?>
 <br />

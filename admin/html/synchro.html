@@ -1,27 +1,27 @@
 
-<h2><center><?php print $grid_name.":&nbsp;".$synchro_db_ttl?></center></h2>
+<h2><center><?php echo $grid_name.":&nbsp;".$synchro_db_ttl?></center></h2>
 <br />
 
 <?php if (!$this->synchronized) {?>
-  <form action="<?php print $this->action_url?>" method="POST">
+  <form action="<?php echo $this->action_url?>" method="POST">
     <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
       <tr>
-        <td width="50" class="head"><?php print $content?></td>
+        <td width="50" class="head"><?php echo $content?></td>
       </tr>
     </table>
 
     <br /><br /><br />
 
-    <input type="hidden" name="sesskey" value="<?php print sesskey() ?>" />
-    <input type="hidden" name="course"  value="<?php print $this->course_id ?>" />
+    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
     <input type="hidden" name="quest"   value="yes" />
     <center>
-      <input type="submit" value="<?php print $synchro_submit?>" /> 
+      <input type="submit" value="<?php echo $synchro_submit?>" /> 
     </center>
   </form>
 
 <?php } else {?>
-  <h3><font color=#2222FF><center><?php print $synchronized_msg ?></center></font></h3>
+  <h3><font color=#2222FF><center><?php echo $synchronized_msg ?></center></font></h3>
 <?php }?>
 <br />
 
@@ -32,7 +32,7 @@
 <?php if ($this->hasError) {?>
   <ul>
     <?php foreach($this->errorMsg as $mesg) {?>
-       <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
+       <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
     <?php }?>
   </ul>
 <?php }?>

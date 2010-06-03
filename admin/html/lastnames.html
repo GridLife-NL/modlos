@@ -1,21 +1,21 @@
 
-<h2><center><?php print $grid_name.":&nbsp;".$lastnames_ttl?></center></h2>
+<h2><center><?php echo $grid_name.":&nbsp;".$lastnames_ttl?></center></h2>
 <br />
 
 <div style="margin-left:15%; margin-right:15%">
 
-<form name="assignform" id="assignform" action="<?php print $this->action_url?>" method="POST">
+<form name="assignform" id="assignform" action="<?php echo $this->action_url?>" method="POST">
 
   <table border="2" cellpadding="0" cellspacing="0" align="center">
     <tr height=22>
       <td style="width:45%; font-size:120%; text-align:center">
-        <b><?php print $select1_title?></b>
+        <b><?php echo $select1_title?></b>
       </td>
 
       <td style="width:10%"></td>
 
       <td style="width:45%; font-size:120%; text-align:center">
-        <b><?php print $select2_title?></b>
+        <b><?php echo $select2_title?></b>
       </td>
     </tr>
 
@@ -26,7 +26,7 @@
                            document.assignform.submit_right.disabled=false;
                            document.assignform.submit_add.disabled=true;" >
           <?php foreach($select1 as $slct1) {?>
-            <option value=<?php print $slct1?> ><?php print $slct1?></option>
+            <option value=<?php echo $slct1?> ><?php echo $slct1?></option>
           <?php }?>
         </select>
         <br />
@@ -38,8 +38,8 @@
       </td>
 
       <td valign="top" style="text-align:center">
-		<input type="hidden" name="sesskey" value="<?php print sesskey() ?>" />
-		<input type="hidden" name="course"  value="<?php print $this->course_id ?>" />
+		<input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+		<input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
         <br />
         <input name="submit_left"   type="submit" id="submit_left"   value="&larr;" />
         <br />
@@ -55,7 +55,7 @@
                            document.assignform.submit_right.disabled=true;
                            document.assignform.submit_add.disabled=true;" >
           <?php foreach($select2 as $slct2) {?>
-            <option value=<?php print $slct2?> ><?php print $slct2?></option>
+            <option value=<?php echo $slct2?> ><?php echo $slct2?></option>
           <?php }?>
         </select>
       </td>
@@ -73,7 +73,7 @@
 <?php if ($this->hasError) {?>
   <ul>
     <?php foreach($this->errorMsg as $mesg) {?>
-       <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
+       <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
     <?php }?>
   </ul>
 <?php }?>

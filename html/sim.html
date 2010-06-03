@@ -20,18 +20,18 @@
 }
 </style>
 
-<title><?php print $grid_name."&nbsp;:&nbsp;".$region_info_ttl?></title>
+<title><?php echo $grid_name."&nbsp;:&nbsp;".$region_info_ttl?></title>
 </head>
 
 
 <body>
 <?php if ($hasPermit) {?>
-<form action="<?php print $action_url?>" method="POST">
+<form action="<?php echo $action_url?>" method="POST">
 <?php }?>
 
 <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td colspan="2" valign="top"><span class="styleTopTitle"><?php print $grid_name."&nbsp;:&nbsp;".$region_info_ttl?></span></td>
+    <td colspan="2" valign="top"><span class="styleTopTitle"><?php echo $grid_name."&nbsp;:&nbsp;".$region_info_ttl?></span></td>
   </tr>
   <tr>
     <td colspan="2" valign="top"><hr /></td>
@@ -41,60 +41,60 @@
 
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr><td>&nbsp;</td></tr>
-        <tr><td><span class="styleTitel"><?php print $region_ttl.":&nbsp;".$regionName?></span></td></tr>
+        <tr><td><span class="styleTitel"><?php echo $region_ttl.":&nbsp;".$regionName?></span></td></tr>
         <?php if ($hasPermit) {?>
           <tr><td>&nbsp;</td></tr>
-          <tr><td class="styleText"><b><?php print $uuid_ttl.":&nbsp;".$region?></b></td></tr>
+          <tr><td class="styleText"><b><?php echo $uuid_ttl.":&nbsp;".$region?></b></td></tr>
         <?php }?>
         <tr><td>&nbsp;</td></tr>
-        <tr><td class="styleText"><b><?php print $coordinates." X:&nbsp;".$locX."&nbsp;Y:&nbsp;".$locY?></b></td></tr>
+        <tr><td class="styleText"><b><?php echo $coordinates." X:&nbsp;".$locX."&nbsp;Y:&nbsp;".$locY?></b></td></tr>
         <tr><td class="styleText">&nbsp;</td></tr>
         <tr>
           <td class="styleText">
-            <b><?php print $admin_user?>:&nbsp;
-              <a href="<?php print CMS_MODULE_URL.'/helper/agent.php?agent='.$owner_uuid.$course_amp?>"><?php print htmlspecialchars($owner_name)?></a>
+            <b><?php echo $admin_user?>:&nbsp;
+              <a href="<?php echo CMS_MODULE_URL.'/helper/agent.php?agent='.$owner_uuid.$course_amp?>"><?php echo htmlspecialchars($owner_name)?></a>
             </b>
           </td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-          <td class="styleText"><b><?php print $voice_mode?>:&nbsp;<?php print $vcmode_title?></b></td>
+          <td class="styleText"><b><?php echo $voice_mode?>:&nbsp;<?php echo $vcmode_title?></b></td>
         </tr>
         <tr><td>&nbsp;</td></tr>
 
 <!-- need Escape -->
         <?php if ($hasPermit) {?>
           <tr><td class="styleText">
-            <!--<?php print $region_owner?>&nbsp;&nbsp; -->
+            <!--<?php echo $region_owner?>&nbsp;&nbsp; -->
             <?php if ($avatar_select) {?>
               <select wide="32" name="rgnadmin">
                 <?php foreach($avatars as $avatar) {?>
                   <?php if ($avatar['name']==$owner_name) {?>
-                    <option value="<?php print $avatar['uuid']?>" selected><?php print htmlspecialchars($avatar['name'])?></option>
+                    <option value="<?php echo $avatar['uuid']?>" selected><?php echo htmlspecialchars($avatar['name'])?></option>
                   <?php } else {?>
-                    <option value="<?php print $avatar['uuid']?>" ><?php print htmlspecialchars($avatar['name'])?></option>
+                    <option value="<?php echo $avatar['uuid']?>" ><?php echo htmlspecialchars($avatar['name'])?></option>
                   <?php }?>
                 <?php }?>
               </select>&nbsp;&nbsp;
             <?php } else {?>
-              <input type="text" name="rgnadmin"  size="15" value="<?php print $owner_name?>"  style="height:20">
+              <input type="text" name="rgnadmin"  size="15" value="<?php echo $owner_name?>"  style="height:20">
             <?php }?>
 
-            <!-- <?php print $voice_mode?>&nbsp;&nbsp; -->
+            <!-- <?php echo $voice_mode?>&nbsp;&nbsp; -->
             <select wide="32" name="voice_mode">
               <?php foreach($voice_modes as $vcm) {?>
                 <?php if ($vcm['id']==$vcmode) {?>
-                  <option value="<?php print $vcm['id']?>" selected><?php print $vcm['title']?></option>
+                  <option value="<?php echo $vcm['id']?>" selected><?php echo $vcm['title']?></option>
                 <?php } else {?>
-                  <option value="<?php print $vcm['id']?>" ><?php print $vcm['title']?></option>
+                  <option value="<?php echo $vcm['id']?>" ><?php echo $vcm['title']?></option>
                 <?php }?>
               <?php }?>
             </select>&nbsp;&nbsp;
 
-            <input type="hidden" name="sesskey" value="<?php print sesskey() ?>" />
-            <input type="hidden" name="region"  value="<?php print $region ?>" />
-            <input type="hidden" name="course"  value="<?php print $course_id ?>" />
-            <input type="submit" value="<?php print $change_ttl?>" />
+            <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+            <input type="hidden" name="region"  value="<?php echo $region ?>" />
+            <input type="hidden" name="course"  value="<?php echo $course_id ?>" />
+            <input type="submit" value="<?php echo $change_ttl?>" />
           </td></tr>
         <?php }?>
 
@@ -110,7 +110,7 @@
             <div align="center">
               <table width="256" height="256" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td bgcolor="#ffffff" background="<?php print $server.'/index.php?method=regionImage'.$guid?>">&nbsp;</td>
+                  <td bgcolor="#ffffff" background="<?php echo $server.'/index.php?method=regionImage'.$guid?>">&nbsp;</td>
                 </tr>
               </table>
             </div>

@@ -2,8 +2,8 @@
 
 if (!defined('CMS_MODULE_PATH')) exit();
 
-require_once(CMS_MODULE_PATH."/include/moodle.func.php");
-require_once(CMS_MODULE_PATH."/include/modlos.func.php");
+require_once(CMS_MODULE_PATH.'/include/moodle.func.php');
+require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
@@ -20,7 +20,7 @@ class  AvatarsList
 	var $avatar_url;
 
 	var $course_id  = 0;
-	var $course_amp	= "";
+	var $course_amp	= '';
 
 	var $use_sloodle = false;
 	var $avatars_num = 0;
@@ -33,8 +33,8 @@ class  AvatarsList
 	// Page Control
 	var $Cpstart 	= 0;
 	var $Cplimit 	= 25;
-	var $firstname 	= "";
-	var $lastname  	= "";
+	var $firstname 	= '';
+	var $lastname  	= '';
 	var $pstart;
 	var $plimit;
 	var $number;
@@ -43,10 +43,10 @@ class  AvatarsList
 	var $date_format;
 
 	// SQL
-	var $lnk_firstname = "";
-	var $lnk_lastname  = "";
-	var $sql_countcnd  = "";
-	var $sql_condition = "";
+	var $lnk_firstname = '';
+	var $lnk_lastname  = '';
+	var $sql_countcnd  = '';
+	var $sql_condition = '';
 
 
 
@@ -60,21 +60,21 @@ class  AvatarsList
 		$this->isGuest     = isguest();
 		$this->hasPermit   = hasPermit($course_id);
 		$this->date_format = $CFG->modlos_date_format;
-		$course_param 	   = "?course=".$course_id;
+		$course_param 	   = '?course='.$course_id;
 		$this->course_id   = $course_id;
         $this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
-		$this->action_url  = CMS_MODULE_URL."/actions/avatars_list.php".$course_param;
-		$this->edit_url	   = CMS_MODULE_URL."/actions/edit_avatar.php". $course_param;
-		$this->owner_url   = CMS_MODULE_URL."/actions/owner_avatar.php".$course_param;
-		$this->search_url  = CMS_MODULE_URL."/actions/avatars_list.php";
-		$this->avatar_url  = $CFG->wwwroot."/user/view.php";
+		$this->action_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param;
+		$this->edit_url	   = CMS_MODULE_URL.'/actions/edit_avatar.php'. $course_param;
+		$this->owner_url   = CMS_MODULE_URL.'/actions/owner_avatar.php'.$course_param;
+		$this->search_url  = CMS_MODULE_URL.'/actions/avatars_list.php';
+		$this->avatar_url  = $CFG->wwwroot.'/user/view.php';
 
 		$this->avatars_num = modlos_get_avatars_num($USER->id);
 		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 
-		if ($course_id>0) $this->course_amp = "&amp;course=".$course_id;
+		if ($course_id>0) $this->course_amp = '&amp;course='.$course_id;
 	}
 
 
@@ -83,9 +83,9 @@ class  AvatarsList
 	function  set_condition() 
 	{
 		$db_ver = opensim_get_db_version();
-		if ($db_ver=="0.0") {
+		if ($db_ver==null) {
 			$course_url = $CFG->wwwroot;
-			if ($ithis->course_id>0) $course_url.= "/course/view.php?id=".$course_id;
+			if ($ithis->course_id>0) $course_url.= '/course/view.php?id='.$course_id;
 			error(get_string('modlos_db_connect_error', 'block_modlos'), $course_url);
 		}
 
@@ -99,22 +99,22 @@ class  AvatarsList
 		// firstname & lastname
 		$this->firstname = optional_param('firstname', '', PARAM_TEXT);
 		$this->lastname  = optional_param('lastname',  '', PARAM_TEXT);
-		if (!isAlphabetNumeric($this->firstname)) $this->firstname = "";
-		if (!isAlphabetNumeric($this->lastname))  $this->lastname  = "";
+		if (!isAlphabetNumeric($this->firstname)) $this->firstname = '';
+		if (!isAlphabetNumeric($this->lastname))  $this->lastname  = '';
 
-		$sql_validuser = $sql_firstname = $sql_lastname = "";
-		if ($this->firstname=="" and $this->lastname=="") {
-			if ($db_ver=="0.6") $sql_validuser = "username!=''";
+		$sql_validuser = $sql_firstname = $sql_lastname = '';
+		if ($this->firstname=='' and $this->lastname=='') {
+			if ($db_ver=='0.6') $sql_validuser = "username!=''";
 			else                $sql_validuser = "FirstName!=''";
 		}
 		else {
-			if ($this->firstname!="") { 
+			if ($this->firstname!='') { 
 				if ($db_ver=="0.6") $sql_firstname = "username  LIKE '$this->firstname'";
 				else                $sql_firstname = "FirstName LIKE '$this->firstname'";
 				$this->lnk_firstname = "&amp;firstname=$this->firstname";
 			}
-			if ($this->lastname!="") { 
-				if ($this->firstname!="") $sql_lastname = "and lastname LIKE '$this->lastname'";
+			if ($this->lastname!='') { 
+				if ($this->firstname!='') $sql_lastname = "and lastname LIKE '$this->lastname'";
 				else                      $sql_lastname = "lastname LIKE '$this->lastname'";
 				$this->lnk_lastname  = "&amp;lastname=$this->lastname";
 			}
@@ -125,7 +125,7 @@ class  AvatarsList
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 
 		// SQL Condition
-		$sql_order = "ORDER BY created ASC";
+		$sql_order = 'ORDER BY created ASC';
 		$sql_limit = "LIMIT $this->pstart, $this->plimit";
 		$this->sql_countcnd  = " WHERE $sql_validuser $sql_firstname $sql_lastname";
 		$this->sql_condition = " WHERE $sql_validuser $sql_firstname $sql_lastname $sql_order $sql_limit";
@@ -181,11 +181,11 @@ class  AvatarsList
 			$this->pnum[2] = $this->number - $this->plimit;
 		}
 
-		$this->icon[3] = $this->icon[4] = $this->icon[5] = $this->icon[6] = "icon_limit_off";
-		if ($this->plimit != 10)  $this->icon[3] = "icon_limit_10_on"; 
-		if ($this->plimit != 25)  $this->icon[4] = "icon_limit_25_on";
-		if ($this->plimit != 50)  $this->icon[5] = "icon_limit_50_on";
-		if ($this->plimit != 100) $this->icon[6] = "icon_limit_100_on";
+		$this->icon[3] = $this->icon[4] = $this->icon[5] = $this->icon[6] = 'icon_limit_off';
+		if ($this->plimit != 10)  $this->icon[3] = 'icon_limit_10_on'; 
+		if ($this->plimit != 25)  $this->icon[4] = 'icon_limit_25_on';
+		if ($this->plimit != 50)  $this->icon[5] = 'icon_limit_50_on';
+		if ($this->plimit != 100) $this->icon[6] = 'icon_limit_100_on';
 
 
 		// OpenSim DB
@@ -203,7 +203,7 @@ class  AvatarsList
 			$this->db_data[$colum]['editable']	= AVATAR_NOT_EDITABLE;
 
 			$created = $this->db_data[$colum]['created'];
-			if ($created==null or $created=="" or $created=='0') {
+			if ($created==null or $created=='' or $created=='0') {
 				$this->db_data[$colum]['born'] = ' - ';
 			}
 			else {
@@ -211,7 +211,7 @@ class  AvatarsList
 			}
 
 			$lastlogin = $this->db_data[$colum]['lastlogin'];
-			if ($lastlogin==null or $lastlogin=="" or $lastlogin=='0') {
+			if ($lastlogin==null or $lastlogin=='' or $lastlogin=='0') {
 				$this->db_data[$colum]['lastin'] = ' - ';
 			}
 			else {
@@ -272,8 +272,8 @@ class  AvatarsList
 
 		$course_amp		= $this->course_amp;
         $plimit_amp     = "&amp;plimit=$this->plimit";
-        $pstart_        = "&amp;pstart=";
-        $plimit_        = "&amp;plimit=";
+        $pstart_        = '&amp;pstart=';
+        $plimit_        = '&amp;plimit=';
 
 		$avatars_list	= get_string('modlos_avatars_list',  'block_modlos');
 		$number_ttl		= get_string('modlos_no',			 'block_modlos');
@@ -297,7 +297,7 @@ class  AvatarsList
 		$users_found  	= get_string('modlos_users_found', 	 'block_modlos');
 		$sloodle_ttl  	= get_string('modlos_sloodle_short', 'block_modlos');
 
-        include(CMS_MODULE_PATH."/html/avatars.html");
+        include(CMS_MODULE_PATH.'/html/avatars.html');
 	}
 }
 

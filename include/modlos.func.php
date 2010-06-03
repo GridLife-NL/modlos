@@ -12,7 +12,7 @@
  * function  modlos_update_usertable($user)
  * function  modlos_delete_usertable($user)
  *
- * function  modlos_get_lastnames($sort="")
+ * function  modlos_get_lastnames($sort='')
  *
  * function  modlos_delete_groupdb($uuid, $delallgrp=false)
  * function  modlos_delete_groupdb_by_gpid($gpid)
@@ -33,10 +33,10 @@
 
 if (!defined('CMS_MODULE_PATH')) exit();
 
-require_once(CMS_MODULE_PATH."/include/config.php");
-require_once(CMS_MODULE_PATH."/include/tools.func.php");
-require_once(CMS_MODULE_PATH."/include/moodle.func.php");
-require_once(CMS_MODULE_PATH."/include/opensim.mysql.php");
+require_once(CMS_MODULE_PATH.'/include/config.php');
+require_once(CMS_MODULE_PATH.'/include/tools.func.php');
+require_once(CMS_MODULE_PATH.'/include/moodle.func.php');
+require_once(CMS_MODULE_PATH.'/include/opensim.mysql.php');
 
 
 
@@ -55,7 +55,7 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
 		$sloodle = get_record(MDL_SLOODLE_USERS_TBL, 'uuid', $uuid);
 		if ($sloodle!=null) {
 			$names = null;
-			if ($sloodle->avname!="") $names = explode(" ", $sloodle->avname);
+			if ($sloodle->avname!='') $names = explode(' ', $sloodle->avname);
 
 			if ($pri_sloodle) {		// Sloodle優先
 				if ($sloodle->userid>0) $avatar->user_id = $sloodle->userid;
@@ -65,17 +65,17 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
 				}
 			}
 			else {
-				if ($avatar->user_id=="" and $sloodle->userid>0) $avatar->user_id = $sloodle->userid;
+				if ($avatar->user_id=='' and $sloodle->userid>0) $avatar->user_id = $sloodle->userid;
 				if (is_array($names)) {
-					if ($avatar->firstname=="") $avatar->firstname = $names[0];
-					if ($avatar->lastname=="")  $avatar->firstname = $names[1];
+					if ($avatar->firstname=='') $avatar->firstname = $names[0];
+					if ($avatar->lastname=='')  $avatar->firstname = $names[1];
 				}
 			}
 		}
 	}
 	
 	if ($avatar==null and $sloodle==null) return null;
-	if ($avatar->firstname=="" or $avatar->lastname=="") return null;
+	if ($avatar->firstname=='' or $avatar->lastname=='') return null;
 
 
 	//
@@ -84,14 +84,14 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
 	$avatar_info['lastname']  = $avatar->lastname;
 
 	if ($avatar->id>0) 			$avatar_info['id'] 		  = $avatar->id;
-	else 						$avatar_info['id'] 		  = "";
-	if ($avatar->user_id!="")  	$avatar_info['uid'] 	  = $avatar->user_id;
+	else 						$avatar_info['id'] 		  = '';
+	if ($avatar->user_id!='')  	$avatar_info['uid'] 	  = $avatar->user_id;
 	else                       	$avatar_info['uid'] 	  = '0';
-	if ($avatar->hmregion!="")	$avatar_info['hmregion']  = $avatar->hmregion;
+	if ($avatar->hmregion!='')	$avatar_info['hmregion']  = $avatar->hmregion;
 	else					   	$avatar_info['hmregion']  = opensim_get_home_region($uuid);
-	if ($avatar->state!="")    	$avatar_info['state'] 	  = $avatar->state;
+	if ($avatar->state!='')    	$avatar_info['state'] 	  = $avatar->state;
 	else					   	$avatar_info['state'] 	  = AVATAR_STATE_NOSTATE;
-	if ($avatar->time!="")     	$avatar_info['time'] 	  = $avatar->time;
+	if ($avatar->time!='')     	$avatar_info['time'] 	  = $avatar->time;
 	else						$avatar_info['time']	  = time();
 
 	return $avatar_info;
@@ -120,8 +120,8 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 			if ($avatar['state']&AVATAR_STATE_SLOODLE) {
 				$insobj->userid = $avatar['uid'];
 				$insobj->uuid 	= $avatar['UUID'];
-				$insobj->avname = $avatar['firstname']." ".$avatar['lastname'];
-				if ($insobj->avname==" ") $insobj->avname = "";
+				$insobj->avname = $avatar['firstname'].' '.$avatar['lastname'];
+				if ($insobj->avname==' ') $insobj->avname = '';
 				$insobj->lastactive = time();
 				$ret = insert_record(MDL_SLOODLE_USERS_TBL, $insobj);
 			}
@@ -203,16 +203,16 @@ function  modlos_insert_usertable($user)
 	$insobj->firstname = $user['firstname'];
 	$insobj->lastname  = $user['lastname'];
 
-	if ($user['uid']!="") 	$insobj->user_id = $user['uid'];
+	if ($user['uid']!='') 	$insobj->user_id = $user['uid'];
 	else                  	$insobj->user_id = 0;
-	if ($user['state']!="")	$insobj->state 	 = $user['state'];
+	if ($user['state']!='')	$insobj->state 	 = $user['state'];
 	else				 	$insobj->state 	 = AVATAR_STATE_SYNCDB;
-	if ($user['time']!="") 	$insobj->time 	 = $user['time'];
+	if ($user['time']!='') 	$insobj->time 	 = $user['time'];
 	else 					$insobj->time 	 = time();
 
 	if (isGUID($user['hmregion'])) {
 		$regionName = opensim_get_region_name($user['hmregion']);
-		if ($regionName!="")$insobj->hmregion = $regionName;
+		if ($regionName!='')$insobj->hmregion = $regionName;
 		else 				$insobj->hmregion = $user['hmregion'];
 	}
 	else {
@@ -239,17 +239,17 @@ function  modlos_update_usertable($user, $updobj=null)
 	}
 
 	// Update
-	if ($user['uid']!="") 	$updobj->user_id = $user['uid'];
-	if ($user['state']!="")	$updobj->state   = $user['state'];
-	if ($user['time']!="")	$updobj->time 	 = $user['time'];
+	if ($user['uid']!='') 	$updobj->user_id = $user['uid'];
+	if ($user['state']!='')	$updobj->state   = $user['state'];
+	if ($user['time']!='')	$updobj->time 	 = $user['time'];
 	else 					$updobj->time 	 = time();
 
 	if (isGUID($user['hmregion'])) {
 		$regionName = opensim_get_region_name($user['hmregion']);
-		if ($regionName!="")$updobj->hmregion = $regionName;
+		if ($regionName!='')$updobj->hmregion = $regionName;
 		else 				$updobj->hmregion = $user['hmregion'];
 	}
-	else if ($user['hmregion']!="") {
+	else if ($user['hmregion']!='') {
 		$updobj->hmregion = $user['hmregion'];
 	}
 
@@ -263,10 +263,10 @@ function  modlos_update_usertable($user, $updobj=null)
 
 function  modlos_delete_usertable($user)
 {
-	if ($user['id']=="" and !isGUID($user['UUID'])) return false;
+	if ($user['id']=='' and !isGUID($user['UUID'])) return false;
 	if (!($user['state']&AVATAR_STATE_INACTIVE)) return false;		// active
 
-	if ($user['id']!="") {
+	if ($user['id']!='') {
 		$ret = delete_records('modlos_users',   'id', $user['id']);
 	}
 	else {
@@ -284,11 +284,11 @@ function  modlos_delete_usertable($user)
 // Last Names
 //
 
-function  modlos_get_lastnames($sort="")
+function  modlos_get_lastnames($sort='')
 {
 	$lastnames = array();
 
-	$lastns = get_records("modlos_lastnames", 'state', AVATAR_LASTN_ACTIVE, $sort, 'lastname');
+	$lastns = get_records('modlos_lastnames', 'state', AVATAR_LASTN_ACTIVE, $sort, 'lastname');
 	foreach ($lastns as $lastn) {
 		$lastnames[] = $lastn->lastname;
 	}
@@ -359,25 +359,25 @@ function  modlos_delete_groupdb_by_gpid($gpid)
 function  modlos_set_profiles($profs, $ovwrite=true)
 {
 	foreach($profs as $prof) {
-		if ($prof['UUID']!="") {
+		if ($prof['UUID']!='') {
 			$insert = false;
 			$prfobj = get_record(MDL_PROFILE_USERPROFILE_TBL, 'useruuid', $prof['UUID']);
 			if (!$prfobj) $insert = true;
 
 			$prfobj->useruuid = $prof['UUID'];
 
-			if ($prof['Partnar']!="")		$prfobj->profilepartnar		  = $prof['Partnar'];
-			if ($prof['Image']!="")			$prfobj->profileimage		  = $prof['Image'];
-			if ($prof['AboutText']!="")		$prfobj->profileabouttext	  =	$prof['AboutText'];
-			if ($prof['AllowPublish']!="")	$prfobj->profileallowpublish  = $prof['AllowPublish'];
-			if ($prof['MaturePublish']!="")	$prfobj->profilematurepublish = $prof['MaturePublish'];
-			if ($prof['URL']!="")			$prfobj->profileurl 		  = $prof['URL'];
-			if ($prof['WantToMask']!="")	$prfobj->profilewanttomask 	  = $prof['WantToMask'];
-			if ($prof['WantToText']!="")	$prfobj->profilewanttotext 	  = $prof['WantToText'];
-			if ($prof['SkillsMask']!="")	$prfobj->profileskillsmask 	  = $prof['SkillsMask'];
-			if ($prof['SkillsText']!="")	$prfobj->profileskillstext 	  = $prof['SkillsText'];
-			if ($prof['LanguagesText']!="")	$prfobj->profilelanguagestext = $prof['LanguagesText'];
-			if ($prof['FirstAboutText']!="")$prfobj->profilefirsttext 	  = $prof['FirstAboutText'];
+			if ($prof['Partnar']!='')		$prfobj->profilepartnar		  = $prof['Partnar'];
+			if ($prof['Image']!='')			$prfobj->profileimage		  = $prof['Image'];
+			if ($prof['AboutText']!='')		$prfobj->profileabouttext	  =	$prof['AboutText'];
+			if ($prof['AllowPublish']!='')	$prfobj->profileallowpublish  = $prof['AllowPublish'];
+			if ($prof['MaturePublish']!='')	$prfobj->profilematurepublish = $prof['MaturePublish'];
+			if ($prof['URL']!='')			$prfobj->profileurl 		  = $prof['URL'];
+			if ($prof['WantToMask']!='')	$prfobj->profilewanttomask 	  = $prof['WantToMask'];
+			if ($prof['WantToText']!='')	$prfobj->profilewanttotext 	  = $prof['WantToText'];
+			if ($prof['SkillsMask']!='')	$prfobj->profileskillsmask 	  = $prof['SkillsMask'];
+			if ($prof['SkillsText']!='')	$prfobj->profileskillstext 	  = $prof['SkillsText'];
+			if ($prof['LanguagesText']!='')	$prfobj->profilelanguagestext = $prof['LanguagesText'];
+			if ($prof['FirstAboutText']!='')$prfobj->profilefirsttext 	  = $prof['FirstAboutText'];
 			if ($prof['FirstImage'])		$prfobj->profilefirstimag 	  = $prof['FirstImage'];
 	
 			if ($insert) {
@@ -391,16 +391,16 @@ function  modlos_set_profiles($profs, $ovwrite=true)
 
 
 	foreach($profs as $prof) {
-		if ($prof['UUID']!="") {
+		if ($prof['UUID']!='') {
 			$insert = false;
 			$setobj = get_record(MDL_PROFILE_USERSETTINGS_TBL, 'useruuid', $prof['UUID']);
 			if (!$setobj) $insert = true;
 
 			$setobj->useruuid = $prof['UUID'];
 
-			if ($prof['ImviaEmail']!="")$setobj->imviaemail = $prof['ImviaEmail'];
-			if ($prof['Visible']!="")	$setobj->visible	= $prof['Visible'];
-			if ($prof['Email']!="")		$setobj->email    	= $prof['Email'];
+			if ($prof['ImviaEmail']!='')$setobj->imviaemail = $prof['ImviaEmail'];
+			if ($prof['Visible']!='')	$setobj->visible	= $prof['Visible'];
+			if ($prof['Email']!='')		$setobj->email    	= $prof['Email'];
 
 			if ($insert) {
 				$rslt = insert_record(MDL_PROFILE_USERSETTINGS_TBL, $setobj);
@@ -464,7 +464,7 @@ function  modlos_inactivate_avatar($uuid)
 	$ret = insert_record('modlos_banned', $insobj);
 	if (!$ret) return false;
 
-	$ret = opensim_set_password($uuid, "invalid_password");
+	$ret = opensim_set_password($uuid, 'invalid_password');
 	if (!$ret) modlos_delete_banneddb($uuid);
 
 	return $ret;
@@ -496,7 +496,7 @@ function  print_tabnav($currenttab, $course, $creatable=true)
 
 	$hasPermit = hasPermit($course_id);
 
-	$course_param = "";
+	$course_param = '';
 	if ($course_id>0) $course_param = '?course='.$course_id;
 
 	///////
@@ -551,18 +551,18 @@ function  print_tabheader($currenttab, $course, $creatable=true)
 	// Print Navi Header
 	if (empty($course)) {
 		// TOP Page
-		print_header(get_string('modlos','block_modlos'), " ",
-					 get_string('modlos','block_modlos'), "", "", true, "&nbsp;", navmenu(NULL));
+		print_header(get_string('modlos','block_modlos'), ' ',
+					 get_string('modlos','block_modlos'), '', '', true, '&nbsp;', navmenu(NULL));
 	}
 	else {
 		if ($course->category) {
 			print_header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
 					 '<a href="'.$CFG->wwwroot."/course/view.php?id={$course->id}\">$course->shortname</a> -> ".
-					 get_string('modlos','block_modlos'), "", "", true, "&nbsp;", navmenu($course));
+					 get_string('modlos','block_modlos'), '', '', true, "&nbsp;", navmenu($course));
 		}
 		else {
 			print_header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
-					 get_string('modlos','block_modlos'), "", "", true, "&nbsp;", navmenu($course));
+					 get_string('modlos','block_modlos'), '', '', true, '&nbsp;', navmenu($course));
 		}
 	}
 

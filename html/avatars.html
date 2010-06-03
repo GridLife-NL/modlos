@@ -5,8 +5,8 @@
       <table width="100%" border="0" cellspacing="0" cellpadding="1">
         <tr>
           <td bgcolor="#e8e8e8">
-            <h2><div align="center"><?php print $grid_name."&nbsp;:&nbsp;".$avatars_list?></div></h2>
-            <?php print $content?>
+            <h2><div align="center"><?php echo $grid_name."&nbsp;:&nbsp;".$avatars_list?></div></h2>
+            <?php echo $content?>
           </td>
         </tr>
       </table>
@@ -22,7 +22,7 @@
 
       <table cellpadding=0 cellspacing=0 width=100%>
         <tr>
-          <td width=200><font color=#ffffff><b>&nbsp;<?php print $this->number." ".$users_found ?></b></font></td>
+          <td width=200><font color=#ffffff><b>&nbsp;<?php echo $this->number." ".$users_found ?></b></font></td>
           <td>
 
             <table cellpadding=1 cellspacing=0>
@@ -31,9 +31,9 @@
                 <!-- icon line -->
                 <td width="50">
                   <?php if ($this->icon[0]=="on") {?>
-                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.'0'?>" target="_self">
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.'0'?>" target="_self">
                   <?php }?>
-                    <img src="<?php print CMS_MODULE_URL.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+                    <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[0]=="on") {?>
                     </a>
                   <?php }?>
@@ -41,9 +41,9 @@
 
                 <td width="50">
                   <?php if ($this->icon[0]=="on") {?>
-                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
                   <?php }?>
-                    <img src="<?php print CMS_MODULE_URL.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+                    <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[0]=="on") {?>
                     </a>
                   <?php }?>
@@ -51,15 +51,15 @@
 
                 <td width=200 align=center>
                   <font color="#000000">
-                    <?php print $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;
+                    <?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;
                   </font>
                 </td>
 
                 <td width="50">
                   <?php if ($this->icon[1]=="on") {?>
-                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
                   <?php }?>
-                      <img src="<?php print CMS_MODULE_URL.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+                      <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[1]=="on") {?>
                     </a>
                   <?php }?>
@@ -67,9 +67,9 @@
 
                 <td width="50">
                   <?php if ($this->icon[1]=="on") {?>
-                    <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
                   <?php }?>
-                      <img src="<?php print CMS_MODULE_URL.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+                      <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[1]=="on") {?>
                     </a>
                   <?php }?>
@@ -79,22 +79,22 @@
                 <td width="10"></td>
 
                 <td width="30">
-                  <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'10'?>" target="_self">
-                    <img src="<?php print CMS_MODULE_URL.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" ALT="Limit 10"></a>
+                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'10'?>" target="_self">
+                    <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" ALT="Limit 10"></a>
                 </td>
                 <td width="30">
-                  <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'25'?>" target="_self">
-                    <img src="<?php print CMS_MODULE_URL.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" ALT="Limit 25">
+                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'25'?>" target="_self">
+                    <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" ALT="Limit 25">
                   </a>
                 </td>
                 <td width="30">
-                  <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'50'?>" target="_self">
-                    <img src="<?php print CMS_MODULE_URL.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" ALT="Limit 50">
+                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'50'?>" target="_self">
+                    <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" ALT="Limit 50">
                   </a>
                 </td>
                 <td width="30">
-                  <a href="<?php print $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'100'?>" target="_self">
-                    <img src="<?php print CMS_MODULE_URL.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" ALT="Limit 100">
+                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'100'?>" target="_self">
+                    <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" ALT="Limit 100">
                   </a>
                 </td>
                 <td></td>
@@ -111,26 +111,26 @@
 
 <!-- search -->
 <table width="85%" cellpadding=3 border=0 bordercolor="#547fdb" cellspacing=1 bgcolor="#547fdb" align="center">
-  <form command1="<?php print $this->search_url?>" method="POST">    
+  <form command1="<?php echo $this->search_url?>" method="POST">    
     <tr>
-      <td><b><?php print $user_search?></b><br /></td>
+      <td><b><?php echo $user_search?></b><br /></td>
     </tr>
     <tr>
       <td bgcolor="#ffffff">
         <table cellpadding=0 cellspacing=0 width="100%" bgcolor="#ffffff">
           <tr>
-            <td><font color="#000000"><?php print $firstname_ttl?></font>&nbsp;&nbsp;
-              <input type="text" name="firstname" size="15" value="<?php print $this->firstname?>" style="height:20">
+            <td><font color="#000000"><?php echo $firstname_ttl?></font>&nbsp;&nbsp;
+              <input type="text" name="firstname" size="15" value="<?php echo $this->firstname?>" style="height:20">
             </td>
-            <td><font color="#000000"><?php print $lastname_ttl?></font>&nbsp;&nbsp;
-              <input type="text" name="lastname"  size="15" value="<?php print $this->lastname?>"  style="height:20">
+            <td><font color="#000000"><?php echo $lastname_ttl?></font>&nbsp;&nbsp;
+              <input type="text" name="lastname"  size="15" value="<?php echo $this->lastname?>"  style="height:20">
             </td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-			<input type="hidden" name="sesskey" value="<?php print sesskey() ?>" />
-			<input type="hidden" name="course"  value="<?php print $this->course_id?>" />
+			<input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+			<input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
             <td><input type="Submit" value="Search" style="height:20"></td>
           </tr>
         </table>
@@ -150,15 +150,15 @@
             <td bgcolor=#547FDB>
               <table cellpadding=2 cellspacing=0 border=0 width=100%>
                 <tr>
-                  <td width=40 ><b>&nbsp;<?php print $number_ttl?></b></td>
+                  <td width=40 ><b>&nbsp;<?php echo $number_ttl?></b></td>
                   <td width=50 >&nbsp;</b></td>
-                  <td width=60 ><b><?php print $edit_ttl?></b></td>
-                  <td width=150><b><?php print $firstname_ttl?></b></td>
-                  <td width=150><b><?php print $lastname_ttl?></b></td>
-                  <td width=250><b><?php print $lastlogin_ttl?></b></td>
-                  <td width=250><b><?php print $status_ttl?></b></td>
-                  <td width=150><b><?php print $crntregion_ttl?></b></td>
-                  <td width=250><b><?php print $owner_ttl?></b></td>
+                  <td width=60 ><b><?php echo $edit_ttl?></b></td>
+                  <td width=150><b><?php echo $firstname_ttl?></b></td>
+                  <td width=150><b><?php echo $lastname_ttl?></b></td>
+                  <td width=250><b><?php echo $lastlogin_ttl?></b></td>
+                  <td width=250><b><?php echo $status_ttl?></b></td>
+                  <td width=150><b><?php echo $crntregion_ttl?></b></td>
+                  <td width=250><b><?php echo $owner_ttl?></b></td>
                   <td>&nbsp;</td>
                 </tr>
 
@@ -172,62 +172,62 @@
                   <?php } else {?>
                   <tr style='background-color: #ffffff'>
                   <?php }?>
-                    <td width=40><font color=#000><b>&nbsp;<?php print $dat['num']+1+$this->pstart?></b></font></td>
+                    <td width=40><font color=#000><b>&nbsp;<?php echo $dat['num']+1+$this->pstart?></b></font></td>
                     <td width=50 height=26>
-                      <a style="cursor:pointer" onClick="window.open('<?php print CMS_MODULE_URL.'/helper/agent.php?agent='.$dat['UUID'].$course_amp?>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
-                        <img src="<?php print CMS_MODULE_URL?>/images/icons/icon_user.gif">
+                      <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php?agent='.$dat['UUID'].$course_amp?>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+                        <img src="<?php echo CMS_MODULE_URL?>/images/icons/icon_user.gif">
                       </a>
                     </td>
                     <td width=60>
                     <?php if ($dat['editable']==AVATAR_EDITABLE) {?>
-                      <a href="<?php print $this->edit_url. '&amp;uuid='.$dat['UUID']?>" ><font color=#cc1010><b><u><?php print $editable_ttl?></u></b></font></a>
+                      <a href="<?php echo $this->edit_url. '&amp;uuid='.$dat['UUID']?>" ><font color=#cc1010><b><u><?php echo $editable_ttl?></u></b></font></a>
                     <?php } elseif ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {?>
-                      <a href="<?php print $this->owner_url.'&amp;uuid='.$dat['UUID']?>"><font color=#aa5050><b><u><?php print $get_owner_ttl?></u></b></font></a>
+                      <a href="<?php echo $this->owner_url.'&amp;uuid='.$dat['UUID']?>"><font color=#aa5050><b><u><?php echo $get_owner_ttl?></u></b></font></a>
                     <?php } else {?>
                       &nbsp;-&nbsp;
                     <?php }?>
                     </td>
-                    <td width=150><font color=#000060><b><?php print $dat['firstname']?></b></font></td>
-                    <td width=150><font color=#000060><b><?php print $dat['lastname']?></b></font></td>
-                    <td width=250><font color=#444444><b><?php print $dat['lastin']?></b></font></td>
+                    <td width=150><font color=#000060><b><?php echo $dat['firstname']?></b></font></td>
+                    <td width=150><font color=#000060><b><?php echo $dat['lastname']?></b></font></td>
+                    <td width=250><font color=#444444><b><?php echo $dat['lastin']?></b></font></td>
                     <td width=250>
                       <b>
                         <?php if (!($dat['state']&AVATAR_STATE_SYNCDB)) { ?>
-                          <font color=#cc0000><?php print $not_syncdb_ttl?>
+                          <font color=#cc0000><?php echo $not_syncdb_ttl?>
                         <?php } elseif ($dat['state']&AVATAR_STATE_INACTIVE) { ?>
-                          <font color=#cc0000><?php print $inactive_ttl?>
+                          <font color=#cc0000><?php echo $inactive_ttl?>
                         <?php } elseif ($dat['state']&AVATAR_STATE_SYNCDB) { ?>
                           <?php if ($dat['online']) {?>
-                            <font color=#005500><?php print $online_ttl?>
+                            <font color=#005500><?php echo $online_ttl?>
                           <?php } else {?>
-                            <font color=#0000cc><?php print $active_ttl?>
+                            <font color=#0000cc><?php echo $active_ttl?>
                           <?php }?>
                         <?php } else {?>
-                          <font color=#cc0000><?php print $unknown_status?>
+                          <font color=#cc0000><?php echo $unknown_status?>
                         <?php }?>
 
                         <?php if ($dat['state']&AVATAR_STATE_SLOODLE and $dat['ownername']!=' - ' and $this->use_sloodle) {?>
-                          ,&nbsp;<?php print $sloodle_ttl?>
+                          ,&nbsp;<?php echo $sloodle_ttl?>
                         <?php }?>
                           </font>
                       </b>
                     </td>
                     <td width=150>
-                      <a style="cursor:pointer" onClick="window.open('<?php print CMS_MODULE_URL.'/helper/sim.php?region='.$dat['region_id'].$course_amp?>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+                      <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php?region='.$dat['region_id'].$course_amp?>','mywindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
                         <?php if ($dat['online']) {?>
-                          <b><font color=#005500><u><?php print $dat['region']?></u></font></b>
+                          <b><font color=#005500><u><?php echo $dat['region']?></u></font></b>
                         <?php } else {?>
-                          <b><font color=#0055cc><u><?php print $dat['region']?></u></font></b>
+                          <b><font color=#0055cc><u><?php echo $dat['region']?></u></font></b>
                         <?php }?>
                       </a>
                     </td>
                     <td width=250>
                       <?php if ($userinfo and $dat['ownername']!=' - ') { ?>
-                        <a href="<?php print $this->avatar_url.'?id='.$dat['uid'].$course_amp?>" target="_blank">
-                          <b><u><?php print $dat['ownername']?></u></b>
+                        <a href="<?php echo $this->avatar_url.'?id='.$dat['uid'].$course_amp?>" target="_blank">
+                          <b><u><?php echo $dat['ownername']?></u></b>
                         </a>
                       <?php } else {?>
-                        <b><?php print $dat['ownername']?></b>
+                        <b><?php echo $dat['ownername']?></b>
                       <?php }?>
                     </td>
                     <td>&nbsp;</td>

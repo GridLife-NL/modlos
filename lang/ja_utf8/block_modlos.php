@@ -139,6 +139,7 @@ $string['modlos_invalid_uid'] 		= '無効なユーザIDです';
 $string['modlos_invalid_passwd'] 	= '無効なパスワードです';
 $string['modlos_invalid_username'] 	= '無効なユーザ名です';
 $string['modlos_invalid_ownername'] = '無効なオーナ名です';
+$string['modlos_or_notconnect_db'] 	= 'または，データベースに接続していません';
 $string['modlos_exist_lastname']  	= '既に存在するラストネームです!!';
 $string['modlos_not_exist_lastname']= '存在しないラストネームです!!';
 $string['modlos_active_avatar'] 	= '有効なアバター';

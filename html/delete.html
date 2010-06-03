@@ -4,48 +4,48 @@
 </style>
 
 
-<h2><center><?php print $grid_name."&nbsp;:&nbsp;".$avatar_delete_ttl?></center></h2>
+<h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_delete_ttl?></center></h2>
 <br />
 
 <?php if ($showPostForm) {?>
-  <form action="<?php print $this->action_url?>" method="POST">
+  <form action="<?php echo $this->action_url?>" method="POST">
 <?php } else {?>
-  <form action="<?php print $this->return_url?>" method="GET">
+  <form action="<?php echo $this->return_url?>" method="GET">
 <?php }?>
 
     <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
       <tr>
-        <td width="100" class="head"><?php print $firstname_ttl?></td>
-        <td width="320" class="even"><?php print $this->firstname?></td>
+        <td width="100" class="head"><?php echo $firstname_ttl?></td>
+        <td width="320" class="even"><?php echo $this->firstname?></td>
       </tr>
 
       <tr>
-        <td class="head"><?php print $lastname_ttl?></td>
-        <td class="odd" ><?php print $this->lastname?></td>
+        <td class="head"><?php echo $lastname_ttl?></td>
+        <td class="odd" ><?php echo $this->lastname?></td>
       </tr>
 
       <tr>
-        <td class="head"><?php print $home_region_ttl?></td>
-        <td class="even"><?php print $this->hmregion?></td>
+        <td class="head"><?php echo $home_region_ttl?></td>
+        <td class="even"><?php echo $this->hmregion?></td>
       </tr>
 
       <tr>
-        <td class="head"><?php print $status_ttl?></td>
+        <td class="head"><?php echo $status_ttl?></td>
         <td class="odd" >
           <?php if ($this->deleted_avatar) {?>
-            <font color=#cc0000><?php print $state_deleted?></font>
+            <font color=#cc0000><?php echo $state_deleted?></font>
           <?php } else {?>
             <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
-              <font color=#cc0000><?php print $not_syncdb_ttl?>
+              <font color=#cc0000><?php echo $not_syncdb_ttl?>
             <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
-              <font color=#cc0000><?php print $inactive_ttl?>
+              <font color=#cc0000><?php echo $inactive_ttl?>
             <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
-              <font color=#005500><?php print $active_ttl?>
+              <font color=#005500><?php echo $active_ttl?>
             <?php } else {?>
-              <font color=#cc0000><?php print $unknown_status?>
+              <font color=#cc0000><?php echo $unknown_status?>
             <?php }?>
             <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
-              ,&nbsp;<?php print $sloodle_ttl?>
+              ,&nbsp;<?php echo $sloodle_ttl?>
             <?php }?>
             </font>
           <?php }?>
@@ -54,8 +54,8 @@
 
       <?php if ($this->hasPermit) {?>
         <tr>
-          <td class="head"><?php print $ownername_ttl?></td>
-          <td class="even"><?php print $this->ownername?></td>	
+          <td class="head"><?php echo $ownername_ttl?></td>
+          <td class="even"><?php echo $this->ownername?></td>	
         </tr>
       <?php }?>
 
@@ -64,28 +64,28 @@
 
   <div align="center">
     <?php if ($showPostForm) {?>
-      <input type="hidden" name="uuid"   value="<?php print $this->UUID?>" />
-      <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
-      <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
-      <input name="submit_delete" type="submit" value="<?php print $delete_ttl?>" />&nbsp;
-      <input name="cancel_delete" type="submit" value="<?php print $cancel_ttl?>" />
+      <input type="hidden" name="uuid"   value="<?php echo $this->UUID?>" />
+      <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+      <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+      <input name="submit_delete" type="submit" value="<?php echo $delete_ttl?>" />&nbsp;
+      <input name="cancel_delete" type="submit" value="<?php echo $cancel_ttl?>" />
     <?php } else {?>
-      <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
-      <input name="submit_return" type="submit" value="<?php print $return_ttl?>" />
+      <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+      <input name="submit_return" type="submit" value="<?php echo $return_ttl?>" />
     <?php }?>
   </div>
 </form>
 <br />
 
 
-<!-- print Message -->
+<!-- echo Message -->
 <hr />
 <?php if ($this->hasError) {?>
 
   <div align="center">
     <ul>
       <?php foreach($this->errorMsg as $mesg) {?>
-        <li><font color="#f02022"><b><?php print $mesg?></b></font></li>
+        <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
       <?php }?>
     </ul>
   </div>
@@ -93,9 +93,9 @@
 <?php } else {?>
 
   <?php if ($this->deleted_avatar) {?>
-    <h3><font color=#2020e0><center><?php print $avatar_deleted?></center></font></h3>
+    <h3><font color=#2020e0><center><?php echo $avatar_deleted?></center></font></h3>
   <?php } else {?>
-    <h3><font color=#e01080><center><?php print $avatar_dlt_confrm?></center></font></b></h3>
+    <h3><font color=#e01080><center><?php echo $avatar_dlt_confrm?></center></font></b></h3>
   <?php }?>
 
 <?php }?>

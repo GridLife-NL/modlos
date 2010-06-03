@@ -1,10 +1,10 @@
 <?php
 
-require_once(realpath(dirname(__FILE__)."/../../../config.php"));
-require_once(realpath(dirname(__FILE__)."/../include/config.php"));
+require_once(realpath(dirname(__FILE__).'/../../../config.php'));
+require_once(realpath(dirname(__FILE__).'/../include/config.php'));
 
 
-$world_map_url = CMS_MODULE_URL."/helper/world_map.php";
+$world_map_url = CMS_MODULE_URL.'/helper/world_map.php';
 $allow_zoom = true;
 
 
@@ -28,10 +28,10 @@ if ($allow_zoom) {
 
 
 ob_start();
-require(CMS_MODULE_PATH."/include/map_script.php");
+require(CMS_MODULE_PATH.'/include/map_script.php');
 $map_script = ob_get_contents();
 ob_end_clean();
  
-include(CMS_MODULE_PATH."/html/world_map.html");
+include(CMS_MODULE_PATH.'/html/world_map.html');
 
 ?>

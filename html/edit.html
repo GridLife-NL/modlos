@@ -4,29 +4,29 @@
 </style>
 
 
-<h2><center><?php print $grid_name."&nbsp;:&nbsp;".$avatar_edit?></center></h2>
+<h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_edit?></center></h2>
 <br />
 
-<form name="assignform" id="assignform" action="<?php print $this->action_url?>" method="POST">
+<form name="assignform" id="assignform" action="<?php echo $this->action_url?>" method="POST">
 
-  <input type="hidden" name="course"  value="<?php print $this->course_id?>" />
-  <input type="hidden" name="uuid"    value="<?php print $this->UUID?>" />
-  <input type="hidden" name="sesskey" value="<?php print sesskey()?>" />
+  <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+  <input type="hidden" name="uuid"    value="<?php echo $this->UUID?>" />
+  <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
 
   <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 
     <tr>
-      <td width="100" class="head"><?php print $firstname_ttl?></td>
-      <td width="320" class="even"><b><?php print $this->firstname?></b></td>
+      <td width="100" class="head"><?php echo $firstname_ttl?></td>
+      <td width="320" class="even"><b><?php echo $this->firstname?></b></td>
     </tr>
 
     <tr>
-      <td class="head"><?php print $lastname_ttl?></td>
-      <td class="odd" ><b><?php print $this->lastname?></b></td>
+      <td class="head"><?php echo $lastname_ttl?></td>
+      <td class="odd" ><b><?php echo $this->lastname?></b></td>
     </tr>
 
     <tr>
-      <td class="head"><?php print $passwd_ttl?></td>
+      <td class="head"><?php echo $passwd_ttl?></td>
       <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>
         <td class="even"><input type="password" name="passwd" size="32" maxlength="16" /></td>
       <?php } else {?>
@@ -35,7 +35,7 @@
     </tr>
 
     <tr>
-      <td class="head"><?php print $confirm_pass_ttl?></td>
+      <td class="head"><?php echo $confirm_pass_ttl?></td>
       <?php if (!($this->state==AVATAR_STATE_INACTIVE)) {?>
         <td class="odd"><input type="password" name="confirm_pass" size="32" maxlength="16" /></td>
       <?php } else {?>
@@ -44,14 +44,14 @@
     </tr>
 
     <tr>
-      <td class="head"><?php print $home_region_ttl?></td>
+      <td class="head"><?php echo $home_region_ttl?></td>
       <td class="even">
         <select wide="25" name="hmregion">
           <?php foreach ($this->regionNames as $region) {?>
             <?php if ($region==$this->hmregion) {?>
-              <option value="<?php print $region?>" selected><?php print $region?></option>
+              <option value="<?php echo $region?>" selected><?php echo $region?></option>
             <?php } else {?>
-              <option value="<?php print $region?>" ><?php print $region?></option>
+              <option value="<?php echo $region?>" ><?php echo $region?></option>
             <?php }?>
           <?php }?>
 		</select>
@@ -59,19 +59,19 @@
     </tr>
 
     <tr>
-      <td class="head"><?php print $status_ttl?></td>
+      <td class="head"><?php echo $status_ttl?></td>
       <td class="odd" >
-        <input type="radio" name="state" value="<?php print AVATAR_STATE_ACTIVE?>" <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>checked<?php }?> /><?php print $active_ttl?>&nbsp;|
-        <input type="radio" name="state" value="<?php print AVATAR_STATE_INACTIVE?>" <?php if ($this->state&AVATAR_STATE_INACTIVE) {?>checked<?php }?> /><?php print $inactive_ttl?>
+        <input type="radio" name="state" value="<?php echo AVATAR_STATE_ACTIVE?>" <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>checked<?php }?> /><?php echo $active_ttl?>&nbsp;|
+        <input type="radio" name="state" value="<?php echo AVATAR_STATE_INACTIVE?>" <?php if ($this->state&AVATAR_STATE_INACTIVE) {?>checked<?php }?> /><?php echo $inactive_ttl?>
       </td>
     </tr>
 
     <?php if ($this->use_sloodle) {?>
       <?php if ($this->avatars_num>1 or $this->hasPermit) {?>
         <tr>
-          <td class="head"><?php print $sloodle_ttl?></td>
+          <td class="head"><?php echo $sloodle_ttl?></td>
           <td class="even">
-            <input name="sloodle" type="checkbox" value="sloodle" <?php if ($this->state&AVATAR_STATE_SLOODLE) {?>checked<?php }?> />&nbsp;<?php print $manage_sloodle?>i
+            <input name="sloodle" type="checkbox" value="sloodle" <?php if ($this->state&AVATAR_STATE_SLOODLE) {?>checked<?php }?> />&nbsp;<?php echo $manage_sloodle?>i
           </td>
         </tr>
       <?php } else {?>
@@ -81,13 +81,13 @@
 
     <?php if ($this->hasPermit) {?>
       <tr>
-        <td class="head"><?php print $owner_ttl?></td>
-        <td class="odd" ><input name="ownername" size="32" maxlength="30" value="<?php print $this->ownername?>" /></td>
+        <td class="head"><?php echo $owner_ttl?></td>
+        <td class="odd" ><input name="ownername" size="32" maxlength="30" value="<?php echo $this->ownername?>" /></td>
       </tr>
     <?php } else {?>
       <tr>
-        <td class="head"><?php print $manage_avatar_ttl?></td>
-        <td class="even"><input name="nomanage" type="checkbox" value="manage_out" />&nbsp;<?php print $manage_out?></td>
+        <td class="head"><?php echo $manage_avatar_ttl?></td>
+        <td class="even"><input name="nomanage" type="checkbox" value="manage_out" />&nbsp;<?php echo $manage_out?></td>
       </tr> 
     <?php }?>
 
@@ -95,12 +95,12 @@
 
   <br />
   <div align="center">
-    <input name="submit_update" type="submit" id="submit_update" value="<?php print $update_ttl?>" />&nbsp;
-    <input type="reset"  value="<?php print $reset_ttl?>" />
+    <input name="submit_update" type="submit" id="submit_update" value="<?php echo $update_ttl?>" />&nbsp;
+    <input type="reset"  value="<?php echo $reset_ttl?>" />
     <?php if ($this->state&AVATAR_STATE_INACTIVE) { ?>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <!--<a href="<?php print $this->delete_url?>" ><font color=#f01010><?php print $delete_ttl?></font></a> -->
-      <input name="submit_delete" type="submit" id="submit_delete" value="<?php print $delete_ttl?>" />
+      <!--<a href="<?php echo $this->delete_url?>" ><font color=#f01010><?php echo $delete_ttl?></font></a> -->
+      <input name="submit_delete" type="submit" id="submit_delete" value="<?php echo $delete_ttl?>" />
     <?php }?>
   </div>
 
@@ -108,54 +108,54 @@
 <br />
 
 
-<!-- print Message -->
+<!-- echo Message -->
 <hr />
 <?php if ($this->hasError) {?>
   <div align="center">
     <ul>
       <?php foreach ($this->errorMsg as $mesg) {?>
-        <li><font color="#f01010"><b><?php print $mesg?></b></font></li>
+        <li><font color="#f01010"><b><?php echo $mesg?></b></font></li>
       <?php }?>
     </ul>
   </div>
 
 <?php } else {?>
   <?php if ($this->updated_avatar) {?>
-    <h3><font color=#1010e0><center><?php print $avatar_updated?></center></font></h3>
+    <h3><font color=#1010e0><center><?php echo $avatar_updated?></center></font></h3>
     <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff" >
       <?php if ($this->hasPermit) {?>
         <tr>
-          <td width="100" class="head"><?php print $uuid_ttl?></td>
-          <td width="320" class="even"><font color="#2060b0"><?php print $this->UUID?></font></td>	
+          <td width="100" class="head"><?php echo $uuid_ttl?></td>
+          <td width="320" class="even"><font color="#2060b0"><?php echo $this->UUID?></font></td>	
         </tr>
       <?php }?>
 
       <tr>
-        <td width="100" class="head"><?php print $firstname_ttl?></td>
-        <td width="320" class="odd" ><?php print $this->firstname?></td>	
+        <td width="100" class="head"><?php echo $firstname_ttl?></td>
+        <td width="320" class="odd" ><?php echo $this->firstname?></td>	
       </tr>
       <tr>
-        <td class="head"><?php print $lastname_ttl?></td>
-        <td class="even"><?php print $this->lastname?></td>	
+        <td class="head"><?php echo $lastname_ttl?></td>
+        <td class="even"><?php echo $this->lastname?></td>	
       </tr>
       <tr>
-        <td class="head"><?php print $home_region_ttl?></td>
-        <td class="odd" ><?php print $this->hmregion?></td>	
+        <td class="head"><?php echo $home_region_ttl?></td>
+        <td class="odd" ><?php echo $this->hmregion?></td>	
       </tr>
       <tr>
-        <td class="head"><?php print $status_ttl?></td>
+        <td class="head"><?php echo $status_ttl?></td>
         <td class="even" >
           <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
-            <font color=#cc0000><?php print $not_syncdb_ttl?>
+            <font color=#cc0000><?php echo $not_syncdb_ttl?>
           <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
-            <font color=#cc0000><?php print $inactive_ttl?>
+            <font color=#cc0000><?php echo $inactive_ttl?>
           <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
-            <font color=#005500><?php print $active_ttl?>
+            <font color=#005500><?php echo $active_ttl?>
           <?php } else {?>
-            <font color=#cc0000><?php print $unknown_status?>
+            <font color=#cc0000><?php echo $unknown_status?>
           <?php }?>
           <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
-            ,&nbsp;<?php print $sloodle_ttl?>
+            ,&nbsp;<?php echo $sloodle_ttl?>
           <?php }?>
             </font>
 
@@ -163,8 +163,8 @@
       </tr>
       <?php if ($this->hasPermit or $this->ownername=="") {?>
         <tr>
-          <td class="head"><?php print $ownername_ttl ?></td>
-          <td class="odd" ><?php print $this->ownername?></td>	
+          <td class="head"><?php echo $ownername_ttl ?></td>
+          <td class="odd" ><?php echo $this->ownername?></td>	
         </tr>
       <?php }?>
     </table>

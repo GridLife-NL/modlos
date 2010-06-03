@@ -7,7 +7,7 @@
  * function  get_display_username($firstname, $lastname)
  * function  get_names_from_display_username($username)
  *
- * function  get_userinfo_by_name($firstname, $lastname="")
+ * function  get_userinfo_by_name($firstname, $lastname='')
  * function  get_userinfo_by_id($id)
  *
  ****************************************************************/
@@ -37,17 +37,17 @@ function  get_display_username($firstname, $lastname)
 	global $CFG;
 
 	if ($CFG->fullnamedisplay=='lastname firstname') {
-		$username = $lastname." ".$firstname;
+		$username = $lastname.' '.$firstname;
 	}
 	/*
 	else if ($CFG->fullnamedisplay=='firstname') {
 		$username = $firstname;
 	}*/
 	else {
-		$username = $firstname." ".$lastname;
+		$username = $firstname.' '.$lastname;
 	}
 
-	if ($username==" ") $username = "";
+	if ($username==' ') $username = '';
 
 	return $username;
 }
@@ -58,7 +58,7 @@ function  get_names_from_display_username($username)
 {
 	global $CFG;
 
-	$names = explode(" ", $username);
+	$names = explode(' ', $username);
 	if ($names==null) return null;
 
 	if ($CFG->fullnamedisplay=='lastname firstname') {
@@ -68,7 +68,7 @@ function  get_names_from_display_username($username)
 	/*
 	else if ($CFG->fullnamedisplay=='firstname') {
 		$fisetN = $names[0];
-		$lastN  = "";
+		$lastN  = '';
 	}*/
 	else {
 		$firstN = $names[0];
@@ -84,10 +84,10 @@ function  get_names_from_display_username($username)
 
 
 
-function  get_userinfo_by_name($firstname, $lastname="")
+function  get_userinfo_by_name($firstname, $lastname='')
 {
-	if ($lastname=="") {
-		$names = explode(" ", $firstname);
+	if ($lastname=='') {
+		$names = explode(' ', $firstname);
 		$firstname = $names[0];
 		$lastname  = $names[1];
 	}

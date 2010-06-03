@@ -1,11 +1,12 @@
 <?php
 //////////////////////////////////////////////////
 //
-// ?action=home ¤Þ¤¿¤Ï ?action= ¤Î¾ì¹ç¤ËÆÉ¤ß½Ð¤µ¤ì¤ë¡¥
+// ?action=showhome ã¾ãŸã¯ ?action= ã®å ´åˆã«èª­ã¿å‡ºã•ã‚Œã‚‹ï¼Ž
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/modlos.func.php");
+
+require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
@@ -64,15 +65,15 @@ class  ShowHome
 		$grid_name       	= $CFG->modlos_grid_name;
 		$content         	= $CFG->modlos_home_content;
 
-		$db_status 			= get_string("modlos_db_status", 		  "block_modlos");
-		$online_ttl 		= get_string("modlos_online_ttl", 		  "block_modlos");
-		$offline_ttl 		= get_string("modlos_offline_ttl", 		  "block_modlos");
-		$total_users 		= get_string("modlos_total_users", 		  "block_modlos");
-		$total_regions 		= get_string("modlos_total_regions", 	  "block_modlos");
-		$visitors_last30days= get_string("modlos_visitors_last30days","block_modlos");
-		$online_now 		= get_string("modlos_online_now", 		  "block_modlos");
+		$db_status 			= get_string('modlos_db_status', 		  'block_modlos');
+		$online_ttl 		= get_string('modlos_online_ttl', 		  'block_modlos');
+		$offline_ttl 		= get_string('modlos_offline_ttl', 		  'block_modlos');
+		$total_users 		= get_string('modlos_total_users', 		  'block_modlos');
+		$total_regions 		= get_string('modlos_total_regions', 	  'block_modlos');
+		$visitors_last30days= get_string('modlos_visitors_last30days','block_modlos');
+		$online_now 		= get_string('modlos_online_now', 		  'block_modlos');
 
-		include(CMS_MODULE_PATH."/html/show_home.html");
+		include(CMS_MODULE_PATH.'/html/show_home.html');
 	}
 
 }

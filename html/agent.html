@@ -34,78 +34,78 @@
 }
 </style>
 
-<title><?php print $grid_name."&nbsp;:&nbsp;".$user_info_ttl?></title>
+<title><?php echo $grid_name."&nbsp;:&nbsp;".$user_info_ttl?></title>
 </head>
 
 
 <body>
 <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr><td colspan="2" valign="top"><span class="styleTopTitle"><?php print $grid_name."&nbsp;:&nbsp;".$avatar_info_ttl?></span></td></tr>
+  <tr><td colspan="2" valign="top"><span class="styleTopTitle"><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_info_ttl?></span></td></tr>
   <tr><td colspan="2" valign="top"><hr /></td></tr>
   <tr>
     <td width="55%" valign="top">
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr><td>&nbsp;</td></tr>
-        <tr><td><span class="styleTitel"><?php print $user_ttl.":&nbsp;".$firstN."&nbsp;&nbsp;".$lastN?></span></td></tr>
+        <tr><td><span class="styleTitel"><?php echo $user_ttl.":&nbsp;".$firstN."&nbsp;&nbsp;".$lastN?></span></td></tr>
         <?php if ($hasPermit) {?>
           <tr><td>&nbsp;</td></tr>
-          <tr><td class="styleText"><b><?php print $uuid_ttl.":&nbsp;".$UUID?></b></td></tr>
+          <tr><td class="styleText"><b><?php echo $uuid_ttl.":&nbsp;".$UUID?></b></td></tr>
         <?php }?>
         <tr><td>&nbsp;</td></tr>
-        <tr><td class="styleText"><b><?php print $born_on_ttl.":&nbsp;".$born?></b></td></tr>
+        <tr><td class="styleText"><b><?php echo $born_on_ttl.":&nbsp;".$born?></b></td></tr>
         <tr><td>&nbsp;</td></tr>
-        <tr><td class="styleText"><b><?php print $lastlogin_ttl.":&nbsp;".$lastin?></b></td></tr>
+        <tr><td class="styleText"><b><?php echo $lastlogin_ttl.":&nbsp;".$lastin?></b></td></tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-          <td class="styleText"><b><?php print $ownername_ttl.":&nbsp;"?><font color="#105ba7">
+          <td class="styleText"><b><?php echo $ownername_ttl.":&nbsp;"?><font color="#105ba7">
             <?php if ($userinfo and $owner!=' - ') {?>
-              <a href="<?php print $CFG->wwwroot.'/user/view.php?id='.$userid.$course_amp?>" target="_blank"><?php print $owner?></a>
+              <a href="<?php echo $CFG->wwwroot.'/user/view.php?id='.$userid.$course_amp?>" target="_blank"><?php echo $owner?></a>
             <?php } else {?>
-              <?php print $owner?>
+              <?php echo $owner?>
             <?php }?>
             </font></b>
           </td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-          <td class="styleText"><b><?php print $status_ttl?>:&nbsp;
+          <td class="styleText"><b><?php echo $status_ttl?>:&nbsp;
             <?php if (!($state&AVATAR_STATE_SYNCDB)) {?>
-              <font color=#cc0000><?php print $not_syncdb_ttl?>
+              <font color=#cc0000><?php echo $not_syncdb_ttl?>
             <?php } elseif ($state&AVATAR_STATE_INACTIVE) {?>
-              <font color=#cc0000><?php print $inactive_ttl?>
+              <font color=#cc0000><?php echo $inactive_ttl?>
             <?php } elseif ($state&AVATAR_STATE_SYNCDB) {?>
-              <font color=#0000cc><?php print $active_ttl?>
+              <font color=#0000cc><?php echo $active_ttl?>
             <?php } else {?>
-              <font color=#cc0000><?php print $unknown_status."(".$state.")"?>
+              <font color=#cc0000><?php echo $unknown_status."(".$state.")"?>
             <?php }?>
             <?php if ($state&AVATAR_STATE_SLOODLE and $owner!=' - ' and $use_sloodle) {?>
-              ,&nbsp;<?php print $sloodle_ttl?>
+              ,&nbsp;<?php echo $sloodle_ttl?>
             <?php }?>
               </font>
 
             <?php if ($agentOnline) {?>
-              &nbsp;<span class='styleOnline'>[<?php print $online_ttl?>]</span>
+              &nbsp;<span class='styleOnline'>[<?php echo $online_ttl?>]</span>
             <?php } else {?>
-              &nbsp;<span class='styleOffline'>[<?php print $offline_ttl?>]</span>
+              &nbsp;<span class='styleOffline'>[<?php echo $offline_ttl?>]</span>
             <?php }?>
             </b>
           </td>
         </tr>
         <tr><td class="styleText">&nbsp;</td></tr>
         <tr>
-          <td class="styleText"><b><?php print $home_region_ttl?>:&nbsp;
-            <a href="<?php print CMS_MODULE_URL.'/helper/sim.php?region='.$regionUUID.$course_amp?>"><font color="#0055cc"><?php print $regionName?></font></a>
+          <td class="styleText"><b><?php echo $home_region_ttl?>:&nbsp;
+            <a href="<?php echo CMS_MODULE_URL.'/helper/sim.php?region='.$regionUUID.$course_amp?>"><font color="#0055cc"><?php echo $regionName?></font></a>
           </b></td>
         </tr>
         <tr><td>&nbsp;</td></tr>
-        <tr><td><span class="styleText"><u><b><?php print $profile_ttl?></b></u></span></td></tr>
+        <tr><td><span class="styleText"><u><b><?php echo $profile_ttl?></b></u></span></td></tr>
         <tr><td><span class="styleplace">.</span></td></tr>
         <tr>
           <td><span class="styleText">
             <?php if ($profileTXT!="") {?>
-              <?php print htmlspecialchars($profileTXT)?>
+              <?php echo htmlspecialchars($profileTXT)?>
             <?php } else {?>
-              <?php print $has_noprofile?>
+              <?php echo $has_noprofile?>
             <?php }?>
           </span></td>
         </tr>
@@ -122,7 +122,7 @@
             <div align="center">
               <table width="256" height="256" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td bgcolor="#ffffff" background="<?php print CMS_MODULE_URL?>/images/info.jpg">&nbsp;</td>
+                  <td bgcolor="#ffffff" background="<?php echo CMS_MODULE_URL?>/images/info.jpg">&nbsp;</td>
                 </tr>
               </table>
             </div>
