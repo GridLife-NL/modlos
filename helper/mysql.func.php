@@ -40,13 +40,19 @@ class DB
 	var $Errno    = 0;					// Error state of query
 	var $Error    = '';
 
+	var $Timeout;						// not implement yet
 
-	function DB($connect=false)
+
+
+	function DB($timeout=60, $connect=false)
 	{
 		//$this->Host 	= OPENSIM_DB_HOST;	
 		//$this->Database = OPENSIM_DB_NAME;	
 		//$this->User 	= OPENSIM_DB_USER;	
 		//$this->Password = OPENSIM_DB_PASS;	
+
+		$this->Timeout = $timeout;
+		//ini_set('mysql.connect_timeout', $timeout);
 
 		if ($connect) $this->connect();
 	}
@@ -243,6 +249,34 @@ class DB
 
 		return $ret2;
 	}
+
+
+
+
+	//
+	// Timeout
+	//
+/*
+	function set_default_timeout($tm)
+	{
+    	ini_set('mysql.connect_timeout', $tm);
+		$this->Timeout = $tm;
+	}
+
+
+
+	function set_temp_timeout($tm)
+	{
+    	ini_set('mysql.connect_timeout', $tm);
+	}
+
+
+
+	function reset_timeout()
+	{
+    	ini_set('mysql.connect_timeout', $this->Timeout);
+	}
+*/
 
 }
 

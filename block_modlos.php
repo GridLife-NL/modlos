@@ -46,7 +46,10 @@ class block_modlos extends block_base
 		}
 		$id = optional_param('id', 0, PARAM_INT);
 	   
+		//$timeout = ini_get('mysql.connect_timeout');
+		//ini_set('mysql.connect_timeout', 1);
 		$db_ver = opensim_get_db_version();
+		//ini_set('mysql.connect_timeout', $timeout);
 
 		$this->content = new stdClass;
 
