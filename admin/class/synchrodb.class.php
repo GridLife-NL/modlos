@@ -102,6 +102,17 @@ class  SynchroDataBase
 			$modlos_users[$modlos_uuid]['time']		= $user->time;
 		}
 
+
+		// OpenSimに対応データが無い場合はデータを消す．
+		foreach ($modlos_users as $modlos_user) {
+			$moodle_uuid = $modlos_user['UUID'];
+			if (!array_key_exists($moodle_uuid, $opsim_users)) {
+				$modlos_user['state'] |= AVATAR_STATE_INACTIVE;
+				modlos_delete_usertable($modlos_user);
+			}
+		}
+
+
 		// OpenSimにデータがある場合は，Modlos のデータを OpenSimにあわせる．
 		foreach ($opsim_users as $opsim_user) {
 			$opsim_user['uid']   = 0;
@@ -114,15 +125,6 @@ class  SynchroDataBase
 			}
 			else {
 				modlos_insert_usertable($opsim_user);
-			}
-		}
-
-		// OpenSimに対応データが無い場合はデータを消す．
-		foreach ($modlos_users as $modlos_user) {
-			$moodle_uuid = $modlos_user['UUID'];
-			if (!array_key_exists($moodle_uuid, $opsim_users)) {
-				$modlos_user['state'] &= AVATAR_STATE_INACTIVE;
-				modlos_delete_usertable($modlos_user);
 			}
 		}
 

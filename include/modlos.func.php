@@ -204,7 +204,7 @@ function  modlos_insert_usertable($user)
 	$insobj->lastname  = $user['lastname'];
 
 	if ($user['uid']!='') 	$insobj->user_id = $user['uid'];
-	else                  	$insobj->user_id = 0;
+	else                  	$insobj->user_id = '0';
 	if ($user['state']!='')	$insobj->state 	 = $user['state'];
 	else				 	$insobj->state 	 = AVATAR_STATE_SYNCDB;
 	if ($user['time']!='') 	$insobj->time 	 = $user['time'];
@@ -216,9 +216,16 @@ function  modlos_insert_usertable($user)
 		else 				$insobj->hmregion = $user['hmregion'];
 	}
 	else {
-		$insobj->hmregion = $user['hmregion'];
+		if ($user['hmregion']==null) {
+			$insobj->hmregion = '';
+		}
+		else {
+			$insobj->hmregion = $user['hmregion'];
+		}
 	}
-
+	
+print_r($insobj);
+print("AAAAAAAAAAAAAAAAAA<br/>");
 	$ret = insert_record('modlos_users', $insobj);
 
 	return $ret;

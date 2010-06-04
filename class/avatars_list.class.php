@@ -191,14 +191,13 @@ class  AvatarsList
 		// OpenSim DB
 		$users = opensim_get_avatars_infos($this->sql_condition);
 
-		$DbLink = new DB;
 		$colum  = 0;
 		foreach($users as $user) {
 			$this->db_data[$colum]				= $user;
 			$this->db_data[$colum]['num']		= $colum;
 			$this->db_data[$colum]['ownername']	= ' - ';
 			$this->db_data[$colum]['region_id']	= $user['hmregion'];
-			$this->db_data[$colum]['region']	= opensim_get_region_name($user['hmregion'], $DbLink);
+			$this->db_data[$colum]['region']	= opensim_get_region_name($user['hmregion']);
 			$this->db_data[$colum]['state']		= AVATAR_STATE_NOSTATE;
 			$this->db_data[$colum]['editable']	= AVATAR_NOT_EDITABLE;
 
@@ -220,7 +219,7 @@ class  AvatarsList
 
 			// Agent Online Info
 			$UUID = $this->db_data[$colum]['UUID'];
-			$online = opensim_get_avatar_online($UUID, $DbLink);
+			$online = opensim_get_avatar_online($UUID);
 			$this->db_data[$colum]['online'] = $online['online'];
 			if ($online['online']) {
 				$this->db_data[$colum]['region_id']	= $online['region_id'];
@@ -255,7 +254,6 @@ class  AvatarsList
 			$colum++;
 		}
 
-		$DbLink->close();
 		return true;
 	}
 
