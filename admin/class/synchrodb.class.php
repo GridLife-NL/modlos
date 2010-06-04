@@ -87,6 +87,7 @@ class  SynchroDataBase
 		// OpenSim DB
 		$opsim_users = opensim_get_avatars_infos();
 
+
 		// Modlos DB を読んで配列に変換
 		$db_users = get_records('modlos_users');
 		$modlos_users = array();
