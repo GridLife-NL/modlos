@@ -92,14 +92,14 @@ class  SynchroDataBase
 		$modlos_users = array();
 		foreach ($db_users as $user) {
 			$modlos_uuid = $user->uuid;
-			$modlos_users[$modlos_uuid]['id'] 	   = $user->id;
-			$modlos_users[$modlos_uuid]['UUID'] 	   = $user->uuid;
-			$modlos_users[$modlos_uuid]['uid']	   = $user->user_id;
-			$modlos_users[$modlos_uuid]['firstname'] = $user->firstname;
-			$modlos_users[$modlos_uuid]['lastname']  = $user->lastname;
-			$modlos_users[$modlos_uuid]['hmregion']  = $user->hmregion;
-			$modlos_users[$modlos_uuid]['state']     = $user->state;
-			$modlos_users[$modlos_uuid]['time']  	   = $user->time;
+			$modlos_users[$modlos_uuid]['id']		= $user->id;
+			$modlos_users[$modlos_uuid]['UUID'] 	= $user->uuid;
+			$modlos_users[$modlos_uuid]['uid']	   	= $user->user_id;
+			$modlos_users[$modlos_uuid]['firstname']= $user->firstname;
+			$modlos_users[$modlos_uuid]['lastname']	= $user->lastname;
+			$modlos_users[$modlos_uuid]['hmregion']	= $user->hmregion;
+			$modlos_users[$modlos_uuid]['state']	= $user->state;
+			$modlos_users[$modlos_uuid]['time']		= $user->time;
 		}
 
 		// OpenSimにデータがある場合は，Modlos のデータを OpenSimにあわせる．
