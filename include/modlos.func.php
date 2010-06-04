@@ -8,6 +8,7 @@
  * function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
  * function  modlos_get_avatars_num($uuid, $use_sloodle=false)
  *
+ * function  modlos_get_users()
  * function  modlos_insert_usertable($user)
  * function  modlos_update_usertable($user)
  * function  modlos_delete_usertable($user)
@@ -127,7 +128,7 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 			}
 		}
 		else {
-			if ($avatar['state']&AVATAR_STATE_SLOODLE) {
+			if ($avatar['state']&AVATAR_STATE_SLOODLE and $avatar['uid']!=0) {
 				$updobj->userid = $avatar['uid'];
 				$updobj->lastactive = time();
 				$ret = update_record(MDL_SLOODLE_USERS_TBL, $updobj);
@@ -191,9 +192,34 @@ function  modlos_get_avatars_num($id, $use_sloodle=false)
 //
 // usertable DB
 //
+//
+
+function  modlos_get_users()
+{
+	// Modlos DB を読んで配列に変換
+	$db_users = get_records('modlos_users');
+	$modlos_users = array();
+	foreach ($db_users as $user) {
+		$modlos_uuid = $user->uuid;
+		$modlos_users[$modlos_uuid]['id']       = $user->id;
+		$modlos_users[$modlos_uuid]['UUID']     = $user->uuid;
+		$modlos_users[$modlos_uuid]['uid']      = $user->user_id;
+		$modlos_users[$modlos_uuid]['firstname']= $user->firstname;
+		$modlos_users[$modlos_uuid]['lastname'] = $user->lastname;
+		$modlos_users[$modlos_uuid]['hmregion'] = $user->hmregion;
+		$modlos_users[$modlos_uuid]['state']    = $user->state;
+		$modlos_users[$modlos_uuid]['time']     = $user->time;
+	}
+	
+	return $modlos_users;
+}
+
+
+
+
+//
 //	UUID, firstname, lastname, uid, state, time, hmregion are setted in $user[]
 //		hmregion is UUID or name of region
-//
 
 function  modlos_insert_usertable($user)
 {
@@ -224,8 +250,6 @@ function  modlos_insert_usertable($user)
 		}
 	}
 	
-print_r($insobj);
-print("AAAAAAAAAAAAAAAAAA<br/>");
 	$ret = insert_record('modlos_users', $insobj);
 
 	return $ret;

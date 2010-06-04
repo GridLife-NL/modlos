@@ -84,30 +84,13 @@ class  SynchroDataBase
 	{
 		global $CFG;
 
-		// OpenSim DB
-		$opsim_users = opensim_get_avatars_infos();
-
-
-		// Modlos DB を読んで配列に変換
-		$db_users = get_records('modlos_users');
-		$modlos_users = array();
-		foreach ($db_users as $user) {
-			$modlos_uuid = $user->uuid;
-			$modlos_users[$modlos_uuid]['id']		= $user->id;
-			$modlos_users[$modlos_uuid]['UUID'] 	= $user->uuid;
-			$modlos_users[$modlos_uuid]['uid']	   	= $user->user_id;
-			$modlos_users[$modlos_uuid]['firstname']= $user->firstname;
-			$modlos_users[$modlos_uuid]['lastname']	= $user->lastname;
-			$modlos_users[$modlos_uuid]['hmregion']	= $user->hmregion;
-			$modlos_users[$modlos_uuid]['state']	= $user->state;
-			$modlos_users[$modlos_uuid]['time']		= $user->time;
-		}
-
+		$opnsim_users = opensim_get_avatars_infos();	// OpenSim DB
+		$modlos_users = modlos_get_users(); 			// Modlos DB
 
 		// OpenSimに対応データが無い場合はデータを消す．
 		foreach ($modlos_users as $modlos_user) {
 			$moodle_uuid = $modlos_user['UUID'];
-			if (!array_key_exists($moodle_uuid, $opsim_users)) {
+			if (!array_key_exists($moodle_uuid, $opnsim_users)) {
 				$modlos_user['state'] |= AVATAR_STATE_INACTIVE;
 				modlos_delete_usertable($modlos_user);
 			}
@@ -115,32 +98,43 @@ class  SynchroDataBase
 
 
 		// OpenSimにデータがある場合は，Modlos のデータを OpenSimにあわせる．
-		foreach ($opsim_users as $opsim_user) {
-			$opsim_user['uid']   = 0;
-			$opsim_user['time']  = time();
-			$opsim_user['state'] = AVATAR_STATE_SYNCDB | AVATAR_STATE_SLOODLE;
+		foreach ($opnsim_users as $opnsim_user) {
+			$opnsim_user['uid']   = 0;
+			$opnsim_user['time']  = time();
+			$opnsim_user['state'] = AVATAR_STATE_SYNCDB;
 
-			if (array_key_exists($opsim_user['UUID'], $modlos_users)) {
-				$opsim_user['id'] = $modlos_users[$opsim_user['UUID']]['id'];
-				modlos_update_usertable($opsim_user);
+			if (array_key_exists($opnsim_user['UUID'], $modlos_users)) {
+				$opnsim_user['id'] = $modlos_users[$opnsim_user['UUID']]['id'];
+				modlos_update_usertable($opnsim_user);
 			}
 			else {
-				modlos_insert_usertable($opsim_user);
+				modlos_insert_usertable($opnsim_user);
 			}
 		}
 
 
+		//
 		// Sloodle連携
+		//
 		if ($CFG->modlos_cooperate_sloodle) {
 			$sloodles = get_records(MDL_SLOODLE_USERS_TBL);
-			if (is_array($sloodles)) {
-				foreach($sloodles as $sloodle) {
-					$mdl = get_record('modlos_users', 'uuid', $sloodle->uuid);
-					if ($mdl!=null) {
-						if (($mdl->user_id>0 and $CFG->modlos_priority_sloodle) or ($mdl->user_id==0)) { 
-							$mdl->user_id = $sloodle->userid;
-							update_record('modlos_users', $mdl);
+			$modloses = get_records('modlos_users');
+
+			if (is_array($sloodles) and is_array($modloses)) {
+				foreach ($modloses as $modlos) {
+					$updated = false;
+					foreach($sloodles as $sloodle) {
+						if ($modlos->uuid==$sloodle->uuid) {
+							if ($CFG->modlos_priority_sloodle or $modlos->user_id==0) { 
+								$modlos->user_id = $sloodle->userid;
+							}
+							$modlos->state |= AVATAR_STATE_SLOODLE;
+							$updated = true;
+							break;
 						}
+					}
+					if ($updated) {
+						update_record('modlos_users', $modlos);
 					}
 				}
 			}

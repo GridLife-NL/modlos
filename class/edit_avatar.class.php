@@ -192,6 +192,8 @@ class  EditAvatar
 				return false;
 			}
 		}
+
+		// GET
 		else {
 			$this->passwd	= '';
 			$this->hmregion = $this->avatar['hmregion'];
@@ -287,6 +289,7 @@ class  EditAvatar
 				}
 			}
 		}
+
 
 		// Modlos and Sloodle DB
 		$update_user['id']	  	  = $this->avatar['id'];
