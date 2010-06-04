@@ -106,8 +106,9 @@ define('AVATAR_STATE_SYNCDB',  	'1');		// 0x01
 define('AVATAR_STATE_SLOODLE', 	'2');		// 0x02
 define('AVATAR_STATE_INACTIVE',	'4');		// 0x04
 
-define('AVATAR_STATE_NOSLOODLE','130');		// 0x82
-define('AVATAR_STATE_ACTIVE',	'132');		// 0x84
+define('AVATAR_STATE_NOSYNCDB',	'254');		// 0xfe
+define('AVATAR_STATE_NOSLOODLE','253');		// 0xfd
+define('AVATAR_STATE_ACTIVE',	'251');		// 0xfb
 
 // Editable
 define('AVATAR_NOT_EDITABLE',	'0');

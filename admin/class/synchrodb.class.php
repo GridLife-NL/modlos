@@ -96,22 +96,21 @@ class  SynchroDataBase
 			}
 		}
 
-
 		// OpenSimにデータがある場合は，Modlos のデータを OpenSimにあわせる．
 		foreach ($opnsim_users as $opnsim_user) {
-			$opnsim_user['uid']   = 0;
-			$opnsim_user['time']  = time();
-			$opnsim_user['state'] = AVATAR_STATE_SYNCDB;
-
+			$opnsim_user['time'] = time();
 			if (array_key_exists($opnsim_user['UUID'], $modlos_users)) {
-				$opnsim_user['id'] = $modlos_users[$opnsim_user['UUID']]['id'];
+				//$opnsim_user['id'] = $modlos_users[$opnsim_user['UUID']]['id'];
+				$opnsim_user['uid']   = $modlos_users[$opnsim_user['UUID']]['uid'];
+				$opnsim_user['state'] = $modlos_users[$opnsim_user['UUID']]['state'];
 				modlos_update_usertable($opnsim_user);
 			}
 			else {
+				$opnsim_user['uid']   = 0;
+				$opnsim_user['state'] = AVATAR_STATE_SYNCDB;
 				modlos_insert_usertable($opnsim_user);
 			}
 		}
-
 
 		//
 		// Sloodle連携
