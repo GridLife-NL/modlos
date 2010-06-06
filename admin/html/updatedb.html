@@ -1,8 +1,8 @@
 
-<h2><center><?php echo $grid_name.":&nbsp;".$synchro_db_ttl?></center></h2>
+<h2><center><?php echo $grid_name.":&nbsp;".$updatedb_ttl?></center></h2>
 <br />
 
-<?php if (!$this->synchronized) {?>
+<?php if (!$this->dbupdated) {?>
   <form action="<?php echo $this->action_url?>" method="POST">
     <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
       <tr>
@@ -16,12 +16,12 @@
     <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
     <input type="hidden" name="quest"   value="yes" />
     <center>
-      <input type="submit" value="<?php echo $synchro_submit?>" /> 
+      <input type="submit" value="<?php echo $updatedb_submit?>" /> 
     </center>
   </form>
 
 <?php } else {?>
-  <h3><font color=#2222FF><center><?php echo $synchronized_msg ?></center></font></h3>
+  <h3><font color=#2222FF><center><?php echo $updatedb_msg ?></center></font></h3>
 <?php }?>
 <br />
 

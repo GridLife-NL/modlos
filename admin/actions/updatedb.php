@@ -14,12 +14,12 @@ $action = 'updatedb';
 print_modlos_header($action, $course);
 
 require_once(CMS_MODULE_PATH."/admin/class/updatedb.class.php");
-$update = new UpdateDataBase($course_id);
+$updatedb = new UpdateDataBase($course_id);
 
 print_tabnav($action, $course);
 
-$synchro->execute();
-$synchro->print_page();
+$updatedb->execute();
+$updatedb->print_page();
 
 print_footer($course);
 	

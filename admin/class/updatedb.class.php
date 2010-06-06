@@ -19,7 +19,7 @@ class  UpdateDataBase
 	var $action_url;
 	var $hashPermit;
 	var $course_id = 0;
-	var	$updateddb = false;
+	var	$dbupdated= false;
 	var	$hasError  = false;
 	var	$errorMsg  = array();
 
@@ -70,10 +70,12 @@ class  UpdateDataBase
 				opensim_recreate_presence();
 				$profs = opensim_get_avatars_profiles_from_users();
 				if ($profs!=null) modlos_set_profiles($profs, false);		// not over write
+
+				$this->dbupdated = true;
 			}
 		}
 
-		return $this->updateddb;
+		return $this->dbupdated;
 	}
 
 
@@ -82,11 +84,11 @@ class  UpdateDataBase
 	{
 		global $CFG;
 
-		$grid_name	   = $CFG->modlos_grid_name;
-		$update_db_ttl = get_string("modlos_updatedb_db", 		"block_modlos");
-		$updated_msg   = get_string("modlos_updatedb_executed",	"block_modlos");
-		$update_submit = get_string("modlos_updatedb_submit", 	"block_modlos");
-		$content	   = "<center>".get_string("modlos_updatedb_contents", "block_modlos")."</center>";
+		$grid_name		= $CFG->modlos_grid_name;
+		$updatedb_ttl 	= get_string("modlos_updatedb_ttl", 	"block_modlos");
+		$updatedb_msg   = get_string("modlos_updatedb_updated",	"block_modlos");
+		$updatedb_submit= get_string("modlos_updatedb_submit", 	"block_modlos");
+		$content		= "<center>".get_string("modlos_updatedb_contents", "block_modlos")."</center>";
 
 		include(CMS_MODULE_PATH."/admin/html/updatedb.html");
 	}
