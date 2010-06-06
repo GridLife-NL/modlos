@@ -139,8 +139,6 @@ class  AvatarsList
 	{
 		global $CFG, $USER;
 
-		$use_sloodle = $CFG->modlos_cooperate_sloodle;
-
 		$dummy = opensim_get_avatars_infos($this->sql_countcnd);
 		if (is_array($dummy)) $this->number = count($dummy);
 		else $this->number = 0;
@@ -225,9 +223,17 @@ class  AvatarsList
 				$this->db_data[$colum]['region'] 	= $online['region_name'];
 			}
 
+
 			// serach Moodle, Modlos and Sloodle DB
 			$uid = -1;
-			$avatardata = modlos_get_avatar_info($UUID, $use_sloodle);
+			$avatardata = modlos_get_avatar_info($UUID, $this->use_sloodle);
+
+			// auto Synchro
+			if ($avatardata==null) {
+				modlos_sync_opensimdb($this->use_sloodle);
+				$avatardata = modlos_get_avatar_info($UUID, $this->use_sloodle);
+			}
+
 			if ($avatardata!=null) {
 				$uid = $avatardata['uid'];
 				$this->db_data[$colum]['state'] = $avatardata['state'];
@@ -240,6 +246,7 @@ class  AvatarsList
 			}
 
 			$this->db_data[$colum]['uid'] = $uid;
+
 
 			if ($this->hasPermit or $USER->id==$uid) {
 				$this->db_data[$colum]['editable'] = AVATAR_EDITABLE;

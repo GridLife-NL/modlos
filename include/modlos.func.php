@@ -28,6 +28,7 @@
  * function  modlos_inactivate_avatar($uuid)
  * function  modlos_delete_banneddb($uuid)
  *
+ * function  modlos_sync_opensimdb($use_sloodle=false)
  * function  modlos_sync_sloodle_users()
  *
  * function  print_tabnav($currenttab, $course, $create_tab=true)
@@ -531,9 +532,51 @@ function  modlos_delete_banneddb($uuid)
 
 
 
+//////////////////////////////////////////////////////////////////////////////////
 //
-// for Sloodle
+// for DB Synchro
 //
+
+function  modlos_sync_opensimdb($use_sloodle=false)
+{
+	$opnsim_users = opensim_get_avatars_infos();	// OpenSim DB
+	$modlos_users = modlos_get_users(); 			// Modlos DB
+
+		// OpenSimに対応データが無い場合はデータを消す．
+	foreach ($modlos_users as $modlos_user) {
+		$moodle_uuid = $modlos_user['UUID'];
+		if (!array_key_exists($moodle_uuid, $opnsim_users)) {
+			$modlos_user['state'] |= AVATAR_STATE_INACTIVE;
+			modlos_delete_usertable($modlos_user);
+		}
+	}
+
+	// OpenSimにデータがある場合は，Modlos のデータを OpenSimにあわせる．
+	foreach ($opnsim_users as $opnsim_user) {
+		$opnsim_user['time'] = time();
+		if (array_key_exists($opnsim_user['UUID'], $modlos_users)) {
+			//$opnsim_user['id'] = $modlos_users[$opnsim_user['UUID']]['id'];
+			$opnsim_user['uid']   = $modlos_users[$opnsim_user['UUID']]['uid'];
+			$opnsim_user['state'] = $modlos_users[$opnsim_user['UUID']]['state'];
+			modlos_update_usertable($opnsim_user);
+		}
+		else {
+			$opnsim_user['uid']   = 0;
+			$opnsim_user['state'] = AVATAR_STATE_SYNCDB;
+			modlos_insert_usertable($opnsim_user);
+		}
+	}
+
+
+	// Sloodle連携
+	if ($use_sloodle) {
+		modlos_sync_sloodle_users();
+	}
+
+	return true;
+}
+
+
 
 function  modlos_sync_sloodle_users()
 {
@@ -561,6 +604,7 @@ function  modlos_sync_sloodle_users()
 
 
 
+//////////////////////////////////////////////////////////////////////////////////
 //
 // Tab Header
 //

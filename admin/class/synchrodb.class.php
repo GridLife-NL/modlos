@@ -117,7 +117,7 @@ class  SynchroDataBase
 		// Sloodle連携
 		//
 		if ($CFG->modlos_cooperate_sloodle) {
-			modlos_sync_sloodle_users(true);
+			modlos_sync_sloodle_users();
 		}
 
 		return true;

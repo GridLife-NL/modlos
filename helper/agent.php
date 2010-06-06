@@ -56,6 +56,13 @@ if ($agent) {
 
 	// Modlos and Sloodle DB
 	$avatar = modlos_get_avatar_info($agent, $use_sloodle);
+
+	// auto Synchro
+	if ($avatar==null) {
+		modlos_sync_opensimdb($use_sloodle);
+		$avatar = modlos_get_avatar_info($agent, $use_sloodle);
+	}
+
 	if ($avatar!=null) {
 		$userid = $avatar['uid'];
 		$state  = $avatar['state'];
