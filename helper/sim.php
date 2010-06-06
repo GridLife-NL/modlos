@@ -23,7 +23,7 @@ $region    = required_param('region', PARAM_TEXT);
 if (!isGUID($region)) exit("<h4>bad region uuid!! ($region)</h4>");
 
 require_login($course_id);
-$hasPermit = hasPermit($course_id);
+$hasPermit = hasModlosPermit($course_id);
 
 global $CFG;
 $grid_name  = $CFG->modlos_grid_name;

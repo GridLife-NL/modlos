@@ -52,7 +52,7 @@ class  OwnerAvatar
 		$course_param 	   = '?course='.$course_id;
 		$this->return_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param;
 		$this->course_id   = $course_id;
-		$this->hasPermit   = hasPermit($course_id);
+		$this->hasPermit   = hasModlosPermit($course_id);
 		$this->action_url  = $module_url.'/actions/owner_avatar.php';
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		$this->user_id	   = $USER->id;

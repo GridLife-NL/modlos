@@ -1,10 +1,11 @@
 <?php
 
 // Nav 
-$course_id = optional_param('course', '0', PARAM_INT);
-$course = get_record('course', 'id', $course_id);
 define('CMS_MODULE_PATH', $CFG->dirroot.'/blocks');
 include(CMS_MODILE_PATH.'/modlos/include/modlos.func.php');
+
+$course_id = optional_param('course', '0', PARAM_INT);
+$course = get_record('course', 'id', $course_id);
 
 ob_start();
 print_tabnav('settings', $course);

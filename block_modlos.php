@@ -64,7 +64,7 @@ class block_modlos extends block_base
 			if ($db_ver!=null) { 
 				$avatars_num = modlos_get_avatars_num($USER->id);
 				$max_avatars = $CFG->modlos_max_own_avatars;
-				if (!hasPermit($id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
+				if (!hasModlosPermit($id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
 			}
 
 			if (!$isAvatarMax) {

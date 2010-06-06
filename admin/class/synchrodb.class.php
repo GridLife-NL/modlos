@@ -30,7 +30,7 @@ class  SynchroDataBase
 		require_login($course_id);
 
 		$this->course_id  = $course_id;
-		$this->hasPermit = hasPermit($course_id);
+		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');

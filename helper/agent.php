@@ -16,7 +16,7 @@ $agent 	   = required_param('agent', PARAM_TEXT);
 if (!isGUID($agent)) exit("<h4>bad agent uuid!! ($agent)</h4>");
 
 require_login($course_id);
-$hasPermit  = hasPermit($course_id);
+$hasPermit  = hasModlosPermit($course_id);
 
 global $CFG;
 $use_sloodle= $CFG->modlos_cooperate_sloodle;

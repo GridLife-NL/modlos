@@ -14,13 +14,13 @@
 
 
 
-function  hasPermit($course_id)
+function  hasPermit($course_id=0)
 {
 	//return false;
 
     if (isguest()) return false;
     if (isadmin()) return true;
-	if ($course_id==null) return false;
+	if ($course_id==0 or $course_id==null) return false;
     if (isteacher($course_id)) return true;
 
     return false;

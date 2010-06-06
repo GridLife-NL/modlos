@@ -21,7 +21,7 @@ $world_map = get_string("modlos_world_map", "block_modlos");
 //
 $avatars_num = modlos_get_avatars_num($USER->id);
 $max_avatars = $CFG->modlos_max_own_avatars;
-if (!hasPermit($course_id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
+if (!hasModlosPermit($course_id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
 else $isAvatarMax = false;
 
 print_tabnav($action, $course, !$isAvatarMax);

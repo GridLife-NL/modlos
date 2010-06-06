@@ -33,7 +33,7 @@ class  ShowHome
 		$this->lastmonth_online = '0';
 		$this->user_count 		= '0';
 		$this->region_count 	= '0';
-		$this->hasPermit		= hasPermit($course_id);
+		$this->hasPermit		= hasModlosPermit($course_id);
 
 		$this->avatars_num = modlos_get_avatars_num($USER->id);
 		$this->max_avatars = $CFG->modlos_max_own_avatars;

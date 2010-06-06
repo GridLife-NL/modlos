@@ -58,7 +58,7 @@ class  AvatarsList
 
 		$this->course_id   = $course_id;
 		$this->isGuest     = isguest();
-		$this->hasPermit   = hasPermit($course_id);
+		$this->hasPermit   = hasModlosPermit($course_id);
 		$this->date_format = $CFG->modlos_date_format;
 		$course_param 	   = '?course='.$course_id;
 		$this->course_id   = $course_id;

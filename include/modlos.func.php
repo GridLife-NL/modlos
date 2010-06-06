@@ -50,9 +50,15 @@ require_once(CMS_MODULE_PATH.'/include/opensim.mysql.php');
 // Tools
 //
 
+function  hasModlosPermit($course_id=0)
+{
+	global $CFG;
 
+	if ($CFG->modlos_teacher_admin) $ret = hasPermit($course_id);
+	else $ret = hasPermit();
 
-
+	return $ret;
+}
 
 
 
@@ -567,7 +573,7 @@ function  print_tabnav($currenttab, $course, $create_tab=true)
 	if (empty($course)) $course_id = 0;
 	else 				$course_id = $course->id;
 
-	$hasPermit = hasPermit($course_id);
+	$hasPermit = hasModlosPermit($course_id);
 
 	$course_param = '';
 	if ($course_id>0) $course_param = '?course='.$course_id;

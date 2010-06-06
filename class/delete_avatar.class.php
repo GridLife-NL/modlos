@@ -71,7 +71,7 @@ class  DeleteAvatar
 			$this->ownername = get_display_username($user_info->firstname, $user_info->lastname);
 		}
 
-		$this->hasPermit = hasPermit($course_id);
+		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
 			error(get_string('modlos_access_forbidden', 'block_modlos'), $this->return_url);
 		}

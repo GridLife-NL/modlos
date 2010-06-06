@@ -40,7 +40,7 @@ class  RegionsList
 		global $CFG, $USER;
 
 		$this->isGuest    = isguest();
-		$this->hasPermit  = hasPermit($course_id);
+		$this->hasPermit  = hasModlosPermit($course_id);
 		$this->course_id  = $course_id;
 		$this->action 	  = 'regions_list.php';
 		$this->action_url = CMS_MODULE_URL.'/actions/'.$this->action;

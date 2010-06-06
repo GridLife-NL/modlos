@@ -56,7 +56,7 @@ class  CreateAvatar
 
 		//
 		$this->course_id	= $course_id;
-		$this->hasPermit	= hasPermit($course_id);
+		$this->hasPermit	= hasModlosPermit($course_id);
 		$this->action_url  	= $module_url.'/actions/create_avatar.php';
 		$this->use_sloodle 	= $CFG->modlos_cooperate_sloodle;
 		$this->actvLastName	= $CFG->modlos_activate_lastname;

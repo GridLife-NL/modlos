@@ -81,7 +81,7 @@ class  EditAvatar
 		$this->avatar 	= $avatar;
 
 
-		$this->hasPermit = hasPermit($course_id);
+		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
 			error(get_string('modlos_access_forbidden', 'block_modlos'), $return_url);
 		}
