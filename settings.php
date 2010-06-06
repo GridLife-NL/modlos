@@ -45,11 +45,11 @@ $settings->add(new admin_setting_configtext('modlos_asset_uri',
 $settings->add(new admin_setting_configtext('modlos_invent_uri', 
 					get_string('modlos_invent_uri', 'block_modlos'),
                    	get_string('modlos_invent_uri_desc', 'block_modlos'), "http://opensim.jp:8003/", PARAM_URL));
-*/
 
 $settings->add(new admin_setting_configtext('modlos_currency_uri', 
 					get_string('modlos_crncy_uri', 'block_modlos'),
                    	get_string('modlos_crncy_uri_desc', 'block_modlos'), "http://opensim.jp:8008/", PARAM_URL));
+*/
 
 // Modlos
 $settings->add(new admin_setting_configtext('modlos_map_start_x', 
