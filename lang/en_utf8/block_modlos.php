@@ -289,8 +289,13 @@ $string['modlos_synchro_submit'] 	= 'Synchro DB';
 $string['modlos_synchro_contents'] 	= 'Synchronize with OpenSim DB?';
 $string['modlos_synchronized'] 		= 'Synchronized OpenSim DB!!';
 
-$string['modlos_return_tab'] 		= 'Return to Course';
+$string['modlos_updatedb_tab']      = 'Update DB';
+$string['modlos_updatedb_db']       = 'Update of Data Base';
+$string['modlos_updatedb_submit']   = 'Update DB';
+$string['modlos_updatedb_contents'] = 'Update OpenSim DB?';
+$string['modlos_updatedb_executed'] = 'OpenSim DB is Updated!!';
 
+$string['modlos_return_tab'] 		= 'Return to Course';
 $string['modlos_access_forbidden'] 	= 'Forbidden Access to this Page!!';
 
 ?>

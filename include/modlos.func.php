@@ -403,7 +403,7 @@ function  modlos_delete_groupdb_by_gpid($gpid)
 //
 //
 
-// called from synchro.class.php
+// called from updatedb.class.php
 function  modlos_set_profiles($profs, $ovwrite=true)
 {
 	foreach($profs as $prof) {
@@ -600,8 +600,8 @@ function  print_tabnav($currenttab, $course, $create_tab=true)
 			$toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/actions/lastnames.php'.$course_param, 
 																	'<b>'.get_string('modlos_lastnames_tab','block_modlos').'</b>');
 		}
-		$toprow[] = new tabobject('synchrodb', CMS_MODULE_URL.'/admin/actions/synchrodb.php'.$course_param, 
-																	'<b>'.get_string('modlos_synchro_tab','block_modlos').'</b>');
+		$toprow[] = new tabobject('updatedb', CMS_MODULE_URL.'/admin/actions/updatedb.php'.$course_param, 
+																	'<b>'.get_string('modlos_updatedb_tab','block_modlos').'</b>');
 		if (isadmin()) {
 			$course_amp = '';
 			if ($course_id>0) $course_amp = '&amp;course='.$course_id;

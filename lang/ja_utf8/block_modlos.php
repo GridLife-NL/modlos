@@ -288,8 +288,13 @@ $string['modlos_synchro_submit'] 	= 'データベース同期の実行';
 $string['modlos_synchro_contents'] 	= 'OpenSimデータベースと Modlosデータベースとの同期を取ります';
 $string['modlos_synchronized'] 		= 'OpenSimデータベースとの同期完了！';
 
-$string['modlos_return_tab'] 		= 'コースに戻る';
+$string['modlos_updatedb_tab'] 		= 'DB更新';
+$string['modlos_updatedb_db'] 		= 'データベース更新';
+$string['modlos_updatedb_submit'] 	= 'データベース更新の実行';
+$string['modlos_updatedb_contents'] = 'OpenSimデータベースの更新を行います';
+$string['modlos_updatedb_executed'] = 'OpenSimデータベースの更新完了！';
 
+$string['modlos_return_tab'] 		= 'コースに戻る';
 $string['modlos_access_forbidden'] 	= 'このページへのアクセスは許可されてません';
 
 ?>
