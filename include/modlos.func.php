@@ -597,7 +597,9 @@ function  print_tabnav($currenttab, $course, $create_tab=true)
 		$toprow[] = new tabobject('synchrodb', CMS_MODULE_URL.'/admin/actions/synchrodb.php'.$course_param, 
 																	'<b>'.get_string('modlos_synchro_tab','block_modlos').'</b>');
 		if (isadmin()) {
-			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos', 
+			$course_amp = '';
+			if ($course_id>0) $course_amp = '&amp;course='.$course_id;
+			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos'.$course_amp, 
 																	'<b>'.get_string('modlos_general_setting_tab','block_modlos').'</b>');
 		}
 	}

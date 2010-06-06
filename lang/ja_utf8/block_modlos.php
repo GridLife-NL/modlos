@@ -241,14 +241,13 @@ $string['modlos_crncy_key_desc'] 	= 'DTL Money サーバへのアクセスキー
 $string['modlos_banker'] 			= 'バンカーアバターのUUID　（未実装）';
 $string['modlos_banker_desc'] 		= 'バンカーアバター （お金の管理を行うアバター） のUUID (GUID)';
 
-$string['modlos_userinfo_link'] 	= 'Xoopsユーザの名前からアカウントページへのリンク';
-$string['modlos_userinfo_link_desc']= 'ページ上に Xoopsユーザの名前が表示された場合に，そのユーザのアカウント情報画面へのリンクを張るかどうかを指定する．'.
-									  'なお，セキュリティ上の問題から，<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>'.
-									  'UserInfoProtector</a>などを使用して，他のユーザのアカウント画面の表示を禁止している場合などにこれを有効にすると，煩わしいだけとなる．';
+$string['modlos_userinfo_link'] 	= 'Moodleユーザの名前からアカウントページへのリンク';
+$string['modlos_userinfo_link_desc']= 'ページ上に Moodleユーザの名前が表示された場合に，そのユーザのアカウント情報画面へのリンクを張るかどうかを指定する．';
+$string['modlos_teacher_admin']     = '管理者に教師を含める';
+$string['modlos_teacher_admin_desc']= 'ここにチェックを入れると，各コースの教師には Modlosの管理者の権限が与えられる．'.
+									  'ただし，場合によってはセキュリティ的に問題になる場合もあり得るので，注意が必要である．';
 $string['modlos_cprt_sloodle'] 		= 'Sloodleとの連携';
 $string['modlos_cprt_sloodle_desc'] = 'Sloodleがインストールされている場合，Sloodleでの OpenSimアバターとMoodleユーザの対応を Modlos側でも使用する';
-$string['modlos_prty_sloodle']      = 'Sloodleデータの優先';
-$string['modlos_prty_sloodle_desc'] = 'Sloodle と Modlosでアバター対応のデータが競合した場合に Sloodleの方を優先する';
 
 $string['modlos_date_format']  		= '日付データのフォーマット';
 $string['modlos_date_format_desc']  = 'Modlosで使用する日付表示のフォーマットを指定する';

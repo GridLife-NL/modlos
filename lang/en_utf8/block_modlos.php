@@ -241,16 +241,14 @@ $string['modlos_crncy_key_desc'] 	= 'Specify Money server access key code';
 $string['modlos_banker'] 			= 'UUID of Banker Avatar';
 $string['modlos_banker_desc'] 		= 'Specify UUID(GUID) of Banker Avatar';
 
-$string['modlos_userinfo_link']     = 'Link from Xoops user\'s name to user information page';
-$string['modlos_userinfo_link_desc']= 'It is specified whether to put the link form Xoops user\'s name to Xoops account information page, '.
-									  'when Xoops user\'s name is displayed on the XoopenSim page. '.
-									  'From the viewpoint on security, You might be forbidding user to view other user\'s account information page using '.
-									  '<a href=http://sourceforge.net/tracker/index.php?func=detail&aid=1718508&group_id=159211&atid=943472>UserInfoProtector</a>. '.
-									  'In that case, if this is checked, it is very annoying.';
+$string['modlos_userinfo_link']     = 'Link from Moodle user\'s name to user information page';
+$string['modlos_userinfo_link_desc']= 'It is specified whether to put the link form Moodle user\'s name to Moodle account information page, '.
+									  'when Moodle user\'s name is displayed on the Modlos page. '.
+$string['modlos_teacher_admin']     = 'The teacher is included in the administrator';
+$string['modlos_teacher_admin_desc']= 'When it is checked, the authority of the manager of Modlos is given to the teacher in each course. '.
+									  'However, it is It is necessary to attention of security.';
 $string['modlos_cprt_sloodle']      = 'Cooperation with Sloodle';
-$string['modlos_cprt_sloodle_desc'] = 'If Sloodle is installed, Modlos reads/writes the Sloodle DB.';
-$string['modlos_prty_sloodle']      = 'It gives priority to Sloodle data';
-$string['modlos_prty_sloodle_desc'] = 'It gives priority to Sloodle, when OpenSim avatar data competes by Modlos with Sloodle.';
+$string['modlos_cprt_sloodle_desc'] = 'If Sloodle is installed, Modlos reads/writes the Sloodle user DB.';
 
 $string['modlos_date_format']		= 'Display format of date(time)';
 $string['modlos_date_format_desc']	= 'Specify display format of date and time';
