@@ -17,7 +17,6 @@ class  DeleteAvatar
 	var $deleted_avatar = false;
 
 	var $use_sloodle = false;
-	var $pri_sloodle = false;
 	var $avatars_num = 0;
 	var $max_avatars = 0;
 	var $isAvatarMax = false;
@@ -56,12 +55,10 @@ class  DeleteAvatar
 			error(get_string('modlos_invalid_uuid', 'block_modlos').' ($uuid)', $this->return_url);
 		}
 		$this->UUID	= $uuid;
-
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
-		$this->pri_sloodle = $CFG->modlos_priority_sloodle;
 
 		// get uid from Modlos and Sloodle DB
-		$avatar = modlos_get_avatar_info($this->UUID, $this->use_sloodle, $this->pri_sloodle);
+		$avatar = modlos_get_avatar_info($this->UUID, $this->use_sloodle);
 		$this->uid	  	= $avatar['uid'];
 		$this->state  	= $avatar['state'];
 		$this->hmregion = $avatar['hmregion'];

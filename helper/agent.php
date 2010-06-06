@@ -20,7 +20,6 @@ $hasPermit  = hasPermit($course_id);
 
 global $CFG;
 $use_sloodle= $CFG->modlos_cooperate_sloodle;
-$pri_sloodle= $CFG->modlos_priority_sloodle;
 $grid_name  = $CFG->modlos_grid_name;
 $userinfo   = $CFG->modlos_userinfo_link;
 $action_url = CMS_MODULE_URL.'/helper/agent.php';
@@ -56,7 +55,7 @@ if ($agent) {
 	}
 
 	// Modlos and Sloodle DB
-	$avatar = modlos_get_avatar_info($agent, $use_sloodle, $pri_sloodle);
+	$avatar = modlos_get_avatar_info($agent, $use_sloodle);
 	if ($avatar!=null) {
 		$userid = $avatar['uid'];
 		$state  = $avatar['state'];

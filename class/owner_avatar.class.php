@@ -17,7 +17,6 @@ class  OwnerAvatar
 	var $user_id	= 0;
 
 	var $use_sloodle = false;
-	var $pri_sloodle = false;
 	var $avatars_num = 0;
 	var $max_avatars = 0;
 	var $isAvatarMax = false;
@@ -56,7 +55,6 @@ class  OwnerAvatar
 		$this->hasPermit   = hasPermit($course_id);
 		$this->action_url  = $module_url.'/actions/owner_avatar.php';
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
-		$this->pri_sloodle = $CFG->modlos_priority_sloodle;
 		$this->user_id	   = $USER->id;
 		$this->ownername   = get_display_username($USER->firstname, $USER->lastname);
 

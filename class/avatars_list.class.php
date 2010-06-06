@@ -140,7 +140,6 @@ class  AvatarsList
 		global $CFG, $USER;
 
 		$use_sloodle = $CFG->modlos_cooperate_sloodle;
-		$pri_sloodle = $CFG->modlos_priority_sloodle;
 
 		$dummy = opensim_get_avatars_infos($this->sql_countcnd);
 		if (is_array($dummy)) $this->number = count($dummy);
@@ -228,7 +227,7 @@ class  AvatarsList
 
 			// serach Moodle, Modlos and Sloodle DB
 			$uid = -1;
-			$avatardata = modlos_get_avatar_info($UUID, $use_sloodle, $pri_sloodle);
+			$avatardata = modlos_get_avatar_info($UUID, $use_sloodle);
 			if ($avatardata!=null) {
 				$uid = $avatardata['uid'];
 				$this->db_data[$colum]['state'] = $avatardata['state'];

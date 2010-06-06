@@ -11,11 +11,12 @@ $course_id = optional_param('course', '0', PARAM_INT);
 $course = get_record('course', 'id', $course_id);
 $action = 'owner_avatar';
 
+print_modlos_header($action, $course);
 
 require_once(CMS_MODULE_PATH."/class/owner_avatar.class.php");
 $avatar = new OwnerAvatar($course_id);
 
-print_tabheader($action, $course, !$avatar->isAvatarMax);
+print_tabnav($action, $course, !$avatar->isAvatarMax);
 
 $avatar->execute();
 $avatar->print_page();

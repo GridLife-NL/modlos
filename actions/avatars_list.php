@@ -11,11 +11,12 @@ $course_id = optional_param('course', '0', PARAM_INT);
 $course = get_record('course', 'id', $course_id);
 $action = 'avatars_list';
 
+print_modlos_header($action, $course);
 
 require_once(CMS_MODULE_PATH."/class/avatars_list.class.php");
 $avatars = new AvatarsList($course_id);
 
-print_tabheader($action, $course, !$avatars->isAvatarMax);
+print_tabnav($action, $course, !$avatars->isAvatarMax);
 
 $avatars->set_condition();
 $avatars->execute();

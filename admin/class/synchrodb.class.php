@@ -112,31 +112,12 @@ class  SynchroDataBase
 			}
 		}
 
+
 		//
 		// Sloodle連携
 		//
 		if ($CFG->modlos_cooperate_sloodle) {
-			$sloodles = get_records(MDL_SLOODLE_USERS_TBL);
-			$modloses = get_records('modlos_users');
-
-			if (is_array($sloodles) and is_array($modloses)) {
-				foreach ($modloses as $modlos) {
-					$updated = false;
-					foreach($sloodles as $sloodle) {
-						if ($modlos->uuid==$sloodle->uuid) {
-							if ($CFG->modlos_priority_sloodle or $modlos->user_id==0) { 
-								$modlos->user_id = $sloodle->userid;
-							}
-							$modlos->state |= AVATAR_STATE_SLOODLE;
-							$updated = true;
-							break;
-						}
-					}
-					if ($updated) {
-						update_record('modlos_users', $modlos);
-					}
-				}
-			}
+			modlos_sync_sloodle_users(true);
 		}
 
 		return true;
@@ -146,12 +127,12 @@ class  SynchroDataBase
 
 	function  print_page() 
 	{
-        global $CFG;
+		global $CFG;
 
-        $grid_name  	  = $CFG->modlos_grid_name;
-		$synchro_db_ttl   = get_string("modlos_synchro_db", 		 "block_modlos");
-		$synchronized_msg = get_string("modlos_synchronized", 	 "block_modlos");
-		$synchro_submit	  = get_string("modlos_synchro_submit", 	 "block_modlos");
+		$grid_name  	  = $CFG->modlos_grid_name;
+		$synchro_db_ttl   = get_string("modlos_synchro_db", 	"block_modlos");
+		$synchronized_msg = get_string("modlos_synchronized", 	"block_modlos");
+		$synchro_submit	  = get_string("modlos_synchro_submit", "block_modlos");
 		$content		  = "<center>".get_string("modlos_synchro_contents", "block_modlos")."</center>";
 
 		include(CMS_MODULE_PATH."/admin/html/synchro.html");

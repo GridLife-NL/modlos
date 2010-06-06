@@ -3,7 +3,9 @@
  *	modlos.func.php by Fumi.Iseki for Modlos
  *
  *
- * function  modlos_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
+ * function  hasModlosPermit($course_id);
+ *
+ * function  modlos_get_avatar_info($uuid, $use_sloodle=false)
  * function  modlos_set_avatar_info($avatar, $use_sloodle=false)
  * function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
  * function  modlos_get_avatars_num($uuid, $use_sloodle=false)
@@ -26,8 +28,10 @@
  * function  modlos_inactivate_avatar($uuid)
  * function  modlos_delete_banneddb($uuid)
  *
- * function  print_tabnav($currenttab, $course, $creatable=true)
- * function  print_tabheader($currenttab, $course, $creatable=true)
+ * function  modlos_sync_sloodle_users()
+ *
+ * function  print_tabnav($currenttab, $course, $create_tab=true)
+ * function  print_modlos_header($currenttab, $course)
  *
  ****************************************************************/
 
@@ -41,11 +45,24 @@ require_once(CMS_MODULE_PATH.'/include/opensim.mysql.php');
 
 
 
+
+//
+// Tools
+//
+
+
+
+
+
+
+
+
+
 //
 // for Modlos and Sloodle
 //
 
-function  modlos_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
+function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 {
 	if (!isGUID($uuid)) return null;
 
@@ -58,20 +75,17 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
 			$names = null;
 			if ($sloodle->avname!='') $names = explode(' ', $sloodle->avname);
 
-			if ($pri_sloodle) {		// Sloodle優先
-				if ($sloodle->userid>0) $avatar->user_id = $sloodle->userid;
-				if (is_array($names)) {
-					$avatar->firstname = $names[0];
-					$avatar->lastname  = $names[1];
-				}
+			if ($sloodle->userid>0) $avatar->user_id = $sloodle->userid;
+			if (is_array($names)) {
+				$avatar->firstname = $names[0];
+				$avatar->lastname  = $names[1];
 			}
-			else {
-				if ($avatar->user_id=='' and $sloodle->userid>0) $avatar->user_id = $sloodle->userid;
+
+			/*	if ($avatar->user_id=='' and $sloodle->userid>0) $avatar->user_id = $sloodle->userid;
 				if (is_array($names)) {
 					if ($avatar->firstname=='') $avatar->firstname = $names[0];
 					if ($avatar->lastname=='')  $avatar->firstname = $names[1];
-				}
-			}
+				}*/
 		}
 	}
 	
@@ -84,20 +98,19 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false, $pri_sloodle=false)
 	$avatar_info['firstname'] = $avatar->firstname;
 	$avatar_info['lastname']  = $avatar->lastname;
 
-	if ($avatar->id>0) 			$avatar_info['id'] 		  = $avatar->id;
-	else 						$avatar_info['id'] 		  = '';
-	if ($avatar->user_id!='')  	$avatar_info['uid'] 	  = $avatar->user_id;
-	else                       	$avatar_info['uid'] 	  = '0';
-	if ($avatar->hmregion!='')	$avatar_info['hmregion']  = $avatar->hmregion;
-	else					   	$avatar_info['hmregion']  = opensim_get_home_region($uuid);
-	if ($avatar->state!='')    	$avatar_info['state'] 	  = $avatar->state;
-	else					   	$avatar_info['state'] 	  = AVATAR_STATE_NOSTATE;
-	if ($avatar->time!='')     	$avatar_info['time'] 	  = $avatar->time;
-	else						$avatar_info['time']	  = time();
+	if ($avatar->id>0) 			$avatar_info['id'] 		 = $avatar->id;
+	else 						$avatar_info['id'] 		 = '';
+	if ($avatar->user_id!='')  	$avatar_info['uid'] 	 = $avatar->user_id;
+	else					   	$avatar_info['uid'] 	 = '0';
+	if ($avatar->hmregion!='')	$avatar_info['hmregion'] = $avatar->hmregion;
+	else					   	$avatar_info['hmregion'] = opensim_get_home_region($uuid);
+	if ($avatar->state!='')		$avatar_info['state'] 	 = $avatar->state;
+	else					   	$avatar_info['state'] 	 = AVATAR_STATE_NOSTATE;
+	if ($avatar->time!='')	 	$avatar_info['time'] 	 = $avatar->time;
+	else						$avatar_info['time']	 = time();
 
 	return $avatar_info;
 }
-
 
 
 
@@ -144,7 +157,6 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 
 
 
-
 function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 {
 	if (!isGUID($avatar['UUID'])) return false;
@@ -188,7 +200,6 @@ function  modlos_get_avatars_num($id, $use_sloodle=false)
 
 
 
-
 //
 // usertable DB
 //
@@ -201,14 +212,14 @@ function  modlos_get_users()
 	$modlos_users = array();
 	foreach ($db_users as $user) {
 		$modlos_uuid = $user->uuid;
-		$modlos_users[$modlos_uuid]['id']       = $user->id;
-		$modlos_users[$modlos_uuid]['UUID']     = $user->uuid;
-		$modlos_users[$modlos_uuid]['uid']      = $user->user_id;
+		$modlos_users[$modlos_uuid]['id']		= $user->id;
+		$modlos_users[$modlos_uuid]['UUID']	 	= $user->uuid;
+		$modlos_users[$modlos_uuid]['uid']		= $user->user_id;
 		$modlos_users[$modlos_uuid]['firstname']= $user->firstname;
 		$modlos_users[$modlos_uuid]['lastname'] = $user->lastname;
 		$modlos_users[$modlos_uuid]['hmregion'] = $user->hmregion;
-		$modlos_users[$modlos_uuid]['state']    = $user->state;
-		$modlos_users[$modlos_uuid]['time']     = $user->time;
+		$modlos_users[$modlos_uuid]['state']	= $user->state;
+		$modlos_users[$modlos_uuid]['time']		= $user->time;
 	}
 	
 	return $modlos_users;
@@ -230,7 +241,7 @@ function  modlos_insert_usertable($user)
 	$insobj->lastname  = $user['lastname'];
 
 	if ($user['uid']!='') 	$insobj->user_id = $user['uid'];
-	else                  	$insobj->user_id = '0';
+	else				  	$insobj->user_id = '0';
 	if ($user['state']!='')	$insobj->state 	 = $user['state'];
 	else				 	$insobj->state 	 = AVATAR_STATE_SYNCDB;
 	if ($user['time']!='') 	$insobj->time 	 = $user['time'];
@@ -431,7 +442,7 @@ function  modlos_set_profiles($profs, $ovwrite=true)
 
 			if ($prof['ImviaEmail']!='')$setobj->imviaemail = $prof['ImviaEmail'];
 			if ($prof['Visible']!='')	$setobj->visible	= $prof['Visible'];
-			if ($prof['Email']!='')		$setobj->email    	= $prof['Email'];
+			if ($prof['Email']!='')		$setobj->email		= $prof['Email'];
 
 			if ($insert) {
 				$rslt = insert_record(MDL_PROFILE_USERSETTINGS_TBL, $setobj);
@@ -450,13 +461,13 @@ function  modlos_set_profiles($profs, $ovwrite=true)
 
 function  modlos_delete_profiles($uuid)
 {
-	delete_records(MDL_PROFILE_USERPROFILE_TBL,	'useruuid',    $uuid);
-	delete_records(MDL_PROFILE_USERSETTINGS_TBL,'useruuid',    $uuid);
-	delete_records(MDL_PROFILE_USERNOTES_TBL, 	'useruuid',    $uuid);
+	delete_records(MDL_PROFILE_USERPROFILE_TBL,	'useruuid',	$uuid);
+	delete_records(MDL_PROFILE_USERSETTINGS_TBL,'useruuid',	$uuid);
+	delete_records(MDL_PROFILE_USERNOTES_TBL, 	'useruuid',	$uuid);
 	delete_records(MDL_PROFILE_USERPICKS_TBL, 	'creatoruuid', $uuid);
 	delete_records(MDL_PROFILE_CLASSIFIEDS_TBL, 'creatoruuid', $uuid);
 
-    return;
+	return;
 }
 
 
@@ -513,11 +524,42 @@ function  modlos_delete_banneddb($uuid)
 
 
 
+
+//
+// for Sloodle
+//
+
+function  modlos_sync_sloodle_users()
+{
+	$sloodles = get_records(MDL_SLOODLE_USERS_TBL);
+	$modloses = get_records('modlos_users');
+
+	if (is_array($sloodles) and is_array($modloses)) {
+		foreach ($modloses as $modlos) {
+			$updated = false;
+			foreach($sloodles as $sloodle) {
+				if ($modlos->uuid==$sloodle->uuid) {
+					$modlos->user_id = $sloodle->userid;
+					$modlos->state |= AVATAR_STATE_SLOODLE;
+					$updated = true;
+					break;
+				}
+			}
+			if ($updated) {
+				update_record('modlos_users', $modlos);
+			}
+		}
+	}
+}
+
+
+
+
 //
 // Tab Header
 //
 
-function  print_tabnav($currenttab, $course, $creatable=true)
+function  print_tabnav($currenttab, $course, $create_tab=true)
 {
 	global $CFG;
 
@@ -541,7 +583,7 @@ function  print_tabnav($currenttab, $course, $creatable=true)
 	if (!isGuest()) {
 		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param, 
 																	'<b>'.get_string('modlos_avatars_list','block_modlos').'</b>');
-		if ($creatable) {
+		if ($create_tab) {
 			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $course_param, 
 																	'<b>'.get_string('modlos_avatar_create','block_modlos').'</b>');
 		}
@@ -575,7 +617,7 @@ function  print_tabnav($currenttab, $course, $creatable=true)
 
 
 
-function  print_tabheader($currenttab, $course, $creatable=true)
+function  print_modlos_header($currenttab, $course)
 {
 	global $CFG;
 
@@ -607,11 +649,6 @@ function  print_tabheader($currenttab, $course, $creatable=true)
 					 get_string('modlos','block_modlos'), '', '', true, '&nbsp;', navmenu($course));
 		}
 	}
-
-
-
-
-	print_tabnav($currenttab, $course, $creatable);
 }
 
 

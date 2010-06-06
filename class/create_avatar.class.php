@@ -22,7 +22,6 @@ class  CreateAvatar
 
 	var $course_id  = 0;
 	var $use_sloodle= false;
-	var $pri_sloodle= false;
 	var	$isDisclaimer=false;
 
 	var $hasError	= false;
@@ -60,7 +59,6 @@ class  CreateAvatar
 		$this->hasPermit	= hasPermit($course_id);
 		$this->action_url  	= $module_url.'/actions/create_avatar.php';
 		$this->use_sloodle 	= $CFG->modlos_cooperate_sloodle;
-		$this->pri_sloodle 	= $CFG->modlos_priority_sloodle;
 		$this->actvLastName	= $CFG->modlos_activate_lastname;
 		$this->isDisclaimer = $CFG->modlos_activate_disclaimer;
 
