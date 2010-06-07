@@ -55,6 +55,7 @@ if ($agent) {
 	}
 
 	// Modlos and Sloodle DB
+	if ($use_sloodle) modlos_sync_sloodle_users();
 	$avatar = modlos_get_avatar_info($agent, $use_sloodle);
 
 	// auto Synchro

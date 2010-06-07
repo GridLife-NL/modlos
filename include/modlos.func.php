@@ -585,16 +585,22 @@ function  modlos_sync_sloodle_users()
 
 	if (is_array($sloodles) and is_array($modloses)) {
 		foreach ($modloses as $modlos) {
-			$updated = false;
+			$with_sloodle = false;
 			foreach($sloodles as $sloodle) {
 				if ($modlos->uuid==$sloodle->uuid) {
 					$modlos->user_id = $sloodle->userid;
 					$modlos->state |= AVATAR_STATE_SLOODLE;
-					$updated = true;
+					$with_sloodle = true;
 					break;
 				}
 			}
-			if ($updated) {
+
+			if ($with_sloodle) {
+				update_record('modlos_users', $modlos);
+			}
+			else if ($modlos->state&AVATAR_STATE_SLOODLE) {
+				$modlos->user_id = '0';
+				$modlos->state &= AVATAR_STATE_NOSLOODLE;
 				update_record('modlos_users', $modlos);
 			}
 		}

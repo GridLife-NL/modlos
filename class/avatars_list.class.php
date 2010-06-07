@@ -57,12 +57,12 @@ class  AvatarsList
 		require_login($course_id);
 
 		$this->course_id   = $course_id;
-		$this->isGuest     = isguest();
+		$this->isGuest	 = isguest();
 		$this->hasPermit   = hasModlosPermit($course_id);
 		$this->date_format = $CFG->modlos_date_format;
 		$course_param 	   = '?course='.$course_id;
 		$this->course_id   = $course_id;
-        $this->use_sloodle = $CFG->modlos_cooperate_sloodle;
+		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
 		$this->action_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param;
 		$this->edit_url	   = CMS_MODULE_URL.'/actions/edit_avatar.php'. $course_param;
@@ -105,17 +105,17 @@ class  AvatarsList
 		$sql_validuser = $sql_firstname = $sql_lastname = '';
 		if ($this->firstname=='' and $this->lastname=='') {
 			if ($db_ver=='0.6') $sql_validuser = "username!=''";
-			else                $sql_validuser = "FirstName!=''";
+			else				$sql_validuser = "FirstName!=''";
 		}
 		else {
 			if ($this->firstname!='') { 
 				if ($db_ver=="0.6") $sql_firstname = "username  LIKE '$this->firstname'";
-				else                $sql_firstname = "FirstName LIKE '$this->firstname'";
+				else				$sql_firstname = "FirstName LIKE '$this->firstname'";
 				$this->lnk_firstname = "&amp;firstname=$this->firstname";
 			}
 			if ($this->lastname!='') { 
 				if ($this->firstname!='') $sql_lastname = "and lastname LIKE '$this->lastname'";
-				else                      $sql_lastname = "lastname LIKE '$this->lastname'";
+				else					  $sql_lastname = "lastname LIKE '$this->lastname'";
 				$this->lnk_lastname  = "&amp;lastname=$this->lastname";
 			}
 		}
@@ -186,6 +186,7 @@ class  AvatarsList
 
 
 		// OpenSim DB
+		if ($this->use_sloodle) modlos_sync_sloodle_users();
 		$users = opensim_get_avatars_infos($this->sql_condition);
 
 		$colum  = 0;
@@ -267,17 +268,17 @@ class  AvatarsList
 
 	function  print_page() 
 	{
-        global $CFG;
+		global $CFG;
 
-        $grid_name 		= $CFG->modlos_grid_name;
-        $content   		= $CFG->modlos_avatars_content;
+		$grid_name 		= $CFG->modlos_grid_name;
+		$content   		= $CFG->modlos_avatars_content;
 		$userinfo		= $CFG->modlos_userinfo_link;
 		$date_format	= $CFG->modlos_date_format;
 
 		$course_amp		= $this->course_amp;
-        $plimit_amp     = "&amp;plimit=$this->plimit";
-        $pstart_        = '&amp;pstart=';
-        $plimit_        = '&amp;plimit=';
+		$plimit_amp		= "&amp;plimit=$this->plimit";
+		$pstart_		= '&amp;pstart=';
+		$plimit_		= '&amp;plimit=';
 
 		$avatars_list	= get_string('modlos_avatars_list',  'block_modlos');
 		$number_ttl		= get_string('modlos_no',			 'block_modlos');
@@ -291,7 +292,7 @@ class  AvatarsList
 		$firstname_ttl 	= get_string('modlos_firstname', 	 'block_modlos');
 		$lastname_ttl 	= get_string('modlos_lastname', 	 'block_modlos');
 		$not_syncdb_ttl = get_string('modlos_not_syncdb',	 'block_modlos');
-		$online_ttl     = get_string('modlos_online_ttl',	 'block_modlos');
+		$online_ttl	 	= get_string('modlos_online_ttl',	 'block_modlos');
 		$active_ttl		= get_string('modlos_active',		 'block_modlos');
 		$inactive_ttl	= get_string('modlos_inactive',		 'block_modlos');
 		$unknown_status	= get_string('modlos_unknown_status','block_modlos');
@@ -301,7 +302,7 @@ class  AvatarsList
 		$users_found  	= get_string('modlos_users_found', 	 'block_modlos');
 		$sloodle_ttl  	= get_string('modlos_sloodle_short', 'block_modlos');
 
-        include(CMS_MODULE_PATH.'/html/avatars.html');
+		include(CMS_MODULE_PATH.'/html/avatars.html');
 	}
 }
 
