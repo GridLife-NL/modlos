@@ -54,13 +54,18 @@ if ($agent) {
 		//$crrntRegion  = $online['region_name'];
 	}
 
-	// Modlos and Sloodle DB
+	// auto synchro
+	modlos_sync_opensimdb();
 	if ($use_sloodle) modlos_sync_sloodle_users();
+
+
+	// Modlos and Sloodle DB
 	$avatar = modlos_get_avatar_info($agent, $use_sloodle);
 
-	// auto Synchro
+	// auto synchro
 	if ($avatar==null) {
-		modlos_sync_opensimdb($use_sloodle);
+		modlos_sync_opensimdb(false);
+		if ($use_sloodle) modlos_sync_sloodle_users(false);
 		$avatar = modlos_get_avatar_info($agent, $use_sloodle);
 	}
 

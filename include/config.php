@@ -18,41 +18,42 @@ $GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
 
 
 // for OpenSim DB
-define('OPENSIM_DB_HOST', $CFG->modlos_sql_server_name);
-define('OPENSIM_DB_NAME', $CFG->modlos_sql_db_name);
-define('OPENSIM_DB_USER', $CFG->modlos_sql_db_user);
-define('OPENSIM_DB_PASS', $CFG->modlos_sql_db_pass);
-define('OPENSIM_HMREGION',$CFG->modlos_home_region);
+define('OPENSIM_DB_HOST',	$CFG->modlos_sql_server_name);
+define('OPENSIM_DB_NAME',	$CFG->modlos_sql_db_name);
+define('OPENSIM_DB_USER',	$CFG->modlos_sql_db_user);
+define('OPENSIM_DB_PASS',	$CFG->modlos_sql_db_pass);
+define('OPENSIM_HMREGION',	$CFG->modlos_home_region);
 
 
 // for CMS/LMS DB
-define('CMS_DB_HOST',     $CFG->dbhost);
-define('CMS_DB_NAME',     $CFG->dbname);
-define('CMS_DB_USER',     $CFG->dbuser);
-define('CMS_DB_PASS',     $CFG->dbpass);
+define('CMS_DB_HOST',		$CFG->dbhost);
+define('CMS_DB_NAME', 		$CFG->dbname);
+define('CMS_DB_USER',		$CFG->dbuser);
+define('CMS_DB_PASS',		$CFG->dbpass);
 
-define('MDL_DB_PREFIX',   'modlos_');
+define('MDL_DB_PREFIX',    	$CFG->prefix);
+define('MDL_MODLOS_PREFIX',	'modlos_');
 
 
 // SQL DB Table definition
-define('MDL_XMLGROUP_ACTIVE_TBL',       MDL_DB_PREFIX.'group_active');
-define('MDL_XMLGROUP_LIST_TBL',         MDL_DB_PREFIX.'group_list');
-define('MDL_XMLGROUP_INVITE_TBL',       MDL_DB_PREFIX.'group_invite');
-define('MDL_XMLGROUP_MEMBERSHIP_TBL',   MDL_DB_PREFIX.'group_membership');
-define('MDL_XMLGROUP_NOTICE_TBL',       MDL_DB_PREFIX.'group_notice');
-define('MDL_XMLGROUP_ROLE_MEMBER_TBL',  MDL_DB_PREFIX.'group_rolemembership');
-define('MDL_XMLGROUP_ROLE_TBL',         MDL_DB_PREFIX.'group_role');
+define('MDL_XMLGROUP_ACTIVE_TBL',       MDL_MODLOS_PREFIX.'group_active');
+define('MDL_XMLGROUP_LIST_TBL',         MDL_MODLOS_PREFIX.'group_list');
+define('MDL_XMLGROUP_INVITE_TBL',       MDL_MODLOS_PREFIX.'group_invite');
+define('MDL_XMLGROUP_MEMBERSHIP_TBL',   MDL_MODLOS_PREFIX.'group_membership');
+define('MDL_XMLGROUP_NOTICE_TBL',       MDL_MODLOS_PREFIX.'group_notice');
+define('MDL_XMLGROUP_ROLE_MEMBER_TBL',  MDL_MODLOS_PREFIX.'group_rolemembership');
+define('MDL_XMLGROUP_ROLE_TBL',         MDL_MODLOS_PREFIX.'group_role');
 
-define('MDL_CURRENCY_MONEY_TBL',		MDL_DB_PREFIX.'economy_money');
-define('MDL_CURRENCY_TRANSACTION_TBL',	MDL_DB_PREFIX.'economy_transactions');
+define('MDL_CURRENCY_MONEY_TBL',		MDL_MODLOS_PREFIX.'economy_money');
+define('MDL_CURRENCY_TRANSACTION_TBL',	MDL_MODLOS_PREFIX.'economy_transactions');
 
-define('MDL_OFFLINE_MESSAGE_TBL', 		MDL_DB_PREFIX.'offline_message');
+define('MDL_OFFLINE_MESSAGE_TBL', 		MDL_MODLOS_PREFIX.'offline_message');
 
-define('MDL_PROFILE_CLASSIFIEDS_TBL',   MDL_DB_PREFIX.'profile_classifieds');
-define('MDL_PROFILE_USERNOTES_TBL',  	MDL_DB_PREFIX.'profile_usernotes');
-define('MDL_PROFILE_USERPICKS_TBL',  	MDL_DB_PREFIX.'profile_userpicks');
-define('MDL_PROFILE_USERPROFILE_TBL',  	MDL_DB_PREFIX.'profile_userprofile');
-define('MDL_PROFILE_USERSETTINGS_TBL',	MDL_DB_PREFIX.'profile_usersettings');
+define('MDL_PROFILE_CLASSIFIEDS_TBL',   MDL_MODLOS_PREFIX.'profile_classifieds');
+define('MDL_PROFILE_USERNOTES_TBL',  	MDL_MODLOS_PREFIX.'profile_usernotes');
+define('MDL_PROFILE_USERPICKS_TBL',  	MDL_MODLOS_PREFIX.'profile_userpicks');
+define('MDL_PROFILE_USERPROFILE_TBL',  	MDL_MODLOS_PREFIX.'profile_userprofile');
+define('MDL_PROFILE_USERSETTINGS_TBL',	MDL_MODLOS_PREFIX.'profile_usersettings');
 
 define('MDL_SLOODLE_USERS_TBL',			'sloodle_users');
 

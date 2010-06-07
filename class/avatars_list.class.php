@@ -185,8 +185,11 @@ class  AvatarsList
 		if ($this->plimit != 100) $this->icon[6] = 'icon_limit_100_on';
 
 
-		// OpenSim DB
+		// auto synchro
+		modlos_sync_opensimdb();
 		if ($this->use_sloodle) modlos_sync_sloodle_users();
+
+		// OpenSim DB
 		$users = opensim_get_avatars_infos($this->sql_condition);
 
 		$colum  = 0;
@@ -229,9 +232,10 @@ class  AvatarsList
 			$uid = -1;
 			$avatardata = modlos_get_avatar_info($UUID, $this->use_sloodle);
 
-			// auto Synchro
+			// auto synchro
 			if ($avatardata==null) {
-				modlos_sync_opensimdb($this->use_sloodle);
+				modlos_sync_opensimdb(false);
+				if ($this->use_sloodle) modlos_sync_sloodle_users(false);
 				$avatardata = modlos_get_avatar_info($UUID, $this->use_sloodle);
 			}
 

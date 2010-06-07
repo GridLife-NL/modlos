@@ -7,7 +7,7 @@
  * function  hasModlosPermit($course_id);
  *
  * // DB
- * function  modlos_get_update_time($table)
+ * function  modlos_get_update_time($fullname_table)
  *
  * // Modlos and Sloodle
  * function  modlos_get_avatar_info($uuid, $use_sloodle=false)
@@ -34,8 +34,8 @@
  * function  modlos_inactivate_avatar($uuid)
  * function  modlos_delete_banneddb($uuid)
  *
- * function  modlos_sync_opensimdb($use_sloodle=false)
- * function  modlos_sync_sloodle_users()
+ * function  modlos_sync_opensimdb($timecheck=true)
+ * function  modlos_sync_sloodle_users($timecheck=true)
  *
  * function  print_tabnav($currenttab, $course, $create_tab=true)
  * function  print_modlos_header($currenttab, $course)
@@ -74,13 +74,18 @@ function  hasModlosPermit($course_id=0)
 // for DB
 //
 
-function  modlos_get_update_time($table)
+function  modlos_get_update_time($fullname_table)
 {
+	if ($fullname_table=="") return 0;
 
+	$db = new DB(CMS_DB_HOST, CMS_DB_NAME, CMS_DB_USER, CMS_DB_PASS);
+	$update = $db->get_update_time($fullname_table);
 
-
-
+	return $update;
 }
+
+
+
 
 
 //
@@ -555,12 +560,19 @@ function  modlos_delete_banneddb($uuid)
 // for DB Synchro
 //
 
-function  modlos_sync_opensimdb($use_sloodle=false)
+function  modlos_sync_opensimdb($timecheck=true)
 {
+	if ($timecheck) {
+		$opensim_up = opensim_users_update_time();
+		$modlos_up  = modlos_get_update_time(MDL_DB_PREFIX.'modlos_users');
+		if ($modlos_up>$opensim_up) return;
+	}
+
+
 	$opnsim_users = opensim_get_avatars_infos();	// OpenSim DB
 	$modlos_users = modlos_get_userstable(); 		// Modlos DB
 
-		// OpenSimに対応データが無い場合はデータを消す．
+	// OpenSimに対応データが無い場合はデータを消す．
 	foreach ($modlos_users as $modlos_user) {
 		$moodle_uuid = $modlos_user['UUID'];
 		if (!array_key_exists($moodle_uuid, $opnsim_users)) {
@@ -585,19 +597,20 @@ function  modlos_sync_opensimdb($use_sloodle=false)
 		}
 	}
 
-
-	// Sloodle連携
-	if ($use_sloodle) {
-		modlos_sync_sloodle_users();
-	}
-
 	return true;
 }
 
 
 
-function  modlos_sync_sloodle_users()
+function  modlos_sync_sloodle_users($timecheck=true)
 {
+	if ($timecheck) {
+		$sloodle_up = modlos_get_update_time(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL);
+		$modlos_up  = modlos_get_update_time(MDL_DB_PREFIX.'modlos_users');
+		if ($modlos_up>$sloodle_up) return;
+	}
+
+
 	$sloodles = get_records(MDL_SLOODLE_USERS_TBL);
 	$modloses = get_records('modlos_users');
 
