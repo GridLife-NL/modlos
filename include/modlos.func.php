@@ -3,17 +3,23 @@
  *	modlos.func.php by Fumi.Iseki for Modlos
  *
  *
+ * // Tools
  * function  hasModlosPermit($course_id);
  *
+ * // DB
+ * function  modlos_get_update_time($table)
+ *
+ * // Modlos and Sloodle
  * function  modlos_get_avatar_info($uuid, $use_sloodle=false)
  * function  modlos_set_avatar_info($avatar, $use_sloodle=false)
  * function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
  * function  modlos_get_avatars_num($uuid, $use_sloodle=false)
  *
- * function  modlos_get_users()
- * function  modlos_insert_usertable($user)
- * function  modlos_update_usertable($user)
- * function  modlos_delete_usertable($user)
+ * // Modlos
+ * function  modlos_get_userstable()
+ * function  modlos_insert_userstable($user)
+ * function  modlos_update_userstable($user)
+ * function  modlos_delete_userstable($user)
  *
  * function  modlos_get_lastnames($sort='')
  *
@@ -63,6 +69,18 @@ function  hasModlosPermit($course_id=0)
 
 
 
+
+//
+// for DB
+//
+
+function  modlos_get_update_time($table)
+{
+
+
+
+
+}
 
 
 //
@@ -128,10 +146,10 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 	// Modlos
 	$obj = get_record('modlos_users', 'uuid', $avatar['UUID']);		
 	if ($obj==null) {
-		$ret = modlos_insert_usertable($avatar);
+		$ret = modlos_insert_userstable($avatar);
 	}
 	else {
-		$ret = modlos_update_usertable($avatar, $obj);
+		$ret = modlos_update_userstable($avatar, $obj);
 	}
 
 	// Sloodle
@@ -168,7 +186,7 @@ function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 {
 	if (!isGUID($avatar['UUID'])) return false;
 
-	$ret = modlos_delete_usertable($avatar);
+	$ret = modlos_delete_userstable($avatar);
 
 	// Sloodle
 	if ($use_sloodle and $ret) $ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
@@ -212,7 +230,7 @@ function  modlos_get_avatars_num($id, $use_sloodle=false)
 //
 //
 
-function  modlos_get_users()
+function  modlos_get_userstable()
 {
 	// Modlos DB を読んで配列に変換
 	$db_users = get_records('modlos_users');
@@ -239,7 +257,7 @@ function  modlos_get_users()
 //	UUID, firstname, lastname, uid, state, time, hmregion are setted in $user[]
 //		hmregion is UUID or name of region
 
-function  modlos_insert_usertable($user)
+function  modlos_insert_userstable($user)
 {
 	if (!isGUID($user['UUID'])) return false;
 
@@ -278,7 +296,7 @@ function  modlos_insert_usertable($user)
 //
 // update (Moodle's)uid, hmregion, state, time of users (Moodle DB).
 //
-function  modlos_update_usertable($user, $updobj=null)
+function  modlos_update_userstable($user, $updobj=null)
 {
 	if (!isGUID($user['UUID'])) return false;
 
@@ -310,7 +328,7 @@ function  modlos_update_usertable($user, $updobj=null)
 
 
 
-function  modlos_delete_usertable($user)
+function  modlos_delete_userstable($user)
 {
 	if ($user['id']=='' and !isGUID($user['UUID'])) return false;
 	if (!($user['state']&AVATAR_STATE_INACTIVE)) return false;		// active
@@ -540,14 +558,14 @@ function  modlos_delete_banneddb($uuid)
 function  modlos_sync_opensimdb($use_sloodle=false)
 {
 	$opnsim_users = opensim_get_avatars_infos();	// OpenSim DB
-	$modlos_users = modlos_get_users(); 			// Modlos DB
+	$modlos_users = modlos_get_userstable(); 		// Modlos DB
 
 		// OpenSimに対応データが無い場合はデータを消す．
 	foreach ($modlos_users as $modlos_user) {
 		$moodle_uuid = $modlos_user['UUID'];
 		if (!array_key_exists($moodle_uuid, $opnsim_users)) {
 			$modlos_user['state'] |= AVATAR_STATE_INACTIVE;
-			modlos_delete_usertable($modlos_user);
+			modlos_delete_userstable($modlos_user);
 		}
 	}
 
@@ -558,12 +576,12 @@ function  modlos_sync_opensimdb($use_sloodle=false)
 			//$opnsim_user['id'] = $modlos_users[$opnsim_user['UUID']]['id'];
 			$opnsim_user['uid']   = $modlos_users[$opnsim_user['UUID']]['uid'];
 			$opnsim_user['state'] = $modlos_users[$opnsim_user['UUID']]['state'];
-			modlos_update_usertable($opnsim_user);
+			modlos_update_userstable($opnsim_user);
 		}
 		else {
 			$opnsim_user['uid']   = 0;
 			$opnsim_user['state'] = AVATAR_STATE_SYNCDB;
-			modlos_insert_usertable($opnsim_user);
+			modlos_insert_userstable($opnsim_user);
 		}
 	}
 

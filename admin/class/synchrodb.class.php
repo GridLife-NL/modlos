@@ -85,14 +85,14 @@ class  SynchroDataBase
 		global $CFG;
 
 		$opnsim_users = opensim_get_avatars_infos();	// OpenSim DB
-		$modlos_users = modlos_get_users(); 			// Modlos DB
+		$modlos_users = modlos_get_userstable(); 		// Modlos DB
 
 		// OpenSimに対応データが無い場合はデータを消す．
 		foreach ($modlos_users as $modlos_user) {
 			$moodle_uuid = $modlos_user['UUID'];
 			if (!array_key_exists($moodle_uuid, $opnsim_users)) {
 				$modlos_user['state'] |= AVATAR_STATE_INACTIVE;
-				modlos_delete_usertable($modlos_user);
+				modlos_delete_userstable($modlos_user);
 			}
 		}
 
@@ -103,12 +103,12 @@ class  SynchroDataBase
 				//$opnsim_user['id'] = $modlos_users[$opnsim_user['UUID']]['id'];
 				$opnsim_user['uid']   = $modlos_users[$opnsim_user['UUID']]['uid'];
 				$opnsim_user['state'] = $modlos_users[$opnsim_user['UUID']]['state'];
-				modlos_update_usertable($opnsim_user);
+				modlos_update_userstable($opnsim_user);
 			}
 			else {
 				$opnsim_user['uid']   = 0;
 				$opnsim_user['state'] = AVATAR_STATE_SYNCDB;
-				modlos_insert_usertable($opnsim_user);
+				modlos_insert_userstable($opnsim_user);
 			}
 		}
 
