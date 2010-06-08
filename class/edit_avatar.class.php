@@ -75,7 +75,7 @@ class  EditAvatar
 		// get uid from Modlos and Sloodle DB
 		$avatar = modlos_get_avatar_info($this->UUID, $this->use_sloodle);
 		$this->uid	  	= $avatar['uid'];
-		$this->ostate 	= $avatar['state'];
+		$this->ostate 	= (int)$avatar['state'];
 		$this->firstname= $avatar['firstname'];
 		$this->lastname = $avatar['lastname'];
 		$this->avatar 	= $avatar;
@@ -114,13 +114,13 @@ class  EditAvatar
 
 			// Sate (Active/Inactive)
 			$state 	= optional_param('state', '', PARAM_INT);
-			if ($state>0x80) $this->state = (int)$this->ostate & $state;
-			else 			 $this->state = (int)$this->ostate | $state;
+			if ($state>0x80) $this->state = $this->ostate & $state;
+			else 			 $this->state = $this->ostate | $state;
 
 			// Sloodle
 			$sloodle = optional_param('sloodle', '', PARAM_ALPHA);
-			if ($sloodle!='') $this->state = (int)$this->state | AVATAR_STATE_SLOODLE;
-			else			  $this->state = (int)$this->state & AVATAR_STATE_NOSLOODLE;
+			if ($sloodle!='') $this->state |= AVATAR_STATE_SLOODLE;
+			else			  $this->state &= AVATAR_STATE_NOSLOODLE;
 
 			//
 			$this->hmregion = optional_param('hmregion', '', PARAM_TEXT);
@@ -268,20 +268,20 @@ class  EditAvatar
 		// State
 		if ($this->state!=$this->ostate) {
 			// Avtive -> InAcvtive
-			if (!((int)$this->ostate&AVATAR_STATE_INACTIVE) and (int)$this->state&AVATAR_STATE_INACTIVE) {
+			if (!($this->ostate&AVATAR_STATE_INACTIVE) and $this->state&AVATAR_STATE_INACTIVE) {
 				$ret = modlos_inactivate_avatar($this->UUID);
 				if (!$ret) {
-					$this->state = (int)$this->state & AVATAR_STATE_ACTIVE;
+					$this->state &= AVATAR_STATE_ACTIVE;
 					$this->hasError = true;
 					$this->errorMsg[] = get_string('modlos_inactivate_error', 'block_modlos');
 					return false;
 				}
 			}
 			// InActive -> Acvtive
-			elseif ((int)$this->ostate&AVATAR_STATE_INACTIVE and !((int)$this->state&AVATAR_STATE_INACTIVE)) {
+			elseif ($this->ostate&AVATAR_STATE_INACTIVE and !($this->state&AVATAR_STATE_INACTIVE)) {
 				$ret = modlos_activate_avatar($this->UUID);
 				if (!$ret) {
-					$this->state = (int)$this->state | AVATAR_STATE_INACTIVE;
+					$this->state |= AVATAR_STATE_INACTIVE;
 					$this->hasError = true;
 					$this->errorMsg[] = get_string('modlos_activate_error', 'block_modlos');
 					return false;

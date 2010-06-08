@@ -60,7 +60,7 @@ class  DeleteAvatar
 		// get uid from Modlos and Sloodle DB
 		$avatar = modlos_get_avatar_info($this->UUID, $this->use_sloodle);
 		$this->uid	  	= $avatar['uid'];
-		$this->state  	= $avatar['state'];
+		$this->state  	= (int)$avatar['state'];
 		$this->hmregion = $avatar['hmregion'];
 		$this->firstname= $avatar['firstname'];
 		$this->lastname = $avatar['lastname'];
@@ -76,7 +76,7 @@ class  DeleteAvatar
 			error(get_string('modlos_access_forbidden', 'block_modlos'), $this->return_url);
 		}
 
-		if (!((int)$this->state&AVATAR_STATE_INACTIVE)) {
+		if (!($this->state&AVATAR_STATE_INACTIVE)) {
 			error(get_string('modlos_active_avatar', 'block_modlos'),  $this->return_url);
 		}
 

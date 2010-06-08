@@ -134,7 +134,7 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 	else					   	$avatar_info['uid'] 	 = '0';
 	if ($avatar->hmregion!='')	$avatar_info['hmregion'] = $avatar->hmregion;
 	else					   	$avatar_info['hmregion'] = opensim_get_home_region($uuid);
-	if ($avatar->state!='')		$avatar_info['state'] 	 = $avatar->state;
+	if ($avatar->state!='')		$avatar_info['state'] 	 = (int)$avatar->state;
 	else					   	$avatar_info['state'] 	 = AVATAR_STATE_NOSTATE;
 	if ($avatar->time!='')	 	$avatar_info['time'] 	 = $avatar->time;
 	else						$avatar_info['time']	 = time();
@@ -272,7 +272,7 @@ function  modlos_insert_userstable($user)
 
 	if ($user['uid']!='') 	$insobj->user_id = $user['uid'];
 	else				  	$insobj->user_id = '0';
-	if ($user['state']!='')	$insobj->state 	 = $user['state'];
+	if ($user['state']!='')	$insobj->state 	 = (int)$user['state'];
 	else				 	$insobj->state 	 = AVATAR_STATE_SYNCDB;
 	if ($user['time']!='') 	$insobj->time 	 = $user['time'];
 	else 					$insobj->time 	 = time();
@@ -312,7 +312,7 @@ function  modlos_update_userstable($user, $updobj=null)
 
 	// Update
 	if ($user['uid']!='') 	$updobj->user_id = $user['uid'];
-	if ($user['state']!='')	$updobj->state   = $user['state'];
+	if ($user['state']!='')	$updobj->state   = (int)$user['state'];
 	if ($user['time']!='')	$updobj->time 	 = $user['time'];
 	else 					$updobj->time 	 = time();
 

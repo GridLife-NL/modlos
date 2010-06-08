@@ -241,7 +241,7 @@ class  AvatarsList
 
 			if ($avatardata!=null) {
 				$uid = $avatardata['uid'];
-				$this->db_data[$colum]['state'] = $avatardata['state'];
+				$this->db_data[$colum]['state'] = (int)$avatardata['state'];
 
 				if ($uid>0) {
 					$user_info = get_record('user', 'id', $uid, 'deleted', '0');
