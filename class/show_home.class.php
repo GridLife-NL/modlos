@@ -22,6 +22,8 @@ class  ShowHome
 	var $max_avatars = 0;
 	var $isAvatarMax = false;
 	var $hasPermit	 = false;
+	var $use_sloodle = false;
+
 
 
 	function  ShowHome($course_id) 
@@ -37,6 +39,7 @@ class  ShowHome
 
 		$this->avatars_num = modlos_get_avatars_num($USER->id);
 		$this->max_avatars = $CFG->modlos_max_own_avatars;
+		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 	}
 
@@ -44,6 +47,10 @@ class  ShowHome
 
 	function  execute()
 	{
+		// auto synchro
+		modlos_sync_opensimdb();
+		if ($this->use_sloodle) modlos_sync_sloodle_users();
+
 		$ret = opensim_check_db();
 		if ($ret==null) return false;
 

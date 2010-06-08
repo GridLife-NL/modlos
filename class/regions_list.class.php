@@ -19,6 +19,7 @@ class  RegionsList
 	var $avatars_num = 0;
 	var $max_avatars = 0;
 	var $isAvatarMax = false;
+	var $use_sloodle = false;
 
 	var $hasPermit 	= false;
 	var $isGuest 	= true;
@@ -45,6 +46,7 @@ class  RegionsList
 		$this->action 	  = 'regions_list.php';
 		$this->action_url = CMS_MODULE_URL.'/actions/'.$this->action;
 
+		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		$this->avatars_num = modlos_get_avatars_num($USER->id);
 		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
@@ -136,6 +138,11 @@ class  RegionsList
 		$voice_mode[0] = $regions_list_ttl= get_string('modlos_voice_inactive_chnl', 'block_modlos');
 		$voice_mode[1] = $regions_list_ttl= get_string('modlos_voice_private_chnl',  'block_modlos');
 		$voice_mode[2] = $regions_list_ttl= get_string('modlos_voice_percel_chnl',   'block_modlos');
+
+
+		// auto synchro
+		modlos_sync_opensimdb();
+		if ($this->use_sloodle) modlos_sync_sloodle_users();
 
 		//
 		$regions = opensim_get_regions_infos($this->sql_condition);
