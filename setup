@@ -1,0 +1,5 @@
+find . -name .svn |xargs rm -fr
+find . -name chk |xargs rm -f
+find . -name clean |xargs rm -f
+rm -f commit update
+
