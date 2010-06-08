@@ -161,7 +161,7 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 	if ($use_sloodle and $ret) {
 		$updobj = get_record(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
 		if ($updobj==null) {
-			if ($avatar['state']&AVATAR_STATE_SLOODLE) {
+			if ((int)$avatar['state']&AVATAR_STATE_SLOODLE) {
 				$insobj->userid = $avatar['uid'];
 				$insobj->uuid 	= $avatar['UUID'];
 				$insobj->avname = $avatar['firstname'].' '.$avatar['lastname'];
@@ -171,7 +171,7 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 			}
 		}
 		else {
-			if ($avatar['state']&AVATAR_STATE_SLOODLE and $avatar['uid']!=0) {
+			if ((int)$avatar['state']&AVATAR_STATE_SLOODLE and $avatar['uid']!=0) {
 				$updobj->userid = $avatar['uid'];
 				$updobj->lastactive = time();
 				$ret = update_record(MDL_SLOODLE_USERS_TBL, $updobj);
@@ -336,7 +336,7 @@ function  modlos_update_userstable($user, $updobj=null)
 function  modlos_delete_userstable($user)
 {
 	if ($user['id']=='' and !isGUID($user['UUID'])) return false;
-	if (!($user['state']&AVATAR_STATE_INACTIVE)) return false;		// active
+	if (!((int)$user['state']&AVATAR_STATE_INACTIVE)) return false;		// active
 
 	if ($user['id']!='') {
 		$ret = delete_records('modlos_users',   'id', $user['id']);
@@ -576,7 +576,7 @@ function  modlos_sync_opensimdb($timecheck=true)
 	foreach ($modlos_users as $modlos_user) {
 		$moodle_uuid = $modlos_user['UUID'];
 		if (!array_key_exists($moodle_uuid, $opnsim_users)) {
-			$modlos_user['state'] |= AVATAR_STATE_INACTIVE;
+			$modlos_user['state'] = (int)$modlos_user['state']|AVATAR_STATE_INACTIVE;
 			modlos_delete_userstable($modlos_user);
 		}
 	}
@@ -620,7 +620,7 @@ function  modlos_sync_sloodle_users($timecheck=true)
 			foreach($sloodles as $sloodle) {
 				if ($modlos->uuid==$sloodle->uuid) {
 					$modlos->user_id = $sloodle->userid;
-					$modlos->state |= AVATAR_STATE_SLOODLE;
+					$modlos->state = (int)$modlos->state|AVATAR_STATE_SLOODLE;
 					$with_sloodle = true;
 					break;
 				}
@@ -629,9 +629,9 @@ function  modlos_sync_sloodle_users($timecheck=true)
 			if ($with_sloodle) {
 				update_record('modlos_users', $modlos);
 			}
-			else if ($modlos->state&AVATAR_STATE_SLOODLE) {
+			else if ((int)$modlos->state&AVATAR_STATE_SLOODLE) {
 				$modlos->user_id = '0';
-				$modlos->state &= AVATAR_STATE_NOSLOODLE;
+				$modlos->state = (int)$modlos->state & AVATAR_STATE_NOSLOODLE;
 				update_record('modlos_users', $modlos);
 			}
 		}

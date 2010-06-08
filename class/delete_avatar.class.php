@@ -76,7 +76,7 @@ class  DeleteAvatar
 			error(get_string('modlos_access_forbidden', 'block_modlos'), $this->return_url);
 		}
 
-		if (!($this->state&AVATAR_STATE_INACTIVE)) {
+		if (!((int)$this->state&AVATAR_STATE_INACTIVE)) {
 			error(get_string('modlos_active_avatar', 'block_modlos'),  $this->return_url);
 		}
 

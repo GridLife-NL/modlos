@@ -82,7 +82,7 @@ class  OwnerAvatar
 		if ($avatar['uid']!=0) {
 			error(get_string('modlos_owner_forbidden', 'block_modlos').' (User ID is not 0)', $this->return_url);
 		}
-		if (!($avatar['state']&AVATAR_STATE_SYNCDB)) {
+		if (!((int)$avatar['state']&AVATAR_STATE_SYNCDB)) {
 			error(get_string('modlos_owner_forbidden', 'block_modlos').' (not Acrive)', $this->return_url);
 		}
 		$this->firstname = $avatar['firstname'];

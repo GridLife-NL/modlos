@@ -91,7 +91,7 @@ class  SynchroDataBase
 		foreach ($modlos_users as $modlos_user) {
 			$moodle_uuid = $modlos_user['UUID'];
 			if (!array_key_exists($moodle_uuid, $opnsim_users)) {
-				$modlos_user['state'] |= AVATAR_STATE_INACTIVE;
+				$modlos_user['state'] = (int)$modlos_user['state']|AVATAR_STATE_INACTIVE;
 				modlos_delete_userstable($modlos_user);
 			}
 		}

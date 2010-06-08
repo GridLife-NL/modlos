@@ -57,7 +57,7 @@ if ($hasPermit and data_submitted() and confirm_sesskey()) {
 	}
 
 	$rginfo = opensim_get_region_info($region);
-	if ($rginfo!=null && $rginfo['owner_uuid']!=$rgnadmin) {
+	if ($rginfo!=null and $rginfo['owner_uuid']!=$rgnadmin) {
 		$ret = opensim_set_region_owner($region, $rgnadmin);
 		if (!$ret) exit("<h4>updating of region owner is fail!! ($region, $rgnadmin)</h4>");
 		$rgninfo = null;
