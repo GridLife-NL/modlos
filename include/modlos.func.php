@@ -3,6 +3,12 @@
  *	modlos.func.php by Fumi.Iseki for Modlos
  *
  *
+ ****************************************************************/
+
+
+/****************************************************************
+ * Functions
+ * 
  * // Tools
  * function  hasModlosPermit($course_id);
  *
@@ -87,7 +93,6 @@ function  modlos_get_update_time($fullname_table)
 
 
 
-
 //
 // for Modlos and Sloodle
 //
@@ -110,12 +115,6 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 				$avatar->firstname = $names[0];
 				$avatar->lastname  = $names[1];
 			}
-
-			/*	if ($avatar->user_id=='' and $sloodle->userid>0) $avatar->user_id = $sloodle->userid;
-				if (is_array($names)) {
-					if ($avatar->firstname=='') $avatar->firstname = $names[0];
-					if ($avatar->lastname=='')  $avatar->firstname = $names[1];
-				}*/
 		}
 	}
 	
@@ -144,21 +143,13 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 
 
 
+
 function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 {
 	if (!isGUID($avatar['UUID'])) return false;
 
-	// Modlos
-	$obj = get_record('modlos_users', 'uuid', $avatar['UUID']);		
-	if ($obj==null) {
-		$ret = modlos_insert_userstable($avatar);
-	}
-	else {
-		$ret = modlos_update_userstable($avatar, $obj);
-	}
-
 	// Sloodle
-	if ($use_sloodle and $ret) {
+	if ($use_sloodle) {
 		$updobj = get_record(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
 		if ($updobj==null) {
 			if ((int)$avatar['state']&AVATAR_STATE_SLOODLE) {
@@ -182,8 +173,19 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 		}
 	}
 
+
+	// Modlos
+	$obj = get_record('modlos_users', 'uuid', $avatar['UUID']);		
+	if ($obj==null) {
+		$ret = modlos_insert_userstable($avatar);
+	}
+	else {
+		$ret = modlos_update_userstable($avatar, $obj);
+	}
+
 	return $ret;
 }
+
 
 
 
@@ -191,14 +193,15 @@ function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 {
 	if (!isGUID($avatar['UUID'])) return false;
 
-	$ret = modlos_delete_userstable($avatar);
-
 	// Sloodle
-	if ($use_sloodle and $ret) $ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
+	if ($use_sloodle) $ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
+
+	$ret = modlos_delete_userstable($avatar);
 
 	if (!$ret) return false;
 	return true;
 }
+
 
 
 
@@ -295,6 +298,7 @@ function  modlos_insert_userstable($user)
 
 	return $ret;
 }
+
 
 
 
@@ -396,6 +400,7 @@ function  modlos_delete_groupdb($uuid, $delallgrp=false)
 
 
 
+
 function  modlos_delete_groupdb_by_uuid($uuid)
 {
 	delete_records(MDL_XMLGROUP_ACTIVE_TBL, 	'agentid', $uuid);
@@ -405,6 +410,7 @@ function  modlos_delete_groupdb_by_uuid($uuid)
 
 	return true;
 }
+
 
 
 
@@ -420,6 +426,7 @@ function  modlos_delete_groupdb_by_gpid($gpid)
 
 	return true;
 }
+
 
 
 
