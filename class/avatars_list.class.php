@@ -67,7 +67,7 @@ class  AvatarsList
 		$this->action_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param;
 		$this->edit_url	   = CMS_MODULE_URL.'/actions/edit_avatar.php'. $course_param;
 		$this->owner_url   = CMS_MODULE_URL.'/actions/owner_avatar.php'.$course_param;
-		$this->search_url  = CMS_MODULE_URL.'/actions/avatars_list.php';
+		$this->search_url  = CMS_MODULE_URL.'/actions/avatars_list.php?pstart=0';
 		$this->avatar_url  = $CFG->wwwroot.'/user/view.php';
 
 		$this->avatars_num = modlos_get_avatars_num($USER->id);
