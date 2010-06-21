@@ -28,7 +28,6 @@ $string['modlos_change'] 			= '変更';
 
 $string['modlos_online_ttl'] 		= 'オンライン';
 $string['modlos_offline_ttl'] 		= 'オフライン';
-$string['modlos_delete_ttl'] 		= '削除';
 $string['modlos_edit_ttl'] 			= 'EDIT';
 $string['modlos_edit_user_ttl'] 	= 'ユーザ情報の編集';
 $string['modlos_reset_ttl'] 		= 'リセット';

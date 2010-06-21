@@ -68,6 +68,7 @@ class  RegionsList
 			error(get_string('modlos_db_connect_error', 'block_modlos'), $course_url);
 		}
 
+		$sql_order = '';
 		if ($this->order=='name')       $sql_order = ' ORDER BY regionName ASC';
 		else if ($this->order=='x')     $sql_order = ' ORDER BY locX ASC';
 		else if ($this->order=='y')     $sql_order = ' ORDER BY locY ASC';

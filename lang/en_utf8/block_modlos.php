@@ -29,7 +29,6 @@ $string['modlos_change'] 			= 'Change';
 
 $string['modlos_online_ttl'] 		= 'ONLINE';
 $string['modlos_offline_ttl'] 		= 'OFFLINE';
-$string['modlos_delete_ttl'] 		= 'DELETE';
 $string['modlos_edit_ttl'] 			= 'EDIT';
 $string['modlos_edit_user_ttl']		= 'EDIT user';
 $string['modlos_reset_ttl'] 		= 'RESET';

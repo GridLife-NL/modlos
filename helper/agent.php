@@ -46,7 +46,7 @@ if ($agent) {
 		$serverIP		= $avinfo['serverIP'];
 		$serverHttpPort	= $avinfo['serverHttpPort'];
 		$serverURI		= $avinfo['serverURI'];
-		$profileTXT 	= $avinfp['profileTXT'];
+		$profileTXT 	= $avinfo['profileTXT'];
 
 		$online			= opensim_get_avatar_online($UUID);
 		$agentOnline	= $online['online'];

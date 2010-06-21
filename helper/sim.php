@@ -38,7 +38,7 @@ foreach($users as $user) {
 	$avatars[$col]['uuid'] = $user['UUID'];
 	$col++;
 }
-$avatar_num = $col;
+$avatars_num = $col;
 
 
 $vcmode = '';
@@ -60,7 +60,7 @@ if ($hasPermit and data_submitted() and confirm_sesskey()) {
 	if ($rginfo!=null and $rginfo['owner_uuid']!=$rgnadmin) {
 		$ret = opensim_set_region_owner($region, $rgnadmin);
 		if (!$ret) exit("<h4>updating of region owner is fail!! ($region, $rgnadmin)</h4>");
-		$rgninfo = null;
+		$rginfo = null;
 	}
 		
 	$voice_mode = optional_param('voice_mode', '', PARAM_TEXT);
@@ -89,7 +89,7 @@ $vcmode_title = $voice_modes[$vcmode]['title'];
 
 //////////////
 $owner_name = $owner_uuid = '';
-if ($rgnifo=='') $rginfo = opensim_get_region_info($region);
+if ($rginfo=='') $rginfo = opensim_get_region_info($region);
 if ($rginfo!=null) {
 	$regionName	 	= $rginfo['regionName'];
 	$serverIP		= $rginfo['serverIP'];
@@ -120,7 +120,7 @@ $locY = $locY/256;
 
 
 $avatar_select = true;
-if ($avatar_num>100) $avatar_select = false;
+if ($avatars_num>100) $avatar_select = false;
 
 //////////////
 $course_amp = '';
