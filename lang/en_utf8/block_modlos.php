@@ -202,7 +202,7 @@ $string['modlos_sql_db_name'] 		= 'OpenSim SQL DB Name';
 $string['modlos_sql_db_desc'] 		= 'Specify the OpenSim SQL DB name';
 $string['modlos_sql_user'] 			= 'OpenSim SQL DB User Name';
 $string['modlos_sql_user_desc'] 	= 'Specify the OpenSim SQL user name';
-$string['modlos_sql_pass'] 			= 'Opensim SQL DB Password';
+$string['modlos_sql_pass'] 			= 'OpenSim SQL DB Password';
 $string['modlos_sql_pass_desc'] 	= 'Specify the OpenSim SQL password';
 
 $string['modlos_asset_uri'] 		= 'Asset Server URL';
@@ -213,21 +213,21 @@ $string['modlos_crncy_uri'] 		= 'Money Server URL';
 $string['modlos_crncy_uri_desc'] 	= 'Specify DTL Money server URL, if exist.';
 
 $string['modlos_map_stx'] 			= 'World Map Start Point (X)';
-$string['modlos_map_stx_desc'] 		= 'Specify X coordinates of world map';
+$string['modlos_map_stx_desc'] 		= 'Specify initial X coordinates of World Map';
 $string['modlos_map_sty'] 			= 'World Map Start Point (Y)';
-$string['modlos_map_sty_desc'] 		= 'Specify Y coordinates of world map';
+$string['modlos_map_sty_desc'] 		= 'Specify initial Y coordinates of World Map';
 $string['modlos_map_size'] 			= 'Size of SIM icon on the World Map';
-$string['modlos_map_size_desc'] 	= 'Specify default size(px) of SIM icon on the World Map';
+$string['modlos_map_size_desc'] 	= 'Specify default size(px) of SIM icon on the World Map.';
 
 $string['modlos_max_avatars'] 		= 'Max Number of Avatars';
-$string['modlos_max_avatars_desc'] 	= 'Max number of avatars that a user can own.';
+$string['modlos_max_avatars_desc'] 	= 'Max number of avatars that a user can own';
 $string['modlos_lname_activate'] 	= 'Last Name Activation';
 $string['modlos_lname_desc'] 		= 'Select to last name limitation is active, or not';
 $string['modlos_dst_region_name'] 	= 'Default Home Region';
-$string['modlos_dst_region_desc'] 	= 'Soecify default home region (SIM)';
+$string['modlos_dst_region_desc'] 	= 'Specify default home region (SIM) of avatar';
 $string['modlos_use_https'] 		= 'Do you use HTTPS with POST';
 $string['modlos_use_https_desc'] 	= 'Do you use HTTPS, when you send important data (ex. password) to Modlos with POST method?'. 
-									  'It is not necessary to select it, when the whole of this site is already https or use https login to Moodle.';
+									  'It is not necessary to select it, when the whole of this site is already https.';
 $string['modlos_https_url'] 		= 'Moodle Block URL of HTTPS';
 $string['modlos_https_url_desc'] 	= 'Specify HTTPS URL (include /blocks) of Moodle Block.'.
 								  	  'If this is blank (default), http: of $CFG->wwwroot/blocks was changed into https: is used. ';

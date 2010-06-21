@@ -13,10 +13,10 @@
   <input type="hidden" name="uuid"    value="<?php echo $this->UUID?>" />
   <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
 
-  <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
+  <table width="520" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 
     <tr>
-      <td width="100" class="head"><?php echo $firstname_ttl?></td>
+      <td width="120" class="head"><?php echo $firstname_ttl?></td>
       <td width="320" class="even"><b><?php echo $this->firstname?></b></td>
     </tr>
 
@@ -81,7 +81,7 @@
 
     <?php if ($this->hasPermit) {?>
       <tr>
-        <td class="head"><?php echo $owner_ttl?></td>
+        <td class="head"><?php echo $ownername_ttl?></td>
         <td class="odd" ><input name="ownername" size="32" maxlength="30" value="<?php echo $this->ownername?>" /></td>
       </tr>
     <?php } else {?>
@@ -122,16 +122,16 @@
 <?php } else {?>
   <?php if ($this->updated_avatar) {?>
     <h3><font color=#1010e0><center><?php echo $avatar_updated?></center></font></h3>
-    <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff" >
+    <table width="520" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff" >
       <?php if ($this->hasPermit) {?>
         <tr>
-          <td width="100" class="head"><?php echo $uuid_ttl?></td>
+          <td width="120" class="head"><?php echo $uuid_ttl?></td>
           <td width="320" class="even"><font color="#2060b0"><?php echo $this->UUID?></font></td>	
         </tr>
       <?php }?>
 
       <tr>
-        <td width="100" class="head"><?php echo $firstname_ttl?></td>
+        <td width="120" class="head"><?php echo $firstname_ttl?></td>
         <td width="320" class="odd" ><?php echo $this->firstname?></td>	
       </tr>
       <tr>
