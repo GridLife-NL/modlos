@@ -1,8 +1,25 @@
 svn update
-svn update osprofile
-svn update flotsam_XmlRpcGroup
-svn update opensimwiredux
-svn update opensim.phplib
-#(cd xoopensim && ./update)
 
-chown -R www.www .
+if [ -d osprofile ]; then
+	svn update osprofile
+else
+	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.osprofile/trunk osprofile 
+fi
+
+if [ -d flotsam_XmlRpcGroup ]; then
+	svn update flotsam_XmlRpcGroup
+else
+	svn co http://www.nsl.tuis.ac.jp/svn/opensim/flotsam_XmlRpcGroup/trunk flotsam_XmlRpcGroup
+fi
+
+if [ -d opensimwiredux ]; then
+	svn update opensimwiredux
+else
+	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensimwiredux/trunk opensimwiredux
+fi
+
+if [ -d opensim.phplib ]; then
+	svn update opensim.phplib
+else
+	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.phplib/trunk opensim.phplib
+fi
