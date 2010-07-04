@@ -65,7 +65,7 @@ class  UpdateDataBase
 					return false;
 				}
 
-				opensim_supply_passwordSalt();
+				//opensim_supply_passwordSalt();
 				opensim_succession_data(OPENSIM_HMREGION);
 				opensim_recreate_presence();
 				$profs = opensim_get_avatars_profiles_from_users();

@@ -477,8 +477,8 @@ function  modlos_set_profiles($profs, $ovwrite=true)
 
 			$setobj->useruuid = $prof['UUID'];
 
-			if ($prof['ImviaEmail']!='')$setobj->imviaemail = $prof['ImviaEmail'];
-			if ($prof['Visible']!='')	$setobj->visible	= $prof['Visible'];
+			//if ($prof['ImviaEmail']!='')$setobj->imviaemail = $prof['ImviaEmail'];
+			//if ($prof['Visible']!='')	$setobj->visible	= $prof['Visible'];
 			if ($prof['Email']!='')		$setobj->email		= $prof['Email'];
 
 			if ($insert) {
