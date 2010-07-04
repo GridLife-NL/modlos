@@ -3,8 +3,8 @@
 // Mute_List Stub for TEST
 //
 
-require_once('./config.php');
-require_once('./mysql.func.php');
+require_once('../include/config.php');
+require_once('../include/mysql.func.php');
 
 
 //$request_xml = $HTTP_RAW_POST_DATA;

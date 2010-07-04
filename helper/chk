@@ -1,5 +1,4 @@
 php -l agent.php
-php -l config.php
 php -l currency.php
 php -l helpers.php
 php -l landtool.php
@@ -12,4 +11,3 @@ php -l world_map.php
 php -l xmlgroups.php
 php -l xmlgroups_config.php
 php -l xmlrpc.php
-php -l mysql.func.php
