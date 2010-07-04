@@ -448,14 +448,14 @@ function  modlos_set_profiles($profs, $ovwrite=true)
 			if ($prof['Partnar']!='')		$prfobj->profilepartnar		  = $prof['Partnar'];
 			if ($prof['Image']!='')			$prfobj->profileimage		  = $prof['Image'];
 			if ($prof['AboutText']!='')		$prfobj->profileabouttext	  =	$prof['AboutText'];
-			if ($prof['AllowPublish']!='')	$prfobj->profileallowpublish  = $prof['AllowPublish'];
-			if ($prof['MaturePublish']!='')	$prfobj->profilematurepublish = $prof['MaturePublish'];
-			if ($prof['URL']!='')			$prfobj->profileurl 		  = $prof['URL'];
+			//if ($prof['AllowPublish']!='')	$prfobj->profileallowpublish  = $prof['AllowPublish'];
+			//if ($prof['MaturePublish']!='')	$prfobj->profilematurepublish = $prof['MaturePublish'];
+			//if ($prof['URL']!='')			$prfobj->profileurl 		  = $prof['URL'];
 			if ($prof['WantToMask']!='')	$prfobj->profilewanttomask 	  = $prof['WantToMask'];
-			if ($prof['WantToText']!='')	$prfobj->profilewanttotext 	  = $prof['WantToText'];
 			if ($prof['SkillsMask']!='')	$prfobj->profileskillsmask 	  = $prof['SkillsMask'];
-			if ($prof['SkillsText']!='')	$prfobj->profileskillstext 	  = $prof['SkillsText'];
-			if ($prof['LanguagesText']!='')	$prfobj->profilelanguagestext = $prof['LanguagesText'];
+			//if ($prof['WantToText']!='')	$prfobj->profilewanttotext 	  = $prof['WantToText'];
+			//if ($prof['SkillsText']!='')	$prfobj->profileskillstext 	  = $prof['SkillsText'];
+			//if ($prof['LanguagesText']!='')	$prfobj->profilelanguagestext = $prof['LanguagesText'];
 			if ($prof['FirstAboutText']!='')$prfobj->profilefirsttext 	  = $prof['FirstAboutText'];
 			if ($prof['FirstImage'])		$prfobj->profilefirstimag 	  = $prof['FirstImage'];
 	
