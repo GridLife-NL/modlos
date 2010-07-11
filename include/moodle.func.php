@@ -1,6 +1,6 @@
 <?php
 /****************************************************************
- *  moodle.func.php by Fumi.Iseki for Mdlopensim
+ *  moodle.func.php by Fumi.Iseki for Modlos
  *
  *
  * function  hasPermit($courseid)
