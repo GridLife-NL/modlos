@@ -118,7 +118,6 @@ if ($agent) {
 
 
 
-
 	//
 	if ($created=='0' or $created==null or $created=='' or $created=='0') {
 		$born = ' - ';
