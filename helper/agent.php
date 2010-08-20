@@ -64,29 +64,9 @@ if ($agent) {
 		//$crrntRegion  = $online['region_name'];
 	}
 
-	// osprofile
-	$prof = modlos_get_profile($agent);
-	if ($prof!=null) {
-        if ($prof['Partnar']!='')	 	 $partner 	   = $prof['Partnar'];
-        if ($prof['AboutText']!='')  	 $profileText  = $prof['AboutText'];
-        if ($prof['Image']!='')		 	 $profileImage = $prof['Image'];
-        if ($prof['FirstAboutText']!='') $firstText    = $prof['FirstAboutText'];
-        if ($prof['FirstImage']!='') 	 $firstImage   = $prof['FirstImage'];
-
-        //$prof['AllowPublish']
-        //$prof['MaturePublish']
-        //$prof['URL']
-        //$prof['WantToMask']
-        //$prof['SkillsMask']
-        //$prof['WantToText']
-        //$prof['SkillsText']
-        //$prof['LanguagesText']
-	}
-
 	// auto synchro
 	modlos_sync_opensimdb();
 	if ($use_sloodle) modlos_sync_sloodle_users();
-
 
 	// Modlos and Sloodle DB
 	$avatar = modlos_get_avatar_info($agent, $use_sloodle);
@@ -112,6 +92,24 @@ if ($agent) {
 	//		$profileText = $rec->profileAboutText;
 	//	}
 	//}
+
+	$prof = modlos_get_profile($agent);
+	if ($prof!=null) {
+        if ($prof['Partnar']!='')	 	 $partner 	   = $prof['Partnar'];
+        if ($prof['AboutText']!='')  	 $profileText  = $prof['AboutText'];
+        if ($prof['Image']!='')		 	 $profileImage = $prof['Image'];
+        if ($prof['FirstAboutText']!='') $firstText    = $prof['FirstAboutText'];
+        if ($prof['FirstImage']!='') 	 $firstImage   = $prof['FirstImage'];
+
+        //$prof['AllowPublish']
+        //$prof['MaturePublish']
+        //$prof['URL']
+        //$prof['WantToMask']
+        //$prof['SkillsMask']
+        //$prof['WantToText']
+        //$prof['SkillsText']
+        //$prof['LanguagesText']
+	}
 
 	//
 	if ($created=='0' or $created==null or $created=='' or $created=='0') {
