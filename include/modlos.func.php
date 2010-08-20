@@ -434,6 +434,35 @@ function  modlos_delete_groupdb_by_gpid($gpid)
 //
 //
 
+
+function  modlos_get_profile($uuid)
+{
+	$prof = array();
+
+	$prfobj = get_record(MDL_PROFILE_USERPROFILE_TBL, 'useruuid', $uuid);
+	if ($prfobj) {
+		$prof['UUID'] 			= $prfobj->useruuid;
+		$prof['Partnar'] 		= $prfobj->profilepartnar;
+		$prof['Image']	 		= $prfobj->profileimage;
+		$prof['AboutText']		= $prfobj->profileabouttext;
+		$prof['AllowPublish']	= $prfobj->profileallowpublish;
+		$prof['MaturePublish']	= $prfobj->profilematurepublish;
+		$prof['URL']			= $prfobj->profileurl;
+		$prof['WantToMask']		= $prfobj->profilewanttomask;
+		$prof['SkillsMask']		= $prfobj->profileskillsmask;
+		$prof['WantToText']		= $prfobj->profilewanttotext;
+		$prof['SkillsText']		= $prfobj->profileskillstext;
+		$prof['LanguagesText']	= $prfobj->profilelanguagestext;
+		$prof['FirstAboutText'] = $prfobj->profilefirsttext;
+		$prof['FirstImage']		= $prfobj->profilefirstimag;
+	}
+
+	return $prof;
+}
+
+
+
+
 // called from updatedb.class.php
 function  modlos_set_profiles($profs, $ovwrite=true)
 {

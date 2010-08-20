@@ -33,7 +33,12 @@ $state  = 0;
 
 if ($agent) {
 	// OpenSim DB
-	$profileTXT = '';
+	$profileText  = '';
+	$profileImage = '';
+	$firstText	  = '';
+	$firstImage	  = '';
+	$partner	  = '';
+
 	$avinfo = opensim_get_avatar_info($agent);
 	if ($avinfo!=null) {
 		$UUID 			= $avinfo['UUID'];
@@ -46,12 +51,36 @@ if ($agent) {
 		$serverIP		= $avinfo['serverIP'];
 		$serverHttpPort	= $avinfo['serverHttpPort'];
 		$serverURI		= $avinfo['serverURI'];
-		$profileTXT 	= $avinfo['profileTXT'];
+
+		$profileText 	= $avinfo['profileText'];
+		$profileImage	= $avinfo['profileImage'];
+		$firstText		= $avinfo['firstText'];
+		$firstImage		= $avinfo['firstImage'];
+		$partner		= $avinfo['partner'];
 
 		$online			= opensim_get_avatar_online($UUID);
 		$agentOnline	= $online['online'];
 		$crrntRegion	= $online['region_id'];
 		//$crrntRegion  = $online['region_name'];
+	}
+
+	// osprofile
+	$prof = modlos_get_profile($agent);
+	if ($prof!=null) {
+        if ($prof['Partnar']!='')	 	 $partner 	   = $prof['Partnar'];
+        if ($prof['AboutText']!='')  	 $profileText  = $prof['AboutText'];
+        if ($prof['Image']!='')		 	 $profileImage = $prof['Image'];
+        if ($prof['FirstAboutText']!='') $firstText    = $prof['FirstAboutText'];
+        if ($prof['FirstImage']!='') 	 $firstImage   = $prof['FirstImage'];
+
+        //$prof['AllowPublish']
+        //$prof['MaturePublish']
+        //$prof['URL']
+        //$prof['WantToMask']
+        //$prof['SkillsMask']
+        //$prof['WantToText']
+        //$prof['SkillsText']
+        //$prof['LanguagesText']
 	}
 
 	// auto synchro
@@ -78,11 +107,11 @@ if ($agent) {
 	}
 
 	// osprofile
-	if ($profileTXT=='') {
-		if ($rec = get_record(MDL_PROFILE_USERPROFILE_TBL, 'useruuid', $agent, '', '', '', '', 'profileAboutText')) {
-			$profileTXT = $rec->profileAboutText;
-		}
-	}
+	//if ($profileText=='') {
+	//	if ($rec = get_record(MDL_PROFILE_USERPROFILE_TBL, 'useruuid', $agent, '', '', '', '', 'profileAboutText')) {
+	//		$profileText = $rec->profileAboutText;
+	//	}
+	//}
 
 	//
 	if ($created=='0' or $created==null or $created=='' or $created=='0') {
