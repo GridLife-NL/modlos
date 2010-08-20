@@ -233,7 +233,7 @@ $string['modlos_grpdb_rkey'] 		= 'Flotsam グループデータベース読み�
 $string['modlos_grpdb_rkey_desc'] 	= 'Flotsam Group Function を使用する場合に指定する読み込み用キー．'.
 									  'OpnenSim.iniの [Groups]セクションの XmlRpcServiceReadKeyの値と一致させる必要がある．';
 $string['modlos_grpdb_wkey'] 		= 'Flotsam グループデータベースの書き込みアクセスキー';
-$string['modlos_grpdb_wkey_desc'] 	= 'Flotsam Group Function を使用する場合に指定する読み込み用キー．'.
+$string['modlos_grpdb_wkey_desc'] 	= 'Flotsam Group Function を使用する場合に指定する書き込み用キー．'.
 									  'OpnenSim.iniの [Groups]セクションの XmlRpcServiceWriteKeyの値と一致させる必要がある．';
 $string['modlos_crncy_key'] 		= 'DTL Money サーバへのアクセスキー　（未実装）';
 $string['modlos_crncy_key_desc'] 	= 'DTL Money サーバへのアクセスキーを指定する．この機能はまだ未実装である';
