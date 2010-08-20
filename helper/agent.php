@@ -64,6 +64,7 @@ if ($agent) {
 		//$crrntRegion  = $online['region_name'];
 	}
 
+
 	// auto synchro
 	modlos_sync_opensimdb();
 	if ($use_sloodle) modlos_sync_sloodle_users();
@@ -85,6 +86,7 @@ if ($agent) {
 			$owner  = get_display_username($moodle->firstname, $moodle->lastname);
 		}
 	}
+
 
 	// osprofile
 	//if ($profileText=='') {
@@ -110,6 +112,12 @@ if ($agent) {
         //$prof['SkillsText']
         //$prof['LanguagesText']
 	}
+
+
+
+
+
+
 
 	//
 	if ($created=='0' or $created==null or $created=='' or $created=='0') {

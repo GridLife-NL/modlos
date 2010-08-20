@@ -69,7 +69,7 @@ class  UpdateDataBase
 				opensim_succession_data(OPENSIM_HMREGION);
 				opensim_recreate_presence();
 				$profs = opensim_get_avatars_profiles_from_users();
-				if ($profs!=null) modlos_set_profiles($profs, false);		// not over write
+				if ($profs!=null) modlos_set_profiles_from_users($profs, false);		// not over write
 
 				$this->dbupdated = true;
 			}

@@ -33,8 +33,9 @@
  * function  modlos_delete_groupdb_by_gpid($gpid)
  * function  modlos_delete_groupdb_by_uuid($uuid)
  *
- * function  modlos_set_profiles($profs, $ovwrite=true)
+ * function  modlos_get_profile($uuid)
  * function  modlos_delete_profiles($uuid)
+ * function  modlos_set_profiles_from_users($profs, $ovwrite=true)
  *
  * function  modlos_activate_avatar($uuid)
  * function  modlos_inactivate_avatar($uuid)
@@ -464,7 +465,7 @@ function  modlos_get_profile($uuid)
 
 
 // called from updatedb.class.php
-function  modlos_set_profiles($profs, $ovwrite=true)
+function  modlos_set_profiles_from_users($profs, $ovwrite=true)
 {
 	foreach($profs as $prof) {
 		if ($prof['UUID']!='') {
