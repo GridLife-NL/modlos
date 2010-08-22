@@ -227,6 +227,9 @@ class  AvatarsList
 				$this->db_data[$colum]['region'] 	= $online['region_name'];
 			}
 
+			$this->db_data[$colum]['uuid']	  = str_replace('-', '', $UUID);
+			$this->db_data[$colum]['rg_uuid'] = str_replace('-', '', $this->db_data[$colum]['region_id']);
+
 
 			// serach Moodle, Modlos and Sloodle DB
 			$uid = -1;

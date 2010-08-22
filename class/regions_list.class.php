@@ -155,6 +155,11 @@ class  RegionsList
 			$this->db_data[$colum]['locY']  = $this->db_data[$colum]['locY']/256;
 			$vcmode = opensim_get_voice_mode($region['UUID']);
 			$this->db_data[$colum]['voice'] = $voice_mode[$vcmode];
+
+			$this->db_data[$colum]['uuid']    = str_replace('-', '',  $region['UUID']);
+			$this->db_data[$colum]['ow_uuid'] = str_replace('-', '',  $region['owner_uuid']);
+			$this->db_data[$colum]['ip_name'] = str_replace('.', 'X', $region['serverIP']);
+
 			$colum++;
 		}
 
