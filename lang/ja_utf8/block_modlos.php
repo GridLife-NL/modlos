@@ -122,7 +122,7 @@ $string['modlos_image_processor']	= '画像処理用プログラム';
 $string['modlos_image_processor_desc'] = 'JPEG2000の画像データを処理するプログラムを指定する';
 $string['modlos_image_processor_path'] = '画像処理プログラムへのパス';
 $string['modlos_image_processor_path_desc'] = '画像処理プログラムへのパスを指定する．空白の場合は Modlosが検索を行う．'.
-											  'パスの最後は必ず / で終わらなければならない．例）/usr/local/bin/<br />'.
+											  'パスの最後は必ず / で終わらなければならない．例）/usr/local/bin/ <br />'.
 											  '変更を保存後，このリンクをクリックして，画像が表示されればOK → '.
 											  '<a href=../blocks/modlos/helper/get_texture.php?uuid=00000000-0000-2222-3333-100000001000 target=_blank>設定のチェック</a>';
 
