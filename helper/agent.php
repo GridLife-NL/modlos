@@ -100,9 +100,10 @@ if ($agent) {
 	if ($prof!=null) {
         if ($prof['Partnar']!='')	 	 $partner 	   = $prof['Partnar'];
         if ($prof['AboutText']!='')  	 $profileText  = $prof['AboutText'];
-        if ($prof['Image']!='')		 	 $profileImage = $prof['Image'];
         if ($prof['FirstAboutText']!='') $firstText    = $prof['FirstAboutText'];
-        if ($prof['FirstImage']!='') 	 $firstImage   = $prof['FirstImage'];
+
+        if ($prof['Image']!='' 		and $prof['Image']!='00000000-0000-0000-0000-000000000000')		 $profileImage = $prof['Image'];
+        if ($prof['FirstImage']!='' and $prof['FirstImage']!='00000000-0000-0000-0000-000000000000') $firstImage   = $prof['FirstImage'];
 
         //$prof['AllowPublish']
         //$prof['MaturePublish']
