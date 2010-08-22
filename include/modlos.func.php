@@ -435,7 +435,6 @@ function  modlos_delete_groupdb_by_gpid($gpid)
 //
 //
 
-
 function  modlos_get_profile($uuid)
 {
 	$prof = array();
