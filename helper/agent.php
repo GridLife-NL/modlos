@@ -113,9 +113,16 @@ if ($agent) {
         //$prof['LanguagesText']
 	}
 
-
-
-
+	$imgdata = '';
+	if ($profileImage!='') {
+		$asset = opensim_get_asset_data($profileImage);
+		if ($asset) {
+			if ($asset['type']==0) {
+				$imgdata = $asset['data'];
+			}
+		}
+	}
+print $profileImage;
 
 
 	//

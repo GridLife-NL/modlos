@@ -122,7 +122,13 @@
             <div align="center">
               <table width="256" height="256" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td bgcolor="#ffffff" background="<?php echo CMS_MODULE_URL?>/images/info.jpg">&nbsp;</td>
+                  <?php if ($imgdata=='') {?>
+                    <td bgcolor="#ffffff" background="<?php echo CMS_MODULE_URL?>/images/info.jpg">&nbsp;</td>
+                  <?php } else {?>
+                    <?php mb_http_output("pass");
+                    header("Content-type: image/jp2"); 
+                    //print $imgdata; ?>
+                  <?php }?>
                 </tr>
               </table>
             </div>
