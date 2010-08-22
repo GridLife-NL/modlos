@@ -14,7 +14,7 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 $isGuest = isguest();
 if ($isGuest) {
-	exit('<h4>guest user is not allowed!!</h4>');
+	exit('<h4>guest user is not allowed to access this page!!</h4>');
 }
 
 

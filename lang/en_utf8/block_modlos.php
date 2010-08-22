@@ -114,22 +114,30 @@ $string['modlos_location_y'] 		= 'Loc: Y';
 $string['modlos_page'] 				= 'Page';
 $string['modlos_page_of'] 			= 'of';
 $string['modlos_coordinates'] 		= 'Coordinates';
-
 $string['modlos_region_owner']      = 'Region Owner';
 $string['modlos_estate_owner']      = 'Admin';
 $string['modlos_estate_id']         = 'Estate ID';
 $string['modlos_region_owner_chng'] = 'Region Owner Change';
 
+$string['modlos_image_processor']   = 'Program for image processing';
+$string['modlos_image_processor_desc'] = 'Specify the program that processes the image data of JPEG2000';
+$string['modlos_image_processor_path'] = 'Path of program for image processing';
+$string['modlos_image_processor_path_desc'] = 'Specify the path of program for image processing. If here is empty, Modlos searches the path. '.
+											  '/ is always necessary for the end of path. ex）/usr/local/bin/ <br />'.
+                                              'After save changes，please click this link. If image is displayed, it is OK -> '.
+                                              '<a href=../blocks/modlos/helper/get_texture.php?uuid=00000000-0000-2222-3333-100000001000 target=_blank>Check of Setting</a>';
+
+
 $string['modlos_firstname_required']= 'You must input First Name!!';
 $string['modlos_lastname_required'] = 'You must input Last Name!!';
 $string['modlos_passwd_required'] 	= 'You must input Password!!';
 
-$string['modlos_firstname_maxlength']='Firstname is too long. Max length of Firstname is indicated in flowing ( ).';
-$string['modlos_firstname_minlength']='Firstname is too short. Min length of Firstname is indicated in flowing ( ).';
-$string['modlos_lastname_maxlength']= 'Lastname is too long. Max length of Lastname is indicated in flowing ( ).';
-$string['modlos_lastname_minlength']= 'Lastname is too short. Min length of Lastname is indicated in flowing ( ).';
-$string['modlos_passwd_maxlength'] 	= 'Password is too long. Max length of password is indicated in flowing ( ).';
-$string['modlos_passwd_minlength']	= 'Password is too short. Min length of password is indicated in flowing ( ).';
+$string['modlos_firstname_maxlength']='Firstname is too long. Max length of Firstname is indicated in flowing ( )';
+$string['modlos_firstname_minlength']='Firstname is too short. Min length of Firstname is indicated in flowing ( )';
+$string['modlos_lastname_maxlength']= 'Lastname is too long. Max length of Lastname is indicated in flowing ( )';
+$string['modlos_lastname_minlength']= 'Lastname is too short. Min length of Lastname is indicated in flowing ( )';
+$string['modlos_passwd_maxlength'] 	= 'Password is too long. Max length of password is indicated in flowing ( )';
+$string['modlos_passwd_minlength']	= 'Password is too short. Min length of password is indicated in flowing ( )';
 $string['modlos_passwd_mismatch'] 	= 'Password is mismatch.';
 $string['modlos_alphabet_numeric'] 	= 'Input Only Alphabet or Numeric';
 $string['modlos_invalid_regionname']= 'Invalid region name!!';

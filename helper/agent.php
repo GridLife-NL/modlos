@@ -7,7 +7,7 @@ if (!defined('CMS_MODULE_PATH')) exit();
 require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 if (isguest()) {
-	exit('<h4>guest user is not allowed!!</h4>');
+	exit('<h4>guest user is not allowed to access this page!!</h4>');
 }
 
 
@@ -19,10 +19,11 @@ require_login($course_id);
 $hasPermit  = hasModlosPermit($course_id);
 
 global $CFG;
-$use_sloodle= $CFG->modlos_cooperate_sloodle;
-$grid_name  = $CFG->modlos_grid_name;
-$userinfo   = $CFG->modlos_userinfo_link;
-$action_url = CMS_MODULE_URL.'/helper/agent.php';
+$use_sloodle = $CFG->modlos_cooperate_sloodle;
+$grid_name   = $CFG->modlos_grid_name;
+$userinfo    = $CFG->modlos_userinfo_link;
+$action_url  = CMS_MODULE_URL.'/helper/agent.php';
+$texture_url = CMS_MODULE_URL.'/helper/get_texture.php?uuid=';
 
 
 //////////////
@@ -112,17 +113,6 @@ if ($agent) {
         //$prof['SkillsText']
         //$prof['LanguagesText']
 	}
-
-	$imgdata = '';
-	if ($profileImage!='') {
-		$asset = opensim_get_asset_data($profileImage);
-		if ($asset) {
-			if ($asset['type']==0) {
-				$imgdata = $asset['data'];
-			}
-		}
-	}
-print $profileImage;
 
 
 	//
