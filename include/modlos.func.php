@@ -721,8 +721,10 @@ function  print_tabnav($currenttab, $course, $create_tab=true)
 			$course_amp = '';
 			if ($course_id>0) $course_amp = '&amp;course='.$course_id;
 
-			$toprow[] = new tabobject('updatedb', CMS_MODULE_URL.'/admin/actions/updatedb.php'.$course_param, 
-																	'<b>'.get_string('modlos_updatedb_tab','block_modlos').'</b>');
+			//$toprow[] = new tabobject('updatedb', CMS_MODULE_URL.'/admin/actions/updatedb.php'.$course_param, 
+			//														'<b>'.get_string('modlos_updatedb_tab','block_modlos').'</b>');
+			$toprow[] = new tabobject('updatedb', CMS_MODULE_URL.'/admin/actions/management.php'.$course_param, 
+																	'<b>'.get_string('modlos_manage_tab','block_modlos').'</b>');
 			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos'.$course_amp, 
 																	'<b>'.get_string('modlos_general_setting_tab','block_modlos').'</b>');
 		}

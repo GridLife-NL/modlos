@@ -301,6 +301,12 @@ $string['modlos_updatedb_submit'] 	= 'データベース更新の実行';
 $string['modlos_updatedb_contents'] = 'OpenSimデータベースの更新を行います';
 $string['modlos_updatedb_updated'] 	= 'OpenSimデータベースの更新完了！';
 
+$string['modlos_manage_tab']        = '管理';
+$string['modlos_manage_ttl']        = 'Modlos の管理';
+$string['modlos_manage_submit']     = '実行';
+$string['modlos_manage_contents']   = '管理コマンドを実行します';
+$string['modlos_manage_done']       = '管理コマンド正常終了!!';
+
 $string['modlos_return_tab'] 		= 'コースに戻る';
 $string['modlos_access_forbidden'] 	= 'このページへのアクセスは許可されてません';
 

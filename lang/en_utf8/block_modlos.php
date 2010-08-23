@@ -302,6 +302,12 @@ $string['modlos_updatedb_submit']	= 'Update DB';
 $string['modlos_updatedb_contents']	= 'Update OpenSim DB ?';
 $string['modlos_updatedb_updated']	= 'OpenSim DB is Updated!!';
 
+$string['modlos_manage_tab']		= 'Management';
+$string['modlos_manage_ttl']		= 'Management of Modlos';
+$string['modlos_manage_submit']		= 'Exec';
+$string['modlos_manage_contents']	= 'Execute Management Command ?';
+$string['modlos_manage_done']		= 'Management Command was Executed!!';
+
 $string['modlos_return_tab'] 		= 'Return to Course';
 $string['modlos_access_forbidden'] 	= 'Forbidden Access to this Page!!';
 
