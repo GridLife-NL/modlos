@@ -17,7 +17,7 @@ if (!isGUID($uuid)) exit('<h4>bad asset uuid!! ('.htmlspecialchars($uuid).')</h4
 global $CFG;
 $prog  = $CFG->modlos_image_processor_jp2;
 $path  = $CFG->modlos_image_processor_path;
-$cache = CMS_MODULE_PATH,'/helper/texture_cache';
+$cache = CMS_MODULE_PATH.'/helper/texture_cache';
 
 
 $ret = opensim_display_texture_data($uuid, $prog, $path, $cache);
