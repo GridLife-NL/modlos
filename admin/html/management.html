@@ -10,17 +10,37 @@
       </tr>
     </table>
 
-    <br /><br /><br />
+    <br /><br />
 
     <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
     <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
     <input type="hidden" name="quest"   value="yes" />
+
+
     <center>
+      <?php echo $select_cmd?><br /><br />
+      <select wide="48" name="manage_command">
+        <?php foreach($commands as $com) {?>
+          <option value="<?php echo $com['com']?>" ><?php echo htmlspecialchars($com['ttl'])?></option>
+        <?php }?>
+      </select>&nbsp;&nbsp;
+      <br />
+      <br />
+
       <input type="submit" value="<?php echo $manage_submit?>" /> 
     </center>
+
   </form>
 
 <?php } else {?>
+
+  <?php foreach($commands as $com) {?>
+     <?php if ($command==$com['com']) {?>
+       <h3><font color=#FF2288><center><?php echo $com['ttl'] ?></center></font></h3>
+       <?php break?>
+     <?php }?>
+  <?php }?>
+
   <h3><font color=#2222FF><center><?php echo $manage_msg ?></center></font></h3>
 <?php }?>
 <br />

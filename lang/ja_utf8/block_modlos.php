@@ -296,7 +296,7 @@ $string['modlos_synchro_contents'] 	= 'OpenSimデータベースと Modlosデー
 $string['modlos_synchronized'] 		= 'OpenSimデータベースとの同期完了！';
 
 $string['modlos_updatedb_tab'] 		= 'DB更新';
-$string['modlos_updatedb_ttl'] 		= 'データベース更新';
+$string['modlos_updatedb_ttl'] 		= 'データベースを0.7用に更新';
 $string['modlos_updatedb_submit'] 	= 'データベース更新の実行';
 $string['modlos_updatedb_contents'] = 'OpenSimデータベースの更新を行います';
 $string['modlos_updatedb_updated'] 	= 'OpenSimデータベースの更新完了！';
@@ -306,6 +306,10 @@ $string['modlos_manage_ttl']        = 'Modlos の管理';
 $string['modlos_manage_submit']     = '実行';
 $string['modlos_manage_contents']   = '管理コマンドを実行します';
 $string['modlos_manage_done']       = '管理コマンド正常終了!!';
+$string['modlos_manage_select']     = '実行する管理コマンドを選択してください';
+
+$string['modlos_cltexture_ttl']     = 'テクスチャのキャッシュデータをクリア';
+$string['modlos_clpresence_ttl']    = 'ログイン情報テーブルをクリア';
 
 $string['modlos_return_tab'] 		= 'コースに戻る';
 $string['modlos_access_forbidden'] 	= 'このページへのアクセスは許可されてません';

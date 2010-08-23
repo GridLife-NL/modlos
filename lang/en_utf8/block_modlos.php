@@ -293,11 +293,11 @@ $string['modlos_lastnames'] 		= 'Lastnames Management';
 $string['modlos_synchro_tab'] 		= 'Synchro DB';
 $string['modlos_synchro_db'] 		= 'Synchronization of Data Base';
 $string['modlos_synchro_submit'] 	= 'Synchro DB';
-$string['modlos_synchro_contents'] 	= 'Synchronize with OpenSim DB?';
+$string['modlos_synchro_contents'] 	= 'Synchronize with OpenSim DB ?';
 $string['modlos_synchronized'] 		= 'Synchronized OpenSim DB!!';
 
 $string['modlos_updatedb_tab']		= 'Update DB';
-$string['modlos_updatedb_ttl']		= 'Update of Data Base';
+$string['modlos_updatedb_ttl']		= 'Update of Data Base to 0.7';
 $string['modlos_updatedb_submit']	= 'Update DB';
 $string['modlos_updatedb_contents']	= 'Update OpenSim DB ?';
 $string['modlos_updatedb_updated']	= 'OpenSim DB is Updated!!';
@@ -307,6 +307,10 @@ $string['modlos_manage_ttl']		= 'Management of Modlos';
 $string['modlos_manage_submit']		= 'Exec';
 $string['modlos_manage_contents']	= 'Execute Management Command ?';
 $string['modlos_manage_done']		= 'Management Command was Executed!!';
+$string['modlos_manage_select']		= 'Select a Management Command';
+
+$string['modlos_cltexture_ttl']		= 'Clear Texture Cache Data';
+$string['modlos_clpresence_ttl']	= 'Clear Login Information Table';
 
 $string['modlos_return_tab'] 		= 'Return to Course';
 $string['modlos_access_forbidden'] 	= 'Forbidden Access to this Page!!';
