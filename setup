@@ -1,5 +1,15 @@
-find . -name .svn |xargs rm -fr
-find . -name chk |xargs rm -f
-find . -name clean |xargs rm -f
-rm -f commit update setup
+#!/bin/sh
 
+if [ $# -lt 1 ]; then
+    echo Usage.... $0 Install_Directory_of_OpenSim 
+    exit
+fi
+
+OS_DIR=$1
+if [ ! -d $OS_DIR ]; then
+    echo "not exist $OS_DIR that is installed OpenSim"
+    exit
+fi
+
+cp -Rpd osprofile $OS_DIR
+cp -pf opensim.phplib/cs_source/MuteListModule.cs $OS_DIR/OpenSim/Region/CoreModules/Avatar/InstantMessage/
