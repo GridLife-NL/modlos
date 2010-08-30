@@ -48,6 +48,7 @@ define('MDL_CURRENCY_MONEY_TBL',		MDL_MODLOS_PREFIX.'economy_money');
 define('MDL_CURRENCY_TRANSACTION_TBL',	MDL_MODLOS_PREFIX.'economy_transactions');
 
 define('MDL_OFFLINE_MESSAGE_TBL', 		MDL_MODLOS_PREFIX.'offline_message');
+define('MDL_MUTE_LIST_TBL', 			MDL_MODLOS_PREFIX.'mute_list');
 
 define('MDL_PROFILE_CLASSIFIEDS_TBL',   MDL_MODLOS_PREFIX.'profile_classifieds');
 define('MDL_PROFILE_USERNOTES_TBL',  	MDL_MODLOS_PREFIX.'profile_usernotes');
@@ -89,8 +90,15 @@ define('OFFLINE_DB_HOST',  			CMS_DB_HOST);
 define('OFFLINE_DB_NAME',  			CMS_DB_NAME);
 define('OFFLINE_DB_USER',  			CMS_DB_USER);
 define('OFFLINE_DB_PASS',  			CMS_DB_PASS);
-
 define('OFFLINE_MESSAGE_TBL', 		$CFG->prefix.MDL_OFFLINE_MESSAGE_TBL);
+
+
+// Offline Message
+define('MUTE_DB_HOST',  			CMS_DB_HOST);
+define('MUTE_DB_NAME',  			CMS_DB_NAME);
+define('MUTE_DB_USER',  			CMS_DB_USER);
+define('MUTE_DB_PASS',  			CMS_DB_PASS);
+define('MUTE_LIST_TBL', 			$CFG->prefix.MDL_MUTE_LIST_TBL);
 
 
 // Avatar Profile. see also profile_config.php 

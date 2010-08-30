@@ -214,6 +214,22 @@ CREATE TABLE `block_modlos_offline_message` (
 
 
 -- --------------------------------------------------------
+-- for Mute List    
+-- --------------------------------------------------------
+
+CREATE TABLE `block_modlos_mute_list` (
+    `AgentID`       varchar(36)  NOT NULL,
+    `MuteID`        varchar(36)  NOT NULL,
+    `MuteName`      varchar(255) NOT NULL,
+    `MuteType`      int(10) unsigned NOT NULL default '0',
+    `MuteFlags`     int(10) unsigned NOT NULL default '0',
+    `Timestamp`     int(11) unsigned NOT NULL default '0',
+    PRIMARY KEY  (`AgentID`,`MuteID`,`MuteName`) 
+) TYPE=MyISAM;     
+
+
+
+-- --------------------------------------------------------
 -- for Profile
 -- --------------------------------------------------------
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="blocks/modlos/db" VERSION="20100602" COMMENT="XMLDB file for Moodle OpenSim blocks/Modlos"
+<XMLDB PATH="blocks/modlos/db" VERSION="20100830" COMMENT="XMLDB file for Moodle OpenSim blocks/Modlos"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -288,7 +288,7 @@
         <KEY NAME="useruuid" TYPE="unique" FIELDS="useruuid" PREVIOUS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="modlos_profile_usersettings" COMMENT="Modlos Profile User Settings" PREVIOUS="modlos_profile_userprofile">
+    <TABLE NAME="modlos_profile_usersettings" COMMENT="Modlos Profile User Settings" PREVIOUS="modlos_profile_userprofile" NEXT="modlos_mute_list">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="useruuid"/>
         <FIELD NAME="useruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="imviaemail"/>
@@ -299,6 +299,20 @@
       <KEYS>
         <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="useruuid"/>
         <KEY NAME="useruuid" TYPE="unique" FIELDS="useruuid" PREVIOUS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="modlos_mute_list" COMMENT="Modlos Mute List Table" PREVIOUS="modlos_profile_usersettings">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="agentid"/>
+        <FIELD NAME="agentid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="muteid"/>
+        <FIELD NAME="muteid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="agentid" NEXT="mutename"/>
+        <FIELD NAME="mutename" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="muteid" NEXT="mutetype"/>
+        <FIELD NAME="mutetype" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="mutename" NEXT="muteflags"/>
+        <FIELD NAME="muteflags" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="mutetype" NEXT="timestamp"/>
+        <FIELD NAME="timestamp" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="muteflags"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
   </TABLES>

@@ -26,8 +26,9 @@ class block_modlos extends block_base
 
 		$this->title   = get_string('modlos_menu', 'block_modlos');
 		//$this->version = 2010063010;
-		$this->version = 2010070422;
-		$this->release = '1.4.1';
+		//$this->version = 2010070422;
+		$this->version = 2010083024;
+		$this->release = '1.4.4';
 
 		$this->grid_name = $CFG->modlos_grid_name;
 		$this->grid_status = false;
