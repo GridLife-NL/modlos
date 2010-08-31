@@ -1,11 +1,5 @@
 svn update
 
-if [ -d osprofile ]; then
-	svn update osprofile
-else
-	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.osprofile/trunk osprofile 
-fi
-
 if [ -d flotsam_XmlRpcGroup ]; then
 	svn update flotsam_XmlRpcGroup
 else
@@ -28,5 +22,17 @@ if [ -d nsl.modules ]; then
 	svn update nsl.modules
 else
 	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.nsl.modules/trunk nsl.modules
+fi
+
+if [ -d osprofile ]; then
+	svn update osprofile
+else
+	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.osprofile/trunk osprofile 
+fi
+
+if [ -d ossearch ]; then
+	svn update ossearch
+else
+	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.ossearch/trunk ossearch 
 fi
 
