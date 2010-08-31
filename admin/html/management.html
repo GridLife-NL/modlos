@@ -36,7 +36,7 @@
 
   <?php foreach($commands as $com) {?>
      <?php if ($command==$com['com']) {?>
-       <h3><font color=#FF2288><center><?php echo $com['ttl'] ?></center></font></h3>
+       <h3><font color=#228888><center><?php echo $com['ttl'] ?></center></font></h3>
        <?php break?>
      <?php }?>
   <?php }?>
@@ -52,7 +52,7 @@
 <?php if ($this->hasError) {?>
   <ul>
     <?php foreach($this->errorMsg as $mesg) {?>
-       <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
+       <li><font color="#F02022"><b><?php echo $mesg?></b></font></li>
     <?php }?>
   </ul>
 <?php }?>
