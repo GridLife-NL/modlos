@@ -23,3 +23,10 @@ if [ -d opensim.phplib ]; then
 else
 	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.phplib/trunk opensim.phplib
 fi
+
+if [ -d nsl.modules ]; then
+	svn update nsl.modules
+else
+	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.nsl.modules/trunk nsl.modules
+fi
+

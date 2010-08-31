@@ -12,5 +12,4 @@ if [ ! -d $OS_DIR ]; then
 fi
 
 cp -Rpd osprofile $OS_DIR
-cp -pf opensim.phplib/cs_source/MuteListModule.cs $OS_DIR/OpenSim/Region/CoreModules/Avatar/InstantMessage/
-cp -pf opensim.phplib/cs_source/OfflineMessageModule.cs $OS_DIR/OpenSim/Region/CoreModules/Avatar/InstantMessage/
+cp -Rpd nsl.modules $OS_DIR
