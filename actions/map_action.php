@@ -9,7 +9,7 @@ require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
 $course_id = optional_param('course', '0', PARAM_INT);
 $course = get_record('course', 'id', $course_id);
-$action = "map_action";
+$action = "world_map";
 
 print_modlos_header($action, $course);
 

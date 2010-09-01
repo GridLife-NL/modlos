@@ -699,7 +699,7 @@ function  print_tabnav($currenttab, $course, $create_tab=true)
 	$toprow = array();
 	$toprow[] = new tabobject('show_home', CMS_MODULE_URL.'/actions/show_home.php'.$course_param, 
 																	'<b>'.get_string('modlos_show_home','block_modlos').'</b>');
-	$toprow[] = new tabobject('map_action', CMS_MODULE_URL.'/actions/map_action.php'.$course_param, 
+	$toprow[] = new tabobject('world_map', CMS_MODULE_URL.'/actions/map_action.php'.$course_param, 
 																	'<b>'.get_string('modlos_world_map','block_modlos').'</b>');
 	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$course_param, 
 																	'<b>'.get_string('modlos_regions_list','block_modlos').'</b>');
@@ -723,7 +723,7 @@ function  print_tabnav($currenttab, $course, $create_tab=true)
 
 			//$toprow[] = new tabobject('updatedb', CMS_MODULE_URL.'/admin/actions/updatedb.php'.$course_param, 
 			//														'<b>'.get_string('modlos_updatedb_tab','block_modlos').'</b>');
-			$toprow[] = new tabobject('updatedb', CMS_MODULE_URL.'/admin/actions/management.php'.$course_param, 
+			$toprow[] = new tabobject('management', CMS_MODULE_URL.'/admin/actions/management.php'.$course_param, 
 																	'<b>'.get_string('modlos_manage_tab','block_modlos').'</b>');
 			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos'.$course_amp, 
 																	'<b>'.get_string('modlos_general_setting_tab','block_modlos').'</b>');
