@@ -99,7 +99,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->addFieldInfo('simname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->addFieldInfo('globalpos', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->addFieldInfo('eventflags', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('mature', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, XMLDB_ENUM, array('true', 'false'), null);
+		$table->addFieldInfo('mature', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, XMLDB_ENUM, array('true', 'false'), 'false');
 
 		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
 		$table->addKeyInfo('eventid', XMLDB_KEY_UNIQUE, array('eventid'));
@@ -151,9 +151,9 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->addFieldInfo('landingpoint', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->addFieldInfo('description', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->addFieldInfo('searchcategory', XMLDB_TYPE_CHAR, '50', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('build', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, XMLDB_ENUM, array('true', 'false'), null);
-		$table->addFieldInfo('script', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, XMLDB_ENUM, array('true', 'false'), null);
-		$table->addFieldInfo('public', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, XMLDB_ENUM, array('true', 'false'), null);
+		$table->addFieldInfo('build', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL,  null, XMLDB_ENUM, array('true', 'false'), 'false');
+		$table->addFieldInfo('script', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, XMLDB_ENUM, array('true', 'false'), 'false');
+		$table->addFieldInfo('public', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, XMLDB_ENUM, array('true', 'false'), 'false');
 		$table->addFieldInfo('dwell', XMLDB_TYPE_NUMBER, '20, 8', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
 		$table->addFieldInfo('infouuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
 
