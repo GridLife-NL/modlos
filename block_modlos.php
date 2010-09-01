@@ -29,14 +29,14 @@ class block_modlos extends block_base
 		//$this->version = 2010070422;
 		//$this->version = 2010083024;
 		$this->version = 2010090100;
-		$this->release = '1.4.4';
+		$this->release = '1.4.5';
 
-		$this->grid_name = $CFG->modlos_grid_name;
-		$this->grid_status = false;
-		$this->now_online = '0';
+		$this->grid_name 		= $CFG->modlos_grid_name;
+		$this->grid_status 		= false;
+		$this->now_online 		= '0';
 		$this->lastmonth_online = '0';
-		$this->user_count = '0';
-		$this->region_count = '0';
+		$this->user_count 		= '0';
+		$this->region_count 	= '0';
 	}
 
 
@@ -49,15 +49,11 @@ class block_modlos extends block_base
 		}
 		$id = optional_param('id', 0, PARAM_INT);
 	   
-		//$timeout = ini_get('mysql.connect_timeout');
-		//ini_set('mysql.connect_timeout', 1);
 		$db_ver = opensim_get_db_version();
-		//ini_set('mysql.connect_timeout', $timeout);
 
 		$this->content = new stdClass;
-
-		$this->content->text = '<a href="'.CMS_MODULE_URL.'/actions/show_home.php?course='.$id.'">'.get_string('modlos_show_home','block_modlos').'</a><br />';
-		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.get_string('modlos_world_map','block_modlos').'</a><br />';
+		$this->content->text = '<a href="'.CMS_MODULE_URL.'/actions/show_home.php?course='.$id.'">'.   get_string('modlos_show_home','block_modlos').'</a><br />';
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.  get_string('modlos_world_map','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
 
 		if (!isguest()) {
