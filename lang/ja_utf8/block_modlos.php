@@ -34,14 +34,14 @@ $string['modlos_reset_ttl'] 		= 'リセット';
 $string['modlos_cancel_ttl'] 		= 'キャンセル';
 $string['modlos_delete_ttl'] 		= '削除';
 $string['modlos_get_owner_ttl'] 	= 'OWNER';
-$string['modlos_update_ttl'] 		= '更新';
+$string['modlos_convert_ttl'] 		= '更新';
 $string['modlos_craete_ttl'] 		= '作成';
 $string['modlos_return_ttl'] 		= '戻る';
 
 $string['modlos_avatar_reset_ttl'] 	= 'リセット';
 $string['modlos_avatar_create_ttl'] = '作成';
 $string['modlos_avatar_edit_ttl'] 	= '編集';
-$string['modlos_avatar_update_ttl'] = '更新';
+$string['modlos_avatar_convert_ttl'] = '更新';
 $string['modlos_avatar_delete_ttl'] = '削除';
 $string['modlos_avatar_own_ttl'] 	= '変更';
 $string['modlos_avatar_dlt_cncld_ttl']='取消し';
@@ -76,13 +76,13 @@ $string['modlos_editable_list'] 	= '編集可能アバターリスト';
 
 $string['modlos_avatar_info'] 		= 'アバター情報';
 $string['modlos_avatar_created'] 	= 'アバターを作成しました';
-$string['modlos_avatar_updated'] 	= 'アバターのデータを更新しました';
+$string['modlos_avatar_convertd'] 	= 'アバターのデータを更新しました';
 $string['modlos_avatar_gotted'] 	= 'このアバターを Moodleのユーザに関連付けて管理します';
 $string['modlos_avatar_gotted_error']= 'アバターの関連付けに失敗しました';
 $string['modlos_avatar_deleted'] 	= 'アバターを削除しました';
 
 $string['modlos_avatar_create'] 	= 'アバター作成';
-$string['modlos_avatar_update'] 	= 'アバター更新';
+$string['modlos_avatar_convert'] 	= 'アバター更新';
 $string['modlos_avatar_delete'] 	= 'アバター削除';
 $string['modlos_avatar_submit'] 	= 'アバター作成';
 $string['modlos_avatar_edit'] 		= 'アバター編集';
@@ -177,13 +177,13 @@ $string['modlos_already_name_error']= '既に存在するアバター名です!!
 $string['modlos_owner_name_error']	= '不正なオーナ名です!!';
 $string['modlos_opensim_create_error']='OpenSim のアバター作成に失敗しました!!';
 $string['modlos_create_error']		= 'ユーザ作成に失敗しました!!';
-$string['modlos_update_error']		= 'ユーザ情報の更新に失敗しました!!';
+$string['modlos_convert_error']		= 'ユーザ情報の更新に失敗しました!!';
 $string['modlos_opensim_delete_error']='OpenSim のアバターの削除に失敗しました!!';
 $string['modlos_sloodle_delete_error']='Sloodle のユーザの削除に失敗しました!!';
 $string['modlos_user_delete_error']	= 'ユーザの削除に失敗しました!!';
-$string['modlos_passwd_update_error']= 'パスワードの更新に失敗しました!!';
-$string['modlos_hmrgn_update_error']= 'ホームリージョンの更新に失敗しました!!';
-$string['modlos_sloodle_update_error']='Sloodleのユーザデータの更新に失敗しました!!';
+$string['modlos_passwd_convert_error']= 'パスワードの更新に失敗しました!!';
+$string['modlos_hmrgn_convert_error']= 'ホームリージョンの更新に失敗しました!!';
+$string['modlos_sloodle_convert_error']='Sloodleのユーザデータの更新に失敗しました!!';
 $string['modlos_inactivate_error']	= 'アバターの無効化に失敗しました!!';
 $string['modlos_activate_error']	= 'アバターの有効化に失敗しました!!';
 
@@ -289,21 +289,21 @@ $string['modlos_user_log_desc'] 	= 'ユーザサーバのログの保存先';
 
 // Admin
 $string["modlos_admin_title"] 		= 'Moodle OpenSim';
-$string["modlos_general_setting_tab"]= '一般設定';
+$string["modlos_general_setting_tab"]='一般設定';
 $string["modlos_lastnames_tab"] 	= 'ラストネーム';
 $string['modlos_lastnames'] 		= 'ラストネーム管理';
 
-$string['modlos_synchro_tab'] 		= 'DB 同期';
+$string['modlos_synchro_tab'] 		= 'データベース同期';
 $string['modlos_synchro_db'] 		= 'データベース同期';
 $string['modlos_synchro_submit'] 	= 'データベース同期の実行';
 $string['modlos_synchro_contents'] 	= 'OpenSimデータベースと Modlosデータベースとの同期を取ります';
 $string['modlos_synchronized'] 		= 'OpenSimデータベースとの同期完了！';
 
-$string['modlos_updatedb_tab'] 		= 'DB更新';
-$string['modlos_updatedb_ttl'] 		= 'データベースを0.7用に更新';
-$string['modlos_updatedb_submit'] 	= 'データベース更新の実行';
-$string['modlos_updatedb_contents'] = 'OpenSimデータベースの更新を行います';
-$string['modlos_updatedb_updated'] 	= 'OpenSimデータベースの更新完了！';
+$string['modlos_convertdb_tab'] 	= 'データベース変換';
+$string['modlos_convertdb_ttl'] 	= 'データベース変換';
+$string['modlos_convertdb_submit'] 	= 'データベース変換の実行';
+$string['modlos_convertdb_contents']= 'OpenSimデータベースを 0.6.x から 0.7.x へ変換';
+$string['modlos_convertdb_converted']='OpenSimデータベースの変換完了！';
 
 $string['modlos_manage_tab']        = '管理';
 $string['modlos_manage_ttl']        = 'Modlos の管理';

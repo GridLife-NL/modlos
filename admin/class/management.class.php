@@ -78,7 +78,7 @@ class  ManagementBase
 				else if ($command=='clpresence') {
 					opensim_clear_login_table();
 				}
-				else if ($command=='updatedb') {
+				else if ($command=='convertdb') {
 					opensim_succession_data(OPENSIM_HMREGION);
 					opensim_recreate_presence();
 					$profs = opensim_get_avatars_profiles_from_users();
@@ -111,8 +111,8 @@ class  ManagementBase
 		$commands[0]['ttl'] = get_string('modlos_cltexture_ttl', 'block_modlos');
 		$commands[1]['com'] = 'clpresence';
 		$commands[1]['ttl'] = get_string('modlos_clpresence_ttl', 'block_modlos');
-		$commands[2]['com'] = 'updatedb';
-		$commands[2]['ttl'] = get_string('modlos_updatedb_ttl', 'block_modlos');
+		$commands[2]['com'] = 'convertdb';
+		$commands[2]['ttl'] = get_string('modlos_convertdb_ttl', 'block_modlos');
 
 		include(CMS_MODULE_PATH."/admin/html/management.html");
 	}

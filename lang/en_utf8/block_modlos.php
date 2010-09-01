@@ -301,11 +301,11 @@ $string['modlos_synchro_submit'] 	= 'Synchro DB';
 $string['modlos_synchro_contents'] 	= 'Synchronize with OpenSim DB ?';
 $string['modlos_synchronized'] 		= 'Synchronized OpenSim DB!!';
 
-$string['modlos_updatedb_tab']		= 'Update DB';
-$string['modlos_updatedb_ttl']		= 'Update of Data Base to 0.7';
-$string['modlos_updatedb_submit']	= 'Update DB';
-$string['modlos_updatedb_contents']	= 'Update OpenSim DB ?';
-$string['modlos_updatedb_updated']	= 'OpenSim DB is Updated!!';
+$string['modlos_convertdb_tab']		= 'Convert DB';
+$string['modlos_convertdb_ttl']		= 'Conversion of Data Base';
+$string['modlos_convertdb_submit']	= 'Convert DB';
+$string['modlos_convertdb_contents']= 'Convert OpenSim DB from 0,6.x to 0.7.x ?';
+$string['modlos_convertdb_converted']='OpenSim DB is Converted!!';
 
 $string['modlos_manage_tab']		= 'Management';
 $string['modlos_manage_ttl']		= 'Management of Modlos';
