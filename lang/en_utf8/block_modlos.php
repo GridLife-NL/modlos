@@ -195,6 +195,8 @@ $string['modlos_voice_inactive_chnl']='Inactive Voice';
 $string['modlos_voice_private_chnl']= 'Private Channel';
 $string['modlos_voice_percel_chnl'] = 'Percel Channel';
 
+$string['modlos_lgscn_box_ttl']		= 'Information';
+
 
 // Config
 $string['modlos_mdl_name'] 			= 'Moodle OpenSim';
@@ -270,6 +272,9 @@ $string['modlos_avt_cntnt'] 		= 'Avatars List Content';
 $string['modlos_avt_cntnt_desc'] 	= 'Specify content of avatars list page';
 $string['modlos_edtbl_cntnt'] 		= 'Editable Avatas List Content';
 $string['modlos_edtbl_cntnt_desc'] 	= 'Specify content of editable avatars list page';
+
+$string['modlos_lgscn_cntnt']		= 'Login Screen Content';
+$string['modlos_lgscn_cntnt_desc']	= 'Specify content of Login Screen on Viewer';
 
 $string['modlos_dsclmr'] 			= 'Disclaimer Activation';
 $string['modlos_dsclmr_desc'] 		= 'Select to display of disclaimer is active or not';

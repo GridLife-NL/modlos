@@ -193,6 +193,7 @@ $string['modlos_voice_inactive_chnl']= 'ボイス無効';
 $string['modlos_voice_private_chnl']= 'プライベートチャネル';
 $string['modlos_voice_percel_chnl']	= '不動産チャネル';
 
+$string['modlos_lgscn_box_ttl']     = 'お知らせ';
 
 // Config
 $string['modlos_mdl_name'] 			= 'Moodle OpenSim';
@@ -269,6 +270,9 @@ $string['modlos_avt_cntnt'] 		= 'アバターリストページのコンテン�
 $string['modlos_avt_cntnt_desc'] 	= 'Modlos のアバターリストページのコンテンツ．HTMLタグ使用可能';
 $string['modlos_edtbl_cntnt'] 		= 'アバター編集ページのコンテンツ';
 $string['modlos_edtbl_cntnt_desc'] 	= 'Modlos のアバター編集ページのコンテンツ．HTMLタグ使用可能';
+
+$string['modlos_lgscn_cntnt']       = 'Login Screen のコンテンツ';
+$string['modlos_lgscn_cntnt_desc']  = 'Viewer に表示される Login Screen のコンテンツ．HTMLタグ使用可能';
 
 $string['modlos_dsclmr'] 			= '使用許諾の表示';
 $string['modlos_dsclmr_desc'] 		= 'アバター作成時に OpenSimの使用許諾を表示するかどうかの指定';
