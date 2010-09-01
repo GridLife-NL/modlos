@@ -107,6 +107,11 @@ class  ManagementBase
 		$command	   = $this->command;
 		$content	   = "<center>".get_string("modlos_manage_contents", "block_modlos")."</center>";
 
+		$course_amp    = "";
+		if ($this->course_id>0) $course_param = '?course='.$this->course_id;
+		$manage_url    = CMS_MODULE_URL.'/admin/actions/management.php'.$course_param;
+		$return_ttl	   = get_string('modlos_manage_return', 'block_modlos');
+
 		$commands[0]['com'] = 'cltexture';
 		$commands[0]['ttl'] = get_string('modlos_cltexture_ttl', 'block_modlos');
 		$commands[1]['com'] = 'clpresence';

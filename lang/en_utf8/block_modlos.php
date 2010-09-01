@@ -302,7 +302,7 @@ $string['modlos_synchro_contents'] 	= 'Synchronize with OpenSim DB ?';
 $string['modlos_synchronized'] 		= 'Synchronized OpenSim DB!!';
 
 $string['modlos_convertdb_tab']		= 'Convert DB';
-$string['modlos_convertdb_ttl']		= 'Conversion of Data Base';
+$string['modlos_convertdb_ttl']		= 'Conversion of Data Base from 0.6.x to 0.7.x';
 $string['modlos_convertdb_submit']	= 'Convert DB';
 $string['modlos_convertdb_contents']= 'Convert OpenSim DB from 0,6.x to 0.7.x ?';
 $string['modlos_convertdb_converted']='OpenSim DB is Converted!!';
@@ -310,9 +310,10 @@ $string['modlos_convertdb_converted']='OpenSim DB is Converted!!';
 $string['modlos_manage_tab']		= 'Management';
 $string['modlos_manage_ttl']		= 'Management of Modlos';
 $string['modlos_manage_submit']		= 'Exec';
-$string['modlos_manage_contents']	= 'Execute Management Command ?';
+$string['modlos_manage_contents']	= 'Execute Management Command';
 $string['modlos_manage_done']		= 'Management Command was Executed!!';
 $string['modlos_manage_select']		= 'Select a Management Command';
+$string['modlos_manage_return']		= 'Return to Management';
 
 $string['modlos_cltexture_ttl']		= 'Clear Texture Cache Data';
 $string['modlos_clpresence_ttl']	= 'Clear Login Information Table';

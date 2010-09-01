@@ -300,7 +300,7 @@ $string['modlos_synchro_contents'] 	= 'OpenSimデータベースと Modlosデー
 $string['modlos_synchronized'] 		= 'OpenSimデータベースとの同期完了！';
 
 $string['modlos_convertdb_tab'] 	= 'データベース変換';
-$string['modlos_convertdb_ttl'] 	= 'データベース変換';
+$string['modlos_convertdb_ttl'] 	= 'データベースを 0.6.x から 0.7.x へ変換';
 $string['modlos_convertdb_submit'] 	= 'データベース変換の実行';
 $string['modlos_convertdb_contents']= 'OpenSimデータベースを 0.6.x から 0.7.x へ変換';
 $string['modlos_convertdb_converted']='OpenSimデータベースの変換完了！';
@@ -308,9 +308,10 @@ $string['modlos_convertdb_converted']='OpenSimデータベースの変換完了�
 $string['modlos_manage_tab']        = '管理';
 $string['modlos_manage_ttl']        = 'Modlos の管理';
 $string['modlos_manage_submit']     = '実行';
-$string['modlos_manage_contents']   = '管理コマンドを実行します';
+$string['modlos_manage_contents']   = '管理コマンドの実行';
 $string['modlos_manage_done']       = '管理コマンド正常終了!!';
 $string['modlos_manage_select']     = '実行する管理コマンドを選択してください';
+$string['modlos_manage_return']     = '管理コマンド画面に戻る';
 
 $string['modlos_cltexture_ttl']     = 'テクスチャのキャッシュデータをクリア';
 $string['modlos_clpresence_ttl']    = 'ログイン情報テーブルをクリア';
