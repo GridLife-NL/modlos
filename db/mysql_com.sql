@@ -18,7 +18,7 @@ CREATE TABLE `block_modlos_users` (
 
 CREATE TABLE `block_modlos_banned` (
 	`UUID` 		varchar(36)  NOT NULL,
-  	`agentinfo` varchar(255) NOT NULL,
+	`agentinfo` varchar(255) NOT NULL,
 	`time` 		varchar(255) NOT NULL,
 	PRIMARY KEY  (`UUID`)
 ) TYPE=MyISAM;
@@ -229,7 +229,7 @@ CREATE TABLE `block_modlos_mute_list` (
 
 CREATE TABLE `block_modlos_login_screen` (
 	`id`       		int(10) unsigned NOT NULL auto_increment,
-	`title`			varchar(255) NOT NULL DEFAULT '',
+	`title`			varchar(255) NOT NULL default '',
 	`information`	text NOT NULL default '',
 	`boderColor`  	varchar(20) NOT NULL default 'white', 
 	`timestamp` 	int(11) unsigned NOT NULL default '0',
@@ -243,69 +243,69 @@ CREATE TABLE `block_modlos_login_screen` (
 -- --------------------------------------------------------
 
 CREATE TABLE `block_modlos_prof_classifieds` (
-  	`classifieduuid` 	char(36) NOT NULL,
-  	`creatoruuid` 		char(36) NOT NULL,
-  	`creationdate` 		int(20) NOT NULL,
-  	`expirationdate` 	int(20) NOT NULL,
-  	`category` 			varchar(20) NOT NULL,
-  	`name` 				varchar(255) NOT NULL,
-  	`description` 		text NOT NULL,
-  	`parceluuid` 		char(36) NOT NULL,
-  	`parentestate` 		int(11) NOT NULL,
-  	`snapshotuuid` 		char(36) NOT NULL,
-  	`simname` 			varchar(255) NOT NULL,
-  	`posglobal` 		varchar(255) NOT NULL,
-  	`parcelname` 		varchar(255) NOT NULL,
-  	`classifiedflags` 	int(8) NOT NULL,
-  	`priceforlisting` 	int(5) NOT NULL,
+	`classifieduuid` 	char(36) NOT NULL,
+	`creatoruuid` 		char(36) NOT NULL,
+	`creationdate` 		int(20)  NOT NULL,
+	`expirationdate` 	int(20)  NOT NULL,
+	`category` 			varchar(20) NOT NULL,
+	`name` 				varchar(255) NOT NULL,
+	`description` 		text NOT NULL,
+	`parceluuid` 		char(36) NOT NULL,
+	`parentestate` 		int(11)  NOT NULL,
+	`snapshotuuid` 		char(36) NOT NULL,
+	`simname` 			varchar(255) NOT NULL,
+	`posglobal` 		varchar(255) NOT NULL,
+	`parcelname` 		varchar(255) NOT NULL,
+	`classifiedflags` 	int(8) NOT NULL,
+	`priceforlisting` 	int(5) NOT NULL,
  	 PRIMARY KEY 	(`classifieduuid`)
 ) TYPE=MyISAM;
 
 
 CREATE TABLE `block_modlos_prof_usernotes` (
-  	`id`        		int(11) NOT NULL auto_increment,
-  	`useruuid` 			varchar(36) NOT NULL,
-  	`targetuuid` 		varchar(36) NOT NULL,
-  	`notes` 			text NOT NULL,
-  	PRIMARY KEY 	(`id`),
-  	UNIQUE KEY 	`useruuid` (`useruuid`, `targetuuid`)
+	`id`        		int(11) NOT NULL auto_increment,
+	`useruuid` 			varchar(36) NOT NULL,
+	`targetuuid` 		varchar(36) NOT NULL,
+	`notes` 			text NOT NULL,
+	PRIMARY KEY 	(`id`),
+	UNIQUE KEY 	`useruuid` (`useruuid`, `targetuuid`)
 ) TYPE=MyISAM;
 
 
 CREATE TABLE `block_modlos_prof_userpicks` (
-  	`pickuuid` 			varchar(36) NOT NULL,
-  	`creatoruuid` 		varchar(36) NOT NULL,
-  	`toppick` 			enum('true','false') NOT NULL,
-  	`parceluuid` 		varchar(36) NOT NULL,
-  	`name` 				varchar(255) NOT NULL,
-  	`description` 		text NOT NULL,
-  	`snapshotuuid` 		varchar(36) NOT NULL,
-  	`user` 				varchar(255) NOT NULL,
-  	`originalname` 		varchar(255) NOT NULL,
-  	`simname` 			varchar(255) NOT NULL,
-  	`posglobal` 		varchar(255) NOT NULL,
-  	`sortorder` 		int(2) NOT NULL,
-  	`enabled` 			enum('true','false') NOT NULL,
-  	PRIMARY KEY 	(`pickuuid`)
+	`pickuuid` 			varchar(36) NOT NULL,
+	`creatoruuid` 		varchar(36) NOT NULL,
+	`toppick` 			enum('true','false') NOT NULL,
+	`parceluuid` 		varchar(36)  NOT NULL,
+	`name` 				varchar(255) NOT NULL,
+	`description` 		text NOT NULL,
+	`snapshotuuid` 		varchar(36)  NOT NULL,
+	`user` 				varchar(255) NOT NULL,
+	`originalname` 		varchar(255) NOT NULL,
+	`simname` 			varchar(255) NOT NULL,
+	`posglobal` 		varchar(255) NOT NULL,
+	`sortorder` 		int(2) NOT NULL,
+	`enabled` 			enum('true','false') NOT NULL,
+	PRIMARY KEY 	(`pickuuid`)
 ) TYPE=MyISAM;
 
 
 CREATE TABLE `block_modlos_prof_userprofile` (
-  	`useruuid` 			 	varchar(36) NOT NULL,
-  	`profilePartner` 		varchar(36) NOT NULL,
-  	`profileImage` 		 	varchar(36) NOT NULL,
-  	`profileAboutText` 	 	text NOT NULL,
-  	`profileAllowPublish`  	binary(1) NOT NULL,
-  	`profileMaturePublish` 	binary(1) NOT NULL,
-  	`profileURL` 			varchar(255) NOT NULL,
-  	`profileWantToMask` 	int(3) NOT NULL,
-  	`profileWantToText` 	text NOT NULL,
-  	`profileSkillsMask` 	int(3) NOT NULL,
-  	`profileSkillsText` 	text NOT NULL,
-  	`profileLanguagesText` 	text NOT NULL,
-  	`profileFirstImage`		varchar(36) NOT NULL,
-  	`profileFirstText` 	 	text NOT NULL,
-  	PRIMARY KEY 	(`useruuid`)
+	`useruuid` 			 	varchar(36) NOT NULL,
+	`profilePartner` 		varchar(36) NOT NULL,
+	`profileImage` 		 	varchar(36) NOT NULL,
+	`profileAboutText` 	 	text NOT NULL,
+	`profileAllowPublish`  	binary(1) NOT NULL,
+	`profileMaturePublish` 	binary(1) NOT NULL,
+	`profileURL` 			varchar(255) NOT NULL,
+	`profileWantToMask` 	int(3) NOT NULL,
+	`profileWantToText` 	text NOT NULL,
+	`profileSkillsMask` 	int(3) NOT NULL,
+	`profileSkillsText` 	text NOT NULL,
+	`profileLanguagesText` 	text NOT NULL,
+	`profileFirstImage`		varchar(36) NOT NULL,
+	`profileFirstText` 	 	text NOT NULL,
+	PRIMARY KEY 	(`useruuid`)
 ) TYPE=MyISAM;
 
 
@@ -328,16 +328,16 @@ CREATE TABLE `block_modlos_prof_usersettings` (
 -- 
 
 CREATE TABLE `block_modlos_search_allparcels` (
-  	`regionUUID` 	char(36)  NOT NULL,
-  	`parcelname` 	varchar(255) NOT NULL,
-  	`ownerUUID` 	char(36) NOT NULL default '00000000-0000-0000-0000-000000000000',
-  	`groupUUID` 	char(36) NOT NULL default '00000000-0000-0000-0000-000000000000',
-  	`landingpoint` 	varchar(255) NOT NULL,
-  	`parcelUUID` 	char(36) NOT NULL default '00000000-0000-0000-0000-000000000000',
-  	`infoUUID` 		char(36) NOT NULL default '00000000-0000-0000-0000-000000000000',
-  	`parcelarea` 	int(11) NOT NULL,
-  	PRIMARY KEY  (`parcelUUID`),
-  	KEY `regionUUID` (`regionUUID`)
+	`regionUUID` 	char(36)  NOT NULL,
+	`parcelname` 	varchar(255) NOT NULL,
+	`ownerUUID` 	char(36) NOT NULL default '00000000-0000-0000-0000-000000000000',
+	`groupUUID` 	char(36) NOT NULL default '00000000-0000-0000-0000-000000000000',
+	`landingpoint` 	varchar(255) NOT NULL,
+	`parcelUUID` 	char(36) NOT NULL default '00000000-0000-0000-0000-000000000000',
+	`infoUUID` 		char(36) NOT NULL default '00000000-0000-0000-0000-000000000000',
+	`parcelarea` 	int(11)  NOT NULL,
+	PRIMARY KEY  (`parcelUUID`),
+	KEY `regionUUID` (`regionUUID`)
 ) TYPE=MyISAM;
 
 
@@ -346,22 +346,22 @@ CREATE TABLE `block_modlos_search_allparcels` (
 -- 
 
 CREATE TABLE `block_modlos_search_classifieds` (
-  	`classifieduuid` 	char(36) NOT NULL,
-  	`creatoruuid` 		char(36) NOT NULL,
-  	`creationdate` 		int(20) NOT NULL,
-  	`expirationdate` 	int(20) NOT NULL,
-  	`category` 			varchar(20) NOT NULL,
-  	`name` 				varchar(255) NOT NULL,
-  	`description` 		text NOT NULL,
-  	`parceluuid` 		char(36) NOT NULL,
-  	`parentestate` 		int(11) NOT NULL,
-  	`snapshotuuid` 		char(36) NOT NULL,
-  	`simname` 			varchar(255) NOT NULL,
-  	`posglobal` 		varchar(255) NOT NULL,
-  	`parcelname` 		varchar(255) NOT NULL,
-  	`classifiedflags`	int(8) NOT NULL,
-  	`priceforlisting` 	int(5) NOT NULL,
-  	PRIMARY KEY  (`classifieduuid`)
+	`classifieduuid` 	char(36) NOT NULL,
+	`creatoruuid` 		char(36) NOT NULL,
+	`creationdate` 		int(20)  NOT NULL,
+	`expirationdate` 	int(20)  NOT NULL,
+	`category` 			varchar(20) NOT NULL,
+	`name` 				varchar(255) NOT NULL,
+	`description` 		text NOT NULL,
+	`parceluuid` 		char(36) NOT NULL,
+	`parentestate` 		int(11)  NOT NULL,
+	`snapshotuuid` 		char(36) NOT NULL,
+	`simname` 			varchar(255) NOT NULL,
+	`posglobal` 		varchar(255) NOT NULL,
+	`parcelname` 		varchar(255) NOT NULL,
+	`classifiedflags`	int(8) NOT NULL,
+	`priceforlisting` 	int(5) NOT NULL,
+	PRIMARY KEY  (`classifieduuid`)
 ) ENGINE=InnoDB ROW_FORMAT=DEFAULT;
 
 
@@ -370,21 +370,21 @@ CREATE TABLE `block_modlos_search_classifieds` (
 -- 
 
 CREATE TABLE `block_modlos_search_events` (
-  	`owneruuid` 	char(36) NOT NULL,
-  	`name` 			varchar(255) NOT NULL,
-  	`eventid` 		int(11) NOT NULL,
-  	`creatoruuid` 	char(36) NOT NULL,
-  	`category` 		int(2) NOT NULL,
-  	`description` 	text NOT NULL,
-  	`dateUTC` 		int(10) NOT NULL,
-  	`duration` 		int(10) NOT NULL,
-  	`covercharge` 	int(10) NOT NULL,
-  	`coveramount` 	int(10) NOT NULL,
-  	`simname` 		varchar(255) NOT NULL,
-  	`globalPos` 	varchar(255) NOT NULL,
-  	`eventflags` 	int(10) NOT NULL,
-  	`mature` 		enum('true','false') NOT NULL,
-  	PRIMARY KEY  (`eventid`)
+	`owneruuid` 	char(36) NOT NULL,
+	`name` 			varchar(255) NOT NULL,
+	`eventid` 		int(11) NOT NULL,
+	`creatoruuid` 	char(36) NOT NULL,
+	`category` 		int(2)  NOT NULL,
+	`description` 	text NOT NULL,
+	`dateUTC` 		int(10) NOT NULL,
+	`duration` 		int(10) NOT NULL,
+	`covercharge` 	int(10) NOT NULL,
+	`coveramount` 	int(10) NOT NULL,
+	`simname` 		varchar(255) NOT NULL,
+	`globalPos` 	varchar(255) NOT NULL,
+	`eventflags` 	int(10) NOT NULL,
+	`mature` 		enum('true','false') NOT NULL,
+	PRIMARY KEY  (`eventid`)
 ) ENGINE=InnoDB ROW_FORMAT=DEFAULT;
 
 
@@ -393,13 +393,13 @@ CREATE TABLE `block_modlos_search_events` (
 -- 
 
 CREATE TABLE `block_modlos_search_hostsregister` (
-  	`host` 			varchar(255) NOT NULL,
-  	`port` 			int(5) NOT NULL,
-  	`register` 		int(10) NOT NULL,
-  	`nextcheck` 	int(10) NOT NULL,
-  	`checked` 		tinyint(1) NOT NULL,
-  	`failcounter` 	int(10) NOT NULL,
-  	PRIMARY KEY (`host`,`port`)
+	`host` 			varchar(255) NOT NULL,
+	`port` 			int(5)  NOT NULL,
+	`register` 		int(10) NOT NULL,
+	`nextcheck` 	int(10) NOT NULL,
+	`checked` 		tinyint(1) NOT NULL,
+	`failcounter` 	int(10) NOT NULL,
+	PRIMARY KEY (`host`,`port`)
 ) ENGINE=InnoDB ROW_FORMAT=DEFAULT;
 
 
@@ -408,13 +408,13 @@ CREATE TABLE `block_modlos_search_hostsregister` (
 -- 
 
 CREATE TABLE `block_modlos_search_objects` (
-  	`objectuuid` 	char(36)  NOT NULL,
-  	`parceluuid` 	char(36)  NOT NULL,
-  	`location` 		varchar(255) NOT NULL,
-  	`name` 			varchar(255) NOT NULL,
-  	`description` 	varchar(255) NOT NULL,
-  	`regionuuid` 	char(36)  NOT NULL default '',
-  PRIMARY KEY  (`objectuuid`,`parceluuid`)
+	`objectuuid` 	char(36)  NOT NULL,
+	`parceluuid` 	char(36)  NOT NULL,
+	`location` 		varchar(255) NOT NULL,
+	`name` 			varchar(255) NOT NULL,
+	`description` 	varchar(255) NOT NULL,
+	`regionuuid` 	char(36)  NOT NULL default '',
+PRIMARY KEY  (`objectuuid`,`parceluuid`)
 ) ENGINE=InnoDB ROW_FORMAT=DEFAULT;
 
 
@@ -423,22 +423,22 @@ CREATE TABLE `block_modlos_search_objects` (
 -- 
 
 CREATE TABLE `block_modlos_search_parcels` (
-  	`regionUUID` 		char(36)  NOT NULL,
-  	`parcelname` 		varchar(255) NOT NULL,
-  	`parcelUUID` 		char(36)  NOT NULL,
-  	`landingpoint` 		varchar(255) NOT NULL,
-  	`description` 		varchar(255) NOT NULL,
-  	`searchcategory` 	varchar(50)  NOT NULL,
-  	`build` 			enum('true','false') NOT NULL,
-  	`script` 			enum('true','false') NOT NULL,
-  	`public` 			enum('true','false') NOT NULL,
-  	`dwell` 			float NOT NULL default '0',
-  	`infouuid` 			char(36)  NOT NULL default '',
-  	PRIMARY KEY  (`regionUUID`,`parcelUUID`),
-  	KEY `name` (`parcelname`),
-  	KEY `description` (`description`),
-  	KEY `searchcategory` (`searchcategory`),
-  	KEY `dwell` (`dwell`)
+	`regionUUID` 		char(36) NOT NULL,
+	`parcelname` 		varchar(255) NOT NULL,
+	`parcelUUID` 		char(36) NOT NULL,
+	`landingpoint` 		varchar(255) NOT NULL,
+	`description` 		varchar(255) NOT NULL,
+	`searchcategory` 	varchar(50)  NOT NULL,
+	`build` 			enum('true','false') NOT NULL,
+	`script` 			enum('true','false') NOT NULL,
+	`public` 			enum('true','false') NOT NULL,
+	`dwell` 			float NOT NULL default '0',
+	`infouuid` 			char(36)  NOT NULL default '',
+	PRIMARY KEY  (`regionUUID`,`parcelUUID`),
+	KEY `name` (`parcelname`),
+	KEY `description` (`description`),
+	KEY `searchcategory` (`searchcategory`),
+	KEY `dwell` (`dwell`)
 ) ENGINE=InnoDB ROW_FORMAT=DEFAULT;
 
 
@@ -447,17 +447,17 @@ CREATE TABLE `block_modlos_search_parcels` (
 -- 
 
 CREATE TABLE `block_modlos_search_parcelsales` (
-  	`regionUUID` 	char(36)  NOT NULL,
-  	`parcelname` 	varchar(255) NOT NULL,
-  	`parcelUUID` 	char(36)  NOT NULL,
-  	`area` 			int(6)  NOT NULL,
-  	`saleprice` 	int(11) NOT NULL,
-  	`landingpoint` 	varchar(255) NOT NULL,
-  	`infoUUID` 		char(36)  NOT NULL default '00000000-0000-0000-0000-000000000000',
-  	`dwell` 		int(11) NOT NULL,
-  	`parentestate` 	int(11) NOT NULL default '1',
-  	`mature` 		varchar(32) NOT NULL default 'PG',
-  	PRIMARY KEY  (`regionUUID`,`parcelUUID`)
+	`regionUUID` 	char(36)  NOT NULL,
+	`parcelname` 	varchar(255) NOT NULL,
+	`parcelUUID` 	char(36)  NOT NULL,
+	`area` 			int(6)  NOT NULL,
+	`saleprice` 	int(11) NOT NULL,
+	`landingpoint` 	varchar(255) NOT NULL,
+	`infoUUID` 		char(36)  NOT NULL default '00000000-0000-0000-0000-000000000000',
+	`dwell` 		int(11) NOT NULL,
+	`parentestate` 	int(11) NOT NULL default '1',
+	`mature` 		varchar(32) NOT NULL default 'PG',
+	PRIMARY KEY  (`regionUUID`,`parcelUUID`)
 ) ENGINE=InnoDB ROW_FORMAT=DEFAULT;
 
 
@@ -466,12 +466,12 @@ CREATE TABLE `block_modlos_search_parcelsales` (
 -- 
 
 CREATE TABLE `block_modlos_search_popularplaces` (
-  	`parcelUUID` 	char(36) NOT NULL,
-  	`name` 			varchar(255) NOT NULL,
-  	`dwell` 		float NOT NULL,
-  	`infoUUID` 		char(36) NOT NULL,
-  	`has_picture` 	tinyint(4) NOT NULL,
-  	`mature` 		tinyint(4) NOT NULL
+	`parcelUUID` 	char(36) NOT NULL,
+	`name` 			varchar(255) NOT NULL,
+	`dwell` 		float NOT NULL,
+	`infoUUID` 		char(36) NOT NULL,
+	`has_picture` 	tinyint(4) NOT NULL,
+	`mature` 		tinyint(4) NOT NULL
 ) ENGINE=InnoDB ROW_FORMAT=DEFAULT;
 
 
@@ -480,13 +480,13 @@ CREATE TABLE `block_modlos_search_popularplaces` (
 -- 
 
 CREATE TABLE `block_modlos_search_regions` (
-  	`regionname` 	varchar(255) NOT NULL,
-  	`regionuuid` 	char(36)  NOT NULL,
-  	`regionhandle` 	varchar(255) NOT NULL,
-  	`url` 			varchar(255) NOT NULL,
-  	`owner` 		varchar(255) NOT NULL,
-  	`owneruuid` 	char(36)  NOT NULL,
-  	PRIMARY KEY  (`regionuuid`)
+	`regionname` 	varchar(255) NOT NULL,
+	`regionuuid` 	char(36)  NOT NULL,
+	`regionhandle` 	varchar(255) NOT NULL,
+	`url` 			varchar(255) NOT NULL,
+	`owner` 		varchar(255) NOT NULL,
+	`owneruuid` 	char(36)  NOT NULL,
+	PRIMARY KEY  (`regionuuid`)
 ) ENGINE=InnoDB ROW_FORMAT=DEFAULT;
 
 
