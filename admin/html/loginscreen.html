@@ -1,13 +1,4 @@
-<head>
-<link  href="<?php echo CMS_MODULE_URL.'/helper/loginscreen/style.css'?>" type=text/css rel=stylesheet />
 
-<!--
-<link  href="<?php echo CMS_MODULE_URL.'/helper/loginscreen/info_alert_box.css'?>" type=text/css rel=stylesheet />
--->
-</head>
-
-
-<body>
 <h2><center><?php echo $grid_name.":&nbsp;".$lgnscrn_ttl?></center></h2>
 <br />
 
@@ -59,15 +50,18 @@
   </table>
   <br /><br /><br />
 
+  <div>
+  <style>
+    <?php include(CMS_MODULE_PATH.'/helper/loginscreen/info_alert_box.css');?>
+  </style>
   <?php
     $BOX_TITLE    = $lgnscrn_boxttl;
     $BOX_COLOR    = $lgnscrn_color;
     $BOX_INFOTEXT = $lgnscrn_altbox;
   ?>
   <div id=Infobox >
-    <?php
-      include("../../helper/loginscreen/color_box.php");
-    ?>
+    <?php include("../../helper/loginscreen/color_box.php"); ?>
+  </div>
   </div>
 
   <br />
@@ -90,4 +84,3 @@
 <?php }?>
 <br />
 
-</body>
