@@ -59,8 +59,8 @@ class  LoginScreen
 			}
 
 			$quest = optional_param('quest', 'no', PARAM_ALPHA);
-			$this->lgnscrn_ckey    = optional_param('lgnscrn_color',  '1', PARAM_INT);
-			$this->lgnscrn_altbox = optional_param('lgnscrn_altbox', '', PARAM_TEXT);
+			$this->lgnscrn_ckey   = optional_param('lgnscrn_color',  '1', PARAM_INT);
+			$this->lgnscrn_altbox = optional_param('lgnscrn_altbox', '',  PARAM_RAW);
 
 			if ($quest=="yes") {
 				$ret = opensim_check_db();

@@ -15,7 +15,7 @@ $LOGIN_SCREEN_CONTENT = $CFG->modlos_loginscreen_content;
 $BOX_TITLE		  = get_string('modlos_lgnscrn_box_ttl', 'block_modlos');
 $BOX_COLOR		  = "green";
 //$BOX_INFOTEXT 	  = "BOX_INFOTEXT<br /> sssss<br /><br /><br /><br />SSSSSSSSSS";
-$BOX_INFOTEXT     = "BOX_INFOTEXT<br /> sssss<br /><br /><br /><br />SSSSSSSSSS<br/>ssssssssss<br />ssssssssss";
+$BOX_INFOTEXT     = "BOX_INFOTEXT<br /> sssssssssssssssssssssssss /><br /><br /><br />SSSSSSSSSS<br/>ssssssssss<br />ssssssssss";
 
 
 $GRID_NAME		  = $CFG->modlos_grid_name;

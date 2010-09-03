@@ -1,5 +1,8 @@
 <head>
+<!--
 <link  href="<?php echo CMS_MODULE_URL.'/helper/loginscreen/style.css'?>" type=text/css rel=stylesheet />
+-->
+<link  href="<?php echo CMS_MODULE_URL.'/helper/loginscreen/info_alert_box.css'?>" type=text/css rel=stylesheet />
 </head>
 
 
@@ -35,7 +38,10 @@
       </select>
       <br /><br /><br />
       <strong><div style="padding:4px;" ><?php echo $edit_altbox?></div></strong>
+<!--
       <textarea name="lgnscrn_altbox" cols="40" rows="5" value="lgnscrn_altbox"><?php echo htmlspecialchars($lgnscrn_altbox)?></textarea><br />
+-->
+      <textarea name="lgnscrn_altbox" cols="40" rows="5" value="lgnscrn_altbox"><?php echo $lgnscrn_altbox?></textarea><br />
 
       <br /><br />
       <input type="submit" value="<?php echo $lgnscrn_submit?>" /> 
@@ -52,11 +58,13 @@
   </table>
   <br /><br /><br />
 
+  <?php
+    $BOX_TITLE    = $lgnscrn_boxttl;
+    $BOX_COLOR    = $lgnscrn_color;
+    $BOX_INFOTEXT = $lgnscrn_altbox;
+  ?>
   <div id=Infobox >
     <?php
-      $BOX_TITLE    = $lgnscrn_boxttl;
-      $BOX_COLOR    = $lgnscrn_color;
-      $BOX_INFOTEXT = $lgnscrn_altbox;
       include("../../helper/loginscreen/box_color.php");
     ?>
   </div>
