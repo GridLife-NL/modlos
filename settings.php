@@ -148,8 +148,8 @@ $settings->add(new admin_setting_configtextarea('modlos_editable_content',
 				   	get_string('modlos_edtbl_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
 
 $settings->add(new admin_setting_configtextarea('modlos_loginscreen_content', 
-					get_string('modlos_lgscn_cntnt', 'block_modlos'),
-				   	get_string('modlos_lgscn_cntnt_desc', 'block_modlos'), "Welcome to OpenSim", PARAM_RAW));
+					get_string('modlos_lgnscrn_cntnt', 'block_modlos'),
+				   	get_string('modlos_lgnscrn_cntnt_desc', 'block_modlos'), "Welcome to OpenSim", PARAM_RAW));
 
 $settings->add(new admin_setting_configcheckbox('modlos_activate_disclaimer', 
 					get_string('modlos_dsclmr', 'block_modlos'),

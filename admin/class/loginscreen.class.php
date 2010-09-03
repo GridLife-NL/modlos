@@ -24,7 +24,7 @@ class  LoginScreen
 	var	$errorMsg  = array();
 
 	var	$lgnscrn_ckey    = 1;
-	var	$lgnscrn_infobox = '';
+	var	$lgnscrn_altbox = '';
 
 
 	function  LoginScreen($course_id) 
@@ -60,7 +60,7 @@ class  LoginScreen
 
 			$quest = optional_param('quest', 'no', PARAM_ALPHA);
 			$this->lgnscrn_ckey    = optional_param('lgnscrn_color',  '1', PARAM_INT);
-			$this->lgnscrn_infobox = optional_param('lgnscrn_infobox', '', PARAM_TEXT);
+			$this->lgnscrn_altbox = optional_param('lgnscrn_altbox', '', PARAM_TEXT);
 
 			if ($quest=="yes") {
 				$ret = opensim_check_db();
@@ -95,16 +95,14 @@ class  LoginScreen
 		$lgnscrn_msg    = get_string('modlos_lgnscrn_done',   'block_modlos');
 		$lgnscrn_submit = get_string('modlos_lgnscrn_submit', 'block_modlos');
 		$select_color	= get_string('modlos_lgnscrn_color',  'block_modlos');
-		$edit_infobox	= get_string('modlos_lgnscrn_infobox','block_modlos');
+		$edit_altbox	= get_string('modlos_lgnscrn_altbox', 'block_modlos');
 		$colors			= array(0=>'white', 1=>'green', 2=>'yellow', 3=>'red');
 		$content		= '<center>'.get_string('modlos_lgnscrn_contents', 'block_modlos').'</center>';
 		$updated		= $this->updated;
 
 		$lgnscrn_color  = $colors[$this->lgnscrn_ckey];
-		$lgnscrn_infobox= $this->lgnscrn_infobox;
-
-
-
+		$lgnscrn_altbox = $this->lgnscrn_altbox;
+		$lgnscrn_boxttl = get_string('modlos_lgnscrn_box_ttl', 'block_modlos');
 
 		$course_amp    	= '';
 		if ($this->course_id>0) $course_param = '?course='.$this->course_id;

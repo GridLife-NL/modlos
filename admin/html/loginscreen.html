@@ -1,7 +1,9 @@
 <head>
+<link  href="style.css" type=text/css rel=stylesheet />
 </head>
 
 
+<body style=>
 <h2><center><?php echo $grid_name.":&nbsp;".$lgnscrn_ttl?></center></h2>
 <br />
 
@@ -32,8 +34,8 @@
         <?php }?>
       </select>
       <br /><br /><br />
-      <strong><div style="padding:4px;" ><?php echo $edit_infobox?></div></strong>
-      <textarea name="lgnscrn_infobox" cols="40" rows="5" value="lgnscrn_infobox"><?php echo htmlspecialchars($lgnscrn_infobox)?></textarea><br />
+      <strong><div style="padding:4px;" ><?php echo $edit_altbox?></div></strong>
+      <textarea name="lgnscrn_altbox" cols="40" rows="5" value="lgnscrn_altbox"><?php echo htmlspecialchars($lgnscrn_altbox)?></textarea><br />
 
       <br /><br />
       <input type="submit" value="<?php echo $lgnscrn_submit?>" /> 
@@ -48,31 +50,16 @@
       <td width="50" class="head"><center><h3><span style="color:#116644;"><?php echo $content?></span></h3></center></td>
     </tr>
   </table>
-  <br />
-  <br />
+  <br /><br />
 
-<!--
-  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
-    <tr>
-      <td>
--->
-<center>
-<object type="text/html" data="../../helper/loginscreen/box_color.php"></object>
-</center>
-
-<!--
-<link  href="../../helper/loginscreen/style.css" type=text/css rel=stylesheet />
-  <div id=Infobox>
+  <div id=Infobox >
     <?php
+      $BOX_TITLE    = $lgnscrn_boxttl;
       $BOX_COLOR    = $lgnscrn_color;
-      $BOX_INFOTEXT = $lgnscrn_infobox;
+      $BOX_INFOTEXT = $lgnscrn_altbox;
       include("../../helper/loginscreen/box_color.php");
     ?>
   </div>
-</td>
-    </tr>
-  </table>
--->
 
   <br />
   <br />
@@ -94,4 +81,4 @@
 <?php }?>
 <br />
 
-
+</body>

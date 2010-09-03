@@ -195,7 +195,7 @@ $string['modlos_voice_inactive_chnl']='Inactive Voice';
 $string['modlos_voice_private_chnl']= 'Private Channel';
 $string['modlos_voice_percel_chnl'] = 'Percel Channel';
 
-$string['modlos_lgscn_box_ttl']		= 'Information';
+$string['modlos_lgnscrn_box_ttl']	= 'Information';
 
 
 // Config
@@ -273,8 +273,8 @@ $string['modlos_avt_cntnt_desc'] 	= 'Specify content of avatars list page';
 $string['modlos_edtbl_cntnt'] 		= 'Editable Avatas List Content';
 $string['modlos_edtbl_cntnt_desc'] 	= 'Specify content of editable avatars list page';
 
-$string['modlos_lgscn_cntnt']		= 'Login Screen Content';
-$string['modlos_lgscn_cntnt_desc']	= 'Specify content of Login Screen on Viewer';
+$string['modlos_lgnscrn_cntnt']		= 'Login Screen Content';
+$string['modlos_lgnscrn_cntnt_desc']= 'Specify content of Login Screen on Viewer';
 
 $string['modlos_dsclmr'] 			= 'Disclaimer Activation';
 $string['modlos_dsclmr_desc'] 		= 'Select to display of disclaimer is active or not';
@@ -322,9 +322,9 @@ $string['modlos_lgnscrn_ttl']		= 'Login Screen Information Box';
 $string['modlos_lgnscrn_done']		= 'Login Screen Information Box is updated!';
 $string['modlos_lgnscrn_submit']	= 'Update';
 $string['modlos_lgnscrn_contents']	= 'Edit Information Box at Login Screen';
-$string['modlos_lgnscrn_return']	= 'Return to Login Screen';
+$string['modlos_lgnscrn_return']	= 'Return to Edit of Information Box';
 $string['modlos_lgnscrn_color']		= 'Color of Information Box';
-$string['modlos_lgnscrn_infobox']	= 'Information Box';
+$string['modlos_lgnscrn_altbox']	= 'Information Box';
 
 $string['modlos_cltexture_ttl']		= 'Clear Texture Cache Data';
 $string['modlos_clpresence_ttl']	= 'Clear Login Information Table';
