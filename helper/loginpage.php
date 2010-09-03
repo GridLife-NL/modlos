@@ -12,7 +12,7 @@ global $CFG;
 
 $LOGIN_SCREEN_CONTENT = $CFG->modlos_loginscreen_content;
 
-$BOX_TITLE		  = get_string('modlos_lgscn_box_ttl', 'block_modlos');
+$BOX_TITLE		  = get_string('modlos_lgnscrn_box_ttl', 'block_modlos');
 $BOX_COLOR		  = "green";
 //$BOX_INFOTEXT 	  = "BOX_INFOTEXT<br /> sssss<br /><br /><br /><br />SSSSSSSSSS";
 $BOX_INFOTEXT     = "BOX_INFOTEXT<br /> sssss<br /><br /><br /><br />SSSSSSSSSS<br/>ssssssssss<br />ssssssssss";
