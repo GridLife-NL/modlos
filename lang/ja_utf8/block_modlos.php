@@ -288,35 +288,48 @@ $string['modlos_user_log_desc'] 	= 'ユーザサーバのログの保存先';
 
 
 // Admin
-$string["modlos_admin_title"] 		= 'Moodle OpenSim';
-$string["modlos_general_setting_tab"]='一般設定';
-$string["modlos_lastnames_tab"] 	= 'ラストネーム';
+$string['modlos_showhome_tab'] 		= 'ホーム';
+$string['modlos_admin_title'] 		= 'Moodle OpenSim';
+$string['modlos_general_setting_tab']='一般設定';
+$string['modlos_lastnames_tab'] 	= 'ラストネーム';
 $string['modlos_lastnames'] 		= 'ラストネーム管理';
 
 $string['modlos_synchro_tab'] 		= 'データベース同期';
 $string['modlos_synchro_db'] 		= 'データベース同期';
 $string['modlos_synchro_submit'] 	= 'データベース同期の実行';
 $string['modlos_synchro_contents'] 	= 'OpenSimデータベースと Modlosデータベースとの同期を取ります';
-$string['modlos_synchronized'] 		= 'OpenSimデータベースとの同期完了！';
+$string['modlos_synchronized'] 		= 'OpenSimデータベースとの同期完了!';
 
 $string['modlos_convertdb_tab'] 	= 'データベース変換';
 $string['modlos_convertdb_ttl'] 	= 'データベースを 0.6.x から 0.7.x へ変換';
 $string['modlos_convertdb_submit'] 	= 'データベース変換の実行';
 $string['modlos_convertdb_contents']= 'OpenSimデータベースを 0.6.x から 0.7.x へ変換';
-$string['modlos_convertdb_converted']='OpenSimデータベースの変換完了！';
+$string['modlos_convertdb_converted']='OpenSimデータベースの変換完了!';
 
-$string['modlos_manage_tab']        = '管理';
-$string['modlos_manage_ttl']        = 'Modlos の管理';
+$string['modlos_manage_tab']        = '管理画面';
+$string['modlos_manage_cmnd_tab']   = '管理コマンド';
+$string['modlos_manage_ttl']        = '管理コマンド';
 $string['modlos_manage_submit']     = '実行';
 $string['modlos_manage_contents']   = '管理コマンドの実行';
 $string['modlos_manage_done']       = '管理コマンド正常終了!!';
 $string['modlos_manage_select']     = '実行する管理コマンドを選択してください';
 $string['modlos_manage_return']     = '管理コマンド画面に戻る';
 
+$string['modlos_lgnscrn_tab']   	= 'ログイン スクリーン';
+$string['modlos_lgnscrn_ttl']   	= 'ログインスクリーン 情報ボックス';
+$string['modlos_lgnscrn_done']  	= '更新完了!';
+$string['modlos_lgnscrn_submit']	= '更新';
+$string['modlos_lgnscrn_contents']	= 'ログインスクリーンの情報ボックスを更新';
+$string['modlos_lgnscrn_return']	= 'ログインスクリーン管理画面に戻る';
+$string['modlos_lgnscrn_color']		= '情報ボックスのカラー';
+$string['modlos_lgnscrn_infobox']	= '情報ボックス';
+
+
 $string['modlos_cltexture_ttl']     = 'テクスチャのキャッシュデータをクリア';
 $string['modlos_clpresence_ttl']    = 'ログイン情報テーブルをクリア';
 
 $string['modlos_return_tab'] 		= 'コースに戻る';
+$string['modlos_return_sitetop_tab']= 'サイトトップに戻る';
 $string['modlos_access_forbidden'] 	= 'このページへのアクセスは許可されてません';
 
 ?>

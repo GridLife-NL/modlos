@@ -16,7 +16,7 @@ print_modlos_header($action, $course);
 require_once(CMS_MODULE_PATH."/admin/class/synchrodb.class.php");
 $synchro = new SynchroDataBase($course_id);
 
-print_tabnav($action, $course);
+print_tabnav_magage($action, $course);
 
 $synchro->execute();
 $synchro->print_page();

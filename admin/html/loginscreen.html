@@ -1,0 +1,97 @@
+<head>
+</head>
+
+
+<h2><center><?php echo $grid_name.":&nbsp;".$lgnscrn_ttl?></center></h2>
+<br />
+
+<?php if (!$this->updated) {?>
+  <form action="<?php echo $this->action_url?>" method="POST">
+    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+      <tr>
+        <td width="50" class="head"><h3><span style="color:#116644;"><?php echo $content?></span></h3></td>
+      </tr>
+    </table>
+
+    <br /><br />
+
+    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
+    <input type="hidden" name="quest"   value="yes" />
+
+    <center>
+      <strong><div style="padding:4px;" ><?php echo $select_color?></div></strong>
+      <select wide="48" name="lgnscrn_color">
+        <?php foreach($colors as $ckey => $color) {?>
+          <?php if ($lgnscrn_ckey==$ckey) {?>
+            <option value="<?php echo $ckey?>" selected><?php echo $color?></option>
+          <?php } else {?>
+            <option value="<?php echo $ckey?>"><?php echo $color?></option>
+          <?php }?>
+          </option>
+        <?php }?>
+      </select>
+      <br /><br /><br />
+      <strong><div style="padding:4px;" ><?php echo $edit_infobox?></div></strong>
+      <textarea name="lgnscrn_infobox" cols="40" rows="5" value="lgnscrn_infobox"><?php echo htmlspecialchars($lgnscrn_infobox)?></textarea><br />
+
+      <br /><br />
+      <input type="submit" value="<?php echo $lgnscrn_submit?>" /> 
+    </center>
+
+  </form>
+
+<?php } else {?>
+
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+    <tr>
+      <td width="50" class="head"><center><h3><span style="color:#116644;"><?php echo $content?></span></h3></center></td>
+    </tr>
+  </table>
+  <br />
+  <br />
+
+<!--
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+    <tr>
+      <td>
+-->
+<center>
+<object type="text/html" data="../../helper/loginscreen/box_color.php"></object>
+</center>
+
+<!--
+<link  href="../../helper/loginscreen/style.css" type=text/css rel=stylesheet />
+  <div id=Infobox>
+    <?php
+      $BOX_COLOR    = $lgnscrn_color;
+      $BOX_INFOTEXT = $lgnscrn_infobox;
+      include("../../helper/loginscreen/box_color.php");
+    ?>
+  </div>
+</td>
+    </tr>
+  </table>
+-->
+
+  <br />
+  <br />
+  <h3><center><a href="<?php echo $lgnscrn_url?>" ><u><?php echo $return_ttl?></u></a></center></h3>
+
+<?php }?>
+<br />
+
+<!-- Error Message -->
+<br />
+<br />
+<hr />
+<?php if ($this->hasError) {?>
+  <ul>
+    <?php foreach($this->errorMsg as $mesg) {?>
+       <li><font color="#F02022"><b><?php echo $mesg?></b></font></li>
+    <?php }?>
+  </ul>
+<?php }?>
+<br />
+
+

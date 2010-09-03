@@ -290,9 +290,10 @@ $string['modlos_user_log_desc'] 	= 'Specify user server directory';
 
 
 // Admin
-$string["modlos_admin_title"] 		= 'Moodle OpenSim';
-$string["modlos_general_setting_tab"]='Preferences';
-$string["modlos_lastnames_tab"] 	= 'Lastnames';
+$string['modlos_showhome_tab'] 		= 'Home';
+$string['modlos_admin_title'] 		= 'Moodle OpenSim';
+$string['modlos_general_setting_tab']='Preferences';
+$string['modlos_lastnames_tab'] 	= 'Lastnames';
 $string['modlos_lastnames'] 		= 'Lastnames Management';
 
 $string['modlos_synchro_tab'] 		= 'Synchro DB';
@@ -308,17 +309,28 @@ $string['modlos_convertdb_contents']= 'Convert OpenSim DB from 0,6.x to 0.7.x ?'
 $string['modlos_convertdb_converted']='OpenSim DB is Converted!!';
 
 $string['modlos_manage_tab']		= 'Management';
-$string['modlos_manage_ttl']		= 'Management of Modlos';
+$string['modlos_manage_cmnd_tab']	= 'Commands of Manage';
+$string['modlos_manage_ttl']		= 'Management Commands';
 $string['modlos_manage_submit']		= 'Exec';
 $string['modlos_manage_contents']	= 'Execute Management Command';
 $string['modlos_manage_done']		= 'Management Command was Executed!!';
 $string['modlos_manage_select']		= 'Select a Management Command';
 $string['modlos_manage_return']		= 'Return to Management';
 
+$string['modlos_lgnscrn_tab']		= 'Login Screen';
+$string['modlos_lgnscrn_ttl']		= 'Login Screen Information Box';
+$string['modlos_lgnscrn_done']		= 'Login Screen Information Box is updated!';
+$string['modlos_lgnscrn_submit']	= 'Update';
+$string['modlos_lgnscrn_contents']	= 'Edit Information Box at Login Screen';
+$string['modlos_lgnscrn_return']	= 'Return to Login Screen';
+$string['modlos_lgnscrn_color']		= 'Color of Information Box';
+$string['modlos_lgnscrn_infobox']	= 'Information Box';
+
 $string['modlos_cltexture_ttl']		= 'Clear Texture Cache Data';
 $string['modlos_clpresence_ttl']	= 'Clear Login Information Table';
 
 $string['modlos_return_tab'] 		= 'Return to Course';
+$string['modlos_return_sitetop_tab']= 'Return to Site Top';
 $string['modlos_access_forbidden'] 	= 'Forbidden Access to this Page!!';
 
 ?>

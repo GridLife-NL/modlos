@@ -9,7 +9,7 @@ $course = get_record('course', 'id', $course_id);
 
 
 ob_start();
-print_tabnav('settings', $course);
+print_tabnav_manage('settings', $course);
 $tabnav = ob_get_contents();
 ob_end_clean();
 

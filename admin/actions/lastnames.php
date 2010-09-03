@@ -16,7 +16,7 @@ print_modlos_header($action, $course);
 require_once(CMS_MODULE_PATH."/admin/class/lastnames.class.php");
 $lastnames = new LastNames($course_id);
 
-print_tabnav($action, $course);
+print_tabnav_manage($action, $course);
 
 $lastnames->execute();
 $lastnames->print_page();

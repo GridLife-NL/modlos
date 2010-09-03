@@ -16,7 +16,7 @@ print_modlos_header($action, $course);
 require_once(CMS_MODULE_PATH."/admin/class/convertdb.class.php");
 $convertdb = new ConvertDataBase($course_id);
 
-print_tabnav($action, $course);
+print_tabnav_manage($action, $course);
 
 $convertdb->execute();
 $convertdb->print_page();
