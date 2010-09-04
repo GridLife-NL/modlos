@@ -3,7 +3,7 @@
 
 <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
   <tr>
-    <td width="50" class="head"><center><h3><span style="color:#116644;"><?php echo $content?></span></h3></center></td>
+    <td width="50" class="head"><center><h3><span style="color:#116644;"><?php echo $contents?></span></h3></center></td>
   </tr>
 </table>
 <br /><br />
@@ -39,8 +39,8 @@
       <br /><br />
 
       <div align="center">
-        <input type="submit" name="update" id="update" value="<?php echo $lgnscrn_submit ?>" />&nbsp;&nbsp;
-        <input type="submit" name="cancel" id="cancel" value="<?php echo $lgnscrn_cancel ?>" />
+        <input type="submit" name="submit_update" id="submit_update" value="<?php echo $lgnscrn_submit ?>" />&nbsp;&nbsp;
+        <input type="submit" name="submit_cancel" id="submit_cancel" value="<?php echo $lgnscrn_cancel ?>" />
       </div>
       <br /><br /><hr /><br />
     <?php }?>
@@ -64,10 +64,10 @@
         <textarea name="lgnscrn_altbox" cols="40" rows="5" value="lgnscrn_altbox"><?php echo $lgnscrn_altbox?></textarea><br />
 
         <br /><br />
-        <input type="submit" name="preview" id="preview" value="<?php echo $lgnscrn_preview?>" />&nbsp;
+        <input type="submit" name="submit_preview" id="submit_preview" value="<?php echo $lgnscrn_preview?>" />&nbsp;
         <input type="reset"  value="<?php echo $lgnscrn_reset?>" />
         <?php if ($preview) {?>
-            &nbsp;&nbsp;&nbsp;<input type="submit" name="cancel" id="cancel" value="<?php echo $lgnscrn_cancel ?>" />
+            &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_cancel" id="submit_cancel" value="<?php echo $lgnscrn_cancel ?>" />
         <?php }?>
       </div>
     <?php }?>

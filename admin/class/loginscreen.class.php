@@ -25,7 +25,7 @@ class  LoginScreen
 	var	$errorMsg  = array();
 	var	$colors	   = array(0=>'white', 1=>'green', 2=>'yellow', 3=>'red');
 
-	var	$lgnscrn_ckey   = 1;
+	var	$lgnscrn_ckey   = 0;
 	var	$lgnscrn_color  = '';
 	var	$lgnscrn_altbox = '';
 
@@ -61,14 +61,14 @@ class  LoginScreen
 				return false;
 			}
 
-			$cancel  = optional_param('cancel', '', PARAM_TEXT);            
-			$preview = optional_param('preview','', PARAM_TEXT);
-			$update  = optional_param('update', '', PARAM_TEXT);
+			$cancel  = optional_param('submit_cancel', '', PARAM_TEXT);            
+			$preview = optional_param('submit_preview','', PARAM_TEXT);
+			$update  = optional_param('submit_update', '', PARAM_TEXT);
 
             // Return to Edit
 			if ($cancel!='') redirect($this->action_url.'?course='.$this->course_id, 'Please wait....', 0);
 
-			$this->lgnscrn_ckey   = optional_param('lgnscrn_color',  '1', PARAM_INT);
+			$this->lgnscrn_ckey   = optional_param('lgnscrn_color',  '0', PARAM_INT);
 			$this->lgnscrn_color  = $this->colors[$this->lgnscrn_ckey];
 			$this->lgnscrn_altbox = optional_param('lgnscrn_altbox', '',  PARAM_RAW);
 
@@ -127,15 +127,15 @@ class  LoginScreen
 
 		$grid_name	   	= $CFG->modlos_grid_name;
 
-		$lgnscrn_ttl    = get_string('modlos_lgnscrn_ttl', 	  'block_modlos');
-		$lgnscrn_msg    = get_string('modlos_lgnscrn_done',   'block_modlos');
-		$lgnscrn_submit = get_string('modlos_lgnscrn_submit', 'block_modlos');
-		$lgnscrn_preview= get_string('modlos_lgnscrn_preview','block_modlos');
-		$lgnscrn_cancel = get_string('modlos_cancel_ttl', 	  'block_modlos');
-		$lgnscrn_reset  = get_string('modlos_reset_ttl', 	  'block_modlos');
-		$select_color	= get_string('modlos_lgnscrn_color',  'block_modlos');
-		$edit_altbox	= get_string('modlos_lgnscrn_altbox', 'block_modlos');
-		$content		= '<center>'.get_string('modlos_lgnscrn_contents', 'block_modlos').'</center>';
+		$lgnscrn_ttl    = get_string('modlos_lgnscrn_ttl', 	   'block_modlos');
+		$lgnscrn_msg    = get_string('modlos_lgnscrn_done',    'block_modlos');
+		$lgnscrn_submit = get_string('modlos_lgnscrn_submit',  'block_modlos');
+		$lgnscrn_preview= get_string('modlos_lgnscrn_preview', 'block_modlos');
+		$lgnscrn_cancel = get_string('modlos_cancel_ttl', 	   'block_modlos');
+		$lgnscrn_reset  = get_string('modlos_reset_ttl', 	   'block_modlos');
+		$select_color	= get_string('modlos_lgnscrn_color',   'block_modlos');
+		$edit_altbox	= get_string('modlos_lgnscrn_altbox',  'block_modlos');
+		$contents		= get_string('modlos_lgnscrn_contents','block_modlos');
 
 		$course_id		= $this->course_id;
 		$updated		= $this->updated;
