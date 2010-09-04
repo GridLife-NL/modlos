@@ -231,7 +231,7 @@ CREATE TABLE `block_modlos_login_screen` (
 	`id`       		int(10) unsigned NOT NULL auto_increment,
 	`title`			varchar(255) NOT NULL default '',
 	`information`	text NOT NULL default '',
-	`boderColor`  	varchar(20) NOT NULL default 'white', 
+	`borderColor`  	varchar(20) NOT NULL default 'white', 
 	`timestamp` 	int(11) unsigned NOT NULL default '0',
 	PRIMARY KEY (`id`)
 ) TYPE=MyISAM;

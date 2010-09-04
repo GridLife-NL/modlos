@@ -23,8 +23,10 @@ class  LoginScreen
 	var	$updated   = false;
 	var	$hasError  = false;
 	var	$errorMsg  = array();
+	var	$colors	   = array(0=>'white', 1=>'green', 2=>'yellow', 3=>'red');
 
-	var	$lgnscrn_ckey    = 1;
+	var	$lgnscrn_ckey   = 1;
+	var	$lgnscrn_color  = '';
 	var	$lgnscrn_altbox = '';
 
 
@@ -67,6 +69,7 @@ class  LoginScreen
 			if ($cancel!='') redirect($this->action_url.'?course='.$this->course_id, 'Please wait....', 0);
 
 			$this->lgnscrn_ckey   = optional_param('lgnscrn_color',  '1', PARAM_INT);
+			$this->lgnscrn_color  = $this->colors[$this->lgnscrn_ckey];
 			$this->lgnscrn_altbox = optional_param('lgnscrn_altbox', '',  PARAM_RAW);
 
 			if ($preview!='') {
@@ -81,15 +84,35 @@ class  LoginScreen
 					$this->errorMsg[] = get_string('modlos_db_connect_error', 'block_modlos');
 					return false;
 				}
+				
+				$alert['title'] 	  = '';
+				$alert['bordercolor'] = $this->lgnscrn_color;
+				$alert['information'] = $this->lgnscrn_altbox;
+			
+				$ret = modlos_set_loginscreen_alert($alert);
+				if ($ret) {
+					$this->preview = false;
+					$this->updated = true;
+				}
+				else {
+					$this->hasError = true;
+					$this->errorMsg[] = "DB Update Error!! (modlos_set_loginscreen_alert)"; 
+				}
+			}
+		}
 
-
-			//		opensim_succession_data(OPENSIM_HMREGION);
-			//		opensim_recreate_presence();
-			//		$profs = opensim_get_avatars_profiles_from_users();
-			//		if ($profs!=null) modlos_set_profiles_from_users($profs, false);        // not over write
-
-				$this->preview = false;
-				$this->updated = true;
+		// GET
+		else {
+			$alert = modlos_get_loginscreen_alert();
+			if ($alert!=null and is_array($alert)) {
+				$this->lgnscrn_color  = $alert['bordercolor'];
+				$this->lgnscrn_altbox = $alert['information'];
+				foreach($this->colors as $ckey => $color) {
+					if ($this->lgnscrn_color==$color) {
+						$this->lgnscrn_ckey = $ckey;
+						break;
+					}
+				}
 			}
 		}
 
@@ -103,6 +126,7 @@ class  LoginScreen
 		global $CFG;
 
 		$grid_name	   	= $CFG->modlos_grid_name;
+
 		$lgnscrn_ttl    = get_string('modlos_lgnscrn_ttl', 	  'block_modlos');
 		$lgnscrn_msg    = get_string('modlos_lgnscrn_done',   'block_modlos');
 		$lgnscrn_submit = get_string('modlos_lgnscrn_submit', 'block_modlos');
@@ -111,15 +135,16 @@ class  LoginScreen
 		$lgnscrn_reset  = get_string('modlos_reset_ttl', 	  'block_modlos');
 		$select_color	= get_string('modlos_lgnscrn_color',  'block_modlos');
 		$edit_altbox	= get_string('modlos_lgnscrn_altbox', 'block_modlos');
-		$colors			= array(0=>'white', 1=>'green', 2=>'yellow', 3=>'red');
 		$content		= '<center>'.get_string('modlos_lgnscrn_contents', 'block_modlos').'</center>';
 
 		$course_id		= $this->course_id;
 		$updated		= $this->updated;
 		$preview		= $this->preview;
 		$action_url		= $this->action_url;
+		$colors			= $this->colors;
 
-		$lgnscrn_color  = $colors[$this->lgnscrn_ckey];
+		$lgnscrn_ckey 	= $this->lgnscrn_ckey;
+		$lgnscrn_color 	= $this->lgnscrn_color;
 		$lgnscrn_altbox = $this->lgnscrn_altbox;
 		$lgnscrn_boxttl = get_string('modlos_lgnscrn_box_ttl', 'block_modlos');
 

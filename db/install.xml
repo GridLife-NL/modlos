@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="blocks/modlos/db" VERSION="20100901" COMMENT="XMLDB file for Moodle OpenSim blocks/Modlos"
+<XMLDB PATH="blocks/modlos/db" VERSION="20100904" COMMENT="XMLDB file for Moodle OpenSim blocks/Modlos"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -315,7 +315,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="modlos_login_screen" COMMENT="Login Screen Information Content" PREVIOUS="modlos_mute_list" NEXT="modlos_search_allparcels">
+    <TABLE NAME="modlos_login_screen" COMMENT="Login Screen Alert Information Box" PREVIOUS="modlos_mute_list" NEXT="modlos_search_allparcels">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="title"/>
         <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="information"/>

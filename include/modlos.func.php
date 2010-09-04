@@ -542,52 +542,54 @@ function  modlos_delete_profiles($uuid)
 //
 //
 
-function  modlos_get_loginscreen_alert($uuid)
+function  modlos_get_loginscreen_alert()
 {
-	$alert = array();
+	$ret = array();
 
 	$alerts = get_records('modlos_login_screen');
 
-	return $alerts[0];
+	if ($alerts!=null) {
+		foreach($alerts as $alert) {
+			if ($alert->id!=null) break;
+		}
+		if ($alert->id!=null) {
+			$ret['id'] 			= $alert->id;
+			$ret['title'] 		= $alert->title;
+			$ret['information'] = $alert->information;
+			$ret['bordercolor'] = $alert->bordercolor;
+			$ret['timestamp'] 	= $alert->timestamp;
+		}
+	}
+
+	return $ret;
 }
 
 
 
 function  modlos_set_loginscreen_alert($alert)
 {
-	$getobj = get_records('modlos_login_screen');
+	$obj->title 	  = '';
+	$obj->information = '';
+	$obj->bordercolor = 'white';
+	$obj->timestamp   = time();
 
-	if (is_array($getobj) and $getobj['id']!=null) {
+	if ($alert['title']!=null) 		 $obj->title = $alert['title'];
+	if ($alert['information']!=null) $obj->information = $alert['information'];
+	if ($alert['bordercolor']!=null) $obj->bordercolor = $alert['bordercolor'];
+
+	$getobj = modlos_get_loginscreen_alert();
+	if ($getobj!=null and $getobj['id']!=null) {
 		// update
-
-
+		$obj->id = $getobj['id'];
+		$ret = update_record('modlos_login_screen', $obj);
 	}
 	else {
 		// insert;
-
-		$insobj->timestamp 	   = time();
-
-    	$insobj->title = '';
-    	$insobj->infomation = ;
-    	$insobj->bordercolor = ;
-    	$insobj->timestamp 	 = time();
-    $ret = insert_record('modlos_banned', $insobj);
-    if (!$ret) return false;
-
-
-
+		$ret = insert_record('modlos_login_screen', $obj);
 	}
 
-
+	return $ret;
 }
-
-
-
-
-
-
-
-
 
 
 
