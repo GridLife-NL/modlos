@@ -37,6 +37,9 @@
  * function  modlos_delete_profiles($uuid)
  * function  modlos_set_profiles_from_users($profs, $ovwrite=true)
  *
+ * function  modlos_get_loginscreen_alert()
+ * function  modlos_set_loginscreen_alert($alert)
+ *
  * function  modlos_activate_avatar($uuid)
  * function  modlos_inactivate_avatar($uuid)
  * function  modlos_delete_banneddb($uuid)
