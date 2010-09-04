@@ -1,75 +1,81 @@
-
 <h2><center><?php echo $grid_name.":&nbsp;".$lgnscrn_ttl?></center></h2>
 <br />
 
-<?php if (!$this->updated) {?>
-  <form action="<?php echo $this->action_url?>" method="POST">
-    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
-      <tr>
-        <td width="50" class="head"><h3><span style="color:#116644;"><?php echo $content?></span></h3></td>
-      </tr>
-    </table>
+<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+  <tr>
+    <td width="50" class="head"><center><h3><span style="color:#116644;"><?php echo $content?></span></h3></center></td>
+  </tr>
+</table>
+<br /><br />
 
-    <br /><br />
 
-    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
-    <input type="hidden" name="quest"   value="yes" />
-
-    <center>
-      <strong><div style="padding:4px;" ><?php echo $select_color?></div></strong>
-      <select wide="48" name="lgnscrn_color">
-        <?php foreach($colors as $ckey => $color) {?>
-          <?php if ($lgnscrn_ckey==$ckey) {?>
-            <option value="<?php echo $ckey?>" selected><?php echo $color?></option>
-          <?php } else {?>
-            <option value="<?php echo $ckey?>"><?php echo $color?></option>
-          <?php }?>
-          </option>
-        <?php }?>
-      </select>
-      <br /><br /><br />
-      <strong><div style="padding:4px;" ><?php echo $edit_altbox?></div></strong>
-<!--
-      <textarea name="lgnscrn_altbox" cols="40" rows="5" value="lgnscrn_altbox"><?php echo htmlspecialchars($lgnscrn_altbox)?></textarea><br />
--->
-      <textarea name="lgnscrn_altbox" cols="40" rows="5" value="lgnscrn_altbox"><?php echo $lgnscrn_altbox?></textarea><br />
-
-      <br /><br />
-      <input type="submit" value="<?php echo $lgnscrn_submit?>" /> 
-    </center>
-
-  </form>
-
-<?php } else {?>
-
-  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
-    <tr>
-      <td width="50" class="head"><center><h3><span style="color:#116644;"><?php echo $content?></span></h3></center></td>
-    </tr>
-  </table>
-  <br /><br /><br />
-
-  <div>
-  <style>
-    <?php include(CMS_MODULE_PATH.'/helper/loginscreen/info_alert_box.css');?>
-  </style>
-  <?php
-    $BOX_TITLE    = $lgnscrn_boxttl;
-    $BOX_COLOR    = $lgnscrn_color;
-    $BOX_INFOTEXT = $lgnscrn_altbox;
-  ?>
-  <div id=Infobox >
-    <?php include("../../helper/loginscreen/color_box.php"); ?>
-  </div>
-  </div>
-
-  <br />
-  <br />
+<?php if ($updated and !$preview) {?>
+  <!-- Update DB -->
+  <h3><font color=#2222FF><center><?php echo $lgnscrn_msg ?></center></font></h3>
   <h3><center><a href="<?php echo $lgnscrn_url?>" ><u><?php echo $return_ttl?></u></a></center></h3>
 
+<?} else {?>
+
+  <form action="<?php echo $action_url?>" method="POST">
+    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"  value="<?php echo $course_id ?>" />
+
+    <!-- PreView -->
+    <?php if ($preview) {?>
+      <input type="hidden" name="lgnscrn_color"  value="<?php echo $lgnscrn_color ?>" />
+      <input type="hidden" name="lgnscrn_altbox" value="<?php echo $lgnscrn_altbox?>" />
+
+      <style type="text/css">
+        <?php include(CMS_MODULE_PATH.'/helper/loginscreen/info_alert_box.css');?>
+      </style>
+      <?php
+        $BOX_TITLE    = $lgnscrn_boxttl;
+        $BOX_COLOR    = $lgnscrn_color;
+        $BOX_INFOTEXT = $lgnscrn_altbox;
+      ?>
+      <div id=Infobox >
+        <?php include("../../helper/loginscreen/color_box.php"); ?>
+      </div>
+      <br /><br />
+
+      <div align="center">
+        <input type="submit" name="update" id="update" value="<?php echo $lgnscrn_submit ?>" />&nbsp;&nbsp;
+        <input type="submit" name="cancel" id="cancel" value="<?php echo $lgnscrn_cancel ?>" />
+      </div>
+      <br /><br /><hr /><br />
+    <?php }?>
+
+    <!-- Input -->
+    <?php if (!$updated or $preview) {?>
+      <div align="center">
+        <strong><div style="padding:4px;" ><?php echo $select_color?></div></strong>
+        <select wide="48" name="lgnscrn_color">
+          <?php foreach($colors as $ckey => $color) {?>
+            <?php if ($lgnscrn_ckey==$ckey) {?>
+              <option value="<?php echo $ckey?>" selected><?php echo $color?></option>
+            <?php } else {?>
+              <option value="<?php echo $ckey?>"><?php echo $color?></option>
+            <?php }?>
+            </option>
+          <?php }?>
+        </select>
+        <br /><br />
+        <strong><div style="padding:4px;" ><?php echo $edit_altbox?></div></strong>
+        <textarea name="lgnscrn_altbox" cols="40" rows="5" value="lgnscrn_altbox"><?php echo $lgnscrn_altbox?></textarea><br />
+
+        <br /><br />
+        <input type="submit" name="preview" id="preview" value="<?php echo $lgnscrn_preview?>" />&nbsp;
+        <input type="reset"  value="<?php echo $lgnscrn_reset?>" />
+        <?php if ($preview) {?>
+            &nbsp;&nbsp;&nbsp;<input type="submit" name="cancel" id="cancel" value="<?php echo $lgnscrn_cancel ?>" />
+        <?php }?>
+      </div>
+    <?php }?>
+
+  </form>
 <?php }?>
-<br />
+
+
 
 <!-- Error Message -->
 <br />

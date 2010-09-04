@@ -321,8 +321,9 @@ $string['modlos_lgnscrn_tab']		= 'Login Screen';
 $string['modlos_lgnscrn_ttl']		= 'Login Screen Information Box';
 $string['modlos_lgnscrn_done']		= 'Login Screen Information Box is updated!';
 $string['modlos_lgnscrn_submit']	= 'Update';
+$string['modlos_lgnscrn_preview']	= 'PreView';
 $string['modlos_lgnscrn_contents']	= 'Edit Information Box at Login Screen';
-$string['modlos_lgnscrn_return']	= 'Return to Edit of Information Box';
+$string['modlos_lgnscrn_return']	= 'Return to Edit';
 $string['modlos_lgnscrn_color']		= 'Color of Information Box';
 $string['modlos_lgnscrn_altbox']	= 'Information Box';
 

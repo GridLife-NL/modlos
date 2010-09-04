@@ -319,11 +319,11 @@ $string['modlos_lgnscrn_tab']   	= 'ログイン スクリーン';
 $string['modlos_lgnscrn_ttl']   	= 'ログインスクリーン 情報ボックス';
 $string['modlos_lgnscrn_done']  	= '更新完了!';
 $string['modlos_lgnscrn_submit']	= '更新';
+$string['modlos_lgnscrn_preview']	= '確認';
 $string['modlos_lgnscrn_contents']	= 'ログインスクリーンの情報ボックスを更新';
 $string['modlos_lgnscrn_return']	= '情報ボックスの変更画面に戻る';
 $string['modlos_lgnscrn_color']		= '情報ボックスのカラー';
 $string['modlos_lgnscrn_altbox']	= '情報ボックス';
-
 
 $string['modlos_cltexture_ttl']     = 'テクスチャのキャッシュデータをクリア';
 $string['modlos_clpresence_ttl']    = 'ログイン情報テーブルをクリア';
