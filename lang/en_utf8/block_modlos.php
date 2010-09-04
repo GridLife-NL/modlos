@@ -195,7 +195,7 @@ $string['modlos_voice_inactive_chnl']='Inactive Voice';
 $string['modlos_voice_private_chnl']= 'Private Channel';
 $string['modlos_voice_percel_chnl'] = 'Percel Channel';
 
-$string['modlos_lgnscrn_box_ttl']	= 'Information';
+$string['modlos_lgnscrn_box_ttl']	= 'Alert Information';
 
 
 // Config
@@ -318,14 +318,14 @@ $string['modlos_manage_select']		= 'Select a Management Command';
 $string['modlos_manage_return']		= 'Return to Management';
 
 $string['modlos_lgnscrn_tab']		= 'Login Screen';
-$string['modlos_lgnscrn_ttl']		= 'Login Screen Information Box';
-$string['modlos_lgnscrn_done']		= 'Login Screen Information Box is updated!';
+$string['modlos_lgnscrn_ttl']		= 'Login Screen Alert Information Box';
+$string['modlos_lgnscrn_done']		= 'Login Screen Alert Information Box is updated!';
 $string['modlos_lgnscrn_submit']	= 'Update';
 $string['modlos_lgnscrn_preview']	= 'PreView';
-$string['modlos_lgnscrn_contents']	= 'Edit Information Box at Login Screen';
+$string['modlos_lgnscrn_contents']	= 'Edit Alert Information Box at Login Screen';
 $string['modlos_lgnscrn_return']	= 'Return to Edit';
-$string['modlos_lgnscrn_color']		= 'Color of Information Box';
-$string['modlos_lgnscrn_altbox']	= 'Information Box';
+$string['modlos_lgnscrn_color']		= 'Color of Alert Information Box';
+$string['modlos_lgnscrn_altbox']	= 'Alert Information Box';
 
 $string['modlos_cltexture_ttl']		= 'Clear Texture Cache Data';
 $string['modlos_clpresence_ttl']	= 'Clear Login Information Table';

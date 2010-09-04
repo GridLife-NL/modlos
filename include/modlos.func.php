@@ -538,6 +538,60 @@ function  modlos_delete_profiles($uuid)
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////
+//
+//
+
+function  modlos_get_loginscreen_alert($uuid)
+{
+	$alert = array();
+
+	$alerts = get_records('modlos_login_screen');
+
+	return $alerts[0];
+}
+
+
+
+function  modlos_set_loginscreen_alert($alert)
+{
+	$getobj = get_records('modlos_login_screen');
+
+	if (is_array($getobj) and $getobj['id']!=null) {
+		// update
+
+
+	}
+	else {
+		// insert;
+
+		$insobj->timestamp 	   = time();
+
+    	$insobj->title = '';
+    	$insobj->infomation = ;
+    	$insobj->bordercolor = ;
+    	$insobj->timestamp 	 = time();
+    $ret = insert_record('modlos_banned', $insobj);
+    if (!$ret) return false;
+
+
+
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 //
 // Bann List
 //

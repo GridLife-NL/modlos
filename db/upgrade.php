@@ -29,7 +29,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
 		$table->addFieldInfo('title', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->addFieldInfo('information', XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('bodercolor', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, null, null, 'white');
+		$table->addFieldInfo('bordercolor', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, null, null, 'white');
 		$table->addFieldInfo('timestamp', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
 
 		$table->addKeyInfo('id', XMLDB_KEY_PRIMARY, array('id'));
