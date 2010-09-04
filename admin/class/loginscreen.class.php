@@ -68,13 +68,15 @@ class  LoginScreen
             // Return to Edit
 			if ($cancel!='') redirect($this->action_url.'?course='.$this->course_id, 'Please wait....', 0);
 
-			$this->lgnscrn_ckey   = optional_param('lgnscrn_color',  '0', PARAM_INT);
-			$this->lgnscrn_color  = $this->colors[$this->lgnscrn_ckey];
-			$this->lgnscrn_altbox = optional_param('lgnscrn_altbox', '',  PARAM_RAW);
+			
+			$this->lgnscrn_ckey   = optional_param('lgnscrn_ckey',  '0', PARAM_INT);	// preview
+			$this->lgnscrn_color  = optional_param('lgnscrn_color', '',  PARAM_ALPHA);	// update
+			$this->lgnscrn_altbox = optional_param('lgnscrn_altbox', '', PARAM_RAW);
 
 			if ($preview!='') {
 				$this->preview = true;
 				$this->updated = true;
+				$this->lgnscrn_color = $this->colors[$this->lgnscrn_ckey];
 			}
 
 			else if ($update!='') {

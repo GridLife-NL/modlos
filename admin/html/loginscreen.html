@@ -49,7 +49,7 @@
     <?php if (!$updated or $preview) {?>
       <div align="center">
         <strong><div style="padding:4px;" ><?php echo $select_color?></div></strong>
-        <select wide="48" name="lgnscrn_color">
+        <select wide="48" name="lgnscrn_ckey">
           <?php foreach($colors as $ckey => $color) {?>
             <?php if ($lgnscrn_ckey==$ckey) {?>
               <option value="<?php echo $ckey?>" selected><?php echo $color?></option>
