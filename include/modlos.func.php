@@ -555,7 +555,7 @@ function  modlos_get_loginscreen_alert()
 		foreach($alerts as $alert) {
 			if ($alert->id!=null) break;
 		}
-		if ($alert->id!=null) {
+		if ($alert!=null and $alert->id!=null) {
 			$ret['id'] 			= $alert->id;
 			$ret['title'] 		= $alert->title;
 			$ret['information'] = $alert->information;
