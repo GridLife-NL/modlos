@@ -93,7 +93,6 @@ class  LoginScreen
 			
 				$ret = modlos_set_loginscreen_alert($alert);
 				if ($ret) {
-					$this->preview = false;
 					$this->updated = true;
 				}
 				else {
@@ -115,9 +114,8 @@ class  LoginScreen
 						break;
 					}
 				}
+				$this->preview = true;
 			}
-			$this->preview = true;
-			$this->updated = false;
 		}
 
 		return $this->updated;
