@@ -116,6 +116,8 @@ class  LoginScreen
 					}
 				}
 			}
+			$this->preview = true;
+			$this->updated = false;
 		}
 
 		return $this->updated;
