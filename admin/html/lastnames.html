@@ -66,16 +66,19 @@
 </div>
 <br />
 
+
 <!-- Error Message -->
 <br />
 <br />
 <hr />
 <?php if ($this->hasError) {?>
-  <ul>
-    <?php foreach($this->errorMsg as $mesg) {?>
-       <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
-    <?php }?>
-  </ul>
+  <div align=center>
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
+      <?php }?>
+    </ul>
+  </div>
 <?php }?>
 <br />
 

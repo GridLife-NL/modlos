@@ -15,26 +15,31 @@
     <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
     <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
     <input type="hidden" name="quest"   value="yes" />
-    <center>
+    <div align=center>
       <input type="submit" value="<?php echo $convertdb_submit?>" /> 
-    </center>
+    </div>
   </form>
 
 <?php } else {?>
-  <h3><font color=#2222FF><center><?php echo $convertdb_msg ?></center></font></h3>
+  <div align=center>
+    <h3><font color=#2222FF><?php echo $convertdb_msg ?></font></h3>
+  </div>
 <?php }?>
 <br />
+
 
 <!-- Error Message -->
 <br />
 <br />
 <hr />
 <?php if ($this->hasError) {?>
-  <ul>
-    <?php foreach($this->errorMsg as $mesg) {?>
-       <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
-    <?php }?>
-  </ul>
+  <div align=center>
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
+      <?php }?>
+    </ul>
+  </div>
 <?php }?>
 <br />
 

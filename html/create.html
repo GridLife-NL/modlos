@@ -116,14 +116,16 @@
   <div align="center">
     <ul>
       <?php foreach($this->errorMsg as $mesg) {?>
-         <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
+        <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
       <?php }?>
     </ul>
   </div>
 
 <?php } else {?>
   <?php if ($this->created_avatar) {?>
-    <h3><font color=#1010e0><center><?php echo $avatar_created?></center></font></h3>
+    <div align="center">
+      <h3><font color=#1010e0><?php echo $avatar_created?></font></h3>
+    </div>
     <table width="520" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 	  <?php if ($this->hasPermit) {?>
         <tr>

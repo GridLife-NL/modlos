@@ -92,11 +92,13 @@
 
 <?php } else {?>
 
-  <?php if ($this->deleted_avatar) {?>
-    <h3><font color=#2020e0><center><?php echo $avatar_deleted?></center></font></h3>
-  <?php } else {?>
-    <h3><font color=#e01080><center><?php echo $avatar_dlt_confrm?></center></font></b></h3>
-  <?php }?>
+  <div align="center">
+    <?php if ($this->deleted_avatar) {?>
+      <h3><font color=#2020e0><?php echo $avatar_deleted?></font></h3>
+    <?php } else {?>
+      <h3><font color=#e01080><?php echo $avatar_dlt_confrm?></font></b></h3>
+    <?php }?>
+  </div>
 
 <?php }?>
 <br />

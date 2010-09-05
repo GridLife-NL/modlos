@@ -16,7 +16,7 @@
     <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
     <input type="hidden" name="quest"   value="yes" />
 
-    <center>
+    <div align=center>
       <strong><div style="padding:4px;" ><?php echo $select_cmd?></div></strong>
       <select wide="48" name="manage_command">
         <?php foreach($commands as $com) {?>
@@ -27,7 +27,7 @@
       <br />
 
       <input type="submit" value="<?php echo $manage_submit?>" /> 
-    </center>
+    </div>
 
   </form>
 
@@ -44,21 +44,26 @@
      <?php }?>
   <?php }?>
 
-  <h3><font color=#2222FF><center><?php echo $manage_msg ?></center></font></h3>
-  <h3><center><a href="<?php echo $manage_url?>" ><u><?php echo $return_ttl?></u></a></center></h3>
+  <div align=center>
+    <h3><font color=#2222FF><?php echo $manage_msg ?></font></h3>
+    <h3><a href="<?php echo $manage_url?>" ><u><?php echo $return_ttl?></u></a></h3>
+  </div>
 <?php }?>
 <br />
+
 
 <!-- Error Message -->
 <br />
 <br />
 <hr />
 <?php if ($this->hasError) {?>
-  <ul>
-    <?php foreach($this->errorMsg as $mesg) {?>
-       <li><font color="#F02022"><b><?php echo $mesg?></b></font></li>
-    <?php }?>
-  </ul>
+  <div align=center>
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+         <li><font color="#F02022"><b><?php echo $mesg?></b></font></li>
+      <?php }?>
+    </ul>
+  </div>
 <?php }?>
 <br />
 

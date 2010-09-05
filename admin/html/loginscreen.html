@@ -82,11 +82,13 @@
 <br />
 <hr />
 <?php if ($this->hasError) {?>
-  <ul>
-    <?php foreach($this->errorMsg as $mesg) {?>
-       <li><font color="#F02022"><b><?php echo $mesg?></b></font></li>
-    <?php }?>
-  </ul>
+  <div align=center>
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><font color="#F02022"><b><?php echo $mesg?></b></font></li>
+      <?php }?>
+    </ul>
+  </div>
 <?php }?>
 <br />
 
