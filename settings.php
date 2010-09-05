@@ -130,26 +130,51 @@ $settings->add(new admin_setting_configtext('modlos_banker_avatar',
 */
 
 // Context
-$settings->add(new admin_setting_configtextarea('modlos_home_content',
+if (function_exists("admin_setting_confightmltextarea")) {
+	$settings->add(new admin_setting_confightmltextarea('modlos_home_content',
 					get_string('modlos_home_cntnt', 'block_modlos'),
 				   	get_string('modlos_home_cntnt_desc', 'block_modlos'), 
 						"<h2><center>Welcome to Moodle OpenSim Interface</center></h2>", PARAM_RAW));
 
-$settings->add(new admin_setting_configtextarea('modlos_regions_content', 
+	$settings->add(new admin_setting_confightmltextarea('modlos_regions_content', 
 					get_string('modlos_rg_cntnt', 'block_modlos'),
 				   	get_string('modlos_rg_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
 
-$settings->add(new admin_setting_configtextarea('modlos_avatars_content', 
+	$settings->add(new admin_setting_confightmltextarea('modlos_avatars_content', 
 					get_string('modlos_avt_cntnt', 'block_modlos'),
 				   	get_string('modlos_avt_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
 
-$settings->add(new admin_setting_configtextarea('modlos_editable_content', 
+	$settings->add(new admin_setting_confightmltextarea('modlos_editable_content', 
 					get_string('modlos_edtbl_cntnt', 'block_modlos'),
 				   	get_string('modlos_edtbl_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
 
-$settings->add(new admin_setting_configtextarea('modlos_loginscreen_content', 
+	$settings->add(new admin_setting_confightmltextarea('modlos_loginscreen_content', 
 					get_string('modlos_lgnscrn_cntnt', 'block_modlos'),
 				   	get_string('modlos_lgnscrn_cntnt_desc', 'block_modlos'), "Welcome to OpenSim", PARAM_RAW));
+}
+else {
+	$settings->add(new admin_setting_configtextarea('modlos_home_content',
+					get_string('modlos_home_cntnt', 'block_modlos'),
+				   	get_string('modlos_home_cntnt_desc', 'block_modlos'), 
+						"<h2><center>Welcome to Moodle OpenSim Interface</center></h2>", PARAM_RAW));
+
+	$settings->add(new admin_setting_configtextarea('modlos_regions_content', 
+					get_string('modlos_rg_cntnt', 'block_modlos'),
+				   	get_string('modlos_rg_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
+
+	$settings->add(new admin_setting_configtextarea('modlos_avatars_content', 
+					get_string('modlos_avt_cntnt', 'block_modlos'),
+				   	get_string('modlos_avt_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
+
+	$settings->add(new admin_setting_configtextarea('modlos_editable_content', 
+					get_string('modlos_edtbl_cntnt', 'block_modlos'),
+				   	get_string('modlos_edtbl_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
+
+	$settings->add(new admin_setting_configtextarea('modlos_loginscreen_content', 
+					get_string('modlos_lgnscrn_cntnt', 'block_modlos'),
+				   	get_string('modlos_lgnscrn_cntnt_desc', 'block_modlos'), "Welcome to OpenSim", PARAM_RAW));
+}
+
 
 $settings->add(new admin_setting_configcheckbox('modlos_activate_disclaimer', 
 					get_string('modlos_dsclmr', 'block_modlos'),
