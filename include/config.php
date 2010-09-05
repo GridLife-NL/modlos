@@ -1,14 +1,14 @@
 <?php
 //
 // Configuration file for Moodle
-//										by Fumi.Iseki
+//											by Fumi.Iseki
 //
 //
 
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
 
 global $CFG;
-if (!defined('CMS_DIR_NAME')) 	 define('CMS_DIR_NAME',    basename(dirname(dirname(__FILE__))));
+if (!defined('CMS_DIR_NAME')) 	 define('CMS_DIR_NAME',	basename(dirname(dirname(__FILE__))));
 if (!defined('CMS_MODULE_URL'))  define('CMS_MODULE_URL',  $CFG->wwwroot.'/blocks/'.CMS_DIR_NAME);
 if (!defined('CMS_MODULE_PATH')) define('CMS_MODULE_PATH', $CFG->dirroot.'/blocks/'.CMS_DIR_NAME);
 
@@ -31,18 +31,20 @@ define('CMS_DB_NAME', 		$CFG->dbname);
 define('CMS_DB_USER',		$CFG->dbuser);
 define('CMS_DB_PASS',		$CFG->dbpass);
 
-define('MDL_DB_PREFIX',    	$CFG->prefix);
+define('MDL_DB_PREFIX',		$CFG->prefix);
 define('MDL_MODLOS_PREFIX',	'modlos_');
 
 
-// SQL DB Table definition
-define('MDL_XMLGROUP_ACTIVE_TBL',       MDL_MODLOS_PREFIX.'group_active');
-define('MDL_XMLGROUP_LIST_TBL',         MDL_MODLOS_PREFIX.'group_list');
-define('MDL_XMLGROUP_INVITE_TBL',       MDL_MODLOS_PREFIX.'group_invite');
+//
+// SQL DB Table definition for Moodle
+//
+define('MDL_XMLGROUP_ACTIVE_TBL',		MDL_MODLOS_PREFIX.'group_active');
+define('MDL_XMLGROUP_LIST_TBL',		 	MDL_MODLOS_PREFIX.'group_list');
+define('MDL_XMLGROUP_INVITE_TBL',		MDL_MODLOS_PREFIX.'group_invite');
 define('MDL_XMLGROUP_MEMBERSHIP_TBL',   MDL_MODLOS_PREFIX.'group_membership');
-define('MDL_XMLGROUP_NOTICE_TBL',       MDL_MODLOS_PREFIX.'group_notice');
+define('MDL_XMLGROUP_NOTICE_TBL',		MDL_MODLOS_PREFIX.'group_notice');
 define('MDL_XMLGROUP_ROLE_MEMBER_TBL',  MDL_MODLOS_PREFIX.'group_rolemembership');
-define('MDL_XMLGROUP_ROLE_TBL',         MDL_MODLOS_PREFIX.'group_role');
+define('MDL_XMLGROUP_ROLE_TBL',			MDL_MODLOS_PREFIX.'group_role');
 
 define('MDL_CURRENCY_MONEY_TBL',		MDL_MODLOS_PREFIX.'economy_money');
 define('MDL_CURRENCY_TRANSACTION_TBL',	MDL_MODLOS_PREFIX.'economy_transactions');
@@ -56,21 +58,30 @@ define('MDL_PROFILE_USERPICKS_TBL',  	MDL_MODLOS_PREFIX.'profile_userpicks');
 define('MDL_PROFILE_USERPROFILE_TBL',  	MDL_MODLOS_PREFIX.'profile_userprofile');
 define('MDL_PROFILE_USERSETTINGS_TBL',	MDL_MODLOS_PREFIX.'profile_usersettings');
 
+define('MDL_SEARCH_ALLPERCELS_TBL',		MDL_MODLOS_PREFIX.'search_allparcels');
+define('MDL_SEARCH_CLASSIFIEDS_TBL',	MDL_MODLOS_PREFIX.'search_classifieds');
+define('MDL_SEARCH_EVENTS_TBL',			MDL_MODLOS_PREFIX.'search_events');
+define('MDL_SEARCH_HOSTSREGISTER_TBL', 	MDL_MODLOS_PREFIX.'search_hostsregister');
+define('MDL_SEARCH_OBJECTS_TBL',		MDL_MODLOS_PREFIX.'search_objects');
+define('MDL_SEARCH_PARCELS_TBL',		MDL_MODLOS_PREFIX.'search_parcels');
+define('MDL_SEARCH_PARCELSALES_TBL',	MDL_MODLOS_PREFIX.'search_parcelsales');
+define('MDL_SEARCH_POPULARPLACES_TBL', 	MDL_MODLOS_PREFIX.'search_popularplaces');
+define('MDL_SEARCH_REGIONS_TBL',		MDL_MODLOS_PREFIX.'search_regions');
+
 define('MDL_SLOODLE_USERS_TBL',			'sloodle_users');
 
 
 
-
 // XML Group.  see also xmlgroups_config.php 
-define('XMLGROUP_ACTIVE_TBL',       $CFG->prefix.MDL_XMLGROUP_ACTIVE_TBL);
-define('XMLGROUP_LIST_TBL',         $CFG->prefix.MDL_XMLGROUP_LIST_TBL);
-define('XMLGROUP_INVITE_TBL',       $CFG->prefix.MDL_XMLGROUP_INVITE_TBL);
+define('XMLGROUP_ACTIVE_TBL',		$CFG->prefix.MDL_XMLGROUP_ACTIVE_TBL);
+define('XMLGROUP_LIST_TBL',	 		$CFG->prefix.MDL_XMLGROUP_LIST_TBL);
+define('XMLGROUP_INVITE_TBL',		$CFG->prefix.MDL_XMLGROUP_INVITE_TBL);
 define('XMLGROUP_MEMBERSHIP_TBL',   $CFG->prefix.MDL_XMLGROUP_MEMBERSHIP_TBL);
-define('XMLGROUP_NOTICE_TBL',       $CFG->prefix.MDL_XMLGROUP_NOTICE_TBL);
-define('XMLGROUP_ROLE_MEMBER_TBL',  $CFG->prefix.MDL_XMLGROUP_ROLE_MEMBER_TBL);
-define('XMLGROUP_ROLE_TBL',         $CFG->prefix.MDL_XMLGROUP_ROLE_TBL);
+define('XMLGROUP_NOTICE_TBL',		$CFG->prefix.MDL_XMLGROUP_NOTICE_TBL);
+define('XMLGROUP_ROLE_MEMBER_TBL',	$CFG->prefix.MDL_XMLGROUP_ROLE_MEMBER_TBL);
+define('XMLGROUP_ROLE_TBL',			$CFG->prefix.MDL_XMLGROUP_ROLE_TBL);
 
-define('XMLGROUP_RKEY',    			$CFG->modlos_groupdb_read_key);
+define('XMLGROUP_RKEY',				$CFG->modlos_groupdb_read_key);
 define('XMLGROUP_WKEY',	   			$CFG->modlos_groupdb_write_key);
 
 
@@ -79,7 +90,7 @@ define('CURRENCY_DB_HOST', 			CMS_DB_HOST);
 define('CURRENCY_DB_NAME', 			CMS_DB_NAME);
 define('CURRENCY_DB_USER', 			CMS_DB_USER);
 define('CURRENCY_DB_PASS', 			CMS_DB_PASS);
-define('CURRENCY_BANKER',  			$CFG->modlos_banker_avatar);
+define('CURRENCY_BANKER',  			'');
 
 define('CURRENCY_MONEY_TBL',		$CFG->prefix.MDL_CURRENCY_MONEY_TBL);
 define('CURRENCY_TRANSACTION_TBL',	$CFG->prefix.MDL_CURRENCY_TRANSACTION_TBL);
@@ -93,7 +104,7 @@ define('OFFLINE_DB_PASS',  			CMS_DB_PASS);
 define('OFFLINE_MESSAGE_TBL', 		$CFG->prefix.MDL_OFFLINE_MESSAGE_TBL);
 
 
-// Offline Message
+// MuteList
 define('MUTE_DB_HOST',  			CMS_DB_HOST);
 define('MUTE_DB_NAME',  			CMS_DB_NAME);
 define('MUTE_DB_USER',  			CMS_DB_USER);
@@ -109,27 +120,40 @@ define('PROFILE_USERPROFILE_TBL',  	$CFG->prefix.MDL_PROFILE_USERPROFILE_TBL);
 define('PROFILE_USERSETTINGS_TBL',	$CFG->prefix.MDL_PROFILE_USERSETTINGS_TBL);
 
 
-// for Avatar State
-define('AVATAR_STATE_NOSTATE', 	'0');		// 0x00
-define('AVATAR_STATE_SYNCDB',  	'1');		// 0x01
-define('AVATAR_STATE_SLOODLE', 	'2');		// 0x02
-define('AVATAR_STATE_INACTIVE',	'4');		// 0x04
+// Search the In World. see also search_config.php 
+define('SEARCH_ALLPERCELS_TBL',		$CFG->prefix.MDL_SEARCH_ALLPERCELS_TBL);
+define('SEARCH_CLASSIFIEDS_TBL',	$CFG->prefix.MDL_SEARCH_CLASSIFIEDS_TBL);
+define('SEARCH_EVENTS_TBL',			$CFG->prefix.MDL_SEARCH_EVENTS_TBL);
+define('SEARCH_HOSTSREGISTER_TBL', 	$CFG->prefix.MDL_SEARCH_HOSTSREGISTER_TBL);
+define('SEARCH_OBJECTS_TBL',		$CFG->prefix.MDL_SEARCH_OBJECTS_TBL);
+define('SEARCH_PARCELS_TBL',		$CFG->prefix.MDL_SEARCH_PARCELS_TBL);
+define('SEARCH_PARCELSALES_TBL',	$CFG->prefix.MDL_SEARCH_PARCELSALES_TBL);
+define('SEARCH_POPULARPLACES_TBL', 	$CFG->prefix.MDL_SEARCH_POPULARPLACES_TBL);
+define('SEARCH_REGIONS_TBL',		$CFG->prefix.MDL_SEARCH_REGIONS_TBL);
 
-define('AVATAR_STATE_NOSYNCDB',	'254');		// 0xfe
-define('AVATAR_STATE_NOSLOODLE','253');		// 0xfd
-define('AVATAR_STATE_ACTIVE',	'251');		// 0xfb
+
+// for Avatar State
+define('AVATAR_STATE_NOSTATE', 		'0');		// 0x00
+define('AVATAR_STATE_SYNCDB',  		'1');		// 0x01
+define('AVATAR_STATE_SLOODLE', 		'2');		// 0x02
+define('AVATAR_STATE_INACTIVE',		'4');		// 0x04
+
+define('AVATAR_STATE_NOSYNCDB',		'254');		// 0xfe
+define('AVATAR_STATE_NOSLOODLE',	'253');		// 0xfd
+define('AVATAR_STATE_ACTIVE',		'251');		// 0xfb
 
 // Editable
-define('AVATAR_NOT_EDITABLE',	'0');
-define('AVATAR_EDITABLE',	 	'1');
-define('AVATAR_OWNER_EDITABLE',	'2');
+define('AVATAR_NOT_EDITABLE',		'0');
+define('AVATAR_EDITABLE',	 		'1');
+define('AVATAR_OWNER_EDITABLE',		'2');
 
 // Lastname
-define('AVATAR_LASTN_INACTIVE',	'0');
-define('AVATAR_LASTN_ACTIVE',  	'1');
+define('AVATAR_LASTN_INACTIVE',		'0');
+define('AVATAR_LASTN_ACTIVE',  		'1');
 
 // Password
-define('AVATAR_PASSWD_MINLEN',	'8');
+define('AVATAR_PASSWD_MINLEN',		'8');
+
 
 
 // for Currency
