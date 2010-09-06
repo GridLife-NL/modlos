@@ -18,21 +18,21 @@ $GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
 
 
 // for OpenSim DB
-define('OPENSIM_DB_HOST',	$CFG->modlos_sql_server_name);
-define('OPENSIM_DB_NAME',	$CFG->modlos_sql_db_name);
-define('OPENSIM_DB_USER',	$CFG->modlos_sql_db_user);
-define('OPENSIM_DB_PASS',	$CFG->modlos_sql_db_pass);
-define('OPENSIM_HMREGION',	$CFG->modlos_home_region);
+define('OPENSIM_DB_HOST',			$CFG->modlos_sql_server_name);
+define('OPENSIM_DB_NAME',			$CFG->modlos_sql_db_name);
+define('OPENSIM_DB_USER',			$CFG->modlos_sql_db_user);
+define('OPENSIM_DB_PASS',			$CFG->modlos_sql_db_pass);
+define('OPENSIM_HMREGION',			$CFG->modlos_home_region);
 
 
 // for CMS/LMS DB
-define('CMS_DB_HOST',		$CFG->dbhost);
-define('CMS_DB_NAME', 		$CFG->dbname);
-define('CMS_DB_USER',		$CFG->dbuser);
-define('CMS_DB_PASS',		$CFG->dbpass);
+define('CMS_DB_HOST',				$CFG->dbhost);
+define('CMS_DB_NAME', 				$CFG->dbname);
+define('CMS_DB_USER',				$CFG->dbuser);
+define('CMS_DB_PASS',				$CFG->dbpass);
 
-define('MDL_DB_PREFIX',		$CFG->prefix);
-define('MDL_MODLOS_PREFIX',	'modlos_');
+define('MDL_DB_PREFIX',				$CFG->prefix);
+define('MDL_MODLOS_PREFIX',			'modlos_');
 
 
 //
