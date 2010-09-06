@@ -1,9 +1,22 @@
+<style type="text/css">
+.head {
+    background-color: #ddd;
+}
+.odd {
+    background-color: #eee;
+}
+      
+.even {
+    background-color: #fff;
+}
+
+</style>
 <h2><center><?php echo $grid_name.":&nbsp;".$lgnscrn_ttl?></center></h2>
 <br />
 
 <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
   <tr>
-    <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $contents?></span></strong></td>
+    <td width=80%  align="center"><strong><span style="color:#116644;"><?php echo $contents?></span></strong></td>
   </tr>
 </table>
 <br /><br />
@@ -29,15 +42,15 @@
         <?php include(CMS_MODULE_PATH.'/helper/loginscreen/alert_box.css');?>
       </style>
       <?php
-        $BOX_TITLE    = $lgnscrn_boxttl;
+        $BOX_TITLE    = $lgnscrn_title;
         $BOX_COLOR    = $lgnscrn_color;
         $BOX_INFOTEXT = $lgnscrn_altbox;
       ?>
       <div id=Infobox >
         <?php include("../../helper/loginscreen/alert_box.php"); ?>
       </div>
-      <br /><br />
 
+      <br />
       <div align="center">
         <input type="submit" name="submit_update" id="submit_update" value="<?php echo $lgnscrn_submit ?>" />&nbsp;&nbsp;
         <input type="submit" name="submit_cancel" id="submit_cancel" value="<?php echo $lgnscrn_cancel ?>" />
@@ -45,25 +58,58 @@
       <br /><br /><hr /><br />
     <?php }?>
 
+
     <!-- Input -->
     <?php if (!$updated or $preview) {?>
-      <div align="center">
-        <strong><div style="padding:4px;" ><?php echo $select_color?></div></strong>
-        <select wide="48" name="lgnscrn_ckey">
-          <?php foreach($colors as $ckey => $color) {?>
-            <?php if ($lgnscrn_ckey==$ckey) {?>
-              <option value="<?php echo $ckey?>" selected><?php echo $color?></option>
-            <?php } else {?>
-              <option value="<?php echo $ckey?>"><?php echo $color?></option>
-            <?php }?>
-            </option>
-          <?php }?>
-        </select>
-        <br /><br />
-        <strong><div style="padding:4px;" ><?php echo $edit_altbox?></div></strong>
-        <textarea name="lgnscrn_altbox" cols="40" rows="5" value="lgnscrn_altbox"><?php echo $lgnscrn_altbox?></textarea><br />
 
-        <br /><br />
+
+      <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
+        <tbody>
+
+          <tr>
+            <td vAlign=top align=center>&nbsp;</td>
+            <td vAlign=top align=center width=550>
+
+              <table cellSpacing=2 cellPadding=2 width=550 border=1 align=center>
+                <tbody>
+                                                                 
+                  <tr align=left>
+                    <td class=head size=200 vAlign=top><strong><?php echo $select_color?></strong></td>
+                    <td class=odd  size=300>
+                      <select wide="48" name="lgnscrn_ckey">
+                        <?php foreach($colors as $ckey => $color) {?>
+                          <?php if ($lgnscrn_ckey==$ckey) {?>
+                            <option value="<?php echo $ckey?>" selected><?php echo $color?></option>
+                          <?php } else {?>
+                            <option value="<?php echo $ckey?>"><?php echo $color?></option>
+                          <?php }?>
+                        <?php }?>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr align=left>
+                    <td class=head size=200 vAlign=top><strong><?php echo $edit_boxttl?></strong></td>
+                    <td class=even size=300>
+                      <input type="text" name="lgnscrn_title" size=50 value="<?php echo $lgnscrn_title?>" /><br />
+                    </td>
+                  </tr>
+                  <tr align=left>
+                    <td class=head size=200 vAlign=top><strong><?php echo $edit_altbox?></strong></td>
+                    <td class=odd  size=300>
+                      <textarea name="lgnscrn_altbox" cols="50" rows="5" value="lgnscrn_altbox"><?php echo $lgnscrn_altbox?></textarea><br />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </td>
+            <td vAlign=top align=center>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br />
+      <div align="center">
         <input type="submit" name="submit_preview" id="submit_preview" value="<?php echo $lgnscrn_preview?>" />&nbsp;
         <input type="reset"  value="<?php echo $lgnscrn_reset?>" />
         <?php if ($preview) {?>

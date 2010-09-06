@@ -13,9 +13,9 @@ global $CFG;
 $LOGIN_SCREEN_CONTENT = $CFG->modlos_loginscreen_content;
 
 $alert = modlos_get_loginscreen_alert();
+$BOX_TITLE		  = $alert['title'];
 $BOX_COLOR		  = $alert['bordercolor'];
 $BOX_INFOTEXT     = $alert['information'];
-$BOX_TITLE		  = get_string('modlos_lgnscrn_box_ttl', 'block_modlos');
 
 $GRID_NAME		  = $CFG->modlos_grid_name;
 $REGION_TTL		  = get_string('modlos_region','block_modlos');

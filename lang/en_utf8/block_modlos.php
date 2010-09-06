@@ -195,8 +195,6 @@ $string['modlos_voice_inactive_chnl']='Inactive Voice';
 $string['modlos_voice_private_chnl']= 'Private Channel';
 $string['modlos_voice_percel_chnl'] = 'Percel Channel';
 
-$string['modlos_lgnscrn_box_ttl']	= 'Alert Information';
-
 
 // Config
 $string['modlos_mdl_name'] 			= 'Moodle OpenSim';
@@ -324,8 +322,9 @@ $string['modlos_lgnscrn_submit']	= 'Update';
 $string['modlos_lgnscrn_preview']	= 'PreView';
 $string['modlos_lgnscrn_contents']	= 'Edit Alert Information Box at Login Screen';
 $string['modlos_lgnscrn_return']	= 'Return to Edit';
-$string['modlos_lgnscrn_color']		= 'Color of Alert Information Box';
-$string['modlos_lgnscrn_altbox']	= 'Alert Information Box';
+$string['modlos_lgnscrn_color']		= 'Color';
+$string['modlos_lgnscrn_altbox']	= 'Information';
+$string['modlos_lgnscrn_boxttl']	= 'Title';
 
 $string['modlos_cltexture_ttl']		= 'Clear Texture Cache Data';
 $string['modlos_clpresence_ttl']	= 'Clear Login Information Table';

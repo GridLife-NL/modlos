@@ -193,7 +193,6 @@ $string['modlos_voice_inactive_chnl']= 'ボイス無効';
 $string['modlos_voice_private_chnl']= 'プライベートチャネル';
 $string['modlos_voice_percel_chnl']	= '不動産チャネル';
 
-$string['modlos_lgnscrn_box_ttl']   = 'お知らせ';
 
 // Config
 $string['modlos_mdl_name'] 			= 'Moodle OpenSim';
@@ -322,8 +321,9 @@ $string['modlos_lgnscrn_submit']	= '更新';
 $string['modlos_lgnscrn_preview']	= '確認';
 $string['modlos_lgnscrn_contents']	= 'ログインスクリーンの情報ボックスを更新';
 $string['modlos_lgnscrn_return']	= '情報ボックスの変更画面に戻る';
-$string['modlos_lgnscrn_color']		= '情報ボックスのカラー';
+$string['modlos_lgnscrn_color']		= 'カラー';
 $string['modlos_lgnscrn_altbox']	= '情報ボックス';
+$string['modlos_lgnscrn_boxttl']	= 'タイトル';
 
 $string['modlos_cltexture_ttl']     = 'テクスチャのキャッシュデータをクリア';
 $string['modlos_clpresence_ttl']    = 'ログイン情報テーブルをクリア';

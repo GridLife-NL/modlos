@@ -26,6 +26,7 @@ class  LoginScreen
 	var	$colors	   = array(0=>'white', 1=>'green', 2=>'yellow', 3=>'red');
 
 	var	$lgnscrn_ckey   = 0;
+	var	$lgnscrn_title  = '';
 	var	$lgnscrn_color  = '';
 	var	$lgnscrn_altbox = '';
 
@@ -68,7 +69,7 @@ class  LoginScreen
             // Return to Edit
 			if ($cancel!='') redirect($this->action_url.'?course='.$this->course_id, 'Please wait....', 0);
 
-			
+			$this->lgnscrn_title  = optional_param('lgnscrn_title', '',  PARAM_TEXT);	// title
 			$this->lgnscrn_ckey   = optional_param('lgnscrn_ckey',  '0', PARAM_INT);	// preview
 			$this->lgnscrn_color  = optional_param('lgnscrn_color', '',  PARAM_ALPHA);	// update
 			$this->lgnscrn_altbox = optional_param('lgnscrn_altbox', '', PARAM_RAW);
@@ -87,7 +88,7 @@ class  LoginScreen
 					return false;
 				}
 				
-				$alert['title'] 	  = '';
+				$alert['title'] 	  = $this->lgnscrn_title;
 				$alert['bordercolor'] = $this->lgnscrn_color;
 				$alert['information'] = $this->lgnscrn_altbox;
 			
@@ -106,8 +107,10 @@ class  LoginScreen
 		else {
 			$alert = modlos_get_loginscreen_alert();
 			if ($alert!=null and is_array($alert)) {
+				$this->lgnscrn_title  = $alert['title'];
 				$this->lgnscrn_color  = $alert['bordercolor'];
 				$this->lgnscrn_altbox = $alert['information'];
+
 				foreach($this->colors as $ckey => $color) {
 					if ($this->lgnscrn_color==$color) {
 						$this->lgnscrn_ckey = $ckey;
@@ -137,6 +140,7 @@ class  LoginScreen
 		$lgnscrn_reset  = get_string('modlos_reset_ttl', 	   'block_modlos');
 		$select_color	= get_string('modlos_lgnscrn_color',   'block_modlos');
 		$edit_altbox	= get_string('modlos_lgnscrn_altbox',  'block_modlos');
+		$edit_boxttl	= get_string('modlos_lgnscrn_boxttl',  'block_modlos');
 		$contents		= get_string('modlos_lgnscrn_contents','block_modlos');
 
 		$course_id		= $this->course_id;
@@ -148,7 +152,7 @@ class  LoginScreen
 		$lgnscrn_ckey 	= $this->lgnscrn_ckey;
 		$lgnscrn_color 	= $this->lgnscrn_color;
 		$lgnscrn_altbox = $this->lgnscrn_altbox;
-		$lgnscrn_boxttl = get_string('modlos_lgnscrn_box_ttl', 'block_modlos');
+		$lgnscrn_title  = $this->lgnscrn_title;
 
 		$course_amp    	= '';
 		if ($course_id>0) $course_param = '?course='.$course_id;
