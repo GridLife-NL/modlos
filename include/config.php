@@ -59,7 +59,7 @@ define('MDL_PROFILE_USERPROFILE_TBL',  	MDL_MODLOS_PREFIX.'profile_userprofile')
 define('MDL_PROFILE_USERSETTINGS_TBL',	MDL_MODLOS_PREFIX.'profile_usersettings');
 
 define('MDL_SEARCH_ALLPERCELS_TBL',		MDL_MODLOS_PREFIX.'search_allparcels');
-define('MDL_SEARCH_CLASSIFIEDS_TBL',	MDL_MODLOS_PREFIX.'search_classifieds');
+define('MDL_SEARCH_CLASSIFIEDS_TBL',	MDL_MODLOS_PREFIX.'profile_classifieds');
 define('MDL_SEARCH_EVENTS_TBL',			MDL_MODLOS_PREFIX.'search_events');
 define('MDL_SEARCH_HOSTSREGISTER_TBL', 	MDL_MODLOS_PREFIX.'search_hostsregister');
 define('MDL_SEARCH_OBJECTS_TBL',		MDL_MODLOS_PREFIX.'search_objects');

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="blocks/modlos/db" VERSION="20100904" COMMENT="XMLDB file for Moodle OpenSim blocks/Modlos"
+<XMLDB PATH="blocks/modlos/db" VERSION="20100912" COMMENT="XMLDB file for Moodle OpenSim blocks/Modlos"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -327,7 +327,7 @@
         <KEY NAME="id" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="modlos_search_allparcels" COMMENT="All Parcels" PREVIOUS="modlos_login_screen" NEXT="modlos_search_classifieds">
+    <TABLE NAME="modlos_search_allparcels" COMMENT="All Parcels" PREVIOUS="modlos_login_screen" NEXT="modlos_search_events">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="regionuuid"/>
         <FIELD NAME="regionuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="parcelname"/>
@@ -340,40 +340,16 @@
         <FIELD NAME="parcelarea" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="infouuid"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="regionuuid"/>
-        <KEY NAME="regionuuid" TYPE="unique" FIELDS="regionuuid" PREVIOUS="primary"/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="parceluuid"/>
+        <KEY NAME="parceluuid" TYPE="unique" FIELDS="parceluuid" PREVIOUS="primary"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="modlos_search_classifieds" COMMENT="Default comment for the table, please edit me" PREVIOUS="modlos_search_allparcels" NEXT="modlos_search_events">
+    <TABLE NAME="modlos_search_events" COMMENT="Events Table for Search" PREVIOUS="modlos_search_allparcels" NEXT="modlos_search_hostsregister">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="classifieduuid"/>
-        <FIELD NAME="classifieduuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="creatoruuid"/>
-        <FIELD NAME="creatoruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="classifieduuid" NEXT="creationdate"/>
-        <FIELD NAME="creationdate" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="creatoruuid" NEXT="expirationdate"/>
-        <FIELD NAME="expirationdate" TYPE="int" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="creationdate" NEXT="category"/>
-        <FIELD NAME="category" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="expirationdate" NEXT="name"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="category" NEXT="description"/>
-        <FIELD NAME="description" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="name" NEXT="parceluuid"/>
-        <FIELD NAME="parceluuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="description" NEXT="parentestate"/>
-        <FIELD NAME="parentestate" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="parceluuid" NEXT="snapshotuuid"/>
-        <FIELD NAME="snapshotuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="parentestate" NEXT="simname"/>
-        <FIELD NAME="simname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="snapshotuuid" NEXT="posglobal"/>
-        <FIELD NAME="posglobal" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="simname" NEXT="parcelname"/>
-        <FIELD NAME="parcelname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="posglobal" NEXT="classifiedflags"/>
-        <FIELD NAME="classifiedflags" TYPE="int" LENGTH="8" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="parcelname" NEXT="priceforlisting"/>
-        <FIELD NAME="priceforlisting" TYPE="int" LENGTH="5" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="classifiedflags"/>
-      </FIELDS>
-      <KEYS>
-        <KEY NAME="id" TYPE="primary" FIELDS="id" NEXT="classifieduuid"/>
-        <KEY NAME="classifieduuid" TYPE="unique" FIELDS="classifieduuid" PREVIOUS="id"/>
-      </KEYS>
-    </TABLE>
-    <TABLE NAME="modlos_search_events" COMMENT="Default comment for the table, please edit me" PREVIOUS="modlos_search_classifieds" NEXT="modlos_search_hostsregister">
-      <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="owneruuid"/>
-        <FIELD NAME="owneruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="uid" TYPE="int" LENGTH="8" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" NEXT="owneruuid"/>
+        <FIELD NAME="owneruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="uid" NEXT="name"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="owneruuid" NEXT="eventid"/>
-        <FIELD NAME="eventid" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="name" NEXT="creatoruuid"/>
+        <FIELD NAME="eventid" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" PREVIOUS="name" NEXT="creatoruuid"/>
         <FIELD NAME="creatoruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="eventid" NEXT="category"/>
         <FIELD NAME="category" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="creatoruuid" NEXT="description"/>
         <FIELD NAME="description" TYPE="text" LENGTH="medium" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="category" NEXT="dateutc"/>
@@ -383,15 +359,13 @@
         <FIELD NAME="coveramount" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="covercharge" NEXT="simname"/>
         <FIELD NAME="simname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="coveramount" NEXT="globalpos"/>
         <FIELD NAME="globalpos" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="simname" NEXT="eventflags"/>
-        <FIELD NAME="eventflags" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="globalpos" NEXT="mature"/>
-        <FIELD NAME="mature" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false" ENUM="true" ENUMVALUES="'true', 'false'" PREVIOUS="eventflags"/>
+        <FIELD NAME="eventflags" TYPE="int" LENGTH="1" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="globalpos"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="eventid"/>
-        <KEY NAME="eventid" TYPE="unique" FIELDS="eventid" PREVIOUS="primary"/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="eventid"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="modlos_search_hostsregister" COMMENT="Default comment for the table, please edit me" PREVIOUS="modlos_search_events" NEXT="modlos_search_objects">
+    <TABLE NAME="modlos_search_hostsregister" COMMENT="Hosts Register" PREVIOUS="modlos_search_events" NEXT="modlos_search_objects">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="host"/>
         <FIELD NAME="host" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="port"/>
@@ -406,7 +380,7 @@
         <KEY NAME="host" TYPE="unique" FIELDS="host, port" PREVIOUS="primary"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="modlos_search_objects" COMMENT="Default comment for the table, please edit me" PREVIOUS="modlos_search_hostsregister" NEXT="modlos_search_parcels">
+    <TABLE NAME="modlos_search_objects" COMMENT="Objects Table" PREVIOUS="modlos_search_hostsregister" NEXT="modlos_search_parcels">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="objectuuid"/>
         <FIELD NAME="objectuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="parceluuid"/>
@@ -421,7 +395,7 @@
         <KEY NAME="uuid" TYPE="unique" FIELDS="objectuuid, parceluuid" PREVIOUS="primary"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="modlos_search_parcels" COMMENT="Default comment for the table, please edit me" PREVIOUS="modlos_search_objects" NEXT="modlos_search_parcelsales">
+    <TABLE NAME="modlos_search_parcels" COMMENT="Parcels" PREVIOUS="modlos_search_objects" NEXT="modlos_search_parcelsales">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="regionuuid"/>
         <FIELD NAME="regionuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="parcelname"/>
@@ -434,14 +408,15 @@
         <FIELD NAME="script" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false" ENUM="true" ENUMVALUES="'true', 'false'" PREVIOUS="build" NEXT="public"/>
         <FIELD NAME="public" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false" ENUM="true" ENUMVALUES="'true', 'false'" PREVIOUS="script" NEXT="dwell"/>
         <FIELD NAME="dwell" TYPE="number" LENGTH="20" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" DECIMALS="8" PREVIOUS="public" NEXT="infouuid"/>
-        <FIELD NAME="infouuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="dwell"/>
+        <FIELD NAME="infouuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="dwell" NEXT="mature"/>
+        <FIELD NAME="mature" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="PG" SEQUENCE="false" ENUM="false" PREVIOUS="infouuid"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="uuid"/>
         <KEY NAME="uuid" TYPE="unique" FIELDS="regionuuid, parceluuid" PREVIOUS="primary"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="modlos_search_parcelsales" COMMENT="Default comment for the table, please edit me" PREVIOUS="modlos_search_parcels" NEXT="modlos_search_popularplaces">
+    <TABLE NAME="modlos_search_parcelsales" COMMENT="Parcel Sales" PREVIOUS="modlos_search_parcels" NEXT="modlos_search_popularplaces">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="regionuuid"/>
         <FIELD NAME="regionuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="parcelname"/>
@@ -453,14 +428,14 @@
         <FIELD NAME="infouuid" TYPE="char" LENGTH="36" NOTNULL="true" DEFAULT="00000000-0000-0000-0000-000000000000" SEQUENCE="false" ENUM="false" PREVIOUS="landingpoint" NEXT="dwell"/>
         <FIELD NAME="dwell" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="infouuid" NEXT="parentestate"/>
         <FIELD NAME="parentestate" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" ENUM="false" PREVIOUS="dwell" NEXT="mature"/>
-        <FIELD NAME="mature" TYPE="char" LENGTH="32" NOTNULL="true" DEFAULT="PG" SEQUENCE="false" ENUM="false" PREVIOUS="parentestate"/>
+        <FIELD NAME="mature" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="PG" SEQUENCE="false" ENUM="false" PREVIOUS="parentestate"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="uuid"/>
         <KEY NAME="uuid" TYPE="unique" FIELDS="regionuuid, parceluuid" PREVIOUS="primary"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="modlos_search_popularplaces" COMMENT="Default comment for the table, please edit me" PREVIOUS="modlos_search_parcelsales" NEXT="modlos_search_regions">
+    <TABLE NAME="modlos_search_popularplaces" COMMENT="Popular Places" PREVIOUS="modlos_search_parcelsales" NEXT="modlos_search_regions">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="regionuuid"/>
         <FIELD NAME="regionuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="name"/>
@@ -474,7 +449,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="modlos_search_regions" COMMENT="Default comment for the table, please edit me" PREVIOUS="modlos_search_popularplaces">
+    <TABLE NAME="modlos_search_regions" COMMENT="Region Search" PREVIOUS="modlos_search_popularplaces">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="regionname"/>
         <FIELD NAME="regionname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="regionuuid"/>
