@@ -6,45 +6,82 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
-class  RegionsList
+class  EventsList
 {
-	var $icon 		= array();
-	var $pnum 		= array();
+	var $hasPermit = false;
+	var $isGuest   = true;
+	var $pg_only   = true;
+	var $userid	   = 0;
+	var $use_utc_time;
+
 	var $action;
 	var $action_url;
 
-	var $course_id	= '';
-	var $course_amp	= '';
-
+	var $course_id	 = '';
+	var $course_amp	 = '';
 	var $isAvatarMax = false;
-	var $use_sloodle = false;
 
-	var $hasPermit 	= false;
-	var $isGuest 	= true;
-
-	var $Cpstart 	= 0;
-	var $Cplimit 	= 25;
-	var $order   	= '';
 	var $pstart;
 	var $plimit;
+	var $Cpstart = 0;
+	var $Cplimit = 25;
+
 	var $number;
 	var $sitemax;
 	var $sitestart;
-	var $sql_condition = '';
+
+	var $icon 	 = array();
+	var $pnum 	 = array();
+	var $db_data = array();
 
 
 
-	function  RegionsList($course_id)
+	function  EventsList($course_id)
 	{
 		global $CFG, $USER;
 
-		$this->isGuest    = isguest();
-		$this->hasPermit  = hasModlosPermit($course_id);
-		$this->course_id  = $course_id;
-		$this->action 	  = 'regions_list.php';
+		require_login($course_id);
+
+		$this->isGuest   = isguest();
+		$this->hasPermit = hasModlosPermit($course_id);
+		$this->course_id = $course_id;
+		$this->userid	 = $USER->id;
+
+		if ($isGuest) {
+			exit('<h4>guest user is not allowed to access this page!!</h4>');
+		}
+
+		$this->date_frmt 	= $CFG->modlos_date_format;
+		$this->pg_only   	= $CFG->modlos_pg_only;
+		$this->use_utc_time = $CFG->modlos_use_utc_time;
+		if ($this->use_utc_time) date_default_timezone_set('UTC');
+   
+
+		$this->pstart = $root->mContext->mRequest->getRequest('pstart');
+		$this->plimit = $root->mContext->mRequest->getRequest('plimit');
+		if ($this->pstart!='' and !preg_match('/^[0-9]+$/', $this->pstart)) $this->pstart = '';
+		if ($this->plimit!='' and !preg_match('/^[0-9]+$/', $this->plimit)) $this->plimit = '';
+		if ($this->pstart=='') $this->pstart = $this->Cpstart;
+		if ($this->plimit=='') $this->plimit = $this->Cplimit;
+   
+		$this->action = 'index.php?action=events';
+		$this->action_url = CMS_MODULE_URL.'/'.$this->action;
+		$this->make_event_url = CMS_MODULE_URL.'/index.php?action=edit_event';
+		$this->edit_event_url = CMS_MODULE_URL.'/index.php?action=edit_event&amp;eventid=';
+		$this->del_event_url  = CMS_MODULE_URL.'/index.php?action=del_event';
+   
+		return true;
+
+
+
+
+
+
+
+
+		$this->action 	  = 'events_list.php';
 		$this->action_url = CMS_MODULE_URL.'/actions/'.$this->action;
 
-		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
@@ -91,7 +128,7 @@ class  RegionsList
 
 	function  execute()
 	{
-		$this->number    = opensim_get_regions_num();
+		$this->number    = opensim_get_events_num();
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
 		if ($this->sitemax==0) $this->sitemax = 1; 
@@ -134,9 +171,9 @@ class  RegionsList
 		if ($this->plimit != 100) $this->icon[6] = 'icon_limit_100_on';
 
 
-		$voice_mode[0] = get_string('modlos_voice_inactive_chnl', 'block_modlos');
-		$voice_mode[1] = get_string('modlos_voice_private_chnl',  'block_modlos');
-		$voice_mode[2] = get_string('modlos_voice_percel_chnl',   'block_modlos');
+		$voice_mode[0] = $regions_list_ttl = get_string('modlos_voice_inactive_chnl', 'block_modlos');
+		$voice_mode[1] = $regions_list_ttl = get_string('modlos_voice_private_chnl',  'block_modlos');
+		$voice_mode[2] = $regions_list_ttl = get_string('modlos_voice_percel_chnl',   'block_modlos');
 
 
 		// auto synchro

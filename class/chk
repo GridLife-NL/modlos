@@ -5,3 +5,4 @@ php -l edit_avatar.class.php
 php -l owner_avatar.class.php
 php -l regions_list.class.php
 php -l show_home.class.php
+php -l events_list.class.php

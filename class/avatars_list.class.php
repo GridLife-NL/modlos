@@ -23,9 +23,8 @@ class  AvatarsList
 	var $course_amp	= '';
 
 	var $use_sloodle = false;
-	var $avatars_num = 0;
-	var $max_avatars = 0;
 	var $isAvatarMax = false;
+	var $use_utc_time;
 
 	var $hasPermit 	= false;
 	var $isGuest   	= true;
@@ -70,9 +69,12 @@ class  AvatarsList
 		$this->search_url  = CMS_MODULE_URL.'/actions/avatars_list.php?pstart=0';
 		$this->avatar_url  = $CFG->wwwroot.'/user/view.php';
 
-		$this->avatars_num = modlos_get_avatars_num($USER->id);
-		$this->max_avatars = $CFG->modlos_max_own_avatars;
-		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
+		$avatars_num = modlos_get_avatars_num($USER->id);
+		$max_avatars = $CFG->modlos_max_own_avatars;
+		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
+
+		$this->use_utc_time = $CFG->modlos_use_utc_time;
+		if ($this->use_utc_time) date_default_timezone_set('UTC');
 
 		if ($course_id>0) $this->course_amp = '&amp;course='.$course_id;
 	}

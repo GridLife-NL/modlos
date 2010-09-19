@@ -972,7 +972,7 @@ function  modlos_sync_sloodle_users($timecheck=true)
 // Tab Menu
 //
 
-function  print_tabnav($currenttab, $course, $create_tab=true)
+function  print_tabnav($currenttab, $course, $show_create_tab=true)
 {
 	global $CFG;
 
@@ -996,9 +996,13 @@ function  print_tabnav($currenttab, $course, $create_tab=true)
 	if (!isGuest()) {
 		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param, 
 																	'<b>'.get_string('modlos_avatars_list','block_modlos').'</b>');
-		if ($create_tab) {
+		if ($show_create_tab) {
 			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $course_param, 
 																	'<b>'.get_string('modlos_avatar_create','block_modlos').'</b>');
+		}
+		if ($CFG->modlos_use_events) {
+			$toprow[] = new tabobject('events_list', CMS_MODULE_URL.'/actions/events_list.php'. $course_param, 
+																	'<b>'.get_string('modlos_events_tab','block_modlos').'</b>');
 		}
 	}
 

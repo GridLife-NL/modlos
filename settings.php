@@ -65,6 +65,14 @@ $settings->add(new admin_setting_configselect('modlos_map_size',
 					get_string('modlos_map_size', 'block_modlos'),
 				   	get_string('modlos_map_size_desc', 'block_modlos'), "128", $options));
 
+$settings->add(new admin_setting_configcheckbox('modlos_use_utc_time', 
+					get_string('modlos_use_utc', 'block_modlos'),
+				   	get_string('modlos_use_utc_desc', 'block_modlos'), 1));
+
+$settings->add(new admin_setting_configtext('modlos_date_format', 
+					get_string('modlos_date_format', 'block_modlos'),
+				   	get_string('modlos_date_format_desc', 'block_modlos'), "Y.m.d - H:i", PARAM_TEXT));
+
 $settings->add(new admin_setting_configtext('modlos_max_own_avatars', 
 					get_string('modlos_max_avatars', 'block_modlos'),
 				   	get_string('modlos_max_avatars_desc', 'block_modlos'), "1", PARAM_INT));
@@ -86,6 +94,14 @@ $settings->add(new admin_setting_configtext('modlos_image_processor_path',
 					get_string('modlos_image_processor_path', 'block_modlos'),
 				   	get_string('modlos_image_processor_path_desc', 'block_modlos'), "", PARAM_TEXT));
 
+$settings->add(new admin_setting_configcheckbox('modlos_use_events',
+					get_string('modlos_events_manage', 'block_modlos'),
+				   	get_string('modlos_events_manage_desc', 'block_modlos'), 1));
+
+$settings->add(new admin_setting_configcheckbox('modlos_pg_only', 
+					get_string('modlos_pg_only', 'block_modlos'),
+				   	get_string('modlos_pg_only_desc', 'block_modlos'), 1));
+
 $settings->add(new admin_setting_configcheckbox('modlos_use_https', 
 					get_string('modlos_use_https', 'block_modlos'),
 				   	get_string('modlos_use_https_desc', 'block_modlos'), 0));
@@ -93,10 +109,6 @@ $settings->add(new admin_setting_configcheckbox('modlos_use_https',
 $settings->add(new admin_setting_configtext('modlos_https_url', 
 					get_string('modlos_https_url', 'block_modlos'),
 				   	get_string('modlos_https_url_desc', 'block_modlos'), "", PARAM_URL));
-
-$settings->add(new admin_setting_configtext('modlos_date_format', 
-					get_string('modlos_date_format', 'block_modlos'),
-				   	get_string('modlos_date_format_desc', 'block_modlos'), "Y.m.d - H:i", PARAM_TEXT));
 
 $settings->add(new admin_setting_configcheckbox('modlos_userinfo_link', 
 					get_string('modlos_userinfo_link', 'block_modlos'),

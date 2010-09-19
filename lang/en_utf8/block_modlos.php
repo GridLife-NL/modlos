@@ -127,6 +127,10 @@ $string['modlos_image_processor_path_desc'] = 'Specify the path of program for i
                                               'After save changes，please click this link. If image is displayed, it is OK -> '.
                                               '<a href=../blocks/modlos/helper/get_texture.php?uuid=00000000-0000-2222-3333-100000001000 target=_blank>Check of Setting</a>';
 
+$string['modlos_events_manage']		= 'Event Management Activation';
+$string['modlos_events_manage_desc']= 'Select to event management fo ossearch is active, or not';
+$string['modlos_pg_only']           = 'Use only of PG';
+$string['modlos_pg_only_desc']      = 'Mature is not used as much as possible. If you use OpenSim for education, we recommend to check this.';
 
 $string['modlos_firstname_required']= 'You must input First Name!!';
 $string['modlos_lastname_required'] = 'You must input Last Name!!';
@@ -259,6 +263,8 @@ $string['modlos_cprt_sloodle_desc'] = 'If Sloodle is installed, Modlos reads/wri
 
 $string['modlos_date_format']		= 'Display format of date(time)';
 $string['modlos_date_format_desc']	= 'Specify display format of date and time';
+$string['modlos_use_utc']			= 'Do you use UTC to display time?';
+$string['modlos_use_utc_desc']		= 'If you check this, then UTC(Universal Time, Coordinated) is used. If you do not check this, then Local Time locale of server is used.';
 
 $string['modlos_home_cntnt'] 		= 'Home (Top) Page Content';
 $string['modlos_home_cntnt_desc']	= 'Specify content of Modlos home (top) page';
@@ -332,5 +338,56 @@ $string['modlos_clpresence_ttl']	= 'Clear Login Information Table';
 $string['modlos_return_tab'] 		= 'Return to Course';
 $string['modlos_return_sitetop_tab']= 'Return to Site Top';
 $string['modlos_access_forbidden'] 	= 'Forbidden Access to this Page!!';
+
+$string['modlos_events_make_ttl']	= 'Make Events';
+$string['modlos_events_make_link']	= 'These are the upcoming events at this moment. To add a new event,';
+$string['modlos_events_click_here']	= 'Click Here';
+
+$string['modlos_events_tab']        = 'Events';
+$string['modlos_events_list']		= 'Events List';
+$string['modlos_events_date']		= 'Date';
+$string['modlos_events_type']		= 'Type';
+$string['modlos_events_name']		= 'Event Name';
+$string['modlos_events_owner']		= 'Owner';
+$string['modlos_events_found']		= 'Events Found';
+$string['modlos_events_makelink']	= 'To add a new event';
+
+$string['modlos_events_desc']		= 'Decription';
+$string['modlos_events_max']		= 'Max';
+$string['modlos_events_chars']		= 'Characters';
+$string['modlos_events_inputed']	= 'Typed';
+$string['modlos_events_starts']		= 'Starts a';
+$string['modlos_events_duration']	= 'Duration';
+$string['modlos_events_category']	= 'Caterory';
+$string['modlos_events_select_cat']	= '- Select Category -';
+$string['modlos_events_charge']		= 'Cover Charge?';
+$string['modlos_events_amount']		= 'Amount';
+$string['modlos_events_location']	= 'Location';
+$string['modlos_events_pick_parcel']= '- Pick a Percel -';
+$string['modlos_events_type_ttl']	= 'Event Type';
+$string['modlos_events_mature_ttl']	= 'Mature Event';
+$string['modlos_events_save']		= 'Save Event';
+$string['modlos_events_saved']		= 'Event was saved';
+
+$string['modlos_events_all_category']='All Category';
+$string['modlos_events_discussion'] = 'Discussion';
+$string['modlos_events_sports']     = 'Sports';
+$string['modlos_events_music']      = 'Live Music';
+$string['modlos_events_commercial'] = 'Commercial';
+$string['modlos_events_nightlife']  = 'Nightlife/';
+$string['modlos_events_entene']     = 'Entertainment';
+$string['modlos_events_games']      = 'Games/Contests';
+$string['modlos_events_pageants']   = 'Pageants';
+$string['modlos_events_edu']        = 'Education';
+$string['modlos_events_arts']       = 'Arts and Culture';
+$string['modlos_events_charity']    = 'Charity/Support Groups';
+$string['modlos_events_misc']       = 'Miscellaneous';
+
+$string['modlos_firstname_required']= 'You must input First Name!!';
+$string['modlos_lastname_required']	= 'You must input Last  Name!!';
+$string['modlos_passwd_required']	= 'You must input Password!!';
+$string['modlos_event_name_required']='You must input Event Name!!';
+$string['modlos_event_desc_required']='You must input Event Description!!';
+$string['modlos_event_owner_required']='You must select valid event Owner!!';
 
 ?>

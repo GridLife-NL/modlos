@@ -126,6 +126,11 @@ $string['modlos_image_processor_path_desc'] = '画像処理プログラムへの
 											  '変更を保存後，このリンクをクリックして，画像が表示されればOK → '.
 											  '<a href=../blocks/modlos/helper/get_texture.php?uuid=00000000-0000-2222-3333-100000001000 target=_blank>設定のチェック</a>';
 
+$string['modlos_events_manage']		= 'イベント管理';
+$string['modlos_events_manage_desc']= 'ossearch用にイベントの管理を行うかどうかを選択する';
+$string['modlos_pg_only']			= '設定をPGに限定';
+$string['modlos_pg_only_desc']		= '可能な限り Mature用の設定を行わない．もし OpenSimを教育用に使用するなら，チェックを入れることをお勧めします';
+
 $string['modlos_firstname_required']= 'ファーストネームを書いてください！';
 $string['modlos_lastname_required'] = 'ラストネームを書いてください！';
 $string['modlos_passwd_required'] 	= 'パスワードを入力してください！';
@@ -258,6 +263,8 @@ $string['modlos_cprt_sloodle_desc'] = 'Sloodleがインストールされてい�
 
 $string['modlos_date_format']  		= '日付データのフォーマット';
 $string['modlos_date_format_desc']  = 'Modlosで使用する日付表示のフォーマットを指定する';
+$string['modlos_use_utc']           = '時刻の表示に世界標準時(UTC)を使用';
+$string['modlos_use_utc_desc']		= 'チェックを入れた場合は時刻の表示に世界標準時を使用．チェックを外した場合はサーバのローカル時刻のロケールを使用する'; 
 
 $string['modlos_home_cntnt'] 		= 'トップページのコンテンツ';
 $string['modlos_home_cntnt_desc']	= 'Modlos のトップ（ホーム）ページのコンテンツ．HTMLタグ使用可能';
@@ -331,5 +338,56 @@ $string['modlos_clpresence_ttl']    = 'ログイン情報テーブルをクリ�
 $string['modlos_return_tab'] 		= 'コースに戻る';
 $string['modlos_return_sitetop_tab']= 'サイトトップに戻る';
 $string['modlos_access_forbidden'] 	= 'このページへのアクセスは許可されてません';
+
+$string['modlos_events_make_ttl']   = 'イベント作成';
+$string['modlos_events_make_link']  = 'イベントを新規作成する場合は，';
+$string['modlos_events_click_here'] = 'ここをクリック';
+
+$string['modlos_events_tab']		= 'イベント';
+$string['modlos_events_list']       = 'イベントリスト';
+$string['modlos_events_date']       = '日時';
+$string['modlos_events_type']       = 'タイプ';
+$string['modlos_events_name']       = 'イベント名';
+$string['modlos_events_owner']      = '主催者';
+$string['modlos_events_found']      = 'イベント';
+
+$string['modlos_events_desc']       = '説明';
+$string['modlos_events_max']        = '最大';
+$string['modlos_events_chars']      = '文字';
+$string['modlos_events_inputed']    = '入力';
+$string['modlos_events_starts']     = '開始時間';
+$string['modlos_events_duration']   = '所要時間';
+$string['modlos_events_category']   = 'カテゴリ';
+$string['modlos_events_select_cat'] = '- カテゴリを選択 -';
+$string['modlos_events_charge']     = '有料?';
+$string['modlos_events_amount']     = 'サービス料';
+$string['modlos_events_location']   = 'ロケーション';
+$string['modlos_events_pick_parcel']= '- 開催地を選択 -';
+
+$string['modlos_events_type_ttl']   = 'イベントタイプ';
+$string['modlos_events_mature_ttl'] = '成人向けイベント';
+$string['modlos_events_save']       = '保存';
+$string['modlos_events_saved']      = 'イベントを保存しました';
+
+$string['modlos_events_all_category']= '全カテゴリ';
+$string['modlos_events_discussion'] = 'ディスカッション';
+$string['modlos_events_sports']     = 'スポーツ';
+$string['modlos_events_music']      = '生演奏';
+$string['modlos_events_commercial'] = '商業目的';
+$string['modlos_events_nightlife']  = '夜遊び／';
+$string['modlos_events_entene']     = 'エンターテインメント';
+$string['modlos_events_games']      = 'ゲーム／コンテスト';
+$string['modlos_events_pageants']   = 'ショー';
+$string['modlos_events_edu']        = '教育';
+$string['modlos_events_arts']       = 'アートとカルチャー';
+$string['modlos_events_charity']    = 'チャリティ／サポート・グループ';
+$string['modlos_events_misc']       = 'その他';
+
+$string['modlos_firstname_required']= 'ファーストネームを書いてください！';
+$string['modlos_lastname_required'] = 'ラストネームを書いてください！';
+$string['modlos_passwd_required']   = 'パスワードを入力してください！';
+$string['modlos_event_name_required']='イベントの名称を入力してください！';
+$string['modlos_event_desc_required']='イベントの説明を書いてください！';
+$string['modlos_event_owner_required']='有効なオーナを選択してください！';
 
 ?>
