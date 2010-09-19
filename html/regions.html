@@ -193,19 +193,19 @@
           <?php if ($this->isGuest) {?>
             <b><?php echo $dat['regionName']?></b>
           <?php } else {?>
-            <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL?>/helper/sim.php?region=<?php echo $dat['UUID'].$course_amp?>','<?php echo $dat['uuid']?>','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL?>/helper/sim.php?region=<?php echo $dat['UUID'].$course_amp?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
               <b><u><?php echo $dat['regionName']?></u></b>
             </a>
           <?php }?>
         </div></td>
-        <td><div style="color: #ff2222"><b><?php echo $dat['locX']?></b></div></td>
-        <td><div style="color: #227700"><b><?php echo $dat['locY']?></b></div></td>
+        <td><div style="color: #115500"><b><?php echo $dat['locX']?></b></div></td>
+        <td><div style="color: #115500"><b><?php echo $dat['locY']?></b></div></td>
 
         <td><div style="color: #2222ff">
           <?php if ($this->isGuest) {?>
             <b><?php echo $dat['est_firstname']?>&nbsp;<?php echo $dat['est_lastname']?></b>
           <?php } else {?>
-            <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL?>/helper/agent.php?agent=<?php echo $dat['owner_uuid'].$course_amp?>','<?php echo $dat['ow_uuid']?>','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL?>/helper/agent.php?agent=<?php echo $dat['owner_uuid'].$course_amp?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
               <b><u><?php echo $dat['est_firstname']?>&nbsp;<?php echo $dat['est_lastname']?></u></b>
             </a>
           <?php }?>

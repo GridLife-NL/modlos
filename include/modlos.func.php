@@ -8,49 +8,91 @@
 
 /****************************************************************
  * Functions
- * 
- * // Tools
- * function  hasModlosPermit($course_id);
- *
- * // DB
- * function  modlos_get_update_time($fullname_table)
- *
- * // Modlos and Sloodle
- * function  modlos_get_avatar_info($uuid, $use_sloodle=false)
- * function  modlos_set_avatar_info($avatar, $use_sloodle=false)
- * function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
- * function  modlos_get_avatars_num($uuid, $use_sloodle=false)
- *
- * // Modlos
- * function  modlos_get_userstable()
- * function  modlos_insert_userstable($user)
- * function  modlos_update_userstable($user)
- * function  modlos_delete_userstable($user)
- *
- * function  modlos_get_lastnames($sort='')
- *
- * function  modlos_delete_groupdb($uuid, $delallgrp=false)
- * function  modlos_delete_groupdb_by_gpid($gpid)
- * function  modlos_delete_groupdb_by_uuid($uuid)
- *
- * function  modlos_get_profile($uuid)
- * function  modlos_delete_profiles($uuid)
- * function  modlos_set_profiles_from_users($profs, $ovwrite=true)
- *
- * function  modlos_get_loginscreen_alert()
- * function  modlos_set_loginscreen_alert($alert)
- *
- * function  modlos_activate_avatar($uuid)
- * function  modlos_inactivate_avatar($uuid)
- * function  modlos_delete_banneddb($uuid)
- *
- * function  modlos_sync_opensimdb($timecheck=true)
- * function  modlos_sync_sloodle_users($timecheck=true)
- *
- * function  print_tabnav($currenttab, $course, $create_tab=true)
- * function  print_modlos_header($currenttab, $course)
- *
+
+ // Tools
+ function  hasModlosPermit($course_id=0)
+
+ // DB
+ function  modlos_get_update_time($fullname_table)
+
+ // Avatars (with Sloodle)
+ function  modlos_get_avatars($uid=0, $use_sloodle=false)
+ function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
+
+ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
+ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
+ function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
+
+ // User Table
+ function  modlos_get_userstable()
+ function  modlos_insert_userstable($user)
+ function  modlos_update_userstable($user, $updobj=null)
+ function  modlos_delete_userstable($user)
+
+ // Last Names
+ function  modlos_get_lastnames($sort='')
+
+ // Group
+ function  modlos_delete_groupdb($uuid, $delallgrp=false)
+ function  modlos_delete_groupdb_by_uuid($uuid)
+ function  modlos_delete_groupdb_by_gpid($gpid)
+
+ // Profile
+ function  modlos_get_profile($uuid)
+ function  modlos_delete_profiles($uuid)
+ function  modlos_set_profiles_from_users($profs, $ovwrite=true)
+
+ // Events
+ function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
+ function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
+ function  modlos_get_event($eventid)
+ function  modlos_set_event($event)
+
+
+ // Login Screen
+ function  modlos_get_loginscreen_alert()
+ function  modlos_set_loginscreen_alert($alert)
+
+ // Bann Avatar
+ function  modlos_activate_avatar($uuid)
+ function  modlos_inactivate_avatar($uuid)
+ function  modlos_delete_banneddb($uuid)
+
+ // Synchro DB
+ function  modlos_sync_opensimdb($timecheck=true)
+ function  modlos_sync_sloodle_users($timecheck=true)
+
+ // Tab Menu
+ function  print_tabnav($currenttab, $course, $create_tab=true)
+ function  print_tabnav_manage($currenttab, $course)
+ function  print_modlos_header($currenttab, $course)
+
  ****************************************************************/
+
+
+
+/****************************************************************
+ Reference: Moodle DB Functions from lib/dmllib.php  (Memo)
+
+ function record_exists($table, $field1='', $value1='', $field2='', $value2='', $field3='', $value3='')
+ function count_records($table, $field1='', $value1='', $field2='', $value2='', $field3='', $value3='')
+
+ function get_record($table, $field1, $value1, $field2='', $value2='', $field3='', $value3='', $fields='*')
+ function get_records($table, $field='', $value='', $sort='', $fields='*', $limitfrom='', $limitnum='')
+ function get_field($table, $return, $field1, $value1, $field2='', $value2='', $field3='', $value3='')
+ function set_field($table, $newfield, $newvalue, $field1, $value1, $field2='', $value2='', $field3='', $value3='')
+
+ function count_records_select($table, $select='', $countitem='COUNT(*)')
+ function get_recordset_select($table, $select='', $sort='', $fields='*', $limitfrom='', $limitnum='')
+
+ function delete_records($table, $field1='', $value1='', $field2='', $value2='', $field3='', $value3='')
+ function delete_records_select($table, $select='')
+
+ function insert_record($table, $dataobject, $returnid=true, $primarykey='id')
+ function update_record($table, $dataobject)
+
+ ****************************************************************/
+
 
 
 if (!defined('CMS_MODULE_PATH')) exit();
@@ -62,7 +104,7 @@ require_once(CMS_MODULE_PATH.'/include/opensim.mysql.php');
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////
 //
 // Tools
 //
@@ -80,8 +122,9 @@ function  hasModlosPermit($course_id=0)
 
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
-// for DB
+// DB
 //
 
 function  modlos_get_update_time($fullname_table)
@@ -97,9 +140,96 @@ function  modlos_get_update_time($fullname_table)
 
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
-// for Modlos and Sloodle
+// Avatars with Sloodle
 //
+
+function  modlos_get_avatars($uid=0, $use_sloodle=false)
+{
+	if (!isNumeric($uid)) return null;
+
+	if ($uid==0) $users = get_records('modlos_users');
+	else 		 $users = get_records('modlos_users', 'user_id', $uid);
+
+	$avatars = array();
+	if ($users!=null) {
+		foreach ($users as $user) {
+			$uuid = $user->uuid;
+			$avatars[$uuid]['UUID'] 	= $user->uuid;
+			$avatars[$uuid]['user_id'] 	= $user->user_id;
+			$avatars[$uuid]['firstname']= $user->firstname;
+			$avatars[$uuid]['lastname'] = $user->lastname;
+			$avatars[$uuid]['hmregion'] = $user->hmregion;
+			$avatars[$uuid]['state'] 	= $user->state;
+			$avatars[$uuid]['time'] 	= $user->time;
+			$avatars[$uuid]['fullname'] = $avatars[$uuid]['firstname']." ".$avatars[$uuid]['lastname'];
+		}
+	}
+
+	if ($use_sloodle) {
+		if ($uid==0) $sloodles = get_records(MDL_SLOODLE_USERS_TBL);
+		else 		 $sloodles = get_records(MDL_SLOODLE_USERS_TBL, 'userid', $uid);
+
+		foreach ($sloodles as $sloodle) {
+			$match = false;
+			foreach ($users as $user) {
+				if ($sloodle->uuid==$user->uuid) {
+					$match = true;
+					break;
+				}
+			}
+			if (!$match) {
+				$uuid = $sloodle->uuid;
+				$avatars[$uuid]['UUID'] 	= $sloodle->uuid;
+				$avatars[$uuid]['user_id'] 	= $sloodle->userid;
+				$avatars[$uuid]['fullname'] = $sloodle->avname;
+				$avname 					= explod(" ", $sloodle->avname);
+				$avatars[$uuid]['firstname']= $avname[0];
+				$avatars[$uuid]['lastname'] = $avname[1];
+				$avatars[$uuid]['hmregion'] = '';
+				$avatars[$uuid]['state'] 	= '';
+				$avatars[$uuid]['time'] 	= $sloodle->alastactive;
+			}
+		}
+	}
+
+	return $avtars;
+}
+
+
+
+function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
+{
+	if (!isNumeric($uid)) return null;
+
+	if ($uid==0) $users = get_records('modlos_users');
+	else 		 $users = get_records('modlos_users', 'user_id', $uid);
+
+	if (is_array($users)) $num = count($users);
+	else $num = 0;
+
+	if ($use_sloodle) {
+		if ($uid==0) $sloodles = get_records(MDL_SLOODLE_USERS_TBL);
+		else 		 $sloodles = get_records(MDL_SLOODLE_USERS_TBL, 'userid', $uid);
+
+		foreach ($sloodles as $sloodle) {
+			$match = false;
+			foreach ($users as $user) {
+				if ($sloodle->uuid==$user->uuid) {
+					$match = true;
+					break;
+				}
+			}
+			if (!$match) $num++;
+		}
+	}
+
+	return $num;
+}
+
+
+
 
 function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 {
@@ -209,36 +339,9 @@ function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 
 
 
-function  modlos_get_avatars_num($id, $use_sloodle=false)
-{
-	if (!isNumeric($id)) return null;
-
-	$avatars = get_records('modlos_users', 'user_id', $id);
-	if (is_array($avatars)) $num = count($avatars);
-	else $num = 0;
-
-	if ($use_sloodle) {
-		$sloodles = get_records(MDL_SLOODLE_USERS_TBL, 'userid', $id);
-		foreach ($sloodle as $sloodle) {
-			$match = false;
-			foreach ($avatas as $avatar) {
-				if ($sloodle->uuid==$avatar->uuid) {
-					$match = true;
-					break;
-				}
-			}
-			if (!$match) $num++;
-		}
-	}
-
-	return $num;
-}
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////
 //
-// usertable DB
+// Users Table DB
 //
 //
 
@@ -360,6 +463,7 @@ function  modlos_delete_userstable($user)
 
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Last Names
 //
@@ -380,6 +484,7 @@ function  modlos_get_lastnames($sort='')
 
 
 
+///////////////////////////////////////////////////////////////////////////////
 //
 // Group DB
 //
@@ -436,6 +541,7 @@ function  modlos_delete_groupdb_by_gpid($gpid)
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //
+// Profile
 //
 
 function  modlos_get_profile($uuid)
@@ -541,8 +647,132 @@ function  modlos_delete_profiles($uuid)
 
 
 
+
 ///////////////////////////////////////////////////////////////////////////////////////
+// 
+// Events
 //
+
+function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
+{
+	$events = array();
+	if ($tm==0) $tm = time();
+
+	$select = "dateUTC > '$tm'";
+	if ($pg_only) $select .= " AND eventflags='0'";
+	if ($uid>0)   $select .= " AND uid='$uid'";
+
+	$rets = get_recordset_select('modlos_search_events', $select, 'dateUTC', '*', $start, $limit);
+   
+	if ($rets!=null) {
+		$num = 0;
+		foreach ($rets as $event) {
+			$events[$num]['uid']		 = $event->uid;
+			$events[$num]['owneruuid']   = $event->owneruuid;
+			$events[$num]['name']		 = $event->name;
+			$events[$num]['eventid']	 = $event->eventid;
+			$events[$num]['creatoruuid'] = $event->creatoruuid;
+			$events[$num]['category']	 = $event->category;
+			$events[$num]['description'] = $event->description;
+			$events[$num]['dateUTC']	 = $event->dateUTC;
+			$events[$num]['duration']	 = $event->duration;
+			$events[$num]['covercharge'] = $event->covercharge;
+			$events[$num]['coveramount'] = $event->coveramount;
+			$events[$num]['simname']	 = $event->simname;
+			$events[$num]['globalPos']   = $event->globalPos;
+			$events[$num]['eventflags']  = $event->eventflags;
+			$num++;
+		}
+	}
+   
+	return $events;
+}
+
+
+
+
+function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
+{  
+	if ($tm==0) $tm = time();
+   
+	$select = "dateUTC > '$tm'";
+	if ($pg_only) $select .= " AND eventflags='0'";
+	if ($uid>0)   $select .= " AND uid='$uid'";
+
+	$events_num = count_records_select('modlos_search_events', $select);
+   
+	return $events_num;
+}
+
+
+   
+function  modlos_get_event($eventid)
+{  
+	$event = get_record('modlos_search_events', 'eventid', $eventid);
+   
+	$ret = array();
+	if ($event!=null) {
+		$ret['uid']		 	= $event->uid;
+		$ret['owneruuid']   = $event->owneruuid;
+		$ret['name']		= $event->name;
+		$ret['eventid']	 	= $event->eventid;
+		$ret['creatoruuid'] = $event->creatoruuid;
+		$ret['category']	= $event->category;
+		$ret['description'] = $event->description;
+		$ret['dateUTC']	 	= $event->dateUTC;
+		$ret['duration']	= $event->duration;
+		$ret['covercharge'] = $event->covercharge;
+		$ret['coveramount'] = $event->coveramount;
+		$ret['simname']	 	= $event->simname;
+		$ret['globalPos']   = $event->globalPos;
+		$ret['eventflags']  = $event->eventflags;
+	}
+   
+	return $ret;
+}
+
+
+
+
+function  modlos_set_event($event)
+{
+	$dbobj->eventid = 0;
+
+	if ($event['eventid']>0) {
+		$dbobj = get_record('modlos_search_events', 'eventid', $event['eventid']);
+		if ($dbobj==null) $dbobj->eventid = 0;
+	}
+   
+	$dbobj->uid		 	= $event['uid'];
+	$dbobj->owneruuid	= $event['owneruuid'];
+	$dbobj->name		= $event['name'];
+	$dbobj->creatoruuid	= $event['creatoruuid'];
+	$dbobj->category	= $event['category'];
+	$dbobj->description	= $event['description'];
+	$dbobj->dateUTC		= $event['dateUTC'];
+	$dbobj->duration	= $event['duration'];
+	$dbobj->covercharge = $event['covercharge'];
+	$dbobj->coveramount = $event['coveramount'];
+	$dbobj->simname		= $event['simname'];
+	$dbobj->globalPos 	= $event['globalPos'];
+	$dbobj->eventflags 	= $event['eventflags'];
+ 
+	if ($dbobj->eventid>0) { 
+		$ret = insert_record('searcheventsdb', $dbobj, true, 'eventid');
+	}
+	else {
+		$ret = update_record('searcheventsdb', $dbobj);
+	}
+	return $ret;
+}
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+// 
+// Login Screen
 //
 
 function  modlos_get_loginscreen_alert()
@@ -597,6 +827,7 @@ function  modlos_set_loginscreen_alert($alert)
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////
 //
 // Bann List
 //
@@ -652,7 +883,7 @@ function  modlos_delete_banneddb($uuid)
 
 //////////////////////////////////////////////////////////////////////////////////
 //
-// for DB Synchro
+// Synchro DB
 //
 
 function  modlos_sync_opensimdb($timecheck=true)
@@ -738,7 +969,7 @@ function  modlos_sync_sloodle_users($timecheck=true)
 
 //////////////////////////////////////////////////////////////////////////////////
 //
-// Tab Header
+// Tab Menu
 //
 
 function  print_tabnav($currenttab, $course, $create_tab=true)
@@ -874,3 +1105,4 @@ function  print_modlos_header($currenttab, $course)
 
 
 ?>
+
