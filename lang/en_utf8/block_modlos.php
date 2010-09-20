@@ -352,7 +352,6 @@ $string['modlos_events_type']		= 'Type';
 $string['modlos_events_name']		= 'Event Name';
 $string['modlos_events_owner']		= 'Owner';
 $string['modlos_events_found']		= 'Events Found';
-$string['modlos_events_makelink']	= 'To add a new event';
 
 $string['modlos_events_desc']		= 'Decription';
 $string['modlos_events_max']		= 'Max';
@@ -377,7 +376,7 @@ $string['modlos_events_sports']     = 'Sports';
 $string['modlos_events_music']      = 'Live Music';
 $string['modlos_events_commercial'] = 'Commercial';
 $string['modlos_events_nightlife']  = 'Nightlife/';
-$string['modlos_events_entene']     = 'Entertainment';
+$string['modlos_events_enteme']     = 'Entertainment';
 $string['modlos_events_games']      = 'Games/Contests';
 $string['modlos_events_pageants']   = 'Pageants';
 $string['modlos_events_edu']        = 'Education';
@@ -385,9 +384,8 @@ $string['modlos_events_arts']       = 'Arts and Culture';
 $string['modlos_events_charity']    = 'Charity/Support Groups';
 $string['modlos_events_misc']       = 'Miscellaneous';
 
-$string['modlos_event_name_required']='イベントの名称を入力してください！';
-$string['modlos_event_desc_required']='イベントの説明を書いてください！';
-$string['modlos_event_owner_required']='有効なオーナを選択してください！';
-$string['modlos_event_owner_required']='有効なオーナを選択してください！';
+$string['modlos_event_name_required']='You must input Event Name!!';
+$string['modlos_event_desc_required']='You must input Event Description!!';
+$string['modlos_event_owner_required']='You must select valid event Owner!!';
 
 ?>
