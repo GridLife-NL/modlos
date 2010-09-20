@@ -1108,4 +1108,3 @@ function  print_modlos_header($currenttab, $course)
 
 
 ?>
-
