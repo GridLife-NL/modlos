@@ -106,7 +106,7 @@ class  EditEvent
 			//$this->parcels[$i]['uuid'] 		= $mod->parceluuid;
 			$this->parcels[$i]['name'] 			= $mod->parcelname;
 			$this->parcels[$i]['regionUUID'] 	= $mod->regionuuid;
-			$this->parcels[$i]['landingpoint'] 	= $mod->get('landingpoint');
+			$this->parcels[$i]['landingpoint'] 	= $mod->landingpoint;
 			$i++;
 		}
 
@@ -306,64 +306,48 @@ class  EditEvent
 		$grid_name		= $CFG->modlos_grid_name;
 		$module_url		= CMS_MODULE_URL;
 
-		$pstart_amp	 	= "&amp;pstart=$this->pstart";
-		$plimit_amp	 	= "&amp;plimit=$this->plimit";
-		$pstart_		= '&amp;pstart=';
-		$plimit_		= '&amp;plimit=';
+		$events_make_ttl 	= get_string('modlos_events_make_ttl',		'block_modlos');
+		$events_save 		= get_string('modlos_events_save',			'block_modlos');
+		$events_saved 		= get_string('modlos_events_saved',			'block_modlos');
 
-		$events_list_ttl 	= get_string('modlos_events_list',   	'block_modlos');
-		$events_make_link	= get_string('modlos_events_make_link', 'block_modlos');
-		$events_click_here	= get_string('modlos_events_click_here','block_modlos');
+		$events_name 		= get_string('modlos_events_name',			'block_modlos');
+		$events_desc 		= get_string('modlos_events_desc',			'block_modlos');
+		$events_pick_parcel = get_string('modlos_events_pick_parcel',	'block_modlos');
+		$events_date 		= get_string('modlos_events_date',			'block_modlos');
+		$events_location 	= get_string('modlos_events_location',		'block_modlos');
+		$events_owner 		= get_string('modlos_events_owner',			'block_modlos');
+		$events_category 	= get_string('modlos_events_category',		'block_modlos');
+		$events_charge 		= get_string('modlos_events_charge',		'block_modlos');
+		$events_amount 		= get_string('modlos_events_amount',		'block_modlos');
+		$events_type 		= get_string('modlos_events_type',			'block_modlos');
+		$events_type_ttl 	= get_string('modlos_events_type_ttl',		'block_modlos');
+		$events_mature_ttl 	= get_string('modlos_events_mature_ttl',	'block_modlos');
 
-		$events_date	= get_string('modlos_events_date',  'block_modlos');
-		$events_type	= get_string('modlos_events_type',  'block_modlos');
-		$events_name	= get_string('modlos_events_name',  'block_modlos');
-		$events_owner	= get_string('modlos_events_owner', 'block_modlos');
-		$events_found	= get_string('modlos_events_found', 'block_modlos');
+		$events_all_category= get_string('modlos_events_all_category',	'block_modlos');
+		$events_discussion 	= get_string('modlos_events_discussion',	'block_modlos');
+		$events_sports 		= get_string('modlos_events_sports',		'block_modlos');
+		$events_music 		= get_string('modlos_events_music',			'block_modlos');
+		$events_commercial 	= get_string('modlos_events_commercial',	'block_modlos');
+		$events_nightlife 	= get_string('modlos_events_nightlife',		'block_modlos');
+		$events_enteme 		= get_string('modlos_events_enteme',		'block_modlos');
+		$events_games 		= get_string('modlos_events_games',			'block_modlos');
+		$events_pageants 	= get_string('modlos_events_pageants',		'block_modlos');
+		$events_edu 		= get_string('modlos_events_edu',			'block_modlos');
+		$events_arts 		= get_string('modlos_events_arts',			'block_modlos');
+		$events_charity 	= get_string('modlos_events_charity',		'block_modlos');
+		$events_misc 		= get_string('modlos_events_misc',			'block_modlos');
 
-		$page_num		= get_string('modlos_page',		   	'block_modlos');
-		$page_num_of	= get_string('modlos_page_of',	 	'block_modlos');
-		$modlos_edit	= get_string('modlos_edit',		  	'block_modlos');
-		$modlos_delete	= get_string('modlos_delete',	   	'block_modlos');
+		$events_max 		= get_string('modlos_events_max',			'block_modlos');
+		$events_chars 		= get_string('modlos_events_chars',			'block_modlos');
+		$events_inputed 	= get_string('modlos_events_inputed',		'block_modlos');
+
+		$modlos_no 			= get_string('modlos_no',					'block_modlos');
+		$modlos_yes 		= get_string('modlos_yes',					'block_modlos');
+		$modlos_reset_ttl 	= get_string('modlos_reset_ttl',			'block_modlos');
+		$modlos_delete_ttl 	= get_string('modlos_delete_ttl',			'block_modlos');
 
 		include(CMS_MODULE_PATH.'/html/edit_event.html');
 	}
 }
 
 ?>
-$modlos_save
-$modlos_all_category
-$modlos_amount
-$modlos_arts
-$modlos_category
-$modlos_char
-$modlos_charge
-$modlos_charity
-$modlos_commercial
-$modlos_date
-$modlos_delete_ttl
-$modlos_desc
-$modlos_discussion
-$modlos_edu
-$modlos_enteme
-$modlos_games
-$modlos_inputed
-$modlos_location
-$modlos_make_ttl
-$modlos_mature_ttl
-$modlos_max
-$modlos_misc
-$modlos_music
-$modlos_name
-$modlos_nightlife
-$modlos_no
-$modlos_owner
-$modlos_pageants
-$modlos_pick_parcel
-$modlos_reset_ttl
-$modlos_saved
-$modlos_sports
-$modlos_type
-$modlos_type_ttl
-$modlos_yes
-

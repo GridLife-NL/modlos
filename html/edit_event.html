@@ -13,13 +13,15 @@ function checklength(obj,warning_div){
 }
 </script>
 
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/table.css")?>
+</style>
 
-<h2><center><?php echo $grid_name?>&nbsp;:&nbsp;<?php echo $modlos_make_ttl?></center></h2>
+<h2><center><?php echo $grid_name?>&nbsp;:&nbsp;<?php echo $events_make_ttl?></center></h2>
 <br />
 
 <form METHOD="POST" ACTION=<?php echo $action_url?> >
-  <{xoops_token form=$actionForm?>
-  <input type="hidden" name="event_id" value="<?php echo $event_id?>" />
+  <input type="hidden" name="event_id" value="<?php echo $this->event_id?>" />
 
   <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
     <tbody>
@@ -27,99 +29,99 @@ function checklength(obj,warning_div){
         <td valign=top align=center>&nbsp;</td>
         <td valign=top align=center width=600>
 
-          <table width="600" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="#FFFFFF">
+          <table width="600" border="0" align="center" cellpadding="1" cellspacing="1">
 
             <tr align="left">
-              <td class="head" width=200><?php echo $modlos_name?></td>
-              <td class="odd"  width=400><input type="text" id="event_name" name="event_name" size="35" value="<?php echo $event_name?>" /></td>
+              <td class="head" width=200><?php echo $events_name?></td>
+              <td class="odd"  width=400><input type="text" id="event_name" name="event_name" size="35" value="<?php echo $this->event_name?>" /></td>
             </tr>
 
             <tr align="left">
-              <td class="head" valign="top"><?php echo $modlos_desc?></td>
+              <td class="head" valign="top"><?php echo $events_desc?></td>
               <td class="even">
-                <textarea name="event_desc" rows="7" cols="" style="width:90%" wrap="virtual" maxlength="1024" onfocus="return checklength(this,'contact_max_warning')" onkeyup="return checklength(this,'contact_max_warning')" ><?php echo $event_desc?></textarea><br />
+                <textarea name="event_desc" rows="7" cols="" style="width:90%" wrap="virtual" maxlength="1024" onfocus="return checklength(this,'contact_max_warning')" onkeyup="return checklength(this,'contact_max_warning')" ><?php echo $this->event_desc?></textarea><br />
                 <div>
                 <div>
-                  <em id="contact_max_warning"><?php echo $modlos_max?> <strong>1024</strong> </em> 
-                  <?php echo $modlos_char?>&nbsp;&nbsp;<?php echo $modlos_inputed?>: <em id="counter"></em>
+                  <em id="contact_max_warning"><?php echo $events_max?> <strong>1024</strong> </em> 
+                  <?php echo $events_chars?>&nbsp;&nbsp;<?php echo $events_inputed?>: <em id="counter"></em>
                 </div>
               </td>
             </tr>
 
             <tr align="left">
-              <td class="head" valign="top"><?php echo $modlos_owner?></td>
+              <td class="head" valign="top"><?php echo $events_owner?></td>
               <td class="even">
                 <select name="owner_name">
-	      		  <{foreach from=$owners item="owner"?>
-                    <?php if ($owner.fullname==$event_owner) {?>
-                      <option value="<?php echo $owner.UUID?>|<?php echo $owner.fullname?>" selected ><?php echo $owner.fullname?></option>
+	      		  <?php foreach ($this->owners as $owner) {?>
+                    <?php if ($owner['fullname']==$this->event_owner) {?>
+                      <option value="<?php echo $owner['UUID']?>|<?php echo $owner['fullname']?>" selected ><?php echo $owner['fullname']?></option>
                     <?php } else {?>
-                      <option value="<?php echo $owner.UUID?>|<?php echo $owner.fullname?>" ><?php echo $owner.fullname?></option>
+                      <option value="<?php echo $owner['UUID']?>|<?php echo $owner['fullname']?>" ><?php echo $owner['fullname']?></option>
                     <?php }?>
-	      		  <{/foreach?>
+	      		  <?php }?>
                 </select>
               </td>
             </tr>
 
-            <{include file="$date_file"?>
+			<?php include($date_file)?>
 
             <tr align="left">
-              <td class="head"><?php echo $modlos_category?></td>
+              <td class="head"><?php echo $events_category?></td>
               <td class="even">
                 <select name="category">
-                  <option value="0"  <?php if ($category==0) {?>selected<?php }?> ><?php echo $modlos_all_category?></option>
-                  <option value="18" <?php if ($category==18){?>selected<?php }?> ><?php echo $modlos_discussion?></option>
-                  <option value="19" <?php if ($category==19){?>selected<?php }?> ><?php echo $modlos_sports?></option>
-                  <option value="20" <?php if ($category==20){?>selected<?php }?> ><?php echo $modlos_music?></option>
-                  <option value="22" <?php if ($category==22){?>selected<?php }?> ><?php echo $modlos_commercial?></option>
-                  <option value="23" <?php if ($category==23){?>selected<?php }?> >
-                    <?php if (!$pg_only) {echo $modlos_nightlife;}?><?php echo $modlos_enteme?>
+                  <option value="0"  <?php if ($this->category==0) {?>selected<?php }?> ><?php echo $events_all_category?></option>
+                  <option value="18" <?php if ($this->category==18){?>selected<?php }?> ><?php echo $events_discussion?></option>
+                  <option value="19" <?php if ($this->category==19){?>selected<?php }?> ><?php echo $events_sports?></option>
+                  <option value="20" <?php if ($this->category==20){?>selected<?php }?> ><?php echo $events_music?></option>
+                  <option value="22" <?php if ($this->category==22){?>selected<?php }?> ><?php echo $events_commercial?></option>
+                  <option value="23" <?php if ($this->category==23){?>selected<?php }?> >
+                    <?php if (!$this->pg_only) {echo $events_nightlife;}?><?php echo $events_enteme?>
                   </option>
-                  <option value="24" <?php if ($category==24){?>selected<?php }?> ><?php echo $modlos_games?></option>
-                  <option value="25" <?php if ($category==25){?>selected<?php }?> ><?php echo $modlos_pageants?></option>
-                  <option value="26" <?php if ($category==26){?>selected<?php }?> ><?php echo $modlos_edu?></option>
-                  <option value="27" <?php if ($category==27){?>selected<?php }?> ><?php echo $modlos_arts?></option>
-                  <option value="28" <?php if ($category==28){?>selected<?php }?> ><?php echo $modlos_charity?></option>
-                  <option value="29" <?php if ($category==29){?>selected<?php }?> ><?php echo $modlos_misc?></option>
+                  <option value="24" <?php if ($this->category==24){?>selected<?php }?> ><?php echo $events_games?></option>
+                  <option value="25" <?php if ($this->category==25){?>selected<?php }?> ><?php echo $events_pageants?></option>
+                  <option value="26" <?php if ($this->category==26){?>selected<?php }?> ><?php echo $events_edu?></option>
+                  <option value="27" <?php if ($this->category==27){?>selected<?php }?> ><?php echo $events_arts?></option>
+                  <option value="28" <?php if ($this->category==28){?>selected<?php }?> ><?php echo $events_charity?></option>
+                  <option value="29" <?php if ($this->category==29){?>selected<?php }?> ><?php echo $events_misc?></option>
                 </select>
               </td>
             </tr>
 
             <tr align="left">
-              <td nowrap class="head"><?php echo $modlos_charge?></td>
+              <td nowrap class="head"><?php echo $events_charge?></td>
               <td class="odd">
                 <select name="cover_charge">
-                  <option value="0" <?php if ($cover_charge==0){?>selected<?php }?> ><?php echo $modlos_no?></option>
-                  <option value="1" <?php if ($cover_charge==1){?>selected<?php }?> ><?php echo $modlos_yes?></option>
+                  <option value="0" <?php if ($this->cover_charge==0){?>selected<?php }?> ><?php echo $modlos_no?></option>
+                  <option value="1" <?php if ($this->cover_charge==1){?>selected<?php }?> ><?php echo $modlos_yes?></option>
                 </select>&nbsp;&nbsp;
-                <?php echo $modlos_amount?> (L$):&nbsp;<input type="text" name="cover_amount" size="3" maxlength="5" value="<?php echo $cover_amount?>" />
+                <?php echo $events_amount?> (L$):&nbsp;<input type="text" name="cover_amount" size="3" maxlength="5" value="<?php echo $this->cover_amount?>" />
               </td>
             </tr>
 
             <tr align="left">
-              <td class="head"><?php echo $modlos_location?></td>
+              <td class="head"><?php echo $events_location?></td>
               <td class="even">
                 <select name="parcel_name">
-                  <option value="0/0/0|00000000-0000-0000-0000-00000000000"><?php echo $modlos_pick_parcel?></option>
-	      		  <{foreach from=$parcels item="parcel"?>
-                    <?php if ($global_pos==$parcel.landingpoint and $region_uuid==$parcel.regionUUID) {?>
-                      <option value="<?php echo $parcel.landingpoint?>|<?php echo $parcel.regionUUID?>" selected><?php echo $parcel.name?></option>
+                  <option value="0/0/0|00000000-0000-0000-0000-00000000000"><?php echo $events_pick_parcel?></option>
+	      		  <?php foreach ($this->parcels as $parcel) {?>
+                    <?php if ($this->global_pos==$parcel['landingpoint'] and $this->region_uuid==$parcel['regionUUID']) {?>
+                      <option value="<?php echo $parcel['landingpoint']?>|<?php echo $parcel['regionUUID']?>" selected><?php echo $parcel['name']?></option>
                     <?php } else {?>
-                      <option value="<?php echo $parcel.landingpoint?>|<?php echo $parcel.regionUUID?>" ><?php echo $parcel.name?></option>
+                      <option value="<?php echo $parcel['landingpoint']?>|<?php echo $parcel['regionUUID']?>" ><?php echo $parcel['name']?></option>
                     <?php }?>
-	      		  <{/foreach?>
+	      		  <?php }?>
                 </select>
               </td>
             </tr>
 
-            <?php if ($pg_only) {?>
+            <?php if ($this->pg_only) {?>
               <input type="hidden" name="check_mature" value="0" />
             <?php } else {?>
               <tr align="left">
-                <td class="head"><?php echo $modlos_type_ttl?></td>
+                <td class="head"><?php echo $events_type_ttl?></td>
                 <td class="odd">
-                  <input type="checkbox" name="check_mature" value="1" <?php if ($check_mature==1) {?>checked<?php }?> />
-                  <?php echo $modlos_mature_ttl?>
+                  <input type="checkbox" name="check_mature" value="1" <?php if ($this->check_mature==1) {?>checked<?php }?> />
+                  <?php echo $events_mature_ttl?>
                 </td>
               </tr>
             <?php }?>
@@ -127,9 +129,10 @@ function checklength(obj,warning_div){
             <tr>
               <td colspan=2 align=center>
                 <br />
-                <input type="submit" name="action_submit" value="<?php echo $modlos_save?>" />&nbsp;&nbsp;
-                <input type="reset"  value=<?php echo $modlos_reset_ttl?> />
-                <?php if ($event_id>0) {?>
+                <input type="submit" name="action_submit" value="<?php echo $events_save?>" />&nbsp;&nbsp;
+                <input type="reset"  value="<?php echo $modlos_reset_ttl?>" />
+                <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+                <?php if ($this->event_id>0) {?>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="submit" name="submit_delete" value="<?php echo $modlos_delete_ttl?>" />
                 <?php }?>
@@ -154,7 +157,7 @@ function checklength(obj,warning_div){
       <tr>
         <td valign=top align=center>&nbsp;</td>
         <td valign=top align=center width=600>
-          <table width="600" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
+          <table width="600" border="0" align="center" cellpadding="1" cellspacing="1" style="color:#1010e0; font-weight:bold;">
             <tr>
               <td>
                 <ul>
@@ -176,7 +179,7 @@ function checklength(obj,warning_div){
   <?php if ($this->event_saved) {?>
 
     <div align="center">
-      <h3><font color=#1010e0><?php echo $modlos_saved?></font></h3>
+      <h3><font color=#1010e0><?php echo $events_saved?></font></h3>
     </div>
 
     <br />
@@ -186,54 +189,54 @@ function checklength(obj,warning_div){
           <td valign=top align=center>&nbsp;</td>
           <td valign=top align=center width=600>
 
-            <table width="600" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
+            <table width="600" border="0" align="center" cellpadding="1" cellspacing="1" style="color:#1010e0; font-weight:bold;">
               <tr align="left">
-                <td class="head" width=200><?php echo $modlos_name?></td>
-                <td class="even" width=400><?php echo $saved_event_name?></td>
+                <td class="head" width=200><?php echo $events_name?></td>
+                <td class="even" width=400><?php echo $this->saved_event_name?></td>
               </tr>
               <tr align="left">
                 <?php if ($use_utc_time) {?>
-                  <td class="head"><?php echo $modlos_date?>&nbsp;(UTC)</td>
+                  <td class="head"><?php echo $events_date?>&nbsp;(UTC)</td>
                 <?php } else {?>
-                  <td class="head"><?php echo $modlos_date?>&nbsp;(Local)</td>
+                  <td class="head"><?php echo $events_date?>&nbsp;(Local)</td>
                 <?php }?>
-                <td class="odd"><?php echo $saved_event_date?></td>
+                <td class="odd"><?php echo $this->saved_event_date?></td>
               </tr>
               <tr align="left">
-                <td class="head"><?php echo $modlos_category?></td>
+                <td class="head"><?php echo $events_category?></td>
                 <td class="even">
-                  <?php if ($saved_category==0) {?><?php echo $modlos_all_category?><?php }?>
-                  <?php if ($saved_category==18){?><?php echo $modlos_discussion?><?php }?>
-                  <?php if ($saved_category==19){?><?php echo $modlos_sports?><?php }?>
-                  <?php if ($saved_category==20){?><?php echo $modlos_music?><?php }?>
-                  <?php if ($saved_category==22){?><?php echo $modlos_commercial?><?php }?>
-                  <?php if ($saved_category==23){?>
-                    <?php if (!$pg_only) {?><?php echo $modlos_nightlife?><?php }?><?php echo $modlos_enteme?>
+                  <?php if ($this->saved_category==0) {?><?php echo $events_all_category?><?php }?>
+                  <?php if ($this->saved_category==18){?><?php echo $events_discussion?><?php }?>
+                  <?php if ($this->saved_category==19){?><?php echo $events_sports?><?php }?>
+                  <?php if ($this->saved_category==20){?><?php echo $events_music?><?php }?>
+                  <?php if ($this->saved_category==22){?><?php echo $events_commercial?><?php }?>
+                  <?php if ($this->saved_category==23){?>
+                    <?php if (!$this->pg_only) {?><?php echo $events_nightlife?><?php }?><?php echo $events_enteme?>
                   <?php }?>
-                  <?php if ($saved_category==24){?><?php echo $modlos_games?><?php }?>
-                  <?php if ($saved_category==25){?><?php echo $modlos_pageants?><?php }?>
-                  <?php if ($saved_category==26){?><?php echo $modlos_edu?><?php }?>
-                  <?php if ($saved_category==27){?><?php echo $modlos_arts?><?php }?>
-                  <?php if ($saved_category==28){?><?php echo $modlos_charity?><?php }?>
-                  <?php if ($saved_category==29){?><?php echo $modlos_misc?><?php }?>
+                  <?php if ($this->saved_category==24){?><?php echo $events_games?><?php }?>
+                  <?php if ($this->saved_category==25){?><?php echo $events_pageants?><?php }?>
+                  <?php if ($this->saved_category==26){?><?php echo $events_edu?><?php }?>
+                  <?php if ($this->saved_category==27){?><?php echo $events_arts?><?php }?>
+                  <?php if ($this->saved_category==28){?><?php echo $events_charity?><?php }?>
+                  <?php if ($sthis->aved_category==29){?><?php echo $events_misc?><?php }?>
                 </td>
               </tr>
               <tr align="left">
-                <td class="head"><?php echo $modlos_owner?></td>
-                <td class="odd" ><?php echo $saved_event_owner?></td>
+                <td class="head"><?php echo $events_owner?></td>
+                <td class="odd" ><?php echo $this->saved_event_owner?></td>
               </tr>
               <tr align=left>
-                <td class="head"><?php echo $modlos_location?></td>
-                <td class="even"><?php echo $saved_region_name?>&nbsp;:&nbsp; <?php echo $saved_global_pos?></td>
+                <td class="head"><?php echo $events_location?></td>
+                <td class="even"><?php echo $this->saved_region_name?>&nbsp;:&nbsp; <?php echo $this->saved_global_pos?></td>
               </tr>
               <tr align=left>
-                <td class="head"><?php echo $modlos_amount?>&nbsp;(L$)</td>
-                <td class="odd" ><?php echo $saved_cover_amount?></td>
+                <td class="head"><?php echo $events_amount?>&nbsp;(L$)</td>
+                <td class="odd" ><?php echo $this->saved_cover_amount?></td>
               </tr>
               <?php if (!$pg_only) {?>
                 <tr align="left">
-                  <td class="head"><?php echo $modlos_type?></td>
-                  <td class="even"><strong><img height=20px width=20px <?php echo $saved_event_type?> /></strong></td>
+                  <td class="head"><?php echo $events_type?></td>
+                  <td class="even"><strong><img height=20px width=20px <?php echo $this->saved_event_type?> /></strong></td>
                 </tr>
               <?php }?>
             </table>

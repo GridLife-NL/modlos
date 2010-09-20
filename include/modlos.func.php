@@ -194,7 +194,7 @@ function  modlos_get_avatars($uid=0, $use_sloodle=false)
 		}
 	}
 
-	return $avtars;
+	return $avatars;
 }
 
 

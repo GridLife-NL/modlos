@@ -60,7 +60,7 @@ define('MDL_PROFILE_USERPICKS_TBL',  	MDL_MODLOS_PREFIX.'profile_userpicks');
 define('MDL_PROFILE_USERPROFILE_TBL',  	MDL_MODLOS_PREFIX.'profile_userprofile');
 define('MDL_PROFILE_USERSETTINGS_TBL',	MDL_MODLOS_PREFIX.'profile_usersettings');
 
-define('MDL_SEARCH_ALLPERCELS_TBL',		MDL_MODLOS_PREFIX.'search_allparcels');
+define('MDL_SEARCH_ALLPARCELS_TBL',		MDL_MODLOS_PREFIX.'search_allparcels');
 define('MDL_SEARCH_CLASSIFIEDS_TBL',	MDL_MODLOS_PREFIX.'profile_classifieds');
 define('MDL_SEARCH_EVENTS_TBL',			MDL_MODLOS_PREFIX.'search_events');
 define('MDL_SEARCH_HOSTSREGISTER_TBL', 	MDL_MODLOS_PREFIX.'search_hostsregister');
@@ -123,7 +123,7 @@ define('PROFILE_USERSETTINGS_TBL',	$CFG->prefix.MDL_PROFILE_USERSETTINGS_TBL);
 
 
 // Search the In World. see also search_config.php 
-define('SEARCH_ALLPERCELS_TBL',		$CFG->prefix.MDL_SEARCH_ALLPERCELS_TBL);
+define('SEARCH_ALLPARCELS_TBL',		$CFG->prefix.MDL_SEARCH_ALLPARCELS_TBL);
 define('SEARCH_CLASSIFIEDS_TBL',	$CFG->prefix.MDL_SEARCH_CLASSIFIEDS_TBL);
 define('SEARCH_EVENTS_TBL',			$CFG->prefix.MDL_SEARCH_EVENTS_TBL);
 define('SEARCH_HOSTSREGISTER_TBL', 	$CFG->prefix.MDL_SEARCH_HOSTSREGISTER_TBL);

@@ -5,6 +5,9 @@ $string['modlos'] 					= 'Modlos';
 
 
 // Main
+$string['modlos_yes'] 				= 'Yes';
+$string['modlos_no'] 				= 'No';
+
 $string['modlos_uuid'] 				= 'UUID';
 $string['modlos_firstname'] 		= 'First Name';
 $string['modlos_lastname'] 			= 'Last Name';
@@ -21,7 +24,7 @@ $string['modlos_state_invalid']	 	= 'Invalid State';
 $string['modlos_state_deleted'] 	= 'Deleted';
 $string['modlos_status'] 			= 'Status';
 $string['modlos_grid_status'] 		= 'Grid Status';
-$string['modlos_no'] 				= 'No.';
+$string['modlos_num'] 				= 'No.';
 $string['modlos_ipaddr'] 			= 'IP Address';
 $string['modlos_info'] 				= 'Info';
 $string['modlos_edit'] 				= 'Edit';

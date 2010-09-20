@@ -4,6 +4,9 @@ $string['modlos_menu'] 				= 'Moodle OpenSim';
 $string['modlos'] 					= 'Modlos';
 
 // Main
+$string['modlos_yes'] 				= 'はい';
+$string['modlos_no'] 				= 'いいえ';
+
 $string['modlos_uuid'] 				= 'UUID';
 $string['modlos_firstname'] 		= 'ファーストネーム';
 $string['modlos_lastname'] 			= 'ラストネーム';
@@ -20,7 +23,7 @@ $string['modlos_state_invalid'] 	= '拒否設定';
 $string['modlos_state_deleted'] 	= '削除済み';
 $string['modlos_status'] 			= 'ステータス';
 $string['modlos_grid_status'] 		= 'グリッドの状態';
-$string['modlos_no'] 				= 'No.';
+$string['modlos_num'] 				= 'No.';
 $string['modlos_ipaddr'] 			= 'IPアドレス';
 $string['modlos_info'] 				= 'これについて・・・';
 $string['modlos_edit'] 				= '編集';

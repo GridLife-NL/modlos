@@ -51,8 +51,8 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->addFieldInfo('infouuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, '00000000-0000-0000-0000-000000000000');
 		$table->addFieldInfo('parcelarea', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
 
-		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
-		$table->addKeyInfo('regionuuid', XMLDB_KEY_UNIQUE, array('regionuuid'));
+        $table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
+        $table->addKeyInfo('parceluuid', XMLDB_KEY_UNIQUE, array('parceluuid'));
 		$result = $result && create_table($table);
 	}
 
@@ -236,7 +236,6 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->addKeyInfo('uuid', XMLDB_KEY_UNIQUE, array('regionuuid', 'parceluuid'));
 		$result = $result && create_table($table);
 	}
-
 
 	return $result;
 }
