@@ -12,6 +12,7 @@ class  EditAvatar
 	var $regionNames = array();
 
 	var $hasPermit	= false;
+	var $isGuest	= true;
 	var $action_url = '';
 	var $delete_url = '';
 	var $course_id	= 0;
@@ -45,6 +46,12 @@ class  EditAvatar
 		global $CFG, $USER;
 
 		require_login($course_id);
+
+		// for Guest
+		$this->isGuest= isguest();
+		if ($this->isGuest) {
+			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+		}
 
 		// for HTTPS
 		$use_https = $CFG->modlos_use_https;

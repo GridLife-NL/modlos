@@ -14,8 +14,10 @@ class  EventsList
 	var $userid	   = 0;
 	var $use_utc_time;
 
-	var $action;
 	var $action_url;
+	var $make_event_url;
+	var $edit_event_url;
+	var $del_event_url;
 
 	var $course_id	 = '';
 	var $course_amp	 = '';
@@ -42,45 +44,26 @@ class  EventsList
 
 		require_login($course_id);
 
+		// for Guest
 		$this->isGuest   = isguest();
+		if ($this->isGuest) {
+			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+		}
+
 		$this->hasPermit = hasModlosPermit($course_id);
 		$this->course_id = $course_id;
 		$this->userid	 = $USER->id;
 
-		if ($isGuest) {
-			exit('<h4>guest user is not allowed to access this page!!</h4>');
-		}
+		$this->date_frmt = $CFG->modlos_date_format;
+		$this->pg_only   = $CFG->modlos_pg_only;
 
-		$this->date_frmt 	= $CFG->modlos_date_format;
-		$this->pg_only   	= $CFG->modlos_pg_only;
 		$this->use_utc_time = $CFG->modlos_use_utc_time;
 		if ($this->use_utc_time) date_default_timezone_set('UTC');
    
-
-		$this->pstart = $root->mContext->mRequest->getRequest('pstart');
-		$this->plimit = $root->mContext->mRequest->getRequest('plimit');
-		if ($this->pstart!='' and !preg_match('/^[0-9]+$/', $this->pstart)) $this->pstart = '';
-		if ($this->plimit!='' and !preg_match('/^[0-9]+$/', $this->plimit)) $this->plimit = '';
-		if ($this->pstart=='') $this->pstart = $this->Cpstart;
-		if ($this->plimit=='') $this->plimit = $this->Cplimit;
-   
-		$this->action = 'index.php?action=events';
-		$this->action_url = CMS_MODULE_URL.'/'.$this->action;
-		$this->make_event_url = CMS_MODULE_URL.'/index.php?action=edit_event';
-		$this->edit_event_url = CMS_MODULE_URL.'/index.php?action=edit_event&amp;eventid=';
-		$this->del_event_url  = CMS_MODULE_URL.'/index.php?action=del_event';
-   
-		return true;
-
-
-
-
-
-
-
-
-		$this->action 	  = 'events_list.php';
-		$this->action_url = CMS_MODULE_URL.'/actions/'.$this->action;
+		$this->action_url	  = CMS_MODULE_URL.'/actions/events_list.php';
+		$this->make_event_url = CMS_MODULE_URL.'/actions/edit_event.php';
+		$this->edit_event_url = CMS_MODULE_URL.'/actions/edit_event.php?eventid=';
+		$this->del_event_url  = CMS_MODULE_URL.'/actions/del_event.php';
 
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
@@ -93,33 +76,8 @@ class  EventsList
 
 	function  set_condition() 
 	{
-		$this->order = optional_param('order', '', PARAM_TEXT);
-		if (!isAlphabetNumeric($this->order)) $this->order = '';
-
-		$db_ver = opensim_get_db_version(); 
-		if ($db_ver==null) {
-			$course_url = $CFG->wwwroot;
-			if ($course_id>0) $course_url .= '/course/view.php?id='.$this->course_id;
-			error(get_string('modlos_db_connect_error', 'block_modlos'), $course_url);
-		}
-
-		$sql_order = '';
-		if ($this->order=='name')       $sql_order = ' ORDER BY regionName ASC';
-		else if ($this->order=='x')     $sql_order = ' ORDER BY locX ASC';
-		else if ($this->order=='y')     $sql_order = ' ORDER BY locY ASC';
-		else if ($this->order=='ip')    $sql_order = ' ORDER BY serverIP ASC';
-		else if ($this->order=='estid') $sql_order = ' ORDER BY estate_map.EstateID ASC';
-		else if ($this->order=='owner') {
-			if ($db_ver=='0.6') $sql_order = ' ORDER BY username, lastname ASC';
-			else                $sql_order = ' ORDER BY FirstName,LastName ASC';
-		}
-
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
-
-		// SQL Condition
-		$sql_limit = "LIMIT $this->pstart, $this->plimit";
-		$this->sql_condition = " $sql_order $sql_limit";
 
 		return true;
 	}
@@ -128,7 +86,13 @@ class  EventsList
 
 	function  execute()
 	{
-		$this->number    = opensim_get_events_num();
+		if ($this->hasPermit) {
+			$this->number = modlos_get_events_num(0, $this->pg_only);
+		}
+		else {
+			$this->number = modlos_get_events_num($this->userid, $this->pg_only);
+		}
+
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
 		if ($this->sitemax==0) $this->sitemax = 1; 
@@ -171,30 +135,30 @@ class  EventsList
 		if ($this->plimit != 100) $this->icon[6] = 'icon_limit_100_on';
 
 
-		$voice_mode[0] = $regions_list_ttl = get_string('modlos_voice_inactive_chnl', 'block_modlos');
-		$voice_mode[1] = $regions_list_ttl = get_string('modlos_voice_private_chnl',  'block_modlos');
-		$voice_mode[2] = $regions_list_ttl = get_string('modlos_voice_percel_chnl',   'block_modlos');
-
-
-		// auto synchro
-		modlos_sync_opensimdb();
-		if ($this->use_sloodle) modlos_sync_sloodle_users();
-
 		//
-		$regions = opensim_get_regions_infos($this->sql_condition);
+		if ($this->hasPermit) {
+			$events = modlos_get_events(0, $this->pstart, $this->plimit, $this->pg_only);
+		}
+		else {
+			$events = modlos_get_events($this->userid, $this->pstart, $this->plimit, $this->pg_only);
+		}
+   
 		$colum = 0;
-		foreach($regions as $region) {
-			$this->db_data[$colum] = $region;
-			$this->db_data[$colum]['num']   = $colum;
-			$this->db_data[$colum]['locX']  = $this->db_data[$colum]['locX']/256;
-			$this->db_data[$colum]['locY']  = $this->db_data[$colum]['locY']/256;
-			$vcmode = opensim_get_voice_mode($region['UUID']);
-			$this->db_data[$colum]['voice'] = $voice_mode[$vcmode];
-
-			$this->db_data[$colum]['uuid']    = str_replace('-', '',  $region['UUID']);
-			$this->db_data[$colum]['ow_uuid'] = str_replace('-', '',  $region['owner_uuid']);
-			$this->db_data[$colum]['ip_name'] = str_replace('.', 'X', $region['serverIP']);
-
+		foreach($events as $event) {
+			if (!$this->pg_only or $event['eventflags']==0) {
+				$avatar_name = opensim_get_avatar_name($event['creatoruuid']);
+				$this->db_data[$colum] = $event;
+				$this->db_data[$colum]['num']	  = $colum;
+				$this->db_data[$colum]['time']	  = date($this->date_frmt, $event['dateUTC']);
+				$this->db_data[$colum]['creator'] = $avatar_name['fullname'];
+   
+				if ($event['eventflags']==0) {
+					$this->db_data[$colum]['type'] = "title='PG Event' src=./images/events/blue_star.gif";
+				}
+				else {
+					$this->db_data[$colum]['type'] = "title='Mature Event' src=./images/events/pink_star.gif";
+				}
+			}
 			$colum++;
 		}
 
@@ -207,28 +171,31 @@ class  EventsList
 	{
 		global $CFG;
 
-		$grid_name       = $CFG->modlos_grid_name;
-		$content         = $CFG->modlos_regions_content;
+		$grid_name		= $CFG->modlos_grid_name;
+		$module_url		= CMS_MODULE_URL;
 
-		$order_param	 = "?order=$this->order";
-		$course_amp 	 = $this->course_amp;
-		$pstart_amp	 	 = "&amp;pstart=$this->pstart";
-		$plimit_amp	 	 = "&amp;plimit=$this->plimit";
-		$pstart_		 = '&amp;pstart=';
-		$plimit_		 = '&amp;plimit=';
+		$course_amp 	= $this->course_amp;
+		$pstart_amp	 	= "&amp;pstart=$this->pstart";
+		$plimit_amp	 	= "&amp;plimit=$this->plimit";
+		$pstart_		= '&amp;pstart=';
+		$plimit_		= '&amp;plimit=';
 
-		$regions_list_ttl= get_string('modlos_regions_list',   'block_modlos');
-		$location_x    	 = get_string('modlos_location_x',	   'block_modlos');
-		$location_y      = get_string('modlos_location_y',	   'block_modlos');
-		$region_name     = get_string('modlos_region_name',	   'block_modlos');
-		$estate_owner    = get_string('modlos_estate_owner',   'block_modlos');
-		$ip_address      = get_string('modlos_ipaddr',		   'block_modlos');
-		$regions_found   = get_string('modlos_regions_found',  'block_modlos');
-		$page_num	     = get_string('modlos_page',		   'block_modlos');
-		$page_num_of     = get_string('modlos_page_of',		   'block_modlos');
-		$voice_chat_mode = get_string('modlos_voice_chat_mode','block_modlos');
+		$events_list_ttl 	= get_string('modlos_events_list',   	'block_modlos');
+		$events_make_link	= get_string('modlos_events_make_link', 'block_modlos');
+		$events_click_here	= get_string('modlos_events_click_here','block_modlos');
 
-		include(CMS_MODULE_PATH.'/html/regions.html');
+		$events_date	= get_string('modlos_events_date',  'block_modlos');
+		$events_type	= get_string('modlos_events_type',  'block_modlos');
+		$events_name	= get_string('modlos_events_name',  'block_modlos');
+		$events_owner	= get_string('modlos_events_owner', 'block_modlos');
+		$events_found	= get_string('modlos_events_found', 'block_modlos');
+
+		$page_num		= get_string('modlos_page',		   	'block_modlos');
+		$page_num_of	= get_string('modlos_page_of',	 	'block_modlos');
+		$modlos_edit	= get_string('modlos_edit',		  	'block_modlos');
+		$modlos_delete	= get_string('modlos_delete',	   	'block_modlos');
+
+		include(CMS_MODULE_PATH.'/html/events.html');
 	}
 }
 

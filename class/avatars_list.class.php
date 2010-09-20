@@ -55,8 +55,13 @@ class  AvatarsList
 
 		require_login($course_id);
 
+		// for Guest
+		$this->isGuest = isguest();
+		if ($this->isGuest) {
+			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+		}
+
 		$this->course_id   = $course_id;
-		$this->isGuest	 = isguest();
 		$this->hasPermit   = hasModlosPermit($course_id);
 		$this->date_format = $CFG->modlos_date_format;
 		$course_param 	   = '?course='.$course_id;

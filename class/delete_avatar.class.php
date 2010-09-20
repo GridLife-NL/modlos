@@ -9,6 +9,7 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 class  DeleteAvatar
 {
 	var $hasPermit	= false;
+	var $isGuest	= true;
 	var $action_url = '';
 	var $cancel_url = '';
 	var $return_url = '';
@@ -42,11 +43,16 @@ class  DeleteAvatar
 
 		require_login($course_id);
 
+		// for Guest
+		$this->isGuest= isguest();
+		if ($this->isGuest) {
+			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+		}
+
 		$course_param = '?course='.$course_id;
 		$this->course_id  = $course_id;
 		$this->action_url = CMS_MODULE_URL.'/actions/delete_avatar.php';
 		$this->cancel_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param;
-
 
 		// get UUID from POST or GET
 		$this->return_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param;

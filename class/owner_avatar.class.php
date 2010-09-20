@@ -9,6 +9,7 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 class  OwnerAvatar
 {
 	var $hashPermit = false;
+	var $isGuest 	= true;
 	var $action_url = '';
 	var $return_url = '';
 	var $updated_owner = false;
@@ -38,6 +39,12 @@ class  OwnerAvatar
 		global $CFG, $USER;
 
 		require_login($course_id);
+
+		// for Guest
+		$this->isGuest= isguest();
+		if ($this->isGuest) {
+			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+		}
 
 		// for HTTPS
 		$use_https = $CFG->modlos_use_https;

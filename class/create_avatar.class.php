@@ -13,6 +13,7 @@ class  CreateAvatar
 	var $actvLastName = false;
 
 	var $hasPermit 	= false;
+	var $isGuest 	= true;
 	var $action_url	= '';
 	var $created_avatar = false;
 
@@ -45,6 +46,12 @@ class  CreateAvatar
 
 		require_login($course_id);
 
+		// for Guest
+		$this->isGuest = isguest();
+		if ($this->isGuest) {
+			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+		}
+
 		// for HTTPS
 		$use_https = $CFG->modlos_use_https;
 		if ($use_https) {
@@ -54,7 +61,6 @@ class  CreateAvatar
 		}
 		else $module_url = CMS_MODULE_URL;
 
-		//
 		$this->course_id	= $course_id;
 		$this->hasPermit	= hasModlosPermit($course_id);
 		$this->action_url  	= $module_url.'/actions/create_avatar.php';
