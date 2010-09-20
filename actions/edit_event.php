@@ -18,7 +18,6 @@ $event = new EditEvent($course_id);
 
 print_tabnav($action, $course, !$event->isAvatarMax);
 
-$event->set_condition();
 $event->execute();
 $event->print_page();
 

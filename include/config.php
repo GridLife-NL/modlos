@@ -24,6 +24,8 @@ define('OPENSIM_DB_USER',			$CFG->modlos_sql_db_user);
 define('OPENSIM_DB_PASS',			$CFG->modlos_sql_db_pass);
 define('OPENSIM_HMREGION',			$CFG->modlos_home_region);
 
+define('OPENSIM_PG_ONLY',			$CFG->modlos_pg_only);
+
 
 // for CMS/LMS DB
 define('CMS_DB_HOST',				$CFG->dbhost);

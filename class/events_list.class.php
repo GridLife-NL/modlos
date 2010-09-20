@@ -14,13 +14,11 @@ class  EventsList
 	var $userid	   = 0;
 	var $use_utc_time;
 
-	var $action_url;
-	var $make_event_url;
-	var $edit_event_url;
-	var $del_event_url;
+	var $make_url;
+	var $edit_url;
+	var $delete_url;
 
 	var $course_id	 = '';
-	var $course_param = '?course=0';
 	var $isAvatarMax = false;
 
 	var $pstart;
@@ -53,33 +51,25 @@ class  EventsList
 		$this->hasPermit = hasModlosPermit($course_id);
 		$this->course_id = $course_id;
 		$this->userid	 = $USER->id;
-
 		$this->date_frmt = $CFG->modlos_date_format;
 		$this->pg_only   = $CFG->modlos_pg_only;
+		$this->pstart 	 = optional_param('pstart', "$this->Cpstart", PARAM_INT);
+		$this->plimit 	 = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 
 		$this->use_utc_time = $CFG->modlos_use_utc_time;
 		if ($this->use_utc_time) date_default_timezone_set('UTC');
    
-		$this->action_url	  = CMS_MODULE_URL.'/actions/events_list.php';
-		$this->make_event_url = CMS_MODULE_URL.'/actions/edit_event.php';
-		$this->edit_event_url = CMS_MODULE_URL.'/actions/edit_event.php?eventid=';
-		$this->del_event_url  = CMS_MODULE_URL.'/actions/delete_event.php';
-
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
 
-		if ($course_id>0) $this->course_param = '?course='.$course_id;
-	}
+		course_param = '?course='.$course_id;
 
+		$this->action_url = CMS_MODULE_URL.'/actions/events_list.php'.$course_param;
+		$this->make_url	  = CMS_MODULE_URL.'/actions/edit_event.php'.$course_param;
+		$this->edit_url   = CMS_MODULE_URL.'/actions/edit_event.php'.$course_param."&amp;eventid=";
+		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$course_param."&amp;eventid=";
 
-
-	function  set_condition() 
-	{
-		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
-		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
-
-		return true;
 	}
 
 
@@ -174,7 +164,6 @@ class  EventsList
 		$grid_name		= $CFG->modlos_grid_name;
 		$module_url		= CMS_MODULE_URL;
 
-		$course_param 	= $this->course_param;
 		$pstart_amp	 	= "&amp;pstart=$this->pstart";
 		$plimit_amp	 	= "&amp;plimit=$this->plimit";
 		$pstart_		= '&amp;pstart=';

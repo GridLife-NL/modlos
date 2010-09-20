@@ -20,7 +20,7 @@ class  AvatarsList
 	var $avatar_url;
 
 	var $course_id  = 0;
-	var $course_amp	= '';
+	var $url_param  = '';
 
 	var $use_sloodle = false;
 	var $isAvatarMax = false;
@@ -64,15 +64,18 @@ class  AvatarsList
 		$this->course_id   = $course_id;
 		$this->hasPermit   = hasModlosPermit($course_id);
 		$this->date_format = $CFG->modlos_date_format;
-		$course_param 	   = '?course='.$course_id;
 		$this->course_id   = $course_id;
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
-		$this->action_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param;
-		$this->edit_url	   = CMS_MODULE_URL.'/actions/edit_avatar.php'. $course_param;
-		$this->owner_url   = CMS_MODULE_URL.'/actions/owner_avatar.php'.$course_param;
-		$this->search_url  = CMS_MODULE_URL.'/actions/avatars_list.php?pstart=0';
-		$this->avatar_url  = $CFG->wwwroot.'/user/view.php';
+		if ($course_id>0) $course_amp = '&amp;course='.$course_id;
+		else 			  $course_amp = '';
+
+		$this->url_param   = '?dmmy_param='.$course_amp;	
+		$this->action_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param;
+		$this->edit_url	   = CMS_MODULE_URL.'/actions/edit_avatar.php'. $this->url_param;
+		$this->owner_url   = CMS_MODULE_URL.'/actions/owner_avatar.php'.$this->url_param;
+		$this->search_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param.'&amp;pstart=0';
+		$this->avatar_url  = $CFG->wwwroot.'/user/view.php'.$this->url_param;
 
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
@@ -81,7 +84,6 @@ class  AvatarsList
 		$this->use_utc_time = $CFG->modlos_use_utc_time;
 		if ($this->use_utc_time) date_default_timezone_set('UTC');
 
-		if ($course_id>0) $this->course_amp = '&amp;course='.$course_id;
 	}
 
 
@@ -290,7 +292,7 @@ class  AvatarsList
 		$userinfo		= $CFG->modlos_userinfo_link;
 		$date_format	= $CFG->modlos_date_format;
 
-		$course_amp		= $this->course_amp;
+		$url_param		= $this->url_param;
 		$plimit_amp		= "&amp;plimit=$this->plimit";
 		$pstart_		= '&amp;pstart=';
 		$plimit_		= '&amp;plimit=';

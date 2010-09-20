@@ -9,7 +9,7 @@
             <br />
             <strong>
               <?php echo $events_make_link?>&nbsp;
-              <a href=<?php echo $make_event_url?> ><?php echo $events_click_here?></a>
+              <a href=<?php echo $make_url?> ><?php echo $events_click_here?></a>
             </strong>
           </td>
         </tr>
@@ -73,7 +73,7 @@
                       <tr>
                         <td>
                           <?php if ($this->icon[0]=="on") {?>
-                            <a href="<?php echo $this->action_url.$course_param.$plimit_amp.$pstart_.'0'?>" target="_self">
+                            <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.'0'?>" target="_self">
                           <?php }?>
                             <img src="<?php echo $module_url.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
                           <?php if ($this->icon[0]=="on") {?>
@@ -82,7 +82,7 @@
                         </td>
                         <td>
                           <?php if ($this->icon[0]=="on") {?>
-                            <a href="<?php echo $this->action_url.$course_param.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
+                            <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
                           <?php }?>
                             <img src="<?php echo $module_url.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
                           <?php if ($this->icon[0]=="on") {?>
@@ -98,7 +98,7 @@
 
                         <td>
                           <?php if ($this->icon[1]=="on") {?>
-                            <a href="<?php echo $this->action_url.$course_param.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
+                            <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
                           <?php }?>
                             <img src="<?php echo $module_url.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
                           <?php if ($this->icon[1]=="on") {?>
@@ -107,7 +107,7 @@
                         </td>
                         <td>
                           <?php if ($this->icon[1]=="on") {?>
-                            <a href="<?php echo $this->action_url.$course_param.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
+                            <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
                           <?php }?>
                             <img src="<?php echo $module_url.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
                           <?php if ($this->icon[1]=="on") {?>
@@ -118,22 +118,22 @@
                         <td width="10"></td>
                         <td width="10"></td>
                         <td>
-                         <a href="<?php echo $this->action_url.$course_param.$pstart_.'0'.$plimit_.'10'?>" target="_self">
+                         <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'10'?>" target="_self">
                             <img src="<?php echo $module_url.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" alt="Limit 10">
                           </a>
                         </td>
                         <td>
-                          <a href="<?php echo $this->action_url.$course_param.$pstart_.'0'.$plimit_.'25'?>" target="_self">
+                          <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'25'?>" target="_self">
                             <img src="<?php echo $module_url.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" alt="Limit 25">
                           </a>
                         </td>
                         <td>
-                          <a href="<?php echo $this->action_url.$course_param.$pstart_.'0'.$plimit_.'50'?>" target="_self">
+                          <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'50'?>" target="_self">
                             <img src="<?php echo $module_url.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" alt="Limit 50">
                           </a>
                         </td>
                         <td>
-                          <a href="<?php echo $this->action_url.$course_param.$pstart_.'0'.$plimit_.'100'?>" target="_self">
+                          <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'100'?>" target="_self">
                             <img src="<?php echo $module_url.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" alt="Limit 100">
                           </a>
                         </td>
@@ -182,8 +182,8 @@
         <td width=30>&nbsp;</td>
         <td width=80>
           <?php if ($this->hasPermit or $this->userid==$dat.uid) {?>
-            <a href=<?php echo $this->edit_event_url?><?php echo $dat.eventid?> ><u><?php echo $this->modlos_edit?></u></a>&nbsp;
-            <a href=<?php echo $this->del_event_url?>  ><u><?php echo $modlos_delete?></u></a>
+            <a href=<?php echo $this->edit_url.$dat.eventid?>   ><u><?php echo $modlos_edit?></u></a>&nbsp;
+            <a href=<?php echo $this->delete_url.$dat.eventid?> ><u><?php echo $modlos_delete?></u></a>
           <?php } else {?>
             &nbsp;
           <?php }?>

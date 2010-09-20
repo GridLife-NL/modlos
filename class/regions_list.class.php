@@ -8,23 +8,22 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 class  RegionsList
 {
-	var $icon 		= array();
-	var $pnum 		= array();
-	var $action;
-	var $action_url;
+	var $icon = array();
+	var $pnum = array();
 
-	var $course_id	= '';
-	var $course_amp = '';
+	var $action_url;
+	var $course_id;
+	var $url_param = '';
 
 	var $isAvatarMax = false;
 	var $use_sloodle = false;
 
-	var $hasPermit 	= false;
-	var $isGuest 	= true;
+	var $hasPermit = false;
+	var $isGuest   = true;
 
-	var $Cpstart 	= 0;
-	var $Cplimit 	= 25;
-	var $order   	= '';
+	var $Cpstart = 0;
+	var $Cplimit = 25;
+	var $order   = '';
 	var $pstart;
 	var $plimit;
 	var $number;
@@ -38,18 +37,21 @@ class  RegionsList
 	{
 		global $CFG, $USER;
 
-		$this->isGuest    = isguest();
-		$this->hasPermit  = hasModlosPermit($course_id);
-		$this->course_id  = $course_id;
-		$this->action 	  = 'regions_list.php';
-		$this->action_url = CMS_MODULE_URL.'/actions/'.$this->action;
+		$this->isGuest   = isguest();
+		$this->hasPermit = hasModlosPermit($course_id);
+		$this->course_id = $course_id;
+
+		if ($course_id>0) $course_param = '?course='.$course_id;
+		else			  $course_param = '';
+
+		$this->url_param  = '?dmmy_param='.$course_id;
+		$this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param;
 
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
 
-		if ($course_id>=0) $this->course_amp = '&amp;course='.$course_id;
 	}
 
 
@@ -67,14 +69,14 @@ class  RegionsList
 		}
 
 		$sql_order = '';
-		if ($this->order=='name')       $sql_order = ' ORDER BY regionName ASC';
-		else if ($this->order=='x')     $sql_order = ' ORDER BY locX ASC';
-		else if ($this->order=='y')     $sql_order = ' ORDER BY locY ASC';
-		else if ($this->order=='ip')    $sql_order = ' ORDER BY serverIP ASC';
+		if ($this->order=='name')	 	$sql_order = ' ORDER BY regionName ASC';
+		else if ($this->order=='x')	 	$sql_order = ' ORDER BY locX ASC';
+		else if ($this->order=='y')	 	$sql_order = ' ORDER BY locY ASC';
+		else if ($this->order=='ip')	$sql_order = ' ORDER BY serverIP ASC';
 		else if ($this->order=='estid') $sql_order = ' ORDER BY estate_map.EstateID ASC';
 		else if ($this->order=='owner') {
 			if ($db_ver=='0.6') $sql_order = ' ORDER BY username, lastname ASC';
-			else                $sql_order = ' ORDER BY FirstName,LastName ASC';
+			else				$sql_order = ' ORDER BY FirstName,LastName ASC';
 		}
 
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
@@ -91,7 +93,7 @@ class  RegionsList
 
 	function  execute()
 	{
-		$this->number    = opensim_get_regions_num();
+		$this->number	= opensim_get_regions_num();
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
 		if ($this->sitemax==0) $this->sitemax = 1; 
@@ -154,7 +156,7 @@ class  RegionsList
 			$vcmode = opensim_get_voice_mode($region['UUID']);
 			$this->db_data[$colum]['voice'] = $voice_mode[$vcmode];
 
-			$this->db_data[$colum]['uuid']    = str_replace('-', '',  $region['UUID']);
+			$this->db_data[$colum]['uuid']	  = str_replace('-', '',  $region['UUID']);
 			$this->db_data[$colum]['ow_uuid'] = str_replace('-', '',  $region['owner_uuid']);
 			$this->db_data[$colum]['ip_name'] = str_replace('.', 'X', $region['serverIP']);
 
@@ -170,9 +172,11 @@ class  RegionsList
 	{
 		global $CFG;
 
-		$grid_name       = $CFG->modlos_grid_name;
-		$content         = $CFG->modlos_regions_content;
+		$grid_name	   	 = $CFG->modlos_grid_name;
+		$content		 = $CFG->modlos_regions_content;
 
+		$url_param 		 = $this->url_param;
+		$order_amp 		 = "&amp;order=$this->order";
 		$course_amp 	 = $this->course_amp;
 		$pstart_amp	 	 = "&amp;pstart=$this->pstart";
 		$plimit_amp	 	 = "&amp;plimit=$this->plimit";
@@ -180,14 +184,14 @@ class  RegionsList
 		$plimit_		 = '&amp;plimit=';
 
 		$regions_list_ttl= get_string('modlos_regions_list',   'block_modlos');
-		$location_x    	 = get_string('modlos_location_x',	   'block_modlos');
-		$location_y      = get_string('modlos_location_y',	   'block_modlos');
-		$region_name     = get_string('modlos_region_name',	   'block_modlos');
-		$estate_owner    = get_string('modlos_estate_owner',   'block_modlos');
-		$ip_address      = get_string('modlos_ipaddr',		   'block_modlos');
+		$location_x		 = get_string('modlos_location_x',	   'block_modlos');
+		$location_y	  	 = get_string('modlos_location_y',	   'block_modlos');
+		$region_name	 = get_string('modlos_region_name',	   'block_modlos');
+		$estate_owner	 = get_string('modlos_estate_owner',   'block_modlos');
+		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
 		$regions_found   = get_string('modlos_regions_found',  'block_modlos');
-		$page_num	     = get_string('modlos_page',		   'block_modlos');
-		$page_num_of     = get_string('modlos_page_of',		   'block_modlos');
+		$page_num		 = get_string('modlos_page',		   'block_modlos');
+		$page_num_of	 = get_string('modlos_page_of',		   'block_modlos');
 		$voice_chat_mode = get_string('modlos_voice_chat_mode','block_modlos');
 
 		include(CMS_MODULE_PATH.'/html/regions.html');

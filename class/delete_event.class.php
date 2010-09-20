@@ -19,8 +19,8 @@ class  DeleteEvent
 	var $edit_event_url;
 	var $del_event_url;
 
-	var $course_id	 = '';
-	var $course_amp	 = '';
+	var $course_id	  = '';
+	var $course_param = '?course=0';
 	var $isAvatarMax = false;
 
 	var $pstart;
@@ -56,6 +56,8 @@ class  DeleteEvent
 
 		$this->date_frmt = $CFG->modlos_date_format;
 		$this->pg_only   = $CFG->modlos_pg_only;
+		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
+		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 
 		$this->use_utc_time = $CFG->modlos_use_utc_time;
 		if ($this->use_utc_time) date_default_timezone_set('UTC');
@@ -69,18 +71,9 @@ class  DeleteEvent
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
 
-		if ($course_id>0) $this->course_amp = '&amp;course='.$course_id;
+		if ($course_id>0) $this->course_param = '?course='.$course_id;
 	}
 
-
-
-	function  set_condition() 
-	{
-		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
-		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
-
-		return true;
-	}
 
 
 
@@ -174,7 +167,7 @@ class  DeleteEvent
 		$grid_name		= $CFG->modlos_grid_name;
 		$module_url		= CMS_MODULE_URL;
 
-		$course_amp 	= $this->course_amp;
+		$course_param 	= $this->course_param;
 		$pstart_amp	 	= "&amp;pstart=$this->pstart";
 		$plimit_amp	 	= "&amp;plimit=$this->plimit";
 		$pstart_		= '&amp;pstart=';

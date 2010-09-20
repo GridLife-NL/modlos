@@ -116,8 +116,10 @@ class  EditAvatar
 
 			// Delete Avatar
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
-			if ($del!='') redirect($this->delete_url.'&amp;uuid='.$this->UUID, 'Please wait....', 0);
-			
+			if ($del!='') {
+				redirect($this->delete_url.'&amp;uuid='.$this->UUID, 'Please wait....', 0);
+				exit('<h4>delete page open error!!</h4>');
+			}
 
 			// Sate (Active/Inactive)
 			$state 	= optional_param('state', '', PARAM_INT);

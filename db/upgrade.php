@@ -187,7 +187,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 
 	// 2010091200
 	if ($result && $oldversion < 2010091200) {
-		$table = new XMLDBTable('modlos_profile_classifieds');
+		$table = new XMLDBTable('modlos_search_classifieds');
 		drop_table($table);
 	}
 
