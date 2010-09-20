@@ -23,5 +23,5 @@ $regions->execute();
 $regions->print_page();
 
 print_footer($course);
-	
+
 ?>	

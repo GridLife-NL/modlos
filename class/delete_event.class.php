@@ -6,7 +6,7 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
-class  EventsList
+class  DeleteEvent
 {
 	var $hasPermit = false;
 	var $isGuest   = true;
@@ -38,7 +38,7 @@ class  EventsList
 
 
 
-	function  EventsList($course_id)
+	function  DeleteEvent($course_id)
 	{
 		global $CFG, $USER;
 
@@ -195,7 +195,7 @@ class  EventsList
 		$modlos_edit	= get_string('modlos_edit',		  	'block_modlos');
 		$modlos_delete	= get_string('modlos_delete',	   	'block_modlos');
 
-		include(CMS_MODULE_PATH.'/html/events.html');
+		include(CMS_MODULE_PATH.'/html/delete_event.html');
 	}
 }
 

@@ -1,0 +1,248 @@
+<script>
+function checklength(obj,warning_div){
+    var mlength=obj.getAttribute? parseInt(obj.getAttribute("maxlength")) : ""
+    if (obj.getAttribute && obj.value.length>mlength){
+        obj.blur();
+        obj.value=obj.value.substring(0,mlength);
+        document.getElementById(warning_div).innerHTML = "<span style='color:red;font-weight:bold;'>max. "+mlength+"</span>";
+    }
+    else {
+        warning_div.innerHTML = "";
+    }
+    document.getElementById('counter').innerHTML =  obj.value.length;
+}
+</script>
+
+
+<h2><center><{$grid_name}>&nbsp;:&nbsp;<{$smarty.const._MD_XPNSM_EVENTS_MAKE_TTL}></center></h2>
+<br />
+
+<form METHOD="POST" ACTION=<{$action_url}> >
+  <{xoops_token form=$actionForm}>
+  <input type="hidden" name="event_id" value="<{$event_id}>" />
+
+  <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
+    <tbody>
+      <tr>
+        <td valign=top align=center>&nbsp;</td>
+        <td valign=top align=center width=600>
+
+          <table width="600" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="#FFFFFF">
+
+            <tr align="left">
+              <td class="head" width=200><{$smarty.const._MD_XPNSM_EVENTS_NAME}></td>
+              <td class="odd"  width=400><input type="text" id="event_name" name="event_name" size="35" value="<{$event_name}>" /></td>
+            </tr>
+
+            <tr align="left">
+              <td class="head" valign="top"><{$smarty.const._MD_XPNSM_EVENTS_DESC}></td>
+              <td class="even">
+                <textarea name="event_desc" rows="7" cols="" style="width:90%" wrap="virtual" maxlength="1024" onfocus="return checklength(this,'contact_max_warning')" onkeyup="return checklength(this,'contact_max_warning')" ><{$event_desc}></textarea><br />
+                <div>
+                <div>
+                  <em id="contact_max_warning"><{$smarty.const._MD_XPNSM_EVENTS_MAX}> <strong>1024</strong> </em> 
+                  <{$smarty.const._MD_XPNSM_EVENTS_CHARS}>&nbsp;&nbsp;<{$smarty.const._MD_XPNSM_EVENTS_INPUTED}>: <em id="counter"></em>
+                </div>
+              </td>
+            </tr>
+
+            <tr align="left">
+              <td class="head" valign="top"><{$smarty.const._MD_XPNSM_EVENTS_OWNER}></td>
+              <td class="even">
+                <select name="owner_name">
+	      		  <{foreach from=$owners item="owner"}>
+                    <{if $owner.fullname==$event_owner}>
+                      <option value="<{$owner.UUID}>|<{$owner.fullname}>" selected ><{$owner.fullname}></option>
+                    <{else}>
+                      <option value="<{$owner.UUID}>|<{$owner.fullname}>" ><{$owner.fullname}></option>
+                    <{/if}>
+	      		  <{/foreach}>
+                </select>
+              </td>
+            </tr>
+
+            <{include file="$date_file"}>
+
+            <tr align="left">
+              <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_CATEGORY}></td>
+              <td class="even">
+                <select name="category">
+                  <option value="0"  <{if $category==0}>selected<{/if}>  ><{$smarty.const._MD_XPNSM_EVENTS_ALL_CATEGORY}></option>
+                  <option value="18" <{if $category==18}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_DISCUSSION}></option>
+                  <option value="19" <{if $category==19}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_SPORTS}></option>
+                  <option value="20" <{if $category==20}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_MUSIC}></option>
+                  <option value="22" <{if $category==22}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_COMMERCIAL}></option>
+                  <option value="23" <{if $category==23}>selected<{/if}> >
+                    <{if !$pg_only}><{$smarty.const._MD_XPNSM_EVENTS_NIGHTLIFE}><{/if}><{$smarty.const._MD_XPNSM_EVENTS_ENTEME}>
+                  </option>
+                  <option value="24" <{if $category==24}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_GAMES}></option>
+                  <option value="25" <{if $category==25}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_PAGEANTS}></option>
+                  <option value="26" <{if $category==26}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_EDU}></option>
+                  <option value="27" <{if $category==27}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_ARTS}></option>
+                  <option value="28" <{if $category==28}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_CHARITY}></option>
+                  <option value="29" <{if $category==29}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_MISC}></option>
+                </select>
+              </td>
+            </tr>
+
+            <tr align="left">
+              <td nowrap class="head"><{$smarty.const._MD_XPNSM_EVENTS_CHARGE}></td>
+              <td class="odd">
+                <select name="cover_charge">
+                  <option value="0" <{if $cover_charge==0}>selected<{/if}> ><{$smarty.const._MD_XPNSM_NO}></option>
+                  <option value="1" <{if $cover_charge==1}>selected<{/if}> ><{$smarty.const._MD_XPNSM_YES}></option>
+                </select>&nbsp;&nbsp;
+                <{$smarty.const._MD_XPNSM_EVENTS_AMOUNT}> (L$):&nbsp;<input type="text" name="cover_amount" size="3" maxlength="5" value="<{$cover_amount}>" />
+              </td>
+            </tr>
+
+            <tr align="left">
+              <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_LOCATION}></td>
+              <td class="even">
+                <select name="parcel_name">
+                  <option value="0/0/0|00000000-0000-0000-0000-00000000000"><{$smarty.const._MD_XPNSM_EVENTS_PICK_PARCEL}></option>
+	      		  <{foreach from=$parcels item="parcel"}>
+                    <{if $global_pos==$parcel.landingpoint and $region_uuid==$parcel.regionUUID}>
+                      <option value="<{$parcel.landingpoint}>|<{$parcel.regionUUID}>" selected><{$parcel.name}></option>
+                    <{else}>
+                      <option value="<{$parcel.landingpoint}>|<{$parcel.regionUUID}>" ><{$parcel.name}></option>
+                    <{/if}>
+	      		  <{/foreach}>
+                </select>
+              </td>
+            </tr>
+
+            <{if $pg_only}>
+              <input type="hidden" name="check_mature" value="0" />
+            <{else}>
+              <tr align="left">
+                <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_TYPE_TTL}></td>
+                <td class="odd">
+                  <input type="checkbox" name="check_mature" value="1" <{if $check_mature==1}>checked<{/if}> />
+                  <{$smarty.const._MD_XPNSM_EVENTS_MATURE_TTL}>
+                </td>
+              </tr>
+            <{/if}>
+
+            <tr>
+              <td colspan=2 align=center>
+                <br />
+                <input type="submit" name="action_submit" value="<{$smarty.const._MD_XPNSM_EVENTS_SAVE}>" />&nbsp;&nbsp;
+                <input type="reset"  value=<{$smarty.const._MD_XPNSM_RESET_TTL}> />
+                <{if $event_id>0}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="submit" name="submit_delete" value="<{$smarty.const._MD_XPNSM_DELETE_TTL}>" />
+                <{/if}>
+              </td>
+            </tr>
+          </table>
+
+        </td>
+        <td valign=top align=center>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+
+
+<br />
+<hr />
+<{if $actionForm->hasError()}>
+  <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
+    <tbody>
+      <tr>
+        <td valign=top align=center>&nbsp;</td>
+        <td valign=top align=center width=600>
+          <table width="600" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
+            <tr>
+              <td>
+                <ul>
+                  <{foreach item="errval" from=$actionForm->getErrorMessages()}>
+                    <li><font color="#f01010"><b><{$errval}></b></font></li>
+                  <{/foreach}>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td valign=top align=center>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+
+<{else}>
+  <{if $event_saved}>
+
+    <div align="center">
+      <h3><font color=#1010e0><{$smarty.const._MD_XPNSM_EVENTS_SAVED}></font></h3>
+    </div>
+
+    <br />
+    <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
+      <tbody>
+        <tr>
+          <td valign=top align=center>&nbsp;</td>
+          <td valign=top align=center width=600>
+
+            <table width="600" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
+              <tr align="left">
+                <td class="head" width=200><{$smarty.const._MD_XPNSM_EVENTS_NAME}></td>
+                <td class="even" width=400><{$saved_event_name}></td>
+              </tr>
+              <tr align="left">
+                <{if $use_utc_time}>
+                  <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_DATE}>&nbsp;(UTC)</td>
+                <{else}>
+                  <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_DATE}>&nbsp;(Local)</td>
+                <{/if}>
+                <td class="odd"><{$saved_event_date}></td>
+              </tr>
+              <tr align="left">
+                <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_CATEGORY}></td>
+                <td class="even">
+                  <{if $saved_category==0 }><{$smarty.const._MD_XPNSM_EVENTS_ALL_CATEGORY}><{/if}>
+                  <{if $saved_category==18}><{$smarty.const._MD_XPNSM_EVENTS_DISCUSSION}><{/if}>
+                  <{if $saved_category==19}><{$smarty.const._MD_XPNSM_EVENTS_SPORTS}><{/if}>
+                  <{if $saved_category==20}><{$smarty.const._MD_XPNSM_EVENTS_MUSIC}><{/if}>
+                  <{if $saved_category==22}><{$smarty.const._MD_XPNSM_EVENTS_COMMERCIAL}><{/if}>
+                  <{if $saved_category==23}>
+                    <{if !$pg_only}><{$smarty.const._MD_XPNSM_EVENTS_NIGHTLIFE}><{/if}><{$smarty.const._MD_XPNSM_EVENTS_ENTEME}>
+                  <{/if}>
+                  <{if $saved_category==24}><{$smarty.const._MD_XPNSM_EVENTS_GAMES}><{/if}>
+                  <{if $saved_category==25}><{$smarty.const._MD_XPNSM_EVENTS_PAGEANTS}><{/if}>
+                  <{if $saved_category==26}><{$smarty.const._MD_XPNSM_EVENTS_EDU}><{/if}>
+                  <{if $saved_category==27}><{$smarty.const._MD_XPNSM_EVENTS_ARTS}><{/if}>
+                  <{if $saved_category==28}><{$smarty.const._MD_XPNSM_EVENTS_CHARITY}><{/if}>
+                  <{if $saved_category==29}><{$smarty.const._MD_XPNSM_EVENTS_MISC}><{/if}>
+                </td>
+              </tr>
+              <tr align="left">
+                <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_OWNER}></td>
+                <td class="odd" ><{$saved_event_owner}></td>
+              </tr>
+              <tr align=left>
+                <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_LOCATION}></td>
+                <td class="even"><{$saved_region_name}>&nbsp;:&nbsp; <{$saved_global_pos}></td>
+              </tr>
+              <tr align=left>
+                <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_AMOUNT}>&nbsp;(L$)</td>
+                <td class="odd" ><{$saved_cover_amount}></td>
+              </tr>
+              <{if !$pg_only}>
+                <tr align="left">
+                  <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_TYPE}></td>
+                  <td class="even"><strong><img height=20px width=20px <{$saved_event_type}> /></strong></td>
+                </tr>
+              <{/if}>
+            </table>
+
+          </td>
+          <td valign=top align=center>&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+
+  <{/if}>
+<{/if}>
