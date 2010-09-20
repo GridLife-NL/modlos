@@ -13,6 +13,8 @@ class  EventsList
 	var $pg_only   = true;
 	var $userid	   = 0;
 	var $use_utc_time;
+	
+	var $url_param = '';
 
 	var $make_url;
 	var $edit_url;
@@ -63,12 +65,13 @@ class  EventsList
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
 
-		course_param = '?course='.$course_id;
+		$this->url_param = '?dmmy_param=';
+		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;
 
-		$this->action_url = CMS_MODULE_URL.'/actions/events_list.php'.$course_param;
-		$this->make_url	  = CMS_MODULE_URL.'/actions/edit_event.php'.$course_param;
-		$this->edit_url   = CMS_MODULE_URL.'/actions/edit_event.php'.$course_param."&amp;eventid=";
-		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$course_param."&amp;eventid=";
+		$this->action_url = CMS_MODULE_URL.'/actions/events_list.php'. $this->url_param;
+		$this->make_url	  = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param;
+		$this->edit_url   = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param."&amp;eventid=";
+		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$this->url_param."&amp;eventid=";
 
 	}
 

@@ -67,10 +67,9 @@ class  AvatarsList
 		$this->course_id   = $course_id;
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
-		if ($course_id>0) $course_amp = '&amp;course='.$course_id;
-		else 			  $course_amp = '';
+		$this->url_param = '?dmmy_param=';	
+		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;
 
-		$this->url_param   = '?dmmy_param='.$course_amp;	
 		$this->action_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param;
 		$this->edit_url	   = CMS_MODULE_URL.'/actions/edit_avatar.php'. $this->url_param;
 		$this->owner_url   = CMS_MODULE_URL.'/actions/owner_avatar.php'.$this->url_param;

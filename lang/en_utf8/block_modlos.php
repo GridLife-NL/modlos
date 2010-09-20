@@ -26,6 +26,7 @@ $string['modlos_ipaddr'] 			= 'IP Address';
 $string['modlos_info'] 				= 'Info';
 $string['modlos_edit'] 				= 'Edit';
 $string['modlos_change'] 			= 'Change';
+$string['modlos_time_now']			= 'Present Time';
 
 $string['modlos_online_ttl'] 		= 'ONLINE';
 $string['modlos_offline_ttl'] 		= 'OFFLINE';
@@ -63,6 +64,7 @@ $string['modlos_not_syncdb'] 		= 'Not Synchro DB';
 $string['modlos_active'] 			= 'Active';
 $string['modlos_inactive'] 			= 'Inactive';
 $string['modlos_unknown_status'] 	= 'unknown Status';
+$string['modlos_unknown_region'] 	= 'unknown Region';
 $string['modlos_active_list'] 		= 'Active List';
 $string['modlos_inactive_list'] 	= 'Inactive List';
 
@@ -181,6 +183,8 @@ $string['modlos_db_connect_error']  = 'Can not connect OpenSim Data Base!!';
 $string['modlos_avatar_name_error'] = 'Illegal avatar name!!';
 $string['modlos_already_name_error']= 'Already exist avatar name!!';
 $string['modlos_owner_name_error']  = 'Illegal avatar name!!';
+$string['modlos_pg_only_error']		= 'Mature cannot be specified at this Grid!!';
+$string['modlos_invalid_date_error']= 'Invlid event date is specified!!';
 $string['modlos_opensim_create_error']='It failed in making avatar of OpenSim!!';
 $string['modlos_create_error']      = 'It failed in making user of Modlos!!';
 $string['modlos_update_error']      = 'It failed in updating user!!';
@@ -386,6 +390,7 @@ $string['modlos_events_misc']       = 'Miscellaneous';
 $string['modlos_firstname_required']= 'You must input First Name!!';
 $string['modlos_lastname_required']	= 'You must input Last  Name!!';
 $string['modlos_passwd_required']	= 'You must input Password!!';
+
 $string['modlos_event_name_required']='You must input Event Name!!';
 $string['modlos_event_desc_required']='You must input Event Description!!';
 $string['modlos_event_owner_required']='You must select valid event Owner!!';

@@ -25,6 +25,7 @@ $string['modlos_ipaddr'] 			= 'IPアドレス';
 $string['modlos_info'] 				= 'これについて・・・';
 $string['modlos_edit'] 				= '編集';
 $string['modlos_change'] 			= '変更';
+$string['modlos_time_now']			= '現時刻';
 
 $string['modlos_online_ttl'] 		= 'オンライン';
 $string['modlos_offline_ttl'] 		= 'オフライン';
@@ -62,6 +63,7 @@ $string['modlos_not_syncdb'] 		= '未同期';
 $string['modlos_active'] 			= 'アクティブ';
 $string['modlos_inactive'] 			= '使用停止';
 $string['modlos_unknown_status'] 	= '不明';
+$string['modlos_unknown_region'] 	= '不明なリージョン';
 $string['modlos_active_list'] 		= '使用可能リスト';
 $string['modlos_inactive_list'] 	= '使用停止リスト';
 
@@ -176,10 +178,13 @@ $string['modlos_sesskey_error'] 	= '無効なセッションキーを検出し�
 $string['modlos_username_error'] 	= 'ユーザネームのエラー!!';
 $string['modlos_ownername_error'] 	= 'オーナーネームのエラー!!';
 
+define('_MD_XPNSM_PG_ONLY_ERROR',       'Mature cannot be specified at this Grid!!');
 $string['modlos_db_connect_error']	= 'OpenSim のデータベースに接続できません!!';
 $string['modlos_avatar_name_error']	= '不正なアバター名です!!';
 $string['modlos_already_name_error']= '既に存在するアバター名です!!';
 $string['modlos_owner_name_error']	= '不正なオーナ名です!!';
+$string['modlos_pg_only_error']		= 'このグリッドでは Matureを指定することはできません!!';
+$string['modlos_invalid_date_error']= '不正な日付（時刻）が指定されました!!';
 $string['modlos_opensim_create_error']='OpenSim のアバター作成に失敗しました!!';
 $string['modlos_create_error']		= 'ユーザ作成に失敗しました!!';
 $string['modlos_convert_error']		= 'ユーザ情報の更新に失敗しました!!';
@@ -386,6 +391,7 @@ $string['modlos_events_misc']       = 'その他';
 $string['modlos_firstname_required']= 'ファーストネームを書いてください！';
 $string['modlos_lastname_required'] = 'ラストネームを書いてください！';
 $string['modlos_passwd_required']   = 'パスワードを入力してください！';
+
 $string['modlos_event_name_required']='イベントの名称を入力してください！';
 $string['modlos_event_desc_required']='イベントの説明を書いてください！';
 $string['modlos_event_owner_required']='有効なオーナを選択してください！';

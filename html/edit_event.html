@@ -14,12 +14,12 @@ function checklength(obj,warning_div){
 </script>
 
 
-<h2><center><{$grid_name}>&nbsp;:&nbsp;<{$smarty.const._MD_XPNSM_EVENTS_MAKE_TTL}></center></h2>
+<h2><center><?php echo $grid_name?>&nbsp;:&nbsp;<?php echo $modlos_make_ttl?></center></h2>
 <br />
 
-<form METHOD="POST" ACTION=<{$action_url}> >
-  <{xoops_token form=$actionForm}>
-  <input type="hidden" name="event_id" value="<{$event_id}>" />
+<form METHOD="POST" ACTION=<?php echo $action_url?> >
+  <{xoops_token form=$actionForm?>
+  <input type="hidden" name="event_id" value="<?php echo $event_id?>" />
 
   <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
     <tbody>
@@ -30,109 +30,109 @@ function checklength(obj,warning_div){
           <table width="600" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="#FFFFFF">
 
             <tr align="left">
-              <td class="head" width=200><{$smarty.const._MD_XPNSM_EVENTS_NAME}></td>
-              <td class="odd"  width=400><input type="text" id="event_name" name="event_name" size="35" value="<{$event_name}>" /></td>
+              <td class="head" width=200><?php echo $modlos_name?></td>
+              <td class="odd"  width=400><input type="text" id="event_name" name="event_name" size="35" value="<?php echo $event_name?>" /></td>
             </tr>
 
             <tr align="left">
-              <td class="head" valign="top"><{$smarty.const._MD_XPNSM_EVENTS_DESC}></td>
+              <td class="head" valign="top"><?php echo $modlos_desc?></td>
               <td class="even">
-                <textarea name="event_desc" rows="7" cols="" style="width:90%" wrap="virtual" maxlength="1024" onfocus="return checklength(this,'contact_max_warning')" onkeyup="return checklength(this,'contact_max_warning')" ><{$event_desc}></textarea><br />
+                <textarea name="event_desc" rows="7" cols="" style="width:90%" wrap="virtual" maxlength="1024" onfocus="return checklength(this,'contact_max_warning')" onkeyup="return checklength(this,'contact_max_warning')" ><?php echo $event_desc?></textarea><br />
                 <div>
                 <div>
-                  <em id="contact_max_warning"><{$smarty.const._MD_XPNSM_EVENTS_MAX}> <strong>1024</strong> </em> 
-                  <{$smarty.const._MD_XPNSM_EVENTS_CHARS}>&nbsp;&nbsp;<{$smarty.const._MD_XPNSM_EVENTS_INPUTED}>: <em id="counter"></em>
+                  <em id="contact_max_warning"><?php echo $modlos_max?> <strong>1024</strong> </em> 
+                  <?php echo $modlos_char?>&nbsp;&nbsp;<?php echo $modlos_inputed?>: <em id="counter"></em>
                 </div>
               </td>
             </tr>
 
             <tr align="left">
-              <td class="head" valign="top"><{$smarty.const._MD_XPNSM_EVENTS_OWNER}></td>
+              <td class="head" valign="top"><?php echo $modlos_owner?></td>
               <td class="even">
                 <select name="owner_name">
-	      		  <{foreach from=$owners item="owner"}>
-                    <{if $owner.fullname==$event_owner}>
-                      <option value="<{$owner.UUID}>|<{$owner.fullname}>" selected ><{$owner.fullname}></option>
-                    <{else}>
-                      <option value="<{$owner.UUID}>|<{$owner.fullname}>" ><{$owner.fullname}></option>
-                    <{/if}>
-	      		  <{/foreach}>
+	      		  <{foreach from=$owners item="owner"?>
+                    <?php if ($owner.fullname==$event_owner) {?>
+                      <option value="<?php echo $owner.UUID?>|<?php echo $owner.fullname?>" selected ><?php echo $owner.fullname?></option>
+                    <?php } else {?>
+                      <option value="<?php echo $owner.UUID?>|<?php echo $owner.fullname?>" ><?php echo $owner.fullname?></option>
+                    <?php }?>
+	      		  <{/foreach?>
                 </select>
               </td>
             </tr>
 
-            <{include file="$date_file"}>
+            <{include file="$date_file"?>
 
             <tr align="left">
-              <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_CATEGORY}></td>
+              <td class="head"><?php echo $modlos_CATEGORY?></td>
               <td class="even">
                 <select name="category">
-                  <option value="0"  <{if $category==0}>selected<{/if}>  ><{$smarty.const._MD_XPNSM_EVENTS_ALL_CATEGORY}></option>
-                  <option value="18" <{if $category==18}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_DISCUSSION}></option>
-                  <option value="19" <{if $category==19}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_SPORTS}></option>
-                  <option value="20" <{if $category==20}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_MUSIC}></option>
-                  <option value="22" <{if $category==22}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_COMMERCIAL}></option>
-                  <option value="23" <{if $category==23}>selected<{/if}> >
-                    <{if !$pg_only}><{$smarty.const._MD_XPNSM_EVENTS_NIGHTLIFE}><{/if}><{$smarty.const._MD_XPNSM_EVENTS_ENTEME}>
+                  <option value="0"  <?php if ($category==0) {?>selected<?php }?> ><?php echo $modlos_all_category?></option>
+                  <option value="18" <?php if ($category==18){?>selected<?php }?> ><?php echo $modlos_discussion?></option>
+                  <option value="19" <?php if ($category==19){?>selected<?php }?> ><?php echo $modlos_sports?></option>
+                  <option value="20" <?php if ($category==20){?>selected<?php }?> ><?php echo $modlos_music?></option>
+                  <option value="22" <?php if ($category==22){?>selected<?php }?> ><?php echo $modlos_commercial?></option>
+                  <option value="23" <?php if ($category==23){?>selected<?php }?> >
+                    <?php if (!$pg_only) {echo $modlos_nightlife;}?><?php echo $modlos_enteme?>
                   </option>
-                  <option value="24" <{if $category==24}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_GAMES}></option>
-                  <option value="25" <{if $category==25}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_PAGEANTS}></option>
-                  <option value="26" <{if $category==26}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_EDU}></option>
-                  <option value="27" <{if $category==27}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_ARTS}></option>
-                  <option value="28" <{if $category==28}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_CHARITY}></option>
-                  <option value="29" <{if $category==29}>selected<{/if}> ><{$smarty.const._MD_XPNSM_EVENTS_MISC}></option>
+                  <option value="24" <?php if ($category==24){?>selected<?php }?> ><?php echo $modlos_games?></option>
+                  <option value="25" <?php if ($category==25){?>selected<?php }?> ><?php echo $modlos_pageants?></option>
+                  <option value="26" <?php if ($category==26){?>selected<?php }?> ><?php echo $modlos_edu?></option>
+                  <option value="27" <?php if ($category==27){?>selected<?php }?> ><?php echo $modlos_arts?></option>
+                  <option value="28" <?php if ($category==28){?>selected<?php }?> ><?php echo $modlos_charity?></option>
+                  <option value="29" <?php if ($category==29){?>selected<?php }?> ><?php echo $modlos_misc?></option>
                 </select>
               </td>
             </tr>
 
             <tr align="left">
-              <td nowrap class="head"><{$smarty.const._MD_XPNSM_EVENTS_CHARGE}></td>
+              <td nowrap class="head"><?php echo $modlos_charge?></td>
               <td class="odd">
                 <select name="cover_charge">
-                  <option value="0" <{if $cover_charge==0}>selected<{/if}> ><{$smarty.const._MD_XPNSM_NO}></option>
-                  <option value="1" <{if $cover_charge==1}>selected<{/if}> ><{$smarty.const._MD_XPNSM_YES}></option>
+                  <option value="0" <?php if ($cover_charge==0){?>selected<?php }?> ><?php echo $modlos_no?></option>
+                  <option value="1" <?php if ($cover_charge==1){?>selected<?php }?> ><?php echo $modlos_yes?></option>
                 </select>&nbsp;&nbsp;
-                <{$smarty.const._MD_XPNSM_EVENTS_AMOUNT}> (L$):&nbsp;<input type="text" name="cover_amount" size="3" maxlength="5" value="<{$cover_amount}>" />
+                <?php echo $modlos_AMOUNT?> (L$):&nbsp;<input type="text" name="cover_amount" size="3" maxlength="5" value="<?php echo $cover_amount?>" />
               </td>
             </tr>
 
             <tr align="left">
-              <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_LOCATION}></td>
+              <td class="head"><?php echo $modlos_LOCATION?></td>
               <td class="even">
                 <select name="parcel_name">
-                  <option value="0/0/0|00000000-0000-0000-0000-00000000000"><{$smarty.const._MD_XPNSM_EVENTS_PICK_PARCEL}></option>
-	      		  <{foreach from=$parcels item="parcel"}>
-                    <{if $global_pos==$parcel.landingpoint and $region_uuid==$parcel.regionUUID}>
-                      <option value="<{$parcel.landingpoint}>|<{$parcel.regionUUID}>" selected><{$parcel.name}></option>
-                    <{else}>
-                      <option value="<{$parcel.landingpoint}>|<{$parcel.regionUUID}>" ><{$parcel.name}></option>
-                    <{/if}>
-	      		  <{/foreach}>
+                  <option value="0/0/0|00000000-0000-0000-0000-00000000000"><?php echo $modlos_pick_parcel?></option>
+	      		  <{foreach from=$parcels item="parcel"?>
+                    <?php if ($global_pos==$parcel.landingpoint and $region_uuid==$parcel.regionUUID) {?>
+                      <option value="<?php echo $parcel.landingpoint?>|<?php echo $parcel.regionUUID?>" selected><?php echo $parcel.name?></option>
+                    <?php } else {?>
+                      <option value="<?php echo $parcel.landingpoint?>|<?php echo $parcel.regionUUID?>" ><?php echo $parcel.name?></option>
+                    <?php }?>
+	      		  <{/foreach?>
                 </select>
               </td>
             </tr>
 
-            <{if $pg_only}>
+            <?php if ($pg_only) {?>
               <input type="hidden" name="check_mature" value="0" />
-            <{else}>
+            <?php } else {?>
               <tr align="left">
-                <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_TYPE_TTL}></td>
+                <td class="head"><?php echo $modlos_TYPE_TTL?></td>
                 <td class="odd">
-                  <input type="checkbox" name="check_mature" value="1" <{if $check_mature==1}>checked<{/if}> />
-                  <{$smarty.const._MD_XPNSM_EVENTS_MATURE_TTL}>
+                  <input type="checkbox" name="check_mature" value="1" <?php if ($check_mature==1) {?>checked<?php }?> />
+                  <?php echo $modlos_MATURE_TTL?>
                 </td>
               </tr>
-            <{/if}>
+            <?php }?>
 
             <tr>
               <td colspan=2 align=center>
                 <br />
-                <input type="submit" name="action_submit" value="<{$smarty.const._MD_XPNSM_EVENTS_SAVE}>" />&nbsp;&nbsp;
-                <input type="reset"  value=<{$smarty.const._MD_XPNSM_RESET_TTL}> />
-                <{if $event_id>0}>
+                <input type="submit" name="action_submit" value="<?php echo $modlos_SAVE?>" />&nbsp;&nbsp;
+                <input type="reset"  value=<?php echo $modlos_reset_ttl?> />
+                <?php if ($event_id>0) {?>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <input type="submit" name="submit_delete" value="<{$smarty.const._MD_XPNSM_DELETE_TTL}>" />
-                <{/if}>
+                  <input type="submit" name="submit_delete" value="<?php echo $modlos_delete_ttl?>" />
+                <?php }?>
               </td>
             </tr>
           </table>
@@ -148,7 +148,7 @@ function checklength(obj,warning_div){
 
 <br />
 <hr />
-<{if $actionForm->hasError()}>
+<?php if ($this->hasError) {?>
   <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
     <tbody>
       <tr>
@@ -158,9 +158,9 @@ function checklength(obj,warning_div){
             <tr>
               <td>
                 <ul>
-                  <{foreach item="errval" from=$actionForm->getErrorMessages()}>
-                    <li><font color="#f01010"><b><{$errval}></b></font></li>
-                  <{/foreach}>
+                  <?php foreach ($this->errorMsg as $errval) {?>
+                    <li><font color="#f01010"><b><?php echo $errval?></b></font></li>
+                  <?php }?>
                 </ul>
               </td>
             </tr>
@@ -172,11 +172,11 @@ function checklength(obj,warning_div){
   </table>
   <br />
 
-<{else}>
-  <{if $event_saved}>
+<?php } else {?>
+  <?php if ($this->event_saved) {?>
 
     <div align="center">
-      <h3><font color=#1010e0><{$smarty.const._MD_XPNSM_EVENTS_SAVED}></font></h3>
+      <h3><font color=#1010e0><?php echo $modlos_saved?></font></h3>
     </div>
 
     <br />
@@ -188,54 +188,54 @@ function checklength(obj,warning_div){
 
             <table width="600" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
               <tr align="left">
-                <td class="head" width=200><{$smarty.const._MD_XPNSM_EVENTS_NAME}></td>
-                <td class="even" width=400><{$saved_event_name}></td>
+                <td class="head" width=200><?php echo $modlos_name?></td>
+                <td class="even" width=400><?php echo $saved_event_name?></td>
               </tr>
               <tr align="left">
-                <{if $use_utc_time}>
-                  <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_DATE}>&nbsp;(UTC)</td>
-                <{else}>
-                  <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_DATE}>&nbsp;(Local)</td>
-                <{/if}>
-                <td class="odd"><{$saved_event_date}></td>
+                <?php if ($use_utc_time) {?>
+                  <td class="head"><?php echo $modlos_date?>&nbsp;(UTC)</td>
+                <?php } else {?>
+                  <td class="head"><?php echo $modlos_date?>&nbsp;(Local)</td>
+                <?php }?>
+                <td class="odd"><?php echo $saved_event_date?></td>
               </tr>
               <tr align="left">
-                <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_CATEGORY}></td>
+                <td class="head"><?php echo $modlos_category?></td>
                 <td class="even">
-                  <{if $saved_category==0 }><{$smarty.const._MD_XPNSM_EVENTS_ALL_CATEGORY}><{/if}>
-                  <{if $saved_category==18}><{$smarty.const._MD_XPNSM_EVENTS_DISCUSSION}><{/if}>
-                  <{if $saved_category==19}><{$smarty.const._MD_XPNSM_EVENTS_SPORTS}><{/if}>
-                  <{if $saved_category==20}><{$smarty.const._MD_XPNSM_EVENTS_MUSIC}><{/if}>
-                  <{if $saved_category==22}><{$smarty.const._MD_XPNSM_EVENTS_COMMERCIAL}><{/if}>
-                  <{if $saved_category==23}>
-                    <{if !$pg_only}><{$smarty.const._MD_XPNSM_EVENTS_NIGHTLIFE}><{/if}><{$smarty.const._MD_XPNSM_EVENTS_ENTEME}>
-                  <{/if}>
-                  <{if $saved_category==24}><{$smarty.const._MD_XPNSM_EVENTS_GAMES}><{/if}>
-                  <{if $saved_category==25}><{$smarty.const._MD_XPNSM_EVENTS_PAGEANTS}><{/if}>
-                  <{if $saved_category==26}><{$smarty.const._MD_XPNSM_EVENTS_EDU}><{/if}>
-                  <{if $saved_category==27}><{$smarty.const._MD_XPNSM_EVENTS_ARTS}><{/if}>
-                  <{if $saved_category==28}><{$smarty.const._MD_XPNSM_EVENTS_CHARITY}><{/if}>
-                  <{if $saved_category==29}><{$smarty.const._MD_XPNSM_EVENTS_MISC}><{/if}>
+                  <?php if ($saved_category==0) { ?><?php echo $modlos_all_category?><?php }?>
+                  <?php if ($saved_category==18){?><?php echo $modlos_discussion?><?php }?>
+                  <?php if ($saved_category==19){?><?php echo $modlos_sports?><?php }?>
+                  <?php if ($saved_category==20){?><?php echo $modlos_music?><?php }?>
+                  <?php if ($saved_category==22){?><?php echo $modlos_commercial?><?php }?>
+                  <?php if ($saved_category==23){?>
+                    <?php if (!$pg_only) {?><?php echo $modlos_nightlife?><?php }?><?php echo $modlos_enteme?>
+                  <?php }?>
+                  <?php if ($saved_category==24){?><?php echo $modlos_games?><?php }?>
+                  <?php if ($saved_category==25){?><?php echo $modlos_pageants?><?php }?>
+                  <?php if ($saved_category==26){?><?php echo $modlos_edu?><?php }?>
+                  <?php if ($saved_category==27){?><?php echo $modlos_arts?><?php }?>
+                  <?php if ($saved_category==28){?><?php echo $modlos_charity?><?php }?>
+                  <?php if ($saved_category==29){?><?php echo $modlos_misc?><?php }?>
                 </td>
               </tr>
               <tr align="left">
-                <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_OWNER}></td>
-                <td class="odd" ><{$saved_event_owner}></td>
+                <td class="head"><?php echo $modlos_owner?></td>
+                <td class="odd" ><?php echo $saved_event_owner?></td>
               </tr>
               <tr align=left>
-                <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_LOCATION}></td>
-                <td class="even"><{$saved_region_name}>&nbsp;:&nbsp; <{$saved_global_pos}></td>
+                <td class="head"><?php echo $modlos_location?></td>
+                <td class="even"><?php echo $saved_region_name?>&nbsp;:&nbsp; <?php echo $saved_global_pos?></td>
               </tr>
               <tr align=left>
-                <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_AMOUNT}>&nbsp;(L$)</td>
-                <td class="odd" ><{$saved_cover_amount}></td>
+                <td class="head"><?php echo $modlos_amount?>&nbsp;(L$)</td>
+                <td class="odd" ><?php echo $saved_cover_amount?></td>
               </tr>
-              <{if !$pg_only}>
+              <?php if (!$pg_only) {?>
                 <tr align="left">
-                  <td class="head"><{$smarty.const._MD_XPNSM_EVENTS_TYPE}></td>
-                  <td class="even"><strong><img height=20px width=20px <{$saved_event_type}> /></strong></td>
+                  <td class="head"><?php echo $modlos_type?></td>
+                  <td class="even"><strong><img height=20px width=20px <?php echo $saved_event_type?> /></strong></td>
                 </tr>
-              <{/if}>
+              <?php }?>
             </table>
 
           </td>
@@ -244,5 +244,5 @@ function checklength(obj,warning_div){
       </tbody>
     </table>
 
-  <{/if}>
-<{/if}>
+  <?php }?>
+<?php }?>
