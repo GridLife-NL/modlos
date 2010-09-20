@@ -150,7 +150,7 @@ class  EditEvent
 			$this->event_hour 	= optional_param('event_hour', 	'0',  PARAM_INT);
 			$this->event_minute	= optional_param('event_minute','0',  PARAM_INT);
 
-			$this->event_name	= optional_param('event_name',	 '',  PARAM_ALPHA);
+			$this->event_name	= optional_param('event_name',	 '',  PARAM_TEXT);
 			$this->event_desc	= optional_param('event_desc',	 '',  PARAM_TEXT);
 			$this->category		= optional_param('category', 	 '0', PARAM_INT);
 
@@ -303,8 +303,8 @@ class  EditEvent
 	{
 		global $CFG;
 
-		$grid_name		= $CFG->modlos_grid_name;
-		$module_url		= CMS_MODULE_URL;
+		$grid_name	= $CFG->modlos_grid_name;
+		$module_url	= CMS_MODULE_URL;
 
 		$events_make_ttl 	= get_string('modlos_events_make_ttl',		'block_modlos');
 		$events_save 		= get_string('modlos_events_save',			'block_modlos');
@@ -345,6 +345,8 @@ class  EditEvent
 		$modlos_yes 		= get_string('modlos_yes',					'block_modlos');
 		$modlos_reset_ttl 	= get_string('modlos_reset_ttl',			'block_modlos');
 		$modlos_delete_ttl 	= get_string('modlos_delete_ttl',			'block_modlos');
+
+		$date_file = CMS_MODULE_PATH.'/lang/'.current_language().'/modlos_events_date.html';
 
 		include(CMS_MODULE_PATH.'/html/edit_event.html');
 	}
