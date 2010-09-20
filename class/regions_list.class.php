@@ -14,7 +14,7 @@ class  RegionsList
 	var $action_url;
 
 	var $course_id	= '';
-	var $course_param = '?course=0';
+	var $course_amp = '';
 
 	var $isAvatarMax = false;
 	var $use_sloodle = false;
@@ -49,7 +49,7 @@ class  RegionsList
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
 
-		if ($course_id>=0) $this->course_param = '?course='.$course_id;
+		if ($course_id>=0) $this->course_amp = '&amp;course='.$course_id;
 	}
 
 
@@ -173,7 +173,7 @@ class  RegionsList
 		$grid_name       = $CFG->modlos_grid_name;
 		$content         = $CFG->modlos_regions_content;
 
-		$course_param 	 = $this->course_param;
+		$course_amp 	 = $this->course_amp;
 		$pstart_amp	 	 = "&amp;pstart=$this->pstart";
 		$plimit_amp	 	 = "&amp;plimit=$this->plimit";
 		$pstart_		 = '&amp;pstart=';

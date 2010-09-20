@@ -15,26 +15,11 @@ class  EditEvent
 	var $use_utc_time;
 
 	var $action_url;
-	var $make_event_url;
-	var $edit_event_url;
 	var $del_event_url;
 
 	var $course_id	 = '';
 	var $course_amp	 = '';
 	var $isAvatarMax = false;
-
-	var $pstart;
-	var $plimit;
-	var $Cpstart = 0;
-	var $Cplimit = 25;
-
-	var $number;
-	var $sitemax;
-	var $sitestart;
-
-	var $icon 	 = array();
-	var $pnum 	 = array();
-	var $db_data = array();
 
 
 
@@ -53,17 +38,14 @@ class  EditEvent
 		$this->hasPermit = hasModlosPermit($course_id);
 		$this->course_id = $course_id;
 		$this->userid	 = $USER->id;
-
 		$this->date_frmt = $CFG->modlos_date_format;
 		$this->pg_only   = $CFG->modlos_pg_only;
 
 		$this->use_utc_time = $CFG->modlos_use_utc_time;
 		if ($this->use_utc_time) date_default_timezone_set('UTC');
    
-		$this->action_url	  = CMS_MODULE_URL.'/actions/events_list.php';
-		$this->make_event_url = CMS_MODULE_URL.'/actions/edit_event.php';
-		$this->edit_event_url = CMS_MODULE_URL.'/actions/edit_event.php?eventid=';
-		$this->del_event_url  = CMS_MODULE_URL.'/actions/delete_event.php';
+		$this->action_url 	 = CMS_MODULE_URL.'/actions/edit_event.php';
+		$this->del_event_url = CMS_MODULE_URL.'/actions/delete_event.php';
 
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
@@ -78,6 +60,9 @@ class  EditEvent
 	{
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
+        $this->event_id   = $root->mContext->mRequest->getRequest('eventid');
+        if ($this->event_id==null) $this->event_id = 0;
+
 
 		return true;
 	}

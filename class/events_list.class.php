@@ -20,7 +20,7 @@ class  EventsList
 	var $del_event_url;
 
 	var $course_id	 = '';
-	var $course_amp	 = '';
+	var $course_param = '?course=0';
 	var $isAvatarMax = false;
 
 	var $pstart;
@@ -69,7 +69,7 @@ class  EventsList
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
 
-		if ($course_id>0) $this->course_amp = '&amp;course='.$course_id;
+		if ($course_id>0) $this->course_param = '?course='.$course_id;
 	}
 
 
@@ -174,7 +174,7 @@ class  EventsList
 		$grid_name		= $CFG->modlos_grid_name;
 		$module_url		= CMS_MODULE_URL;
 
-		$course_amp 	= $this->course_amp;
+		$course_param 	= $this->course_param;
 		$pstart_amp	 	= "&amp;pstart=$this->pstart";
 		$plimit_amp	 	= "&amp;plimit=$this->plimit";
 		$pstart_		= '&amp;pstart=';
