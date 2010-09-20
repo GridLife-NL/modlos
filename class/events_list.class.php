@@ -45,7 +45,7 @@ class  EventsList
 		require_login($course_id);
 
 		// for Guest
-		$this->isGuest   = isguest();
+		$this->isGuest = isguest();
 		if ($this->isGuest) {
 			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
 		}
