@@ -43,7 +43,7 @@ $string['modlos_avatar_create_ttl'] = '作成';
 $string['modlos_avatar_edit_ttl'] 	= '編集';
 $string['modlos_avatar_convert_ttl'] = '更新';
 $string['modlos_avatar_delete_ttl'] = '削除';
-$string['modlos_avatar_own_ttl'] 	= '変更';
+$string['modlos_avatar_own_ttl'] 	= 'オーナの変更';
 $string['modlos_avatar_dlt_cncld_ttl']='取消し';
 
 $string['modlos_home_page'] 		= 'トップページ';
