@@ -4,7 +4,7 @@
 
 <?php if (!$this->managed) {?>
   <form action="<?php echo $this->action_url?>" method="POST">
-    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2">
       <tr>
         <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $content?></span></strong></td>
       </tr>
@@ -35,7 +35,7 @@
 
   <?php foreach($commands as $com) {?>
      <?php if ($command==$com['com']) {?>
-       <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#FFFFFF">
+       <table width="600" border="0" align="center" cellpadding="2" cellspacing="2">
          <tr>
            <td width=80% class="head" align="center"><strong><span style="color:#116644"><?php echo $com['ttl'] ?></span></strong></td>
          </tr>
