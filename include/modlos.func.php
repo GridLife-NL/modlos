@@ -1042,14 +1042,6 @@ function  print_tabnav_manage($currenttab, $course)
 	$toprow[] = new tabobject('show_home', CMS_MODULE_URL.'/actions/show_home.php'.$course_param, 
 																	'<b>'.get_string('modlos_showhome_tab','block_modlos').'</b>');
 	if ($hasPermit) {
-		$toprow[] = new tabobject('management', CMS_MODULE_URL.'/admin/actions/management.php'.$course_param, 
-																	'<b>'.get_string('modlos_manage_cmnd_tab','block_modlos').'</b>');
-		$toprow[] = new tabobject('loginscreen', CMS_MODULE_URL.'/admin/actions/loginscreen.php'.$course_param, 
-																	'<b>'.get_string('modlos_lgnscrn_tab','block_modlos').'</b>');
-		if ($CFG->modlos_activate_lastname) {
-			$toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/actions/lastnames.php'.$course_param, 
-																	'<b>'.get_string('modlos_lastnames_tab','block_modlos').'</b>');
-		}
 		if (isadmin()) {
 			$course_amp = '';
 			if ($course_id>0) $course_amp = '&amp;course='.$course_id;
@@ -1057,6 +1049,14 @@ function  print_tabnav_manage($currenttab, $course)
 			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos'.$course_amp, 
 																	'<b>'.get_string('modlos_general_setting_tab','block_modlos').'</b>');
 		}
+		$toprow[] = new tabobject('loginscreen', CMS_MODULE_URL.'/admin/actions/loginscreen.php'.$course_param, 
+																	'<b>'.get_string('modlos_lgnscrn_tab','block_modlos').'</b>');
+		if ($CFG->modlos_activate_lastname) {
+			$toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/actions/lastnames.php'.$course_param, 
+																	'<b>'.get_string('modlos_lastnames_tab','block_modlos').'</b>');
+		}
+		$toprow[] = new tabobject('management', CMS_MODULE_URL.'/admin/actions/management.php'.$course_param, 
+																	'<b>'.get_string('modlos_manage_cmnd_tab','block_modlos').'</b>');
 	}
 
 	if ($course_id>0) {
