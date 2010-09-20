@@ -64,7 +64,7 @@ function checklength(obj,warning_div){
             <{include file="$date_file"?>
 
             <tr align="left">
-              <td class="head"><?php echo $modlos_CATEGORY?></td>
+              <td class="head"><?php echo $modlos_category?></td>
               <td class="even">
                 <select name="category">
                   <option value="0"  <?php if ($category==0) {?>selected<?php }?> ><?php echo $modlos_all_category?></option>
@@ -92,12 +92,12 @@ function checklength(obj,warning_div){
                   <option value="0" <?php if ($cover_charge==0){?>selected<?php }?> ><?php echo $modlos_no?></option>
                   <option value="1" <?php if ($cover_charge==1){?>selected<?php }?> ><?php echo $modlos_yes?></option>
                 </select>&nbsp;&nbsp;
-                <?php echo $modlos_AMOUNT?> (L$):&nbsp;<input type="text" name="cover_amount" size="3" maxlength="5" value="<?php echo $cover_amount?>" />
+                <?php echo $modlos_amount?> (L$):&nbsp;<input type="text" name="cover_amount" size="3" maxlength="5" value="<?php echo $cover_amount?>" />
               </td>
             </tr>
 
             <tr align="left">
-              <td class="head"><?php echo $modlos_LOCATION?></td>
+              <td class="head"><?php echo $modlos_location?></td>
               <td class="even">
                 <select name="parcel_name">
                   <option value="0/0/0|00000000-0000-0000-0000-00000000000"><?php echo $modlos_pick_parcel?></option>
@@ -116,10 +116,10 @@ function checklength(obj,warning_div){
               <input type="hidden" name="check_mature" value="0" />
             <?php } else {?>
               <tr align="left">
-                <td class="head"><?php echo $modlos_TYPE_TTL?></td>
+                <td class="head"><?php echo $modlos_type_ttl?></td>
                 <td class="odd">
                   <input type="checkbox" name="check_mature" value="1" <?php if ($check_mature==1) {?>checked<?php }?> />
-                  <?php echo $modlos_MATURE_TTL?>
+                  <?php echo $modlos_mature_ttl?>
                 </td>
               </tr>
             <?php }?>
@@ -127,7 +127,7 @@ function checklength(obj,warning_div){
             <tr>
               <td colspan=2 align=center>
                 <br />
-                <input type="submit" name="action_submit" value="<?php echo $modlos_SAVE?>" />&nbsp;&nbsp;
+                <input type="submit" name="action_submit" value="<?php echo $modlos_save?>" />&nbsp;&nbsp;
                 <input type="reset"  value=<?php echo $modlos_reset_ttl?> />
                 <?php if ($event_id>0) {?>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -202,7 +202,7 @@ function checklength(obj,warning_div){
               <tr align="left">
                 <td class="head"><?php echo $modlos_category?></td>
                 <td class="even">
-                  <?php if ($saved_category==0) { ?><?php echo $modlos_all_category?><?php }?>
+                  <?php if ($saved_category==0) {?><?php echo $modlos_all_category?><?php }?>
                   <?php if ($saved_category==18){?><?php echo $modlos_discussion?><?php }?>
                   <?php if ($saved_category==19){?><?php echo $modlos_sports?><?php }?>
                   <?php if ($saved_category==20){?><?php echo $modlos_music?><?php }?>

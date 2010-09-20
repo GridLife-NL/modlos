@@ -74,7 +74,6 @@ $string['modlos_world_map'] 		= 'World Map';
 $string['modlos_user_info'] 		= 'User Information';
 $string['modlos_avatars_list'] 		= 'Avatars List';
 $string['modlos_regions_list'] 		= 'Regions List';
-$string['modlos_avatar_create'] 	= 'Create Avatar';
 $string['modlos_editable_list'] 	= 'Editable Avatars List';
 
 $string['modlos_avatar_info'] 		= 'Avatar Information';
@@ -163,7 +162,6 @@ $string['modlos_admin'] 			= 'Admin';
 $string['modlos_admin_user'] 		= 'Admin User';
 $string['modlos_administrator'] 	= 'Administrator';
 
-$string['modlos_access_forbidden'] 	= 'Forbidden Access to this Page';
 $string['modlos_over_max_avatars'] 	= 'Number of Your Avatars is Maximum';
 $string['modlos_bad_uuid'] 			= 'Specified UUID is Illegal';
 $string['modlos_not_exist_uuid'] 	= 'Specified UUID is Not Exist';
@@ -387,12 +385,9 @@ $string['modlos_events_arts']       = 'Arts and Culture';
 $string['modlos_events_charity']    = 'Charity/Support Groups';
 $string['modlos_events_misc']       = 'Miscellaneous';
 
-$string['modlos_firstname_required']= 'You must input First Name!!';
-$string['modlos_lastname_required']	= 'You must input Last  Name!!';
-$string['modlos_passwd_required']	= 'You must input Password!!';
-
-$string['modlos_event_name_required']='You must input Event Name!!';
-$string['modlos_event_desc_required']='You must input Event Description!!';
-$string['modlos_event_owner_required']='You must select valid event Owner!!';
+$string['modlos_event_name_required']='イベントの名称を入力してください！';
+$string['modlos_event_desc_required']='イベントの説明を書いてください！';
+$string['modlos_event_owner_required']='有効なオーナを選択してください！';
+$string['modlos_event_owner_required']='有効なオーナを選択してください！';
 
 ?>

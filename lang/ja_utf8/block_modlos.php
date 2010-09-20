@@ -35,14 +35,14 @@ $string['modlos_reset_ttl'] 		= 'リセット';
 $string['modlos_cancel_ttl'] 		= 'キャンセル';
 $string['modlos_delete_ttl'] 		= '削除';
 $string['modlos_get_owner_ttl'] 	= 'OWNER';
-$string['modlos_convert_ttl'] 		= '更新';
-$string['modlos_craete_ttl'] 		= '作成';
+$string['modlos_update_ttl'] 		= '更新';
+$string['modlos_create_ttl'] 		= '作成';
 $string['modlos_return_ttl'] 		= '戻る';
 
 $string['modlos_avatar_reset_ttl'] 	= 'リセット';
 $string['modlos_avatar_create_ttl'] = '作成';
 $string['modlos_avatar_edit_ttl'] 	= '編集';
-$string['modlos_avatar_convert_ttl'] = '更新';
+$string['modlos_avatar_update_ttl'] = '更新';
 $string['modlos_avatar_delete_ttl'] = '削除';
 $string['modlos_avatar_own_ttl'] 	= 'オーナの変更';
 $string['modlos_avatar_dlt_cncld_ttl']='取消し';
@@ -73,18 +73,17 @@ $string['modlos_world_map'] 		= 'ワールドマップ';
 $string['modlos_user_info'] 		= 'ユーザ情報';
 $string['modlos_avatars_list'] 		= 'アバターリスト';
 $string['modlos_regions_list'] 		= 'リージョンリスト';
-$string['modlos_avatar_create'] 	= 'アバター作成';
 $string['modlos_editable_list'] 	= '編集可能アバターリスト';
 
 $string['modlos_avatar_info'] 		= 'アバター情報';
 $string['modlos_avatar_created'] 	= 'アバターを作成しました';
-$string['modlos_avatar_convertd'] 	= 'アバターのデータを更新しました';
+$string['modlos_avatar_updated'] 	= 'アバターのデータを更新しました';
 $string['modlos_avatar_gotted'] 	= 'このアバターを Moodleのユーザに関連付けて管理します';
 $string['modlos_avatar_gotted_error']= 'アバターの関連付けに失敗しました';
 $string['modlos_avatar_deleted'] 	= 'アバターを削除しました';
 
 $string['modlos_avatar_create'] 	= 'アバター作成';
-$string['modlos_avatar_convert'] 	= 'アバター更新';
+$string['modlos_avatar_update'] 	= 'アバター更新';
 $string['modlos_avatar_delete'] 	= 'アバター削除';
 $string['modlos_avatar_submit'] 	= 'アバター作成';
 $string['modlos_avatar_edit'] 		= 'アバター編集';
@@ -162,7 +161,6 @@ $string['modlos_admin'] 			= '管理者';
 $string['modlos_admin_user'] 		= '管理ユーザ';
 $string['modlos_administrator'] 	= '管理者';
 
-$string['modlos_access_forbidden'] 	= 'このページへのアクセスは許可されていません';
 $string['modlos_over_max_avatars'] 	= 'アバターの所持数が最大です';
 $string['modlos_bad_uuid'] 			= '不正な UUID です';
 $string['modlos_not_exist_uuid'] 	= '存在しない UUID です';
@@ -178,7 +176,6 @@ $string['modlos_sesskey_error'] 	= '無効なセッションキーを検出し�
 $string['modlos_username_error'] 	= 'ユーザネームのエラー!!';
 $string['modlos_ownername_error'] 	= 'オーナーネームのエラー!!';
 
-define('_MD_XPNSM_PG_ONLY_ERROR',       'Mature cannot be specified at this Grid!!');
 $string['modlos_db_connect_error']	= 'OpenSim のデータベースに接続できません!!';
 $string['modlos_avatar_name_error']	= '不正なアバター名です!!';
 $string['modlos_already_name_error']= '既に存在するアバター名です!!';
@@ -187,7 +184,7 @@ $string['modlos_pg_only_error']		= 'このグリッドでは Matureを指定す�
 $string['modlos_invalid_date_error']= '不正な日付（時刻）が指定されました!!';
 $string['modlos_opensim_create_error']='OpenSim のアバター作成に失敗しました!!';
 $string['modlos_create_error']		= 'ユーザ作成に失敗しました!!';
-$string['modlos_convert_error']		= 'ユーザ情報の更新に失敗しました!!';
+$string['modlos_update_error']		= 'ユーザ情報の更新に失敗しました!!';
 $string['modlos_opensim_delete_error']='OpenSim のアバターの削除に失敗しました!!';
 $string['modlos_sloodle_delete_error']='Sloodle のユーザの削除に失敗しました!!';
 $string['modlos_user_delete_error']	= 'ユーザの削除に失敗しました!!';
@@ -342,7 +339,7 @@ $string['modlos_clpresence_ttl']    = 'ログイン情報テーブルをクリ�
 
 $string['modlos_return_tab'] 		= 'コースに戻る';
 $string['modlos_return_sitetop_tab']= 'サイトトップに戻る';
-$string['modlos_access_forbidden'] 	= 'このページへのアクセスは許可されてません';
+$string['modlos_access_forbidden'] 	= 'このページへのアクセスは許可されていません';
 
 $string['modlos_events_make_ttl']   = 'イベント作成';
 $string['modlos_events_make_link']  = 'イベントを新規作成する場合は，';
@@ -387,10 +384,6 @@ $string['modlos_events_edu']        = '教育';
 $string['modlos_events_arts']       = 'アートとカルチャー';
 $string['modlos_events_charity']    = 'チャリティ／サポート・グループ';
 $string['modlos_events_misc']       = 'その他';
-
-$string['modlos_firstname_required']= 'ファーストネームを書いてください！';
-$string['modlos_lastname_required'] = 'ラストネームを書いてください！';
-$string['modlos_passwd_required']   = 'パスワードを入力してください！';
 
 $string['modlos_event_name_required']='イベントの名称を入力してください！';
 $string['modlos_event_desc_required']='イベントの説明を書いてください！';
