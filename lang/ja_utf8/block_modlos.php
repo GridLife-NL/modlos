@@ -50,7 +50,7 @@ $string['modlos_avatar_delete_ttl'] = '削除';
 $string['modlos_avatar_own_ttl'] 	= 'オーナの変更';
 $string['modlos_avatar_dlt_cncld_ttl']='取消し';
 
-$string['modlos_home_page'] 		= 'トップページ';
+$string['modlos_home_page'] 		= 'Modlos ホーム';
 $string['modlos_db_status'] 		= 'データベース';
 $string['modlos_total_users'] 		= '全体のユーザ人数';
 $string['modlos_total_regions'] 	= '全体のリージョン数';
@@ -70,7 +70,7 @@ $string['modlos_unknown_region'] 	= '不明なリージョン';
 $string['modlos_active_list'] 		= '使用可能リスト';
 $string['modlos_inactive_list'] 	= '使用停止リスト';
 
-$string['modlos_show_home'] 		= 'トップページ';
+$string['modlos_show_home'] 		= 'Modlos ホーム';
 $string['modlos_show_db'] 			= 'データベース';
 $string['modlos_world_map'] 		= 'ワールドマップ';
 $string['modlos_user_info'] 		= 'ユーザ情報';
@@ -299,7 +299,7 @@ $string['modlos_user_log_desc'] 	= 'ユーザサーバのログの保存先';
 
 
 // Admin
-$string['modlos_showhome_tab'] 		= 'ホーム';
+$string['modlos_showhome_tab'] 		= 'Modlos ホーム';
 $string['modlos_admin_title'] 		= 'Moodle OpenSim';
 $string['modlos_general_setting_tab']='一般設定';
 $string['modlos_lastnames_tab'] 	= 'ラストネーム';
@@ -318,6 +318,7 @@ $string['modlos_convertdb_contents']= 'OpenSimデータベースを 0.6.x から
 $string['modlos_convertdb_converted']='OpenSimデータベースの変換完了!';
 
 $string['modlos_manage_tab']        = '管理画面';
+$string['modlos_manage_menu']       = '管理画面';
 $string['modlos_manage_cmnd_tab']   = '管理コマンド';
 $string['modlos_manage_ttl']        = '管理コマンド';
 $string['modlos_manage_submit']     = '実行';

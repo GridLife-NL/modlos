@@ -59,7 +59,7 @@ class block_modlos extends block_base
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
 
 		if (!isguest()) {
-			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list?course='.$id.'">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php?course='.$id.'">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';
 
 			$isAvatarMax = false;
 			if ($db_ver!=null) { 
@@ -69,15 +69,16 @@ class block_modlos extends block_base
 			}
 
 			if (!$isAvatarMax) {
-				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar?course='.$id.'">'.get_string('modlos_avatar_create','block_modlos').'</a><br />';
+				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar.php?course='.$id.'">'.get_string('modlos_avatar_create','block_modlos').'</a><br />';
 			}
-/*
-			if (isadmin()) {
-				$this->content->text.= '<hr />';
-				$this->content->text.= '<a href="'.$CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos">'.
-										get_string('modlos_general_setting_menu','block_modlos').'</a><br />';
+
+			if ($CFG->modlos_use_events) {
+				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/events_list.php?course='.$id.'">'.get_string('modlos_events_list','block_modlos').'</a><br />';
 			}
-*/
+
+			if (hasModlosPermit($id)) {
+				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/admin/actions/management.php?course='.$id.'">'.get_string('modlos_manage_menu','block_modlos').'</a><br />';
+			}
 		}
 		$this->content->text.= "<hr />";		
 

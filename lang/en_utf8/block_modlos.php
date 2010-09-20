@@ -51,7 +51,7 @@ $string['modlos_avatar_delete_ttl'] = 'DELETE AVATAR';
 $string['modlos_avatar_own_ttl'] 	= 'OWN AVATAR';
 $string['modlos_avatar_dlt_cncld_ttl']='AVATAR delete CANCELED';
 
-$string['modlos_home_page'] 		= 'Home Page';
+$string['modlos_home_page'] 		= 'Modlos Home';
 $string['modlos_db_status'] 		= 'DB Status';
 $string['modlos_total_users'] 		= 'Total Users';
 $string['modlos_total_regions'] 	= 'Total Regions';
@@ -71,7 +71,7 @@ $string['modlos_unknown_region'] 	= 'unknown Region';
 $string['modlos_active_list'] 		= 'Active List';
 $string['modlos_inactive_list'] 	= 'Inactive List';
 
-$string['modlos_show_home'] 		= 'Home Page';
+$string['modlos_show_home'] 		= 'Modlos Home';
 $string['modlos_show_db'] 			= 'Data Base';
 $string['modlos_world_map'] 		= 'World Map';
 $string['modlos_user_info'] 		= 'User Information';
@@ -299,7 +299,7 @@ $string['modlos_user_log_desc'] 	= 'Specify user server directory';
 
 
 // Admin
-$string['modlos_showhome_tab'] 		= 'Home';
+$string['modlos_showhome_tab'] 		= 'Modlos Home';
 $string['modlos_admin_title'] 		= 'Moodle OpenSim';
 $string['modlos_general_setting_tab']='Preferences';
 $string['modlos_lastnames_tab'] 	= 'Lastnames';
@@ -318,6 +318,7 @@ $string['modlos_convertdb_contents']= 'Convert OpenSim DB from 0,6.x to 0.7.x ?'
 $string['modlos_convertdb_converted']='OpenSim DB is Converted!!';
 
 $string['modlos_manage_tab']		= 'Management';
+$string['modlos_manage_menu']		= 'Management';
 $string['modlos_manage_cmnd_tab']	= 'Commands of Manage';
 $string['modlos_manage_ttl']		= 'Management Commands';
 $string['modlos_manage_submit']		= 'Exec';
