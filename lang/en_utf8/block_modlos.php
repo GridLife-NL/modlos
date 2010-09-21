@@ -325,7 +325,7 @@ $string['modlos_manage_submit']		= 'Exec';
 $string['modlos_manage_contents']	= 'Execute Management Command';
 $string['modlos_manage_done']		= 'Management Command was Executed!!';
 $string['modlos_manage_select']		= 'Select a Management Command';
-$string['modlos_manage_return']		= 'Return to Management';
+$string['modlos_manage_return']		= 'Return to Management Commands';
 
 $string['modlos_lgnscrn_tab']		= 'Login Screen';
 $string['modlos_lgnscrn_ttl']		= 'Login Screen Alert Information Box';

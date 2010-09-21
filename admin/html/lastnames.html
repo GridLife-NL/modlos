@@ -6,8 +6,8 @@
 
 <form name="assignform" id="assignform" action="<?php echo $this->action_url?>" method="POST">
 
-  <table border="2" cellpadding="0" cellspacing="0" align="center" bgcolor="#F8F8F8">
-    <tr height=22>
+  <table cellpadding="2" cellspacing="1" align="center" border="2" bordercolor="#FFFFFF" bgcolor="#F8F8F8">
+    <tr height=26 style="background-color: #E0E0E0">
       <td style="width:45%; font-size:120%; text-align:center">
         <b><?php echo $select1_title?></b>
       </td>
@@ -29,15 +29,9 @@
             <option value=<?php echo $slct1?> ><?php echo $slct1?></option>
           <?php }?>
         </select>
-        <br />
-        <input type="text" name="addname" size="24" value="" 
-                  onFocus ="document.assignform.submit_left.disabled=true;
-                            document.assignform.submit_right.disabled=true;
-                            document.assignform.submit_add.disabled=false;" >
-        <input name="submit_add"    type="submit" id="submit_add"    value="add" />
       </td>
 
-      <td valign="top" style="text-align:center">
+      <td valign="top" style="text-align:center; background-color: #E8E8E8">
 		<input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
 		<input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
         <br />
@@ -60,6 +54,17 @@
         </select>
       </td>
     </tr>
+
+    <tr height=24 style="background-color: #E0E0E0">
+      <td style="width:45%; font-size:120%; text-align:left">
+          <input type="text" name="addname" size="24" value="" 
+                  onFocus ="document.assignform.submit_left.disabled=true;
+                            document.assignform.submit_right.disabled=true;
+                            document.assignform.submit_add.disabled=false;" >
+          <input name="submit_add"    type="submit" id="submit_add"    value="add" />
+      </td>
+      <td style="width:10%"></td>
+      <td style="width:45%"></td>
   </table>
 
 </form>
