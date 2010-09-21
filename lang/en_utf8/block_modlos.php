@@ -387,7 +387,8 @@ $string['modlos_events_games']      = 'Games/Contests';
 $string['modlos_events_pageants']   = 'Pageants';
 $string['modlos_events_edu']        = 'Education';
 $string['modlos_events_arts']       = 'Arts and Culture';
-$string['modlos_events_charity']    = 'Charity/Support Groups';
+$string['modlos_events_charity']    = 'Charity/Support';
+//$string['modlos_events_charity']    = 'Charity/Support Groups';
 $string['modlos_events_misc']       = 'Miscellaneous';
 
 $string['modlos_event_name_required']='You must input Event Name!!';

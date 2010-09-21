@@ -167,6 +167,7 @@ class  EventsList
 	function  print_page() 
 	{
 		global $CFG;
+		global $Categories;
 
 		$grid_name		= $CFG->modlos_grid_name;
 		$module_url		= CMS_MODULE_URL;

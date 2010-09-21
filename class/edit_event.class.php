@@ -342,53 +342,41 @@ class  EditEvent
 	function  print_page() 
 	{
 		global $CFG;
+		global $Categories;
 
 		$grid_name	= $CFG->modlos_grid_name;
 		$module_url	= CMS_MODULE_URL;
 
-		$events_make_ttl 	= get_string('modlos_events_make_ttl',		'block_modlos');
-		$events_save 		= get_string('modlos_events_save',			'block_modlos');
-		$events_saved 		= get_string('modlos_events_saved',			'block_modlos');
+		$events_make_ttl 	= get_string('modlos_events_make_ttl',	  'block_modlos');
+		$events_save 		= get_string('modlos_events_save',		  'block_modlos');
+		$events_saved 		= get_string('modlos_events_saved',		  'block_modlos');
 
-		$events_name 		= get_string('modlos_events_name',			'block_modlos');
-		$events_desc 		= get_string('modlos_events_desc',			'block_modlos');
-		$events_pick_parcel = get_string('modlos_events_pick_parcel',	'block_modlos');
-		$events_date 		= get_string('modlos_events_date',			'block_modlos');
-		$events_starts 		= get_string('modlos_events_starts',		'block_modlos');
-		$events_duration 	= get_string('modlos_events_duration',		'block_modlos');
-		$events_location 	= get_string('modlos_events_location',		'block_modlos');
-		$events_owner 		= get_string('modlos_events_owner',			'block_modlos');
-		$events_creator 	= get_string('modlos_events_creator',		'block_modlos');
-		$events_category 	= get_string('modlos_events_category',		'block_modlos');
-		$events_charge 		= get_string('modlos_events_charge',		'block_modlos');
-		$events_amount 		= get_string('modlos_events_amount',		'block_modlos');
-		$events_type 		= get_string('modlos_events_type',			'block_modlos');
-		$events_type_ttl 	= get_string('modlos_events_type_ttl',		'block_modlos');
-		$events_mature_ttl 	= get_string('modlos_events_mature_ttl',	'block_modlos');
+		$events_name 		= get_string('modlos_events_name',		  'block_modlos');
+		$events_desc 		= get_string('modlos_events_desc',		  'block_modlos');
+		$events_pick_parcel = get_string('modlos_events_pick_parcel', 'block_modlos');
+		$events_date 		= get_string('modlos_events_date',		  'block_modlos');
+		$events_starts 		= get_string('modlos_events_starts',	  'block_modlos');
+		$events_duration 	= get_string('modlos_events_duration',	  'block_modlos');
+		$events_location 	= get_string('modlos_events_location',	  'block_modlos');
+		$events_owner 		= get_string('modlos_events_owner',		  'block_modlos');
+		$events_creator 	= get_string('modlos_events_creator',	  'block_modlos');
+		$events_category 	= get_string('modlos_events_category',	  'block_modlos');
+		$events_charge 		= get_string('modlos_events_charge',	  'block_modlos');
+		$events_amount 		= get_string('modlos_events_amount',	  'block_modlos');
+		$events_type 		= get_string('modlos_events_type',		  'block_modlos');
+		$events_type_ttl 	= get_string('modlos_events_type_ttl',	  'block_modlos');
+		$events_mature_ttl 	= get_string('modlos_events_mature_ttl',  'block_modlos');
 
-		$events_all_category= get_string('modlos_events_all_category',	'block_modlos');
-		$events_discussion 	= get_string('modlos_events_discussion',	'block_modlos');
-		$events_sports 		= get_string('modlos_events_sports',		'block_modlos');
-		$events_music 		= get_string('modlos_events_music',			'block_modlos');
-		$events_commercial 	= get_string('modlos_events_commercial',	'block_modlos');
-		$events_nightlife 	= get_string('modlos_events_nightlife',		'block_modlos');
-		$events_enteme 		= get_string('modlos_events_enteme',		'block_modlos');
-		$events_games 		= get_string('modlos_events_games',			'block_modlos');
-		$events_pageants 	= get_string('modlos_events_pageants',		'block_modlos');
-		$events_edu 		= get_string('modlos_events_edu',			'block_modlos');
-		$events_arts 		= get_string('modlos_events_arts',			'block_modlos');
-		$events_charity 	= get_string('modlos_events_charity',		'block_modlos');
-		$events_misc 		= get_string('modlos_events_misc',			'block_modlos');
+		$events_max 		= get_string('modlos_events_max',		  'block_modlos');
+		$events_chars 		= get_string('modlos_events_chars',		  'block_modlos');
+		$events_inputed 	= get_string('modlos_events_inputed',	  'block_modlos');
 
-		$events_max 		= get_string('modlos_events_max',			'block_modlos');
-		$events_chars 		= get_string('modlos_events_chars',			'block_modlos');
-		$events_inputed 	= get_string('modlos_events_inputed',		'block_modlos');
+		$modlos_no 			= get_string('modlos_no',				  'block_modlos');
+		$modlos_yes 		= get_string('modlos_yes',				  'block_modlos');
+		$modlos_reset_ttl 	= get_string('modlos_reset_ttl',		  'block_modlos');
+		$modlos_delete_ttl 	= get_string('modlos_delete_ttl',		  'block_modlos');
+		$modlos_delete 		= get_string('modlos_delete',			  'block_modlos');
 
-		$modlos_no 			= get_string('modlos_no',					'block_modlos');
-		$modlos_yes 		= get_string('modlos_yes',					'block_modlos');
-		$modlos_reset_ttl 	= get_string('modlos_reset_ttl',			'block_modlos');
-		$modlos_delete_ttl 	= get_string('modlos_delete_ttl',			'block_modlos');
-		$modlos_delete 		= get_string('modlos_delete',				'block_modlos');
 
 		$date_file = CMS_MODULE_PATH.'/lang/'.current_language().'/modlos_events_date.html';
 		if (!file_exists($date_file)) {

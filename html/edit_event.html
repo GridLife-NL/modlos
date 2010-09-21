@@ -84,20 +84,18 @@ function checklength(obj,warning_div){
               <td class="head"><?php echo $events_category?></td>
               <td class="odd">
                 <select name="category">
-                  <option value="0"  <?php if ($this->category==0) {?>selected<?php }?> ><?php echo $events_all_category?></option>
-                  <option value="18" <?php if ($this->category==18){?>selected<?php }?> ><?php echo $events_discussion?></option>
-                  <option value="19" <?php if ($this->category==19){?>selected<?php }?> ><?php echo $events_sports?></option>
-                  <option value="20" <?php if ($this->category==20){?>selected<?php }?> ><?php echo $events_music?></option>
-                  <option value="22" <?php if ($this->category==22){?>selected<?php }?> ><?php echo $events_commercial?></option>
-                  <option value="23" <?php if ($this->category==23){?>selected<?php }?> >
-                    <?php if (!$this->pg_only) {echo $events_nightlife;}?><?php echo $events_enteme?>
-                  </option>
-                  <option value="24" <?php if ($this->category==24){?>selected<?php }?> ><?php echo $events_games?></option>
-                  <option value="25" <?php if ($this->category==25){?>selected<?php }?> ><?php echo $events_pageants?></option>
-                  <option value="26" <?php if ($this->category==26){?>selected<?php }?> ><?php echo $events_edu?></option>
-                  <option value="27" <?php if ($this->category==27){?>selected<?php }?> ><?php echo $events_arts?></option>
-                  <option value="28" <?php if ($this->category==28){?>selected<?php }?> ><?php echo $events_charity?></option>
-                  <option value="29" <?php if ($this->category==29){?>selected<?php }?> ><?php echo $events_misc?></option>
+                  <option value="0"  <?php if ($this->category==0) {?>selected<?php }?> ><?php echo $Categories[0]?></option>
+                  <option value="18" <?php if ($this->category==18){?>selected<?php }?> ><?php echo $Categories[18]?></option>
+                  <option value="19" <?php if ($this->category==19){?>selected<?php }?> ><?php echo $Categories[19]?></option>
+                  <option value="20" <?php if ($this->category==20){?>selected<?php }?> ><?php echo $Categories[20]?></option>
+                  <option value="22" <?php if ($this->category==22){?>selected<?php }?> ><?php echo $Categories[22]?></option>
+                  <option value="23" <?php if ($this->category==23){?>selected<?php }?> ><?php echo $Categories[23]?></option>
+                  <option value="24" <?php if ($this->category==24){?>selected<?php }?> ><?php echo $Categories[24]?></option>
+                  <option value="25" <?php if ($this->category==25){?>selected<?php }?> ><?php echo $Categories[25]?></option>
+                  <option value="26" <?php if ($this->category==26){?>selected<?php }?> ><?php echo $Categories[26]?></option>
+                  <option value="27" <?php if ($this->category==27){?>selected<?php }?> ><?php echo $Categories[27]?></option>
+                  <option value="28" <?php if ($this->category==28){?>selected<?php }?> ><?php echo $Categories[28]?></option>
+                  <option value="29" <?php if ($this->category==29){?>selected<?php }?> ><?php echo $Categories[29]?></option>
                 </select>
               </td>
             </tr>
@@ -220,20 +218,7 @@ function checklength(obj,warning_div){
               <tr align="left">
                 <td class="head"><?php echo $events_category?></td>
                 <td class="even">
-                  <?php if ($this->saved_category==0) {?><?php echo $events_all_category?><?php }?>
-                  <?php if ($this->saved_category==18){?><?php echo $events_discussion?><?php }?>
-                  <?php if ($this->saved_category==19){?><?php echo $events_sports?><?php }?>
-                  <?php if ($this->saved_category==20){?><?php echo $events_music?><?php }?>
-                  <?php if ($this->saved_category==22){?><?php echo $events_commercial?><?php }?>
-                  <?php if ($this->saved_category==23){?>
-                    <?php if (!$this->pg_only) {?><?php echo $events_nightlife?><?php }?><?php echo $events_enteme?>
-                  <?php }?>
-                  <?php if ($this->saved_category==24){?><?php echo $events_games?><?php }?>
-                  <?php if ($this->saved_category==25){?><?php echo $events_pageants?><?php }?>
-                  <?php if ($this->saved_category==26){?><?php echo $events_edu?><?php }?>
-                  <?php if ($this->saved_category==27){?><?php echo $events_arts?><?php }?>
-                  <?php if ($this->saved_category==28){?><?php echo $events_charity?><?php }?>
-                  <?php if ($sthis->aved_category==29){?><?php echo $events_misc?><?php }?>
+                  <?php echo $Categories[$this->saved_category]?>
                 </td>
               </tr>
               <tr align="left">

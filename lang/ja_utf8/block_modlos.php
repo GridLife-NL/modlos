@@ -382,13 +382,14 @@ $string['modlos_events_discussion'] = 'ディスカッション';
 $string['modlos_events_sports']     = 'スポーツ';
 $string['modlos_events_music']      = '生演奏';
 $string['modlos_events_commercial'] = '商業目的';
-$string['modlos_events_nightlife']  = '夜遊び／';
+$string['modlos_events_nightlife']  = '夜遊び/';
 $string['modlos_events_enteme']     = 'エンターテインメント';
-$string['modlos_events_games']      = 'ゲーム／コンテスト';
+$string['modlos_events_games']      = 'ゲーム/コンテスト';
 $string['modlos_events_pageants']   = 'ショー';
 $string['modlos_events_edu']        = '教育';
 $string['modlos_events_arts']       = 'アートとカルチャー';
-$string['modlos_events_charity']    = 'チャリティ／サポート・グループ';
+//$string['modlos_events_charity']    = 'チャリティ/サポート・グループ';
+$string['modlos_events_charity']    = 'チャリティ/サポート';
 $string['modlos_events_misc']       = 'その他';
 
 $string['modlos_event_name_required']='イベントの名称を入力してください！';
