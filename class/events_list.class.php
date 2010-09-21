@@ -142,17 +142,17 @@ class  EventsList
 				$avatar_name = opensim_get_avatar_name($event['creatoruuid']);
 				$this->db_data[$colum] = $event;
 				$this->db_data[$colum]['num']	  = $colum;
-				$this->db_data[$colum]['time']	  = date($this->date_frmt, $event['dateUTC']);
+				$this->db_data[$colum]['time']	  = date($this->date_frmt, $event['dateutc']);
 				$this->db_data[$colum]['creator'] = $avatar_name['fullname'];
    
 				if ($event['eventflags']==0) {
-					$this->db_data[$colum]['type'] = "title='PG Event' src=./images/events/blue_star.gif";
+					$this->db_data[$colum]['type'] = "title='PG Event' src=../images/events/blue_star.gif";
 				}
 				else {
-					$this->db_data[$colum]['type'] = "title='Mature Event' src=./images/events/pink_star.gif";
+					$this->db_data[$colum]['type'] = "title='Mature Event' src=../images/events/pink_star.gif";
 				}
+				$colum++;
 			}
-			$colum++;
 		}
 
 		return true;

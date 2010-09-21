@@ -138,7 +138,7 @@ class  EditEvent
 	
 			$parcel = explode('|', optional_param('parcel_name', '|', PARAM_TEXT));
 			$this->global_pos  = $parcel[0];
-			$this->region_uuid = $parcel[0];
+			$this->region_uuid = $parcel[1];
 
 			$owner = explode('|', optional_param('owner_name', '|', PARAM_TEXT));
 			$this->owner_uuid  = $owner[0];
@@ -166,18 +166,18 @@ class  EditEvent
 			// Error check
 			if (!isGUID($this->owner_uuid)) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos');
+				$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos')." (UUID)";
 			}
- 			if (!isAlphabetNumericSpecial($owner_name)) {
+ 			if (!isAlphabetNumericSpecial($this->event_owner)) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos');
+				$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos')." (Name)";
 			}
 
-			if ($this->event_name) {
+			if ($this->event_name=='') {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_event_name_required', 'block_modlos');
 			}
-			if ($this->event_desc) {
+			if ($this->event_desc=='') {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_event_desc_required', 'block_modlos');
 			}
@@ -188,7 +188,7 @@ class  EditEvent
 			}
 
 			$event_date = mktime($this->event_hour, $this->event_minute, 0, $this->event_month, $this->event_day, $this->event_year);
-			if ($event_date<$time()) {
+			if ($event_date<time()) {
 				$this->hasError = true;
 				$ftr = date($this->date_frmt, $event_date);
 				$this->errorMsg[] = get_string('modlos_invalid_date_error', 'block_modlos')." ($ftr < ".get_string('modlos_time_now', 'block_modlos').')';
@@ -207,9 +207,9 @@ class  EditEvent
 				$event['duration']	  = $this->duration;
 				$event['covercharge'] = $this->cover_charge;
 				$event['coveramount'] = $this->cover_amount;
-				$event['dateUTC']	  = $event_date;
+				$event['dateutc']	  = $event_date;
 				$event['simname']	  = $this->region_uuid;
-				$event['globalPos']   = $this->global_pos;
+				$event['globalpos']   = $this->global_pos;
 				$event['eventflags']  = $this->check_mature;
 
 				// save to DB
@@ -228,13 +228,13 @@ class  EditEvent
 					$this->saved_event_owner  = $this->event_owner;
    
 					$this->saved_region_name  = opensim_get_region_name($this->region_uuid);
-					if ($this->saved_region_name=="") $this->saved_region_name = get_string('modlos_unknown_region', 'block_modlos');
+					if ($this->saved_region_name=='') $this->saved_region_name = get_string('modlos_unknown_region', 'block_modlos');
    
 					if ($this->check_mature) {
-						$this->saved_event_type = "title='Mature Event' src=./images/events/pink_star.gif";
+						$this->saved_event_type = "title='Mature Event' src=../images/events/pink_star.gif";
 					}
 					else {
-						$this->saved_event_type = "title='PG Event' src=./images/events/blue_star.gif";
+						$this->saved_event_type = "title='PG Event' src=../images/events/blue_star.gif";
 					}
    
 					// clear valiable
@@ -256,7 +256,11 @@ class  EditEvent
 					$this->event_month  = $date['mon'];
 					$this->event_day	= $date['mday'];
 					$this->event_hour   = $date['hours'];
-					$this->event_minute = ((int)($date['minutes']/15+1))*15;
+					$this->event_minute = ((int)($date['minutes']/15))*15;
+				}
+				else {
+					$this->hasError = true;
+					$this->errorMsg[] = get_string('modlos_update_error', 'block_modlos');
 				}
 			}
 		}
@@ -277,12 +281,11 @@ class  EditEvent
 					$this->cover_charge = $event['covercharge'];
 					$this->cover_amount = $event['coveramount'];
 					$this->check_mature = $event['eventflags'];
-					$this->global_pos	= $event['globalPos'];
+					$this->global_pos	= $event['globalpos'];
 					$this->region_uuid	= $event['simname'];
 					$owner_name = opensim_get_avatar_name($this->owner_uuid);
 					$this->event_owner  = $owner_name['fullname'];
-					$date = getdate($event['dateUTC']);
-					$date['minutes'] -= 15;
+					$date = getdate($event['dateutc']);
 				}
 			}
 					
@@ -290,7 +293,11 @@ class  EditEvent
 			$this->event_month  = $date['mon'];
 			$this->event_day	= $date['mday'];
 			$this->event_hour   = $date['hours'];
-			$this->event_minute = ((int)($date['minutes']/15+1))*15;
+			$this->event_minute = ((int)($date['minutes']/15))*15;
+			if ($this->event_minute==60) {
+				$this->event_hour++;
+				$this->event_minute = 0;
+			}
 		}
 
 		return true;
@@ -314,6 +321,8 @@ class  EditEvent
 		$events_desc 		= get_string('modlos_events_desc',			'block_modlos');
 		$events_pick_parcel = get_string('modlos_events_pick_parcel',	'block_modlos');
 		$events_date 		= get_string('modlos_events_date',			'block_modlos');
+		$events_starts 		= get_string('modlos_events_starts',		'block_modlos');
+		$events_duration 	= get_string('modlos_events_duration',		'block_modlos');
 		$events_location 	= get_string('modlos_events_location',		'block_modlos');
 		$events_owner 		= get_string('modlos_events_owner',			'block_modlos');
 		$events_category 	= get_string('modlos_events_category',		'block_modlos');
@@ -347,6 +356,9 @@ class  EditEvent
 		$modlos_delete_ttl 	= get_string('modlos_delete_ttl',			'block_modlos');
 
 		$date_file = CMS_MODULE_PATH.'/lang/'.current_language().'/modlos_events_date.html';
+		if (!file_exists($date_file)) {
+			$date_file = CMS_MODULE_PATH.'/lang/en_utf8/modlos_events_date.html';
+		}
 
 		include(CMS_MODULE_PATH.'/html/edit_event.html');
 	}

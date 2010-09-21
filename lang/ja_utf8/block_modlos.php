@@ -27,6 +27,7 @@ $string['modlos_num'] 				= 'No.';
 $string['modlos_ipaddr'] 			= 'IPアドレス';
 $string['modlos_info'] 				= 'これについて・・・';
 $string['modlos_edit'] 				= '編集';
+$string['modlos_delete'] 			= '削除';
 $string['modlos_change'] 			= '変更';
 $string['modlos_time_now']			= '現時刻';
 
@@ -187,7 +188,7 @@ $string['modlos_pg_only_error']		= 'このグリッドでは Matureを指定す�
 $string['modlos_invalid_date_error']= '不正な日付（時刻）が指定されました!!';
 $string['modlos_opensim_create_error']='OpenSim のアバター作成に失敗しました!!';
 $string['modlos_create_error']		= 'ユーザ作成に失敗しました!!';
-$string['modlos_update_error']		= 'ユーザ情報の更新に失敗しました!!';
+$string['modlos_update_error']		= 'データベースの更新に失敗しました!!';
 $string['modlos_opensim_delete_error']='OpenSim のアバターの削除に失敗しました!!';
 $string['modlos_sloodle_delete_error']='Sloodle のユーザの削除に失敗しました!!';
 $string['modlos_user_delete_error']	= 'ユーザの削除に失敗しました!!';

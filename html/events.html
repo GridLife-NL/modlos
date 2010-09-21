@@ -26,7 +26,7 @@
       <td width="15"  height="40" background="<?php echo $module_url?>/images/main/regions_left.gif">&nbsp;</td>
       <td width="30"  height="40" valign="bottom" background="<?php echo $module_url?>/images/main/regions_middle.jpg"><br /><strong>No.</strong></td>
       <td width="140" height="40" valign="bottom" background="<?php echo $module_url?>/images/main/regions_middle.jpg"><br />
-        <?php if ($use_utc_time) {?>
+        <?php if ($this->use_utc_time) {?>
           <strong>&nbsp;&nbsp;<?php echo $events_date?>&nbsp;(UTC)</strong>
         <?php }else{?>
           <strong>&nbsp;&nbsp;<?php echo $events_date?>&nbsp;(Local)</strong>
@@ -39,7 +39,7 @@
         <strong>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $events_name?></strong>
       </td>
       <td width="200" valign="bottom" background="<?php echo $module_url?>/images/main/regions_middle.jpg"><br />
-        <strong><?php echo $evemts_owner?></strong>
+        <strong><?php echo $events_owner?></strong>
       </td>
       <td width="30"  valign="bottom" background="<?php echo $module_url?>/images/main/regions_middle.jpg"><br />
       </td>
@@ -159,31 +159,31 @@
     </tr>
 
     <?php foreach ($this->db_data as $dat) {?>
-      <?php if ($dat.num%2==0) {?>
+      <?php if ($dat['num']%2==0) {?>
       <tr style='background-color: #d8d8d8'>
       <?php } else {?>
       <tr style='background-color: #e8e8e8'>
       <?php }?>
         <td width=15>&nbsp;</td>
-        <td width=30><font color=#000><strong>&nbsp;<?php echo $dat.num+1+$pstart?></strong></font></td>
+        <td width=30><font color=#000><strong>&nbsp;<?php echo $dat['num']+1+$this->pstart?></strong></font></td>
 
-        <td width=140><div style="color: #000000"><strong><?php echo $dat.time?></strong> </td>
+        <td width=140><div style="color: #000000"><strong><?php echo $dat['time']?></strong> </td>
         <td width=40 >
           <div style="color: #ff2222">
-            <strong><img height=20px width=20px <?php echo $dat.type?> /></strong>
+            <strong><img height=20px width=20px <?php echo $dat['type']?> /></strong>
           </div>
         </td>
-        <td width=300><div style="color: #115500"><strong><?php echo $dat.name?></strong></div></td>
+        <td width=300><div style="color: #115500"><strong><?php echo $dat['name']?></strong></div></td>
         <td width=200><div style="color: #2222cc">
-          <a style="cursor:pointer" onClick="window.open('<?php echo $module_url?>/helper/agent.php?agent=<?php echo $dat.creatoruuid?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
-            <strong><u><?php echo $dat.creator?></u></strong>
+          <a style="cursor:pointer" onClick="window.open('<?php echo $module_url?>/helper/agent.php?agent=<?php echo $dat['creatoruuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <strong><u><?php echo $dat['creator']?></u></strong>
           </a>
         </td>
         <td width=30>&nbsp;</td>
         <td width=80>
-          <?php if ($this->hasPermit or $this->userid==$dat.uid) {?>
-            <a href=<?php echo $this->edit_url.$dat.eventid?>   ><u><?php echo $modlos_edit?></u></a>&nbsp;
-            <a href=<?php echo $this->delete_url.$dat.eventid?> ><u><?php echo $modlos_delete?></u></a>
+          <?php if ($this->hasPermit or $this->userid==$dat['uid']) {?>
+            <a href=<?php echo $this->edit_url.$dat['eventid']?>   ><u><?php echo $modlos_edit?></u></a>&nbsp;
+            <a href=<?php echo $this->delete_url.$dat['eventid']?> ><u><?php echo $modlos_delete?></u></a>
           <?php } else {?>
             &nbsp;
           <?php }?>

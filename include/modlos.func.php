@@ -658,29 +658,16 @@ function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
 	$events = array();
 	if ($tm==0) $tm = time();
 
-	$select = "dateUTC > '$tm'";
+	$select = "dateutc > '$tm'";
 	if ($pg_only) $select .= " AND eventflags='0'";
 	if ($uid>0)   $select .= " AND uid='$uid'";
 
-	$rets = get_recordset_select('modlos_search_events', $select, 'dateUTC', '*', $start, $limit);
-   
+	$rets = get_recordset_select('modlos_search_events', $select, 'dateutc', '*', $start, $limit);
+
 	if ($rets!=null) {
 		$num = 0;
 		foreach ($rets as $event) {
-			$events[$num]['uid']		 = $event->uid;
-			$events[$num]['owneruuid']   = $event->owneruuid;
-			$events[$num]['name']		 = $event->name;
-			$events[$num]['eventid']	 = $event->eventid;
-			$events[$num]['creatoruuid'] = $event->creatoruuid;
-			$events[$num]['category']	 = $event->category;
-			$events[$num]['description'] = $event->description;
-			$events[$num]['dateUTC']	 = $event->dateUTC;
-			$events[$num]['duration']	 = $event->duration;
-			$events[$num]['covercharge'] = $event->covercharge;
-			$events[$num]['coveramount'] = $event->coveramount;
-			$events[$num]['simname']	 = $event->simname;
-			$events[$num]['globalPos']   = $event->globalPos;
-			$events[$num]['eventflags']  = $event->eventflags;
+			$events[$num] = $event;
 			$num++;
 		}
 	}
@@ -695,7 +682,7 @@ function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
 {  
 	if ($tm==0) $tm = time();
    
-	$select = "dateUTC > '$tm'";
+	$select = "dateutc > '$tm'";
 	if ($pg_only) $select .= " AND eventflags='0'";
 	if ($uid>0)   $select .= " AND uid='$uid'";
 
@@ -719,12 +706,12 @@ function  modlos_get_event($eventid)
 		$ret['creatoruuid'] = $event->creatoruuid;
 		$ret['category']	= $event->category;
 		$ret['description'] = $event->description;
-		$ret['dateUTC']	 	= $event->dateUTC;
+		$ret['dateutc']	 	= $event->dateutc;
 		$ret['duration']	= $event->duration;
 		$ret['covercharge'] = $event->covercharge;
 		$ret['coveramount'] = $event->coveramount;
 		$ret['simname']	 	= $event->simname;
-		$ret['globalPos']   = $event->globalPos;
+		$ret['globalpos']   = $event->globalpos;
 		$ret['eventflags']  = $event->eventflags;
 	}
    
@@ -749,19 +736,19 @@ function  modlos_set_event($event)
 	$dbobj->creatoruuid	= $event['creatoruuid'];
 	$dbobj->category	= $event['category'];
 	$dbobj->description	= $event['description'];
-	$dbobj->dateUTC		= $event['dateUTC'];
+	$dbobj->dateutc		= $event['dateutc'];
 	$dbobj->duration	= $event['duration'];
 	$dbobj->covercharge = $event['covercharge'];
 	$dbobj->coveramount = $event['coveramount'];
 	$dbobj->simname		= $event['simname'];
-	$dbobj->globalPos 	= $event['globalPos'];
+	$dbobj->globalpos 	= $event['globalpos'];
 	$dbobj->eventflags 	= $event['eventflags'];
  
 	if ($dbobj->eventid>0) { 
-		$ret = insert_record('searcheventsdb', $dbobj, true, 'eventid');
+		$ret = update_record('modlos_search_events', $dbobj);
 	}
 	else {
-		$ret = update_record('searcheventsdb', $dbobj);
+		$ret = insert_record('modlos_search_events', $dbobj, true, 'eventid');
 	}
 	return $ret;
 }

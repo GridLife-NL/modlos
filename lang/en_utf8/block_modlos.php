@@ -28,6 +28,7 @@ $string['modlos_num'] 				= 'No.';
 $string['modlos_ipaddr'] 			= 'IP Address';
 $string['modlos_info'] 				= 'Info';
 $string['modlos_edit'] 				= 'Edit';
+$string['modlos_delete'] 			= 'Delete';
 $string['modlos_change'] 			= 'Change';
 $string['modlos_time_now']			= 'Present Time';
 
@@ -188,7 +189,7 @@ $string['modlos_pg_only_error']		= 'Mature cannot be specified at this Grid!!';
 $string['modlos_invalid_date_error']= 'Invlid event date is specified!!';
 $string['modlos_opensim_create_error']='It failed in making avatar of OpenSim!!';
 $string['modlos_create_error']      = 'It failed in making user of Modlos!!';
-$string['modlos_update_error']      = 'It failed in updating user!!';
+$string['modlos_update_error']      = 'It failed in updating DB!!';
 $string['modlos_opensim_delete_error']='It failed in deleting avatar of OpenSim!!';
 $string['modlos_sloodle_delete_error']='It failed in deleting avatar of Sloodle!!';
 $string['modlos_user_delete_error'] = 'It failed in deleting user!!';
