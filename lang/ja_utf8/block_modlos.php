@@ -37,7 +37,7 @@ $string['modlos_edit_ttl'] 			= 'EDIT';
 $string['modlos_edit_user_ttl'] 	= 'ユーザ情報の編集';
 $string['modlos_reset_ttl'] 		= 'リセット';
 $string['modlos_cancel_ttl'] 		= 'キャンセル';
-$string['modlos_delete_ttl'] 		= '削除';
+$string['modlos_delete_ttl'] 		= 'DEL';
 $string['modlos_get_owner_ttl'] 	= 'OWNER';
 $string['modlos_update_ttl'] 		= '更新';
 $string['modlos_create_ttl'] 		= '作成';
@@ -356,6 +356,7 @@ $string['modlos_events_date']       = '日時';
 $string['modlos_events_type']       = 'タイプ';
 $string['modlos_events_name']       = 'イベント名';
 $string['modlos_events_owner']      = '主催者';
+$string['modlos_events_creator']    = '登録者';
 $string['modlos_events_found']      = 'イベント';
 
 $string['modlos_events_desc']       = '説明';
@@ -393,5 +394,8 @@ $string['modlos_events_misc']       = 'その他';
 $string['modlos_event_name_required']='イベントの名称を入力してください！';
 $string['modlos_event_desc_required']='イベントの説明を書いてください！';
 $string['modlos_event_owner_required']='有効なオーナを選択してください！';
+$string['modlos_event_creator_required']='有効な登録者を選択してください！';
+
+$string['modlos_should_have_avatar']= 'あなたはアバターを少なくとも一体は持つ必要があります．';
 
 ?>

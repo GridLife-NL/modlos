@@ -19,8 +19,9 @@ class  EditEvent
 	var $hasError  = false;
 	var $errorMsg  = array();
 
-	var $parcels = array();
-	var $owners  = array();
+	var $parcels  = array();
+	var $owners   = array();
+	var $creators = array();
 
 	var $action_url;
 	var $delete_url;
@@ -39,7 +40,9 @@ class  EditEvent
 	var $cover_amount = 0;
 	var $check_mature = 0;
 	var $event_owner  = '';
+	var $event_creator= '';
 	var $owner_uuid   = '';
+	var $creator_uuid = '';
 	var $event_saved  = false;
 
 	var $event_day;
@@ -56,6 +59,7 @@ class  EditEvent
 	var $saved_event_type   = '';
 	var $saved_event_date   = '';
 	var $saved_event_owner  = '';
+	var $saved_event_creator= '';
 
 
 
@@ -111,11 +115,16 @@ class  EditEvent
 		}
 
 		// List of Owners
-		if ($this->hasPermit) {
-			$this->owners = modlos_get_avatars();
+		$this->owners = modlos_get_avatars();
+
+		// List of Creators
+		$this->creators = modlos_get_avatars($this->userid);
+		if ($this->creators==null) {
+			error(get_string('modlos_should_have_avatar', 'block_modlos'), CMS_MODULE_URL.'/actions/events_list.php');
 		}
-		else {
-			$this->owners = modlos_get_avatars($this->userid);
+		foreach ($this->creators as $creator) {
+			$this->event_owner = $creator['fullname'];
+			break;
 		}
 
 		$event = array();
@@ -127,6 +136,8 @@ class  EditEvent
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 			}
+
+			$this->event_id = optional_param('event_id', '0',  PARAM_INT);
 
 			// Delete Event
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
@@ -143,6 +154,10 @@ class  EditEvent
 			$owner = explode('|', optional_param('owner_name', '|', PARAM_TEXT));
 			$this->owner_uuid  = $owner[0];
 			$this->event_owner = $owner[1];
+
+			$creator = explode('|', optional_param('creator_name', '|', PARAM_TEXT));
+			$this->creator_uuid  = $creator[0];
+			$this->event_creator = $creator[1];
 
 			$this->event_year  	= optional_param('event_year','2010', PARAM_INT);
 			$this->event_month 	= optional_param('event_month', '1',  PARAM_INT);
@@ -173,6 +188,15 @@ class  EditEvent
 				$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos')." (Name)";
 			}
 
+			if (!isGUID($this->creator_uuid)) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string('modlos_event_creator_required', 'block_modlos')." (UUID)";
+			}
+ 			if (!isAlphabetNumericSpecial($this->event_creator)) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string('modlos_event_creator_required', 'block_modlos')." (Name)";
+			}
+
 			if ($this->event_name=='') {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_event_name_required', 'block_modlos');
@@ -197,11 +221,12 @@ class  EditEvent
 
 			//
 			if (!$this->hasError) {
+				$event['id']	  	  = $this->event_id;
 				$event['uid']		  = $this->userid;
 				$event['eventid']	  = $this->event_id;
 				$event['owneruuid']   = $this->owner_uuid;
 				$event['name']		  = $this->event_name;
-				$event['creatoruuid'] = $this->owner_uuid;
+				$event['creatoruuid'] = $this->creator_uuid;
 				$event['category']	  = $this->category;
 				$event['description'] = $this->event_desc;
 				$event['duration']	  = $this->duration;
@@ -226,6 +251,7 @@ class  EditEvent
 					$this->saved_global_pos   = $this->global_pos;
 					$this->saved_event_date   = date($this->date_frmt, $event_date);
 					$this->saved_event_owner  = $this->event_owner;
+					$this->saved_event_creator= $this->event_creator;
    
 					$this->saved_region_name  = opensim_get_region_name($this->region_uuid);
 					if ($this->saved_region_name=='') $this->saved_region_name = get_string('modlos_unknown_region', 'block_modlos');
@@ -249,6 +275,8 @@ class  EditEvent
 					$this->region_uuid  = '';
 					$this->event_owner  = '';
 					$this->owner_uuid   = '';
+					$this->event_creator= '';
+					$this->creator_uuid = '';
 					$this->event_id	 	= 0;
    
 					$date = getdate();
@@ -275,6 +303,7 @@ class  EditEvent
 				if ($event!=null and ($event['uid']==$this->userid or $this->hasPermit)) {
 					$this->event_name	= $event['name'];
 					$this->owner_uuid	= $event['owneruuid'];
+					$this->creator_uuid	= $event['creatoruuid'];
 					$this->event_desc	= $event['description'];
 					$this->category	 	= $event['category'];
 					$this->duration	 	= $event['duration'];
@@ -283,8 +312,12 @@ class  EditEvent
 					$this->check_mature = $event['eventflags'];
 					$this->global_pos	= $event['globalpos'];
 					$this->region_uuid	= $event['simname'];
+
 					$owner_name = opensim_get_avatar_name($this->owner_uuid);
-					$this->event_owner  = $owner_name['fullname'];
+					$this->event_owner   = $owner_name['fullname'];
+					$creator_name = opensim_get_avatar_name($this->creator_uuid);
+					$this->event_creator = $creator_name['fullname'];
+
 					$date = getdate($event['dateutc']);
 				}
 			}
@@ -325,6 +358,7 @@ class  EditEvent
 		$events_duration 	= get_string('modlos_events_duration',		'block_modlos');
 		$events_location 	= get_string('modlos_events_location',		'block_modlos');
 		$events_owner 		= get_string('modlos_events_owner',			'block_modlos');
+		$events_creator 	= get_string('modlos_events_creator',		'block_modlos');
 		$events_category 	= get_string('modlos_events_category',		'block_modlos');
 		$events_charge 		= get_string('modlos_events_charge',		'block_modlos');
 		$events_amount 		= get_string('modlos_events_amount',		'block_modlos');
@@ -354,6 +388,7 @@ class  EditEvent
 		$modlos_yes 		= get_string('modlos_yes',					'block_modlos');
 		$modlos_reset_ttl 	= get_string('modlos_reset_ttl',			'block_modlos');
 		$modlos_delete_ttl 	= get_string('modlos_delete_ttl',			'block_modlos');
+		$modlos_delete 		= get_string('modlos_delete',				'block_modlos');
 
 		$date_file = CMS_MODULE_PATH.'/lang/'.current_language().'/modlos_events_date.html';
 		if (!file_exists($date_file)) {

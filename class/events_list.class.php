@@ -72,7 +72,6 @@ class  EventsList
 		$this->make_url	  = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param;
 		$this->edit_url   = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param."&amp;eventid=";
 		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$this->url_param."&amp;eventid=";
-
 	}
 
 
@@ -139,12 +138,17 @@ class  EventsList
 		$colum = 0;
 		foreach($events as $event) {
 			if (!$this->pg_only or $event['eventflags']==0) {
-				$avatar_name = opensim_get_avatar_name($event['creatoruuid']);
 				$this->db_data[$colum] = $event;
+				$this->db_data[$colum]['eventid'] = $event['id'];
 				$this->db_data[$colum]['num']	  = $colum;
 				$this->db_data[$colum]['time']	  = date($this->date_frmt, $event['dateutc']);
+
+				$avatar_name = opensim_get_avatar_name($event['creatoruuid']);
 				$this->db_data[$colum]['creator'] = $avatar_name['fullname'];
    
+				$avatar_name = opensim_get_avatar_name($event['owneruuid']);
+				$this->db_data[$colum]['owner'] = $avatar_name['fullname'];
+
 				if ($event['eventflags']==0) {
 					$this->db_data[$colum]['type'] = "title='PG Event' src=../images/events/blue_star.gif";
 				}
@@ -176,16 +180,17 @@ class  EventsList
 		$events_make_link	= get_string('modlos_events_make_link', 'block_modlos');
 		$events_click_here	= get_string('modlos_events_click_here','block_modlos');
 
-		$events_date	= get_string('modlos_events_date',  'block_modlos');
-		$events_type	= get_string('modlos_events_type',  'block_modlos');
-		$events_name	= get_string('modlos_events_name',  'block_modlos');
-		$events_owner	= get_string('modlos_events_owner', 'block_modlos');
-		$events_found	= get_string('modlos_events_found', 'block_modlos');
+		$events_date	= get_string('modlos_events_date',   'block_modlos');
+		$events_type	= get_string('modlos_events_type',   'block_modlos');
+		$events_name	= get_string('modlos_events_name',   'block_modlos');
+		$events_owner	= get_string('modlos_events_owner',  'block_modlos');
+		$events_creator	= get_string('modlos_events_creator','block_modlos');
+		$events_found	= get_string('modlos_events_found',  'block_modlos');
 
-		$page_num		= get_string('modlos_page',		   	'block_modlos');
-		$page_num_of	= get_string('modlos_page_of',	 	'block_modlos');
-		$modlos_edit	= get_string('modlos_edit',		  	'block_modlos');
-		$modlos_delete	= get_string('modlos_delete',	   	'block_modlos');
+		$page_num		= get_string('modlos_page',		   	 'block_modlos');
+		$page_num_of	= get_string('modlos_page_of',	 	 'block_modlos');
+		$modlos_edit	= get_string('modlos_edit_ttl',		 'block_modlos');
+		$modlos_delete	= get_string('modlos_delete_ttl',	 'block_modlos');
 
 		include(CMS_MODULE_PATH.'/html/events.html');
 	}

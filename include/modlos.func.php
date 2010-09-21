@@ -45,7 +45,7 @@
  // Events
  function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
  function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
- function  modlos_get_event($eventid)
+ function  modlos_get_event($id)
  function  modlos_set_event($event)
 
 
@@ -89,7 +89,7 @@
  function delete_records_select($table, $select='')
 
  function insert_record($table, $dataobject, $returnid=true, $primarykey='id')
- function update_record($table, $dataobject)
+ function update_record($table, $dataobject)		// need $dataobject->id
 
  ****************************************************************/
 
@@ -693,12 +693,13 @@ function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
 
 
    
-function  modlos_get_event($eventid)
+function  modlos_get_event($id)
 {  
-	$event = get_record('modlos_search_events', 'eventid', $eventid);
+	$event = get_record('modlos_search_events', 'id', $id);
    
 	$ret = array();
 	if ($event!=null) {
+		$ret['id']		 	= $event->id;
 		$ret['uid']		 	= $event->uid;
 		$ret['owneruuid']   = $event->owneruuid;
 		$ret['name']		= $event->name;
@@ -723,16 +724,18 @@ function  modlos_get_event($eventid)
 
 function  modlos_set_event($event)
 {
-	$dbobj->eventid = 0;
+	$dbobj->id = 0;
 
-	if ($event['eventid']>0) {
-		$dbobj = get_record('modlos_search_events', 'eventid', $event['eventid']);
-		if ($dbobj==null) $dbobj->eventid = 0;
+	if ($event['id']>0) {
+		$dbobj = get_record('modlos_search_events', 'id', $event['id']);
+		if ($dbobj==null) $dbobj->id = 0;
 	}
    
+	$dbobj->id		 	= $event['id'];
 	$dbobj->uid		 	= $event['uid'];
 	$dbobj->owneruuid	= $event['owneruuid'];
 	$dbobj->name		= $event['name'];
+	$dbobj->eventid		= $event['eventid'];
 	$dbobj->creatoruuid	= $event['creatoruuid'];
 	$dbobj->category	= $event['category'];
 	$dbobj->description	= $event['description'];
@@ -744,11 +747,11 @@ function  modlos_set_event($event)
 	$dbobj->globalpos 	= $event['globalpos'];
 	$dbobj->eventflags 	= $event['eventflags'];
  
-	if ($dbobj->eventid>0) { 
+	if ($dbobj->id>0) { 
 		$ret = update_record('modlos_search_events', $dbobj);
 	}
 	else {
-		$ret = insert_record('modlos_search_events', $dbobj, true, 'eventid');
+		$ret = insert_record('modlos_search_events', $dbobj);
 	}
 	return $ret;
 }

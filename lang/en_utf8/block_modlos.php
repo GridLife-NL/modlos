@@ -38,7 +38,7 @@ $string['modlos_edit_ttl'] 			= 'EDIT';
 $string['modlos_edit_user_ttl']		= 'EDIT user';
 $string['modlos_reset_ttl'] 		= 'RESET';
 $string['modlos_cancel_ttl'] 		= 'CANCEL';
-$string['modlos_delete_ttl'] 		= 'DELETE';
+$string['modlos_delete_ttl'] 		= 'DEL';
 $string['modlos_get_owner_ttl'] 	= 'OWNER';
 $string['modlos_update_ttl'] 		= 'UPDATE';
 $string['modlos_create_ttl'] 		= 'CREATE';
@@ -356,6 +356,7 @@ $string['modlos_events_date']		= 'Date';
 $string['modlos_events_type']		= 'Type';
 $string['modlos_events_name']		= 'Event Name';
 $string['modlos_events_owner']		= 'Owner';
+$string['modlos_events_creator']	= 'Creator';
 $string['modlos_events_found']		= 'Events Found';
 
 $string['modlos_events_desc']		= 'Decription';
@@ -392,5 +393,8 @@ $string['modlos_events_misc']       = 'Miscellaneous';
 $string['modlos_event_name_required']='You must input Event Name!!';
 $string['modlos_event_desc_required']='You must input Event Description!!';
 $string['modlos_event_owner_required']='You must select valid event Owner!!';
+$string['modlos_event_creator_required']='You must select valid event Creator!!';
+
+$string['modlos_should_have_avatar']= 'You should have avatar at least one.';
 
 ?>
