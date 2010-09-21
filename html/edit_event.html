@@ -50,7 +50,7 @@ function checklength(obj,warning_div){
 
             <tr align="left">
               <td class="head" valign="top"><?php echo $events_owner?></td>
-              <td class="even">
+              <td class="odd">
                 <select name="owner_name">
 	      		  <?php foreach ($this->owners as $owner) {?>
                     <?php if ($owner['fullname']==$this->event_owner) {?>
@@ -82,7 +82,7 @@ function checklength(obj,warning_div){
 
             <tr align="left">
               <td class="head"><?php echo $events_category?></td>
-              <td class="even">
+              <td class="odd">
                 <select name="category">
                   <option value="0"  <?php if ($this->category==0) {?>selected<?php }?> ><?php echo $events_all_category?></option>
                   <option value="18" <?php if ($this->category==18){?>selected<?php }?> ><?php echo $events_discussion?></option>
@@ -104,7 +104,7 @@ function checklength(obj,warning_div){
 
             <tr align="left">
               <td nowrap class="head"><?php echo $events_charge?></td>
-              <td class="odd">
+              <td class="even">
                 <select name="cover_charge">
                   <option value="0" <?php if ($this->cover_charge==0){?>selected<?php }?> ><?php echo $modlos_no?></option>
                   <option value="1" <?php if ($this->cover_charge==1){?>selected<?php }?> ><?php echo $modlos_yes?></option>
@@ -115,7 +115,7 @@ function checklength(obj,warning_div){
 
             <tr align="left">
               <td class="head"><?php echo $events_location?></td>
-              <td class="even">
+              <td class="odd">
                 <select name="parcel_name">
                   <option value="0/0/0|00000000-0000-0000-0000-00000000000"><?php echo $events_pick_parcel?></option>
 	      		  <?php foreach ($this->parcels as $parcel) {?>
@@ -134,7 +134,7 @@ function checklength(obj,warning_div){
             <?php } else {?>
               <tr align="left">
                 <td class="head"><?php echo $events_type_ttl?></td>
-                <td class="odd">
+                <td class="even">
                   <input type="checkbox" name="check_mature" value="1" <?php if ($this->check_mature==1) {?>checked<?php }?> />
                   <?php echo $events_mature_ttl?>
                 </td>
