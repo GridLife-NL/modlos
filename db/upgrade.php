@@ -24,6 +24,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
+
 	// 2010090100
 	if ($result && $oldversion < 2010090100) {
 		$table = new XMLDBTable('modlos_login_screen');
@@ -37,6 +38,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->addKeyInfo('id', XMLDB_KEY_PRIMARY, array('id'));
 		$result = $result && create_table($table);
 	}
+
 
 
 	//  2010092000
@@ -58,15 +60,14 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$result = $result && create_table($table);
 	}
 
-	if ($result && $oldversion < 2010092000) {
+	//if ($result && $oldversion < 2010092000) {
 		$table = new XMLDBTable('modlos_search_events');
  		drop_table($table);
 
-		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
 		$table->addFieldInfo('uid', XMLDB_TYPE_INTEGER, '8', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
 		$table->addFieldInfo('owneruuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->addFieldInfo('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('eventid', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->addFieldInfo('eventid', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
 		$table->addFieldInfo('creatoruuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->addFieldInfo('category', XMLDB_TYPE_INTEGER, '2', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
 		$table->addFieldInfo('description', XMLDB_TYPE_TEXT, 'medium', null, XMLDB_NOTNULL, null, null, null, null);
@@ -78,9 +79,9 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->addFieldInfo('globalpos', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->addFieldInfo('eventflags', XMLDB_TYPE_INTEGER, '1', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
 
-		$table->addKeyInfo('id', XMLDB_KEY_PRIMARY, array('id'));
+		$table->addKeyInfo('eventid', XMLDB_KEY_PRIMARY, array('eventid'));
 		$result = $result && create_table($table);
-	}
+	//}
 
 	if ($result && $oldversion < 2010092000) {
 		$table = new XMLDBTable('modlos_search_hostsregister');
