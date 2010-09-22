@@ -41,8 +41,8 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 
 
 
-	//  2010092000
-	if ($result && $oldversion < 2010092000) {
+	//  2010092200
+	if ($result && $oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_hostsregister');
  		drop_table($table);
 
@@ -60,7 +60,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
-	if ($result && $oldversion < 2010092000) {
+	if ($result && $oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_allparcels');
  		drop_table($table);
 
@@ -80,7 +80,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
-	if ($result && $oldversion < 2010092000) {
+	if ($result && $oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_parcels');
  		drop_table($table);
 
@@ -104,7 +104,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
-	if ($result && $oldversion < 2010092000) {
+	if ($result && $oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_parcelsales');
  		drop_table($table);
 
@@ -126,7 +126,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
-	if ($result && $oldversion < 2010092000) {
+	if ($result && $oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_events');
  		drop_table($table);
 
@@ -151,7 +151,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
-	if ($result && $oldversion < 2010092000) {
+	if ($result && $oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_regions');
  		drop_table($table);
 
@@ -169,7 +169,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
-	if ($result && $oldversion < 2010092000) {
+	if ($result && $oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_popularplaces');
  		drop_table($table);
 
@@ -186,7 +186,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
-	if ($result && $oldversion < 2010092000) {
+	if ($result && $oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_objects');
  		drop_table($table);
 
