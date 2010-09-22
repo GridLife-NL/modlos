@@ -377,7 +377,7 @@ $string['modlos_events_saved']		= 'Event was saved';
 
 $string['modlos_events_delete'] 	= 'Delete Event';
 $string['modlos_events_deleted']	= 'Event Deleted';
-$string['modlos_events_delete_ttl']	= 'DELETE EVENT');
+$string['modlos_events_delete_ttl']	= 'DELETE EVENT';
 $string['modlos_events_dlt_canceled']='Event Delete Canceled';
 $string['modlos_events_dlt_confrm'] = 'Is Event really DELETE?';
 
