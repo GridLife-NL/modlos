@@ -49,6 +49,7 @@ function checklength(obj,warning_div){
               </td>
             </tr>
 
+<!--
             <tr align="left">
               <td class="head" valign="top"><?php echo $events_owner?></td>
               <td class="odd">
@@ -63,10 +64,11 @@ function checklength(obj,warning_div){
                 </select>
               </td>
             </tr>
+-->
 
             <tr align="left">
               <td class="head" valign="top"><?php echo $events_creator?></td>
-              <td class="even">
+              <td class="odd">
                 <select name="creator_name">
 	      		  <?php foreach ($this->creators as $creator) {?>
                     <?php if ($creator['fullname']==$this->event_creator) {?>
@@ -222,26 +224,28 @@ function checklength(obj,warning_div){
                   <?php echo $Categories[$this->saved_category]?>
                 </td>
               </tr>
+<!--
               <tr align="left">
                 <td class="head"><?php echo $events_owner?></td>
                 <td class="odd" ><?php echo $this->saved_event_owner?></td>
               </tr>
+-->
               <tr align="left">
                 <td class="head"><?php echo $events_creator?></td>
-                <td class="even"><?php echo $this->saved_event_creator?></td>
+                <td class="odd" ><?php echo $this->saved_event_creator?></td>
               </tr>
               <tr align=left>
                 <td class="head"><?php echo $events_location?></td>
-                <td class="odd" ><?php echo $this->saved_region_name?>&nbsp;:&nbsp; <?php echo $this->saved_global_pos?></td>
+                <td class="even"><?php echo $this->saved_region_name?>&nbsp;:&nbsp; <?php echo $this->saved_global_pos?></td>
               </tr>
               <tr align=left>
                 <td class="head"><?php echo $events_amount?>&nbsp;(L$)</td>
-                <td class="even"><?php echo $this->saved_cover_amount?></td>
+                <td class="odd" ><?php echo $this->saved_cover_amount?></td>
               </tr>
               <?php if (!$pg_only) {?>
                 <tr align="left">
                   <td class="head"><?php echo $events_type?></td>
-                  <td class="odd" ><strong><img height=20px width=20px <?php echo $this->saved_event_type?> /></strong></td>
+                  <td class="even"><strong><img height=20px width=20px <?php echo $this->saved_event_type?> /></strong></td>
                 </tr>
               <?php }?>
             </table>

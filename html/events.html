@@ -42,7 +42,7 @@
         <strong><?php echo $events_category?></strong>
       </td>
       <td width="120"  valign="bottom" background="<?php echo $module_url?>/images/main/regions_middle.jpg"><br />
-        <strong><?php echo $events_owner?></strong>
+        <strong><?php echo $events_creator?></strong>
       </td>
       <td width="80"  valign="bottom" background="<?php echo $module_url?>/images/main/regions_middle.jpg"><br /> </td>
       <td width="15" background="<?php echo $module_url?>/images/main/regions_right.gif">&nbsp;</td>
@@ -179,18 +179,18 @@
 
         <td width=160 style="color: #551111"><strong><?php echo $Categories[$dat['category']]?></strong></td>
 
+<!--
         <td width=120 style="color: #2222cc">
           <a style="cursor:pointer" onClick="window.open('<?php echo $module_url?>/helper/agent.php?agent=<?php echo $dat['owneruuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
             <strong><u><?php echo $dat['owner']?></u></strong>
           </a>
         </td>
-<!--
+-->
         <td width=120 style="color: #2222cc">
           <a style="cursor:pointer" onClick="window.open('<?php echo $module_url?>/helper/agent.php?agent=<?php echo $dat['creatoruuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
             <strong><u><?php echo $dat['creator']?></u></strong>
           </a>
         </td>
--->
         <td width=80>
           <?php if ($this->hasPermit or $this->userid==$dat['uid']) {?>
             <a href=<?php echo $this->edit_url.$dat['eventid']?>   ><strong><u style="color: #cc1010"><?php echo $modlos_edit?></u></strong></a>&nbsp;

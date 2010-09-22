@@ -150,10 +150,10 @@ class  EventsList
 				$this->db_data[$colum]['owner'] = $avatar_name['fullname'];
 
 				if ($event['eventflags']==0) {
-					$this->db_data[$colum]['type'] = "title='PG Event' src=../images/events/blue_star.gif";
+					$this->db_data[$colum]['type'] = "title='PG Event' src=../images/events/pink_star.gif";
 				}
 				else {
-					$this->db_data[$colum]['type'] = "title='Mature Event' src=../images/events/pink_star.gif";
+					$this->db_data[$colum]['type'] = "title='Mature Event' src=../images/events/blue_star.gif";
 				}
 				$colum++;
 			}

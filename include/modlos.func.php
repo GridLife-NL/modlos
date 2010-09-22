@@ -754,6 +754,11 @@ function  modlos_set_event($event)
 	}
 	else {
 		$ret = insert_record('modlos_search_events', $dbobj);
+		if ($ret) {
+			$dbobj->id 		= $ret;
+			$dbobj->eventid = $ret;
+			$ret = update_record('modlos_search_events', $dbobj);
+		}
 	}
 	return $ret;
 }

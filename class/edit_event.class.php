@@ -183,15 +183,6 @@ class  EditEvent
 
 
 			// Error check
-			if (!isGUID($this->owner_uuid)) {
-				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos')." (UUID)";
-			}
- 			if (!isAlphabetNumericSpecial($this->event_owner)) {
-				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos')." (Name)";
-			}
-
 			if (!isGUID($this->creator_uuid)) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_event_creator_required', 'block_modlos')." (UUID)";
@@ -199,6 +190,17 @@ class  EditEvent
  			if (!isAlphabetNumericSpecial($this->event_creator)) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_event_creator_required', 'block_modlos')." (Name)";
+			}
+
+			if (!isGUID($this->owner_uuid)) {
+				//$this->hasError = true;
+				//$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos')." (UUID)";
+				$this->owner_uuid = $this->creator_uuid;
+			}
+ 			if (!isAlphabetNumericSpecial($this->event_owner)) {
+				//$this->hasError = true;
+				//$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos')." (Name)";
+				$this->event_owner = $this->event_creator;
 			}
 
 			if ($this->event_name=='') {
@@ -261,10 +263,10 @@ class  EditEvent
 					if ($this->saved_region_name=='') $this->saved_region_name = get_string('modlos_unknown_region', 'block_modlos');
    
 					if ($this->check_mature) {
-						$this->saved_event_type = "title='Mature Event' src=../images/events/pink_star.gif";
+						$this->saved_event_type = "title='Mature Event' src=../images/events/blue_star.gif";
 					}
 					else {
-						$this->saved_event_type = "title='PG Event' src=../images/events/blue_star.gif";
+						$this->saved_event_type = "title='PG Event' src=../images/events/pink_star.gif";
 					}
    
 					// clear valiable
@@ -283,6 +285,11 @@ class  EditEvent
 					$this->creator_uuid = '';
 					$this->event_id	 	= 0;
    
+					foreach ($this->creators as $creator) {
+						$this->event_owner = $creator['fullname'];
+						break;
+					}
+
 					$date = getdate();
 					$this->event_year   = $date['year'];
 					$this->event_month  = $date['mon'];
