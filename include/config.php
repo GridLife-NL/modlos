@@ -16,6 +16,7 @@ if (!defined('CMS_MODULE_PATH')) define('CMS_MODULE_PATH', $CFG->dirroot.'/block
 
 if ($CFG->modlos_use_utc_time) date_default_timezone_set('UTC');
 
+$DateFormat = $CFG->modlos_date_format;
 $GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
 
 
