@@ -1,8 +1,12 @@
 
             <tr align="left">
-              <td class="head"><?php echo $events_date?></td>
-              <td class="odd">
+              <?php if ($this->use_utc_time) {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(UTC)</td>
+              <?php } else {?>
+                <td class="head"><?php echo $events_date?>&nbsp;(Local)</td>
+              <?php }?>
 
+              <td class="odd">
                 <select name="event_year">
                   <option value="2010" <?php if ($this->event_year==2010) {?>selected<?php }?> >2010年</option>
                   <option value="2011" <?php if ($this->event_year==2011) {?>selected<?php }?> >2011年</option>
@@ -33,9 +37,13 @@
             </tr>
 
             <tr align="left">
-              <td class="head"><?php echo $events_starts?></td>
-              <td class="even">
+              <?php if ($this->use_utc_time) {?>
+                <td class="head"><?php echo $events_starts?>&nbsp;(UTC)</td>
+              <?php } else {?>
+                <td class="head"><?php echo $events_starts?>&nbsp;(Local)</td>
+              <?php }?>
 
+              <td class="even">
                 <select name="event_hour">
                   <?php for ($h=0; $h<13; $h++) {?> 
                     <?php if ($h==$this->event_hour) {?>

@@ -13,6 +13,9 @@ if (!defined('CMS_MODULE_URL'))  define('CMS_MODULE_URL',  $CFG->wwwroot.'/block
 if (!defined('CMS_MODULE_PATH')) define('CMS_MODULE_PATH', $CFG->dirroot.'/blocks/'.CMS_DIR_NAME);
 
 
+
+if ($CFG->modlos_use_utc_time) date_default_timezone_set('UTC');
+
 $GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
 
 

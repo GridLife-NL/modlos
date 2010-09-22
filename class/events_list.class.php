@@ -59,7 +59,7 @@ class  EventsList
 		$this->plimit 	 = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 
 		$this->use_utc_time = $CFG->modlos_use_utc_time;
-		if ($this->use_utc_time) date_default_timezone_set('UTC');
+		//if ($this->use_utc_time) date_default_timezone_set('UTC');
    
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;

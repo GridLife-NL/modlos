@@ -58,7 +58,7 @@ class  DeleteEvent
 		
 		$this->date_frmt = $CFG->modlos_date_format;	
 		$this->use_utc_time = $CFG->modlos_use_utc_time;
-		if ($this->use_utc_time) date_default_timezone_set('UTC');
+		//if ($this->use_utc_time) date_default_timezone_set('UTC');
 
 		$course_param = '?course='.$course_id;
 		$this->course_id  = $course_id;

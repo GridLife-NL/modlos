@@ -86,7 +86,7 @@ class  EditEvent
 		$this->event_id  = optional_param('eventid', '0', PARAM_INT);
 
 		$this->use_utc_time = $CFG->modlos_use_utc_time;
-		if ($this->use_utc_time) date_default_timezone_set('UTC');
+		//if ($this->use_utc_time) date_default_timezone_set('UTC');
    
 		$this->url_param = '?dmmy_param=';
 		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;

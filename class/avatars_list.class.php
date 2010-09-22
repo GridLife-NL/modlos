@@ -81,8 +81,7 @@ class  AvatarsList
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
 
 		$this->use_utc_time = $CFG->modlos_use_utc_time;
-		if ($this->use_utc_time) date_default_timezone_set('UTC');
-
+		//if ($this->use_utc_time) date_default_timezone_set('UTC');
 	}
 
 

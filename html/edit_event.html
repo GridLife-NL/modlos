@@ -209,7 +209,7 @@ function checklength(obj,warning_div){
                 <td class="even" width=400><?php echo $this->saved_event_name?></td>
               </tr>
               <tr align="left">
-                <?php if ($use_utc_time) {?>
+                <?php if ($this->use_utc_time) {?>
                   <td class="head"><?php echo $events_date?>&nbsp;(UTC)</td>
                 <?php } else {?>
                   <td class="head"><?php echo $events_date?>&nbsp;(Local)</td>
