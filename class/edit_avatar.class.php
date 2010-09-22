@@ -235,7 +235,7 @@ class  EditAvatar
 		$owner_ttl	  		= get_string('modlos_owner',		 'block_modlos');
 		$ownername_ttl	  	= get_string('modlos_ownername',	 'block_modlos');
 		$update_ttl	  		= get_string('modlos_update_ttl', 	 'block_modlos');
-		$delete_ttl	  		= get_string('modlos_delete_ttl', 	 'block_modlos');
+		$delete_ttl	  		= get_string('modlos_delete', 	 	 'block_modlos');
 		$reset_ttl	  		= get_string('modlos_reset_ttl', 	 'block_modlos');
 		$avatar_updated	  	= get_string('modlos_avatar_updated','block_modlos');
 		$uuid_ttl	  		= get_string('modlos_uuid',			 'block_modlos');

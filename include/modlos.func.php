@@ -48,7 +48,6 @@
  function  modlos_get_event($id)
  function  modlos_set_event($event)
 
-
  // Login Screen
  function  modlos_get_loginscreen_alert()
  function  modlos_set_loginscreen_alert($alert)

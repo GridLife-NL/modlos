@@ -101,8 +101,7 @@ $string['modlos_sloodle_short']		= 'SLDL';
 $string['modlos_manage_sloodle']	= 'Sloodle との連携';
 
 $string['modlos_avatar_upd_submit'] = 'アバター更新';
-$string['modlos_avatar_dlt_submit'] = 'アバター削除';
-$string['modlos_avatar_dlt_canceled']= '削除取り消し';
+$string['modlos_avatar_dlt_canceled']= 'アバター削除取り消し';
 $string['modlos_avatar_dlt_confrm']	= '本当にアバターを削除しますか？';
 
 $string['modlos_users_found'] 		= 'ユーザ';
@@ -377,6 +376,12 @@ $string['modlos_events_mature_ttl'] = '成人向けイベント';
 $string['modlos_events_save']       = '保存';
 $string['modlos_events_saved']      = 'イベントを保存しました';
 
+$string['modlos_events_delete']		= 'イベントの削除';
+$string['modlos_events_deleted']	= 'イベントを削除しました';
+$string['modlos_events_delete_ttl']	= '削除';
+$string['modlos_events_dlt_canceled']='イベント削除取り消し';
+$string['modlos_events_dlt_confrm']	= '本当にイベントを削除しますか？';
+
 $string['modlos_events_all_category']= '全カテゴリ';
 $string['modlos_events_discussion'] = 'ディスカッション';
 $string['modlos_events_sports']     = 'スポーツ';
@@ -392,6 +397,8 @@ $string['modlos_events_arts']       = 'アートとカルチャー';
 $string['modlos_events_charity']    = 'チャリティ/サポート';
 $string['modlos_events_misc']       = 'その他';
 
+$string['modlos_bad_event_id']		= '不正なイベントID です';
+$string['modlos_not_exist_event']	= '指定されたイベントは存在しません';
 $string['modlos_event_name_required']='イベントの名称を入力してください！';
 $string['modlos_event_desc_required']='イベントの説明を書いてください！';
 $string['modlos_event_owner_required']='有効なオーナを選択してください！';

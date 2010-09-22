@@ -102,7 +102,6 @@ $string['modlos_sloodle_short']     = 'SLDL';
 $string['modlos_manage_sloodle']    = 'Cooperation with Sloodle';
 
 $string['modlos_avatar_upd_submit'] = 'Update Avatar';
-$string['modlos_avatar_dlt_submit'] = 'Delete Avatar';
 $string['modlos_avatar_dlt_canceled']='Avatar Delete Canceled';
 $string['modlos_avatar_dlt_confrm'] = 'Is Avatar really DELETE?';
 
@@ -376,6 +375,12 @@ $string['modlos_events_mature_ttl']	= 'Mature Event';
 $string['modlos_events_save']		= 'Save Event';
 $string['modlos_events_saved']		= 'Event was saved';
 
+$string['modlos_events_delete'] 	= 'Delete Event';
+$string['modlos_events_deleted']	= 'Event Deleted';
+$string['modlos_events_delete_ttl']	= 'DELETE EVENT');
+$string['modlos_events_dlt_canceled']='Event Delete Canceled';
+$string['modlos_events_dlt_confrm'] = 'Is Event really DELETE?';
+
 $string['modlos_events_all_category']='All Category';
 $string['modlos_events_discussion'] = 'Discussion';
 $string['modlos_events_sports']     = 'Sports';
@@ -391,6 +396,8 @@ $string['modlos_events_charity']    = 'Charity/Support';
 //$string['modlos_events_charity']    = 'Charity/Support Groups';
 $string['modlos_events_misc']       = 'Miscellaneous';
 
+$string['modlos_bad_event_id']		= 'Specified Event ID is illegal!!';
+$string['modlos_not_exist_event']	= 'Specified Event is not exist!!';
 $string['modlos_event_name_required']='You must input Event Name!!';
 $string['modlos_event_desc_required']='You must input Event Description!!';
 $string['modlos_event_owner_required']='You must select valid event Owner!!';

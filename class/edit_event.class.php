@@ -91,8 +91,8 @@ class  EditEvent
 		$this->url_param = '?dmmy_param=';
 		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;
 
-		$this->action_url = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param.'&amp;courseid=';
-		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$this->url_param.'&amp;courseid=';
+		$this->action_url = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param;
+		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$this->url_param.'&amp;eventid=';
 
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;

@@ -1,115 +1,85 @@
 
-<h2><center><{$grid_name}>&nbsp;:&nbsp;<{$smarty.const._MD_XPNSM_AVATAR_DELETE}></center></h2>
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/table.css")?>
+</style>
+
+
+<h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$events_delete_ttl?></center></h2>
 <br />
 
-<{if $showPostForm}>
-<form action="<{$action_url}>" method="POST">
-<{else}>
-<form action="<{$return_url}>" method="GET">
-<{/if}>
+<?php if ($showPostForm) {?>
+  <form action="<?php echo $this->action_url?>" method="POST">
+<?php } else {?>
+  <form action="<?php echo $this->return_url?>" method="GET">
+<?php }?>
 
-  <table cellSpacing=0 cellPadding=0 width=500 border=0 align=center>
-    <tbody>
+    <table width="450" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
       <tr>
-        <td valign=top align=center>&nbsp;</td>
-        <td valign=top align=center width=500>
-
-          <table width="500" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="#ffffff" style="color:#1010e0; font-weight:bold;">
-            <tr align=left>
-              <td width="150" class="head"><{$smarty.const._MD_XPNSM_FIRSTNAME}></td>
-              <td width="350" class="even"><{$firstname}></td>
-            </tr>
-            <tr align=left>
-              <td class="head"><{$smarty.const._MD_XPNSM_LASTNAME}></td>
-              <td class="odd"><{$lastname}></td>
-            </tr>
-            <tr align=left>
-              <td class="head"><{$smarty.const._MD_XPNSM_HOME_REGION}></td>
-              <td class="even"><{$hmregion}></td>
-            </tr>
-            <tr align=left>
-              <td class="head"><{$smarty.const._MD_XPNSM_STATUS}></td>
-              <td class="odd" >
-                <{if $deleted_avatar}>
-                  <font color=#cc0000><{$smarty.const._MD_XPNSM_STATE_DELETED}></font>
-                <{else}>
-                  <{if !($state&AVATAR_STATE_SYNCDB) }>
-                    <font color=#cc0000><{$smarty.const._MD_XPNSM_NOT_SYNCDB}></font>
-                  <{elseif $state&AVATAR_STATE_INACTIVE }>
-                    <font color=#cc0000><{$smarty.const._MD_XPNSM_INACTIVE}></font>
-                  <{elseif $state&AVATAR_STATE_SYNCDB }>
-                    <font color=#0000cc><{$smarty.const._MD_XPNSM_ACTIVE}></font>
-                  <{else}>
-                    <font color=#cc0000><{$smarty.const._MD_XPNSM_UNKNOWN_STATUS}></font>
-                  <{/if}>
-                <{/if}>
-              </td>
-            </tr>
-
-            <{if $isAdmin}>
-              <tr align=left>
-                <td class="head"><{$smarty.const._MD_XPNSM_OWNERNAME}></td>
-                <td class="even"><{$ownername}></td>	
-              </tr>
-            <{/if}>
-
-          </table>
-
+        <td width="100" class="head"><?php echo $events_name?></td>
+        <td width="320" class="even"><?php echo $this->event_name?></td>
+      </tr>
+      <tr>
+        <td class="head">
+          <?php echo $events_date?>
+          <?php if ($this->use_utc_time) {echo " (UTC)";} else {echo " (Local)";}?>
         </td>
-        <td valign=top align=center>&nbsp;</td>
+        <td class="odd" ><?php echo $this->event_date?></td>
+      </tr>
       <tr>
-    <tbody>
-  </table>
+        <td class="head"><?php echo $events_category?></td>
+        <td class="even"><?php echo $this->event_category?></td>
+      </tr>
+      <tr>
+        <td class="head"><?php echo $events_owner?></td>
+        <td class="odd" ><?php echo $this->event_ownername?></td>
+      </tr>
+      <tr>
+        <td class="head"><?php echo $events_creator?></td>
+        <td class="even"><?php echo $this->event_creatorname?></td>
+      </tr>
 
+    </table>
   <br />
 
-  <div align=center>
-    <{if $showPostForm}>
-      <{xoops_token form=$actionForm}>
-      <input type="hidden" name="uuid" value="<{$UUID}>" />
-      <input name="submit_delete" type="submit" value="<{$smarty.const._MD_XPNSM_DELETE_TTL}>" />&nbsp;
-      <input name="cancel_delete" type="submit" value="<{$smarty.const._MD_XPNSM_CANCEL_TTL}>" />
-    <{else}>
-      <input type="hidden" name="action"   value="<{$return_action}>" />
-      <input name="submit_return" type="submit" value="<{$smarty.const._MD_XPNSM_RETURN_TTL}>" />&nbsp;
-    <{/if}>
+  <div align="center">
+    <?php if ($showPostForm) {?>
+      <input type="hidden" name="eventid"   value="<?php echo $this->event_id?>" />
+      <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+      <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+      <input name="submit_delete" type="submit" value="<?php echo $delete_ttl?>" />&nbsp;
+      <input name="cancel_delete" type="submit" value="<?php echo $cancel_ttl?>" />
+    <?php } else {?>
+      <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+      <input name="submit_return" type="submit" value="<?php echo $return_ttl?>" />
+    <?php }?>
   </div>
 </form>
-
-
 <br />
+
+
+<!-- echo Message -->
 <hr />
-<{if $actionForm->hasError()}>
-  <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
-    <tbody>
-      <tr>
-        <td valign=top align=center>&nbsp;</td>
-        <td valign=top align=center width=600>
-          <table width="600" border="0" align="center" cellpadding="1" cellspacing="1" bgcolor="#FFFFFF" style="color:#1010e0; font-weight:bold;">
-            <tr>
-              <td>
-               <ul>
-                <{foreach item="errval" from=$actionForm->getErrorMessages()}>
-                  <li><font color="#f01010"><b><{$errval}></b></font></li>
-                <{/foreach}>
-                </ul>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <td valign=top align=center>&nbsp;</td>
-      </tr>
-    </tbody>
-  </table>
-  <br />
-<{else}>
-  <div align=center>
-    <{if $deleted_avatar}>
-      <h3><font color=#2020e0><{$smarty.const._MD_XPNSM_AVATAR_DELETED}></font></h3>
-    <{else}>
-      <h3><font color=#cc2020><{$smarty.const._MD_XPNSM_AVATAR_DLT_CONFRM}></font></h3> 
-    <{/if}>
+<?php if ($this->hasError) {?>
+
+  <div align="center">
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
+      <?php }?>
+    </ul>
   </div>
 
-<{/if}>
+<?php } else {?>
+
+  <div align="center">
+    <?php if ($this->deleted) {?>
+      <h3><font color=#2020e0><?php echo $events_deleted?></font></h3>
+    <?php } else {?>
+      <h3><font color=#c02020><?php echo $events_dlt_confrm?></font></b></h3>
+    <?php }?>
+  </div>
+
+<?php }?>
+<br />
+
 
