@@ -103,21 +103,6 @@ require_once(CMS_MODULE_PATH.'/include/opensim.mysql.php');
 
 
 
-// Categories
-$Categories[0]  = get_string('modlos_events_all_category', 	'block_modlos');
-$Categories[18] = get_string('modlos_events_discussion', 	'block_modlos');
-$Categories[19] = get_string('modlos_events_sports', 		'block_modlos');
-$Categories[20] = get_string('modlos_events_music', 		'block_modlos');
-$Categories[22] = get_string('modlos_events_commercial',	'block_modlos');
-$Categories[23] = get_string('modlos_events_enteme',		'block_modlos');
-$Categories[24] = get_string('modlos_events_games',			'block_modlos');
-$Categories[25] = get_string('modlos_events_pageants',		'block_modlos');
-$Categories[26] = get_string('modlos_events_edu',			'block_modlos');
-$Categories[27] = get_string('modlos_events_arts',			'block_modlos');
-$Categories[28] = get_string('modlos_events_charity',		'block_modlos');
-$Categories[29] = get_string('modlos_events_misc',			'block_modlos');
-if (!$CFG->modlos_pg_only) $Categories[23] = get_string('modlos_events_nightlife', 'block_modlos').$Categories[23];
-
 
 
 
