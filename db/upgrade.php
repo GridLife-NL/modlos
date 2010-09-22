@@ -38,7 +38,9 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$result = $result && create_table($table);
 	}
 
-	if ($result && $oldversion < 2010090100) {
+
+	//  2010092000
+	if ($result && $oldversion < 2010092000) {
 		$table = new XMLDBTable('modlos_search_allparcels');
 
 		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
