@@ -11,7 +11,8 @@ class  EditEvent
 	var $hasPermit = false;
 	var $isGuest   = true;
 	var $pg_only   = true;
-	var $userid	   = 0;
+	var $userid	   = 0;			// owner id of this process
+	var $uid	   = 0;			// first creator of this event
 	var $date_frmt;
 	var $use_utc_time;
 
@@ -80,6 +81,8 @@ class  EditEvent
 		$this->userid	 = $USER->id;
 		$this->date_frmt = $CFG->modlos_date_format;
 		$this->pg_only   = $CFG->modlos_pg_only;
+
+		// GET eventid
 		$this->event_id  = optional_param('eventid', '0', PARAM_INT);
 
 		$this->use_utc_time = $CFG->modlos_use_utc_time;
@@ -137,6 +140,7 @@ class  EditEvent
 				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 			}
 
+			$this->uid 		= optional_param('uid', '0',  PARAM_INT);
 			$this->event_id = optional_param('event_id', '0',  PARAM_INT);
 
 			// Delete Event
@@ -222,7 +226,7 @@ class  EditEvent
 			//
 			if (!$this->hasError) {
 				$event['id']	  	  = $this->event_id;
-				$event['uid']		  = $this->userid;
+				$event['uid']		  = $this->uid;
 				$event['eventid']	  = $this->event_id;
 				$event['owneruuid']   = $this->owner_uuid;
 				$event['name']		  = $this->event_name;
@@ -296,11 +300,13 @@ class  EditEvent
 		// GET
 		else {	  
 			$date = getdate();
+			$this->uid = $this->userid;
 					
 			if (isNumeric($this->event_id) and $this->event_id>0) {
 				$event = modlos_get_event($this->event_id);
 					
 				if ($event!=null and ($event['uid']==$this->userid or $this->hasPermit)) {
+					$this->uid			= $event['uid'];
 					$this->event_name	= $event['name'];
 					$this->owner_uuid	= $event['owneruuid'];
 					$this->creator_uuid	= $event['creatoruuid'];
