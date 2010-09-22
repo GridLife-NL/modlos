@@ -30,7 +30,7 @@ class block_modlos extends block_base
 		//$this->version = 2010083024;
 		//$this->version = 2010090100;
 		//$this->version = 2010092200;
-		$this->version = 2010092300;
+		$this->version = 2010092301;
 		$this->release = '1.4.7';
 
 		$this->grid_name 		= $CFG->modlos_grid_name;
