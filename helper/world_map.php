@@ -1,7 +1,7 @@
 <?php
 
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
-require_once(realpath(dirname(__FILE__).'/../include/config.php'));
+require_once(realpath(dirname(__FILE__).'/../include/cms_interface.php'));
 
 
 $world_map_url = CMS_MODULE_URL.'/helper/world_map.php';

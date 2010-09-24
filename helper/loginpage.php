@@ -3,14 +3,10 @@
 //
 //
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
-require_once(realpath(dirname(__FILE__).'/../include/config.php'));
+require_once(realpath(dirname(__FILE__).'/../include/cms_interface.php'));
 
-if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
-global $CFG;
-
-$LOGIN_SCREEN_CONTENT = $CFG->modlos_loginscreen_content;
+$LOGIN_SCREEN_CONTENT = cms_get_config('modlos_loginscreen_content');
 
 $alert = modlos_get_loginscreen_alert();
 $BOX_TITLE		  = $alert['title'];

@@ -5,3 +5,4 @@ php -l moodle.func.php
 php -l mysql.func.php
 php -l opensim.mysql.php
 php -l tools.func.php
+php -l cms_interface.func.php
