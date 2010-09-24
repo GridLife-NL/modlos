@@ -21,7 +21,7 @@
       <tr>
         <td class="head">
           <?php echo $events_date?>
-          <?php if ($this->use_utc_time) {echo " (UTC)";} else {echo " (Local)";}?>
+          <?php if (USE_UTC_TIME) {echo " (UTC)";} else {echo " (Local)";}?>
         </td>
         <td class="odd" ><?php echo $this->event_date?></td>
       </tr>

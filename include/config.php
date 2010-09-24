@@ -7,38 +7,35 @@
 
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
 
-global $CFG;
 if (!defined('CMS_DIR_NAME')) 	 define('CMS_DIR_NAME',	basename(dirname(dirname(__FILE__))));
 if (!defined('CMS_MODULE_URL'))  define('CMS_MODULE_URL',  $CFG->wwwroot.'/blocks/'.CMS_DIR_NAME);
 if (!defined('CMS_MODULE_PATH')) define('CMS_MODULE_PATH', $CFG->dirroot.'/blocks/'.CMS_DIR_NAME);
 
+global $CFG;
 
 
-if ($CFG->modlos_use_utc_time) date_default_timezone_set('UTC');
 
-$DateFormat = $CFG->modlos_date_format;
+//
 $GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
 
 
 
 // for OpenSim DB
-define('OPENSIM_DB_HOST',			$CFG->modlos_sql_server_name);
-define('OPENSIM_DB_NAME',			$CFG->modlos_sql_db_name);
-define('OPENSIM_DB_USER',			$CFG->modlos_sql_db_user);
-define('OPENSIM_DB_PASS',			$CFG->modlos_sql_db_pass);
-define('OPENSIM_HMREGION',			$CFG->modlos_home_region);
-
-define('OPENSIM_PG_ONLY',			$CFG->modlos_pg_only);
+define('OPENSIM_DB_HOST',				$CFG->modlos_sql_server_name);
+define('OPENSIM_DB_NAME',				$CFG->modlos_sql_db_name);
+define('OPENSIM_DB_USER',				$CFG->modlos_sql_db_user);
+define('OPENSIM_DB_PASS',				$CFG->modlos_sql_db_pass);
+define('OPENSIM_HMREGION',				$CFG->modlos_home_region);
 
 
 // for CMS/LMS DB
-define('CMS_DB_HOST',				$CFG->dbhost);
-define('CMS_DB_NAME', 				$CFG->dbname);
-define('CMS_DB_USER',				$CFG->dbuser);
-define('CMS_DB_PASS',				$CFG->dbpass);
+define('CMS_DB_HOST',					$CFG->dbhost);
+define('CMS_DB_NAME', 					$CFG->dbname);
+define('CMS_DB_USER',					$CFG->dbuser);
+define('CMS_DB_PASS',					$CFG->dbpass);
 
-define('MDL_DB_PREFIX',				$CFG->prefix);
-define('MDL_MODLOS_PREFIX',			'modlos_');
+define('MDL_DB_PREFIX',					$CFG->prefix);
+define('MDL_MODLOS_PREFIX',				'modlos_');
 
 
 //
@@ -174,22 +171,5 @@ $minimum_real = 1;
 
 // Error message if the amount is not reached:
 $low_amount_error = 'You tried to buy less than the minimum amount of currency. You cannot buy currency for less than US$ %.2f.';
-
-
-
-// Categories
-$Categories[0]  = get_string('modlos_events_all_category',	'block_modlos');
-$Categories[18] = get_string('modlos_events_discussion',	'block_modlos');
-$Categories[19] = get_string('modlos_events_sports',		'block_modlos');
-$Categories[20] = get_string('modlos_events_music',			'block_modlos');
-$Categories[22] = get_string('modlos_events_commercial',	'block_modlos');
-$Categories[23] = get_string('modlos_events_enteme',		'block_modlos');
-$Categories[24] = get_string('modlos_events_games',			'block_modlos');
-$Categories[25] = get_string('modlos_events_pageants',	  	'block_modlos');
-$Categories[26] = get_string('modlos_events_edu',		   	'block_modlos');
-$Categories[27] = get_string('modlos_events_arts',			'block_modlos');
-$Categories[28] = get_string('modlos_events_charity',		'block_modlos');
-$Categories[29] = get_string('modlos_events_misc',			'block_modlos');
-if (!OPENSIM_PGONLY) $Categories[23] = get_string('modlos_events_nightlife', 'block_modlos').$Categories[23];
 
 ?>

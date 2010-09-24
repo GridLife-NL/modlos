@@ -24,7 +24,6 @@ class  AvatarsList
 
 	var $use_sloodle = false;
 	var $isAvatarMax = false;
-	var $use_utc_time;
 
 	var $hasPermit 	= false;
 	var $isGuest   	= true;
@@ -39,7 +38,6 @@ class  AvatarsList
 	var $number;
 	var $sitemax;
 	var $sitestart;
-	var $date_format;
 
 	// SQL
 	var $lnk_firstname = '';
@@ -63,7 +61,6 @@ class  AvatarsList
 
 		$this->course_id   = $course_id;
 		$this->hasPermit   = hasModlosPermit($course_id);
-		$this->date_format = $CFG->modlos_date_format;
 		$this->course_id   = $course_id;
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
@@ -79,9 +76,6 @@ class  AvatarsList
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
-
-		$this->use_utc_time = $CFG->modlos_use_utc_time;
-		//if ($this->use_utc_time) date_default_timezone_set('UTC');
 	}
 
 
@@ -214,7 +208,7 @@ class  AvatarsList
 				$this->db_data[$colum]['born'] = ' - ';
 			}
 			else {
-				$this->db_data[$colum]['born'] = date($this->date_format, $created);
+				$this->db_data[$colum]['born'] = date(DATE_FORMAT, $created);
 			}
 
 			$lastlogin = $this->db_data[$colum]['lastlogin'];
@@ -222,7 +216,7 @@ class  AvatarsList
 				$this->db_data[$colum]['lastin'] = ' - ';
 			}
 			else {
-				$this->db_data[$colum]['lastin'] = date($this->date_format, $lastlogin);
+				$this->db_data[$colum]['lastin'] = date(DATE_FORMAT, $lastlogin);
 			}
 
 			// Agent Online Info
@@ -288,7 +282,7 @@ class  AvatarsList
 		$grid_name 		= $CFG->modlos_grid_name;
 		$content   		= $CFG->modlos_avatars_content;
 		$userinfo		= $CFG->modlos_userinfo_link;
-		$date_format	= $CFG->modlos_date_format;
+		$date_format	= DATE_FORMAT;
 
 		$url_param		= $this->url_param;
 		$plimit_amp		= "&amp;plimit=$this->plimit";

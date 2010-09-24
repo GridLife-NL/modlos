@@ -27,9 +27,6 @@ class  DeleteEvent
 	var $event_ownername='';
 	var $event_creatorname='';
 
-	var $date_ftmt	= '';
-	var $use_utc_time = false;
-
 	var $hasError  	= false;
 	var $errorMsg  	= array();
 
@@ -53,14 +50,10 @@ class  DeleteEvent
 			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
 		}
 
-		$this->hasPermit = hasModlosPermit($course_id);
-		$this->userid	 = $USER->id;
+		$this->hasPermit  = hasModlosPermit($course_id);
+		$this->userid	  = $USER->id;
 		
-		$this->date_frmt = $CFG->modlos_date_format;	
-		$this->use_utc_time = $CFG->modlos_use_utc_time;
-		//if ($this->use_utc_time) date_default_timezone_set('UTC');
-
-		$course_param = '?course='.$course_id;
+		$course_param 	  = '?course='.$course_id;
 		$this->course_id  = $course_id;
 		$this->action_url = CMS_MODULE_URL.'/actions/delete_event.php';
 		$this->return_url = CMS_MODULE_URL.'/actions/events_list.php'.$course_param;
@@ -94,7 +87,7 @@ class  DeleteEvent
 		global $Categories;
 
 		$this->event_name = $this->event['name'];
-		$this->event_date = date($this->date_frmt, $this->event['dateUTC']);
+		$this->event_date = date(DATE_FORMAT, $this->event['dateUTC']);
 		$this->event_category = $Categories[$this->event['category']];
 
 		$owner_name = opensim_get_avatar_name($this->event['owneruuid']);

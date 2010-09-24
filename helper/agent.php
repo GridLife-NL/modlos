@@ -121,13 +121,13 @@ if ($agent) {
 		$born = ' - ';
 	}
 	else {
-		$born = date($CFG->modlos_date_format, $created);
+		$born = date(DATE_FORMAT, $created);
 	}
 	if ($lastlogin==null or $lastlogin=='' or $lastlogin=='0') {
 		$lastin = ' - ';
 	}
 	else {
-		$lastin = date($CFG->modlos_date_format, $lastlogin);
+		$lastin = date(DATE_FORMAT, $lastlogin);
 	}
 }
 

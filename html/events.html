@@ -24,7 +24,7 @@
       <td width="15"  height="40" background="<?php echo $module_url?>/images/main/regions_left.gif">&nbsp;</td>
       <td width="30"  height="40" valign="bottom" background="<?php echo $module_url?>/images/main/regions_middle.jpg"><br /><strong>No.</strong></td>
       <td width="140" height="40" valign="bottom" background="<?php echo $module_url?>/images/main/regions_middle.jpg"><br />
-        <?php if ($this->use_utc_time) {?>
+        <?php if (USE_UTC_TIME) {?>
           <strong>&nbsp;&nbsp;<?php echo $events_date?>&nbsp;(UTC)</strong>
         <?php }else{?>
           <strong>&nbsp;&nbsp;<?php echo $events_date?>&nbsp;(Local)</strong>

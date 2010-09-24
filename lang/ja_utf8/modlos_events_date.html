@@ -1,6 +1,6 @@
 
             <tr align="left">
-              <?php if ($this->use_utc_time) {?>
+              <?php if (USE_UTC_TIME) {?>
                 <td class="head"><?php echo $events_date?>&nbsp;(UTC)</td>
               <?php } else {?>
                 <td class="head"><?php echo $events_date?>&nbsp;(Local)</td>
@@ -37,7 +37,7 @@
             </tr>
 
             <tr align="left">
-              <?php if ($this->use_utc_time) {?>
+              <?php if (USE_UTC_TIME) {?>
                 <td class="head"><?php echo $events_starts?>&nbsp;(UTC)</td>
               <?php } else {?>
                 <td class="head"><?php echo $events_starts?>&nbsp;(Local)</td>

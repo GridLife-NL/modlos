@@ -10,9 +10,7 @@ class  EventsList
 {
 	var $hasPermit = false;
 	var $isGuest   = true;
-	var $pg_only   = true;
 	var $userid	   = 0;
-	var $use_utc_time;
 	
 	var $url_param = '';
 
@@ -53,14 +51,9 @@ class  EventsList
 		$this->hasPermit = hasModlosPermit($course_id);
 		$this->course_id = $course_id;
 		$this->userid	 = $USER->id;
-		$this->date_frmt = $CFG->modlos_date_format;
-		$this->pg_only   = $CFG->modlos_pg_only;
 		$this->pstart 	 = optional_param('pstart', "$this->Cpstart", PARAM_INT);
 		$this->plimit 	 = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 
-		$this->use_utc_time = $CFG->modlos_use_utc_time;
-		//if ($this->use_utc_time) date_default_timezone_set('UTC');
-   
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
@@ -79,10 +72,10 @@ class  EventsList
 	function  execute()
 	{
 		if ($this->hasPermit) {
-			$this->number = modlos_get_events_num(0, $this->pg_only);
+			$this->number = modlos_get_events_num(0, OPENSIM_PGONLY);
 		}
 		else {
-			$this->number = modlos_get_events_num($this->userid, $this->pg_only);
+			$this->number = modlos_get_events_num($this->userid, OPENSIM_PGONLY);
 		}
 
 		$this->sitemax   = ceil ($this->number/$this->plimit);
@@ -129,19 +122,19 @@ class  EventsList
 
 		//
 		if ($this->hasPermit) {
-			$events = modlos_get_events(0, $this->pstart, $this->plimit, $this->pg_only);
+			$events = modlos_get_events(0, $this->pstart, $this->plimit, OPENSIM_PGONLY);
 		}
 		else {
-			$events = modlos_get_events($this->userid, $this->pstart, $this->plimit, $this->pg_only);
+			$events = modlos_get_events($this->userid, $this->pstart, $this->plimit, OPENSIM_PGONLY);
 		}
    
 		$colum = 0;
 		foreach($events as $event) {
-			if (!$this->pg_only or $event['eventflags']==0) {
+			if (!OPENSIM_PGONLY or $event['eventflags']==0) {
 				$this->db_data[$colum] = $event;
 				$this->db_data[$colum]['eventid'] = $event['id'];
 				$this->db_data[$colum]['num']	  = $colum;
-				$this->db_data[$colum]['time']	  = date($this->date_frmt, $event['dateutc']);
+				$this->db_data[$colum]['time']	  = date(DATE_FORMAT, $event['dateutc']);
 
 				$avatar_name = opensim_get_avatar_name($event['creatoruuid']);
 				$this->db_data[$colum]['creator'] = $avatar_name['fullname'];

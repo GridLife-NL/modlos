@@ -130,7 +130,7 @@ function checklength(obj,warning_div){
               </td>
             </tr>
 
-            <?php if ($this->pg_only) {?>
+            <?php if (OPENSIM_PGONLY) {?>
               <input type="hidden" name="check_mature" value="0" />
             <?php } else {?>
               <tr align="left">
@@ -211,7 +211,7 @@ function checklength(obj,warning_div){
                 <td class="even" width=400><?php echo $this->saved_event_name?></td>
               </tr>
               <tr align="left">
-                <?php if ($this->use_utc_time) {?>
+                <?php if (USE_UTC_TIME) {?>
                   <td class="head"><?php echo $events_date?>&nbsp;(UTC)</td>
                 <?php } else {?>
                   <td class="head"><?php echo $events_date?>&nbsp;(Local)</td>
@@ -242,7 +242,7 @@ function checklength(obj,warning_div){
                 <td class="head"><?php echo $events_amount?>&nbsp;(L$)</td>
                 <td class="odd" ><?php echo $this->saved_cover_amount?></td>
               </tr>
-              <?php if (!$pg_only) {?>
+              <?php if (!OPENSIM_PGONLY) {?>
                 <tr align="left">
                   <td class="head"><?php echo $events_type?></td>
                   <td class="even"><strong><img height=20px width=20px <?php echo $this->saved_event_type?> /></strong></td>

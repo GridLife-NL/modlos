@@ -10,11 +10,8 @@ class  EditEvent
 {
 	var $hasPermit = false;
 	var $isGuest   = true;
-	var $pg_only   = true;
 	var $userid	   = 0;			// owner id of this process
 	var $uid	   = 0;			// first creator of this event
-	var $date_frmt;
-	var $use_utc_time;
 
 	var $url_param = '';
 	var $hasError  = false;
@@ -79,15 +76,10 @@ class  EditEvent
 		$this->hasPermit = hasModlosPermit($course_id);
 		$this->course_id = $course_id;
 		$this->userid	 = $USER->id;
-		$this->date_frmt = $CFG->modlos_date_format;
-		$this->pg_only   = $CFG->modlos_pg_only;
 
 		// GET eventid
 		$this->event_id  = optional_param('eventid', '0', PARAM_INT);
 
-		$this->use_utc_time = $CFG->modlos_use_utc_time;
-		//if ($this->use_utc_time) date_default_timezone_set('UTC');
-   
 		$this->url_param = '?dmmy_param=';
 		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;
 
@@ -212,7 +204,7 @@ class  EditEvent
 				$this->errorMsg[] = get_string('modlos_event_desc_required', 'block_modlos');
 			}
 
-			if ($this->pg_only and $this->check_mature==1) {
+			if (OPENSIM_PGONLY and $this->check_mature==1) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_pg_only_error', 'block_modlos');
 			}
@@ -220,7 +212,7 @@ class  EditEvent
 			$event_date = mktime($this->event_hour, $this->event_minute, 0, $this->event_month, $this->event_day, $this->event_year);
 			if ($event_date<time()) {
 				$this->hasError = true;
-				$ftr = date($this->date_frmt, $event_date);
+				$ftr = date(DATE_FORMAT, $event_date);
 				$this->errorMsg[] = get_string('modlos_invalid_date_error', 'block_modlos')." ($ftr < ".get_string('modlos_time_now', 'block_modlos').')';
 			}
 
@@ -255,7 +247,7 @@ class  EditEvent
 					$this->saved_cover_amount = $this->cover_amount;
 					$this->saved_cover_charge = $this->cover_charge;
 					$this->saved_global_pos   = $this->global_pos;
-					$this->saved_event_date   = date($this->date_frmt, $event_date);
+					$this->saved_event_date   = date(DATE_FORMAT, $event_date);
 					$this->saved_event_owner  = $this->event_owner;
 					$this->saved_event_creator= $this->event_creator;
    
