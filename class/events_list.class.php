@@ -48,6 +48,9 @@ class  EventsList
 			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
 		}
 
+$a = modlos_get_user_email('35a5c2b1-7d9f-48b6-85d7-938a75d30829');
+echo "======> ".$a;
+die();
 		$this->hasPermit = hasModlosPermit($course_id);
 		$this->course_id = $course_id;
 		$this->userid	 = $USER->id;

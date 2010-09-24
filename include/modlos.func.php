@@ -14,6 +14,7 @@
 
  // DB
  function  modlos_get_update_time($fullname_table)
+ function  modlos_get_user_email($uuid)
 
  // Avatars (with Sloodle)
  function  modlos_get_avatars($uid=0, $use_sloodle=false)
@@ -139,6 +140,22 @@ function  modlos_get_update_time($fullname_table)
 	$update = $db->get_update_time($fullname_table);
 
 	return $update;
+}
+
+
+
+function  modlos_get_user_email($uuid)
+{
+    if (!isGUID($uuid)) return null;
+
+	$avatar = modlos_get_avatar_info($uuid);
+	if ($avatar==null) return null;
+
+	$email = '';
+    $user = get_userinfo_by_id($avatar['uid']);
+    if ($user!=null) $email = $user->email;
+
+    return $email;
 }
 
 
