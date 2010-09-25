@@ -8,6 +8,7 @@
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
 require_once(realpath(dirname(__FILE__).'/../include/cms_interface.php'));
 
+
 $isGuest = isguest();
 if ($isGuest) {
 	exit('<h4>guest user is not allowed to access this page!!</h4>');
