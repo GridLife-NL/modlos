@@ -100,7 +100,7 @@ $settings->add(new admin_setting_configcheckbox('modlos_use_events',
 
 $settings->add(new admin_setting_configcheckbox('modlos_pg_only', 
 					get_string('modlos_pg_only', 'block_modlos'),
-				   	get_string('modlos_pg_only_desc', 'block_modlos'), 1));
+				   	get_string('modlos_pg_only_desc', 'block_modlos'), 0));
 
 $settings->add(new admin_setting_configcheckbox('modlos_use_https', 
 					get_string('modlos_use_https', 'block_modlos'),
