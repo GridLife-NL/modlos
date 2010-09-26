@@ -14,7 +14,6 @@ require_once(CMS_MODULE_PATH.'/include/opensim.mysql.php');
 require_once(CMS_MODULE_PATH.'/include/moodle.func.php');
 require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
-global $CFG;
 
 //
 // Config of Moodle
@@ -62,5 +61,8 @@ function  cms_get_config($name)
     return $CFG->$name;
 }
 
+
+//
+if (!defined('CMS_READED_INTERFACE')) define('CMS_READED_INTERFACE', 'YES');
 
 ?>

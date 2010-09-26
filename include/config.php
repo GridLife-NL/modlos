@@ -4,14 +4,11 @@
 //											by Fumi.Iseki
 //
 //
-
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
 
-if (!defined('CMS_DIR_NAME')) 	 define('CMS_DIR_NAME',	basename(dirname(dirname(__FILE__))));
-if (!defined('CMS_MODULE_URL'))  define('CMS_MODULE_URL',  $CFG->wwwroot.'/blocks/'.CMS_DIR_NAME);
+if (!defined('CMS_DIR_NAME'))	 define('CMS_DIR_NAME',	basename(dirname(dirname(__FILE__))));
+if (!defined('CMS_MODULE_URL'))	 define('CMS_MODULE_URL',  $CFG->wwwroot.'/blocks/'.CMS_DIR_NAME);
 if (!defined('CMS_MODULE_PATH')) define('CMS_MODULE_PATH', $CFG->dirroot.'/blocks/'.CMS_DIR_NAME);
-
-global $CFG;
 
 
 
@@ -171,5 +168,10 @@ $minimum_real = 1;
 
 // Error message if the amount is not reached:
 $low_amount_error = 'You tried to buy less than the minimum amount of currency. You cannot buy currency for less than US$ %.2f.';
+
+
+
+//
+if (!defined('CMS_READED_CONFIG')) define('CMS_READED_CONFIG', 'YES');
 
 ?>

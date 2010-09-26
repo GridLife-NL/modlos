@@ -30,7 +30,7 @@ class block_modlos extends block_base
 		//$this->version = 2010083024;
 		//$this->version = 2010090100;
 		//$this->version = 2010092200;
-		$this->version = 2010092301;
+		$this->version = 2010092303;
 		$this->release = '1.5.0';
 
 		$this->grid_name 		= $CFG->modlos_grid_name;
@@ -39,6 +39,7 @@ class block_modlos extends block_base
 		$this->lastmonth_online = '0';
 		$this->user_count 		= '0';
 		$this->region_count 	= '0';
+		$this->cron 			= '1';
 	}
 
 
@@ -134,6 +135,13 @@ class block_modlos extends block_base
 		return false;
 	}
 
+
+	// exec parser
+	function cron(){
+		global $CFG;
+       
+		require($CFG->dirroot.'/blocks/modlos/include/cron.php');
+	}
 }
 
 ?>
