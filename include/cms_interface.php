@@ -62,6 +62,7 @@ function  cms_get_config($name)
 }
 
 
+
 //
 if (!defined('CMS_READED_INTERFACE')) define('CMS_READED_INTERFACE', 'YES');
 
