@@ -90,9 +90,9 @@ $settings->add(new admin_setting_configselect('modlos_image_processor_jp2',
 					get_string('modlos_image_processor', 'block_modlos'),
 				   	get_string('modlos_image_processor_desc', 'block_modlos'), "convert", $options));
 
-$settings->add(new admin_setting_configtext('modlos_image_processor_path', 
-					get_string('modlos_image_processor_path', 'block_modlos'),
-				   	get_string('modlos_image_processor_path_desc', 'block_modlos'), "", PARAM_TEXT));
+//$settings->add(new admin_setting_configtext('modlos_image_processor_path', 
+//					get_string('modlos_image_processor_path', 'block_modlos'),
+//				   	get_string('modlos_image_processor_path_desc', 'block_modlos'), "", PARAM_TEXT));
 
 $settings->add(new admin_setting_configcheckbox('modlos_use_events',
 					get_string('modlos_events_manage', 'block_modlos'),
