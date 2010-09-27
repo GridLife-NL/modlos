@@ -87,13 +87,6 @@ if ($agent) {
 	}
 
 
-	// osprofile
-	//if ($profileText=='') {
-	//	if ($rec = get_record(MDL_PROFILE_USERPROFILE_TBL, 'useruuid', $agent, '', '', '', '', 'profileAboutText')) {
-	//		$profileText = $rec->profileAboutText;
-	//	}
-	//}
-
 	$prof = modlos_get_profile($agent);
 	if ($prof!=null) {
         if ($prof['Partnar']!='')	 	 $partner 	   = $prof['Partnar'];

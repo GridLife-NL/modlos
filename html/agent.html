@@ -126,7 +126,7 @@
                   <?php if ($profileImage=='') {?>
                     <img style="border-color:#999999" src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width=256 border=5 />
                   <?php } else {?>
-                    <img style="border-color:#999999" src="<?php echo $texture_url.$profileImage?>" width=256 border=5 />
+                    <img style="border-color:#999999" src="<?php echo $texture_url.$profileImage?>&amp;xsize=256&amp;ysize=256" width=256 border=5 />
                   <?php }?>
                   </td>
                 </tr>

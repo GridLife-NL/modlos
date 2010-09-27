@@ -9,15 +9,16 @@ if (isguest()) {
 }
 
 
-$uuid = required_param('uuid', PARAM_TEXT);
+$uuid  = required_param('uuid', PARAM_TEXT);
 if (!isGUID($uuid)) exit('<h4>bad asset uuid!! ('.htmlspecialchars($uuid).')</h4>');
+$xsize = optional_param('xsize', '0', PARAM_INT);
+$ysize = optional_param('ysize', '0', PARAM_INT);
 
 $prog  = cms_get_config('modlos_image_processor_jp2');
-$path  = cms_get_config('modlos_image_processor_path');
+//$path  = cms_get_config('modlos_image_processor_path');
 $cache = CMS_MODULE_PATH.'/helper/texture_cache';
 
-
-$ret = opensim_display_texture_data($uuid, $prog, $path, $cache, true);
+$ret = opensim_display_texture_data($uuid, $prog, $xsize, $ysize, $cache, true);
 if (!$ret) exit();
  
 ?>
