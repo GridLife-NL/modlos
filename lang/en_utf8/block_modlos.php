@@ -124,12 +124,14 @@ $string['modlos_estate_id']         = 'Estate ID';
 $string['modlos_region_owner_chng'] = 'Region Owner Change';
 
 $string['modlos_image_processor']   = 'Program for image processing';
-$string['modlos_image_processor_desc'] = 'Specify the program that processes the image data of JPEG2000';
-$string['modlos_image_processor_path'] = 'Path of program for image processing';
-$string['modlos_image_processor_path_desc'] = 'Specify the path of program for image processing. If here is empty, Modlos searches the path. '.
-											  '/ is always necessary for the end of path. ex) /usr/local/bin/ <br />'.
+$string['modlos_image_processor_desc'] = 'Specify the program that processes the image data of JPEG2000. '.
                                               'After save changes，please click this link. If image is displayed, it is OK -> '.
                                               '<a href=../blocks/modlos/helper/get_texture.php?uuid=00000000-0000-2222-3333-100000001000 target=_blank>Check of Setting</a>';
+//$string['modlos_image_processor_path'] = 'Path of program for image processing';
+//$string['modlos_image_processor_path_desc'] = 'Specify the path of program for image processing. If here is empty, Modlos searches the path. '.
+//											  '/ is always necessary for the end of path. ex) /usr/local/bin/ <br />'.
+//                                              'After save changes，please click this link. If image is displayed, it is OK -> '.
+//                                              '<a href=../blocks/modlos/helper/get_texture.php?uuid=00000000-0000-2222-3333-100000001000 target=_blank>Check of Setting</a>';
 
 $string['modlos_events_manage']		= 'Event Management Activation';
 $string['modlos_events_manage_desc']= 'Select to event management fo ossearch is active, or not';
