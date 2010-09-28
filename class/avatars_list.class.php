@@ -33,6 +33,7 @@ class  AvatarsList
 	var $Cplimit 	= 25;
 	var $firstname 	= '';
 	var $lastname  	= '';
+	var $order		= '';
 	var $pstart;
 	var $plimit;
 	var $number;
@@ -103,6 +104,8 @@ class  AvatarsList
 		if (!isAlphabetNumeric($this->firstname)) $this->firstname = '';
 		if (!isAlphabetNumeric($this->lastname))  $this->lastname  = '';
 
+		$this->order = optional_param('order', '', PARAM_ALPHA);
+
 		$sql_validuser = $sql_firstname = $sql_lastname = '';
 		if ($this->firstname=='' and $this->lastname=='') {
 			if ($db_ver=='0.6') $sql_validuser = "username!=''";
@@ -121,12 +124,26 @@ class  AvatarsList
 			}
 		}
 
+        // 0.7: PrincipalID, FirstName, LastName, Created, Login,     homeRegionID 
+        // 0.6: users.UUID,  username,  lastname, created, lastLogin, regions.uuid 
+		$sql_order = $this->order;
+		if ($this->order!='') {
+			if ($db_ver=="0.6") {
+				if ($sql_order=='firstname')  $sql_order = 'username';
+				else if ($sql_order=='login') $sql_order = 'lastlogin';
+			}
+		}
+
 		// pstart & plimit
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 
+		// Order
+		if ($sql_order=='login') $sql_order = 'ORDER BY '.$sql_order.' DESC ';
+		else if ($sql_order!='') $sql_order = 'ORDER BY '.$sql_order.' ASC ';
+		else					 $sql_order = 'ORDER BY created ASC ';
+
 		// SQL Condition
-		$sql_order = 'ORDER BY created ASC';
 		$sql_limit = "LIMIT $this->pstart, $this->plimit";
 		$this->sql_countcnd  = " WHERE $sql_validuser $sql_firstname $sql_lastname";
 		$this->sql_condition = " WHERE $sql_validuser $sql_firstname $sql_lastname $sql_order $sql_limit";
@@ -286,11 +303,14 @@ class  AvatarsList
 
 		$url_param		= $this->url_param;
 		$plimit_amp		= "&amp;plimit=$this->plimit";
-		$pstart_		= '&amp;pstart=';
+		$pstart_amp		= "&amp;pstart=$this->pstart";
+		$order_amp		= "&amp;order=$this->order";
 		$plimit_		= '&amp;plimit=';
+		$pstart_		= '&amp;pstart=';
+		$order_			= '&amp;order=';
 
 		$avatars_list	= get_string('modlos_avatars_list',  'block_modlos');
-		$number_ttl		= get_string('modlos_no',			 'block_modlos');
+		$number_ttl		= get_string('modlos_num',			 'block_modlos');
 		$edit_ttl		= get_string('modlos_edit',			 'block_modlos');
 		$editable_ttl	= get_string('modlos_edit_ttl',		 'block_modlos');
 		$lastlogin_ttl	= get_string('modlos_lastlogin',	 'block_modlos');

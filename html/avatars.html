@@ -31,7 +31,7 @@
                 <!-- icon line -->
                 <td width="50">
                   <?php if ($this->icon[0]=="on") {?>
-                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.'0'?>" target="_self">
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.'0'.$order_amp?>" target="_self">
                   <?php }?>
                     <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[0]=="on") {?>
@@ -41,7 +41,7 @@
 
                 <td width="50">
                   <?php if ($this->icon[0]=="on") {?>
-                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[0].$order_amp?>" target="_self">
                   <?php }?>
                     <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[0]=="on") {?>
@@ -51,13 +51,13 @@
 
                 <td width="200" align=center>
                   <font color="#000000">
-                    <?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;
+                    <b><?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;</b>
                   </font>
                 </td>
 
                 <td width="50">
                   <?php if ($this->icon[1]=="on") {?>
-                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[1].$order_amp?>" target="_self">
                   <?php }?>
                       <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[1]=="on") {?>
@@ -67,7 +67,7 @@
 
                 <td width="50">
                   <?php if ($this->icon[1]=="on") {?>
-                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[2].$order_amp?>" target="_self">
                   <?php }?>
                       <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
                   <?php if ($this->icon[1]=="on") {?>
@@ -79,21 +79,21 @@
                 <td width="10"></td>
 
                 <td width="30">
-                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'10'?>" target="_self">
+                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'10'.$order_amp?>" target="_self">
                     <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" ALT="Limit 10"></a>
                 </td>
                 <td width="30">
-                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'25'?>" target="_self">
+                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'25'.$order_amp?>" target="_self">
                     <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" ALT="Limit 25">
                   </a>
                 </td>
                 <td width="30">
-                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'50'?>" target="_self">
+                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'50'.$order_amp?>" target="_self">
                     <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" ALT="Limit 50">
                   </a>
                 </td>
                 <td width="30">
-                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'100'?>" target="_self">
+                  <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'100'.$order_amp?>" target="_self">
                     <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" ALT="Limit 100">
                   </a>
                 </td>
@@ -112,17 +112,19 @@
 <!-- search -->
 <table width="85%" cellpadding=3 border=0 bordercolor="#547fdb" cellspacing=1 bgcolor="#547fdb" align="center">
   <form action="<?php echo $this->search_url.$plimit_amp?>" method="POST">
+<!--
     <tr>
       <td><b><?php echo $user_search?></b><br /></td>
     </tr>
+-->
     <tr>
-      <td bgcolor="#ffffff">
-        <table cellpadding=0 cellspacing=0 width="100%" bgcolor="#ffffff">
+      <td>
+        <table cellpadding=0 cellspacing=0 width="100%">
           <tr>
-            <td><font color="#000000"><?php echo $firstname_ttl?></font>&nbsp;&nbsp;
+            <td><font color="#000000"><b><?php echo $firstname_ttl?></b></font>&nbsp;&nbsp;
               <input type="text" name="firstname" size="15" value="<?php echo $this->firstname?>" style="height:20">
             </td>
-            <td><font color="#000000"><?php echo $lastname_ttl?></font>&nbsp;&nbsp;
+            <td><font color="#000000"><b><?php echo $lastname_ttl?></b></font>&nbsp;&nbsp;
               <input type="text" name="lastname"  size="15" value="<?php echo $this->lastname?>"  style="height:20">
             </td>
             <td>&nbsp;</td>
@@ -147,19 +149,31 @@
 
         <table cellpadding=0 cellspacing=1 border=0 width=100% bgcolor=#305AB1>
           <tr>
-            <td bgcolor=#547FDB>
+            <td bgcolor=#54DDDB>
               <table cellpadding=2 cellspacing=0 border=0 width=100%>
                 <tr>
                   <td width=40 ><b>&nbsp;<?php echo $number_ttl?></b></td>
                   <td width=50 >&nbsp;</b></td>
                   <td width=60 ><b><?php echo $edit_ttl?></b></td>
-                  <td width=150><b><?php echo $firstname_ttl?></b></td>
-                  <td width=150><b><?php echo $lastname_ttl?></b></td>
-                  <?php if (USE_UTC_TIME) {?>
-                    <td width=250><b><?php echo $lastlogin_ttl?>&nbsp;(UTC)</b></td>
-                  <?php }else{?>
-                    <td width=250><b><?php echo $lastlogin_ttl?>&nbsp;(Local)</b></td>
-                  <?php }?>
+                  <td width=150>
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp?>&amp;order=firstname" target="_self">
+                      <b><u><?php echo $firstname_ttl?></u></b>
+                    </a>
+                  </td>
+                  <td width=150>
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp?>&amp;order=lastname" target="_self">
+                      <b><u><?php echo $lastname_ttl?></u></b>
+                    </a>
+                  </td>
+                  <td width=250>
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp?>&amp;order=login" target="_self">
+                      <?php if (USE_UTC_TIME) {?>
+                        <b><u><?php echo $lastlogin_ttl?>&nbsp;(UTC)</u></b>
+                      <?php }else{?>
+                        <b><u><?php echo $lastlogin_ttl?>&nbsp;(Local)</u></b>
+                      <?php }?>
+                    </a>
+                  </td>
                   <td width=250><b><?php echo $status_ttl?></b></td>
                   <td width=150><b><?php echo $crntregion_ttl?></b></td>
                   <td width=250><b><?php echo $owner_ttl?></b></td>
