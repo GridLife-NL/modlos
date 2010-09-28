@@ -137,6 +137,7 @@ class  AvatarsList
 		// pstart & plimit
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
+		$sql_limit = "LIMIT $this->pstart, $this->plimit";
 
 		// Order
 		if ($sql_order=='login') $sql_order = 'ORDER BY '.$sql_order.' DESC ';
@@ -144,7 +145,6 @@ class  AvatarsList
 		else					 $sql_order = 'ORDER BY created ASC ';
 
 		// SQL Condition
-		$sql_limit = "LIMIT $this->pstart, $this->plimit";
 		$this->sql_countcnd  = " WHERE $sql_validuser $sql_firstname $sql_lastname";
 		$this->sql_condition = " WHERE $sql_validuser $sql_firstname $sql_lastname $sql_order $sql_limit";
 
@@ -326,6 +326,7 @@ class  AvatarsList
 		$online_ttl	 	= get_string('modlos_online_ttl',	 'block_modlos');
 		$active_ttl		= get_string('modlos_active',		 'block_modlos');
 		$inactive_ttl	= get_string('modlos_inactive',		 'block_modlos');
+		$reset_ttl		= get_string('modlos_reset_ttl',	 'block_modlos');
 		$unknown_status	= get_string('modlos_unknown_status','block_modlos');
 		$page_num		= get_string('modlos_page',			 'block_modlos');
 		$page_num_of	= get_string('modlos_page_of',		 'block_modlos');

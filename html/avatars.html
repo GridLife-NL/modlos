@@ -133,7 +133,12 @@
             <td>&nbsp;</td>
 			<input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
 			<input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
-            <td><input type="Submit" value="Search" style="height:20"></td>
+            <td>
+              <input type="Submit" value="Search" style="height:20">&nbsp;&nbsp;&nbsp;
+              <a href="<?php echo $this->action_url.$plimit_amp.$pstart_amp.$order_amp?>" target="_self">
+                <font color="#000"><b><u><?php echo $reset_ttl?></u></b></font>
+              </a>
+            </td>
           </tr>
         </table>
       </td>
