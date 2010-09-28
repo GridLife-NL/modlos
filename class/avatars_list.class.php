@@ -301,6 +301,8 @@ class  AvatarsList
 		$userinfo		= $CFG->modlos_userinfo_link;
 		$date_format	= DATE_FORMAT;
 
+		$lnk_firstname	= $this->lnk_firstname;
+		$lnk_lastname	= $this->lnk_lastname;
 		$url_param		= $this->url_param;
 		$plimit_amp		= "&amp;plimit=$this->plimit";
 		$pstart_amp		= "&amp;pstart=$this->pstart";
