@@ -113,7 +113,7 @@ function checklength(obj,warning_div){
               </td>
             </tr>
 
-            <?php if (OPENSIM_PGONLY) {?>
+            <?php if (OPENSIM_PG_ONLY) {?>
               <input type="hidden" name="check_mature" value="0" />
             <?php } else {?>
               <tr align="left">
@@ -225,7 +225,7 @@ function checklength(obj,warning_div){
                 <td class="head"><?php echo $events_amount?>&nbsp;(L$)</td>
                 <td class="odd" ><?php echo $this->saved_cover_amount?></td>
               </tr>
-              <?php if (!OPENSIM_PGONLY) {?>
+              <?php if (!OPENSIM_PG_ONLY) {?>
                 <tr align="left">
                   <td class="head"><?php echo $events_type?></td>
                   <td class="even"><strong><img height=20px width=20px <?php echo $this->saved_event_type?> /></strong></td>

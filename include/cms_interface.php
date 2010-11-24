@@ -41,7 +41,7 @@ $Categories[26] = get_string('modlos_events_edu',		   	'block_modlos');
 $Categories[27] = get_string('modlos_events_arts',			'block_modlos');
 $Categories[28] = get_string('modlos_events_charity',		'block_modlos');
 $Categories[29] = get_string('modlos_events_misc',			'block_modlos');
-if (!OPENSIM_PGONLY) $Categories[23] = get_string('modlos_events_nightlife', 'block_modlos').$Categories[23];
+if (!OPENSIM_PG_ONLY) $Categories[23] = get_string('modlos_events_nightlife', 'block_modlos').$Categories[23];
 
 
 //

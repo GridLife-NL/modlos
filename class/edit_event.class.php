@@ -204,7 +204,7 @@ class  EditEvent
 				$this->errorMsg[] = get_string('modlos_event_desc_required', 'block_modlos');
 			}
 
-			if (OPENSIM_PGONLY and $this->check_mature==1) {
+			if (OPENSIM_PG_ONLY and $this->check_mature==1) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_pg_only_error', 'block_modlos');
 			}

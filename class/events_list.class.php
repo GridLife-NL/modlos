@@ -72,10 +72,10 @@ class  EventsList
 	function  execute()
 	{
 		if ($this->hasPermit) {
-			$this->number = modlos_get_events_num(0, OPENSIM_PGONLY);
+			$this->number = modlos_get_events_num(0, OPENSIM_PG_ONLY);
 		}
 		else {
-			$this->number = modlos_get_events_num($this->userid, OPENSIM_PGONLY);
+			$this->number = modlos_get_events_num($this->userid, OPENSIM_PG_ONLY);
 		}
 
 		$this->sitemax   = ceil ($this->number/$this->plimit);
@@ -122,15 +122,15 @@ class  EventsList
 
 		//
 		if ($this->hasPermit) {
-			$events = modlos_get_events(0, $this->pstart, $this->plimit, OPENSIM_PGONLY);
+			$events = modlos_get_events(0, $this->pstart, $this->plimit, OPENSIM_PG_ONLY);
 		}
 		else {
-			$events = modlos_get_events($this->userid, $this->pstart, $this->plimit, OPENSIM_PGONLY);
+			$events = modlos_get_events($this->userid, $this->pstart, $this->plimit, OPENSIM_PG_ONLY);
 		}
    
 		$colum = 0;
 		foreach($events as $event) {
-			if (!OPENSIM_PGONLY or $event['eventflags']==0) {
+			if (!OPENSIM_PG_ONLY or $event['eventflags']==0) {
 				$this->db_data[$colum] = $event;
 				$this->db_data[$colum]['eventid'] = $event['id'];
 				$this->db_data[$colum]['num']	  = $colum;
