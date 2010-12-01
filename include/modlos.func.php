@@ -404,7 +404,7 @@ function  modlos_insert_userstable($user)
 	if ($user['uid']!='') 	$insobj->user_id = $user['uid'];
 	else				  	$insobj->user_id = '0';
 	if ($user['state']!='')	$insobj->state 	 = (int)$user['state'];
-	else				 	$insobj->state 	 = AVATAR_STATE_SYNCDB;
+	else				 	$insobj->state 	 = (int)AVATAR_STATE_SYNCDB;
 	if ($user['time']!='') 	$insobj->time 	 = $user['time'];
 	else 					$insobj->time 	 = time();
 

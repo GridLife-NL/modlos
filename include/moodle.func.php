@@ -39,10 +39,9 @@ function  get_display_username($firstname, $lastname)
 	if ($CFG->fullnamedisplay=='lastname firstname') {
 		$username = $lastname.' '.$firstname;
 	}
-	/*
-	else if ($CFG->fullnamedisplay=='firstname') {
-		$username = $firstname;
-	}*/
+	else if ($CFG->fullnamedisplay=='language' and current_language()=='ja_utf8') {
+		$username = $lastname.' '.$firstname;
+	}
 	else {
 		$username = $firstname.' '.$lastname;
 	}
@@ -58,18 +57,18 @@ function  get_names_from_display_username($username)
 {
 	global $CFG;
 
-	$names = explode(' ', $username);
+	//$names = explode(' ', $username);
+	$names = preg_split("/ /", $username, 0, PREG_SPLIT_NO_EMPTY);
 	if ($names==null) return null;
 
 	if ($CFG->fullnamedisplay=='lastname firstname') {
 		$firstN = $names[1];
 		$lastN  = $names[0];
 	}
-	/*
-	else if ($CFG->fullnamedisplay=='firstname') {
-		$fisetN = $names[0];
-		$lastN  = '';
-	}*/
+	else if ($CFG->fullnamedisplay=='language' and current_language()=='ja_utf8') {
+		$firstN = $names[1];
+		$lastN  = $names[0];
+	}
 	else {
 		$firstN = $names[0];
 		$lastN  = $names[1];
@@ -87,7 +86,8 @@ function  get_names_from_display_username($username)
 function  get_userinfo_by_name($firstname, $lastname='')
 {
 	if ($lastname=='') {
-		$names = explode(' ', $firstname);
+		//$names = explode(' ', $firstname);
+		$names = preg_split("/ /", $firstname, 0, PREG_SPLIT_NO_EMPTY);
 		$firstname = $names[0];
 		$lastname  = $names[1];
 	}
