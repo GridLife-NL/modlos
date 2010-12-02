@@ -210,7 +210,7 @@ class  AvatarsList
 		// OpenSim DB
 		$users = opensim_get_avatars_infos($this->sql_condition);
 
-		$colum  = 0;
+		$colum = 0;
 		foreach($users as $user) {
 			$this->db_data[$colum]				= $user;
 			$this->db_data[$colum]['num']		= $colum;
