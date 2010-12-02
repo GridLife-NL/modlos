@@ -57,7 +57,7 @@ class  CreateAvatar
 		if ($use_https) {
 			$https_url = $CFG->modlos_https_url;
 			if ($https_url!='') $module_url = $https_url.CMS_DIR_NAME;
-			else 				$module_url = ereg_replace('^http:', 'https:', CMS_MODULE_URL);
+			else 				$module_url = preg_replace('^http:', 'https:', CMS_MODULE_URL);
 		}
 		else $module_url = CMS_MODULE_URL;
 
