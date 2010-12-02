@@ -928,7 +928,7 @@ function  modlos_sync_opensimdb($timecheck=true)
 		if (array_key_exists($opnsim_user['UUID'], $modlos_users)) {
 			//$opnsim_user['id'] = $modlos_users[$opnsim_user['UUID']]['id'];
 			$opnsim_user['uid']   = $modlos_users[$opnsim_user['UUID']]['uid'];
-			$opnsim_user['state'] = $modlos_users[$opnsim_user['UUID']]['state'];
+			$opnsim_user['state'] = $modlos_users[$opnsim_user['UUID']]['state']|AVATAR_STATE_SYNCDB;
 			modlos_update_userstable($opnsim_user);
 		}
 		else {

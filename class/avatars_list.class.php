@@ -261,6 +261,10 @@ class  AvatarsList
 			}
 
 			if ($avatardata!=null) {
+				if (!((int)$avatardata['state']&AVATAR_STATE_SYNCDB)) {
+					modlos_sync_opensimdb(false);
+				}
+
 				$uid = $avatardata['uid'];
 				$this->db_data[$colum]['state'] = (int)$avatardata['state'];
 
