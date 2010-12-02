@@ -932,7 +932,7 @@ function  modlos_sync_opensimdb($timecheck=true)
 			modlos_update_userstable($opnsim_user);
 		}
 		else {
-			$opnsim_user['uid']   = 0;
+			$opnsim_user['uid']   = '0';
 			$opnsim_user['state'] = AVATAR_STATE_SYNCDB;
 			modlos_insert_userstable($opnsim_user);
 		}

@@ -106,7 +106,7 @@ $string['modlos_avatar_dlt_canceled']='Avatar Delete Canceled';
 $string['modlos_avatar_dlt_confrm'] = 'Is Avatar really DELETE?';
 
 $string['modlos_users_found'] 		= 'Users Found';
-$string['modlos_nouser_found'] 		= 'User not Found';
+$string['modlos_nouser_found'] 		= 'User not Found in Moodle';
 $string['modlos_user_search'] 		= 'User Search';
 
 $string['modlos_region'] 			= 'Region';

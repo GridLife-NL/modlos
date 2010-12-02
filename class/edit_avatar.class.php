@@ -158,6 +158,7 @@ class  EditAvatar
 					}
 					else {
 						$this->hasError = true;
+						$this->errorMsg[] = get_string('modlos_ownername', 'block_modlos').' ('.$this->ownername.')';
 						$this->errorMsg[] = get_string('modlos_nouser_found', 'block_modlos').' ('.$names['firstname'].' '.$names['lastname'].')';
 						$this->ownername = get_display_username($USER->firstname, $USER->lastname);
 						$this->uid = $USER->id;

@@ -128,7 +128,7 @@ class  CreateAvatar
 			}
 			if (!isAlphabetNumericSpecial($this->lastname)) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_invalid_last', 'block_modlos')." ($this->lastname)";
+				$this->errorMsg[] = get_string('modlos_invalid_lastname', 'block_modlos')." ($this->lastname)";
 			}
 			if (!isAlphabetNumericSpecial($this->passwd)) {
 				$this->hasError = true;
@@ -252,10 +252,13 @@ class  CreateAvatar
 				$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);
 				if ($user_info==null) {
 					$this->hasError = true;
+					$this->errorMsg[] = get_string('modlos_ownername', 'block_modlos').' ('.$this->ownername.')';
 					$this->errorMsg[] = get_string('modlos_nouser_found', 'block_modlos').' ('.$names['firstname'].' '.$names['lastname'].')';
-					return false;
+					$this->ownername = '';
+					$this->uid = '0';
+					//return false;
 				}
-				$this->uid = $user_info->id;
+				else $this->uid = $user_info->id;
 			}
 			else $this->uid = '0';
 		}
