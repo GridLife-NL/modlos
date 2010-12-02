@@ -267,7 +267,7 @@ class  CreateAvatar
 		// Sloodle
 		$state   = AVATAR_STATE_SYNCDB;
 		$sloodle = optional_param('sloodle', '', PARAM_ALPHA);
-		if ($sloodle!='' and $this->use_sloodle) $state = (int$state | AVATAR_STATE_SLOODLE;
+		if ($sloodle!='' and $this->use_sloodle) $state = (int)$state | AVATAR_STATE_SLOODLE;
 
 
 		$new_user['UUID']		= $this->UUID;
