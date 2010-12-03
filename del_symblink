@@ -6,6 +6,7 @@ function symbl2file()
 	FIL=`echo $1|awk -F":" '{print $2}'`
 
 	rm $SYB 
+	echo "copy $FIL to $SYB"
 	cp -Rpd $FIL $SYB
 }
 
