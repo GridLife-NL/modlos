@@ -141,8 +141,9 @@ $settings->add(new admin_setting_configtext('modlos_banker_avatar',
 						"00000000-0000-0000-0000-000000000000", PARAM_TEXT));
 */
 
+
 // Context
-if (function_exists("admin_setting_confightmltextarea")) {
+if (class_exists("admin_setting_confightmltextarea")) {
 	$settings->add(new admin_setting_confightmltextarea('modlos_home_content',
 					get_string('modlos_home_cntnt', 'block_modlos'),
 				   	get_string('modlos_home_cntnt_desc', 'block_modlos'), 
