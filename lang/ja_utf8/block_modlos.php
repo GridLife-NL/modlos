@@ -290,7 +290,7 @@ $string['modlos_lgnscrn_cntnt_desc']= 'Viewer に表示される Login Screen �
 $string['modlos_dsclmr'] 			= '使用許諾の表示';
 $string['modlos_dsclmr_desc'] 		= 'アバター作成時に OpenSimの使用許諾を表示するかどうかの指定';
 $string['modlos_dsclmr_cntnt'] 		= '使用許諾の内容';
-$string['modlos_dsclmr_cntnt_desc'] = 'OpenSim使用許諾の内容を記入する．HTMLタグ，BB Codeタグは使用不可';
+$string['modlos_dsclmr_cntnt_desc'] = 'OpenSim使用許諾の内容を記入する．HTMLタグは使用不可';
 
 $string['modlos_grid_log_dir'] 		= 'グリッドサーバのログ保存先';
 $string['modlos_grid_log_desc'] 	= 'グリッドサーバのログの保存先';

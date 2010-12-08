@@ -274,23 +274,23 @@ $string['modlos_use_utc']			= 'Do you use UTC to display time?';
 $string['modlos_use_utc_desc']		= 'If you check this, then UTC(Universal Time, Coordinated) is used. If you do not check this, then Local Time locale of server is used.';
 
 $string['modlos_home_cntnt'] 		= 'Home (Top) Page Content';
-$string['modlos_home_cntnt_desc']	= 'Specify content of Modlos home (top) page';
+$string['modlos_home_cntnt_desc']	= 'Specify content of Modlos home (top) page. The HTML tag can be used.';
 $string['modlos_db_status_cntnt'] 	= 'DB Status Content';
-$string['modlos_db_status_cntnt_desc']='Specify content of DB status page';
+$string['modlos_db_status_cntnt_desc']='Specify content of DB status page. The HTML tag can be used.';
 $string['modlos_rg_cntnt'] 			= 'Regions List Content';
-$string['modlos_rg_cntnt_desc'] 	= 'Specify content of regions list page';
+$string['modlos_rg_cntnt_desc'] 	= 'Specify content of regions list page. The HTML tag can be used.';
 $string['modlos_avt_cntnt'] 		= 'Avatars List Content';
-$string['modlos_avt_cntnt_desc'] 	= 'Specify content of avatars list page';
+$string['modlos_avt_cntnt_desc'] 	= 'Specify content of avatars list page. The HTML tag can be used.';
 $string['modlos_edtbl_cntnt'] 		= 'Editable Avatas List Content';
-$string['modlos_edtbl_cntnt_desc'] 	= 'Specify content of editable avatars list page';
+$string['modlos_edtbl_cntnt_desc'] 	= 'Specify content of editable avatars list page. The HTML tag can be used.';
 
 $string['modlos_lgnscrn_cntnt']		= 'Login Screen Content';
-$string['modlos_lgnscrn_cntnt_desc']= 'Specify content of Login Screen on Viewer';
+$string['modlos_lgnscrn_cntnt_desc']= 'Specify content of Login Screen on Viewer. The HTML tag can be used.';
 
 $string['modlos_dsclmr'] 			= 'Disclaimer Activation';
 $string['modlos_dsclmr_desc'] 		= 'Select to display of disclaimer is active or not';
 $string['modlos_dsclmr_cntnt'] 		= 'Content of Disclaimer';
-$string['modlos_dsclmr_cntnt_desc'] = 'Specify content of Disclaimer of OpenSim';
+$string['modlos_dsclmr_cntnt_desc'] = 'Specify content of Disclaimer of OpenSim. The HTML tag cannot be used.';
 
 $string['modlos_grid_log_dir'] 		= 'Grid Server Log Directory';
 $string['modlos_grid_log_desc'] 	= 'Specify grid server directory';
