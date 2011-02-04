@@ -37,6 +37,10 @@ $settings->add(new admin_setting_configtext('modlos_sql_db_pass',
 					get_string('modlos_sql_pass', 'block_modlos'),
 				   	get_string('modlos_sql_pass_desc', 'block_modlos'), "opensim_pass", PARAM_TEXT));
 
+$settings->add(new admin_setting_configtext('modlos_user_server_uri', 
+					get_string('modlos_user_uri', 'block_modlos'),
+				   	get_string('modlos_user_uri_desc', 'block_modlos'), "http://opensim:8002/", PARAM_URL));
+
 /*
 $settings->add(new admin_setting_configtext('modlos_asset_uri', 
 					get_string('modlos_asset_uri', 'block_modlos'),
@@ -94,7 +98,7 @@ $settings->add(new admin_setting_configselect('modlos_image_processor_jp2',
 //					get_string('modlos_image_processor_path', 'block_modlos'),
 //				   	get_string('modlos_image_processor_path_desc', 'block_modlos'), "", PARAM_TEXT));
 
-$settings->add(new admin_setting_configcheckbox('modlos_use_events',
+$settings->add(new admin_setting_configcheckbox('modlos_activate_events',
 					get_string('modlos_events_manage', 'block_modlos'),
 				   	get_string('modlos_events_manage_desc', 'block_modlos'), 1));
 
@@ -109,10 +113,6 @@ $settings->add(new admin_setting_configcheckbox('modlos_use_https',
 $settings->add(new admin_setting_configtext('modlos_https_url', 
 					get_string('modlos_https_url', 'block_modlos'),
 				   	get_string('modlos_https_url_desc', 'block_modlos'), "", PARAM_URL));
-
-$settings->add(new admin_setting_configcheckbox('modlos_userinfo_link', 
-					get_string('modlos_userinfo_link', 'block_modlos'),
-				   	get_string('modlos_userinfo_link_desc', 'block_modlos'), 0));
 
 $settings->add(new admin_setting_configcheckbox('modlos_teacher_admin', 
 					get_string('modlos_teacher_admin', 'block_modlos'),
@@ -130,6 +130,15 @@ $settings->add(new admin_setting_configtext('modlos_groupdb_read_key',
 $settings->add(new admin_setting_configtext('modlos_groupdb_write_key', 
 					get_string('modlos_grpdb_wkey', 'block_modlos'),
 				   	get_string('modlos_grpdb_wkey_desc', 'block_modlos'), "1234", PARAM_TEXT));
+
+$settings->add(new admin_setting_configcheckbox('modlos_currency_server', 
+					get_string('modlos_use_crncy_svr', 'block_modlos'),
+				   	get_string('modlos_use_crncysvr_desc', 'block_modlos'), 0));
+
+$settings->add(new admin_setting_configtext('modlos_currency_script_key', 
+					get_string('modlos_crncy_key', 'block_modlos'),
+				   	get_string('modlos_crncy_key_desc', 'block_modlos'), "123456789", PARAM_TEXT));
+
 /*
 $settings->add(new admin_setting_configtext('modlos_groupdb_currency_key', 
 					get_string('modlos_crncy_key', 'block_modlos'),
@@ -140,6 +149,11 @@ $settings->add(new admin_setting_configtext('modlos_banker_avatar',
 				   	get_string('modlos_banker_desc', 'block_modlos'), 
 						"00000000-0000-0000-0000-000000000000", PARAM_TEXT));
 */
+
+
+$settings->add(new admin_setting_configcheckbox('modlos_userinfo_link', 
+					get_string('modlos_userinfo_link', 'block_modlos'),
+				   	get_string('modlos_userinfo_link_desc', 'block_modlos'), 0));
 
 
 // Context

@@ -172,6 +172,6 @@ $low_amount_error = 'You tried to buy less than the minimum amount of currency. 
 
 
 //
-if (!defined('CMS_READED_CONFIG')) define('CMS_READED_CONFIG', 'YES');
+if (!defined('ENV_READED_CONFIG')) define('ENV_READED_CONFIG', 'YES');
 
 ?>

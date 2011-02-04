@@ -222,12 +222,14 @@ $string['modlos_sql_user_desc'] 	= 'OpenSim の SQLデータベースのーザ�
 $string['modlos_sql_pass'] 			= 'OpenSim SQLデータベースのパスワード';
 $string['modlos_sql_pass_desc'] 	= 'OpenSim の SQLデータベースのパスワード';
 
+$string['modlos_user_uri'] 			= 'User(ROBUST) サーバのURL';
+$string['modlos_user_uri_desc'] 	= "OpenSimの User(ROBUST)サーバの URLを指定する．'localhost(127.0.0.1)' は使用しないこと．この値は DTL/NSL Moneyサーバでも使用される．従って，もしDTL/NSL Moneyサーバを使用するなら，OpenSim.ini の [Economy]セクションの UserServer と同じ値を指定しなければならない";
 $string['modlos_asset_uri'] 		= 'Asset サーバのURI';
-$string['modlos_asset_uri_desc'] 	= "OpenSim Asset サーバの URI(url)．'localhost' は使用しないこと";
+$string['modlos_asset_uri_desc'] 	= "OpenSim Asset サーバの URLを指定する．'localhost(127.0.0.1)' は使用しないこと";
 $string['modlos_invent_uri'] 		= 'Inventory サーバのURI';
-$string['modlos_invent_uri_desc'] 	= "OpenSim Inventory サーバの URI(url)．'localhost' は使用しないこと";
+$string['modlos_invent_uri_desc'] 	= "OpenSim Inventory サーバの URLを指定する．'localhost(127.0.0.1)' は使用しないこと";
 $string['modlos_crncy_uri'] 		= 'Money サーバのURI';
-$string['modlos_crncy_uri_desc'] 	= 'DTL Money サーバを使用する場合は，その URI(url)';
+$string['modlos_crncy_uri_desc'] 	= 'DTL/NSL Money サーバを使用する場合は，そのURLを指定する';
 
 $string['modlos_map_stx'] 			= 'ワールドマップのスタート位置 (X)';
 $string['modlos_map_stx_desc'] 		= 'ワールドマップを表示する時の 中心 X座標の初期値';
@@ -255,8 +257,11 @@ $string['modlos_grpdb_rkey_desc'] 	= 'Flotsam Group Function を使用する場�
 $string['modlos_grpdb_wkey'] 		= 'Flotsam グループデータベースの書き込みアクセスキー';
 $string['modlos_grpdb_wkey_desc'] 	= 'Flotsam Group Function を使用する場合に指定する書き込み用キー．'.
 									  'OpnenSim.iniの [Groups]セクションの XmlRpcServiceWriteKeyの値と一致させる必要がある．';
-$string['modlos_crncy_key'] 		= 'DTL Money サーバへのアクセスキー　（未実装）';
-$string['modlos_crncy_key_desc'] 	= 'DTL Money サーバへのアクセスキーを指定する．この機能はまだ未実装である';
+
+$string['modlos_use_crncy_srv']		= 'DTL/NSL Money サーバの使用';
+$string['modlos_use_crncy_svr_desc']= 'DTL/NSL Money サーバを使用するかどうか？';
+$string['modlos_crncy_key'] 		= 'ViewerとMoneyスクリプトとのアクセスキー';
+$string['modlos_crncy_key_desc'] 	= 'iViewerとMoneyスクリプトとのアクセスキーを指定する．任意の文字列なら何でも良い';
 $string['modlos_banker'] 			= 'バンカーアバターのUUID　（未実装）';
 $string['modlos_banker_desc'] 		= 'バンカーアバター （お金の管理を行うアバター） のUUID (GUID)';
 

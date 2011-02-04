@@ -48,23 +48,25 @@ if (!OPENSIM_PG_ONLY) $Categories[23] = get_string('modlos_events_nightlife', 'b
 //
 //
 //
-function  cms_get_user_email($uid)
+function  env_get_user_email($uid)
 {                  
     return modlos_get_user_email($uid);
 }
 
 
                    
-function  cms_get_config($name)
+function  env_get_config($name)
 {                  
     global $CFG;
-                   
+	
+	$name = "modlos_".$name;
+ 
     return $CFG->$name;
 }
 
 
 
 //
-if (!defined('CMS_READED_INTERFACE')) define('CMS_READED_INTERFACE', 'YES');
+if (!defined('ENV_READED_INTERFACE')) define('ENV_READED_INTERFACE', 'YES');
 
 ?>

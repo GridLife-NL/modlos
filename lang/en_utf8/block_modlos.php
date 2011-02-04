@@ -223,12 +223,15 @@ $string['modlos_sql_user_desc'] 	= 'Specify the OpenSim SQL user name';
 $string['modlos_sql_pass'] 			= 'OpenSim SQL DB Password';
 $string['modlos_sql_pass_desc'] 	= 'Specify the OpenSim SQL password';
 
+$string['modlos_user_uri'] 			= 'User(ROBUST) server URL';
+$string['modlos_user_uri_desc'] 	= 'Specify User(ROBUST) server URL. Do not use localhost(127.0.0.1)';
+$string['modlos_user_uri_desc']		= 'Please specify OpenSim User(ROBUST) server URL. Not use localhost(127.0.0.1). This value is used by DTL/NSL Money Server. Therefor, if you use DTL/NSL Money server, please use same vale of UserServer at [Economy] section in OpenSim.ini';
 $string['modlos_asset_uri'] 		= 'Asset Server URL';
 $string['modlos_asset_uri_desc'] 	= 'Specify Asset server URL';
 $string['modlos_invent_uri'] 		= 'Inventory Server URL';
 $string['modlos_invent_uri_desc'] 	= 'Specify Inventory server URL';
 $string['modlos_crncy_uri'] 		= 'Money Server URL';
-$string['modlos_crncy_uri_desc'] 	= 'Specify DTL Money server URL, if exist.';
+$string['modlos_crncy_uri_desc'] 	= 'Specify DTL/NSL Money server URL, if exist.';
 
 $string['modlos_map_stx'] 			= 'World Map Start Point (X)';
 $string['modlos_map_stx_desc'] 		= 'Specify initial X coordinates of World Map';
@@ -254,8 +257,12 @@ $string['modlos_grpdb_rkey'] 		= 'Group Database Read Key';
 $string['modlos_grpdb_rkey_desc'] 	= 'Specify same read key code with XmlRpcServiceReadKey in [Groups] section of OpenSim.ini';
 $string['modlos_grpdb_wkey'] 		= 'Group Database Write Key';
 $string['modlos_grpdb_wkey_desc'] 	= 'Specify same write key code with XmlRpcServiceWriteKey in [Groups] section of OpenSim.ini';
-$string['modlos_crncy_key'] 		= 'Money Server Access key';
-$string['modlos_crncy_key_desc'] 	= 'Specify Money server access key code';
+
+
+$string['modlos_use_crncy_svr'] 	= 'Do you use DTL/NSL Money Server?';
+$string['modlos_use_crncy_svr_desc']= 'Please specify whether to use DTL/NSL Money Server.';
+$string['modlos_crncy_key'] 		= 'Money Script Access key';
+$string['modlos_crncy_key_desc']	= 'Please specify Money Script access key code. You can specify any string.';
 $string['modlos_banker'] 			= 'UUID of Banker Avatar';
 $string['modlos_banker_desc'] 		= 'Specify UUID(GUID) of Banker Avatar';
 
