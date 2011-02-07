@@ -50,6 +50,14 @@ define('MDL_MODLOS_PREFIX',				'modlos_');
 define('MDL_SLOODLE_USERS_TBL',			'sloodle_users');
 
 
+//
+define('SYSURL',						$CFG->wwwroot);
+define('OPENSIM_PG_ONLY',				$CFG->modlos_pg_only);
+define('DATE_FORMAT',					$CFG->modlos_date_format);
+define('USE_UTC_TIME',					$CFG->modlos_use_utc_time);
+
+if (USE_UTC_TIME) date_default_timezone_set('UTC');
+
 
 
 //////////////////////////////////////////////////////////////////////////////////
