@@ -3,10 +3,10 @@
 //
 //
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
-require_once(realpath(dirname(__FILE__).'/../include/cms_interface.php'));
+require_once(realpath(dirname(__FILE__).'/../include/env_interface.php'));
 
 
-$LOGIN_SCREEN_CONTENT = cms_get_config('modlos_loginscreen_content');
+$LOGIN_SCREEN_CONTENT = env_get_config('loginscreen_content');
 
 $alert = modlos_get_loginscreen_alert();
 $BOX_TITLE		  = $alert['title'];

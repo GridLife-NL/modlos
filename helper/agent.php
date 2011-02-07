@@ -1,7 +1,7 @@
 <?php
 
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
-require_once(realpath(dirname(__FILE__).'/../include/cms_interface.php'));
+require_once(realpath(dirname(__FILE__).'/../include/env_interface.php'));
 
 
 if (isguest()) {

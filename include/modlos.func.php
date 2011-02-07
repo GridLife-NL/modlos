@@ -97,7 +97,7 @@
 
 if (!defined('CMS_MODULE_PATH')) exit();
 
-require_once(CMS_MODULE_PATH.'/include/cms_interface.php');
+require_once(CMS_MODULE_PATH.'/include/env_interface.php');
 
 require_once(CMS_MODULE_PATH.'/include/tools.func.php');
 require_once(CMS_MODULE_PATH.'/include/mysql.func.php');

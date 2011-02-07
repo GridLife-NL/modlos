@@ -131,7 +131,7 @@ $settings->add(new admin_setting_configtext('modlos_groupdb_write_key',
 					get_string('modlos_grpdb_wkey', 'block_modlos'),
 				   	get_string('modlos_grpdb_wkey_desc', 'block_modlos'), "1234", PARAM_TEXT));
 
-$settings->add(new admin_setting_configcheckbox('modlos_currency_server', 
+$settings->add(new admin_setting_configcheckbox('modlos_use_currency_server', 
 					get_string('modlos_use_crncy_svr', 'block_modlos'),
 				   	get_string('modlos_use_crncysvr_desc', 'block_modlos'), 0));
 
