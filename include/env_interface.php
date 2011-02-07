@@ -7,10 +7,10 @@
 
 require_once(realpath(dirname(__FILE__).'/config.php'));
 
-require_once(CMS_MODULE_PATH.'/include/tools.func.php');
-require_once(CMS_MODULE_PATH.'/include/mysql.func.php');
-require_once(CMS_MODULE_PATH.'/include/env.mysql.php');
-require_once(CMS_MODULE_PATH.'/include/opensim.mysql.php');
+require_once(ENV_HELPER_PATH.'/../include/tools.func.php');
+require_once(ENV_HELPER_PATH.'/../include/mysql.func.php');
+require_once(ENV_HELPER_PATH.'/../include/env.mysql.php');
+require_once(ENV_HELPER_PATH.'/../include/opensim.mysql.php');
 
 require_once(CMS_MODULE_PATH.'/include/moodle.func.php');
 require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
