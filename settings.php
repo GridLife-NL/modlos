@@ -133,7 +133,7 @@ $settings->add(new admin_setting_configtext('modlos_groupdb_write_key',
 
 $settings->add(new admin_setting_configcheckbox('modlos_use_currency_server', 
 					get_string('modlos_use_crncy_svr', 'block_modlos'),
-				   	get_string('modlos_use_crncysvr_desc', 'block_modlos'), 0));
+				   	get_string('modlos_use_crncy_svr_desc', 'block_modlos'), 0));
 
 $settings->add(new admin_setting_configtext('modlos_currency_script_key', 
 					get_string('modlos_crncy_key', 'block_modlos'),

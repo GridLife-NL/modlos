@@ -258,10 +258,10 @@ $string['modlos_grpdb_wkey'] 		= 'Flotsam グループデータベースの書�
 $string['modlos_grpdb_wkey_desc'] 	= 'Flotsam Group Function を使用する場合に指定する書き込み用キー．'.
 									  'OpnenSim.iniの [Groups]セクションの XmlRpcServiceWriteKeyの値と一致させる必要がある．';
 
-$string['modlos_use_crncy_srv']		= 'DTL/NSL Money サーバの使用';
+$string['modlos_use_crncy_svr']		= 'DTL/NSL Money サーバの使用';
 $string['modlos_use_crncy_svr_desc']= 'DTL/NSL Money サーバを使用するかどうか？';
 $string['modlos_crncy_key'] 		= 'ViewerとMoneyスクリプトとのアクセスキー';
-$string['modlos_crncy_key_desc'] 	= 'iViewerとMoneyスクリプトとのアクセスキーを指定する．任意の文字列なら何でも良い';
+$string['modlos_crncy_key_desc'] 	= 'ViewerとMoneyスクリプトとのアクセスキーを指定する．任意の文字列なら何でも良い';
 $string['modlos_banker'] 			= 'バンカーアバターのUUID　（未実装）';
 $string['modlos_banker_desc'] 		= 'バンカーアバター （お金の管理を行うアバター） のUUID (GUID)';
 
