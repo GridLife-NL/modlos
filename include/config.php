@@ -132,7 +132,6 @@ define('PROFILE_USERSETTINGS_TBL',		MODLOS_DB_PREFIX.'profile_usersettings');
 
 // Search the In World. see also search_config.php 
 define('SEARCH_ALLPARCELS_TBL',			MODLOS_DB_PREFIX.'search_allparcels');
-define('SEARCH_CLASSIFIEDS_TBL',		MODLOS_DB_PREFIX.'profile_classifieds');
 define('SEARCH_EVENTS_TBL',				MODLOS_DB_PREFIX.'search_events');
 define('SEARCH_HOSTSREGISTER_TBL', 		MODLOS_DB_PREFIX.'search_hostsregister');
 define('SEARCH_OBJECTS_TBL',			MODLOS_DB_PREFIX.'search_objects');
@@ -140,6 +139,7 @@ define('SEARCH_PARCELS_TBL',			MODLOS_DB_PREFIX.'search_parcels');
 define('SEARCH_PARCELSALES_TBL',		MODLOS_DB_PREFIX.'search_parcelsales');
 define('SEARCH_POPULARPLACES_TBL', 		MODLOS_DB_PREFIX.'search_popularplaces');
 define('SEARCH_REGIONS_TBL',			MODLOS_DB_PREFIX.'search_regions');
+define('SEARCH_CLASSIFIEDS_TBL',		PROFILE_CLASSIFIEDS_TBL);
 
 
 
