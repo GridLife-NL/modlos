@@ -99,7 +99,7 @@ define('MUTE_DB_HOST',  				CMS_DB_HOST);
 define('MUTE_DB_NAME',  				CMS_DB_NAME);
 define('MUTE_DB_USER',  				CMS_DB_USER);
 define('MUTE_DB_PASS',  				CMS_DB_PASS);
-define('MUTE_LIST_TBL', 				MODLOS_BD_PREFIX.'mute_list');
+define('MUTE_LIST_TBL', 				MODLOS_DB_PREFIX.'mute_list');
 
 
 
