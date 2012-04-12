@@ -1,5 +1,6 @@
 <?php
 
+$string['pluginname'] 				= 'Modlos';
 $string['modlos_menu'] 				= 'Moodle OpenSim';
 $string['modlos'] 					= 'Modlos';
 
