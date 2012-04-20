@@ -47,7 +47,7 @@ class  CreateAvatar
 		require_login($course_id);
 
 		// for Guest
-		$this->isGuest = isguest();
+		$this->isGuest = jbxl_is_guest($USER->id, $course_id);
 		if ($this->isGuest) {
 			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
 		}

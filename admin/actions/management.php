@@ -5,7 +5,12 @@ require_once(realpath(dirname(__FILE__)."/../../include/env_interface.php"));
 
 
 $course_id = optional_param('course', '0', PARAM_INT);
-$course = get_record('course', 'id', $course_id);
+
+if ($course_id) $urlparams['course'] = $course_id;
+$PAGE->set_url('/blocks/modlos/admin/actions/management.php', $urlparams);
+
+
+$course = $DB->get_record('course', array('id'=>$course_id));
 $action = 'management';
 
 print_modlos_header($action, $course);
@@ -18,6 +23,5 @@ print_tabnav_manage($action, $course);
 $manage->execute();
 $manage->print_page();
 
-print_footer($course);
-	
+echo $OUTPUT->footer($course);
 ?>	

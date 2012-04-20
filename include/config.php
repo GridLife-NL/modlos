@@ -46,6 +46,8 @@ define('CMS_DB_NAME', 					$CFG->dbname);
 define('CMS_DB_USER',					$CFG->dbuser);
 define('CMS_DB_PASS',					$CFG->dbpass);
 
+define('MDL_DB_PREFIX',					$CFG->prefix);
+
 define('MDL_SLOODLE_USERS_TBL',			'sloodle_users');
 
 

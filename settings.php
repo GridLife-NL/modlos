@@ -1,11 +1,13 @@
 <?php
 
 // Nav 
-define('CMS_MODULE_PATH', $CFG->dirroot.'/blocks');
-include(CMS_MODILE_PATH.'/modlos/include/modlos.func.php');
+if (!defined('CMS_MODULE_PATH')) {
+	define('CMS_MODULE_PATH', $CFG->dirroot.'/blocks/modlos');
+}
+require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 $course_id = optional_param('course', '0', PARAM_INT);
-$course = get_record('course', 'id', $course_id);
+$course = $DB->get_record('course', array('id'=>$course_id));
 
 
 ob_start();

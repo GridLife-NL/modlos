@@ -278,15 +278,17 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 
 	$sloodle = null;
 	if ($use_sloodle) {
-		$sloodle = $DB->get_record(MDL_SLOODLE_USERS_TBL, array('uuid'=>$uuid));
-		if ($sloodle!=null) {
-			$names = null;
-			if ($sloodle->avname!='') $names = explode(' ', $sloodle->avname);
+ 		if (jbxl_exist_db_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
+			$sloodle = $DB->get_record(MDL_SLOODLE_USERS_TBL, array('uuid'=>$uuid));
+			if ($sloodle!=null) {
+				$names = null;
+				if ($sloodle->avname!='') $names = explode(' ', $sloodle->avname);
 
-			if ($sloodle->userid>0) $avatar->user_id = $sloodle->userid;
-			if (is_array($names)) {
-				$avatar->firstname = $names[0];
-				$avatar->lastname  = $names[1];
+				if ($sloodle->userid>0) $avatar->user_id = $sloodle->userid;
+				if (is_array($names)) {
+					$avatar->firstname = $names[0];
+					$avatar->lastname  = $names[1];
+				}
 			}
 		}
 	}
@@ -525,7 +527,7 @@ function  modlos_get_lastnames($sort='')
 
 	$lastnames = array();
 
-	$lastns = $DB->get_records('modlos_lastnames', array('state'=>AVATAR_LASTN_ACTIVE, $sort=>'lastname'));
+	$lastns = $DB->get_records('modlos_lastnames', array('state'=>AVATAR_LASTN_ACTIVE), $sort, 'lastname');
 	foreach ($lastns as $lastn) {
 		$lastnames[] = $lastn->lastname;
 	}
@@ -1007,7 +1009,7 @@ function  modlos_sync_opensimdb($timecheck=true)
 
 function  modlos_sync_sloodle_users($timecheck=true)
 {
-	global $DB;
+	global $DB, $CFG;
 
 	if ($timecheck) {
 		$sloodle_up = modlos_get_update_time(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL);
@@ -1052,7 +1054,7 @@ function  modlos_sync_sloodle_users($timecheck=true)
 
 function  print_tabnav($currenttab, $course, $show_create_tab=true)
 {
-	global $CFG;
+	global $CFG, $USER;
 
 	if (empty($currenttab)) $currenttab = 'show_home';
 	if (empty($course)) $course_id = 0;
@@ -1071,7 +1073,7 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 																	'<b>'.get_string('modlos_world_map','block_modlos').'</b>');
 	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$course_param, 
 																	'<b>'.get_string('modlos_regions_list','block_modlos').'</b>');
-	if (!isGuest()) {
+	if (!jbxl_is_guest($USER->id, $course_id)) {
 		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param, 
 																	'<b>'.get_string('modlos_avatars_list','block_modlos').'</b>');
 		if ($show_create_tab) {
@@ -1154,7 +1156,7 @@ function  print_tabnav_manage($currenttab, $course)
 
 function  print_modlos_header($currenttab, $course)
 {
-	global $CFG;
+	global $CFG, $OUTPUT;
 
 	// Print Navi Header
 	if (empty($course)) {
@@ -1169,17 +1171,17 @@ function  print_modlos_header($currenttab, $course)
 			$langmenu = popup_form('?lang=', $langs, 'chooselang', $currlang, '', '', '', true, 'self', $langlabel);
 		}
 
-		print_header(get_string('modlos', 'block_modlos'), get_string('modlos_menu', 'block_modlos'), 
+		echo $OUTPUT->header(get_string('modlos', 'block_modlos'), get_string('modlos_menu', 'block_modlos'), 
 					 get_string('modlos', 'block_modlos'), '', '', true, '&nbsp;', user_login_string($SITE).$langmenu);
 	}
 	else {
 		if ($course->category) {
-			print_header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
-					 '<a href="'.$CFG->wwwroot."/course/view.php?id={$course->id}\">$course->shortname</a> -> ".
-					 get_string('modlos','block_modlos'), '', '', true, '&nbsp;', navmenu($course));
+			//echo $OUTPUT->header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
+			//		 '<a href="'.$CFG->wwwroot."/course/view.php?id={$course->id}\">$course->shortname</a> -> ".
+			//		 get_string('modlos','block_modlos'), '', '', true, '&nbsp;', navmenu($course));
 		}
 		else {
-			print_header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
+			echo $OUTPUT->header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
 					 get_string('modlos','block_modlos'), '', '', true, '&nbsp;', navmenu($course));
 		}
 	}

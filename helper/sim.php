@@ -8,9 +8,10 @@
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
 require_once(realpath(dirname(__FILE__).'/../include/env_interface.php'));
 
+//require_once(realpath(dirname(__FILE__).'/../include/jbxl_moodle_tools.php'));
 
-$isGuest = isguest();
-if ($isGuest) {
+
+if (jbxl_is_guest($USER->id)) {
 	exit('<h4>guest user is not allowed to access this page!!</h4>');
 }
 

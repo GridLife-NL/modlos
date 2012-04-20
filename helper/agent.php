@@ -3,8 +3,10 @@
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
 require_once(realpath(dirname(__FILE__).'/../include/env_interface.php'));
 
+//require_once(realpath(dirname(__FILE__).'/../include/jbxl_moodle_tools.php'));
 
-if (isguest()) {
+
+if (jbxl_is_guest($USER->id)) {
 	exit('<h4>guest user is not allowed to access this page!!</h4>');
 }
 
@@ -16,7 +18,8 @@ if (!isGUID($agent)) exit("<h4>bad agent uuid!! ($agent)</h4>");
 require_login($course_id);
 $hasPermit  = hasModlosPermit($course_id);
 
-global $CFG;
+//global $CFG, $DB;
+
 $use_sloodle = $CFG->modlos_cooperate_sloodle;
 $grid_name   = $CFG->modlos_grid_name;
 $userinfo    = $CFG->modlos_userinfo_link;
@@ -81,7 +84,7 @@ if ($agent) {
 	if ($avatar!=null) {
 		$userid = $avatar['uid'];
 		$state  = (int)$avatar['state'];
-		if ($moodle = get_record('user', 'id', $userid)) {
+		if ($moodle = $DB->get_record('user', array('id'=>$userid))) {
 			$owner  = get_display_username($moodle->firstname, $moodle->lastname);
 		}
 	}

@@ -68,7 +68,7 @@ class  EditEvent
 		require_login($course_id);
 
 		// for Guest
-		$this->isGuest = isguest();
+		$this->isGuest = jbxl_is_guest($USER->id, $course_id);
 		if ($this->isGuest) {
 			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
 		}
@@ -98,8 +98,10 @@ class  EditEvent
 
 	function  execute()
 	{
+		global $DB;
+
 		// List of Parcels
-		$modobj = get_records("modlos_search_parcels");
+		$modobj = $DB->get_records("modlos_search_parcels");
 		$i = 0;		 
 		foreach ($modobj as $mod) {
 			//$this->parcels[$i]['uuid'] 		= $mod->parceluuid;

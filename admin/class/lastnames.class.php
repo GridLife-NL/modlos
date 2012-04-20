@@ -47,7 +47,9 @@ class  LastNames
 
 	function  execute()
 	{
-		$objs = get_records('modlos_lastnames');
+		global $DB;
+
+		$objs = $DB->get_records('modlos_lastnames');
 		if (is_array($objs)) {
 			foreach($objs as $name) {
 				$this->lastnames[$name->lastname] = $name->state;
@@ -111,13 +113,15 @@ class  LastNames
 
 	function  action_add()
 	{
+		global $DB;
+
 		if (!isAlphabetNumericSpecial($this->addname)) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string('modlos_invalid_lastname', 'block_modlos')." ($this->addname)";
 			return;
 		}
 
-		$obj = get_record('modlos_lastnames', 'lastname', $this->addname);
+		$obj = $DB->get_record('modlos_lastnames', array('lastname'=>$this->addname));
 		if ($obj!=null) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string('modlos_exist_lastname', 'block_modlos')." ($this->addname)";
@@ -126,7 +130,7 @@ class  LastNames
 
 		$obj->lastname = $this->addname;
 		$obj->state    = AVATAR_LASTN_ACTIVE;
-		insert_record('modlos_lastnames', $obj);
+		$DB->insert_record('modlos_lastnames', $obj);
 
 		$this->lastnames[$this->addname] = AVATAR_LASTN_ACTIVE;
 	}
@@ -135,15 +139,17 @@ class  LastNames
 
 	function  action_move_active()
 	{
+		global $DB;
+
 		foreach($this->select_active as $name) {
-			$obj = get_record('modlos_lastnames', 'lastname', $name);
+			$obj = $DB->get_record('modlos_lastnames', array('lastname'=>$name));
 			if ($obj==null) {
 				if (!$this->hasError) $this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_not_exist_lastname', 'block_modlos')." ($name)";
 			}
 			else {
 				$obj->state = AVATAR_LASTN_ACTIVE;
-				update_record('modlos_lastnames', $obj);
+				$DB->update_record('modlos_lastnames', $obj);
 				$this->lastnames[$name] = AVATAR_LASTN_ACTIVE;
 			}
 		}
@@ -153,15 +159,17 @@ class  LastNames
 
 	function  action_move_inactive()
 	{
+		global $DB;
+
 		foreach($this->select_inactive as $name) {
-			$obj = get_record('modlos_lastnames', 'lastname', $name);
+			$obj = $DB->get_record('modlos_lastnames', array('lastname'=>$name));
 			if ($obj==null) {
 				if (!$this->hasError) $this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_not_exist_lastname', 'block_modlos')." ($name)";
 			}
 			else {
 				$obj->state = AVATAR_LASTN_INACTIVE;
-				update_record('modlos_lastnames', $obj);
+				$DB->update_record('modlos_lastnames', $obj);
 				$this->lastnames[$name] = AVATAR_LASTN_INACTIVE;
 			}
 		}
@@ -171,13 +179,15 @@ class  LastNames
 
 	function  action_delete()
 	{
+		global $DB;
+
 		foreach($this->select_active as $name) {
-			delete_records('modlos_lastnames', 'lastname', $name);
+			$DB->delete_records('modlos_lastnames', array('lastname'=>$name));
 			unset($this->lastnames[$name]);
 		}
 
 		foreach($this->select_inactive as $name) {
-			delete_records('modlos_lastnames', 'lastname', $name);
+			$DB->delete_records('modlos_lastnames', array('lastname'=>$name));
 			unset($this->lastnames[$name]);
 		}
 	}

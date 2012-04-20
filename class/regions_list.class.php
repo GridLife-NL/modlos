@@ -37,7 +37,7 @@ class  RegionsList
 	{
 		global $CFG, $USER;
 
-		$this->isGuest   = isguest();
+		$this->isGuest   = jbxl_is_guest($USER->id, $course_id);
 		$this->hasPermit = hasModlosPermit($course_id);
 		$this->course_id = $course_id;
 
@@ -176,7 +176,7 @@ class  RegionsList
 
 		$url_param 		 = $this->url_param;
 		$order_amp 		 = "&amp;order=$this->order";
-		$course_amp 	 = $this->course_amp;
+		$course_amp 	 = "&amp;course=$this->course_id";
 		$pstart_amp	 	 = "&amp;pstart=$this->pstart";
 		$plimit_amp	 	 = "&amp;plimit=$this->plimit";
 		$pstart_		 = '&amp;pstart=';
