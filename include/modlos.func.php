@@ -278,7 +278,7 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 
 	$sloodle = null;
 	if ($use_sloodle) {
- 		if (jbxl_exist_db_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
+ 		if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
 			$sloodle = $DB->get_record(MDL_SLOODLE_USERS_TBL, array('uuid'=>$uuid));
 			if ($sloodle!=null) {
 				$names = null;
