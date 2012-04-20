@@ -5,5 +5,5 @@ php -l moodle.func.php
 php -l mysql.func.php
 php -l opensim.mysql.php
 php -l tools.func.php
-php -l env_interface.func.php
+php -l env_interface.php
 php -l env.mysql.php

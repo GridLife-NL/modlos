@@ -69,13 +69,24 @@
 
  ****************************************************************/
 
+/****************************************************************
+ Reference: Moodle 2.x DB Functions from lib/dml/moodle_database.php (Memo)
+
+ $DB->get_record($table, array $conditions, $fields='*', $strictness=IGNORE_MISSING)
+ $DB->get_records($table, array $conditions=null, $sort='', $fields='*', $limitfrom=0, $limitnum=0)
+
+ $DB->get_recordset_select($table, $select, array $params=null, $sort='', $fields='*', $limitfrom=0, $limitnum=0) 
+ $DB->count_records_select($table, $select, array $params=null, $countitem="COUNT('x')")
+
+ ****************************************************************/
 
 
 /****************************************************************
- Reference: Moodle DB Functions from lib/dmllib.php  (Memo)
+ Reference: Moodle DB 1.9.x Functions from lib/dmllib.php  (Memo)
 
  function record_exists($table, $field1='', $value1='', $field2='', $value2='', $field3='', $value3='')
  function count_records($table, $field1='', $value1='', $field2='', $value2='', $field3='', $value3='')
+
 
  function get_record($table, $field1, $value1, $field2='', $value2='', $field3='', $value3='', $fields='*')
  function get_records($table, $field='', $value='', $sort='', $fields='*', $limitfrom='', $limitnum='')
@@ -104,6 +115,7 @@ require_once(CMS_MODULE_PATH.'/include/mysql.func.php');
 require_once(CMS_MODULE_PATH.'/include/opensim.mysql.php');
 require_once(CMS_MODULE_PATH.'/include/moodle.func.php');
 
+require_once(CMS_MODULE_PATH.'/include/jbxl_moodle_tools.php');
 
 
 
@@ -168,10 +180,12 @@ function  modlos_get_user_email($uuid)
 
 function  modlos_get_avatars($uid=0, $use_sloodle=false)
 {
+	global $DB;
+
 	if (!isNumeric($uid)) return null;
 
-	if ($uid==0) $users = get_records('modlos_users');
-	else 		 $users = get_records('modlos_users', 'user_id', $uid);
+	if ($uid==0) $users = $DB->get_records('modlos_users');
+	else 		 $users = $DB->get_records('modlos_users', array('user_id'=>$uid));
 
 	$avatars = array();
 	if ($users!=null) {
@@ -189,8 +203,8 @@ function  modlos_get_avatars($uid=0, $use_sloodle=false)
 	}
 
 	if ($use_sloodle) {
-		if ($uid==0) $sloodles = get_records(MDL_SLOODLE_USERS_TBL);
-		else 		 $sloodles = get_records(MDL_SLOODLE_USERS_TBL, 'userid', $uid);
+		if ($uid==0) $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);
+		else 		 $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL, array('userid'=>$uid));
 
 		foreach ($sloodles as $sloodle) {
 			$match = false;
@@ -222,17 +236,19 @@ function  modlos_get_avatars($uid=0, $use_sloodle=false)
 
 function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
 {
+	global $DB;
+
 	if (!isNumeric($uid)) return null;
 
-	if ($uid==0) $users = get_records('modlos_users');
-	else 		 $users = get_records('modlos_users', 'user_id', $uid);
+	if ($uid==0) $users = $DB->get_records('modlos_users');
+	else 		 $users = $DB->get_records('modlos_users', array('user_id'=>$uid));
 
 	if (is_array($users)) $num = count($users);
 	else $num = 0;
 
 	if ($use_sloodle) {
-		if ($uid==0) $sloodles = get_records(MDL_SLOODLE_USERS_TBL);
-		else 		 $sloodles = get_records(MDL_SLOODLE_USERS_TBL, 'userid', $uid);
+		if ($uid==0) $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);
+		else 		 $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL, array('userid'=>$uid));
 
 		foreach ($sloodles as $sloodle) {
 			$match = false;
@@ -254,13 +270,15 @@ function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
 
 function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 {
+	global $DB;
+
 	if (!isGUID($uuid)) return null;
 
-	$avatar = get_record('modlos_users', 'uuid', $uuid);		
+	$avatar = $DB->get_record('modlos_users', array('uuid'=>$uuid));		
 
 	$sloodle = null;
 	if ($use_sloodle) {
-		$sloodle = get_record(MDL_SLOODLE_USERS_TBL, 'uuid', $uuid);
+		$sloodle = $DB->get_record(MDL_SLOODLE_USERS_TBL, array('uuid'=>$uuid));
 		if ($sloodle!=null) {
 			$names = null;
 			if ($sloodle->avname!='') $names = explode(' ', $sloodle->avname);
@@ -301,11 +319,13 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 
 function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 {
+	global $DB;
+
 	if (!isGUID($avatar['UUID'])) return false;
 
 	// Sloodle
 	if ($use_sloodle) {
-		$updobj = get_record(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
+		$updobj = $DB->get_record(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
 		if ($updobj==null) {
 			if ((int)$avatar['state']&AVATAR_STATE_SLOODLE) {
 				$insobj->userid = $avatar['uid'];
@@ -313,24 +333,24 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 				$insobj->avname = $avatar['firstname'].' '.$avatar['lastname'];
 				if ($insobj->avname==' ') $insobj->avname = '';
 				$insobj->lastactive = time();
-				$ret = insert_record(MDL_SLOODLE_USERS_TBL, $insobj);
+				$ret = $DB->insert_record(MDL_SLOODLE_USERS_TBL, $insobj);
 			}
 		}
 		else {
 			if ((int)$avatar['state']&AVATAR_STATE_SLOODLE and $avatar['uid']!=0) {
 				$updobj->userid = $avatar['uid'];
 				$updobj->lastactive = time();
-				$ret = update_record(MDL_SLOODLE_USERS_TBL, $updobj);
+				$ret = $DB->update_record(MDL_SLOODLE_USERS_TBL, $updobj);
 			}
 			else {
-				$ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
+				$ret = $DB->delete_records(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
 			}
 		}
 	}
 
 
 	// Modlos
-	$obj = get_record('modlos_users', 'uuid', $avatar['UUID']);		
+	$obj = $DB->get_record('modlos_users', array('uuid'=>$avatar['UUID']));		
 	if ($obj==null) {
 		$ret = modlos_insert_userstable($avatar);
 	}
@@ -346,10 +366,12 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 
 function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 {
+	global $DB;
+
 	if (!isGUID($avatar['UUID'])) return false;
 
 	// Sloodle
-	if ($use_sloodle) $ret = delete_records(MDL_SLOODLE_USERS_TBL, 'uuid', $avatar['UUID']);
+	if ($use_sloodle) $ret = $DB->delete_records(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
 
 	$ret = modlos_delete_userstable($avatar);
 
@@ -368,8 +390,10 @@ function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 
 function  modlos_get_userstable()
 {
+	global $DB;
+
 	// Modlos DB を読んで配列に変換
-	$db_users = get_records('modlos_users');
+	$db_users = $DB->get_records('modlos_users');
 	$modlos_users = array();
 	foreach ($db_users as $user) {
 		$modlos_uuid = $user->uuid;
@@ -395,6 +419,8 @@ function  modlos_get_userstable()
 
 function  modlos_insert_userstable($user)
 {
+	global $DB;
+
 	if (!isGUID($user['UUID'])) return false;
 
 	$insobj->uuid 	   = $user['UUID'];
@@ -422,7 +448,7 @@ function  modlos_insert_userstable($user)
 		}
 	}
 	
-	$ret = insert_record('modlos_users', $insobj);
+	$ret = $DB->insert_record('modlos_users', $insobj);
 
 	return $ret;
 }
@@ -435,10 +461,12 @@ function  modlos_insert_userstable($user)
 //
 function  modlos_update_userstable($user, $updobj=null)
 {
+	global $DB;
+
 	if (!isGUID($user['UUID'])) return false;
 
 	if ($updobj==null) {
-		$updobj = get_record('modlos_users', 'uuid', $user['UUID']);		
+		$updobj = $DB->get_record('modlos_users', array('uuid'=>$user['UUID']));		
 		if ($updobj==null) return false;
 	}
 
@@ -457,7 +485,7 @@ function  modlos_update_userstable($user, $updobj=null)
 		$updobj->hmregion = $user['hmregion'];
 	}
 
-	$ret = update_record('modlos_users', $updobj);
+	$ret = $DB->update_record('modlos_users', $updobj);
 
 	return $ret;
 }
@@ -467,14 +495,16 @@ function  modlos_update_userstable($user, $updobj=null)
 
 function  modlos_delete_userstable($user)
 {
+	global $DB;
+
 	if ($user['id']=='' and !isGUID($user['UUID'])) return false;
 	if (!((int)$user['state']&AVATAR_STATE_INACTIVE)) return false;		// active
 
 	if ($user['id']!='') {
-		$ret = delete_records('modlos_users',   'id', $user['id']);
+		$ret = $DB->delete_records('modlos_users', array('id'=>$user['id']));
 	}
 	else {
-		$ret = delete_records('modlos_users', 'uuid', $user['UUID']);
+		$ret = $DB->delete_records('modlos_users', array('uuid'=>$user['UUID']));
 	}
 
 	if (!$ret) return false;
@@ -491,9 +521,11 @@ function  modlos_delete_userstable($user)
 
 function  modlos_get_lastnames($sort='')
 {
+	global $DB;
+
 	$lastnames = array();
 
-	$lastns = get_records('modlos_lastnames', 'state', AVATAR_LASTN_ACTIVE, $sort, 'lastname');
+	$lastns = $DB->get_records('modlos_lastnames', array('state'=>AVATAR_LASTN_ACTIVE, $sort=>'lastname'));
 	foreach ($lastns as $lastn) {
 		$lastnames[] = $lastn->lastname;
 	}
@@ -512,11 +544,13 @@ function  modlos_get_lastnames($sort='')
 
 function  modlos_delete_groupdb($uuid, $delallgrp=false)
 {
+	global $DB;
+
 	$ret = modlos_delete_groupdb_by_uuid($uuid);
 	if (!$ret) return false;
 
 	if ($delallgrp) {
-		$groupobjs = get_records(MDL_XMLGROUP_LIST_TBL, 'founderid', $uuid);
+		$groupobjs = $DB->get_records(MDL_XMLGROUP_LIST_TBL, array('founderid'=>$uuid));
 		if ($groupobjs==null) return false;
 
 		foreach($groupobjs as $groupdata) {
@@ -532,11 +566,13 @@ function  modlos_delete_groupdb($uuid, $delallgrp=false)
 
 
 function  modlos_delete_groupdb_by_uuid($uuid)
-{
-	delete_records(MDL_XMLGROUP_ACTIVE_TBL, 	'agentid', $uuid);
-	delete_records(MDL_XMLGROUP_INVITE_TBL, 	'agentid', $uuid);
-	delete_records(MDL_XMLGROUP_MEMBERSHIP_TBL, 'agentid', $uuid);
-	delete_records(MDL_XMLGROUP_ROLE_MEMBER_TBL,'agentid', $uuid);
+{ 
+	global $DB;
+
+	$DB->delete_records(MDL_XMLGROUP_ACTIVE_TBL, 	  array('agentid'=>$uuid));
+	$DB->delete_records(MDL_XMLGROUP_INVITE_TBL, 	  array('agentid'=>$uuid));
+	$DB->delete_records(MDL_XMLGROUP_MEMBERSHIP_TBL,  array('agentid'=>$uuid));
+	$DB->delete_records(MDL_XMLGROUP_ROLE_MEMBER_TBL, array('agentid'=>$uuid));
 
 	return true;
 }
@@ -546,13 +582,15 @@ function  modlos_delete_groupdb_by_uuid($uuid)
 
 function  modlos_delete_groupdb_by_gpid($gpid)
 {
-	delete_records(MDL_XMLGROUP_ACTIVE_TBL, 	'activegroupid', $gpid);
-	delete_records(MDL_XMLGROUP_LIST_TBL, 		'groupid', $gpid);
-	delete_records(MDL_XMLGROUP_INVITE_TBL, 	'groupid', $gpid);
-	delete_records(MDL_XMLGROUP_MEMBERSHIP_TBL,	'groupid', $gpid);
-	delete_records(MDL_XMLGROUP_NOTICE_TBL, 	'groupid', $gpid);
-	delete_records(MDL_XMLGROUP_ROLE_TBL, 		'groupid', $gpid);
-	delete_records(MDL_XMLGROUP_ROLE_MEMBER_TBL,'groupid', $gpid);
+	global $DB;
+
+	$DB->delete_records(MDL_XMLGROUP_ACTIVE_TBL, 	  array('activegroupid', $gpid));
+	$DB->delete_records(MDL_XMLGROUP_LIST_TBL, 		  array('groupid'=>$gpid));
+	$DB->delete_records(MDL_XMLGROUP_INVITE_TBL, 	  array('groupid'=>$gpid));
+	$DB->delete_records(MDL_XMLGROUP_MEMBERSHIP_TBL,  array('groupid'=>$gpid));
+	$DB->delete_records(MDL_XMLGROUP_NOTICE_TBL, 	  array('groupid'=>$gpid));
+	$DB->delete_records(MDL_XMLGROUP_ROLE_TBL, 		  array('groupid'=>$gpid));
+	$DB->delete_records(MDL_XMLGROUP_ROLE_MEMBER_TBL, array('groupid'=>$gpid));
 
 	return true;
 }
@@ -567,9 +605,11 @@ function  modlos_delete_groupdb_by_gpid($gpid)
 
 function  modlos_get_profile($uuid)
 {
+	global $DB;
+
 	$prof = array();
 
-	$prfobj = get_record(MDL_PROFILE_USERPROFILE_TBL, 'useruuid', $uuid);
+	$prfobj = $DB->get_record(MDL_PROFILE_USERPROFILE_TBL, array('useruuid'=>$uuid));
 	if ($prfobj) {
 		$prof['UUID'] 			= $prfobj->useruuid;
 		$prof['Partnar'] 		= $prfobj->profilepartnar;
@@ -596,10 +636,12 @@ function  modlos_get_profile($uuid)
 // called from updatedb.class.php
 function  modlos_set_profiles_from_users($profs, $ovwrite=true)
 {
+	global $DB;
+
 	foreach($profs as $prof) {
 		if ($prof['UUID']!='') {
 			$insert = false;
-			$prfobj = get_record(MDL_PROFILE_USERPROFILE_TBL, 'useruuid', $prof['UUID']);
+			$prfobj = $DB->get_record(MDL_PROFILE_USERPROFILE_TBL, array('useruuid'=>$prof['UUID']));
 			if (!$prfobj) $insert = true;
 
 			$prfobj->useruuid = $prof['UUID'];
@@ -619,10 +661,10 @@ function  modlos_set_profiles_from_users($profs, $ovwrite=true)
 			if ($prof['FirstImage'])		$prfobj->profilefirstimag 	  = $prof['FirstImage'];
 	
 			if ($insert) {
-				$rslt = insert_record(MDL_PROFILE_USERPROFILE_TBL, $prfobj);
+				$rslt = $DB->insert_record(MDL_PROFILE_USERPROFILE_TBL, $prfobj);
 			}
 			else if ($ovwrite) {
-				$rslt = update_record(MDL_PROFILE_USERPROFILE_TBL, $prfobj);
+				$rslt = $DB->update_record(MDL_PROFILE_USERPROFILE_TBL, $prfobj);
 			}
 		}
 	}
@@ -631,7 +673,7 @@ function  modlos_set_profiles_from_users($profs, $ovwrite=true)
 	foreach($profs as $prof) {
 		if ($prof['UUID']!='') {
 			$insert = false;
-			$setobj = get_record(MDL_PROFILE_USERSETTINGS_TBL, 'useruuid', $prof['UUID']);
+			$setobj = $DB->get_record(MDL_PROFILE_USERSETTINGS_TBL, array('useruuid'=>$prof['UUID']));
 			if (!$setobj) $insert = true;
 
 			$setobj->useruuid = $prof['UUID'];
@@ -641,10 +683,10 @@ function  modlos_set_profiles_from_users($profs, $ovwrite=true)
 			if ($prof['Email']!='')		$setobj->email		= $prof['Email'];
 
 			if ($insert) {
-				$rslt = insert_record(MDL_PROFILE_USERSETTINGS_TBL, $setobj);
+				$rslt = $DB->insert_record(MDL_PROFILE_USERSETTINGS_TBL, $setobj);
 			}
 			else if ($ovwrite) {
-				$rslt = update_record(MDL_PROFILE_USERSETTINGS_TBL, $setobj);
+				$rslt = $DB->update_record(MDL_PROFILE_USERSETTINGS_TBL, $setobj);
 			}
 		}
 	}
@@ -657,11 +699,13 @@ function  modlos_set_profiles_from_users($profs, $ovwrite=true)
 
 function  modlos_delete_profiles($uuid)
 {
-	delete_records(MDL_PROFILE_USERPROFILE_TBL,	'useruuid',	$uuid);
-	delete_records(MDL_PROFILE_USERSETTINGS_TBL,'useruuid',	$uuid);
-	delete_records(MDL_PROFILE_USERNOTES_TBL, 	'useruuid',	$uuid);
-	delete_records(MDL_PROFILE_USERPICKS_TBL, 	'creatoruuid', $uuid);
-	delete_records(MDL_PROFILE_CLASSIFIEDS_TBL, 'creatoruuid', $uuid);
+	global $DB;
+
+	$DB->delete_records(MDL_PROFILE_USERPROFILE_TBL,  array('useruuid'=>$uuid));
+	$DB->delete_records(MDL_PROFILE_USERSETTINGS_TBL, array('useruuid'=>$uuid));
+	$DB->delete_records(MDL_PROFILE_USERNOTES_TBL, 	  array('useruuid'=>$uuid));
+	$DB->delete_records(MDL_PROFILE_USERPICKS_TBL, 	  array('creatoruuid'=>$uuid));
+	$DB->delete_records(MDL_PROFILE_CLASSIFIEDS_TBL,  array('creatoruuid'=>$uuid));
 
 	return;
 }
@@ -676,6 +720,8 @@ function  modlos_delete_profiles($uuid)
 
 function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
 {
+	global $DB;
+
 	$events = array();
 	if ($tm==0) $tm = time();
 
@@ -683,7 +729,7 @@ function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
 	if ($pg_only) $select .= " AND eventflags='0'";
 	if ($uid>0)   $select .= " AND uid='$uid'";
 
-	$rets = get_recordset_select('modlos_search_events', $select, 'dateutc', '*', $start, $limit);
+	$rets = $DB->get_recordset_select('modlos_search_events', $select, null, 'dateutc', '*', $start, $limit);
 
 	if ($rets!=null) {
 		$num = 0;
@@ -700,14 +746,16 @@ function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
 
 
 function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
-{  
+{ 
+	global $DB;
+
 	if ($tm==0) $tm = time();
    
 	$select = "dateutc > '$tm'";
 	if ($pg_only) $select .= " AND eventflags='0'";
 	if ($uid>0)   $select .= " AND uid='$uid'";
 
-	$events_num = count_records_select('modlos_search_events', $select);
+	$events_num = $DB->count_records_select('modlos_search_events', $select);
    
 	return $events_num;
 }
@@ -715,8 +763,10 @@ function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
 
    
 function  modlos_get_event($id)
-{  
-	$event = get_record('modlos_search_events', 'id', $id);
+{ 
+	global $DB;
+
+	$event = $DB->get_record('modlos_search_events', array('id', $id));
    
 	$ret = array();
 	if ($event!=null) {
@@ -745,10 +795,12 @@ function  modlos_get_event($id)
 
 function  modlos_set_event($event)
 {
+	global $DB;
+
 	$dbobj->id = 0;
 
 	if ($event['id']>0) {
-		$dbobj = get_record('modlos_search_events', 'id', $event['id']);
+		$dbobj = $DB->get_record('modlos_search_events', array('id'=>$event['id']));
 		if ($dbobj==null) $dbobj->id = 0;
 	}
    
@@ -769,14 +821,14 @@ function  modlos_set_event($event)
 	$dbobj->eventflags 	= $event['eventflags'];
  
 	if ($dbobj->id>0) { 
-		$ret = update_record('modlos_search_events', $dbobj);
+		$ret = $DB->update_record('modlos_search_events', $dbobj);
 	}
 	else {
-		$ret = insert_record('modlos_search_events', $dbobj);
+		$ret = $DB->insert_record('modlos_search_events', $dbobj);
 		if ($ret) {
 			$dbobj->id 		= $ret;
 			$dbobj->eventid = $ret;
-			$ret = update_record('modlos_search_events', $dbobj);
+			$ret = $DB->update_record('modlos_search_events', $dbobj);
 		}
 	}
 	return $ret;
@@ -792,9 +844,11 @@ function  modlos_set_event($event)
 
 function  modlos_get_loginscreen_alert()
 {
+	global $DB;
+
 	$ret = array();
 
-	$alerts = get_records('modlos_login_screen');
+	$alerts = $DB->get_records('modlos_login_screen');
 
 	if ($alerts!=null) {
 		foreach($alerts as $alert) {
@@ -816,6 +870,8 @@ function  modlos_get_loginscreen_alert()
 
 function  modlos_set_loginscreen_alert($alert)
 {
+	global $DB;
+
 	$obj->title 	  = '';
 	$obj->information = '';
 	$obj->bordercolor = 'white';
@@ -829,11 +885,11 @@ function  modlos_set_loginscreen_alert($alert)
 	if ($getobj!=null and $getobj['id']!=null) {
 		// update
 		$obj->id = $getobj['id'];
-		$ret = update_record('modlos_login_screen', $obj);
+		$ret = $DB->update_record('modlos_login_screen', $obj);
 	}
 	else {
 		// insert;
-		$ret = insert_record('modlos_login_screen', $obj);
+		$ret = $DB->insert_record('modlos_login_screen', $obj);
 	}
 
 	return $ret;
@@ -850,13 +906,15 @@ function  modlos_set_loginscreen_alert($alert)
 // Active/Inactive Avatar
 function  modlos_activate_avatar($uuid)
 {
-	$ban = get_record('modlos_banned', 'uuid', $uuid);
+	global $DB;
+
+	$ban = $DB->get_record('modlos_banned', array('uuid'=>$uuid));
 	if (!$ban) return false;
 
 	$ret = opensim_set_password($uuid, $ban->agentinfo);
 	if (!$ret) return false;
 
-	$ret = delete_records('modlos_banned', 'uuid', $uuid);
+	$ret = $DB->delete_records('modlos_banned', array('uuid'=>$uuid));
 	if (!$ret) return false;
 	return true;
 }
@@ -865,6 +923,8 @@ function  modlos_activate_avatar($uuid)
 
 function  modlos_inactivate_avatar($uuid)
 {
+	global $DB;
+
 	$passwd = opensim_get_password($uuid);
 	if ($passwd==null) return false;
 
@@ -874,7 +934,7 @@ function  modlos_inactivate_avatar($uuid)
 	$insobj->uuid 	   = $uuid;
 	$insobj->agentinfo = $passwdhash;
 	$insobj->time 	   = time();
-	$ret = insert_record('modlos_banned', $insobj);
+	$ret = $DB->insert_record('modlos_banned', $insobj);
 	if (!$ret) return false;
 
 	$ret = opensim_set_password($uuid, 'invalid_password');
@@ -887,7 +947,9 @@ function  modlos_inactivate_avatar($uuid)
 
 function  modlos_delete_banneddb($uuid)
 {
-	$ret = delete_records('modlos_banned', 'uuid', $uuid);
+	global $DB;
+
+	$ret = $DB->delete_records('modlos_banned', array('uuid'=>$uuid));
 	if (!$ret) return false;
 	return true;
 }
@@ -945,15 +1007,16 @@ function  modlos_sync_opensimdb($timecheck=true)
 
 function  modlos_sync_sloodle_users($timecheck=true)
 {
+	global $DB;
+
 	if ($timecheck) {
 		$sloodle_up = modlos_get_update_time(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL);
 		$modlos_up  = modlos_get_update_time(MDL_DB_PREFIX.'modlos_users');
 		if ($modlos_up>$sloodle_up) return;
 	}
 
-
-	$sloodles = get_records(MDL_SLOODLE_USERS_TBL);
-	$modloses = get_records('modlos_users');
+	$sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);
+	$modloses = $DB->get_records('modlos_users');
 
 	if (is_array($sloodles) and is_array($modloses)) {
 		foreach ($modloses as $modlos) {
@@ -968,12 +1031,12 @@ function  modlos_sync_sloodle_users($timecheck=true)
 			}
 
 			if ($with_sloodle) {
-				update_record('modlos_users', $modlos);
+				$DB->update_record('modlos_users', $modlos);
 			}
 			else if ((int)$modlos->state&AVATAR_STATE_SLOODLE) {
 				$modlos->user_id = '0';
 				$modlos->state = (int)$modlos->state & AVATAR_STATE_NOSLOODLE;
-				update_record('modlos_users', $modlos);
+				$DB->update_record('modlos_users', $modlos);
 			}
 		}
 	}
@@ -1042,7 +1105,7 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 
 function  print_tabnav_manage($currenttab, $course)
 {
-	global $CFG;
+	global $CFG, $USER;
 
 	if (empty($currenttab)) $currenttab = 'management';
 	if (empty($course)) $course_id = 0;
@@ -1058,7 +1121,7 @@ function  print_tabnav_manage($currenttab, $course)
 	$toprow[] = new tabobject('show_home', CMS_MODULE_URL.'/actions/show_home.php'.$course_param, 
 																	'<b>'.get_string('modlos_showhome_tab','block_modlos').'</b>');
 	if ($hasPermit) {
-		if (isadmin()) {
+		if (jbxl_is_admin($USER->id)) {
 			$course_amp = '';
 			if ($course_id>0) $course_amp = '&amp;course='.$course_id;
 

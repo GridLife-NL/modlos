@@ -13,15 +13,20 @@
  ****************************************************************/
 
 
+require_once(CMS_MODULE_PATH.'/include/jbxl_moodle_tools.php');
+
 
 function  hasPermit($course_id=0)
 {
-	//return false;
+	global $USER;
 
-    if (isguest()) return false;
-    if (isadmin()) return true;
+	if (jbxl_is_admin($USER->id)) return true;
 	if ($course_id==0 or $course_id==null) return false;
-    if (isteacher($course_id)) return true;
+
+	$cntxt = get_context_instance(CONTEXT_COURSE, $course_id);
+	if (jbxl_is_guest($USER->id, $cntxt)) return false;
+    if (jbxl_is_teacher($USER->id, $cntxt, false)) return true;
+    if (jbxl_is_assistant($USER->id, $cntxt)) return true;
 
     return false;
 }
@@ -85,6 +90,8 @@ function  get_names_from_display_username($username)
 
 function  get_userinfo_by_name($firstname, $lastname='')
 {
+	global $DB;
+
 	if ($lastname=='') {
 		//$names = explode(' ', $firstname);
 		$names = preg_split("/ /", $firstname, 0, PREG_SPLIT_NO_EMPTY);
@@ -92,7 +99,7 @@ function  get_userinfo_by_name($firstname, $lastname='')
 		$lastname  = $names[1];
 	}
 
-	$user_info = get_record('user', 'firstname', $firstname, 'lastname', $lastname, 'deleted', '0');
+	$user_info = $DB->get_record('user', array('firstname'=>$firstname, 'lastname'=>$lastname, 'deleted'=>'0'));
 	return $user_info;
 }
 
@@ -101,9 +108,11 @@ function  get_userinfo_by_name($firstname, $lastname='')
 
 function  get_userinfo_by_id($id)
 {
+	global $DB;
+
 	if ($id<=0) return null;
 
-	$user_info = get_record('user', 'id', $id, 'deleted', '0');
+	$user_info = $DB->get_record('user', array('id'=>$id, 'deleted'=>'0'));
 	return $user_info;
 }
 
