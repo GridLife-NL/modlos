@@ -6,7 +6,7 @@
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/modlos.func.php");
+require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
@@ -31,8 +31,6 @@ class  LastNames
 
 	function  LastNames($course_id) 
 	{
-		require_login($course_id);
-
 		$this->course_id  = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
@@ -40,7 +38,7 @@ class  LastNames
 			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 			return;
 		}
-		$this->action_url = CMS_MODULE_URL."/admin/actions/lastnames.php";
+		$this->action_url = CMS_MODULE_URL.'/admin/actions/lastnames.php';
 	}
 
 
@@ -67,7 +65,7 @@ class  LastNames
 
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("modlos_sesskey_error", "block_modlos");
+				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 				return false;
 			}
 
@@ -80,10 +78,10 @@ class  LastNames
 			$this->select_active   = optional_param('select_right', '', PARAM_TEXT);
 			$this->addname		   = optional_param('addname',		'', PARAM_TEXT);
 
-			if	   ($add!="") $this->action_add();
-			elseif ($lft!="") $this->action_move_active();
-			elseif ($rgt!="") $this->action_move_inactive();
-			elseif ($del!="") $this->action_delete();
+			if	   ($add!='') $this->action_add();
+			elseif ($lft!='') $this->action_move_active();
+			elseif ($rgt!='') $this->action_move_inactive();
+			elseif ($del!='') $this->action_delete();
 		}
 	}
 
@@ -106,7 +104,7 @@ class  LastNames
 		$select1_title	= get_string('modlos_active_list', 	'block_modlos');
 		$select2_title	= get_string('modlos_inactive_list', 'block_modlos');
 
-		include(CMS_MODULE_PATH."/admin/html/lastnames.html");
+		include(CMS_MODULE_PATH.'/admin/html/lastnames.html');
 	}
 
 

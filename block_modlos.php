@@ -8,8 +8,6 @@ if (!defined('CMS_MODULE_PATH')) exit();
 require_once(CMS_MODULE_PATH."/include/opensim.mysql.php");
 require_once(CMS_MODULE_PATH."/include/modlos.func.php");
 
-require_once(CMS_MODULE_PATH."/include/jbxl_moodle_tools.php");
-
 
 class block_modlos extends block_base 
 {
@@ -65,7 +63,7 @@ class block_modlos extends block_base
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.  get_string('modlos_world_map','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
 
-		$isguest = jbxl_is_guest($USER->id, $id);
+		$isguest = isguestuser();
 
 		if (!$isguest) {
 			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php?course='.$id.'">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';

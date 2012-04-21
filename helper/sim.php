@@ -8,22 +8,18 @@
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
 require_once(realpath(dirname(__FILE__).'/../include/env_interface.php'));
 
-//require_once(realpath(dirname(__FILE__).'/../include/jbxl_moodle_tools.php'));
 
-
-if (jbxl_is_guest($USER->id)) {
+if (isguestuser()) {
 	exit('<h4>guest user is not allowed to access this page!!</h4>');
 }
 
-
-$course_id = optional_param('course', '0', PARAM_INT);
 $region    = required_param('region', PARAM_TEXT);
+$course_id = optional_param('course', '0', PARAM_INT);
 if (!isGUID($region)) exit("<h4>bad region uuid!! ($region)</h4>");
 
 require_login($course_id);
 $hasPermit = hasModlosPermit($course_id);
 
-global $CFG;
 $grid_name  = $CFG->modlos_grid_name;
 $action_url = CMS_MODULE_URL.'/helper/sim.php';
 

@@ -1073,7 +1073,7 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 																	'<b>'.get_string('modlos_world_map','block_modlos').'</b>');
 	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$course_param, 
 																	'<b>'.get_string('modlos_regions_list','block_modlos').'</b>');
-	if (!jbxl_is_guest($USER->id, $course_id)) {
+	if (!isguestuser()) {
 		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param, 
 																	'<b>'.get_string('modlos_avatars_list','block_modlos').'</b>');
 		if ($show_create_tab) {
@@ -1156,7 +1156,9 @@ function  print_tabnav_manage($currenttab, $course)
 
 function  print_modlos_header($currenttab, $course)
 {
-	global $CFG, $OUTPUT;
+	global $CFG, $OUTPUT, $PAGE;
+
+	//require_login($course->id);
 
 	// Print Navi Header
 	if (empty($course)) {
@@ -1165,26 +1167,47 @@ function  print_modlos_header($currenttab, $course)
 			$langmenu = '';
 		}
 		else {
-			$currlang = current_language();
-			$langs = get_list_of_languages();
+			$currlang  = current_language();
+			$langs 	   = get_list_of_languages();
 			$langlabel = get_accesshide(get_string('language'));
-			$langmenu = popup_form('?lang=', $langs, 'chooselang', $currlang, '', '', '', true, 'self', $langlabel);
+			$langmenu  = popup_form('?lang=', $langs, 'chooselang', $currlang, '', '', '', true, 'self', $langlabel);
 		}
 
-		echo $OUTPUT->header(get_string('modlos', 'block_modlos'), get_string('modlos_menu', 'block_modlos'), 
-					 get_string('modlos', 'block_modlos'), '', '', true, '&nbsp;', user_login_string($SITE).$langmenu);
+		$title = get_string('modlos', 'block_modlos');
+		$head  = get_string('modlos_menu', 'block_modlos');
+		$menu  = user_login_string($SITE).$langmenu;
+		//print_header(get_string('modlos', 'block_modlos'), get_string('modlos_menu', 'block_modlos'), 
+		//			 get_string('modlos', 'block_modlos'), '', '', true, '&nbsp;', user_login_string($SITE).$langmenu);
 	}
 	else {
+		/*
 		if ($course->category) {
-			//echo $OUTPUT->header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
+			//print_header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
 			//		 '<a href="'.$CFG->wwwroot."/course/view.php?id={$course->id}\">$course->shortname</a> -> ".
 			//		 get_string('modlos','block_modlos'), '', '', true, '&nbsp;', navmenu($course));
 		}
 		else {
-			echo $OUTPUT->header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
-					 get_string('modlos','block_modlos'), '', '', true, '&nbsp;', navmenu($course));
+			$title = $course->shortname.': '.get_string('modlos', 'block_modlos');
+			$head  = $course->fullname;
+			$menu  = navmenu($course);
+			//print_header("$course->shortname: ".get_string('modlos','block_modlos'), $course->fullname,
+			//		 get_string('modlos','block_modlos'), '', '', true, '&nbsp;', navmenu($course));
 		}
+		*/
+		$title = $course->shortname.': '.get_string('modlos', 'block_modlos');
+		$head  = $course->fullname;
+		$menu  = navmenu($course);
 	}
+
+    $PAGE->set_title($title);
+    $PAGE->set_heading($head);
+    $PAGE->set_cacheable(true);
+    $PAGE->set_button('&nbsp;');
+    $PAGE->set_headingmenu($menu);
+
+	echo $OUTPUT->header();
+
+	return;
 }
 
 

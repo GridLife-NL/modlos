@@ -65,10 +65,8 @@ class  EditEvent
 	{
 		global $CFG, $USER;
 
-		require_login($course_id);
-
 		// for Guest
-		$this->isGuest = jbxl_is_guest($USER->id, $course_id);
+		$this->isGuest = isguestuser();
 		if ($this->isGuest) {
 			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
 		}
@@ -101,7 +99,7 @@ class  EditEvent
 		global $DB;
 
 		// List of Parcels
-		$modobj = $DB->get_records("modlos_search_parcels");
+		$modobj = $DB->get_records('modlos_search_parcels');
 		$i = 0;		 
 		foreach ($modobj as $mod) {
 			//$this->parcels[$i]['uuid'] 		= $mod->parceluuid;
@@ -179,21 +177,21 @@ class  EditEvent
 			// Error check
 			if (!isGUID($this->creator_uuid)) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_event_creator_required', 'block_modlos')." (UUID)";
+				$this->errorMsg[] = get_string('modlos_event_creator_required', 'block_modlos').' (UUID)';
 			}
  			if (!isAlphabetNumericSpecial($this->event_creator)) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_event_creator_required', 'block_modlos')." (Name)";
+				$this->errorMsg[] = get_string('modlos_event_creator_required', 'block_modlos').' (Name)';
 			}
 
 			if (!isGUID($this->owner_uuid)) {
 				//$this->hasError = true;
-				//$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos')." (UUID)";
+				//$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos').' (UUID)';
 				$this->owner_uuid = $this->creator_uuid;
 			}
  			if (!isAlphabetNumericSpecial($this->event_owner)) {
 				//$this->hasError = true;
-				//$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos')." (Name)";
+				//$this->errorMsg[] = get_string('modlos_event_owner_required', 'block_modlos').' (Name)';
 				$this->event_owner = $this->event_creator;
 			}
 

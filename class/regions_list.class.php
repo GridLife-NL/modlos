@@ -37,7 +37,7 @@ class  RegionsList
 	{
 		global $CFG, $USER;
 
-		$this->isGuest   = jbxl_is_guest($USER->id, $course_id);
+		$this->isGuest   = isguestuser();
 		$this->hasPermit = hasModlosPermit($course_id);
 		$this->course_id = $course_id;
 

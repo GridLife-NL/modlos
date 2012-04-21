@@ -11,7 +11,7 @@
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/modlos.func.php");
+require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 class  ManagementBase
@@ -28,16 +28,14 @@ class  ManagementBase
 
 	function  ManagementBase($course_id) 
 	{
-		require_login($course_id);
-
-		$this->course_id  = $course_id;
+		$this->course_id = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 			return;
 		}
-		$this->action_url = CMS_MODULE_URL."/admin/actions/management.php";
+		$this->action_url = CMS_MODULE_URL.'/admin/actions/management.php';
 	}
 
 
@@ -53,13 +51,13 @@ class  ManagementBase
 
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("modlos_sesskey_error", "block_modlos");
+				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 				return false;
 			}
 
 			$quest   = optional_param('quest', 'no', PARAM_ALPHA);
 			$command = optional_param('manage_command', '', PARAM_ALPHA);
-			if ($quest=="yes" && $command!='') {
+			if ($quest=='yes' && $command!='') {
 				$ret = opensim_check_db();
 				if (!$ret['grid_status']) {
 					$this->hasError = true;
@@ -105,9 +103,9 @@ class  ManagementBase
 		$manage_submit = get_string('modlos_manage_submit', 'block_modlos');
 		$select_cmd	   = get_string('modlos_manage_select', 'block_modlos');
 		$command	   = $this->command;
-		$content	   = "<center>".get_string("modlos_manage_contents", "block_modlos")."</center>";
+		$content	   = '<center>'.get_string('modlos_manage_contents', 'block_modlos').'</center>';
 
-		$course_amp    = "";
+		$course_amp    = '';
 		if ($this->course_id>0) $course_param = '?course='.$this->course_id;
 		$manage_url    = CMS_MODULE_URL.'/admin/actions/management.php'.$course_param;
 		$return_ttl	   = get_string('modlos_manage_return', 'block_modlos');
@@ -116,10 +114,10 @@ class  ManagementBase
 		$commands[0]['ttl'] = get_string('modlos_cltexture_ttl', 'block_modlos');
 		$commands[1]['com'] = 'clpresence';
 		$commands[1]['ttl'] = get_string('modlos_clpresence_ttl', 'block_modlos');
-		$commands[2]['com'] = 'convertdb';
-		$commands[2]['ttl'] = get_string('modlos_convertdb_ttl', 'block_modlos');
+		//$commands[2]['com'] = 'convertdb';
+		//$commands[2]['ttl'] = get_string('modlos_convertdb_ttl', 'block_modlos');
 
-		include(CMS_MODULE_PATH."/admin/html/management.html");
+		include(CMS_MODULE_PATH.'/admin/html/management.html');
 	}
 
 }

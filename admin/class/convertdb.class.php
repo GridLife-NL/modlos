@@ -11,7 +11,7 @@
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/modlos.func.php");
+require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 class  ConvertDataBase
@@ -27,16 +27,14 @@ class  ConvertDataBase
 
 	function  ConvertDataBase($course_id) 
 	{
-		require_login($course_id);
-
-		$this->course_id  = $course_id;
+		$this->course_id = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 			return;
 		}
-		$this->action_url = CMS_MODULE_URL."/admin/actions/convertdb.php";
+		$this->action_url = CMS_MODULE_URL.'/admin/actions/convertdb.php';
 	}
 
 
@@ -52,12 +50,12 @@ class  ConvertDataBase
 
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("modlos_sesskey_error", "block_modlos");
+				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 				return false;
 			}
 
 			$quest = optional_param('quest', 'no', PARAM_ALPHA);
-			if ($quest=="yes") {
+			if ($quest=='yes') {
 				$ret = opensim_check_db();
 				if (!$ret['grid_status']) {
 					$this->hasError = true;
@@ -85,12 +83,12 @@ class  ConvertDataBase
 		global $CFG;
 
 		$grid_name		  = $CFG->modlos_grid_name;
-		$convertdb_ttl 	  = get_string("modlos_convertdb_ttl", 	    "block_modlos");
-		$convertdb_msg    = get_string("modlos_convertdb_convrted",	"block_modlos");
-		$convertdb_submit = get_string("modlos_convertdb_submit", 	"block_modlos");
-		$content		  = "<center>".get_string("modlos_convertdb_contents", "block_modlos")."</center>";
+		$convertdb_ttl 	  = get_string('modlos_convertdb_ttl', 	    'block_modlos');
+		$convertdb_msg    = get_string('modlos_convertdb_convrted',	'block_modlos');
+		$convertdb_submit = get_string('modlos_convertdb_submit', 	'block_modlos');
+		$content		  = '<center>'.get_string('modlos_convertdb_contents', 'block_modlos').'</center>';
 
-		include(CMS_MODULE_PATH."/admin/html/convertdb.html");
+		include(CMS_MODULE_PATH.'/admin/html/convertdb.html');
 	}
 
 }

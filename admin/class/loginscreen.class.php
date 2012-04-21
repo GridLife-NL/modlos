@@ -11,7 +11,7 @@
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/modlos.func.php");
+require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 class  LoginScreen
@@ -33,8 +33,6 @@ class  LoginScreen
 
 	function  LoginScreen($course_id) 
 	{
-		require_login($course_id);
-
 		$this->course_id  = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
@@ -42,7 +40,7 @@ class  LoginScreen
 			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 			return;
 		}
-		$this->action_url = CMS_MODULE_URL."/admin/actions/loginscreen.php";
+		$this->action_url = CMS_MODULE_URL.'/admin/actions/loginscreen.php';
 	}
 
 
@@ -58,7 +56,7 @@ class  LoginScreen
 
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("modlos_sesskey_error", "block_modlos");
+				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 				return false;
 			}
 
@@ -98,7 +96,7 @@ class  LoginScreen
 				}
 				else {
 					$this->hasError = true;
-					$this->errorMsg[] = "DB Update Error!! (modlos_set_loginscreen_alert)"; 
+					$this->errorMsg[] = 'DB Update Error!! (modlos_set_loginscreen_alert)'; 
 				}
 			}
 		}
@@ -159,7 +157,7 @@ class  LoginScreen
 		$lgnscrn_url	= CMS_MODULE_URL.'/admin/actions/loginscreen.php'.$course_param;
 		$return_ttl	   	= get_string('modlos_lgnscrn_return', 'block_modlos');
 
-		include(CMS_MODULE_PATH."/admin/html/loginscreen.html");
+		include(CMS_MODULE_PATH.'/admin/html/loginscreen.html');
 	}
 
 }

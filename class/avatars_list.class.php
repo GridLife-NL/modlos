@@ -52,10 +52,8 @@ class  AvatarsList
 	{
 		global $CFG, $USER;
 
-		require_login($course_id);
-
 		// for Guest
-		$this->isGuest = jbxl_is_guest($USER->id, $course_id);
+		$this->isGuest = isguestuser();
 		if ($this->isGuest) {
 			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
 		}
@@ -113,7 +111,7 @@ class  AvatarsList
 		}
 		else {
 			if ($this->firstname!='') { 
-				if ($db_ver=="0.6") $sql_firstname = "username  LIKE '$this->firstname'";
+				if ($db_ver=='0.6') $sql_firstname = "username  LIKE '$this->firstname'";
 				else				$sql_firstname = "FirstName LIKE '$this->firstname'";
 				$this->lnk_firstname = "&amp;firstname=$this->firstname";
 			}
@@ -128,7 +126,7 @@ class  AvatarsList
         // 0.6: users.UUID,  username,  lastname, created, lastLogin, regions.uuid 
 		$sql_order = $this->order;
 		if ($this->order!='') {
-			if ($db_ver=="0.6") {
+			if ($db_ver=='0.6') {
 				if ($sql_order=='firstname')  $sql_order = 'username';
 				else if ($sql_order=='login') $sql_order = 'lastlogin';
 			}

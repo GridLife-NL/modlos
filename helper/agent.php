@@ -3,22 +3,17 @@
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
 require_once(realpath(dirname(__FILE__).'/../include/env_interface.php'));
 
-//require_once(realpath(dirname(__FILE__).'/../include/jbxl_moodle_tools.php'));
 
-
-if (jbxl_is_guest($USER->id)) {
-	exit('<h4>guest user is not allowed to access this page!!</h4>');
+if (isguestuser()) {
+    exit('<h4>guest user is not allowed to access this page!!</h4>');
 }
 
-
-$course_id = optional_param('course', '0', PARAM_INT);
 $agent 	   = required_param('agent', PARAM_TEXT);
+$course_id = optional_param('course', '0', PARAM_INT);
 if (!isGUID($agent)) exit("<h4>bad agent uuid!! ($agent)</h4>");
 
 require_login($course_id);
-$hasPermit  = hasModlosPermit($course_id);
-
-//global $CFG, $DB;
+$hasPermit = hasModlosPermit($course_id);
 
 $use_sloodle = $CFG->modlos_cooperate_sloodle;
 $grid_name   = $CFG->modlos_grid_name;

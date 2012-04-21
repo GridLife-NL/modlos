@@ -11,7 +11,7 @@
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH."/include/modlos.func.php");
+require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 class  UpdateDataBase
@@ -27,8 +27,6 @@ class  UpdateDataBase
 
 	function  UpdateDataBase($course_id) 
 	{
-		require_login($course_id);
-
 		$this->course_id  = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
@@ -36,7 +34,7 @@ class  UpdateDataBase
 			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 			return;
 		}
-		$this->action_url = CMS_MODULE_URL."/admin/actions/updatedb.php";
+		$this->action_url = CMS_MODULE_URL.'/admin/actions/updatedb.php';
 	}
 
 
@@ -52,12 +50,12 @@ class  UpdateDataBase
 
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string("modlos_sesskey_error", "block_modlos");
+				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 				return false;
 			}
 
 			$quest = optional_param('quest', 'no', PARAM_ALPHA);
-			if ($quest=="yes") {
+			if ($quest=='yes') {
 				$ret = opensim_check_db();
 				if (!$ret['grid_status']) {
 					$this->hasError = true;
@@ -85,12 +83,12 @@ class  UpdateDataBase
 		global $CFG;
 
 		$grid_name		= $CFG->modlos_grid_name;
-		$updatedb_ttl 	= get_string("modlos_updatedb_ttl", 	"block_modlos");
-		$updatedb_msg   = get_string("modlos_updatedb_updated",	"block_modlos");
-		$updatedb_submit= get_string("modlos_updatedb_submit", 	"block_modlos");
-		$content		= "<center>".get_string("modlos_updatedb_contents", "block_modlos")."</center>";
+		$updatedb_ttl 	= get_string('modlos_updatedb_ttl', 	'block_modlos');
+		$updatedb_msg   = get_string('modlos_updatedb_updated',	'block_modlos');
+		$updatedb_submit= get_string('modlos_updatedb_submit', 	'block_modlos');
+		$content		= '<center>'.get_string('modlos_updatedb_contents', 'block_modlos').'</center>';
 
-		include(CMS_MODULE_PATH."/admin/html/updatedb.html");
+		include(CMS_MODULE_PATH.'/admin/html/updatedb.html');
 	}
 
 }

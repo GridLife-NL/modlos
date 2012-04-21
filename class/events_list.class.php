@@ -40,10 +40,8 @@ class  EventsList
 	{
 		global $CFG, $USER;
 
-		require_login($course_id);
-
 		// for Guest
-		$this->isGuest = jbxl_is_guest($USER->id, $course_id);
+		$this->isGuest = isguestuser();
 		if ($this->isGuest) {
 			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
 		}
@@ -63,8 +61,8 @@ class  EventsList
 
 		$this->action_url = CMS_MODULE_URL.'/actions/events_list.php'. $this->url_param;
 		$this->make_url	  = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param;
-		$this->edit_url   = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param."&amp;eventid=";
-		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$this->url_param."&amp;eventid=";
+		$this->edit_url   = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param.'&amp;eventid=';
+		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$this->url_param.'&amp;eventid=';
 	}
 
 
