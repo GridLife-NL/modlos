@@ -13,7 +13,6 @@ require_once(ENV_HELPER_PATH.'/../include/env.mysql.php');
 require_once(ENV_HELPER_PATH.'/../include/opensim.mysql.php');
 
 require_once(CMS_MODULE_PATH.'/include/moodle.func.php');
-require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 //
@@ -53,6 +52,61 @@ function  env_get_config($name)
  
     return $CFG->$name;
 }
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+define('MDL_CURRENCY_MONEY_TBL',			'modlos_economy_money');
+define('MDL_CURRENCY_TRANSACTION_TBL',		'modlos_economy_transactions');
+
+
+// Offline Message and MuteList
+define('MDL_OFFLINE_MESSAGE_TBL', 			'modlos_offline_message');
+define('MDL_MUTE_LIST_TBL', 				'modlos_mute_list');
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+//
+// External other Modules
+//
+
+// for Sloodle
+define('MDL_SLOODLE_USERS_TBL',             'sloodle_users');
+
+
+// XML Group.  see also xmlgroups_config.php 
+define('MDL_XMLGROUP_ACTIVE_TBL',			'modlos_group_active');
+define('MDL_XMLGROUP_LIST_TBL',		 		'modlos_group_list');
+define('MDL_XMLGROUP_INVITE_TBL',			'modlos_group_invite');
+define('MDL_XMLGROUP_MEMBERSHIP_TBL',   	'modlos_group_membership');
+define('MDL_XMLGROUP_NOTICE_TBL',			'modlos_group_notice');
+define('MDL_XMLGROUP_ROLE_MEMBER_TBL',  	'modlos_group_rolemembership');
+define('MDL_XMLGROUP_ROLE_TBL',				'modlos_group_role');
+
+
+// Avatar Profile. see also profile_config.php 
+define('MDL_PROFILE_CLASSIFIEDS_TBL',   	'modlos_profile_classifieds');
+define('MDL_PROFILE_USERNOTES_TBL',  		'modlos_profile_usernotes');
+define('MDL_PROFILE_USERPICKS_TBL',  		'modlos_profile_userpicks');
+define('MDL_PROFILE_USERPROFILE_TBL',  		'modlos_profile_userprofile');
+define('MDL_PROFILE_USERSETTINGS_TBL',		'modlos_profile_usersettings');
+
+
+// Search the In World. see also search_config.php 
+define('MDL_SEARCH_ALLPARCELS_TBL',			'modlos_search_allparcels');
+define('MDL_SEARCH_EVENTS_TBL',				'modlos_search_events');
+define('MDL_SEARCH_HOSTSREGISTER_TBL', 		'modlos_search_hostsregister');
+define('MDL_SEARCH_OBJECTS_TBL',			'modlos_search_objects');
+define('MDL_SEARCH_PARCELS_TBL',			'modlos_search_parcels');
+define('MDL_SEARCH_PARCELSALES_TBL',		'modlos_search_parcelsales');
+define('MDL_SEARCH_POPULARPLACES_TBL', 		'modlos_search_popularplaces');
+define('MDL_SEARCH_REGIONS_TBL',			'modlos_search_regions');
+define('MDL_SEARCH_CLASSIFIEDS_TBL',		MDL_PROFILE_CLASSIFIEDS_TBL);
+
 
 
 

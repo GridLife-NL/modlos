@@ -4,7 +4,6 @@
 //											by Fumi.Iseki
 //
 //
-
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
 
 if (!defined('CMS_DIR_NAME'))	 define('CMS_DIR_NAME',	basename(dirname(dirname(__FILE__))));
@@ -47,11 +46,6 @@ define('CMS_DB_NAME', 					$CFG->dbname);
 define('CMS_DB_USER',					$CFG->dbuser);
 define('CMS_DB_PASS',					$CFG->dbpass);
 
-define('MDL_DB_PREFIX',					$CFG->prefix);
-
-define('MDL_SLOODLE_USERS_TBL',			'sloodle_users');
-
-
 //
 define('SYSURL',						$CFG->wwwroot);
 define('OPENSIM_PG_ONLY',				$CFG->modlos_pg_only);
@@ -62,6 +56,7 @@ if (USE_UTC_TIME) date_default_timezone_set('UTC');
 
 
 //
+define('MDL_DB_PREFIX',					$CFG->prefix);
 define('MODLOS_DB_PREFIX',     			$CFG->prefix.'modlos_');
 
 
@@ -69,6 +64,10 @@ define('MODLOS_DB_PREFIX',     			$CFG->prefix.'modlos_');
 //
 // External NSL Modules
 //
+
+// for Sloodle
+define('SLOODLE_USERS_TBL',				$CFG->prefix.'sloodle_users');
+
 
 // Currency DB for helpers.php
 if (USE_CURRENCY_SERVER) {

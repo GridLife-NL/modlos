@@ -6,6 +6,7 @@
 //
 
 require_once(realpath(dirname(__FILE__).'/env_interface.php'));
+require_once(realpath(dirname(__FILE__).'/modlos.func.php'));
 
 
 //
