@@ -42,7 +42,7 @@ class  RegionsList
 		$this->course_id = $course_id;
 
 		$this->url_param = '?dmmy_param=';
-		if ($course_id>0) $this->url_param .= '?course='.$course_id;
+		if ($course_id>0) $this->url_param .= '&course='.$course_id;
 
 		$this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param;
 

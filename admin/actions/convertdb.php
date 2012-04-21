@@ -2,10 +2,12 @@
 
 require_once(realpath(dirname(__FILE__)."/../../../../config.php"));
 require_once(realpath(dirname(__FILE__)."/../../include/env_interface.php"));
+require_once(realpath(dirname(__FILE__)."/../../include/modlos.func.php"));
 
 
 $course_id = optional_param('course', '0', PARAM_INT);
 
+$urlparams = array();
 if ($course_id) $urlparams['course'] = $course_id;
 $PAGE->set_url('/blocks/modlos/admin/actions/convertdb.php', $urlparams);
 
