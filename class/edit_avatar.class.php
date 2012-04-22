@@ -48,7 +48,7 @@ class  EditAvatar
 		// for Guest
 		$this->isGuest = isguestuser();
 		if ($this->isGuest) {
-			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
 		// for HTTPS
@@ -71,7 +71,8 @@ class  EditAvatar
 		$return_url = CMS_MODULE_URL.'/actions/avatars_list.php'. $course_param;
 		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
-			error(get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)", $return_url);
+			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)";
+			print_error($mesg, '', $return_url);
 		}
 		$this->UUID = $uuid;
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
@@ -88,7 +89,7 @@ class  EditAvatar
 
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			error(get_string('modlos_access_forbidden', 'block_modlos'), $return_url);
+			print_error('modlos_access_forbidden', 'block_modlos', $return_url);
 		}
 
 		$this->avatars_num = modlos_get_avatars_num($USER->id);

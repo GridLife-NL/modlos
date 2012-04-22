@@ -41,7 +41,7 @@ class  OwnerAvatar
 		// for Guest
 		$this->isGuest = isguestuser();
 		if ($this->isGuest) {
-			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
 		// for HTTPS
@@ -69,26 +69,31 @@ class  OwnerAvatar
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 
 		if ($isAvatarMax) {
-			error(get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)", $this->return_url);
+			$mesg = ' '.get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)";
+			print_error($mesg, '', $this->return_url);
 		}
 
 
 		// get UUID from POST or GET
 		$this->UUID = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($this->UUID)) {
-			error(get_string('modlos_invalid_uuid', 'block_modlos')." ($this->UUID)", $this->return_url);
+			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($this->UUID)";
+			print_error($mesg, '', $this->return_url);
 		}
 
 		// check Modlos DB
 		$avatar = modlos_get_avatar_info($this->UUID);
 		if ($avatar==null) {
-			error(get_string('modlos_not_exist_uuid', 'block_modlos')." ($this->UUID)", $this->return_url);
+			$mesg = ' '.get_string('modlos_not_exist_uuid', 'block_modlos')." ($this->UUID)";
+			print_error($meag, '', $this->return_url);
 		}
 		if ($avatar['uid']!=0) {
-			error(get_string('modlos_owner_forbidden', 'block_modlos').' (User ID is not 0)', $this->return_url);
+			$mesg = ' '.get_string('modlos_owner_forbidden', 'block_modlos').' (User ID is not 0)';
+			print_error($mesg, '', $this->return_url);
 		}
 		if (!((int)$avatar['state']&AVATAR_STATE_SYNCDB)) {
-			error(get_string('modlos_owner_forbidden', 'block_modlos').' (not Acrive)', $this->return_url);
+			$mesg = ' '.get_string('modlos_owner_forbidden', 'block_modlos').' (not Acrive)';
+			print_error($mesg, '', $this->return_url);
 		}
 		$this->firstname = $avatar['firstname'];
 		$this->lastname  = $avatar['lastname'];

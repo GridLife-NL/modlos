@@ -55,7 +55,7 @@ class  AvatarsList
 		// for Guest
 		$this->isGuest = isguestuser();
 		if ($this->isGuest) {
-			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
 		$this->course_id   = $course_id;
@@ -86,13 +86,13 @@ class  AvatarsList
 		if ($db_ver==null) {
 			$course_url = $CFG->wwwroot;
 			if ($ithis->course_id>0) $course_url.= '/course/view.php?id='.$course_id;
-			error(get_string('modlos_db_connect_error', 'block_modlos'), $course_url);
+			print_error('modlos_db_connect_error', 'block_modlos', $course_url);
 		}
 
 		// Post Check
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
-				error(get_string('modlos_sesskey_error', 'block_modlos'), $this->action_url);
+				print_error('modlos_sesskey_error', 'block_modlos', $this->action_url);
 			}
 		}
 

@@ -64,7 +64,7 @@ class  RegionsList
 		if ($db_ver==null) {
 			$course_url = $CFG->wwwroot;
 			if ($course_id>0) $course_url .= '/course/view.php?id='.$this->course_id;
-			error(get_string('modlos_db_connect_error', 'block_modlos'), $course_url);
+			print_error('modlos_db_connect_error', 'block_modlos', $course_url);
 		}
 
 		$sql_order = '';

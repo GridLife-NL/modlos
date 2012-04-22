@@ -43,7 +43,7 @@ class  EventsList
 		// for Guest
 		$this->isGuest = isguestuser();
 		if ($this->isGuest) {
-			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
 		$this->hasPermit = hasModlosPermit($course_id);

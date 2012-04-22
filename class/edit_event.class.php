@@ -68,7 +68,7 @@ class  EditEvent
 		// for Guest
 		$this->isGuest = isguestuser();
 		if ($this->isGuest) {
-			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
 		$this->hasPermit = hasModlosPermit($course_id);
@@ -115,7 +115,7 @@ class  EditEvent
 		// List of Creators
 		$this->creators = modlos_get_avatars($this->userid);
 		if ($this->creators==null) {
-			error(get_string('modlos_should_have_avatar', 'block_modlos'), CMS_MODULE_URL.'/actions/events_list.php');
+			print_error('modlos_should_have_avatar', 'block_modlos', CMS_MODULE_URL.'/actions/events_list.php');
 		}
 		foreach ($this->creators as $creator) {
 			$this->event_owner = $creator['fullname'];

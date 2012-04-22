@@ -1,21 +1,13 @@
 
 <table width="85%" border="0" align="center" cellpadding="0" cellspacing="0" >
   <tr>
-    <td>
-      <table width="100%" border="0" cellspacing="0" cellpadding="1">
-        <tr>
-          <td bgcolor="#d8e8e8" align=center>
-            <h2><div align="center"><?php echo $grid_name?>&nbsp;:&nbsp;<?php echo $events_list_ttl?></div></h2>
-            <br />
-            <strong><?php echo $events_make_link?>&nbsp;</strong>
-            <a href=<?php echo $this->make_url?> ><strong><?php echo $events_click_here?></strong></a>
-          </td>
-        </tr>
-      </table>
+    <td bgcolor="#d8e8e8" align=center>
+      <h2><div align="center"><?php echo $grid_name?>&nbsp;:&nbsp;<?php echo $events_list_ttl?></div></h2>
+      <strong><?php echo $events_make_link?>&nbsp;</strong>
+      <a href=<?php echo $this->make_url?> ><strong><?php echo $events_click_here?></strong></a>
     </td>
   </tr>
 </table>
-<br />
 
 
 <table width="85%" border=0 align=center cellpadding="0" cellspacing="0">
@@ -30,7 +22,7 @@
           <strong>&nbsp;&nbsp;<?php echo $events_date?>&nbsp;(Local)</strong>
         <?php }?>
       </td>
-      <td width="40" valign="bottom" background="<?php echo $module_url?>/images/main/regions_middle.jpg"><br />
+      <td width="60" valign="bottom" background="<?php echo $module_url?>/images/main/regions_middle.jpg"><br />
         <strong><?php echo $events_type?></strong>
       </td>
       <td width="300" valign="bottom" background="<?php echo $module_url?>/images/main/regions_middle.jpg"><br />
@@ -58,94 +50,81 @@
       <td colspan="7">
 
         <table width=100% align="center" cellpadding=3 cellspacing=0 bgcolor=#999999>
-          <tr>
-            <td style="filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#00CC22', endColorStr='#e8e8e8', gradientType='1')">
+          <tr style="filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#00CC22', endColorStr='#e8e8e8', gradientType='1')">
 
-              <table cellpadding=0 cellspacing=0 width=100%>
-                <tr>
-                  <td width=200>
-                    <font color=#e8e8e8><strong>&nbsp;<?php echo $this->number?> <?php echo $events_found?></strong></font>
-                  </td>
-                  <td>
-
-                    <table cellpadding=1 cellspacing=0>
-                      <tr>
-                        <td width="50">
-                          <?php if ($this->icon[0]=="on") {?>
-                            <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.'0'?>" target="_self">
-                          <?php }?>
-                            <img src="<?php echo $module_url.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
-                          <?php if ($this->icon[0]=="on") {?>
-                            </a>
-                          <?php }?>
-                        </td>
-
-                        <td width="50">
-                          <?php if ($this->icon[0]=="on") {?>
-                            <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
-                          <?php }?>
-                            <img src="<?php echo $module_url.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
-                          <?php if ($this->icon[0]=="on") {?>
-                            </a>
-                          <?php }?>
-                        </td>
-
-                        <td width="200" align=center>
-                          <font color="#000000">
-                            <?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;
-                          </font>
-                        </td>
-
-                        <td width="50">
-                          <?php if ($this->icon[1]=="on") {?>
-                            <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
-                          <?php }?>
-                            <img src="<?php echo $module_url.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
-                          <?php if ($this->icon[1]=="on") {?>
-                            </a>
-                          <?php }?>
-                        </td>
-
-                        <td width="50">
-                          <?php if ($this->icon[1]=="on") {?>
-                            <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
-                          <?php }?>
-                            <img src="<?php echo $module_url.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
-                          <?php if ($this->icon[1]=="on") {?>
-                            </a>
-                          <?php }?>
-                        </td>
-
-                        <td width="10"></td>
-                        <td width="10"></td>
-
-                        <td width="30">
-                         <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'10'?>" target="_self">
-                            <img src="<?php echo $module_url.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" alt="Limit 10">
-                          </a>
-                        </td>
-                        <td width="30">
-                          <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'25'?>" target="_self">
-                            <img src="<?php echo $module_url.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" alt="Limit 25">
-                          </a>
-                        </td>
-                        <td width="30">
-                          <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'50'?>" target="_self">
-                            <img src="<?php echo $module_url.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" alt="Limit 50">
-                          </a>
-                        </td>
-                        <td width="30">
-                          <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'100'?>" target="_self">
-                            <img src="<?php echo $module_url.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" alt="Limit 100">
-                          </a>
-                        </td>
-                        <td></td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
+            <td width=200>
+              <font color=#e8e8e8><strong>&nbsp;<?php echo $this->number?> <?php echo $events_found?></strong></font>
             </td>
+            <td width="50">
+              <?php if ($this->icon[0]=="on") {?>
+                <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.'0'?>" target="_self">
+              <?php }?>
+                <img src="<?php echo $module_url.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+              <?php if ($this->icon[0]=="on") {?>
+                </a>
+              <?php }?>
+            </td>
+
+            <td width="50">
+              <?php if ($this->icon[0]=="on") {?>
+                <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
+              <?php }?>
+                <img src="<?php echo $module_url.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+              <?php if ($this->icon[0]=="on") {?>
+                </a>
+              <?php }?>
+            </td>
+
+            <td width="200" align=center>
+              <font color="#000000">
+                <?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;
+              </font>
+            </td>
+
+            <td width="50">
+              <?php if ($this->icon[1]=="on") {?>
+                <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
+              <?php }?>
+                <img src="<?php echo $module_url.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+              <?php if ($this->icon[1]=="on") {?>
+                </a>
+              <?php }?>
+            </td>
+
+            <td width="50">
+              <?php if ($this->icon[1]=="on") {?>
+                <a href="<?php echo $this->action_url.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
+              <?php }?>
+                <img src="<?php echo $module_url.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+              <?php if ($this->icon[1]=="on") {?>
+                </a>
+              <?php }?>
+            </td>
+
+            <td width="10"></td>
+            <td width="10"></td>
+
+            <td width="30">
+             <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'10'?>" target="_self">
+                <img src="<?php echo $module_url.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" alt="Limit 10">
+              </a>
+            </td>
+            <td width="30">
+              <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'25'?>" target="_self">
+                <img src="<?php echo $module_url.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" alt="Limit 25">
+              </a>
+            </td>
+            <td width="30">
+              <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'50'?>" target="_self">
+                <img src="<?php echo $module_url.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" alt="Limit 50">
+              </a>
+            </td>
+            <td width="30">
+              <a href="<?php echo $this->action_url.$pstart_.'0'.$plimit_.'100'?>" target="_self">
+                <img src="<?php echo $module_url.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" alt="Limit 100">
+              </a>
+            </td>
+            <td></td>
           </tr>
         </table>
 

@@ -47,7 +47,7 @@ class  CreateAvatar
 		// for Guest
 		$this->isGuest = isguestuser();
 		if ($this->isGuest) {
-			error(get_string('modlos_access_forbidden', 'block_modlos'), CMS_MODULE_URL);
+			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
 		// for HTTPS
@@ -74,7 +74,8 @@ class  CreateAvatar
 		if ($this->isAvatarMax) {
 			$course_url = $CFG->wwwroot;
 			if ($course_id>0) $course_url.= '/course/view.php?id='.$course_id;
-			error(get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)", $course_url);
+			$mesg = ' '.get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)";
+			print_error($mesg, '', $course_url);
 		}
 	}
 
