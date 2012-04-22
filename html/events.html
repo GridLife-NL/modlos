@@ -136,38 +136,38 @@
     </tr>
 
     <?php foreach ($this->db_data as $dat) {?>
-      <?php if ($dat['num']%2==0) {?>
+      <?php if ($dat->num%2==0) {?>
       <tr style='background-color: #d8d8d8'>
       <?php } else {?>
       <tr style='background-color: #e8e8e8'>
       <?php }?>
         <td width="1">&nbsp;</td>
-        <td width="30"><font color=#000><strong>&nbsp;<?php echo $dat['num']+1+$this->pstart?></strong></font></td>
+        <td width="30"><font color=#000><strong>&nbsp;<?php echo $dat->num+1+$this->pstart;?></strong></font></td>
 
-        <td width="140" height=26 style="color: #000000"><strong><?php echo $dat['time']?></strong> </td>
+        <td width="140" height=26 style="color: #000000"><strong><?php echo $dat->time;?></strong> </td>
         <td width="40"  style="color: #ff2222">
-          <strong><img height=20px width=20px <?php echo $dat['type']?> /></strong>
+          <strong><img height=20px width=20px <?php echo $dat->type;?> /></strong>
         </td>
-        <td width="300" style="color: #115500"><strong><?php echo $dat['name']?></strong></td>
+        <td width="300" style="color: #115500"><strong><?php echo $dat->name;?></strong></td>
 
-        <td width="160" style="color: #551111"><strong><?php echo $Categories[$dat['category']]?></strong></td>
+        <td width="160" style="color: #551111"><strong><?php echo $Categories[$dat->category];?></strong></td>
 
 <!--
         <td width="120" style="color: #2222cc">
-          <a style="cursor:pointer" onClick="window.open('<?php echo $module_url?>/helper/agent.php?agent=<?php echo $dat['owneruuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
-            <strong><u><?php echo $dat['owner']?></u></strong>
+          <a style="cursor:pointer" onClick="window.open('<?php echo $module_url?>/helper/agent.php?agent=<?php echo $dat->owneruuid;?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <strong><u><?php echo $dat->owner;?></u></strong>
           </a>
         </td>
 -->
         <td width="120" style="color: #2222cc">
-          <a style="cursor:pointer" onClick="window.open('<?php echo $module_url?>/helper/agent.php?agent=<?php echo $dat['creatoruuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
-            <strong><u><?php echo $dat['creator']?></u></strong>
+          <a style="cursor:pointer" onClick="window.open('<?php echo $module_url?>/helper/agent.php?agent=<?php echo $dat->creatoruuid;?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <strong><u><?php echo $dat->creator;?></u></strong>
           </a>
         </td>
         <td width="80">
           <?php if ($this->hasPermit or $this->userid==$dat['uid']) {?>
-            <a href=<?php echo $this->edit_url.$dat['eventid']?>   ><strong><u style="color: #cc1010"><?php echo $modlos_edit?></u></strong></a>&nbsp;
-            <a href=<?php echo $this->delete_url.$dat['eventid']?> ><strong><u style="color: #cc1010"><?php echo $modlos_delete?></u></strong></a>
+            <a href=<?php echo $this->edit_url.$dat->eventid;?>   ><strong><u style="color: #cc1010"><?php echo $modlos_edit?></u></strong></a>&nbsp;
+            <a href=<?php echo $this->delete_url.$dat->eventid;?> ><strong><u style="color: #cc1010"><?php echo $modlos_delete?></u></strong></a>
           <?php } else {?>
             &nbsp;
           <?php }?>

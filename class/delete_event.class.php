@@ -84,10 +84,10 @@ class  DeleteEvent
 
 	function  execute()
 	{
-		global $Categories;
+		global $Categories, $DB;
 
 		$this->event_name = $this->event['name'];
-		$this->event_date = date(DATE_FORMAT, $this->event['dateUTC']);
+		$this->event_date = date(DATE_FORMAT, $this->event['dateutc']);
 		$this->event_category = $Categories[$this->event['category']];
 
 		$owner_name = opensim_get_avatar_name($this->event['owneruuid']);
@@ -105,7 +105,7 @@ class  DeleteEvent
 
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
 			if ($del!='') {
-				$this->deleted = delete_records('modlos_search_events', 'id', $this->event_id);
+				$this->deleted = $DB->delete_records('modlos_search_events', array('id'=>$this->event_id));
 				if (!$this->deleted) {
 					$this->hasError = true;
 					$this->errorMsg[] = get_string('modlos_update_error', 'block_modlos');

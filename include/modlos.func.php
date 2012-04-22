@@ -203,28 +203,30 @@ function  modlos_get_avatars($uid=0, $use_sloodle=false)
 	}
 
 	if ($use_sloodle) {
-		if ($uid==0) $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);
-		else 		 $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL, array('userid'=>$uid));
+ 		if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
+			if ($uid==0) $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);
+			else 		 $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL, array('userid'=>$uid));
 
-		foreach ($sloodles as $sloodle) {
-			$match = false;
-			foreach ($users as $user) {
-				if ($sloodle->uuid==$user->uuid) {
-					$match = true;
-					break;
+			foreach ($sloodles as $sloodle) {
+				$match = false;
+				foreach ($users as $user) {
+					if ($sloodle->uuid==$user->uuid) {
+						$match = true;
+						break;
+					}
+				}	
+				if (!$match) {
+					$uuid = $sloodle->uuid;
+					$avatars[$uuid]['UUID'] 	= $sloodle->uuid;
+					$avatars[$uuid]['user_id'] 	= $sloodle->userid;
+					$avatars[$uuid]['fullname'] = $sloodle->avname;
+					$avname 					= explod(" ", $sloodle->avname);
+					$avatars[$uuid]['firstname']= $avname[0];
+					$avatars[$uuid]['lastname'] = $avname[1];
+					$avatars[$uuid]['hmregion'] = '';
+					$avatars[$uuid]['state'] 	= '';
+					$avatars[$uuid]['time'] 	= $sloodle->alastactive;
 				}
-			}
-			if (!$match) {
-				$uuid = $sloodle->uuid;
-				$avatars[$uuid]['UUID'] 	= $sloodle->uuid;
-				$avatars[$uuid]['user_id'] 	= $sloodle->userid;
-				$avatars[$uuid]['fullname'] = $sloodle->avname;
-				$avname 					= explod(" ", $sloodle->avname);
-				$avatars[$uuid]['firstname']= $avname[0];
-				$avatars[$uuid]['lastname'] = $avname[1];
-				$avatars[$uuid]['hmregion'] = '';
-				$avatars[$uuid]['state'] 	= '';
-				$avatars[$uuid]['time'] 	= $sloodle->alastactive;
 			}
 		}
 	}
@@ -247,20 +249,22 @@ function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
 	else $num = 0;
 
 	if ($use_sloodle) {
-		if ($uid==0) $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);
-		else 		 $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL, array('userid'=>$uid));
+ 		if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
+			if ($uid==0) $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);
+			else 		 $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL, array('userid'=>$uid));
 
-		foreach ($sloodles as $sloodle) {
-			$match = false;
-			foreach ($users as $user) {
-				if ($sloodle->uuid==$user->uuid) {
-					$match = true;
-					break;
+			foreach ($sloodles as $sloodle) {
+				$match = false;
+				foreach ($users as $user) {
+					if ($sloodle->uuid==$user->uuid) {
+						$match = true;
+						break;
+					}
 				}
+				if (!$match) $num++;
 			}
-			if (!$match) $num++;
 		}
-	}
+	}	
 
 	return $num;
 }
@@ -327,25 +331,27 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 
 	// Sloodle
 	if ($use_sloodle) {
-		$updobj = $DB->get_record(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
-		if ($updobj==null) {
-			if ((int)$avatar['state']&AVATAR_STATE_SLOODLE) {
-				$insobj->userid = $avatar['uid'];
-				$insobj->uuid 	= $avatar['UUID'];
-				$insobj->avname = $avatar['firstname'].' '.$avatar['lastname'];
-				if ($insobj->avname==' ') $insobj->avname = '';
-				$insobj->lastactive = time();
-				$ret = $DB->insert_record(MDL_SLOODLE_USERS_TBL, $insobj);
-			}
-		}
-		else {
-			if ((int)$avatar['state']&AVATAR_STATE_SLOODLE and $avatar['uid']!=0) {
-				$updobj->userid = $avatar['uid'];
-				$updobj->lastactive = time();
-				$ret = $DB->update_record(MDL_SLOODLE_USERS_TBL, $updobj);
+ 		if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
+			$updobj = $DB->get_record(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
+			if ($updobj==null) {
+				if ((int)$avatar['state']&AVATAR_STATE_SLOODLE) {
+					$insobj->userid = $avatar['uid'];
+					$insobj->uuid 	= $avatar['UUID'];
+					$insobj->avname = $avatar['firstname'].' '.$avatar['lastname'];
+					if ($insobj->avname==' ') $insobj->avname = '';
+					$insobj->lastactive = time();
+					$ret = $DB->insert_record(MDL_SLOODLE_USERS_TBL, $insobj);
+				}
 			}
 			else {
-				$ret = $DB->delete_records(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
+				if ((int)$avatar['state']&AVATAR_STATE_SLOODLE and $avatar['uid']!=0) {
+					$updobj->userid = $avatar['uid'];
+					$updobj->lastactive = time();
+					$ret = $DB->update_record(MDL_SLOODLE_USERS_TBL, $updobj);
+				}
+				else {
+					$ret = $DB->delete_records(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
+				}
 			}
 		}
 	}
@@ -373,7 +379,11 @@ function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 	if (!isGUID($avatar['UUID'])) return false;
 
 	// Sloodle
-	if ($use_sloodle) $ret = $DB->delete_records(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
+	if ($use_sloodle) {
+ 		if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
+			$ret = $DB->delete_records(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
+		}
+	}
 
 	$ret = modlos_delete_userstable($avatar);
 
@@ -768,7 +778,7 @@ function  modlos_get_event($id)
 { 
 	global $DB;
 
-	$event = $DB->get_record('modlos_search_events', array('id', $id));
+	$event = $DB->get_record('modlos_search_events', array('id'=>$id));
    
 	$ret = array();
 	if ($event!=null) {
@@ -1011,6 +1021,8 @@ function  modlos_sync_sloodle_users($timecheck=true)
 {
 	global $DB, $CFG;
 
+ 	if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) return;
+
 	if ($timecheck) {
 		$sloodle_up = modlos_get_update_time(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL);
 		$modlos_up  = modlos_get_update_time(MDL_DB_PREFIX.'modlos_users');
@@ -1042,6 +1054,8 @@ function  modlos_sync_sloodle_users($timecheck=true)
 			}
 		}
 	}
+
+	return;
 }
 
 
