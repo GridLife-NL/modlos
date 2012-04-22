@@ -9,37 +9,127 @@
 </table>
 
 
+<!-- Page Navi -->
+<table width=85% cellpadding=3 border=0 cellspacing=0 bgcolor=#999999 align="center">
+  <tr style="filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#0000cc', endColorStr='#ffffff', gradientType='1')">
+    <td>&nbsp;</td>
+    <td width="200">
+      <font color=#e8e8e8><b>&nbsp;<?php echo $this->number." ".$regions_found?></b></font>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[0]=="on") {?>
+        <a href="<?php echo $this->action_url.$order_amp.$plimit_amp.$pstart_.'0'?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[0]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[0]=="on") {?>
+        <a href="<?php echo $this->action_url.$order_amp.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[0]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="200" align=center>
+      <font color="#000000">
+        <?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;
+      </font>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[1]=="on") {?>
+        <a href="<?php echo $this->action_url.$order_amp.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[1]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="50">
+      <?php if ($this->icon[1]=="on") {?>
+        <a href="<?php echo $this->action_url.$order_amp.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
+      <?php }?>
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
+      <?php if ($this->icon[1]=="on") {?>
+        </a>
+      <?php }?>
+    </td>
+
+    <td width="10"></td>
+    <td width="10"></td>
+
+    <td width="30">
+      <a href="<?php echo $this->action_url.$order_amp.$pstart_.'0'.$plimit_.'10'?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" alt="Limit 10">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $this->action_url.$order_amp.$pstart_.'0'.$plimit_.'25'?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" alt="Limit 25">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $this->action_url.$order_amp.$pstart_.'0'.$plimit_.'50'?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" alt="Limit 50">
+      </a>
+    </td>
+    <td width="30">
+      <a href="<?php echo $this->action_url.$order_amp.$pstart_.'0'.$plimit_.'100'?>" target="_self">
+        <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" alt="Limit 100">
+      </a>
+    </td>
+    <td></td>
+
+    <td>&nbsp;</td>
+  </tr>
+<table>
+
+
 <table width="85%" border=0 align=center cellpadding="0" cellspacing="0">
   <tbody>
     <tr>
-      <td width="15"  height="40" background="<?php echo CMS_MODULE_URL?>/images/main/regions_left.gif">&nbsp;</td>
-      <td width="30"  height="40" valign="bottom" background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg"><br /><b>No.</b></td>
-      <td width="250" height="40" valign="bottom" background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg"><br />
+      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_left.gif" height="40">&nbsp;</td>
+      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg" colspan="9">&nbsp;</td>
+      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_right.gif">&nbsp;</td>
+    </tr>
+
+    <tr bgcolor="#e8e8e8">
+      <td width="15" >&nbsp;</td>
+      <td width="30" ><b>No.</b></td>
+      <td width="250">
         <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=name'">
           <b><u><?php echo htmlspecialchars($region_name)?></u></b>
         </a>
       </td>
-      <td width="100" valign="bottom" background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg"><br />
+      <td width="100">
         <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=x'">
           <b><u><?php echo $location_x?></u></b>
         </a>
       </td>
-      <td width="180" valign="bottom" background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg"><br />
+      <td width="180">
         <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=y'">
           <b><u><?php echo $location_y?></u></b>
         </a>
       </td>
-      <td width="200" valign="bottom" background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg"><br />
+      <td width="200">
         <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=owner'">
           <b><u><?php echo htmlspecialchars($estate_owner)?></u></b>
         </a>
       </td>
-      <td width="400" valign="bottom" background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg"><br />
+      <td width="400">
         <?php if (!$this->isGuest) {?>
           <b><?php echo $voice_chat_mode?></b>
         <?php }?>
       </td>
-      <td width="50"  valign="bottom" background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg"><br />
+      <td width="50" >
 <!--
         <?php if ($this->hasPermit) {?>
           <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=estid'">
@@ -48,112 +138,17 @@
         <?php }?>
 -->
       </td>
-      <td width="50"  valign="bottom" background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg"><br /> </td>
-      <td width="120" valign="bottom" background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg"><br />
+      <td width="50" >&nbsp;</td>
+      <td width="120">
         <?php if ($this->hasPermit) {?>
           <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=ip'">
             <b><u><?php echo $ip_address?></u></b>
           </a>
         <?php }?>
       </td>
-      <td width="15" background="<?php echo CMS_MODULE_URL?>/images/main/regions_right.gif">&nbsp;</td>
+      <td width="15" >&nbsp;</td>
     </tr>
 
-    <tr>
-      <td bgcolor="#e8e8e8">&nbsp;</td>
-      <td colspan="9" bgcolor="#e8e8e8"><hr /></td>
-      <td bgcolor="#e8e8e8">&nbsp;</td>
-    </tr>
-
-    <tr>
-      <td bgcolor="#e8e8e8">&nbsp;</td>
-
-      <td colspan="9">
-        <!--//START LIMIT AND SEARCH ROW -->  
-        <table width=100% align="center" cellpadding=3 cellspacing=0 bgcolor=#999999>
-          <tr style="filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#CC0000', endColorStr='#e8e8e8', gradientType='1')">
-
-            <td width="200">
-              <font color=#e8e8e8><b>&nbsp;<?php echo $this->number." ".$regions_found?></b></font>
-            </td>
-
-            <td width="50">
-              <?php if ($this->icon[0]=="on") {?>
-                <a href="<?php echo $this->action_url.$order_amp.$plimit_amp.$pstart_.'0'?>" target="_self">
-              <?php }?>
-                <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
-              <?php if ($this->icon[0]=="on") {?>
-                </a>
-              <?php }?>
-            </td>
-
-            <td width="50">
-              <?php if ($this->icon[0]=="on") {?>
-                <a href="<?php echo $this->action_url.$order_amp.$plimit_amp.$pstart_.$this->pnum[0]?>" target="_self">
-              <?php }?>
-                <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
-              <?php if ($this->icon[0]=="on") {?>
-                </a>
-              <?php }?>
-            </td>
-
-            <td width="200" align=center>
-              <font color="#000000">
-                <?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;
-              </font>
-            </td>
-
-            <td width="50">
-              <?php if ($this->icon[1]=="on") {?>
-                <a href="<?php echo $this->action_url.$order_amp.$plimit_amp.$pstart_.$this->pnum[1]?>" target="_self">
-              <?php }?>
-                <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
-              <?php if ($this->icon[1]=="on") {?>
-                </a>
-              <?php }?>
-            </td>
-
-            <td width="50">
-              <?php if ($this->icon[1]=="on") {?>
-                <a href="<?php echo $this->action_url.$order_amp.$plimit_amp.$pstart_.$this->pnum[2]?>" target="_self">
-              <?php }?>
-                <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
-              <?php if ($this->icon[1]=="on") {?>
-                </a>
-              <?php }?>
-            </td>
-
-            <td width="10"></td>
-            <td width="10"></td>
-
-            <td width="30">
-              <a href="<?php echo $this->action_url.$order_amp.$pstart_.'0'.$plimit_.'10'?>" target="_self">
-                <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" alt="Limit 10">
-              </a>
-            </td>
-            <td width="30">
-              <a href="<?php echo $this->action_url.$order_amp.$pstart_.'0'.$plimit_.'25'?>" target="_self">
-                <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" alt="Limit 25">
-              </a>
-            </td>
-            <td width="30">
-              <a href="<?php echo $this->action_url.$order_amp.$pstart_.'0'.$plimit_.'50'?>" target="_self">
-                <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" alt="Limit 50">
-              </a>
-            </td>
-            <td width="30">
-              <a href="<?php echo $this->action_url.$order_amp.$pstart_.'0'.$plimit_.'100'?>" target="_self">
-                <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" alt="Limit 100">
-              </a>
-            </td>
-            <td></td>
-          </tr>
-        </table>
-        <!--//END LIMIT AND SEARCH ROW -->
-      </td>
-
-      <td bgcolor="#e8e8e8">&nbsp;</td>
-    </tr>
 
     <tr>
       <td bgcolor="#e8e8e8">&nbsp;</td>
@@ -220,15 +215,7 @@
 
     <tr>
       <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_left.gif" height="40">&nbsp;</td>
-      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg">&nbsp;</td>
-      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg">&nbsp;</td>
-      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg">&nbsp;</td>
-      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg">&nbsp;</td>
-      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg">&nbsp;</td>
-      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg">&nbsp;</td>
-      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg">&nbsp;</td>
-      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg">&nbsp;</td>
-      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg">&nbsp;</td>
+      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg" colspan="9">&nbsp;</td>
       <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_right.gif">&nbsp;</td>
     </tr>
   </tbody>
