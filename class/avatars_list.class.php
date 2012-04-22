@@ -160,7 +160,7 @@ class  AvatarsList
 		else $this->number = 0;
 
 		$this->sitemax   = ceil ($this->number/$this->plimit);
-		$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
+		$this->sitestart = floor(($this->pstart+$this->plimit-1)/$this->plimit) + 1;
 		if ($this->sitemax==0) $this->sitemax = 1;
 
 		// back more and back one
