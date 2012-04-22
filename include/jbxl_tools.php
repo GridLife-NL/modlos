@@ -7,7 +7,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 if (!defined('_JBXL_TOOLS')) {
-define('_JBXL_TOOLS', 'jbxl_tools_1.0');
+
+define('_JBXL_TOOLS', 'jbxl_tools_v1.0');
 
 
 /****************************************************************************************

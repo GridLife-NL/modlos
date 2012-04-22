@@ -11,7 +11,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 if (!defined('_JBXL_MOODLE_TOOLS')) {
-define('_JBXL_MOODLE_TOOLS', 'jbxl_moodle_tools_1.0');
+
+define('_JBXL_MOODLE_TOOLS', 'jbxl_moodle_tools_v1.0');
 
 
 /*******************************************************************************
