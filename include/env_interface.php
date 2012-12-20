@@ -57,6 +57,9 @@ function  env_get_config($name)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Tables Name without DB prefix
+//
 
 define('MDL_CURRENCY_MONEY_TBL',			'modlos_economy_money');
 define('MDL_CURRENCY_TRANSACTION_TBL',		'modlos_economy_transactions');
