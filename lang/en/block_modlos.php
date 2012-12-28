@@ -52,7 +52,7 @@ $string['modlos_avatar_delete_ttl'] = 'DELETE AVATAR';
 $string['modlos_avatar_own_ttl'] 	= 'OWN AVATAR';
 $string['modlos_avatar_dlt_cncld_ttl']='AVATAR delete CANCELED';
 
-$string['modlos_home_page'] 		= 'Modlos Home';
+$string['modlos_status_page'] 		= 'OpenSim Status';
 $string['modlos_db_status'] 		= 'DB Status';
 $string['modlos_total_users'] 		= 'Total Users';
 $string['modlos_total_regions'] 	= 'Total Regions';
@@ -280,8 +280,8 @@ $string['modlos_date_format_desc']	= 'Specify display format of date and time';
 $string['modlos_use_utc']			= 'Do you use UTC to display time?';
 $string['modlos_use_utc_desc']		= 'If you check this, then UTC(Universal Time, Coordinated) is used. If you do not check this, then Local Time locale of server is used.';
 
-$string['modlos_home_cntnt'] 		= 'Home (Top) Page Content';
-$string['modlos_home_cntnt_desc']	= 'Specify content of Modlos home (top) page. The HTML tag can be used.';
+$string['modlos_status_cntnt'] 		= 'Status Page Content';
+$string['modlos_status_cntnt_desc']	= 'Specify content of status page. The HTML tag can be used.';
 $string['modlos_db_status_cntnt'] 	= 'DB Status Content';
 $string['modlos_db_status_cntnt_desc']='Specify content of DB status page. The HTML tag can be used.';
 $string['modlos_rg_cntnt'] 			= 'Regions List Content';

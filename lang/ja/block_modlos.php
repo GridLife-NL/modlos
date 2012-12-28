@@ -52,7 +52,7 @@ $string['modlos_avatar_delete_ttl'] = '削除';
 $string['modlos_avatar_own_ttl'] 	= 'オーナの変更';
 $string['modlos_avatar_dlt_cncld_ttl']='取消し';
 
-$string['modlos_home_page'] 		= 'Modlos ホーム';
+$string['modlos_status_page'] 		= 'ステータス';
 $string['modlos_db_status'] 		= 'データベース';
 $string['modlos_total_users'] 		= '全体のユーザ人数';
 $string['modlos_total_regions'] 	= '全体のリージョン数';
@@ -279,8 +279,8 @@ $string['modlos_date_format_desc']  = 'Modlosで使用する日付表示のフ�
 $string['modlos_use_utc']           = '時刻の表示に世界標準時(UTC)を使用';
 $string['modlos_use_utc_desc']		= 'チェックを入れた場合は時刻の表示に世界標準時を使用．チェックを外した場合はサーバのローカル時刻のロケールを使用する'; 
 
-$string['modlos_home_cntnt'] 		= 'トップページのコンテンツ';
-$string['modlos_home_cntnt_desc']	= 'Modlos のトップ（ホーム）ページのコンテンツ．HTMLタグ使用可能';
+$string['modlos_status_cntnt'] 		= 'ステータスページのコンテンツ';
+$string['modlos_status_cntnt_desc']	= 'Modlos のステータスページのコンテンツ．HTMLタグ使用可能';
 $string['modlos_db_status_cntnt'] 	= 'データベース状態のページのコンテンツ';
 $string['modlos_db_status_cntnt_desc']='Modlos のデータベース状態のページのコンテンツ．HTMLタグ使用可能';
 $string['modlos_rg_cntnt'] 			= 'リージョンリストページのコンテンツ';

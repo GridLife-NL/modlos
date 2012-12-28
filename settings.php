@@ -161,8 +161,8 @@ $settings->add(new admin_setting_configcheckbox('modlos_userinfo_link',
 // Context
 if (class_exists("admin_setting_confightmltextarea")) {
 	$settings->add(new admin_setting_confightmltextarea('modlos_home_content',
-					get_string('modlos_home_cntnt', 'block_modlos'),
-				   	get_string('modlos_home_cntnt_desc', 'block_modlos'), 
+					get_string('modlos_status_cntnt', 'block_modlos'),
+				   	get_string('modlos_status_cntnt_desc', 'block_modlos'), 
 						"<h2><center>Welcome to Moodle OpenSim Interface</center></h2>", PARAM_RAW));
 
 	$settings->add(new admin_setting_confightmltextarea('modlos_regions_content', 
@@ -183,8 +183,8 @@ if (class_exists("admin_setting_confightmltextarea")) {
 }
 else {
 	$settings->add(new admin_setting_configtextarea('modlos_home_content',
-					get_string('modlos_home_cntnt', 'block_modlos'),
-				   	get_string('modlos_home_cntnt_desc', 'block_modlos'), 
+					get_string('modlos_status_cntnt', 'block_modlos'),
+				   	get_string('modlos_status_cntnt_desc', 'block_modlos'), 
 						"<h2><center>Welcome to Moodle OpenSim Interface</center></h2>", PARAM_RAW));
 
 	$settings->add(new admin_setting_configtextarea('modlos_regions_content', 
