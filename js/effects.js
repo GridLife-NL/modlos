@@ -1,1 +1,1 @@
-../opensimwiredux/js/effects.js
+../opensim.phplib/opensimwiredux/js/effects.js

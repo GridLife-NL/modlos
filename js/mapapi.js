@@ -1,1 +1,1 @@
-../opensimwiredux/js/mapapi.js
+../opensim.phplib/opensimwiredux/js/mapapi.js

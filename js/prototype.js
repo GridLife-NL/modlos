@@ -1,1 +1,1 @@
-../opensimwiredux/js/prototype.js
+../opensim.phplib/opensimwiredux/js/prototype.js

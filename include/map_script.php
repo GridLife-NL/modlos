@@ -1,1 +1,1 @@
-../opensimwiredux/map_script.php
+../opensim.phplib/opensimwiredux/map_script.php
