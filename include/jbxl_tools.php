@@ -4,8 +4,6 @@
 //                2012/04/12
 //
 
-defined('MOODLE_INTERNAL') || die();
-
 if (!defined('_JBXL_TOOLS')) {
 
 define('_JBXL_TOOLS', 'jbxl_tools_v1.0');
