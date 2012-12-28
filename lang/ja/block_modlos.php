@@ -72,7 +72,7 @@ $string['modlos_unknown_region'] 	= '不明なリージョン';
 $string['modlos_active_list'] 		= '使用可能リスト';
 $string['modlos_inactive_list'] 	= '使用停止リスト';
 
-$string['modlos_show_home'] 		= 'Modlos ホーム';
+$string['modlos_show_status'] 		= 'Modlos';
 $string['modlos_show_db'] 			= 'データベース';
 $string['modlos_world_map'] 		= 'ワールドマップ';
 $string['modlos_user_info'] 		= 'ユーザ情報';

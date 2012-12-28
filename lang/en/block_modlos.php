@@ -72,7 +72,7 @@ $string['modlos_unknown_region'] 	= 'unknown Region';
 $string['modlos_active_list'] 		= 'Active List';
 $string['modlos_inactive_list'] 	= 'Inactive List';
 
-$string['modlos_show_home'] 		= 'Modlos Home';
+$string['modlos_show_status'] 		= 'Modlos Status';
 $string['modlos_show_db'] 			= 'Data Base';
 $string['modlos_world_map'] 		= 'World Map';
 $string['modlos_user_info'] 		= 'User Information';
