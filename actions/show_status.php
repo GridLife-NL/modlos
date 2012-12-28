@@ -18,7 +18,7 @@ require_login($course->id);
 print_modlos_header($action, $course);
 
 require_once(CMS_MODULE_PATH.'/class/show_status.class.php');
-$showstatus = new ShowHome($course_id);
+$showstatus = new ShowStatus($course_id);
 
 print_tabnav($action, $course, !$showstatus->isAvatarMax);
 
