@@ -5,4 +5,4 @@ php -l edit_avatar.php
 php -l map_action.php
 php -l owner_avatar.php
 php -l regions_list.php
-php -l show_home.php
+php -l show_status.php

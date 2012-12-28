@@ -5,6 +5,6 @@ php -l delete.html
 php -l edit.html
 php -l owner.html
 php -l regions.html
-php -l show_home.html
+php -l show_status.html
 php -l sim.html
 php -l world_map.html

@@ -1070,7 +1070,7 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 {
 	global $CFG, $USER;
 
-	if (empty($currenttab)) $currenttab = 'show_home';
+	if (empty($currenttab)) $currenttab = 'show_status';
 	if (empty($course)) $course_id = 0;
 	else 				$course_id = $course->id;
 
@@ -1081,7 +1081,7 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 
 	///////
 	$toprow = array();
-	$toprow[] = new tabobject('show_home', CMS_MODULE_URL.'/actions/show_home.php'.$course_param, 
+	$toprow[] = new tabobject('show_status', CMS_MODULE_URL.'/actions/show_status.php'.$course_param, 
 																	'<b>'.get_string('modlos_showhome_tab','block_modlos').'</b>');
 	$toprow[] = new tabobject('world_map', CMS_MODULE_URL.'/actions/map_action.php'.$course_param, 
 																	'<b>'.get_string('modlos_world_map','block_modlos').'</b>');
@@ -1134,7 +1134,7 @@ function  print_tabnav_manage($currenttab, $course)
 
 	///////
 	$toprow = array();
-	$toprow[] = new tabobject('show_home', CMS_MODULE_URL.'/actions/show_home.php'.$course_param, 
+	$toprow[] = new tabobject('show_status', CMS_MODULE_URL.'/actions/show_status.php'.$course_param, 
 																	'<b>'.get_string('modlos_showhome_tab','block_modlos').'</b>');
 	if ($hasPermit) {
 		if (jbxl_is_admin($USER->id)) {

@@ -1,3 +1,3 @@
 <?php
-include('./actions/show_home.php');
+include('./actions/show_status.php');
 ?>
