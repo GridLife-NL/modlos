@@ -59,7 +59,7 @@ class block_modlos extends block_base
 		$db_ver = opensim_get_db_version();
 
 		$this->content = new stdClass;
-		$this->content->text = '<a href="'.CMS_MODULE_URL.'/actions/show_home.php?course='.$id.'">'.   get_string('modlos_show_home','block_modlos').'</a><br />';
+		$this->content->text = '<a href="'.CMS_MODULE_URL.'/actions/status.php?course='.$id.'">'.   get_string('modlos_status','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.  get_string('modlos_world_map','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
 

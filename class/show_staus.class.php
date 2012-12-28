@@ -80,7 +80,7 @@ class  ShowHome
 		$visitors_last30days= get_string('modlos_visitors_last30days','block_modlos');
 		$online_now 		= get_string('modlos_online_now', 		  'block_modlos');
 
-		include(CMS_MODULE_PATH.'/html/show_home.html');
+		include(CMS_MODULE_PATH.'/html/show_status.html');
 	}
 
 }
