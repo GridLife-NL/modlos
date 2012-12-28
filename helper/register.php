@@ -1,1 +1,1 @@
-../ossearch/webroot/register.php
+../opensim.modules/Search/php/register.php

@@ -1,1 +1,1 @@
-../osprofile/webroot/profile_config.php
+../opensim.modules/Profile/php/profile_config.php

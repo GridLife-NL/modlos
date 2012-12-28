@@ -1,1 +1,1 @@
-../nsl.modules/php/mute.php
+../opensim.modules/Messaging/php/mute.php

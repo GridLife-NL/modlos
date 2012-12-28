@@ -1,1 +1,1 @@
-../ossearch/webroot/search_config.php
+../opensim.modules/Search/php/search_config.php
