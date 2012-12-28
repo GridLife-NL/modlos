@@ -18,12 +18,12 @@ require_login($course->id);
 print_modlos_header($action, $course);
 
 require_once(CMS_MODULE_PATH.'/class/show_status.class.php');
-$showhome = new ShowHome($course_id);
+$showstatus = new ShowHome($course_id);
 
-print_tabnav($action, $course, !$showhome->isAvatarMax);
+print_tabnav($action, $course, !$showstatus->isAvatarMax);
 
-$showhome->execute();
-$showhome->print_page();
+$showstatus->execute();
+$showstatus->print_page();
 
 echo $OUTPUT->footer($course);
 ?>	

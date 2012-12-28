@@ -308,7 +308,7 @@ $string['modlos_user_log_desc'] 	= 'Specify user server directory';
 
 
 // Admin
-$string['modlos_showhome_tab'] 		= 'Modlos Home';
+$string['modlos_show_status_tab'] 	= 'Status';
 $string['modlos_admin_title'] 		= 'Moodle OpenSim';
 $string['modlos_general_setting_tab']='Preferences';
 $string['modlos_lastnames_tab'] 	= 'Lastnames';

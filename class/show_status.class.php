@@ -1,7 +1,7 @@
 <?php
 //////////////////////////////////////////////////
 //
-// ?action=showhome または ?action= の場合に読み出される．
+// ?action=show_status または ?action= の場合に読み出される．
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
@@ -10,7 +10,7 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
-class  ShowHome
+class  ShowStatus
 {
 	var	$grid_status;
 	var $now_online;
@@ -26,7 +26,7 @@ class  ShowHome
 
 
 
-	function  ShowHome($course_id) 
+	function  ShowStatus($course_id) 
 	{
 		global $CFG, $USER;
 
@@ -70,7 +70,7 @@ class  ShowHome
 		global $CFG;
 
 		$grid_name       	= $CFG->modlos_grid_name;
-		$content         	= $CFG->modlos_home_content;
+		$content         	= $CFG->modlos_status_content;
 
 		$db_status 			= get_string('modlos_db_status', 		  'block_modlos');
 		$online_ttl 		= get_string('modlos_online_ttl', 		  'block_modlos');

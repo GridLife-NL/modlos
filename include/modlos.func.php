@@ -1082,7 +1082,7 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 	///////
 	$toprow = array();
 	$toprow[] = new tabobject('show_status', CMS_MODULE_URL.'/actions/show_status.php'.$course_param, 
-																	'<b>'.get_string('modlos_showhome_tab','block_modlos').'</b>');
+																	'<b>'.get_string('modlos_show_status_tab','block_modlos').'</b>');
 	$toprow[] = new tabobject('world_map', CMS_MODULE_URL.'/actions/map_action.php'.$course_param, 
 																	'<b>'.get_string('modlos_world_map','block_modlos').'</b>');
 	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$course_param, 
@@ -1135,7 +1135,7 @@ function  print_tabnav_manage($currenttab, $course)
 	///////
 	$toprow = array();
 	$toprow[] = new tabobject('show_status', CMS_MODULE_URL.'/actions/show_status.php'.$course_param, 
-																	'<b>'.get_string('modlos_showhome_tab','block_modlos').'</b>');
+																	'<b>'.get_string('modlos_show_status_tab','block_modlos').'</b>');
 	if ($hasPermit) {
 		if (jbxl_is_admin($USER->id)) {
 			$course_amp = '';
