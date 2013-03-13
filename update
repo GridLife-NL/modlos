@@ -6,33 +6,22 @@ else
 	svn co http://www.nsl.tuis.ac.jp/svn/opensim/flotsam_XmlRpcGroup/trunk flotsam_XmlRpcGroup
 fi
 
-#if [ -d opensimwiredux ]; then
-#	svn update opensimwiredux
-#else
-#	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensimwiredux/trunk opensimwiredux
-#fi
-
 if [ -d opensim.phplib ]; then
 	svn update opensim.phplib
 else
-	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.phplib/trunk opensim.phplib
+    svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.phplib/trunk opensim.phplib
+fi
+
+if [ -d opensin.hepler ]; then
+    svn update opensim.helper
+else
+    svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.helper/trunk opensim.helper
 fi
 
 if [ -d opensim.modules ]; then
 	svn update opensim.modules
 else
-	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.nsl.modules/trunk opensim.modules
+	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.modules/trunk opensim.modules
 fi
 
-#if [ -d osprofile ]; then
-#	svn update osprofile
-#else
-#	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.osprofile/trunk osprofile 
-#fi
-
-#if [ -d ossearch ]; then
-#	svn update ossearch
-#else
-#	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.ossearch/trunk ossearch 
-#fi
 
