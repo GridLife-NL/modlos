@@ -1,1 +1,1 @@
-../opensim.phplib/opensimwiredux/mysql.func.php
+../opensim.phplib/mysql.func.php

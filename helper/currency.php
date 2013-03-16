@@ -1,1 +1,1 @@
-../opensim.phplib/opensimwiredux/currency.php
+../opensim.helper/currency.php
