@@ -1094,7 +1094,7 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $course_param, 
 																	'<b>'.get_string('modlos_avatar_create','block_modlos').'</b>');
 		}
-		if ($CFG->modlos_use_events) {
+		if ($CFG->modlos_activate_events) {
 			$toprow[] = new tabobject('events_list', CMS_MODULE_URL.'/actions/events_list.php'. $course_param, 
 																	'<b>'.get_string('modlos_events_tab','block_modlos').'</b>');
 		}

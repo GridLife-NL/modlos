@@ -48,7 +48,7 @@ function  env_get_config($name)
 {                  
     global $CFG;
 	
-	$name = "modlos_".$name;
+	$name = 'modlos_'.$name;
  
     return $CFG->$name;
 }

@@ -81,7 +81,7 @@ class block_modlos extends block_base
 				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar.php?course='.$id.'">'.get_string('modlos_avatar_create','block_modlos').'</a><br />';
 			}
 
-			if ($CFG->modlos_use_events) {
+			if ($CFG->modlos_activate_events) {
 				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/events_list.php?course='.$id.'">'.get_string('modlos_events_list','block_modlos').'</a><br />';
 			}
 
