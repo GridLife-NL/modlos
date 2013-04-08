@@ -4,12 +4,11 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 {
 	global $CFG, $THEME, $DB;
 
-	$result = true;
 	$dbman = $DB->get_manager();
 
 
 	// 2010083024
-	if ($result && $oldversion < 2010083024) {
+	if ($oldversion < 2010083024) {
 		$table = new XMLDBTable('modlos_mute_list');
 
 		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
@@ -21,13 +20,13 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->addFieldInfo('timestamp', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
 
 		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
-		$result = $result && $dbman->create_table($table);
+		$dbman->create_table($table);
 	}
 
 
 
 	// 2010090100
-	if ($result && $oldversion < 2010090100) {
+	if ($oldversion < 2010090100) {
 		$table = new XMLDBTable('modlos_login_screen');
 
 		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
@@ -37,13 +36,13 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->addFieldInfo('timestamp', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
 
 		$table->addKeyInfo('id', XMLDB_KEY_PRIMARY, array('id'));
-		$result = $result && $dbman->create_table($table);
+		$dbman->create_table($table);
 	}
 
 
 
 	//  2010092200
-	if ($result && $oldversion < 2010092200) {
+	if ($oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_hostsregister');
  		$dbman->drop_table($table);
 
@@ -57,11 +56,11 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 
 		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
 		$table->addKeyInfo('host', XMLDB_KEY_UNIQUE, array('host', 'port'));
-		$result = $result && $dbman->create_table($table);
+		$dbman->create_table($table);
 	}
 
 
-	if ($result && $oldversion < 2010092200) {
+	if ($oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_allparcels');
  		$dbman->drop_table($table);
 
@@ -77,11 +76,11 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 
 		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
 		$table->addKeyInfo('parceluuid', XMLDB_KEY_UNIQUE, array('parceluuid'));
-		$result = $result && $dbman->create_table($table);
+		$dbman->create_table($table);
 	}
 
 
-	if ($result && $oldversion < 2010092200) {
+	if ($oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_parcels');
  		$dbman->drop_table($table);
 
@@ -101,11 +100,11 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 
 		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
 		$table->addKeyInfo('uuid', XMLDB_KEY_UNIQUE, array('regionuuid', 'parceluuid'));
-		$result = $result && $dbman->create_table($table);
+		$dbman->create_table($table);
 	}
 
 
-	if ($result && $oldversion < 2010092200) {
+	if ($oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_parcelsales');
  		$dbman->drop_table($table);
 
@@ -123,11 +122,11 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 
 		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
 		$table->addKeyInfo('uuid', XMLDB_KEY_UNIQUE, array('regionuuid', 'parceluuid'));
-		$result = $result && $dbman->create_table($table);
+		$dbman->create_table($table);
 	}
 
 
-	if ($result && $oldversion < 2010092200) {
+	if ($oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_events');
  		$dbman->drop_table($table);
 
@@ -148,11 +147,11 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->addFieldInfo('eventflags', XMLDB_TYPE_INTEGER, '1', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
 
 		$table->addKeyInfo('id', XMLDB_KEY_PRIMARY, array('id'));
-		$result = $result && $dbman->create_table($table);
+		$dbman->create_table($table);
 	}
 
 
-	if ($result && $oldversion < 2010092200) {
+	if ($oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_regions');
  		$dbman->drop_table($table);
 
@@ -166,11 +165,11 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 
 		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
 		$table->addKeyInfo('regionuuid', XMLDB_KEY_UNIQUE, array('regionuuid'));
-		$result = $result && $dbman->create_table($table);
+		$dbman->create_table($table);
 	}
 
 
-	if ($result && $oldversion < 2010092200) {
+	if ($oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_popularplaces');
  		$dbman->drop_table($table);
 
@@ -183,11 +182,11 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->addFieldInfo('mature', XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
 
 		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
-		$result = $result && $dbman->create_table($table);
+		$dbman->create_table($table);
 	}
 
 
-	if ($result && $oldversion < 2010092200) {
+	if ($oldversion < 2010092200) {
 		$table = new XMLDBTable('modlos_search_objects');
  		$dbman->drop_table($table);
 
@@ -201,11 +200,11 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 
 		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
 		$table->addKeyInfo('uuid', XMLDB_KEY_UNIQUE, array('objectuuid', 'parceluuid'));
-		$result = $result && $dbman->create_table($table);
+		$dbman->create_table($table);
 	}
 
 
-	return $result;
+	return true;
 }
 
 ?>
