@@ -1,6 +1,5 @@
 <?php
 
-// Nav 
 if (!defined('CMS_MODULE_PATH')) {
 	define('CMS_MODULE_PATH', $CFG->dirroot.'/blocks/modlos');
 }
