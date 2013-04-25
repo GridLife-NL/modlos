@@ -20,55 +20,55 @@ $settings->add(new admin_setting_heading('block_modlos_addheading', '', $tabnav)
 // OpenSim DB
 $settings->add(new admin_setting_configtext('modlos_grid_name', 
 					get_string('modlos_grid_name', 'block_modlos'),
-				   	get_string('modlos_grid_desc', 'block_modlos'), "Open Grid", PARAM_TEXT));
+				   	get_string('modlos_grid_desc', 'block_modlos'), 'Open Grid', PARAM_TEXT));
 
 $settings->add(new admin_setting_configtext('modlos_sql_server_name', 
 					get_string('modlos_sql_server_name', 'block_modlos'),
-				   	get_string('modlos_sql_server_desc', 'block_modlos'), "localhost", PARAM_TEXT));
+				   	get_string('modlos_sql_server_desc', 'block_modlos'), 'localhost', PARAM_TEXT));
 
 $settings->add(new admin_setting_configtext('modlos_sql_db_name', 
 					get_string('modlos_sql_db_name', 'block_modlos'),
-				   	get_string('modlos_sql_db_desc', 'block_modlos'), "opensim", PARAM_TEXT));
+				   	get_string('modlos_sql_db_desc', 'block_modlos'), 'opensim', PARAM_TEXT));
 
 $settings->add(new admin_setting_configtext('modlos_sql_db_user', 
 					get_string('modlos_sql_user', 'block_modlos'),
-				   	get_string('modlos_sql_user_desc', 'block_modlos'), "opensim_user", PARAM_TEXT));
+				   	get_string('modlos_sql_user_desc', 'block_modlos'), 'opensim_user', PARAM_TEXT));
 
 $settings->add(new admin_setting_configtext('modlos_sql_db_pass', 
 					get_string('modlos_sql_pass', 'block_modlos'),
-				   	get_string('modlos_sql_pass_desc', 'block_modlos'), "opensim_pass", PARAM_TEXT));
+				   	get_string('modlos_sql_pass_desc', 'block_modlos'), 'opensim_pass', PARAM_TEXT));
 
 $settings->add(new admin_setting_configtext('modlos_user_server_uri', 
 					get_string('modlos_user_uri', 'block_modlos'),
-				   	get_string('modlos_user_uri_desc', 'block_modlos'), "http://opensim:8002/", PARAM_URL));
+				   	get_string('modlos_user_uri_desc', 'block_modlos'), 'http://opensim:8002/', PARAM_URL));
 
 /*
 $settings->add(new admin_setting_configtext('modlos_asset_uri', 
 					get_string('modlos_asset_uri', 'block_modlos'),
-				   	get_string('modlos_asset_uri_desc', 'block_modlos'), "http://opensim.jp:8003/", PARAM_URL));
+				   	get_string('modlos_asset_uri_desc', 'block_modlos'), 'http://opensim.jp:8003/', PARAM_URL));
 
 $settings->add(new admin_setting_configtext('modlos_invent_uri', 
 					get_string('modlos_invent_uri', 'block_modlos'),
-				   	get_string('modlos_invent_uri_desc', 'block_modlos'), "http://opensim.jp:8003/", PARAM_URL));
+				   	get_string('modlos_invent_uri_desc', 'block_modlos'), 'http://opensim.jp:8003/', PARAM_URL));
 
 $settings->add(new admin_setting_configtext('modlos_currency_uri', 
 					get_string('modlos_crncy_uri', 'block_modlos'),
-				   	get_string('modlos_crncy_uri_desc', 'block_modlos'), "http://opensim.jp:8008/", PARAM_URL));
+				   	get_string('modlos_crncy_uri_desc', 'block_modlos'), 'http://opensim.jp:8008/', PARAM_URL));
 */
 
 // Modlos
 $settings->add(new admin_setting_configtext('modlos_map_start_x', 
 					get_string('modlos_map_stx', 'block_modlos'),
-				   	get_string('modlos_map_stx_desc', 'block_modlos'), "1000", PARAM_INT));
+				   	get_string('modlos_map_stx_desc', 'block_modlos'), '1000', PARAM_INT));
 
 $settings->add(new admin_setting_configtext('modlos_map_start_y', 
 					get_string('modlos_map_sty', 'block_modlos'),
-				   	get_string('modlos_map_sty_desc', 'block_modlos'), "1000", PARAM_INT));
+				   	get_string('modlos_map_sty_desc', 'block_modlos'), '1000', PARAM_INT));
 
 $options = array('16'=>16, '32'=>32, '64'=>64, '128'=>128, '256'=>256, '512'=>512);
 $settings->add(new admin_setting_configselect('modlos_map_size', 
 					get_string('modlos_map_size', 'block_modlos'),
-				   	get_string('modlos_map_size_desc', 'block_modlos'), "128", $options));
+				   	get_string('modlos_map_size_desc', 'block_modlos'), '128', $options));
 
 $settings->add(new admin_setting_configcheckbox('modlos_use_utc_time', 
 					get_string('modlos_use_utc', 'block_modlos'),
@@ -76,11 +76,11 @@ $settings->add(new admin_setting_configcheckbox('modlos_use_utc_time',
 
 $settings->add(new admin_setting_configtext('modlos_date_format', 
 					get_string('modlos_date_format', 'block_modlos'),
-				   	get_string('modlos_date_format_desc', 'block_modlos'), "Y.m.d - H:i", PARAM_TEXT));
+				   	get_string('modlos_date_format_desc', 'block_modlos'), 'Y.m.d - H:i', PARAM_TEXT));
 
 $settings->add(new admin_setting_configtext('modlos_max_own_avatars', 
 					get_string('modlos_max_avatars', 'block_modlos'),
-				   	get_string('modlos_max_avatars_desc', 'block_modlos'), "1", PARAM_INT));
+				   	get_string('modlos_max_avatars_desc', 'block_modlos'), '1', PARAM_INT));
 
 $settings->add(new admin_setting_configcheckbox('modlos_activate_lastname', 
 					get_string('modlos_lname_activate', 'block_modlos'),
@@ -88,16 +88,16 @@ $settings->add(new admin_setting_configcheckbox('modlos_activate_lastname',
 
 $settings->add(new admin_setting_configtext('modlos_home_region', 
 					get_string('modlos_dst_region_name', 'block_modlos'),
-				   	get_string('modlos_dst_region_desc', 'block_modlos'), "", PARAM_TEXT));
+				   	get_string('modlos_dst_region_desc', 'block_modlos'), '', PARAM_TEXT));
 
 $options = array('imagick'=>'Imagick of PHP', 'convert'=>'ImageMagick', 'jasper'=>'JasPer');
 $settings->add(new admin_setting_configselect('modlos_image_processor_jp2', 
 					get_string('modlos_image_processor', 'block_modlos'),
-				   	get_string('modlos_image_processor_desc', 'block_modlos'), "convert", $options));
+				   	get_string('modlos_image_processor_desc', 'block_modlos'), 'convert', $options));
 
 //$settings->add(new admin_setting_configtext('modlos_image_processor_path', 
 //					get_string('modlos_image_processor_path', 'block_modlos'),
-//				   	get_string('modlos_image_processor_path_desc', 'block_modlos'), "", PARAM_TEXT));
+//				   	get_string('modlos_image_processor_path_desc', 'block_modlos'), '', PARAM_TEXT));
 
 $settings->add(new admin_setting_configcheckbox('modlos_activate_events',
 					get_string('modlos_events_manage', 'block_modlos'),
@@ -113,7 +113,7 @@ $settings->add(new admin_setting_configcheckbox('modlos_use_https',
 
 $settings->add(new admin_setting_configtext('modlos_https_url', 
 					get_string('modlos_https_url', 'block_modlos'),
-				   	get_string('modlos_https_url_desc', 'block_modlos'), "", PARAM_URL));
+				   	get_string('modlos_https_url_desc', 'block_modlos'), '', PARAM_URL));
 
 $settings->add(new admin_setting_configcheckbox('modlos_teacher_admin', 
 					get_string('modlos_teacher_admin', 'block_modlos'),
@@ -126,11 +126,11 @@ $settings->add(new admin_setting_configcheckbox('modlos_cooperate_sloodle',
 // Ex Function
 $settings->add(new admin_setting_configtext('modlos_groupdb_read_key', 
 					get_string('modlos_grpdb_rkey', 'block_modlos'),
-				   	get_string('modlos_grpdb_rkey_desc', 'block_modlos'), "1234", PARAM_TEXT));
+				   	get_string('modlos_grpdb_rkey_desc', 'block_modlos'), '1234', PARAM_TEXT));
 
 $settings->add(new admin_setting_configtext('modlos_groupdb_write_key', 
 					get_string('modlos_grpdb_wkey', 'block_modlos'),
-				   	get_string('modlos_grpdb_wkey_desc', 'block_modlos'), "1234", PARAM_TEXT));
+				   	get_string('modlos_grpdb_wkey_desc', 'block_modlos'), '1234', PARAM_TEXT));
 
 $settings->add(new admin_setting_configcheckbox('modlos_use_currency_server', 
 					get_string('modlos_use_crncy_svr', 'block_modlos'),
@@ -138,17 +138,17 @@ $settings->add(new admin_setting_configcheckbox('modlos_use_currency_server',
 
 $settings->add(new admin_setting_configtext('modlos_currency_script_key', 
 					get_string('modlos_crncy_key', 'block_modlos'),
-				   	get_string('modlos_crncy_key_desc', 'block_modlos'), "123456789", PARAM_TEXT));
+				   	get_string('modlos_crncy_key_desc', 'block_modlos'), '123456789', PARAM_TEXT));
 
 /*
 $settings->add(new admin_setting_configtext('modlos_groupdb_currency_key', 
 					get_string('modlos_crncy_key', 'block_modlos'),
-				   	get_string('modlos_crncy_key_desc', 'block_modlos'), "1234", PARAM_TEXT));
+				   	get_string('modlos_crncy_key_desc', 'block_modlos'), '1234', PARAM_TEXT));
 
 $settings->add(new admin_setting_configtext('modlos_banker_avatar', 
 					get_string('modlos_banker', 'block_modlos'),
 				   	get_string('modlos_banker_desc', 'block_modlos'), 
-						"00000000-0000-0000-0000-000000000000", PARAM_TEXT));
+						'00000000-0000-0000-0000-000000000000', PARAM_TEXT));
 */
 
 
@@ -158,49 +158,50 @@ $settings->add(new admin_setting_configcheckbox('modlos_userinfo_link',
 
 
 // Context
-if (class_exists("admin_setting_confightmltextarea")) {
-	$settings->add(new admin_setting_confightmltextarea('modlos_status_content',
+//admin_setting_confightmltextarea
+if (class_exists('admin_setting_confightmleditor')) {
+	$settings->add(new admin_setting_confightmleditor('modlos_status_content',
 					get_string('modlos_status_cntnt', 'block_modlos'),
 				   	get_string('modlos_status_cntnt_desc', 'block_modlos'), 
-						"<h2><center>Welcome to Moodle OpenSim Interface</center></h2>", PARAM_RAW));
+						'<h2><center>Welcome to Moodle OpenSim Interface</center></h2>', PARAM_RAW));
 
-	$settings->add(new admin_setting_confightmltextarea('modlos_regions_content', 
+	$settings->add(new admin_setting_confightmleditor('modlos_regions_content', 
 					get_string('modlos_rg_cntnt', 'block_modlos'),
-				   	get_string('modlos_rg_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
+				   	get_string('modlos_rg_cntnt_desc', 'block_modlos'), '', PARAM_RAW));
 
-	$settings->add(new admin_setting_confightmltextarea('modlos_avatars_content', 
+	$settings->add(new admin_setting_confightmleditor('modlos_avatars_content', 
 					get_string('modlos_avt_cntnt', 'block_modlos'),
-				   	get_string('modlos_avt_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
+				   	get_string('modlos_avt_cntnt_desc', 'block_modlos'), '', PARAM_RAW));
 
-	$settings->add(new admin_setting_confightmltextarea('modlos_editable_content', 
+	$settings->add(new admin_setting_confightmleditor('modlos_editable_content', 
 					get_string('modlos_edtbl_cntnt', 'block_modlos'),
-				   	get_string('modlos_edtbl_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
+				   	get_string('modlos_edtbl_cntnt_desc', 'block_modlos'), '', PARAM_RAW));
 
-	$settings->add(new admin_setting_confightmltextarea('modlos_loginscreen_content', 
+	$settings->add(new admin_setting_confightmleditor('modlos_loginscreen_content', 
 					get_string('modlos_lgnscrn_cntnt', 'block_modlos'),
-				   	get_string('modlos_lgnscrn_cntnt_desc', 'block_modlos'), "Welcome to OpenSim", PARAM_RAW));
+				   	get_string('modlos_lgnscrn_cntnt_desc', 'block_modlos'), 'Welcome to OpenSim', PARAM_RAW));
 }
 else {
 	$settings->add(new admin_setting_configtextarea('modlos_status_content',
 					get_string('modlos_status_cntnt', 'block_modlos'),
 				   	get_string('modlos_status_cntnt_desc', 'block_modlos'), 
-						"<h2><center>Welcome to Moodle OpenSim Interface</center></h2>", PARAM_RAW));
+						'<h2><center>Welcome to Moodle OpenSim Interface</center></h2>', PARAM_RAW));
 
 	$settings->add(new admin_setting_configtextarea('modlos_regions_content', 
 					get_string('modlos_rg_cntnt', 'block_modlos'),
-				   	get_string('modlos_rg_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
+				   	get_string('modlos_rg_cntnt_desc', 'block_modlos'), '', PARAM_RAW));
 
 	$settings->add(new admin_setting_configtextarea('modlos_avatars_content', 
 					get_string('modlos_avt_cntnt', 'block_modlos'),
-				   	get_string('modlos_avt_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
+				   	get_string('modlos_avt_cntnt_desc', 'block_modlos'), '', PARAM_RAW));
 
 	$settings->add(new admin_setting_configtextarea('modlos_editable_content', 
 					get_string('modlos_edtbl_cntnt', 'block_modlos'),
-				   	get_string('modlos_edtbl_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
+				   	get_string('modlos_edtbl_cntnt_desc', 'block_modlos'), '', PARAM_RAW));
 
 	$settings->add(new admin_setting_configtextarea('modlos_loginscreen_content', 
 					get_string('modlos_lgnscrn_cntnt', 'block_modlos'),
-				   	get_string('modlos_lgnscrn_cntnt_desc', 'block_modlos'), "Welcome to OpenSim", PARAM_RAW));
+				   	get_string('modlos_lgnscrn_cntnt_desc', 'block_modlos'), 'Welcome to OpenSim', PARAM_RAW));
 }
 
 
@@ -210,6 +211,5 @@ $settings->add(new admin_setting_configcheckbox('modlos_activate_disclaimer',
 
 $settings->add(new admin_setting_configtextarea('modlos_disclaimer_content', 
 					get_string('modlos_dsclmr_cntnt', 'block_modlos'),
-				   	get_string('modlos_dsclmr_cntnt_desc', 'block_modlos'), "", PARAM_RAW));
+				   	get_string('modlos_dsclmr_cntnt_desc', 'block_modlos'), '', PARAM_RAW));
 
-?>
