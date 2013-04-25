@@ -26,4 +26,3 @@ $showstatus->execute();
 $showstatus->print_page();
 
 echo $OUTPUT->footer($course);
-?>	

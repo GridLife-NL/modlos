@@ -151,6 +151,15 @@ function  modlos_get_update_time($fullname_table)
 	$db = new DB(CMS_DB_HOST, CMS_DB_NAME, CMS_DB_USER, CMS_DB_PASS);
 	$update = $db->get_update_time($fullname_table);
 
+	/*
+	if (!$update) {		// InnoDB
+		$db->query('select MAX(time) from '.$fullname_table);
+		if ($db->Errno==0) {
+			$result = $db->next_record();
+			$update = $result[0];
+		}
+	}
+	*/
 	return $update;
 }
 
@@ -316,6 +325,8 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 	else					   	$avatar_info['state'] 	 = AVATAR_STATE_NOSTATE;
 	if ($avatar->time!='')	 	$avatar_info['time'] 	 = $avatar->time;
 	else						$avatar_info['time']	 = time();
+	//
+	$avatar_info['regionname'] = modlos_get_region_name($avatar_info['hmregion']);
 
 	return $avatar_info;
 }
@@ -356,6 +367,8 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 		}
 	}
 
+	//
+	if (!isset($avatar['regionname'])) $avatar['regionname'] = modlos_get_region_name($avatar['hmregion']);
 
 	// Modlos
 	$obj = $DB->get_record('modlos_users', array('uuid'=>$avatar['UUID']));		
@@ -439,13 +452,16 @@ function  modlos_insert_userstable($user)
 	$insobj->firstname = $user['firstname'];
 	$insobj->lastname  = $user['lastname'];
 
-	if ($user['uid']!='') 	$insobj->user_id = $user['uid'];
-	else				  	$insobj->user_id = '0';
-	if ($user['state']!='')	$insobj->state 	 = (int)$user['state'];
-	else				 	$insobj->state 	 = (int)AVATAR_STATE_SYNCDB;
-	if ($user['time']!='') 	$insobj->time 	 = $user['time'];
-	else 					$insobj->time 	 = time();
+	if ($user['uid']!='') 	 $insobj->user_id = $user['uid'];
+	else				  	 $insobj->user_id = '0';
+	if ($user['state']!='')	 $insobj->state  = (int)$user['state'];
+	else				 	 $insobj->state  = (int)AVATAR_STATE_SYNCDB;
+	if ($user['time']!='') 	 $insobj->time = $user['time'];
+	else 					 $insobj->time = time();
+	//
+	$insobj->hmregion = $user['regionname'];
 
+/*
 	if (isGUID($user['hmregion'])) {
 		$regionName = opensim_get_region_name($user['hmregion']);
 		if ($regionName!='')$insobj->hmregion = $regionName;
@@ -459,6 +475,7 @@ function  modlos_insert_userstable($user)
 			$insobj->hmregion = $user['hmregion'];
 		}
 	}
+*/
 	
 	$ret = $DB->insert_record('modlos_users', $insobj);
 
@@ -483,11 +500,14 @@ function  modlos_update_userstable($user, $updobj=null)
 	}
 
 	// Update
-	if ($user['uid']!='') 	$updobj->user_id = $user['uid'];
-	if ($user['state']!='')	$updobj->state   = (int)$user['state'];
-	if ($user['time']!='')	$updobj->time 	 = $user['time'];
-	else 					$updobj->time 	 = time();
+	if ($user['uid']!='')   $updobj->user_id  = $user['uid'];
+	if ($user['state']!='') $updobj->state    = (int)$user['state'];
+	if ($user['time']!='') 	$updobj->time 	  = $user['time'];
+	else 				 	$updobj->time 	  = time();
 
+	$updobj->hmregion = $user['regionname'];
+
+	/*
 	if (isGUID($user['hmregion'])) {
 		$regionName = opensim_get_region_name($user['hmregion']);
 		if ($regionName!='')$updobj->hmregion = $regionName;
@@ -496,12 +516,33 @@ function  modlos_update_userstable($user, $updobj=null)
 	else if ($user['hmregion']!='') {
 		$updobj->hmregion = $user['hmregion'];
 	}
+	*/
 
 	$ret = $DB->update_record('modlos_users', $updobj);
 
 	return $ret;
 }
 	
+
+
+
+function  modlos_get_region_name($region)
+{
+	if (isGUID($region)) {
+		$regionName = opensim_get_region_name($region);
+		if ($regionName!='') $region = $regionName;
+	}
+
+	return $region;
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -983,7 +1024,6 @@ function  modlos_sync_opensimdb($timecheck=true)
 		if ($modlos_up>$opensim_up) return;
 	}
 
-
 	$opnsim_users = opensim_get_avatars_infos();	// OpenSim DB
 	$modlos_users = modlos_get_userstable(); 		// Modlos DB
 
@@ -998,16 +1038,24 @@ function  modlos_sync_opensimdb($timecheck=true)
 
 	// OpenSimにデータがある場合は，Modlos のデータを OpenSimにあわせる．
 	foreach ($opnsim_users as $opnsim_user) {
-		$opnsim_user['time'] = time();
-		if (array_key_exists($opnsim_user['UUID'], $modlos_users)) {
-			//$opnsim_user['id'] = $modlos_users[$opnsim_user['UUID']]['id'];
-			$opnsim_user['uid']   = $modlos_users[$opnsim_user['UUID']]['uid'];
-			$opnsim_user['state'] = $modlos_users[$opnsim_user['UUID']]['state']|AVATAR_STATE_SYNCDB;
-			modlos_update_userstable($opnsim_user);
+		$opnsim_uuid = $opnsim_user['UUID'];	
+		$regionName  = modlos_get_region_name($opnsim_user['hmregion']);
+		//
+		// 	リージョンネームの更新
+		if (array_key_exists($opnsim_uuid, $modlos_users)) {
+			if ($regionName!=$modlos_users[$opnsim_uuid]['hmregion']) {
+				$opnsim_user['uid']   = $modlos_users[$opnsim_uuid]['uid'];
+				$opnsim_user['state'] = $modlos_users[$opnsim_uuid]['state']|AVATAR_STATE_SYNCDB;
+				$opnsim_user['time']  = time();
+				$opnsim_user['regionname'] = $regionName;
+				modlos_update_userstable($opnsim_user);
+			}
 		}
 		else {
 			$opnsim_user['uid']   = '0';
 			$opnsim_user['state'] = AVATAR_STATE_SYNCDB;
+			$opnsim_user['time']  = time();
+			$opnsim_user['regionname'] = $regionName;
 			modlos_insert_userstable($opnsim_user);
 		}
 	}
