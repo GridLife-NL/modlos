@@ -144,6 +144,9 @@ function  hasModlosPermit($course_id=0)
 // DB
 //
 
+//
+// InnoDB では 常に 0 を返す．
+//
 function  modlos_get_update_time($fullname_table)
 {
 	if ($fullname_table=="") return 0;
@@ -151,17 +154,22 @@ function  modlos_get_update_time($fullname_table)
 	$db = new DB(CMS_DB_HOST, CMS_DB_NAME, CMS_DB_USER, CMS_DB_PASS);
 	$update = $db->get_update_time($fullname_table);
 
-	/*
-	if (!$update) {		// InnoDB
-		$db->query('select MAX(time) from '.$fullname_table);
-		if ($db->Errno==0) {
-			$result = $db->next_record();
-			$update = $result[0];
-		}
-	}
-	*/
 	return $update;
 }
+
+
+
+function  modlos_count_records($tablename)
+{
+	global $DB;
+	
+	if ($tablename=='') return 0;
+
+	$count = $DB->count_records($tablename);
+
+	return $count;
+}
+
 
 
 
@@ -326,7 +334,6 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 	if ($avatar->time!='')	 	$avatar_info['time'] 	 = $avatar->time;
 	else						$avatar_info['time']	 = time();
 	//
-	$avatar_info['regionname'] = modlos_get_region_name($avatar_info['hmregion']);
 
 	return $avatar_info;
 }
@@ -366,9 +373,6 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 			}
 		}
 	}
-
-	//
-	if (!isset($avatar['regionname'])) $avatar['regionname'] = modlos_get_region_name($avatar['hmregion']);
 
 	// Modlos
 	$obj = $DB->get_record('modlos_users', array('uuid'=>$avatar['UUID']));		
@@ -440,7 +444,7 @@ function  modlos_get_userstable()
 
 //
 //	UUID, firstname, lastname, uid, state, time, hmregion are setted in $user[]
-//		hmregion is UUID or name of region
+//
 
 function  modlos_insert_userstable($user)
 {
@@ -448,6 +452,7 @@ function  modlos_insert_userstable($user)
 
 	if (!isGUID($user['UUID'])) return false;
 
+	$insobj = new stdClass();
 	$insobj->uuid 	   = $user['UUID'];
 	$insobj->firstname = $user['firstname'];
 	$insobj->lastname  = $user['lastname'];
@@ -458,25 +463,8 @@ function  modlos_insert_userstable($user)
 	else				 	 $insobj->state  = (int)AVATAR_STATE_SYNCDB;
 	if ($user['time']!='') 	 $insobj->time = $user['time'];
 	else 					 $insobj->time = time();
-	//
-	$insobj->hmregion = $user['regionname'];
+	$insobj->hmregion = modlos_get_region_name($user['hmregion']);
 
-/*
-	if (isGUID($user['hmregion'])) {
-		$regionName = opensim_get_region_name($user['hmregion']);
-		if ($regionName!='')$insobj->hmregion = $regionName;
-		else 				$insobj->hmregion = $user['hmregion'];
-	}
-	else {
-		if ($user['hmregion']==null) {
-			$insobj->hmregion = '';
-		}
-		else {
-			$insobj->hmregion = $user['hmregion'];
-		}
-	}
-*/
-	
 	$ret = $DB->insert_record('modlos_users', $insobj);
 
 	return $ret;
@@ -500,23 +488,11 @@ function  modlos_update_userstable($user, $updobj=null)
 	}
 
 	// Update
-	if ($user['uid']!='')   $updobj->user_id  = $user['uid'];
-	if ($user['state']!='') $updobj->state    = (int)$user['state'];
-	if ($user['time']!='') 	$updobj->time 	  = $user['time'];
-	else 				 	$updobj->time 	  = time();
-
-	$updobj->hmregion = $user['regionname'];
-
-	/*
-	if (isGUID($user['hmregion'])) {
-		$regionName = opensim_get_region_name($user['hmregion']);
-		if ($regionName!='')$updobj->hmregion = $regionName;
-		else 				$updobj->hmregion = $user['hmregion'];
-	}
-	else if ($user['hmregion']!='') {
-		$updobj->hmregion = $user['hmregion'];
-	}
-	*/
+	if ($user['uid']!='')   $updobj->user_id = $user['uid'];
+	if ($user['state']!='') $updobj->state   = (int)$user['state'];
+	if ($user['time']!='') 	$updobj->time 	 = $user['time'];
+	else 				 	$updobj->time 	 = time();
+	$updobj->hmregion = modlos_get_region_name($user['hmregion']);
 
 	$ret = $DB->update_record('modlos_users', $updobj);
 
@@ -1016,16 +992,19 @@ function  modlos_delete_banneddb($uuid)
 // Synchro DB
 //
 
-function  modlos_sync_opensimdb($timecheck=true)
+function  modlos_sync_opensimdb($update_check=true)
 {
-	if ($timecheck) {
-		$opensim_up = opensim_users_update_time();
-		$modlos_up  = modlos_get_update_time(MDL_DB_PREFIX.'modlos_users');
-		if ($modlos_up>$opensim_up) return;
+	global $CFG;
+
+	if ($update_check) {
+		$opensim_up = opensim_users_update_time();						// InnoDB の場合は常に 0
+		if ($opensim_up==0) $opensim_up = opensim_user_count_records();	// InnoDB の場合はレコード数でチェック
+		if ($opensim_up==$CFG->opensim_update) return;
+		set_config('opensim_update', $opensim_up);
 	}
 
-	$opnsim_users = opensim_get_avatars_infos();	// OpenSim DB
-	$modlos_users = modlos_get_userstable(); 		// Modlos DB
+	$opnsim_users = opensim_get_avatars_infos();	// OpenSim DB       UUID,      firstname, lastname, hmregion,             created, lastlogin
+	$modlos_users = modlos_get_userstable(); 		// Modlos DB    id, UUID, uid, firstname, lastname, hmregion, state, time
 
 	// OpenSimに対応データが無い場合はデータを消す．
 	foreach ($modlos_users as $modlos_user) {
@@ -1039,15 +1018,15 @@ function  modlos_sync_opensimdb($timecheck=true)
 	// OpenSimにデータがある場合は，Modlos のデータを OpenSimにあわせる．
 	foreach ($opnsim_users as $opnsim_user) {
 		$opnsim_uuid = $opnsim_user['UUID'];	
-		$regionName  = modlos_get_region_name($opnsim_user['hmregion']);
+		$opnsim_user['hmregion'] = modlos_get_region_name($opnsim_user['hmregion']);	// OpenSim DB のホームリージョン名
 		//
-		// 	リージョンネームの更新
+		// 	ホームリージョンの名前を更新
 		if (array_key_exists($opnsim_uuid, $modlos_users)) {
-			if ($regionName!=$modlos_users[$opnsim_uuid]['hmregion']) {
-				$opnsim_user['uid']   = $modlos_users[$opnsim_uuid]['uid'];
-				$opnsim_user['state'] = $modlos_users[$opnsim_uuid]['state']|AVATAR_STATE_SYNCDB;
+			$modlos_user = $modlos_users[$opnsim_uuid];
+			if ($opnsim_user['hmregion']!=$modlos_user['hmregion']) {
+				$opnsim_user['uid']   = $modlos_user['uid'];
+				$opnsim_user['state'] = $modlos_user['state']|AVATAR_STATE_SYNCDB;
 				$opnsim_user['time']  = time();
-				$opnsim_user['regionname'] = $regionName;
 				modlos_update_userstable($opnsim_user);
 			}
 		}
@@ -1055,7 +1034,6 @@ function  modlos_sync_opensimdb($timecheck=true)
 			$opnsim_user['uid']   = '0';
 			$opnsim_user['state'] = AVATAR_STATE_SYNCDB;
 			$opnsim_user['time']  = time();
-			$opnsim_user['regionname'] = $regionName;
 			modlos_insert_userstable($opnsim_user);
 		}
 	}
@@ -1065,16 +1043,17 @@ function  modlos_sync_opensimdb($timecheck=true)
 
 
 
-function  modlos_sync_sloodle_users($timecheck=true)
+function  modlos_sync_sloodle_users($update_check=true)
 {
 	global $DB, $CFG;
 
- 	if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) return;
+ 	if (!jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) return;
 
-	if ($timecheck) {
-		$sloodle_up = modlos_get_update_time(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL);
-		$modlos_up  = modlos_get_update_time(MDL_DB_PREFIX.'modlos_users');
-		if ($modlos_up>$sloodle_up) return;
+	if ($update_check) {
+		$sloodle_up = modlos_get_update_time(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL); 		// InnoDB の場合は常に 0
+		if ($sloodle_up==0) $sloodle_up = modlos_count_records(MDL_SLOODLE_USERS_TBL);	// InnoDB の場合はレコード数でチェック
+		if ($sloodle_up==$CFG->sloodle_update) return;
+		set_config('sloodle_update', $sloodle_up);
 	}
 
 	$sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);

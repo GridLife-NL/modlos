@@ -23,23 +23,14 @@ class block_modlos extends block_base
 	{
 		global $CFG;
 
-		$this->title   = get_string('modlos_menu', 'block_modlos');
-		//$this->version = 2010063010;
-		//$this->version = 2010070422;
-		//$this->version = 2010083024;
-		//$this->version = 2010090100;
-		//$this->version = 2010092200;
-		//$this->version = 2010092303;
-		//$this->version = 2010120215;
-		//$this->version = 2010120917;
-		//$this->version = 2011020717;
-		//$this->version = 2011030114;
-		//$this->version = 2012041117
-		//$this->version = 2012122900;	// 2.0.2
-		//$this->version = 2013031600;	// 2.0.3
-		$this->version = 2013040701;
-		$this->release = '2.1.0';
+		if (empty($plugin)) $plugin = new stdClass();
+		include($CFG->dirroot.'/blocks/modlos/version.php');
 
+		$this->title   = get_string('modlos_menu', 'block_modlos');
+		$this->version = $plugin->version;
+		$this->release = $plugin->release;
+
+		//
 		$this->grid_name 		= $CFG->modlos_grid_name;
 		$this->grid_status 		= false;
 		$this->now_online 		= '0';
@@ -47,6 +38,9 @@ class block_modlos extends block_base
 		$this->user_count 		= '0';
 		$this->region_count 	= '0';
 		$this->cron 			= '1';
+
+		if (!isset($CFG->sloodle_update)) set_config('sloodle_update', 0);
+		if (!isset($CFG->opensim_update)) set_config('opensim_update', 0);
 	}
 
 

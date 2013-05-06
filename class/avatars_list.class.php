@@ -251,7 +251,7 @@ class  AvatarsList
 			$uid = -1;
 			$avatardata = modlos_get_avatar_info($UUID, $this->use_sloodle);
 
-			// auto synchro
+			// synchro
 			if ($avatardata==null) {
 				modlos_sync_opensimdb(false);
 				if ($this->use_sloodle) modlos_sync_sloodle_users(false);
