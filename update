@@ -18,7 +18,7 @@ else
     svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.phplib/trunk opensim.phplib
 fi
 
-if [ -d opensin.hepler ]; then
+if [ -d opensim.helper ]; then
     svn update opensim.helper
 else
     svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.helper/trunk opensim.helper
