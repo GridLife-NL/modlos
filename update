@@ -1,5 +1,11 @@
 svn update
 
+if [ -d jbxl ]; then
+	svn update jbxl
+else
+	svn co http://www.nsl.tuis.ac.jp/svn/php/jbxl/trunk jbxl
+fi
+
 if [ -d flotsam_XmlRpcGroup ]; then
 	svn update flotsam_XmlRpcGroup
 else
