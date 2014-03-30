@@ -152,7 +152,7 @@ class  LoginScreen
 		$lgnscrn_altbox = $this->lgnscrn_altbox;
 		$lgnscrn_title  = $this->lgnscrn_title;
 
-		$course_amp    	= '';
+		$course_param   = '';
 		if ($course_id>0) $course_param = '?course='.$course_id;
 		$lgnscrn_url	= CMS_MODULE_URL.'/admin/actions/loginscreen.php'.$course_param;
 		$return_ttl	   	= get_string('modlos_lgnscrn_return', 'block_modlos');

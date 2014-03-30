@@ -15,8 +15,9 @@ if (isguestuser()) {
 }
 
 $region    = required_param('region', PARAM_TEXT);
-$course_id = optional_param('course', '0', PARAM_INT);
+$course_id = optional_param('course', '1', PARAM_INT);
 if (!isGUID($region)) exit("<h4>bad region uuid!! ($region)</h4>");
+if (!$course_id) $course_id = 1; 
 
 require_login($course_id);
 $hasPermit = hasModlosPermit($course_id);

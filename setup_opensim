@@ -11,5 +11,4 @@ if [ ! -d $OS_DIR ]; then
     exit
 fi
 
-cp -Rpd osprofile $OS_DIR
-cp -Rpd nsl.modules $OS_DIR
+cp -Rpd opensim.modules $OS_DIR

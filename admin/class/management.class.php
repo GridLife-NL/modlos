@@ -68,6 +68,7 @@ class  ManagementBase
 				$this->command = $command;
 				$this->managed = true;
 
+				// Command
 				if ($command=='cltexture') {
 					$cachedir = CMS_MODULE_PATH.'/helper/texture_cache';
 					$command  = "cd $cachedir && /bin/sh cache_clear.sh";
@@ -81,6 +82,9 @@ class  ManagementBase
 					opensim_recreate_presence();
 					$profs = opensim_get_avatars_profiles_from_users();
 					if ($profs!=null) modlos_set_profiles_from_users($profs, false);        // not over write
+				}
+				else if ($command=='debugcom') {
+					opensim_debug_command();
 				}
 				else {
 					$this->managed = false;
@@ -105,7 +109,7 @@ class  ManagementBase
 		$command	   = $this->command;
 		$content	   = '<center>'.get_string('modlos_manage_contents', 'block_modlos').'</center>';
 
-		$course_amp    = '';
+		$course_param  = '';
 		if ($this->course_id>0) $course_param = '?course='.$this->course_id;
 		$manage_url    = CMS_MODULE_URL.'/admin/actions/management.php'.$course_param;
 		$return_ttl	   = get_string('modlos_manage_return', 'block_modlos');
@@ -114,6 +118,9 @@ class  ManagementBase
 		$commands[0]['ttl'] = get_string('modlos_cltexture_ttl', 'block_modlos');
 		$commands[1]['com'] = 'clpresence';
 		$commands[1]['ttl'] = get_string('modlos_clpresence_ttl', 'block_modlos');
+		//
+		$commands[2]['com'] = 'debugcom';
+		$commands[2]['ttl'] = get_string('modlos_debugcom_ttl', 'block_modlos');
 		//$commands[2]['com'] = 'convertdb';
 		//$commands[2]['ttl'] = get_string('modlos_convertdb_ttl', 'block_modlos');
 

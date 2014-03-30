@@ -461,9 +461,14 @@ function  modlos_insert_userstable($user)
 	else				  	 $insobj->user_id = '0';
 	if ($user['state']!='')	 $insobj->state  = (int)$user['state'];
 	else				 	 $insobj->state  = (int)AVATAR_STATE_SYNCDB;
-	if ($user['time']!='') 	 $insobj->time = $user['time'];
-	else 					 $insobj->time = time();
+	if (array_key_exists('time', $user) and $user['time']!='') {
+		$insobj->time = $user['time'];
+	}
+	else {
+		$insobj->time = time();
+	}
 	$insobj->hmregion = modlos_get_region_name($user['hmregion']);
+	if ($insobj->hmregion==null) $insobj->hmregion = '';
 
 	$ret = $DB->insert_record('modlos_users', $insobj);
 
@@ -517,19 +522,15 @@ function  modlos_get_region_name($region)
 
 
 
-
-
-
-
-
 function  modlos_delete_userstable($user)
 {
 	global $DB;
 
-	if ($user['id']=='' and !isGUID($user['UUID'])) return false;
+	if (!isset($user['id']) and !isGUID($user['UUID'])) return false;
 	if (!((int)$user['state']&AVATAR_STATE_INACTIVE)) return false;		// active
 
-	if ($user['id']!='') {
+	//if ($user['id']!='') {
+	if (isset($user['id'])) {
 		$ret = $DB->delete_records('modlos_users', array('id'=>$user['id']));
 	}
 	else {
@@ -641,7 +642,7 @@ function  modlos_get_profile($uuid)
 	$prfobj = $DB->get_record(MDL_PROFILE_USERPROFILE_TBL, array('useruuid'=>$uuid));
 	if ($prfobj) {
 		$prof['UUID'] 			= $prfobj->useruuid;
-		$prof['Partnar'] 		= $prfobj->profilepartnar;
+		$prof['Partnar'] 		= $prfobj->profilepartner;
 		$prof['Image']	 		= $prfobj->profileimage;
 		$prof['AboutText']		= $prfobj->profileabouttext;
 		$prof['AllowPublish']	= $prfobj->profileallowpublish;
@@ -653,7 +654,7 @@ function  modlos_get_profile($uuid)
 		$prof['SkillsText']		= $prfobj->profileskillstext;
 		$prof['LanguagesText']	= $prfobj->profilelanguagestext;
 		$prof['FirstAboutText'] = $prfobj->profilefirsttext;
-		$prof['FirstImage']		= $prfobj->profilefirstimag;
+		$prof['FirstImage']		= $prfobj->profilefirstimage;
 	}
 
 	return $prof;
@@ -901,6 +902,7 @@ function  modlos_set_loginscreen_alert($alert)
 {
 	global $DB;
 
+	$obj = new stdClass();
 	$obj->title 	  = '';
 	$obj->information = '';
 	$obj->bordercolor = 'white';
@@ -997,8 +999,8 @@ function  modlos_sync_opensimdb($update_check=true)
 	global $CFG;
 
 	if ($update_check) {
-		$opensim_up = opensim_users_update_time();						// InnoDB の場合は常に 0
-		if ($opensim_up==0) $opensim_up = opensim_user_count_records();	// InnoDB の場合はレコード数でチェック
+		$opensim_up = opensim_users_update_time();							// InnoDB の場合は常に 0
+		if ($opensim_up==0) $opensim_up = opensim_users_count_records();	// InnoDB の場合はレコード数でチェック
 		if ($opensim_up==$CFG->opensim_update) return;
 		set_config('opensim_update', $opensim_up);
 	}
@@ -1099,7 +1101,7 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 
 	if (empty($currenttab)) $currenttab = 'show_status';
 	if (empty($course)) $course_id = 0;
-	else 				$course_id = $course->id;
+	else				$course_id = $course->id;
 
 	$hasPermit = hasModlosPermit($course_id);
 
@@ -1132,7 +1134,7 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 																	'<b>'.get_string('modlos_manage_tab','block_modlos').'</b>');
 	}
 
-	if ($course_id>0) {
+	if ($course_id>1) {
 		$toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, '<b>'.get_string('modlos_return_tab', 'block_modlos').'</b>');
 	}
 	else {
@@ -1152,7 +1154,7 @@ function  print_tabnav_manage($currenttab, $course)
 
 	if (empty($currenttab)) $currenttab = 'management';
 	if (empty($course)) $course_id = 0;
-	else 				$course_id = $course->id;
+	else				$course_id = $course->id;
 
 	$hasPermit = hasModlosPermit($course_id);
 
@@ -1181,7 +1183,7 @@ function  print_tabnav_manage($currenttab, $course)
 																	'<b>'.get_string('modlos_manage_cmnd_tab','block_modlos').'</b>');
 	}
 
-	if ($course_id>0) {
+	if ($course_id>1) {
 		$toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, '<b>'.get_string('modlos_return_tab', 'block_modlos').'</b>');
 	}
 	else {
@@ -1197,7 +1199,8 @@ function  print_tabnav_manage($currenttab, $course)
 
 function  print_modlos_header($currenttab, $course)
 {
-	global $CFG, $OUTPUT, $PAGE;
+	global $SITE, $OUTPUT, $PAGE;
+//	global $CFG;
 
 	// Print Navi Header
 	if (empty($course)) {
@@ -1218,7 +1221,8 @@ function  print_modlos_header($currenttab, $course)
 
 		$title = get_string('modlos', 'block_modlos');
 		$head  = get_string('modlos_menu', 'block_modlos');
-		$menu  = user_login_string($SITE);
+		//$menu  = user_login_string($SITE);
+		$menu  = '';
 	}
 	else {
 		$title = $course->shortname.': '.get_string('modlos', 'block_modlos');
@@ -1238,4 +1242,3 @@ function  print_modlos_header($currenttab, $course)
 }
 
 
-?>

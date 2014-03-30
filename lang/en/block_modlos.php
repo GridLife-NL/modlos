@@ -1,5 +1,8 @@
 <?php
 
+$string['modlos:addinstance']       = 'Add a new Modlos block';
+$string['modlos:view']              = 'View block';
+
 $string['pluginname'] 				= 'Modlos';
 $string['modlos_menu'] 				= 'Moodle OpenSim';
 $string['modlos'] 					= 'Modlos';
@@ -32,25 +35,25 @@ $string['modlos_delete'] 			= 'Delete';
 $string['modlos_change'] 			= 'Change';
 $string['modlos_time_now']			= 'Present Time';
 
-$string['modlos_online_ttl'] 		= 'ONLINE';
-$string['modlos_offline_ttl'] 		= 'OFFLINE';
-$string['modlos_edit_ttl'] 			= 'EDIT';
-$string['modlos_edit_user_ttl']		= 'EDIT user';
-$string['modlos_reset_ttl'] 		= 'RESET';
-$string['modlos_cancel_ttl'] 		= 'CANCEL';
-$string['modlos_delete_ttl'] 		= 'DEL';
-$string['modlos_get_owner_ttl'] 	= 'OWNER';
-$string['modlos_update_ttl'] 		= 'UPDATE';
-$string['modlos_create_ttl'] 		= 'CREATE';
-$string['modlos_return_ttl'] 		= 'RETURN';
+$string['modlos_online_ttl'] 		= ' ONLINE ';
+$string['modlos_offline_ttl'] 		= ' OFFLINE ';
+$string['modlos_edit_ttl'] 			= ' EDIT ';
+$string['modlos_edit_user_ttl']		= ' EDIT user ';
+$string['modlos_reset_ttl'] 		= ' RESET ';
+$string['modlos_cancel_ttl'] 		= ' CANCEL ';
+$string['modlos_delete_ttl'] 		= ' DEL ';
+$string['modlos_get_owner_ttl'] 	= ' OWNER ';
+$string['modlos_update_ttl'] 		= ' UPDATE ';
+$string['modlos_create_ttl'] 		= ' CREATE ';
+$string['modlos_return_ttl'] 		= ' RETURN ';
 
-$string['modlos_avatar_reset_ttl'] 	= 'RESET AVATAR';
-$string['modlos_avatar_create_ttl'] = 'CREATE AVATAR';
-$string['modlos_avatar_edit_ttl'] 	= 'EDIT AVATA';
-$string['modlos_avatar_update_ttl'] = 'UPDATE AVATAR';
-$string['modlos_avatar_delete_ttl'] = 'DELETE AVATAR';
-$string['modlos_avatar_own_ttl'] 	= 'OWN AVATAR';
-$string['modlos_avatar_dlt_cncld_ttl']='AVATAR delete CANCELED';
+$string['modlos_avatar_reset_ttl'] 	= ' RESET AVATAR ';
+$string['modlos_avatar_create_ttl'] = ' CREATE AVATAR ';
+$string['modlos_avatar_edit_ttl'] 	= ' EDIT AVATAR ';
+$string['modlos_avatar_update_ttl'] = ' UPDATE AVATAR ';
+$string['modlos_avatar_delete_ttl'] = ' DELETE AVATAR ';
+$string['modlos_avatar_own_ttl'] 	= ' OWN AVATAR ';
+$string['modlos_avatar_dlt_cncld_ttl']=' AVATAR delete CANCELED ';
 
 $string['modlos_status_page'] 		= 'OpenSim Status';
 $string['modlos_db_status'] 		= 'DB Status';
@@ -142,12 +145,12 @@ $string['modlos_firstname_required']= 'You must input First Name!!';
 $string['modlos_lastname_required'] = 'You must input Last Name!!';
 $string['modlos_passwd_required'] 	= 'You must input Password!!';
 
-$string['modlos_firstname_maxlength']='Firstname is too long. Max length of Firstname is indicated in flowing ( )';
-$string['modlos_firstname_minlength']='Firstname is too short. Min length of Firstname is indicated in flowing ( )';
-$string['modlos_lastname_maxlength']= 'Lastname is too long. Max length of Lastname is indicated in flowing ( )';
-$string['modlos_lastname_minlength']= 'Lastname is too short. Min length of Lastname is indicated in flowing ( )';
-$string['modlos_passwd_maxlength'] 	= 'Password is too long. Max length of password is indicated in flowing ( )';
-$string['modlos_passwd_minlength']	= 'Password is too short. Min length of password is indicated in flowing ( )';
+$string['modlos_firstname_maxlength']='Firstname is too long. Max length of Firstname is {$a}';
+$string['modlos_firstname_minlength']='Firstname is too short. Min length of Firstname is {$a}';
+$string['modlos_lastname_maxlength']= 'Lastname is too long. Max length of Lastname is {$a}';
+$string['modlos_lastname_minlength']= 'Lastname is too short. Min length of Lastname is {$a}';
+$string['modlos_passwd_maxlength'] 	= 'Password is too long. Max length of password is {$a}';
+$string['modlos_passwd_minlength']	= 'Password is too short. Min length of password is {$a}';
 $string['modlos_passwd_mismatch'] 	= 'Password is mismatch.';
 $string['modlos_alphabet_numeric'] 	= 'Input Only Alphabet or Numeric';
 $string['modlos_invalid_regionname']= 'Invalid region name!!';
@@ -242,6 +245,8 @@ $string['modlos_map_size_desc'] 	= 'Specify default size(px) of SIM icon on the 
 
 $string['modlos_max_avatars'] 		= 'Max Number of Avatars';
 $string['modlos_max_avatars_desc'] 	= 'Max number of avatars that a user can own';
+$string['modlos_base_avatar']       = 'Template Avatar\'s GUID';
+$string['modlos_base_avatar_desc']  = 'Specifies the GUID of the avatar as a template for creating the avatar.';
 $string['modlos_lname_activate'] 	= 'Last Name Activation';
 $string['modlos_lname_desc'] 		= 'Select to last name limitation is active, or not';
 $string['modlos_dst_region_name'] 	= 'Default Home Region';
@@ -349,6 +354,7 @@ $string['modlos_lgnscrn_boxttl']	= 'Title';
 
 $string['modlos_cltexture_ttl']		= 'Clear Texture Cache Data';
 $string['modlos_clpresence_ttl']	= 'Clear Login Information Table';
+$string['modlos_debugcom_ttl']	    = 'Command for Debug';
 
 $string['modlos_return_tab'] 		= 'Return to Course';
 $string['modlos_return_sitetop_tab']= 'Return to Site Top';

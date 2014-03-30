@@ -68,7 +68,7 @@ class  OwnerAvatar
 		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 
-		if ($isAvatarMax) {
+		if ($this->isAvatarMax) {
 			$mesg = ' '.get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)";
 			print_error($mesg, '', $this->return_url);
 		}

@@ -61,8 +61,7 @@ class block_modlos extends block_base
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
 
 		$isguest = isguestuser();
-
-		if (!$isguest) {
+		if (!$isguest and $USER->id!=0) {
 			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php?course='.$id.'">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';
 
 			$isAvatarMax = false;

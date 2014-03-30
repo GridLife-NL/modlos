@@ -5,14 +5,26 @@
 
 //
 // About Capabilities
-//    please see http://docs.moodle.org/dev/Roles#Capability-locality_changes_in_v1.9
+//	please see http://docs.moodle.org/dev/Roles#Capability-locality_changes_in_v1.9
 //
 
 defined('MOODLE_INTERNAL') || die();
 
-if (!defined('_JBXL_MOODLE_TOOLS')) {
+$jbxl_moodle_tools_ver = 2013092100;
 
-define('_JBXL_MOODLE_TOOLS', 'jbxl_moodle_tools_v1.0');
+
+//
+if (defined('JBXL_MOODLE_TOOLS_VER') or defined('_JBXL_MOODLE_TOOLS')) {
+	if (defined('JBXL_MOODLE_TOOLS_VER')) {
+		if (JBXL_MOODLE_TOOLS_VER < $jbxl_moodle_tools_ver) {
+			print_error('JBXL_MOODLE_TOOLS: old version is used. '.JBXL_MOODLE_TOOLS_VER.' < '.$jbxl_moodle_tools_ver);
+		}
+	}
+}
+else {
+
+define('JBXL_MOODLE_TOOLS_VER', $jbxl_moodle_tools_ver);
+
 
 
 /*******************************************************************************
@@ -26,6 +38,7 @@ define('_JBXL_MOODLE_TOOLS', 'jbxl_moodle_tools_v1.0');
 // function  jbxl_is_student($uid, $cntxt)
 // function  jbxl_has_role($uid, $cntxt, $rolename)
 //
+// function  jbxl_get_course_users($cntxt, $sort='')
 // function  jbxl_get_course_students($cntxt, $sort='')
 // function  jbxl_get_course_tachers($cntxt, $sort='')
 // function  jbxl_get_course_assistants($cntxt, $sort='')
@@ -42,9 +55,9 @@ define('_JBXL_MOODLE_TOOLS', 'jbxl_moodle_tools_v1.0');
 function  jbxl_is_admin($uid)
 {
 	$admins = get_admins();
-    foreach ($admins as $admin) {
-        if ($uid==$admin->id) return true;
-    }
+	foreach ($admins as $admin) {
+		if ($uid==$admin->id) return true;
+	}
 	return false;
 }
 
@@ -57,10 +70,18 @@ function  jbxl_is_teacher($uid, $cntxt, $inc_admin=true)
 	if (!$cntxt) return false;
 	if (!is_object($cntxt)) $cntxt = get_context_instance(CONTEXT_COURSE, $cntxt);
 
-	$role = $DB->get_field('role', 'id', array('shortname'=>'editingteacher'));
-	$ret  = user_has_role_assignment($uid, $role, $cntxt->id);
+	$ret = false;
+	$roles = $DB->get_records('role', array('archetype'=>'editingteacher'), 'id', 'id'); 
+	foreach($roles as $role) {
+		$ret = user_has_role_assignment($uid, $role->id, $cntxt->id);
+		if ($ret) return $ret;
+	}
 
-	if (!$ret && $inc_admin) $ret = jbxl_is_admin($uid); 
+	if ($inc_admin) {
+		$ret = jbxl_is_admin($uid); 
+		if (!$ret) $ret = jbxl_has_role($uid, $cntxt, 'manager');
+		if (!$ret) $ret = jbxl_has_role($uid, $cntxt, 'coursecreator');
+	}
 	return $ret;
 }
 
@@ -73,10 +94,12 @@ function  jbxl_is_assistant($uid, $cntxt)
 	if (!$cntxt) return false;
 	if (!is_object($cntxt)) $cntxt = get_context_instance(CONTEXT_COURSE, $cntxt);
 
-	$role = $DB->get_field('role', 'id', array('shortname'=>'teacher'));
-	$ret  = user_has_role_assignment($uid, $role, $cntxt->id);
-
-	return $ret;
+	$roles = $DB->get_records('role', array('archetype'=>'teacher'), 'id', 'id'); 
+	foreach($roles as $role) {
+		$ret = user_has_role_assignment($uid, $role->id, $cntxt->id);
+		if ($ret) return $ret;
+	}
+	return false;
 }
 
 
@@ -88,10 +111,12 @@ function  jbxl_is_student($uid, $cntxt)
 	if (!$cntxt) return false;
 	if (!is_object($cntxt)) $cntxt = get_context_instance(CONTEXT_COURSE, $cntxt);
 
-	$role = $DB->get_field('role', 'id', array('shortname'=>'student'));
-	$ret  = user_has_role_assignment($uid, $role, $cntxt->id);
-
-	return $ret;
+	$roles = $DB->get_records('role', array('archetype'=>'student'), 'id', 'id'); 
+	foreach($roles as $role) {
+		$ret = user_has_role_assignment($uid, $role->id, $cntxt->id);	// slow?
+		if ($ret) return $ret;
+	}
+	return false;
 }
 
 
@@ -100,13 +125,32 @@ function  jbxl_has_role($uid, $cntxt, $rolename)
 {
 	global $DB;
 
-	if (!$cntxt) return '';
+	if (!$cntxt) return false;
 	if (!is_object($cntxt)) $cntxt = get_context_instance(CONTEXT_COURSE, $cntxt);
 
-	$role = $DB->get_field('role', 'id', array('shortname'=>$rolename));
-	$ret  = user_has_role_assignment($uid, $role, $cntxt->id);
+	$roles = $DB->get_records('role', array('archetype'=>$rolename), 'id', 'id'); 
+	foreach($roles as $role) {
+		$ret = user_has_role_assignment($uid, $role->id, $cntxt->id);
+		if ($ret) return $ret;
+	}
+	return false;
+}
 
-	return $ret;
+
+
+function jbxl_get_course_users($cntxt, $sort='')
+{
+	global $DB;
+
+	if (!$cntxt) return '';
+
+	if ($sort) $sort = ' ORDER BY u.'.$sort;
+	$sql = 'SELECT u.* FROM {role_assignments} r, {user} u WHERE r.contextid = ? AND r.userid = u.id '.$sort;
+	//
+	if (!is_object($cntxt)) $cntxt = get_context_instance(CONTEXT_COURSE, $cntxt);
+	$users = $DB->get_records_sql($sql, array($cntxt->id));
+
+	return $users;
 }
 
 
@@ -116,14 +160,22 @@ function jbxl_get_course_students($cntxt, $sort='')
 	global $DB;
 
 	if (!$cntxt) return '';
+
+	$roles = $DB->get_records('role', array('archetype'=>'student'), 'id', 'id'); 
+	if (empty($roles)) return '';
+
+	$roleid = '';
+	foreach($roles as $role) {
+		if (!empty($roleid)) $roleid.= ' OR ';
+		$roleid.= 'r.roleid = '.$role->id;
+	}
+	if ($sort) $sort = ' ORDER BY u.'.$sort;
+
+	$sql = 'SELECT u.* FROM {role_assignments} r, {user} u '.
+					 ' WHERE r.contextid = ? AND ('.$roleid.') AND r.userid = u.id '.$sort;
+	//
 	if (!is_object($cntxt)) $cntxt = get_context_instance(CONTEXT_COURSE, $cntxt);
-
-	$roleid = $DB->get_field('role', 'id', array('shortname'=>'student'));
-	if ($sort) $sort = " ORDER BY u.".$sort;
-
-	$sql = "SELECT u.* FROM {role_assignments} r, {user} u ".
-					 " WHERE r.contextid = ? AND r.roleid = ? AND r.userid = u.id  $sort";
-    $users = $DB->get_records_sql($sql, array($cntxt->id, $roleid));
+	$users = $DB->get_records_sql($sql, array($cntxt->id));
 
 	return $users;
 }
@@ -135,17 +187,26 @@ function jbxl_get_course_tachers($cntxt, $sort='')
 	global $DB;
 
 	if (!$cntxt) return '';
+
+	$roles = $DB->get_records('role', array('archetype'=>'editingteacher'), 'id', 'id'); 
+	if (empty($roles)) return '';
+
+	$roleid = '';
+	foreach($roles as $role) {
+		if (!empty($roleid)) $roleid.= ' OR ';
+		$roleid.= 'r.roleid = '.$role->id;
+	}
+	if ($sort) $sort = ' ORDER BY u.'.$sort;
+
+	$sql = 'SELECT u.* FROM {role_assignments} r, {user} u '. 
+					 ' WHERE r.contextid = ? AND ('.$roleid.') AND r.userid = u.id '.$sort;
+	//
 	if (!is_object($cntxt)) $cntxt = get_context_instance(CONTEXT_COURSE, $cntxt);
-
-	$roleid = $DB->get_field('role', 'id', array('shortname'=>'editingteacher'));
-	if ($sort) $sort = " ORDER BY u.".$sort;
-
-	$sql = "SELECT u.* FROM {role_assignments} r, {user} u ".
-					 " WHERE r.contextid = ? AND r.roleid = ? AND r.userid = u.id  $sort";
-    $users = $DB->get_records_sql($sql, array($cntxt->id, $roleid));
+	$users = $DB->get_records_sql($sql, array($cntxt->id));
 
 	return $users;
 }
+
 
 
 function jbxl_get_course_assistants($cntxt, $sort='')
@@ -153,14 +214,22 @@ function jbxl_get_course_assistants($cntxt, $sort='')
 	global $DB;
 
 	if (!$cntxt) return '';
+
+	$roles = $DB->get_records('role', array('archetype'=>'teacher'), 'id', 'id'); 
+	if (empty($roles)) return '';
+
+	$roleid = '';
+	foreach($roles as $role) {
+		if (!empty($roleid)) $roleid.= ' OR ';
+		$roleid.= 'r.roleid = '.$role->id;
+	}
+	if ($sort) $sort = ' ORDER BY u.'.$sort;
+
+	$sql = 'SELECT u.* FROM {role_assignments} r, {user} u '.
+					 ' WHERE r.contextid = ? AND ('.$roleid.') AND r.userid = u.id '.$sort;
+	//
 	if (!is_object($cntxt)) $cntxt = get_context_instance(CONTEXT_COURSE, $cntxt);
-
-	$roleid = $DB->get_field('role', 'id', array('shortname'=>'teacher'));
-	if ($sort) $sort = " ORDER BY u.".$sort;
-
-	$sql = "SELECT u.* FROM {role_assignments} r, {user} u ".
-					 " WHERE r.contextid = ? AND r.roleid = ? AND r.userid = u.id  $sort";
-    $users = $DB->get_records_sql($sql, array($cntxt->id, $roleid));
+	$users = $DB->get_records_sql($sql, array($cntxt->id));
 
 	return $users;
 }
@@ -168,6 +237,7 @@ function jbxl_get_course_assistants($cntxt, $sort='')
 
 
 
+/*
 function jbxl_get_user_first_grouping($courseid, $userid)
 {
 	/////////////////////////////////
@@ -177,19 +247,20 @@ function jbxl_get_user_first_grouping($courseid, $userid)
 
 	if (!$courseid or !$userid) return 0;
 
-    $groupings = groups_get_user_groups($courseid, $userid);
+	$groupings = groups_get_user_groups($courseid, $userid);
 	if (!is_array($groupings)) return 0;
 
 	$keys = array_keys($groupings);
 	if (count($keys)>1 && $keys[0]==0) return $keys[1];
 	else return $keys[0];
 }
+*/
 
 
 
 
 //
-// Moodle DB
+// Moodle DB (MySQL)
 //
 
 function jbxl_db_exist_table($table, $lower_case=true)
@@ -215,10 +286,7 @@ function jbxl_db_exist_table($table, $lower_case=true)
 
 
 
+}		// !defined('JBXL_MOODLE_TOOLS_VER')
 
 
 
-
-
-}		// !defined('_JBXL_MOODLE_TOOLS')
-?>

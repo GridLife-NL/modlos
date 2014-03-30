@@ -10,8 +10,9 @@ if (isguestuser()) {
 }
 
 $agent 	   = required_param('agent', PARAM_TEXT);
-$course_id = optional_param('course', '0', PARAM_INT);
+$course_id = optional_param('course', '1', PARAM_INT);
 if (!isGUID($agent)) exit("<h4>bad agent uuid!! ($agent)</h4>");
+if (!$course_id) $course_id = 1; 
 
 require_login($course_id);
 $hasPermit = hasModlosPermit($course_id);

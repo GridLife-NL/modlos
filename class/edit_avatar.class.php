@@ -142,7 +142,7 @@ class  EditAvatar
 			}
 			if ($this->passwd!='' and strlen($this->passwd)<AVATAR_PASSWD_MINLEN) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_passwd_minlength', 'block_modlos').' ('.AVATAR_PASSWD_MINLEN.')';
+				$this->errorMsg[] = get_string('modlos_passwd_minlength', 'block_modlos', AVATAR_PASSWD_MINLEN);
 			}
 
 

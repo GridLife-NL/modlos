@@ -3,5 +3,6 @@ svn ci -m ""
 (cd flotsam_XmlRpcGroup && svn ci -m "")
 (cd opensim.phplib && svn ci -m "")
 (cd opensim.modules && svn ci -m "")
+(cd opensim.helper && svn ci -m "")
 #(cd osprofile && svn ci -m "")
 #(cd ossearch && svn ci -m "")

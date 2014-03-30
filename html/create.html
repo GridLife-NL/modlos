@@ -8,18 +8,18 @@
 <br />
 
 <form action="<?php echo $this->action_url?>" method="POST">
-  <table width="520" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
+  <table width="640" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 
   <?php if ($this->hasPermit) {?>
     <tr>
-      <td width="120" class="head"><?php echo $uuid_ttl?></td>
-      <td width="320" class="even"><input name="UUID" id="UUID" size="52" maxlength="36" value="<?php echo $this->nx_UUID?>" /></td>
+      <td width="180" class="head"><?php echo $uuid_ttl?></td>
+      <td width="460" class="even"><input name="UUID" id="UUID" size="52" maxlength="36" value="<?php echo $this->nx_UUID?>" /></td>
     </tr>
   <?php }?>
 
     <tr>
-      <td width="120" class="head"><?php echo $firstname_ttl?></td>
-      <td width="320" class="even"><input name="firstname" id="firstname" size="32" maxlength="30" value="<?php echo $pv_firstname?>" /></td>
+      <td width="180" class="head"><?php echo $firstname_ttl?></td>
+      <td width="460" class="even"><input name="firstname" id="firstname" size="32" maxlength="30" value="<?php echo $pv_firstname?>" /></td>
     </tr>
 
     <tr>
@@ -88,7 +88,7 @@
       <tr>
         <td class="head"><?php echo $disclaimer_ttl?></td>
         <td class="odd">
-          <textarea name="disclaimer" cols="40" rows="5" readonly="readonly"><?php echo $disclaimer?></textarea><br />
+          <textarea name="disclaimer" cols="64" rows="8" readonly="readonly"><?php echo $disclaimer?></textarea><br />
       	  <label><input name="agree" type="checkbox" value="agree"  />&nbsp;<?php echo $disclaim_agree?></label>
         </td>
       </tr>
@@ -96,8 +96,8 @@
       <input type="hidden" name="agree" value="agree" />
     <?php }?>
 
-
   </table>
+
   <br />
 
   <div align="center">
@@ -117,16 +117,16 @@
   <div align="center">
     <h3><font color=#1010e0><?php echo $avatar_created?></font></h3>
   </div>
-  <table width="520" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
+  <table width="640" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
     <?php if ($this->hasPermit) {?>
       <tr>
-        <td width="120" class="head"><?php echo $uuid_ttl?></td>
-        <td width="320" class="even"><font color="#2060b0"><?php echo $this->UUID?></font></td>	
+        <td width="180" class="head"><?php echo $uuid_ttl?></td>
+        <td width="460" class="even"><font color="#2060b0"><?php echo $this->UUID?></font></td>	
       </tr>
     <?php }?>
     <tr>
-      <td width="120" class="head"><?php echo $firstname_ttl?></td>
-      <td width="320" class="odd" ><?php echo $this->firstname?></td>
+      <td width="180" class="head"><?php echo $firstname_ttl?></td>
+      <td width="460" class="odd" ><?php echo $this->firstname?></td>
     </tr>
     <tr>
       <td class="head"><?php echo $lastname_ttl?></td>

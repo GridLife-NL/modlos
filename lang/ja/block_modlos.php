@@ -1,5 +1,8 @@
 <?php
 
+$string['modlos:addinstance']       = 'Modlosブロックの追加';
+$string['modlos:view']              = 'ブロックの閲覧';
+
 $string['pluginname'] 				= 'Modlos';
 $string['modlos_menu'] 				= 'Moodle OpenSim';
 $string['modlos'] 					= 'Modlos';
@@ -32,25 +35,25 @@ $string['modlos_delete'] 			= '削除';
 $string['modlos_change'] 			= '変更';
 $string['modlos_time_now']			= '現時刻';
 
-$string['modlos_online_ttl'] 		= 'オンライン';
-$string['modlos_offline_ttl'] 		= 'オフライン';
-$string['modlos_edit_ttl'] 			= 'EDIT';
-$string['modlos_edit_user_ttl'] 	= 'ユーザ情報の編集';
-$string['modlos_reset_ttl'] 		= 'リセット';
-$string['modlos_cancel_ttl'] 		= 'キャンセル';
-$string['modlos_delete_ttl'] 		= 'DEL';
-$string['modlos_get_owner_ttl'] 	= 'OWNER';
-$string['modlos_update_ttl'] 		= '更新';
-$string['modlos_create_ttl'] 		= '作成';
-$string['modlos_return_ttl'] 		= '戻る';
+$string['modlos_online_ttl'] 		= ' オンライン ';
+$string['modlos_offline_ttl'] 		= ' オフライン ';
+$string['modlos_edit_ttl'] 			= ' EDIT';
+$string['modlos_edit_user_ttl'] 	= ' ユーザ情報の編集 ';
+$string['modlos_reset_ttl'] 		= ' リセット ';
+$string['modlos_cancel_ttl'] 		= ' キャンセル ';
+$string['modlos_delete_ttl'] 		= ' DEL ';
+$string['modlos_get_owner_ttl'] 	= ' OWNER ';
+$string['modlos_update_ttl'] 		= ' 更新 ';
+$string['modlos_create_ttl'] 		= ' 作成 ';
+$string['modlos_return_ttl'] 		= ' 戻る ';
 
-$string['modlos_avatar_reset_ttl'] 	= 'リセット';
-$string['modlos_avatar_create_ttl'] = '作成';
-$string['modlos_avatar_edit_ttl'] 	= '編集';
-$string['modlos_avatar_update_ttl'] = '更新';
-$string['modlos_avatar_delete_ttl'] = '削除';
-$string['modlos_avatar_own_ttl'] 	= 'オーナの変更';
-$string['modlos_avatar_dlt_cncld_ttl']='取消し';
+$string['modlos_avatar_reset_ttl'] 	= ' リセット ';
+$string['modlos_avatar_create_ttl'] = ' 作成 ';
+$string['modlos_avatar_edit_ttl'] 	= ' 編集 ';
+$string['modlos_avatar_update_ttl'] = ' 更新 ';
+$string['modlos_avatar_delete_ttl'] = ' 削除 ';
+$string['modlos_avatar_own_ttl'] 	= ' オーナの変更 ';
+$string['modlos_avatar_dlt_cncld_ttl']=' 取消し ';
 
 $string['modlos_status_page'] 		= 'ステータス';
 $string['modlos_db_status'] 		= 'データベース';
@@ -142,12 +145,12 @@ $string['modlos_firstname_required']= 'ファーストネームを書いてく�
 $string['modlos_lastname_required'] = 'ラストネームを書いてください！';
 $string['modlos_passwd_required'] 	= 'パスワードを入力してください！';
 
-$string['modlos_firstname_maxlength']= 'ファーストネームが長すぎます．( )内に示す文字数以下である必要があります．';
-$string['modlos_firstname_minlength']= 'ファーストネームが短すぎます．( )内に示す文字数以上である必要があります．';
-$string['modlos_lastname_maxlength']= 'ラストネームが長過ぎます． ( )内に示す文字数以下である必要があります．';
-$string['modlos_lastname_minlength']= 'ラストネームが短すぎます． ( )内に示す文字数以上である必要があります．';
-$string['modlos_passwd_maxlength'] 	= 'パスワードが長過ぎます．( )内に示す文字数以下である必要があります．';
-$string['modlos_passwd_minlength'] 	= 'パスワードが短すぎます．( )内に示す文字数以上である必要があります．';
+$string['modlos_firstname_maxlength']= 'ファーストネームが長すぎます．{$a}文字以下である必要があります．';
+$string['modlos_firstname_minlength']= 'ファーストネームが短すぎます．{$a}文字以上である必要があります．';
+$string['modlos_lastname_maxlength']= 'ラストネームが長過ぎます．{$a}文字以下である必要があります．';
+$string['modlos_lastname_minlength']= 'ラストネームが短すぎます．{$a}文字以上である必要があります．';
+$string['modlos_passwd_maxlength'] 	= 'パスワードが長過ぎます．{$a}文字以下である必要があります．';
+$string['modlos_passwd_minlength'] 	= 'パスワードが短すぎます．{$a}文字以上である必要があります．';
 $string['modlos_passwd_mismatch'] 	= 'パスワードが一致しません';
 $string['modlos_alphabet_numeric'] 	= '半角英数字のみの使用となります';
 $string['modlos_invalid_regionname']= '無効なリージョンネームです';
@@ -241,6 +244,8 @@ $string['modlos_map_size_desc'] 		= 'ワールドマップ上のSIMのサイズ(
 
 $string['modlos_max_avatars'] 		= 'アバターの最大数';
 $string['modlos_max_avatars_desc'] 	= '一人の Moodleユーザが所有できるアバターの最大人数．負数の場合は無制限';
+$string['modlos_base_avatar'] 		= 'テンプレートアバターのGUID';
+$string['modlos_base_avatar_desc'] 	= 'アバターを作成する際のテンプレートとなるアバターのGUIDを指定する．';
 $string['modlos_lname_activate'] 	= 'ラストネーム管理';
 $string['modlos_lname_desc'] 		= 'ラストネームを，予めデータベースに用意していた物に制限するか？';
 $string['modlos_dst_region_name'] 	= 'デフォルトのホームリージョン';
@@ -348,6 +353,7 @@ $string['modlos_lgnscrn_boxttl']	= 'タイトル';
 
 $string['modlos_cltexture_ttl']     = 'テクスチャのキャッシュデータをクリア';
 $string['modlos_clpresence_ttl']    = 'ログイン情報テーブルをクリア';
+$string['modlos_debugcom_ttl']      = 'デバッグ用コマンド';
 
 $string['modlos_return_tab'] 		= 'コースに戻る';
 $string['modlos_return_sitetop_tab']= 'サイトトップに戻る';

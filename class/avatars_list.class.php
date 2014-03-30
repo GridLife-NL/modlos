@@ -79,7 +79,7 @@ class  AvatarsList
 
 
 
-
+	// アバターの検索条件
 	function  set_condition() 
 	{
 		$db_ver = opensim_get_db_version();

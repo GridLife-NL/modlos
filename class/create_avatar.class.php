@@ -17,9 +17,11 @@ class  CreateAvatar
 	var $action_url	= '';
 	var $created_avatar = false;
 
+	var $base_avatar = '00000000-0000-0000-0000-000000000000';
+
 	var	$avatars_num = 0;
 	var	$max_avatars = 0;
-	var	$isAvatarMax = false;
+	var $isAvatarMax = false;
 
 	var $course_id  = 0;
 	var $use_sloodle= false;
@@ -69,6 +71,7 @@ class  CreateAvatar
 		$this->avatars_num = modlos_get_avatars_num($USER->id);
 		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
+		$this->base_avatar = $CFG->modlos_base_avatar;
 
 		// Number of Avatars Check
 		if ($this->isAvatarMax) {
@@ -77,6 +80,13 @@ class  CreateAvatar
 			$mesg = ' '.get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)";
 			print_error($mesg, '', $course_url);
 		}
+	}
+
+
+
+	function  set_base_avatar($base)
+	{
+		if (isGUID($base)) $this->base_avatar = $base;
 	}
 
 
@@ -135,7 +145,7 @@ class  CreateAvatar
 			}
 			if (strlen($this->passwd)<AVATAR_PASSWD_MINLEN) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_passwd_minlength', 'block_modlos').' ('.AVATAR_PASSWD_MINLEN.')';
+				$this->errorMsg[] = get_string('modlos_passwd_minlength', 'block_modlos', AVATAR_PASSWD_MINLEN);
 			}
 			if ($this->passwd!=$confirm_pass) {
 				$this->hasError = true;
@@ -203,11 +213,12 @@ class  CreateAvatar
 		$pv_ownername = $this->ownername;
 		if ($this->created_avatar) {
 			$pv_firstname = '';
-			$pv_lastname  = '';
+			$pv_lastname  = 'Resident';
 		}
 		else {
 			$pv_firstname = $this->firstname;
 			$pv_lastname  = $this->lastname;
+			if ($pv_lastname=='') $pv_lastname = 'Resident';
 		}
 
 		include(CMS_MODULE_PATH.'/html/create.html');
@@ -237,7 +248,7 @@ class  CreateAvatar
 		}
 
 		// OpenSim DB
-		$rslt = opensim_create_avatar($this->UUID, $this->firstname, $this->lastname, $this->passwd, $this->hmregion);
+		$rslt = opensim_create_avatar($this->UUID, $this->firstname, $this->lastname, $this->passwd, $this->hmregion, $this->base_avatar);
 		if (!$rslt) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string('modlos_opensim_create_error', 'block_modlos')." ($this->UUID)";

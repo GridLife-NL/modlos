@@ -5,7 +5,8 @@ if (!defined('CMS_MODULE_PATH')) {
 }
 require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
-$course_id = optional_param('course', '0', PARAM_INT);
+$course_id = optional_param('course', '1', PARAM_INT);
+if (!$course_id) $course_id = 1;
 $course = $DB->get_record('course', array('id'=>$course_id));
 
 
@@ -68,7 +69,7 @@ $settings->add(new admin_setting_configtext('modlos_map_start_y',
 $options = array('16'=>16, '32'=>32, '64'=>64, '128'=>128, '256'=>256, '512'=>512);
 $settings->add(new admin_setting_configselect('modlos_map_size', 
 					get_string('modlos_map_size', 'block_modlos'),
-				   	get_string('modlos_map_size_desc', 'block_modlos'), '128', $options));
+				   	get_string('modlos_map_size_desc', 'block_modlos'), '64', $options));
 
 $settings->add(new admin_setting_configcheckbox('modlos_use_utc_time', 
 					get_string('modlos_use_utc', 'block_modlos'),
@@ -81,6 +82,10 @@ $settings->add(new admin_setting_configtext('modlos_date_format',
 $settings->add(new admin_setting_configtext('modlos_max_own_avatars', 
 					get_string('modlos_max_avatars', 'block_modlos'),
 				   	get_string('modlos_max_avatars_desc', 'block_modlos'), '1', PARAM_INT));
+
+$settings->add(new admin_setting_configtext('modlos_base_avatar',
+					get_string('modlos_base_avatar', 'block_modlos'),
+					get_string('modlos_base_avatar_desc', 'block_modlos'), '00000000-0000-0000-0000-000000000000', PARAM_TEXT));
 
 $settings->add(new admin_setting_configcheckbox('modlos_activate_lastname', 
 					get_string('modlos_lname_activate', 'block_modlos'),
@@ -147,8 +152,7 @@ $settings->add(new admin_setting_configtext('modlos_groupdb_currency_key',
 
 $settings->add(new admin_setting_configtext('modlos_banker_avatar', 
 					get_string('modlos_banker', 'block_modlos'),
-				   	get_string('modlos_banker_desc', 'block_modlos'), 
-						'00000000-0000-0000-0000-000000000000', PARAM_TEXT));
+				   	get_string('modlos_banker_desc', 'block_modlos'), '00000000-0000-0000-0000-000000000000', PARAM_TEXT));
 */
 
 
