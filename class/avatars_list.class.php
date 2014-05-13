@@ -82,10 +82,12 @@ class  AvatarsList
 	// アバターの検索条件
 	function  set_condition() 
 	{
+		global $CFG;
+
 		$db_ver = opensim_get_db_version();
 		if ($db_ver==null) {
 			$course_url = $CFG->wwwroot;
-			if ($ithis->course_id>0) $course_url.= '/course/view.php?id='.$course_id;
+			if ($this->course_id>0) $course_url.= '/course/view.php?id='.$this->course_id;
 			print_error('modlos_db_connect_error', 'block_modlos', $course_url);
 		}
 
