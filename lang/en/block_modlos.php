@@ -225,6 +225,8 @@ $string['modlos_sql_user'] 			= 'OpenSim SQL DB User Name';
 $string['modlos_sql_user_desc'] 	= 'Specify the OpenSim SQL user name';
 $string['modlos_sql_pass'] 			= 'OpenSim SQL DB Password';
 $string['modlos_sql_pass_desc'] 	= 'Specify the OpenSim SQL password';
+$string['modlos_use_mysqli']        = 'Use of a MySQLi interface';
+$string['modlos_use_mysqli_desc']   = 'Do you use MySQLi interface which is expanded function of PHP5? (need MySQL4.1 or later）';
 
 $string['modlos_user_uri'] 			= 'User(ROBUST) server URL';
 $string['modlos_user_uri_desc'] 	= 'Specify User(ROBUST) server URL. Do not use localhost(127.0.0.1)';

@@ -33,6 +33,8 @@ define('USE_CURRENCY_SERVER',	$CFG->modlos_use_currency_server);
 define('CURRENCY_SCRIPT_KEY',	$CFG->modlos_currency_script_key);
 define('USER_SERVER_URI',		$CFG->modlos_user_server_uri);
 
+if (!property_exists($CFG, 'modlos_use_mysqli')) $CFG->modlos_use_mysqli = false;
+define('OPENSIM_DB_MYSQLI',		$CFG->modlos_use_mysqli);
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -45,6 +47,7 @@ define('CMS_DB_HOST',					$CFG->dbhost);
 define('CMS_DB_NAME', 					$CFG->dbname);
 define('CMS_DB_USER',					$CFG->dbuser);
 define('CMS_DB_PASS',					$CFG->dbpass);
+define('CMS_DB_MYSQLI',					$CFG->modlos_use_mysqli);
 
 //
 define('SYSURL',						$CFG->wwwroot);
@@ -75,6 +78,7 @@ if (USE_CURRENCY_SERVER) {
 	define('CURRENCY_DB_NAME',			OPENSIM_DB_NAME);
 	define('CURRENCY_DB_USER',			OPENSIM_DB_USER);
 	define('CURRENCY_DB_PASS',			OPENSIM_DB_PASS);
+	define('CURRENCY_DB_MYSQLI',		OPENSIM_DB_MYSQLI);
 	define('CURRENCY_MONEY_TBL',	  	'balances');
 	define('CURRENCY_TRANSACTION_TBL',	'transactions');
 }
@@ -83,6 +87,7 @@ else {
 	define('CURRENCY_DB_NAME',			CMS_DB_NAME);
 	define('CURRENCY_DB_USER',			CMS_DB_USER);
 	define('CURRENCY_DB_PASS',			CMS_DB_PASS);
+	define('CURRENCY_DB_MYSQLI',		CMS_DB_MYSQLI);
 	define('CURRENCY_MONEY_TBL',		MODLOS_DB_PREFIX.'economy_money');
 	define('CURRENCY_TRANSACTION_TBL',	MODLOS_DB_PREFIX.'economy_transactions');
 }
@@ -93,6 +98,7 @@ define('OFFLINE_DB_HOST',  				CMS_DB_HOST);
 define('OFFLINE_DB_NAME',  				CMS_DB_NAME);
 define('OFFLINE_DB_USER',  				CMS_DB_USER);
 define('OFFLINE_DB_PASS',  				CMS_DB_PASS);
+define('OFFLINE_DB_MYSQLI',  			CMS_DB_MYSQLI);
 define('OFFLINE_MESSAGE_TBL', 			MODLOS_DB_PREFIX.'offline_message');
 
 
@@ -101,6 +107,7 @@ define('MUTE_DB_HOST',  				CMS_DB_HOST);
 define('MUTE_DB_NAME',  				CMS_DB_NAME);
 define('MUTE_DB_USER',  				CMS_DB_USER);
 define('MUTE_DB_PASS',  				CMS_DB_PASS);
+define('MUTE_DB_MYSQLI',  				CMS_DB_MYSQLI);
 define('MUTE_LIST_TBL', 				MODLOS_DB_PREFIX.'mute_list');
 
 

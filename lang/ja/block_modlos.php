@@ -225,6 +225,8 @@ $string['modlos_sql_user'] 			= 'OpenSim SQLデータベースのユーザ名';
 $string['modlos_sql_user_desc'] 	= 'OpenSim の SQLデータベースのーザ名';
 $string['modlos_sql_pass'] 			= 'OpenSim SQLデータベースのパスワード';
 $string['modlos_sql_pass_desc'] 	= 'OpenSim の SQLデータベースのパスワード';
+$string['modlos_use_mysqli'] 		= 'MySQLi インターフェイスの使用';
+$string['modlos_use_mysqli_desc'] 	= 'PHP5の拡張機能であるMySQLiインターフェイスを使用するか？（要 MySQL4.1以上）';
 
 $string['modlos_user_uri'] 			= 'User(ROBUST) サーバのURL';
 $string['modlos_user_uri_desc'] 	= "OpenSimの User(ROBUST)サーバの URLを指定する．'localhost(127.0.0.1)' は使用しないこと．この値は DTL/NSL Moneyサーバでも使用される．従って，もしDTL/NSL Moneyサーバを使用するなら，OpenSim.ini の [Economy]セクションの UserServer と同じ値を指定しなければならない";
