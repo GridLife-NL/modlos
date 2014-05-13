@@ -57,13 +57,15 @@ class  RegionsList
 
 	function  set_condition() 
 	{
+		global $CFG;
+
 		$this->order = optional_param('order', '', PARAM_TEXT);
 		if (!isAlphabetNumeric($this->order)) $this->order = '';
 
 		$db_ver = opensim_get_db_version(); 
 		if ($db_ver==null) {
 			$course_url = $CFG->wwwroot;
-			if ($course_id>0) $course_url .= '/course/view.php?id='.$this->course_id;
+			if ($this->course_id>0) $course_url .= '/course/view.php?id='.$this->course_id;
 			print_error('modlos_db_connect_error', 'block_modlos', $course_url);
 		}
 
