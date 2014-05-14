@@ -43,11 +43,11 @@ $settings->add(new admin_setting_configcheckbox('modlos_use_mysqli',
 					get_string('modlos_use_mysqli', 'block_modlos'),
 				   	get_string('modlos_use_mysqli_desc', 'block_modlos'), 0));
 
+/*
 $settings->add(new admin_setting_configtext('modlos_user_server_uri', 
 					get_string('modlos_user_uri', 'block_modlos'),
 				   	get_string('modlos_user_uri_desc', 'block_modlos'), 'http://opensim:8002/', PARAM_URL));
 
-/*
 $settings->add(new admin_setting_configtext('modlos_asset_uri', 
 					get_string('modlos_asset_uri', 'block_modlos'),
 				   	get_string('modlos_asset_uri_desc', 'block_modlos'), 'http://opensim.jp:8003/', PARAM_URL));

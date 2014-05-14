@@ -31,7 +31,7 @@ define('OPENSIM_DB_PASS',		$CFG->modlos_sql_db_pass);
 
 define('USE_CURRENCY_SERVER',	$CFG->modlos_use_currency_server);
 define('CURRENCY_SCRIPT_KEY',	$CFG->modlos_currency_script_key);
-define('USER_SERVER_URI',		$CFG->modlos_user_server_uri);
+//define('USER_SERVER_URI',		$CFG->modlos_user_server_uri);
 
 if (!property_exists($CFG, 'modlos_use_mysqli')) $CFG->modlos_use_mysqli = false;
 define('OPENSIM_DB_MYSQLI',		$CFG->modlos_use_mysqli);
