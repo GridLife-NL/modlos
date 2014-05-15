@@ -41,7 +41,7 @@ $settings->add(new admin_setting_configtext('modlos_sql_db_pass',
 
 $settings->add(new admin_setting_configcheckbox('modlos_use_mysqli', 
 					get_string('modlos_use_mysqli', 'block_modlos'),
-				   	get_string('modlos_use_mysqli_desc', 'block_modlos'), 0));
+				   	get_string('modlos_use_mysqli_desc', 'block_modlos'), 1));
 
 /*
 $settings->add(new admin_setting_configtext('modlos_user_server_uri', 
