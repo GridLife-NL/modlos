@@ -120,8 +120,14 @@ class  CreateAvatar
 			$this->passwd	= optional_param('passwd', 	'', 	PARAM_TEXT);
 			$confirm_pass	= optional_param('confirm_pass', '',PARAM_TEXT);
 			$this->hmregion = optional_param('hmregion', 	'', PARAM_TEXT);
+			//
+			$this->firstname= addslashes($this->firstname);
+			$this->lastname = addslashes($this->lastname);
+			$this->hmregion = addslashes($this->hmregion);
+			//
 			if($this->hasPermit) {
 				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
+				$this->ownername = addslashes($this->ownername);
 				$this->UUID		 = optional_param('UUID', 	   '', PARAM_TEXT);
 			}
 			else $this->ownername = get_display_username($USER->firstname, $USER->lastname);
@@ -151,11 +157,12 @@ class  CreateAvatar
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_mismatch_passwd', 'block_modlos');
 			}
+			/*
 			if (!isAlphabetNumericSpecial($this->hmregion)) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_invalid_regionname', 'block_modlos')." ($this->hmregion)";
 				$this->errorMsg[] = get_string('modlos_or_notconnect_db', 'block_modlos');
-			}
+			}*/
 			if ($this->isDisclaimer and !$this->hasPermit) {
 				$agree = optional_param('agree', '', PARAM_ALPHA);
 				if ($agree!='agree') {
@@ -262,7 +269,7 @@ class  CreateAvatar
 				$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);
 				if ($user_info==null) {
 					$this->hasError = true;
-					$this->errorMsg[] = get_string('modlos_ownername', 'block_modlos').' ('.$this->ownername.')';
+					$this->errorMsg[] = get_string('modlos_ownername', 'block_modlos').' ('.stripslashes($this->ownername).')';
 					$this->errorMsg[] = get_string('modlos_nouser_found', 'block_modlos').' ('.$names['firstname'].' '.$names['lastname'].')';
 					$this->ownername = '';
 					$this->uid = '0';

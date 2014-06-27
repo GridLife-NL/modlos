@@ -132,6 +132,7 @@ class  EditAvatar
 
 			//
 			$this->hmregion = optional_param('hmregion', '', PARAM_TEXT);
+			$this->hmregion = addslashes($this->hmregion);
 
 			// password
 			$confirm_pass = optional_param('confirm_pass','', PARAM_TEXT);
@@ -149,17 +150,18 @@ class  EditAvatar
 			// Owner Name
 			if ($this->hasPermit) {		// for admin
 				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
+				$this->ownername = addslashes($this->ownername);
 				if ($this->ownername!='') {
-					$names = get_names_from_display_username($this->ownername);
+					$names = get_names_from_display_username(stripslashes($this->ownername));
 					$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);				
 					if ($user_info!=null) {
 						$this->uid = $user_info->id;
 					}
 					else {
 						$this->hasError = true;
-						$this->errorMsg[] = get_string('modlos_ownername', 'block_modlos').' ('.$this->ownername.')';
+						$this->errorMsg[] = get_string('modlos_ownername', 'block_modlos').' ('.stripslashes($this->ownername).')';
 						$this->errorMsg[] = get_string('modlos_nouser_found', 'block_modlos').' ('.$names['firstname'].' '.$names['lastname'].')';
-						$this->ownername = get_display_username($USER->firstname, $USER->lastname);
+						$this->ownername  = get_display_username($USER->firstname, $USER->lastname);
 						$this->uid = $USER->id;
 					}
 				}

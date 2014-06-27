@@ -48,7 +48,7 @@
       <td class="even">
         <select wide="25" name="hmregion">
           <?php foreach ($this->regionNames as $region) {?>
-            <?php if ($region==$this->hmregion) {?>
+            <?php if ($region==stripslashes($this->hmregion)) {?>
               <option value="<?php echo $region?>" selected><?php echo $region?></option>
             <?php } else {?>
               <option value="<?php echo $region?>" ><?php echo $region?></option>
@@ -82,7 +82,7 @@
     <?php if ($this->hasPermit) {?>
       <tr>
         <td class="head"><?php echo $ownername_ttl?></td>
-        <td class="odd" ><input name="ownername" size="32" maxlength="30" value="<?php echo $this->ownername?>" /></td>
+        <td class="odd" ><input name="ownername" size="32" maxlength="30" value="<?php echo stripslashes($this->ownername);?>" /></td>
       </tr>
     <?php } else {?>
       <tr>
@@ -140,7 +140,7 @@
       </tr>
       <tr>
         <td class="head"><?php echo $home_region_ttl?></td>
-        <td class="odd" ><?php echo $this->hmregion?></td>	
+        <td class="odd" ><?php echo stripslashes($this->hmregion)?></td>	
       </tr>
       <tr>
         <td class="head"><?php echo $status_ttl?></td>
@@ -164,7 +164,7 @@
       <?php if ($this->hasPermit or $this->ownername=="") {?>
         <tr>
           <td class="head"><?php echo $ownername_ttl ?></td>
-          <td class="odd" ><?php echo $this->ownername?></td>	
+          <td class="odd" ><?php echo stripslashes($this->ownername);?></td>	
         </tr>
       <?php }?>
     </table>
