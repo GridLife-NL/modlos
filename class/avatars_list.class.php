@@ -211,42 +211,56 @@ class  AvatarsList
 		$users = opensim_get_avatars_infos($this->sql_condition);
 
 		$colum = 0;
+		$dat = array();
 		foreach($users as $user) {
-			$this->db_data[$colum]				= $user;
-			$this->db_data[$colum]['num']		= $colum;
-			$this->db_data[$colum]['ownername']	= ' - ';
-			$this->db_data[$colum]['region_id']	= $user['hmregion'];
-			$this->db_data[$colum]['region']	= opensim_get_region_name($user['hmregion']);
-			$this->db_data[$colum]['state']		= AVATAR_STATE_NOSTATE;
-			$this->db_data[$colum]['editable']	= AVATAR_NOT_EDITABLE;
+			//
+//			$uflag = false;
+//			if ($this->hasPermit or $USER->id==$uid) {
+//				$uflag = true;
+//			}
+//			elseif ($uid==0) {
+//				if (!$this->isAvatarMax) {
+//					$uflag = true;
+//				}
+//			}
+//			if (!$uflag) continue;
+//if ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {
 
-			$created = $this->db_data[$colum]['created'];
+			$dat				= $user;
+			$dat['num']		= $colum;
+			$dat['ownername']	= ' - ';
+			$dat['region_id']	= $user['hmregion'];
+			$dat['region']	= opensim_get_region_name($user['hmregion']);
+			$dat['state']		= AVATAR_STATE_NOSTATE;
+			$dat['editable']	= AVATAR_NOT_EDITABLE;
+
+			$created = $dat['created'];
 			if ($created==null or $created=='' or $created=='0') {
-				$this->db_data[$colum]['born'] = ' - ';
+				$dat['born'] = ' - ';
 			}
 			else {
-				$this->db_data[$colum]['born'] = date(DATE_FORMAT, $created);
+				$dat['born'] = date(DATE_FORMAT, $created);
 			}
 
-			$lastlogin = $this->db_data[$colum]['lastlogin'];
+			$lastlogin = $dat['lastlogin'];
 			if ($lastlogin==null or $lastlogin=='' or $lastlogin=='0') {
-				$this->db_data[$colum]['lastin'] = ' - ';
+				$dat['lastin'] = ' - ';
 			}
 			else {
-				$this->db_data[$colum]['lastin'] = date(DATE_FORMAT, $lastlogin);
+				$dat['lastin'] = date(DATE_FORMAT, $lastlogin);
 			}
 
 			// Agent Online Info
-			$UUID = $this->db_data[$colum]['UUID'];
+			$UUID = $dat['UUID'];
 			$online = opensim_get_avatar_online($UUID);
-			$this->db_data[$colum]['online'] = $online['online'];
+			$dat['online'] = $online['online'];
 			if ($online['online']) {
-				$this->db_data[$colum]['region_id']	= $online['region_id'];
-				$this->db_data[$colum]['region'] 	= $online['region_name'];
+				$dat['region_id']	= $online['region_id'];
+				$dat['region'] 	= $online['region_name'];
 			}
 
-			$this->db_data[$colum]['uuid']	  = str_replace('-', '', $UUID);
-			$this->db_data[$colum]['rg_uuid'] = str_replace('-', '', $this->db_data[$colum]['region_id']);
+			$dat['uuid']	  = str_replace('-', '', $UUID);
+			$dat['rg_uuid'] = str_replace('-', '', $dat['region_id']);
 
 
 			// serach Moodle, Modlos and Sloodle DB
@@ -266,29 +280,35 @@ class  AvatarsList
 				}
 
 				$uid = $avatardata['uid'];
-				$this->db_data[$colum]['state'] = (int)$avatardata['state'];
+				$dat['state'] = (int)$avatardata['state'];
 
 				if ($uid>0) {
 					$user_info = get_userinfo_by_id($uid);
 					if ($user_info!=null) {
-						$this->db_data[$colum]['ownername'] = get_display_username($user_info->firstname, $user_info->lastname);
+						$dat['ownername'] = get_display_username($user_info->firstname, $user_info->lastname);
 					}
 				}
 			}
 
-			$this->db_data[$colum]['uid'] = $uid;
+			$dat['uid'] = $uid;
 
 
 			if ($this->hasPermit or $USER->id==$uid) {
-				$this->db_data[$colum]['editable'] = AVATAR_EDITABLE;
+				$dat['editable'] = AVATAR_EDITABLE;
 			}
 			elseif ($uid==0) {
 				if (!$this->isAvatarMax) {
-					$this->db_data[$colum]['editable'] = AVATAR_OWNER_EDITABLE;
+					$dat['editable'] = AVATAR_OWNER_EDITABLE;
 				}
 			}
 
-			$colum++;
+
+			//
+			if ($dat['editable']==AVATAR_EDITABLE or ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE))) {
+				$this->db_data[$colum] = $dat;
+				$colum++;
+			}
+ 			unset($dat);
 		}
 
 		return true;
