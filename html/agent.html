@@ -46,7 +46,7 @@
     <td width="55%" valign="top">
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr><td>&nbsp;</td></tr>
-        <tr><td><span class="styleTitel"><?php echo $user_ttl.":&nbsp;".$firstN."&nbsp;&nbsp;".$lastN?></span></td></tr>
+        <tr><td><span class="styleTitel"><?php echo $user_ttl.":&nbsp;".htmlspecialchars($firstN)."&nbsp;&nbsp;".htmlspecialchars($lastN)?></span></td></tr>
         <?php if ($hasPermit) {?>
           <tr><td>&nbsp;</td></tr>
           <tr><td class="styleText"><b><?php echo $uuid_ttl.":&nbsp;".$UUID?></b></td></tr>
@@ -59,7 +59,7 @@
         <tr>
           <td class="styleText"><b><?php echo $ownername_ttl.":&nbsp;"?><font color="#105ba7">
             <?php if ($userinfo and $owner!=' - ') {?>
-              <a href="<?php echo $CFG->wwwroot.'/user/view.php?id='.$userid.$course_amp?>" target="_blank"><?php echo $owner?></a>
+              <a href="<?php echo $CFG->wwwroot.'/user/view.php?id='.$userid.$course_amp?>" target="_blank"><?php echo htmlspecialchars($owner)?></a>
             <?php } else {?>
               <?php echo $owner?>
             <?php }?>

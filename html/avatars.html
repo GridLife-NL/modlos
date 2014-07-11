@@ -96,10 +96,10 @@
     <tr>
       <td><b><?php echo $user_search?></b><br /></td>
       <td><font color="#000000"><b><?php echo $firstname_ttl?></b></font>&nbsp;&nbsp;
-        <input type="text" name="firstname" size="15" value="<?php echo $this->firstname?>" style="height:20">
+        <input type="text" name="firstname" size="15" value="<?php echo htmlspecialchars($this->firstname)?>" style="height:20">
       </td>
         <td><font color="#000000"><b><?php echo $lastname_ttl?></b></font>&nbsp;&nbsp;
-        <input type="text" name="lastname"  size="15" value="<?php echo $this->lastname?>"  style="height:20">
+        <input type="text" name="lastname"  size="15" value="<?php echo htmlspecialchars($this->lastname)?>"  style="height:20">
       </td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
@@ -181,8 +181,8 @@
                       &nbsp;-&nbsp;
                     <?php }?>
                     </td>
-                    <td width=150><font color=#000060><b><?php echo $dat['firstname']?></b></font></td>
-                    <td width=150><font color=#000060><b><?php echo $dat['lastname']?></b></font></td>
+                    <td width=150><font color=#000060><b><?php echo htmlspecialchars($dat['firstname'])?></b></font></td>
+                    <td width=150><font color=#000060><b><?php echo htmlspecialchars($dat['lastname'])?></b></font></td>
                     <td width=250><font color=#444444><b><?php echo $dat['lastin']?></b></font></td>
                     <td width=250>
                       <b>
@@ -218,10 +218,10 @@
                     <td width=250>
                       <?php if ($userinfo and $dat['ownername']!=' - ') { ?>
                         <a href="<?php echo $this->avatar_url.'&id='.$dat['uid']?>" target="_blank">
-                          <b><u><?php echo $dat['ownername']?></u></b>
+                          <b><u><?php echo htmlspecialchars($dat['ownername'])?></u></b>
                         </a>
                       <?php } else {?>
-                        <b><?php echo $dat['ownername']?></b>
+                        <b><?php echo htmlspecialchars($dat['ownername'])?></b>
                       <?php }?>
                     </td>
                     <td>&nbsp;</td>

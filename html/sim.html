@@ -82,7 +82,7 @@
                 <?php }?>
               </select>&nbsp;&nbsp;
             <?php } else {?>
-              <input type="text" name="rgnadmin"  size="15" value="<?php echo $owner_name?>"  style="height:20">
+              <input type="text" name="rgnadmin"  size="15" value="<?php echo htmlspecialchars($owner_name)?>"  style="height:20">
             <?php }?>
 
             <!-- <?php echo $voice_mode?>&nbsp;&nbsp; -->
