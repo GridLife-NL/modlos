@@ -82,7 +82,7 @@ class  AvatarsList
 	// アバターの検索条件
 	function  set_condition() 
 	{
-		global $CFG;
+		global $CFG, $USER;
 
 		$db_ver = opensim_get_db_version();
 		if ($db_ver==null) {
@@ -118,7 +118,7 @@ class  AvatarsList
 				$this->lnk_firstname = "&amp;firstname=$this->firstname";
 			}
 			if ($this->lastname!='') { 
-				if ($this->firstname!='') $sql_lastname = "and lastname LIKE '$this->lastname'";
+				if ($this->firstname!='') $sql_lastname = "AND lastname LIKE '$this->lastname'";
 				else					  $sql_lastname = "lastname LIKE '$this->lastname'";
 				$this->lnk_lastname  = "&amp;lastname=$this->lastname";
 			}
@@ -137,7 +137,9 @@ class  AvatarsList
 		// pstart & plimit
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
-		$sql_limit = "LIMIT $this->pstart, $this->plimit";
+
+		if ($this->hasPermit) $sql_limit = "LIMIT $this->pstart, $this->plimit";
+		else $sql_limit = "";	// 一般ユーザ：ページなし
 
 		// Order
 		if ($sql_order=='login') $sql_order = 'ORDER BY '.$sql_order.' DESC ';
@@ -157,80 +159,28 @@ class  AvatarsList
 	{
 		global $CFG, $USER;
 
-		$dummy = opensim_get_avatars_infos($this->sql_countcnd);
-		if (is_array($dummy)) $this->number = count($dummy);
-		else $this->number = 0;
-
-		$this->sitemax   = ceil ($this->number/$this->plimit);
-		$this->sitestart = floor(($this->pstart+$this->plimit-1)/$this->plimit) + 1;
-		if ($this->sitemax==0) $this->sitemax = 1;
-
-		// back more and back one
-		if ($this->pstart==0) {
-			$this->icon[0] = 'off';
-			$this->pnum[0] = 0;
+		if ($this->hasPermit) {
+			$dummy = opensim_get_avatars_infos($this->sql_countcnd);
+			if (is_array($dummy)) $this->number = count($dummy);
+			else $this->number = 0;
 		}
-		else {
-			$this->icon[0] = 'on';
-			$this->pnum[0] = $this->pstart - $this->plimit;
-			if ($this->pnum[0]<0) $this->pnum[0] = 0;
-		}
-
-		// forward one
-		if ($this->number <= ($this->pstart + $this->plimit)) {
-			$this->icon[1] = 'off'; 
-			$this->pnum[1] = 0; 
-		}
-		else {
-			$this->icon[1] = 'on'; 
-			$this->pnum[1] = $this->pstart + $this->plimit;
-		}
-
-		// forward more
-		if (($this->number-$this->plimit) < 0) {
-			$this->icon[2] = 'off';
-			$this->pnum[2] = 0;
-		}
-		else {
-			$this->icon[2] = 'on';
-			$this->pnum[2] = $this->number - $this->plimit;
-		}
-
-		$this->icon[3] = $this->icon[4] = $this->icon[5] = $this->icon[6] = 'icon_limit_off';
-		if ($this->plimit != 10)  $this->icon[3] = 'icon_limit_10_on'; 
-		if ($this->plimit != 25)  $this->icon[4] = 'icon_limit_25_on';
-		if ($this->plimit != 50)  $this->icon[5] = 'icon_limit_50_on';
-		if ($this->plimit != 100) $this->icon[6] = 'icon_limit_100_on';
-
 
 		// auto synchro
 		modlos_sync_opensimdb();
 		if ($this->use_sloodle) modlos_sync_sloodle_users();
 
 		// OpenSim DB
-		$users = opensim_get_avatars_infos($this->sql_condition);
-
 		$colum = 0;
 		$dat = array();
+		//
+		$users = opensim_get_avatars_infos($this->sql_condition);
 		foreach($users as $user) {
 			//
-//			$uflag = false;
-//			if ($this->hasPermit or $USER->id==$uid) {
-//				$uflag = true;
-//			}
-//			elseif ($uid==0) {
-//				if (!$this->isAvatarMax) {
-//					$uflag = true;
-//				}
-//			}
-//			if (!$uflag) continue;
-//if ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {
-
 			$dat				= $user;
-			$dat['num']		= $colum;
+			$dat['num']			= $colum;
 			$dat['ownername']	= ' - ';
 			$dat['region_id']	= $user['hmregion'];
-			$dat['region']	= opensim_get_region_name($user['hmregion']);
+			$dat['region']		= opensim_get_region_name($user['hmregion']);
 			$dat['state']		= AVATAR_STATE_NOSTATE;
 			$dat['editable']	= AVATAR_NOT_EDITABLE;
 
@@ -302,7 +252,6 @@ class  AvatarsList
 				}
 			}
 
-
 			//
 			if ($dat['editable']==AVATAR_EDITABLE or ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE))) {
 				$this->db_data[$colum] = $dat;
@@ -310,6 +259,50 @@ class  AvatarsList
 			}
  			unset($dat);
 		}
+		// 一般ユーザ
+		if (!$this->hasPermit) $this->number = $colum;
+
+		//
+		$this->sitemax   = ceil ($this->number/$this->plimit);
+		$this->sitestart = floor(($this->pstart+$this->plimit-1)/$this->plimit) + 1;
+		if ($this->sitemax==0) $this->sitemax = 1;
+
+		// back more and back one
+		if ($this->pstart==0) {
+			$this->icon[0] = 'off';
+			$this->pnum[0] = 0;
+		}
+		else {
+			$this->icon[0] = 'on';
+			$this->pnum[0] = $this->pstart - $this->plimit;
+			if ($this->pnum[0]<0) $this->pnum[0] = 0;
+		}
+
+		// forward one
+		if ($this->number <= ($this->pstart + $this->plimit)) {
+			$this->icon[1] = 'off'; 
+			$this->pnum[1] = 0; 
+		}
+		else {
+			$this->icon[1] = 'on'; 
+			$this->pnum[1] = $this->pstart + $this->plimit;
+		}
+
+		// forward more
+		if (($this->number-$this->plimit) < 0) {
+			$this->icon[2] = 'off';
+			$this->pnum[2] = 0;
+		}
+		else {
+			$this->icon[2] = 'on';
+			$this->pnum[2] = $this->number - $this->plimit;
+		}
+
+		$this->icon[3] = $this->icon[4] = $this->icon[5] = $this->icon[6] = 'icon_limit_off';
+		if ($this->plimit != 10)  $this->icon[3] = 'icon_limit_10_on'; 
+		if ($this->plimit != 25)  $this->icon[4] = 'icon_limit_25_on';
+		if ($this->plimit != 50)  $this->icon[5] = 'icon_limit_50_on';
+		if ($this->plimit != 100) $this->icon[6] = 'icon_limit_100_on';
 
 		return true;
 	}
