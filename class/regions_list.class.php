@@ -71,6 +71,7 @@ class  RegionsList
 
 		$sql_order = '';
 		if ($this->order=='name')	 	$sql_order = ' ORDER BY regionName ASC';
+		else if ($this->order=='estate')$sql_order = ' ORDER BY EstateName ASC';
 		else if ($this->order=='x')	 	$sql_order = ' ORDER BY locX ASC';
 		else if ($this->order=='y')	 	$sql_order = ' ORDER BY locY ASC';
 		else if ($this->order=='ip')	$sql_order = ' ORDER BY serverIP ASC';
@@ -190,6 +191,7 @@ class  RegionsList
 		$location_x		 = get_string('modlos_location_x',	   'block_modlos');
 		$location_y	  	 = get_string('modlos_location_y',	   'block_modlos');
 		$region_name	 = get_string('modlos_region_name',	   'block_modlos');
+		$estate_name	 = get_string('modlos_estate',         'block_modlos');
 		$estate_owner	 = get_string('modlos_estate_owner',   'block_modlos');
 		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
 		$regions_found   = get_string('modlos_regions_found',  'block_modlos');

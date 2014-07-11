@@ -113,6 +113,8 @@ $string['modlos_nouser_found'] 		= 'User not Found in Moodle';
 $string['modlos_user_search'] 		= 'User Search';
 
 $string['modlos_region'] 			= 'Region';
+$string['modlos_estate'] 			= 'Estate';
+$string['modlos_ipaddress'] 		= 'IP Address';
 $string['modlos_region_info'] 		= 'Region Information';
 $string['modlos_region_name'] 		= 'Region Name';
 $string['modlos_regions_found'] 	= 'Regions Found';

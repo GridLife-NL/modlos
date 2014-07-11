@@ -113,6 +113,8 @@ $string['modlos_nouser_found'] 		= 'ユーザがいません';
 $string['modlos_user_search'] 		= 'ユーザ検索';
 
 $string['modlos_region'] 			= 'リージョン';
+$string['modlos_estate'] 			= 'エステート';
+$string['modlos_ipaddress']			= 'IPアドレス';
 $string['modlos_region_info'] 		= 'リージョン情報';
 $string['modlos_region_name'] 		= 'リージョン名';
 $string['modlos_regions_found'] 	= 'リージョン';

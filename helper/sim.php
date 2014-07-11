@@ -95,6 +95,7 @@ if ($rginfo!=null) {
 	$locY		   	= $rginfo['locY'];
 	$owner_name	 	= $rginfo['fullname'];
 	$owner_uuid	 	= $rginfo['owner_uuid'];
+	$estateName	 	= $rginfo['estate_name'];
 }
 else {
 	exit("<h4>cannot get region information!! ($region)</h4>");
@@ -123,7 +124,9 @@ $course_amp = '';
 if ($course_id>0) $course_amp = '&amp;course='.$course_id;
 
 $region_info_ttl= get_string('modlos_region_info',	 'block_modlos');
-$region_ttl   	= get_string('modlos_region',   		 'block_modlos');
+$region_ttl   	= get_string('modlos_region',   	 'block_modlos');
+$estate_ttl   	= get_string('modlos_estate',   	 'block_modlos');
+$ipaddress_ttl 	= get_string('modlos_ipaddress',   	 'block_modlos');
 $uuid_ttl     	= get_string('modlos_uuid',    		 'block_modlos');
 $change_ttl   	= get_string('modlos_change',		 'block_modlos');
 
