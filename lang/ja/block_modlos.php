@@ -208,8 +208,8 @@ $string['modlos_activate_error']	= 'アバターの有効化に失敗しまし�
 $string['modlos_voice_chat_mode']	= 'ボイスチャネル';
 $string['modlos_voice_chat_mode_chng']='モード変更';
 $string['modlos_voice_inactive_chnl']= 'ボイス無効';
-$string['modlos_voice_private_chnl']= 'プライベートチャネル';
-$string['modlos_voice_percel_chnl']	= '不動産チャネル';
+$string['modlos_voice_private_chnl']= 'プライベート';
+$string['modlos_voice_percel_chnl']	= 'パーセル';
 
 
 // Config

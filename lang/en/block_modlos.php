@@ -207,9 +207,9 @@ $string['modlos_activate_error']    = 'It failed in the activation of avatar!!';
 
 $string['modlos_voice_chat_mode']   = 'Voice Channel';
 $string['modlos_voice_chat_mode_chng']='Change Mode';
-$string['modlos_voice_inactive_chnl']='Inactive Voice';
-$string['modlos_voice_private_chnl']= 'Private Channel';
-$string['modlos_voice_percel_chnl'] = 'Percel Channel';
+$string['modlos_voice_inactive_chnl']='Inactive';
+$string['modlos_voice_private_chnl']= 'Private';
+$string['modlos_voice_percel_chnl'] = 'Percel';
 
 
 // Config
