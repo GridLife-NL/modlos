@@ -1077,7 +1077,7 @@ function  modlos_sync_sloodle_users($update_check=true)
 				$DB->update_record('modlos_users', $modlos);
 			}
 			else if ((int)$modlos->state&AVATAR_STATE_SLOODLE) {
-				$modlos->user_id = '0';
+				//$modlos->user_id = '0';
 				$modlos->state = (int)$modlos->state & AVATAR_STATE_NOSLOODLE;
 				$DB->update_record('modlos_users', $modlos);
 			}
