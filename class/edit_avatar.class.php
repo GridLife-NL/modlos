@@ -69,7 +69,7 @@ class  EditAvatar
 
 		// get UUID from POST or GET
 		$return_url = CMS_MODULE_URL.'/actions/avatars_list.php'. $course_param;
-		$uuid = optional_param('uuid', '', PARAM_ALPHAEXT);
+		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
 			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)";
 			print_error($mesg, '', $return_url);
@@ -149,7 +149,7 @@ class  EditAvatar
 
 			// Owner Name
 			if ($this->hasPermit) {		// for admin
-				$this->ownername = optional_param('ownername', '', PARAM_ALPHAEXT);
+				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
 				$this->ownername = addslashes($this->ownername);
 				if ($this->ownername!='') {
 					//$names = get_names_from_display_username(stripslashes($this->ownername));

@@ -54,7 +54,7 @@ class  DeleteAvatar
 
 		// get UUID from POST or GET
 		$this->return_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param;
-		$uuid = optional_param('uuid', '', PARAM_ALPHAEXT);
+		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
 			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos').' ($uuid)';
 			print_error($mesg, '', $this->return_url);

@@ -75,7 +75,7 @@ class  OwnerAvatar
 
 
 		// get UUID from POST or GET
-		$this->UUID = optional_param('uuid', '', PARAM_ALPHAEXT);
+		$this->UUID = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($this->UUID)) {
 			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($this->UUID)";
 			print_error($mesg, '', $this->return_url);

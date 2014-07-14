@@ -126,9 +126,9 @@ class  CreateAvatar
 			$this->hmregion = addslashes($this->hmregion);
 			//
 			if($this->hasPermit) {
-				$this->ownername = optional_param('ownername', '', PARAM_ALPHAEXT);
+				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
 				$this->ownername = addslashes($this->ownername);
-				$this->UUID		 = optional_param('UUID', 	   '', PARAM_ALPHAEXT);
+				$this->UUID		 = optional_param('UUID', 	   '', PARAM_TEXT);
 			}
 			else $this->ownername = $USER->username; //get_display_username($USER->firstname, $USER->lastname);
 
