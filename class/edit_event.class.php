@@ -155,7 +155,7 @@ class  EditEvent
 			$this->creator_uuid  = $creator[0];
 			$this->event_creator = $creator[1];
 
-			$this->event_year  	= optional_param('event_year','2010', PARAM_INT);
+			$this->event_year  	= optional_param('event_year', date('Y'), PARAM_INT);
 			$this->event_month 	= optional_param('event_month', '1',  PARAM_INT);
 			$this->event_day   	= optional_param('event_day', 	'1',  PARAM_INT);
 			$this->event_hour 	= optional_param('event_hour', 	'0',  PARAM_INT);

@@ -129,7 +129,7 @@ class  EventsList
    
 		$colum = 0;
 		foreach($events as $event) {
-			if (!OPENSIM_PG_ONLY or $event['eventflags']==0) {
+			if (!OPENSIM_PG_ONLY or $event->eventflags==0) {
 				$this->db_data[$colum] = $event;
 				$this->db_data[$colum]->num	 = $colum;
 				$this->db_data[$colum]->time = date(DATE_FORMAT, $event->dateutc);

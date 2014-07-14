@@ -8,9 +8,11 @@
 
               <td class="odd">
                 <select name="event_year">
-                  <option value="2010" <?php if ($this->event_year==2010) {?>selected<?php }?> >2010年</option>
-                  <option value="2011" <?php if ($this->event_year==2011) {?>selected<?php }?> >2011年</option>
-                  <option value="2012" <?php if ($this->event_year==2012) {?>selected<?php }?> >2012年</option>
+                  <?php
+                    $now_year = date('Y');
+                    for ($t=$now_year; $t<$now_year + 3; $t++) { ?>
+                      <option value=<?php echo "$t "; if ($t==$now_year) {?>selected<?php } echo ">$t 年"?></option>
+                  <?php  } ?>
                 </select>&nbsp;&nbsp;
 
                 <select name="event_month">

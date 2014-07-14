@@ -126,11 +126,11 @@ class  CreateAvatar
 			$this->hmregion = addslashes($this->hmregion);
 			//
 			if($this->hasPermit) {
-				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
+				$this->ownername = optional_param('ownername', '', PARAM_ALPHAEXT);
 				$this->ownername = addslashes($this->ownername);
-				$this->UUID		 = optional_param('UUID', 	   '', PARAM_TEXT);
+				$this->UUID		 = optional_param('UUID', 	   '', PARAM_ALPHAEXT);
 			}
-			else $this->ownername = get_display_username($USER->firstname, $USER->lastname);
+			else $this->ownername = $USER->username; //get_display_username($USER->firstname, $USER->lastname);
 
 			// Check
 			if (!isGUID($this->UUID, true)) {
@@ -183,7 +183,7 @@ class  CreateAvatar
 		else {
 			$this->hmregion  = $CFG->modlos_home_region;
 			$this->UUID		 = $this->nx_UUID;
-			$this->ownername = get_display_username($USER->firstname, $USER->lastname);
+			$this->ownername = $USER->username; //get_display_username($USER->firstname, $USER->lastname);
 		}
 
 		return true;
@@ -265,12 +265,13 @@ class  CreateAvatar
 		// User ID of Moodle
 		if ($this->hasPermit) {
 			if ($this->ownername!='') {
-				$names = get_names_from_display_username($this->ownername);
-				$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);
+				//$names = get_names_from_display_username($this->ownername);
+				//$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);
+				$user_info = get_userinfo_by_username(stripslashes($this->ownername));
 				if ($user_info==null) {
 					$this->hasError = true;
 					$this->errorMsg[] = get_string('modlos_ownername', 'block_modlos').' ('.stripslashes($this->ownername).')';
-					$this->errorMsg[] = get_string('modlos_nouser_found', 'block_modlos').' ('.$names['firstname'].' '.$names['lastname'].')';
+				//	$this->errorMsg[] = get_string('modlos_nouser_found', 'block_modlos').' ('.$names['firstname'].' '.$names['lastname'].')';
 					$this->ownername = '';
 					$this->uid = '0';
 					//return false;
@@ -286,7 +287,7 @@ class  CreateAvatar
 		$sloodle = optional_param('sloodle', '', PARAM_ALPHA);
 		if ($sloodle!='' and $this->use_sloodle) $state = (int)$state | AVATAR_STATE_SLOODLE;
 
-
+		//
 		$new_user['UUID']		= $this->UUID;
 		$new_user['uid']		= $this->uid;
 		$new_user['firstname'] 	= $this->firstname;

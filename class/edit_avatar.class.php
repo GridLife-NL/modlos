@@ -69,7 +69,7 @@ class  EditAvatar
 
 		// get UUID from POST or GET
 		$return_url = CMS_MODULE_URL.'/actions/avatars_list.php'. $course_param;
-		$uuid = optional_param('uuid', '', PARAM_TEXT);
+		$uuid = optional_param('uuid', '', PARAM_ALPHAEXT);
 		if (!isGUID($uuid)) {
 			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)";
 			print_error($mesg, '', $return_url);
@@ -149,19 +149,20 @@ class  EditAvatar
 
 			// Owner Name
 			if ($this->hasPermit) {		// for admin
-				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
+				$this->ownername = optional_param('ownername', '', PARAM_ALPHAEXT);
 				$this->ownername = addslashes($this->ownername);
 				if ($this->ownername!='') {
-					$names = get_names_from_display_username(stripslashes($this->ownername));
-					$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);				
+					//$names = get_names_from_display_username(stripslashes($this->ownername));
+					//$user_info = get_userinfo_by_name($names['firstname'], $names['lastname']);				
+					$user_info = get_userinfo_by_username(stripslashes($this->ownername));				
 					if ($user_info!=null) {
 						$this->uid = $user_info->id;
 					}
 					else {
 						$this->hasError = true;
 						$this->errorMsg[] = get_string('modlos_ownername', 'block_modlos').' ('.stripslashes($this->ownername).')';
-						$this->errorMsg[] = get_string('modlos_nouser_found', 'block_modlos').' ('.$names['firstname'].' '.$names['lastname'].')';
-						$this->ownername  = get_display_username($USER->firstname, $USER->lastname);
+					//	$this->errorMsg[] = get_string('modlos_nouser_found', 'block_modlos').' ('.$names['firstname'].' '.$names['lastname'].')';
+					//	$this->ownername  = get_display_username($USER->firstname, $USER->lastname);
 						$this->uid = $USER->id;
 					}
 				}
@@ -172,7 +173,7 @@ class  EditAvatar
 			else {	// user
 				$nomanage = optional_param('nomanage', '', PARAM_ALPHA);
 				if ($nomanage=='') {
-					$this->ownername = get_display_username($USER->firstname, $USER->lastname);
+					$this->ownername = $USER->username;	//get_display_username($USER->firstname, $USER->lastname);
 					$this->uid = $USER->id;
 				}
 				else {
@@ -209,9 +210,9 @@ class  EditAvatar
 
 			if ($this->hasPermit and $this->uid>0) {
 				$user_info = get_userinfo_by_id($this->uid);
-				$this->ownername = get_display_username($user_info->firstname, $user_info->lastname);
+				$this->ownername  = $user_info->username;	//get_display_username($user_info->firstname, $user_info->lastname);
 			}
-			else $this->ownername = get_display_username($USER->firstname, $USER->lastname);
+			else $this->ownername = $USER->username;		//get_display_username($USER->firstname, $USER->lastname);
 		}
 
 		return true;
