@@ -324,6 +324,7 @@ class  AvatarsList
 		$date_format	= DATE_FORMAT;
 
 		$has_permit		= $this->hasPermit;
+		$avatar_max		= $this->isAvatarMax;
 		$lnk_firstname	= $this->lnk_firstname;
 		$lnk_lastname	= $this->lnk_lastname;
 		$url_param		= $this->url_param;

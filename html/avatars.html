@@ -110,7 +110,7 @@
       </td>
       <td>&nbsp;</td>
       <td>
-        <?php if (!$has_permit) {?>
+        <?php if (!$has_permit and !$avatar_max) {?>
           <a href="<?php echo $this->action_url.$ownerloss_.'1'?>" target="_self">
             <font color="#000"><b><u><?php echo $find_owner_ttl?></u></b></font>
           </a>
@@ -141,12 +141,12 @@
                   <td width=40 ><b>&nbsp;<?php echo $number_ttl?></b></td>
                   <td width=50 >&nbsp;</b></td>
                   <td width=60 ><b><?php echo $edit_ttl?></b></td>
-                  <td width=150>
+                  <td width=180>
                     <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp?>&amp;order=firstname" target="_self">
                       <b><u><?php echo $firstname_ttl?></u></b>
                     </a>
                   </td>
-                  <td width=150>
+                  <td width=180>
                     <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp?>&amp;order=lastname" target="_self">
                       <b><u><?php echo $lastname_ttl?></u></b>
                     </a>
@@ -160,7 +160,7 @@
                       <?php }?>
                     </a>
                   </td>
-                  <td width=250><b><?php echo $status_ttl?></b></td>
+                  <td width=200><b><?php echo $status_ttl?></b></td>
                   <td width=150><b><?php echo $crntregion_ttl?></b></td>
                   <td width=250><b><?php echo $owner_ttl?></b></td>
                   <td>&nbsp;</td>
