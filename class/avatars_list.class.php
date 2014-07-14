@@ -29,6 +29,7 @@ class  AvatarsList
 	var $isGuest   	= true;
 
 	// Page Control
+	var $ownerloss  = 0;	// false
 	var $Cpstart 	= 0;
 	var $Cplimit 	= 25;
 	var $firstname 	= '';
@@ -137,9 +138,13 @@ class  AvatarsList
 		// pstart & plimit
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
+		//
 
 		if ($this->hasPermit) $sql_limit = "LIMIT $this->pstart, $this->plimit";
 		else $sql_limit = "";	// 一般ユーザ：ページなし
+
+		//
+		$this->ownerloss = optional_param('ownerloss', "$this->ownerloss", PARAM_INT);
 
 		// Order
 		if ($sql_order=='login') $sql_order = 'ORDER BY '.$sql_order.' DESC ';
@@ -169,10 +174,10 @@ class  AvatarsList
 		modlos_sync_opensimdb();
 		if ($this->use_sloodle) modlos_sync_sloodle_users();
 
+
 		// OpenSim DB
 		$colum = 0;
 		$dat = array();
-		//
 		$users = opensim_get_avatars_infos($this->sql_condition);
 		foreach($users as $user) {
 			//
@@ -247,7 +252,7 @@ class  AvatarsList
 				$dat['editable'] = AVATAR_EDITABLE;
 			}
 			elseif ($uid==0) {
-				if (!$this->isAvatarMax) {
+				if (!$this->isAvatarMax and $this->ownerloss) {
 					$dat['editable'] = AVATAR_OWNER_EDITABLE;
 				}
 			}
@@ -318,15 +323,18 @@ class  AvatarsList
 		$userinfo		= $CFG->modlos_userinfo_link;
 		$date_format	= DATE_FORMAT;
 
+		$has_permit		= $this->hasPermit;
 		$lnk_firstname	= $this->lnk_firstname;
 		$lnk_lastname	= $this->lnk_lastname;
 		$url_param		= $this->url_param;
 		$plimit_amp		= "&amp;plimit=$this->plimit";
 		$pstart_amp		= "&amp;pstart=$this->pstart";
 		$order_amp		= "&amp;order=$this->order";
+		$ownerloss_amp	= "&amp;ownerloss=$this->ownerloss";
 		$plimit_		= '&amp;plimit=';
 		$pstart_		= '&amp;pstart=';
 		$order_			= '&amp;order=';
+		$ownerloss_		= '&amp;ownerloss=';
 
 		$avatars_list	= get_string('modlos_avatars_list',  'block_modlos');
 		$number_ttl		= get_string('modlos_num',			 'block_modlos');
@@ -344,10 +352,11 @@ class  AvatarsList
 		$active_ttl		= get_string('modlos_active',		 'block_modlos');
 		$inactive_ttl	= get_string('modlos_inactive',		 'block_modlos');
 		$reset_ttl		= get_string('modlos_reset_ttl',	 'block_modlos');
+		$find_owner_ttl	= get_string('modlos_find_owner_ttl','block_modlos');
 		$unknown_status	= get_string('modlos_unknown_status','block_modlos');
 		$page_num		= get_string('modlos_page',			 'block_modlos');
 		$page_num_of	= get_string('modlos_page_of',		 'block_modlos');
-		$user_search	= get_string('modlos_user_search',	 'block_modlos');
+		$user_search	= get_string('modlos_avatar_search', 'block_modlos');
 		$users_found  	= get_string('modlos_users_found', 	 'block_modlos');
 		$sloodle_ttl  	= get_string('modlos_sloodle_short', 'block_modlos');
 

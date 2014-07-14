@@ -40,6 +40,7 @@ $string['modlos_offline_ttl'] 		= ' オフライン ';
 $string['modlos_edit_ttl'] 			= ' EDIT';
 $string['modlos_edit_user_ttl'] 	= ' ユーザ情報の編集 ';
 $string['modlos_reset_ttl'] 		= ' リセット ';
+$string['modlos_find_owner_ttl'] 	= ' 迷子のアバターを探す ';
 $string['modlos_cancel_ttl'] 		= ' キャンセル ';
 $string['modlos_delete_ttl'] 		= ' DEL ';
 $string['modlos_get_owner_ttl'] 	= ' OWNER ';
@@ -111,6 +112,7 @@ $string['modlos_avatar_dlt_confrm']	= '本当にアバターを削除します�
 $string['modlos_users_found'] 		= 'ユーザ';
 $string['modlos_nouser_found'] 		= 'ユーザがいません';
 $string['modlos_user_search'] 		= 'ユーザ検索';
+$string['modlos_avatar_search'] 	= 'アバター検索';
 
 $string['modlos_region'] 			= 'リージョン';
 $string['modlos_estate'] 			= 'エステート';

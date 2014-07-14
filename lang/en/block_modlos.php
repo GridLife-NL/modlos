@@ -40,6 +40,7 @@ $string['modlos_offline_ttl'] 		= ' OFFLINE ';
 $string['modlos_edit_ttl'] 			= ' EDIT ';
 $string['modlos_edit_user_ttl']		= ' EDIT user ';
 $string['modlos_reset_ttl'] 		= ' RESET ';
+$string['modlos_find_owner_ttl']    = ' FIND LOST AVATAR ';
 $string['modlos_cancel_ttl'] 		= ' CANCEL ';
 $string['modlos_delete_ttl'] 		= ' DEL ';
 $string['modlos_get_owner_ttl'] 	= ' OWNER ';
@@ -111,6 +112,7 @@ $string['modlos_avatar_dlt_confrm'] = 'Is Avatar really DELETE?';
 $string['modlos_users_found'] 		= 'Users Found';
 $string['modlos_nouser_found'] 		= 'User not Found in Moodle';
 $string['modlos_user_search'] 		= 'User Search';
+$string['modlos_avatar_search'] 	= 'Avatar Search';
 
 $string['modlos_region'] 			= 'Region';
 $string['modlos_estate'] 			= 'Estate';

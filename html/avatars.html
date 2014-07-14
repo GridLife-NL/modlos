@@ -94,7 +94,7 @@
 
 <!-- search -->
 <table width="85%" cellpadding=3 border=0 cellspacing=1 bgcolor="#e0e0e0" align="center">
-  <form action="<?php echo $this->search_url.$plimit_amp?>" method="POST">
+  <form action="<?php echo $this->search_url.$plimit_amp.$ownerloss_amp?>" method="POST">
     <tr>
       <td><b><?php echo $user_search?></b><br /></td>
       <td><font color="#000000"><b><?php echo $firstname_ttl?></b></font>&nbsp;&nbsp;
@@ -103,14 +103,22 @@
         <td><font color="#000000"><b><?php echo $lastname_ttl?></b></font>&nbsp;&nbsp;
         <input type="text" name="lastname"  size="15" value="<?php echo htmlspecialchars($this->lastname)?>"  style="height:20">
       </td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
       <td>
         <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
         <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
         <input type="Submit" value="Search" style="height:20">&nbsp;&nbsp;&nbsp;
+      </td>
+      <td>&nbsp;</td>
+      <td>
+        <?php if (!$has_permit) {?>
+          <a href="<?php echo $this->action_url.$ownerloss_.'1'?>" target="_self">
+            <font color="#000"><b><u><?php echo $find_owner_ttl?></u></b></font>
+          </a>
+        <?php } else { ?>
+          &nbsp;
+        <?php } ?>
+      </td>
+      <td>
         <a href="<?php echo $this->action_url.$plimit_amp.$pstart_amp.$order_amp?>" target="_self">
           <font color="#000"><b><u><?php echo $reset_ttl?></u></b></font>
         </a>
