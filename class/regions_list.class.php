@@ -10,6 +10,7 @@ class  RegionsList
 {
 	var $icon = array();
 	var $pnum = array();
+	var $db_data = array();
 
 	var $action_url;
 	var $course_id;
