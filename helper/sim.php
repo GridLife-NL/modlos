@@ -21,6 +21,7 @@ if (!$course_id) $course_id = 1;
 
 require_login($course_id);
 $hasPermit = hasModlosPermit($course_id);
+$isGuest   = isguestuser();
 
 $grid_name  = $CFG->modlos_grid_name;
 $action_url = CMS_MODULE_URL.'/helper/sim.php';
