@@ -80,6 +80,7 @@
             <!--<?php echo $region_owner?>&nbsp;&nbsp; -->
             <?php if ($avatar_select) {?>
               <select wide="32" name="rgnadmin">
+                <option value="" ></option>
                 <?php foreach($avatars as $avatar) {?>
                   <?php if ($avatar['name']==$owner_name) {?>
                     <option value="<?php echo $avatar['uuid']?>" selected><?php echo htmlspecialchars($avatar['name'])?></option>
