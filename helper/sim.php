@@ -29,7 +29,7 @@ $action_url = CMS_MODULE_URL.'/helper/sim.php';
 
 //////////////
 $col = 0;
-$users = opensim_get_avatars_infos();
+$users = opensim_get_avatars_infos('ORDER BY firstname,lastname');
 foreach($users as $user) {
 	$avatars[$col]['name'] = $user['firstname'].' '.$user['lastname'];
 	$avatars[$col]['uuid'] = $user['UUID'];
