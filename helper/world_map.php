@@ -3,6 +3,7 @@
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
 require_once(realpath(dirname(__FILE__).'/../include/env_interface.php'));
 
+require_once(ENV_HELPER_PATH.'/../include/modlos.func.php');
 
 $world_map_url = CMS_MODULE_URL.'/helper/world_map.php';
 $allow_zoom = true;
@@ -28,6 +29,8 @@ if ($allow_zoom) {
 
 
 ob_start();
+
+$course_id = optional_param('course', '1', PARAM_INT);
 require(CMS_MODULE_PATH.'/include/map_script.php');
 $map_script = ob_get_contents();
 ob_end_clean();
