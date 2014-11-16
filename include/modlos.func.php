@@ -939,6 +939,12 @@ function  modlos_activate_avatar($uuid)
 {
 	global $DB;
 
+	$passwd = opensim_get_password($uuid);
+	if ($passwd==null) return false;
+
+	$passwdhash = $passwd['passwordHash'];
+	if ($passwdhash!='invalid_password') return false;
+
 	$ban = $DB->get_record('modlos_banned', array('uuid'=>$uuid));
 	if (!$ban) return false;
 
@@ -960,7 +966,7 @@ function  modlos_inactivate_avatar($uuid)
 	if ($passwd==null) return false;
 
 	$passwdhash = $passwd['passwordHash'];
-	if ($passwdhash==null) return false;
+	if ($passwdhash==null or $passwdhash=='invalid_password') return false;
 
 	$insobj->uuid 	   = $uuid;
 	$insobj->agentinfo = $passwdhash;
