@@ -197,7 +197,7 @@ class  Estates
 			// UPDATE Estate Name
 			else if ($key=='estatenames') {
 				foreach($values as $id => $value) {
-					if (in_array($id, $this->estates) and $this->estates[$id]['estate_name']!=$value) {
+					if (array_key_exists($id, $this->estates) and $this->estates[$id]['estate_name']!=$value) {
 						 opensim_update_estate($id, $value, '');
 					}
 				}
@@ -205,7 +205,7 @@ class  Estates
 			// UPDATE Estate Owner
 			else if ($key=='estateowners') {
 				foreach($values as $id => $value) {
-					if (in_array($id, $this->estates) and $this->estates[$id]['fullname']!=$value) {
+					if (array_key_exists($id, $this->estates) and $this->estates[$id]['fullname']!=$value) {
 						 opensim_update_estate($id, '', $value);
 					}
 				}
