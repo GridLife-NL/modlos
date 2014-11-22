@@ -12,7 +12,6 @@ $course = $DB->get_record('course', array('id'=>$course_id));
 
 ob_start();
 print_tabnav_manage('settings', $course);
-//echo "<input type='hidden' name='course' value='$course_id' />";
 $tabnav = ob_get_contents();
 ob_end_clean();
 
