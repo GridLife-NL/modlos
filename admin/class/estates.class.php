@@ -38,14 +38,36 @@ class  Estates
 
 	function  execute()
 	{
-		global $DB;
+		// Form	
+		if (data_submitted()) {
+			if (!$this->hasPermit) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
+				return false;
+			}
+			if (!confirm_sesskey()) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
+				return false;
+			}
 
+			$this->estates = opensim_get_estates_infos();
+			if ($this->estates==null) return;
+
+			$add = optional_param('addestate', '', PARAM_TEXT);
+			$upd = optional_param('updateestate', '', PARAM_TEXT);
+
+			if	   ($add!='') $this->action_add();
+			elseif ($upd!='') $this->action_update();
+		}
+
+		//
 		$this->estates = opensim_get_estates_infos();
 		if ($this->estates==null) return;
-
+		//
 		$map_url = CMS_MODULE_URL.'/helper/sim.php?cource='.$this->course_id.'&amp;region=';
 		$region_win_pre = '<a style="cursor:pointer" onClick="window.open(';
-		$region_win_param = "'location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450'";
+		$region_win_param = "'location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=400'";
 
 		foreach($this->estates as $estate) {
 			$estate_id = $estate['estate_id'];
@@ -61,35 +83,6 @@ class  Estates
 					$this->estates[$estate_id]['regions'] .= ', '.$region_link;
 				}
 			}
-		}
-
-		// Form	
-		if (data_submitted()) {
-			if (!$this->hasPermit) {
-				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
-				return false;
-			}
-
-			if (!confirm_sesskey()) {
-				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
-				return false;
-			}
-
-			$add = optional_param('submit_add',	   '', PARAM_TEXT);
-			$lft = optional_param('submit_left',   '', PARAM_TEXT);
-			$rgt = optional_param('submit_right',  '', PARAM_TEXT);
-			$del = optional_param('submit_delete', '', PARAM_TEXT);
-
-			$this->select_inactive = optional_param('select_left',  '', PARAM_TEXT);
-			$this->select_active   = optional_param('select_right', '', PARAM_TEXT);
-			$this->addname		   = optional_param('addname',		'', PARAM_TEXT);
-
-			if	   ($add!='') $this->action_add();
-			elseif ($lft!='') $this->action_move_active();
-			elseif ($rgt!='') $this->action_move_inactive();
-			elseif ($del!='') $this->action_delete();
 		}
 	}
 
@@ -147,12 +140,12 @@ class  Estates
 		$i = 0;
 		foreach($this->estates as $estate) {
 			$estate_id = $estate['estate_id'];
-			$estate_input = '<input type="hidden" name="estateids['.$i.']" value="'.$estate_id.'" />';
+			//$estate_input = '<input type="hidden" name="estateids['.$i.']" value="'.$estate_id.'" />';
 			$table->data[$i][] = $i + 1;
 			$table->data[$i][] = $estate_id;
-			$table->data[$i][] = '<input type="text" name="estatenames['.$i.']"  size="16" maxlength="32" value="'.$estate['estate_name'].'" />';
-			$table->data[$i][] = '<input type="text" name="estateowners['.$i.']" size="16" maxlength="32" value="'.$estate['fullname'].'" />';
-			$table->data[$i][] = '<input type="checkbox" name="estatedels['.$i.']" value="1" />'.$estate_input;
+			$table->data[$i][] = '<input type="text" name="estatenames['.$estate_id.']"  size="16" maxlength="32" value="'.$estate['estate_name'].'" />';
+			$table->data[$i][] = '<input type="text" name="estateowners['.$estate_id.']" size="16" maxlength="32" value="'.$estate['fullname'].'" />';
+			$table->data[$i][] = '<input type="checkbox" name="estatedels['.$estate_id.']" value="1" />';//.$estate_input;
 			$table->data[$i][] = $estate['regions'];
 
 			if (($i+1)%$this->page_size==0) {
@@ -174,81 +167,52 @@ class  Estates
 
 	function  action_add()
 	{
-		global $DB;
+		$estate_name = optional_param('estatename', '', PARAM_TEXT);
+		if ($estate_name=='') return;
 
-		if (!isAlphabetNumericSpecial($this->addname)) {
+		if (!isAlphabetNumericSpecial($estate_name)) {
 			$this->hasError = true;
-			$this->errorMsg[] = get_string('modlos_invalid_lastname', 'block_modlos')." ($this->addname)";
+			$this->errorMsg[] = get_string('modlos_invalid_estatename', 'block_modlos')." ($estate_name)";
 			return;
 		}
 
-		$obj = $DB->get_record('modlos_lastnames', array('lastname'=>$this->addname));
-		if ($obj!=null) {
+		$ret = opensim_create_estate($estate_name, '00000000-0000-0000-0000-000000000000');
+		if ($ret==0) {
 			$this->hasError = true;
-			$this->errorMsg[] = get_string('modlos_exist_lastname', 'block_modlos')." ($this->addname)";
+			$this->errorMsg[] = get_string('modlos_err_create_estate', 'block_modlos')." ($estate_name)";
 			return;
 		}
-
-		$obj->lastname = $this->addname;
-		$obj->state	= AVATAR_LASTN_ACTIVE;
-		$DB->insert_record('modlos_lastnames', $obj);
-
-		$this->lastnames[$this->addname] = AVATAR_LASTN_ACTIVE;
 	}
 
 
-	function  action_move_active()
+	function  action_update()
 	{
-		global $DB;
-
-		foreach($this->select_active as $name) {
-			$obj = $DB->get_record('modlos_lastnames', array('lastname'=>$name));
-			if ($obj==null) {
-				if (!$this->hasError) $this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_not_exist_lastname', 'block_modlos')." ($name)";
+		foreach($_POST as $key => $values) {
+			// DELETE
+			if ($key=='estatedels') {
+				foreach($values as $id => $value) {
+					opensim_del_estate($id);
+				}
 			}
-			else {
-				$obj->state = AVATAR_LASTN_ACTIVE;
-				$DB->update_record('modlos_lastnames', $obj);
-				$this->lastnames[$name] = AVATAR_LASTN_ACTIVE;
+			// UPDATE Estate Name
+			else if ($key=='estatenames') {
+				foreach($values as $id => $value) {
+					if (in_array($id, $this->estates) and $this->estates[$id]['estate_name']!=$value) {
+						 opensim_update_estate($id, $value, '');
+					}
+				}
 			}
-		}
-	}
-
-
-	function  action_move_inactive()
-	{
-		global $DB;
-
-		foreach($this->select_inactive as $name) {
-			$obj = $DB->get_record('modlos_lastnames', array('lastname'=>$name));
-			if ($obj==null) {
-				if (!$this->hasError) $this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_not_exist_lastname', 'block_modlos')." ($name)";
-			}
-			else {
-				$obj->state = AVATAR_LASTN_INACTIVE;
-				$DB->update_record('modlos_lastnames', $obj);
-				$this->lastnames[$name] = AVATAR_LASTN_INACTIVE;
+			// UPDATE Estate Owner
+			else if ($key=='estateowners') {
+				foreach($values as $id => $value) {
+					if (in_array($id, $this->estates) and $this->estates[$id]['fullname']!=$value) {
+						 opensim_update_estate($id, '', $value);
+					}
+				}
 			}
 		}
 	}
 
-
-	function  action_delete()
-	{
-		global $DB;
-
-		foreach($this->select_active as $name) {
-			$DB->delete_records('modlos_lastnames', array('lastname'=>$name));
-			unset($this->lastnames[$name]);
-		}
-
-		foreach($this->select_inactive as $name) {
-			$DB->delete_records('modlos_lastnames', array('lastname'=>$name));
-			unset($this->lastnames[$name]);
-		}
-	}
 }
 
 

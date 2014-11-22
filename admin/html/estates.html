@@ -50,6 +50,9 @@
               <input type="hidden" name="sesskey" value="<?php echo sesskey();?>" />
               <input type="hidden" name="course"  value="<?php echo $this->course_id;?>" />
               <?php $count = $this->show_table(); ?>
+              <?php if ($count%$this->page_size!=0) { ?>
+              <input type="submit" name="updateestate" value="<?php echo get_string('modlos_update','block_modlos');?>" /> 
+              <?php }?>
             </form>
           </td>
         </tr>

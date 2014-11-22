@@ -165,7 +165,7 @@
           <?php if ($this->isGuest) {?>
             <b><?php echo htmlspecialchars($dat['regionName'])?></b>
           <?php } else {?>
-            <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_param.'&region='.$dat['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_param.'&region='.$dat['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=400')">
               <b><u><?php echo $dat['regionName']?></u></b>
             </a>
           <?php }?>
@@ -181,7 +181,7 @@
           <?php if ($this->isGuest) {?>
             <b><?php echo htmlspecialchars($dat['est_firstname'])?>&nbsp;<?php echo htmlspecialchars($dat['est_lastname'])?></b>
           <?php } else {?>
-            <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$dat['owner_uuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$dat['owner_uuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=400')">
               <b><u><?php echo htmlspecialchars($dat['est_firstname']).'&nbsp;'.htmlspecialchars($dat['est_lastname'])?></u></b>
             </a>
           <?php }?>

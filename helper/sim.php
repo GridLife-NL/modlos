@@ -28,15 +28,16 @@ $action_url = CMS_MODULE_URL.'/helper/sim.php';
 
 
 //////////////
-$col = 0;
-$users = opensim_get_avatars_infos('ORDER BY firstname,lastname');
-foreach($users as $user) {
-	$avatars[$col]['name'] = $user['firstname'].' '.$user['lastname'];
-	$avatars[$col]['uuid'] = $user['UUID'];
-	$col++;
-}
-$avatars_num = $col;
+//$col = 0;
+//$users = opensim_get_avatars_infos('ORDER BY firstname,lastname');
+//foreach($users as $user) {
+//	$avatars[$col]['name'] = $user['firstname'].' '.$user['lastname'];
+//	$avatars[$col]['uuid'] = $user['UUID'];
+//	$col++;
+//}
+//$avatars_num = $col;
 
+$estates = opensim_get_estates_infos();
 
 $vcmode = '';
 $rginfo = '';
@@ -44,28 +45,20 @@ $rginfo = '';
 // POST
 if ($hasPermit and data_submitted() and confirm_sesskey()) {
 	//
-	$rgnadmin = optional_param('rgnadmin', '', PARAM_TEXT);
-	if (!isGUID($rgnadmin)) {   // owner name
-		$rgnuuid = opensim_get_avatar_uuid($rgnadmin);
-		if (!isGUID($rgnuuid)) {
-			exit("<h4>unknown avatar name!! ($rgnadmin)</h4>");
+	$estateid = optional_param('estateid', '', PARAM_INT);
+	if (isNumeric($estateid)) { 
+		$rginfo = opensim_get_region_info($region);
+		if ($rginfo!=null and $rginfo['estate_id']!=$estateid) {
+			opensim_set_region_estateid($region, $estateid);
+			$rginfo = '';
 		}
-		$rgnadmin = $rgnuuid;
 	}
 
-	$rginfo = opensim_get_region_info($region);
-	if ($rginfo!=null and $rginfo['owner_uuid']!=$rgnadmin) {
-		$ret = opensim_set_estate_owner($region, $rgnadmin);
-		if (!$ret) exit("<h4>updating of region owner is fail!! ($region, $rgnadmin)</h4>");
-		$rginfo = null;
-	}
-		
 	$voice_mode = optional_param('voice_mode', '', PARAM_TEXT);
 	if (isNumeric($voice_mode)) {
 		$vcmode = opensim_get_voice_mode($region);
 		if ($vcmode!=$voice_mode) {
-			$ret = opensim_set_voice_mode($region, $voice_mode);
-			if (!$ret) exit("<h4>updating of voice mode is fail!! ($region, $voice_mode)</h4>");
+			opensim_set_voice_mode($region, $voice_mode);
 			$vcmode = '';
 		}
 	}	
@@ -98,7 +91,8 @@ if ($rginfo!=null) {
 	$sizeY		   	= $rginfo['sizeY'];
 	$owner_name	 	= $rginfo['fullname'];
 	$owner_uuid	 	= $rginfo['owner_uuid'];
-	$estateName	 	= $rginfo['estate_name'];
+	$estate_name 	= $rginfo['estate_name'];
+	$estate_id	 	= $rginfo['estate_id'];
 }
 else {
 	exit("<h4>cannot get region information!! ($region)</h4>");
@@ -119,8 +113,8 @@ $locX = $locX/256;
 $locY = $locY/256;
 
 
-$avatar_select = true;
-if ($avatars_num>100) $avatar_select = false;
+//$avatar_select = true;
+//if ($avatars_num>100) $avatar_select = false;
 
 //////////////
 $course_amp = '';
