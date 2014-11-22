@@ -125,6 +125,7 @@ $string['modlos_location_y'] 		= '座標: Y';
 $string['modlos_page'] 				= 'ページ';
 $string['modlos_page_of'] 			= '/';
 $string['modlos_coordinates'] 		= '座標';
+$string['modlos_region_size'] 		= 'リージョンサイズ';
 $string['modlos_region_owner'] 		= 'リージョンオーナー';
 $string['modlos_estate_owner']		= '管理者';
 $string['modlos_estate_id']			= 'Estate ID';

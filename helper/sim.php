@@ -94,6 +94,8 @@ if ($rginfo!=null) {
 	$serverURI	  	= $rginfo['serverURI'];
 	$locX		   	= $rginfo['locX'];
 	$locY		   	= $rginfo['locY'];
+	$sizeX		   	= $rginfo['sizeX'];
+	$sizeY		   	= $rginfo['sizeY'];
 	$owner_name	 	= $rginfo['fullname'];
 	$owner_uuid	 	= $rginfo['owner_uuid'];
 	$estateName	 	= $rginfo['estate_name'];
@@ -132,6 +134,7 @@ $uuid_ttl     	= get_string('modlos_uuid',    		 'block_modlos');
 $change_ttl   	= get_string('modlos_change',		 'block_modlos');
 
 $coordinates  	= get_string('modlos_coordinates', 	 'block_modlos');
+$region_size  	= get_string('modlos_region_size', 	 'block_modlos');
 $admin_user   	= get_string('modlos_admin_user',  	 'block_modlos');
 $region_owner 	= get_string('modlos_region_owner',	 'block_modlos');
 $voice_mode	  	= get_string('modlos_voice_chat_mode','block_modlos');

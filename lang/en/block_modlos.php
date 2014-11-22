@@ -125,6 +125,7 @@ $string['modlos_location_y'] 		= 'Loc: Y';
 $string['modlos_page'] 				= 'Page';
 $string['modlos_page_of'] 			= 'of';
 $string['modlos_coordinates'] 		= 'Coordinates';
+$string['modlos_region_size'] 		= 'Region Size';
 $string['modlos_region_owner']      = 'Region Owner';
 $string['modlos_estate_owner']      = 'Admin';
 $string['modlos_estate_id']         = 'Estate ID';
