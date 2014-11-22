@@ -70,22 +70,19 @@ class block_modlos extends block_base
 				$max_avatars = $CFG->modlos_max_own_avatars;
 				if (!hasModlosPermit($id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
 			}
-
 			if (!$isAvatarMax) {
 				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar.php?course='.$id.'">'.get_string('modlos_avatar_create','block_modlos').'</a><br />';
 			}
-
 			if ($CFG->modlos_activate_events) {
 				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/events_list.php?course='.$id.'">'.get_string('modlos_events_list','block_modlos').'</a><br />';
 			}
-
 			if (hasModlosPermit($id)) {
 				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/admin/actions/management.php?course='.$id.'">'.get_string('modlos_manage_menu','block_modlos').'</a><br />';
 			}
 		}
 		$this->content->text.= "<hr />";		
 
-		if ($db_ver!=null) { 
+		if ($db_ver!=null and $CFG->modlos_connect_db) { 
 			$db_state = opensim_check_db();
 			$this->grid_status 		= $db_state['grid_status'];
 			$this->now_online 	 	= $db_state['now_online'];
@@ -100,6 +97,7 @@ class block_modlos extends block_base
 			$this->user_count  		= 0;
 			$this->region_count		= 0;
 		}
+		if (!$this->grid_status) set_config('modlos_connect_db', 0);
 
 		$this->content->text.= "<center><b>".$this->grid_name."</b></center>";		
 		$this->content->text.= get_string('modlos_db_status','block_modlos').": ";		

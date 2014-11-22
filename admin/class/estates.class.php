@@ -67,7 +67,7 @@ class  Estates
 		//
 		$map_url = CMS_MODULE_URL.'/helper/sim.php?cource='.$this->course_id.'&amp;region=';
 		$region_win_pre = '<a style="cursor:pointer" onClick="window.open(';
-		$region_win_param = "'location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=400'";
+		$region_win_param = "'location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=420'";
 
 		foreach($this->estates as $estate) {
 			$estate_id = $estate['estate_id'];

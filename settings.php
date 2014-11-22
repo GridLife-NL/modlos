@@ -12,10 +12,13 @@ $course = $DB->get_record('course', array('id'=>$course_id));
 
 ob_start();
 print_tabnav_manage('settings', $course);
+echo "<input type='hidden' name='course' value='$course_id' />";
 $tabnav = ob_get_contents();
 ob_end_clean();
 
 $settings->add(new admin_setting_heading('block_modlos_addheading', '', $tabnav));
+
+//$settings->add(new admin_setting_heading('', '', "AAA"));
 
 // OpenSim DB
 $settings->add(new admin_setting_configtext('modlos_grid_name', 
@@ -222,6 +225,5 @@ $settings->add(new admin_setting_configcheckbox('modlos_activate_disclaimer',
 $settings->add(new admin_setting_configtextarea('modlos_disclaimer_content', 
 					get_string('modlos_dsclmr_cntnt', 'block_modlos'),
 				   	get_string('modlos_dsclmr_cntnt_desc', 'block_modlos'), '', PARAM_RAW));
-
 
 
