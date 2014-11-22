@@ -217,6 +217,7 @@ $string['modlos_voice_private_chnl']= 'プライベート';
 $string['modlos_voice_percel_chnl']	= 'パーセル';
 
 $string['modlos_add'] 				= '登録';
+$string['modlos_update'] 			= '更新';
 $string['modlos_updateordel'] 		= '更新または削除';
 
 // Config

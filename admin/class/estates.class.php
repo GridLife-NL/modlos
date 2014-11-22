@@ -100,6 +100,11 @@ class  Estates
 		$table->size [] = '20px';
 		$table->wrap [] = 'nowrap';
 
+		$table->head [] = 'ID';
+		$table->align[] = 'center';
+		$table->size [] = '20px';
+		$table->wrap [] = 'nowrap';
+
 		$table->head [] = get_string('modlos_estate_name','block_modlos');
 		$table->align[] = 'center';
 		$table->size [] = '60px';
@@ -125,12 +130,13 @@ class  Estates
 			$estate_id = $estate['estate_id'];
 			$estate_input = '<input type="hidden" name="estateids['.$i.']" value="'.$estate_id.'" />';
 			$table->data[$i][] = $i + 1;
+			$table->data[$i][] = $estate_id;
 			$table->data[$i][] = '<input type="text" name="estatenames['.$i.']"  size="16" maxlength="32" value="'.$estate['estate_name'].'" />';
 			$table->data[$i][] = '<input type="text" name="estateowners['.$i.']" size="16" maxlength="32" value="'.$estate['fullname'].'" />';
 			$table->data[$i][] = '<input type="checkbox" name="estatedels['.$i.']" value="1" />'.$estate_input;
 
 			if (($i+1)%$this->page_size==0) {
-				$table->data[$i][] = '<input type="submit" name="updateestate" value="'.get_string('modlos_updateordel','block_modlos').'" />';
+				$table->data[$i][] = '<input type="submit" name="updateestate" value="'.get_string('modlos_update','block_modlos').'" />';
 			}
 			else  {
 				$table->data[$i][] = ' ';

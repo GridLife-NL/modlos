@@ -217,6 +217,7 @@ $string['modlos_voice_private_chnl']= 'Private';
 $string['modlos_voice_percel_chnl'] = 'Percel';
 
 $string['modlos_add']               = 'Add';
+$string['modlos_update']       		= 'Update';
 $string['modlos_updateordel']       = 'Update or Delete';
 
 // Config
