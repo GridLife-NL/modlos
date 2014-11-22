@@ -128,7 +128,6 @@ $string['modlos_page_of'] 			= 'of';
 $string['modlos_coordinates'] 		= 'Coordinates';
 $string['modlos_region_size'] 		= 'Region Size';
 $string['modlos_region_owner']      = 'Region Owner';
-$string['modlos_estate_owner']      = 'Admin';
 $string['modlos_estate_id']         = 'Estate ID';
 $string['modlos_region_owner_chng'] = 'Region Owner Change';
 
@@ -356,8 +355,10 @@ $string['modlos_manage_done']		= 'Management Command was Executed!!';
 $string['modlos_manage_select']		= 'Select a Management Command';
 $string['modlos_manage_return']		= 'Return to Management Commands';
 
-$string['modlos_estate_tab']		= 'Management of Estate';
-$string['modlos_estate_ttl']		= 'Management of Estate';
+$string['modlos_estate_tab']		= 'Manage of Estates';
+$string['modlos_estate_ttl']		= 'Manage of Estates';
+$string['modlos_estate_owner']      = 'Estate Owner';
+$string['modlos_estate_regions']    = 'Regions';
 
 $string['modlos_lgnscrn_tab']		= 'Login Screen';
 $string['modlos_lgnscrn_ttl']		= 'Login Screen Alert Information Box';

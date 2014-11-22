@@ -128,7 +128,6 @@ $string['modlos_page_of'] 			= '/';
 $string['modlos_coordinates'] 		= '座標';
 $string['modlos_region_size'] 		= 'リージョンサイズ';
 $string['modlos_region_owner'] 		= 'リージョンオーナー';
-$string['modlos_estate_owner']		= '管理者';
 $string['modlos_estate_id']			= 'エステート ID';
 $string['modlos_region_owner_chng'] = 'リージョンオーナー変更';
 
@@ -355,8 +354,10 @@ $string['modlos_manage_done']       = '管理コマンド正常終了!!';
 $string['modlos_manage_select']     = '実行する管理コマンドを選択してください';
 $string['modlos_manage_return']     = '管理コマンド画面に戻る';
 
-$string['modlos_estate_tab']        = 'エステートの管理';
-$string['modlos_estate_ttl']        = 'エステートの管理';
+$string['modlos_estate_tab']        = 'エステート管理';
+$string['modlos_estate_ttl']        = 'エステート管理';
+$string['modlos_estate_owner']      = 'エステート オーナ';
+$string['modlos_estate_regions']    = 'リージョン';
 
 $string['modlos_lgnscrn_tab']   	= 'ログイン スクリーン';
 $string['modlos_lgnscrn_ttl']   	= 'ログインスクリーン 情報ボックス';

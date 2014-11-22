@@ -19,11 +19,8 @@ class  Estates
 
 	var $estates  = array();
 
-	var $addname;
-
 	var $hasError = false;
 	var $errorMsg = array();
-
 
 
 	function  Estates($course_id) 
@@ -39,13 +36,32 @@ class  Estates
 	}
 
 
-
 	function  execute()
 	{
 		global $DB;
 
 		$this->estates = opensim_get_estates_infos();
 		if ($this->estates==null) return;
+
+		$map_url = CMS_MODULE_URL.'/helper/sim.php?cource='.$this->course_id.'&amp;region=';
+		$region_win_pre = '<a style="cursor:pointer" onClick="window.open(';
+		$region_win_param = "'location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450'";
+
+		foreach($this->estates as $estate) {
+			$estate_id = $estate['estate_id'];
+			$regions = opensim_get_regions_infos("WHERE estate_map.EstateID=".$estate_id);
+			$this->estates[$estate_id]['regions'] = '';
+			//
+			foreach($regions as $region) {
+				$region_link = $region_win_pre."'".$map_url.$region['UUID']."',null,".$region_win_param.')">'.$region['regionName'].'</a>';
+				if ($this->estates[$estate_id]['regions']=='') { 
+					$this->estates[$estate_id]['regions'] = $region_link;
+				}
+				else {
+					$this->estates[$estate_id]['regions'] .= ', '.$region_link;
+				}
+			}
+		}
 
 		// Form	
 		if (data_submitted()) {
@@ -78,7 +94,6 @@ class  Estates
 	}
 
 
-
 	function  print_page() 
 	{
 		global $CFG, $OUTPUT;
@@ -88,7 +103,6 @@ class  Estates
 
 		include(CMS_MODULE_PATH.'/admin/html/estates.html');
 	}
-
 
 
 	function  show_table()
@@ -106,23 +120,28 @@ class  Estates
 		$table->wrap [] = 'nowrap';
 
 		$table->head [] = get_string('modlos_estate_name','block_modlos');
-		$table->align[] = 'center';
+		$table->align[] = 'left';
 		$table->size [] = '60px';
 		$table->wrap [] = 'nowrap';
 
 		$table->head [] = get_string('modlos_estate_owner','block_modlos');
-		$table->align[] = 'center';
+		$table->align[] = 'left';
 		$table->size [] = '60px';
 		$table->wrap [] = 'nowrap';
 
 		$table->head [] = get_string('delete');
 		$table->align[] = 'center';
-		$table->size [] = '60px';
+		$table->size [] = '40px';
 		$table->wrap [] = 'nowrap';
+
+		$table->head [] = get_string('modlos_estate_regions','block_modlos');
+		$table->align[] = 'left';
+		$table->size [] = '200px';
+		$table->wrap [] = '';
 
 		$table->head [] = '';
 		$table->align[] = 'center';
-		$table->size [] = '60px';
+		$table->size [] = '20px';
 		$table->wrap [] = 'nowrap';
 		//
 		$i = 0;
@@ -134,6 +153,7 @@ class  Estates
 			$table->data[$i][] = '<input type="text" name="estatenames['.$i.']"  size="16" maxlength="32" value="'.$estate['estate_name'].'" />';
 			$table->data[$i][] = '<input type="text" name="estateowners['.$i.']" size="16" maxlength="32" value="'.$estate['fullname'].'" />';
 			$table->data[$i][] = '<input type="checkbox" name="estatedels['.$i.']" value="1" />'.$estate_input;
+			$table->data[$i][] = $estate['regions'];
 
 			if (($i+1)%$this->page_size==0) {
 				$table->data[$i][] = '<input type="submit" name="updateestate" value="'.get_string('modlos_update','block_modlos').'" />';
@@ -150,7 +170,6 @@ class  Estates
 
 		return $i;
 	}
-
 
 
 	function  action_add()
@@ -178,7 +197,6 @@ class  Estates
 	}
 
 
-
 	function  action_move_active()
 	{
 		global $DB;
@@ -198,7 +216,6 @@ class  Estates
 	}
 
 
-
 	function  action_move_inactive()
 	{
 		global $DB;
@@ -216,7 +233,6 @@ class  Estates
 			}
 		}
 	}
-
 
 
 	function  action_delete()
