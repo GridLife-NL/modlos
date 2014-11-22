@@ -1149,6 +1149,7 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 
 	$tabs = array($toprow);
 
+	echo "<input type='hidden' name='course' value='$course_id' />";
 	print_tabs($tabs, $currenttab, NULL, NULL);
 }
 
