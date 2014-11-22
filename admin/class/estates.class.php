@@ -1,6 +1,6 @@
 <?php
 //////////////////////////////////////////////////////////////////////////////////////////////
-// lastnames.class.php
+// estates.class.php
 //
 //										by Fumi.Iseki
 //
@@ -11,17 +11,14 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
-class  LastNames
+class  Estates
 {
 	var $action_url;
 	var $course_id = 0;
+	var $page_size = 15;
 
-	var $lastnames			= array();
-	var $lastnames_active	= array();
-	var $lastnames_inactive = array();
+	var $estates  = array();
 
-	var $select_active		= array();		// move to active
-	var $select_inactive   	= array();		// move to inactive
 	var $addname;
 
 	var $hasError = false;
@@ -29,7 +26,7 @@ class  LastNames
 
 
 
-	function  LastNames($course_id) 
+	function  Estates($course_id) 
 	{
 		$this->course_id  = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
@@ -38,7 +35,7 @@ class  LastNames
 			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 			return;
 		}
-		$this->action_url = CMS_MODULE_URL.'/admin/actions/lastnames.php';
+		$this->action_url = CMS_MODULE_URL.'/admin/actions/estates.php';
 	}
 
 
@@ -47,12 +44,8 @@ class  LastNames
 	{
 		global $DB;
 
-		$objs = $DB->get_records('modlos_lastnames');
-		if (is_array($objs)) {
-			foreach($objs as $name) {
-				$this->lastnames[$name->lastname] = $name->state;
-			}
-		}
+		$this->estates = opensim_get_estates_infos();
+		if ($this->estates==null) return;
 
 		// Form	
 		if (data_submitted()) {
@@ -88,22 +81,68 @@ class  LastNames
 
 	function  print_page() 
 	{
-		global $CFG;
+		global $CFG, $OUTPUT;
 
-		foreach ($this->lastnames as $lastname=>$state) {
-			if ($state==AVATAR_LASTN_ACTIVE) $this->lastnames_active[]   = $lastname;
-			else							 $this->lastnames_inactive[] = $lastname;
+		$grid_name	  = $CFG->modlos_grid_name;
+		$estates_ttl  = get_string('modlos_estate_ttl','block_modlos');
+
+		include(CMS_MODULE_PATH.'/admin/html/estates.html');
+	}
+
+
+
+	function  show_table()
+	{
+		$table = new html_table();
+		//
+		$table->head [] = '#';
+		$table->align[] = 'center';
+		$table->size [] = '20px';
+		$table->wrap [] = 'nowrap';
+
+		$table->head [] = get_string('modlos_estate_name','block_modlos');
+		$table->align[] = 'center';
+		$table->size [] = '60px';
+		$table->wrap [] = 'nowrap';
+
+		$table->head [] = get_string('modlos_estate_owner','block_modlos');
+		$table->align[] = 'center';
+		$table->size [] = '60px';
+		$table->wrap [] = 'nowrap';
+
+		$table->head [] = get_string('delete');
+		$table->align[] = 'center';
+		$table->size [] = '60px';
+		$table->wrap [] = 'nowrap';
+
+		$table->head [] = '';
+		$table->align[] = 'center';
+		$table->size [] = '60px';
+		$table->wrap [] = 'nowrap';
+		//
+		$i = 0;
+		foreach($this->estates as $estate) {
+			$estate_id = $estate['estate_id'];
+			$estate_input = '<input type="hidden" name="estateids['.$i.']" value="'.$estate_id.'" />';
+			$table->data[$i][] = $i + 1;
+			$table->data[$i][] = '<input type="text" name="estatenames['.$i.']"  size="16" maxlength="32" value="'.$estate['estate_name'].'" />';
+			$table->data[$i][] = '<input type="text" name="estateowners['.$i.']" size="16" maxlength="32" value="'.$estate['fullname'].'" />';
+			$table->data[$i][] = '<input type="checkbox" name="estatedels['.$i.']" value="1" />'.$estate_input;
+
+			if (($i+1)%$this->page_size==0) {
+				$table->data[$i][] = '<input type="submit" name="updateestate" value="'.get_string('modlos_updateordel','block_modlos').'" />';
+			}
+			else  {
+				$table->data[$i][] = ' ';
+			}
+			$i++;
 		}
 
-		$grid_name		= $CFG->modlos_grid_name;
-		$select1 		= $this->lastnames_active;
-		$select2 		= $this->lastnames_inactive;
+		echo '<div align="center">';
+		echo html_writer::table($table);
+		echo '</div>';
 
-		$lastnames_ttl	= get_string('modlos_lastnames', 	'block_modlos');
-		$select1_title	= get_string('modlos_active_list', 	'block_modlos');
-		$select2_title	= get_string('modlos_inactive_list', 'block_modlos');
-
-		include(CMS_MODULE_PATH.'/admin/html/lastnames.html');
+		return $i;
 	}
 
 
@@ -126,7 +165,7 @@ class  LastNames
 		}
 
 		$obj->lastname = $this->addname;
-		$obj->state    = AVATAR_LASTN_ACTIVE;
+		$obj->state	= AVATAR_LASTN_ACTIVE;
 		$DB->insert_record('modlos_lastnames', $obj);
 
 		$this->lastnames[$this->addname] = AVATAR_LASTN_ACTIVE;

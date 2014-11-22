@@ -116,6 +116,7 @@ $string['modlos_avatar_search'] 	= 'Avatar Search';
 
 $string['modlos_region'] 			= 'Region';
 $string['modlos_estate'] 			= 'Estate';
+$string['modlos_estate_name'] 		= 'Estate Name';
 $string['modlos_ipaddress'] 		= 'IP Address';
 $string['modlos_region_info'] 		= 'Region Information';
 $string['modlos_region_name'] 		= 'Region Name';
@@ -215,10 +216,15 @@ $string['modlos_voice_inactive_chnl']='Inactive';
 $string['modlos_voice_private_chnl']= 'Private';
 $string['modlos_voice_percel_chnl'] = 'Percel';
 
+$string['modlos_add']               = 'Add';
+$string['modlos_updateordel']       = 'Update or Delete';
 
 // Config
 $string['modlos_mdl_name'] 			= 'Moodle OpenSim';
 $string['modlos_mdl_desc'] 			= 'Moodle OpenSim interface';
+
+$string['modlos_connect_db']		= 'Connect to DB';
+$string['modlos_connect_db_desc']	= 'Usually, it is always YES. When DB is downed, this value is set as NO automatically. Please check after starting DB';
 
 $string['modlos_grid_name'] 		= 'Grid Name';
 $string['modlos_grid_desc'] 		= 'Specify the OpenSim grid name';
@@ -348,6 +354,9 @@ $string['modlos_manage_contents']	= 'Execute Management Command';
 $string['modlos_manage_done']		= 'Management Command was Executed!!';
 $string['modlos_manage_select']		= 'Select a Management Command';
 $string['modlos_manage_return']		= 'Return to Management Commands';
+
+$string['modlos_estate_tab']		= 'Management of Estate';
+$string['modlos_estate_ttl']		= 'Management of Estate';
 
 $string['modlos_lgnscrn_tab']		= 'Login Screen';
 $string['modlos_lgnscrn_ttl']		= 'Login Screen Alert Information Box';

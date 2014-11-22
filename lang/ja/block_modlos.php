@@ -116,6 +116,7 @@ $string['modlos_avatar_search'] 	= 'アバター検索';
 
 $string['modlos_region'] 			= 'リージョン';
 $string['modlos_estate'] 			= 'エステート';
+$string['modlos_estate_name'] 		= 'エステート名';
 $string['modlos_ipaddress']			= 'IPアドレス';
 $string['modlos_region_info'] 		= 'リージョン情報';
 $string['modlos_region_name'] 		= 'リージョン名';
@@ -128,7 +129,7 @@ $string['modlos_coordinates'] 		= '座標';
 $string['modlos_region_size'] 		= 'リージョンサイズ';
 $string['modlos_region_owner'] 		= 'リージョンオーナー';
 $string['modlos_estate_owner']		= '管理者';
-$string['modlos_estate_id']			= 'Estate ID';
+$string['modlos_estate_id']			= 'エステート ID';
 $string['modlos_region_owner_chng'] = 'リージョンオーナー変更';
 
 $string['modlos_image_processor']	= '画像処理用プログラム'; 
@@ -215,10 +216,15 @@ $string['modlos_voice_inactive_chnl']= 'ボイス無効';
 $string['modlos_voice_private_chnl']= 'プライベート';
 $string['modlos_voice_percel_chnl']	= 'パーセル';
 
+$string['modlos_add'] 				= '登録';
+$string['modlos_updateordel'] 		= '更新または削除';
 
 // Config
 $string['modlos_mdl_name'] 			= 'Moodle OpenSim';
 $string['modlos_mdl_desc'] 			= 'Moodle OpenSim インターフェイス';
+
+$string['modlos_connect_db']        = 'データベースへの接続';
+$string['modlos_connect_db_desc']   = '通常は常に YES．DBがダウンした場合，この値は自動的に NOになるので，DBを起動後に YESに戻す';
 
 $string['modlos_grid_name'] 		= 'グリッド名';
 $string['modlos_grid_desc'] 		= 'OpenSim のグリッド名';
@@ -347,6 +353,9 @@ $string['modlos_manage_contents']   = '管理コマンドの実行';
 $string['modlos_manage_done']       = '管理コマンド正常終了!!';
 $string['modlos_manage_select']     = '実行する管理コマンドを選択してください';
 $string['modlos_manage_return']     = '管理コマンド画面に戻る';
+
+$string['modlos_estate_tab']        = 'エステートの管理';
+$string['modlos_estate_ttl']        = 'エステートの管理';
 
 $string['modlos_lgnscrn_tab']   	= 'ログイン スクリーン';
 $string['modlos_lgnscrn_ttl']   	= 'ログインスクリーン 情報ボックス';

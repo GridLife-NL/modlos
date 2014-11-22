@@ -1185,6 +1185,8 @@ function  print_tabnav_manage($currenttab, $course)
 			$toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/actions/lastnames.php'.$course_param, 
 																	'<b>'.get_string('modlos_lastnames_tab','block_modlos').'</b>');
 		}
+		$toprow[] = new tabobject('estates', CMS_MODULE_URL.'/admin/actions/estates.php'.$course_param, 
+																	'<b>'.get_string('modlos_estate_tab','block_modlos').'</b>');
 		$toprow[] = new tabobject('management', CMS_MODULE_URL.'/admin/actions/management.php'.$course_param, 
 																	'<b>'.get_string('modlos_manage_cmnd_tab','block_modlos').'</b>');
 	}

@@ -17,11 +17,14 @@ ob_end_clean();
 
 $settings->add(new admin_setting_heading('block_modlos_addheading', '', $tabnav));
 
-
 // OpenSim DB
 $settings->add(new admin_setting_configtext('modlos_grid_name', 
 					get_string('modlos_grid_name', 'block_modlos'),
 				   	get_string('modlos_grid_desc', 'block_modlos'), 'Open Grid', PARAM_TEXT));
+
+$settings->add(new admin_setting_configcheckbox('modlos_connect_db', 
+					get_string('modlos_connect_db', 'block_modlos'),
+				   	get_string('modlos_connect_db_desc', 'block_modlos'), 1));
 
 $settings->add(new admin_setting_configtext('modlos_sql_server_name', 
 					get_string('modlos_sql_server_name', 'block_modlos'),

@@ -1,0 +1,48 @@
+
+<table align="center" class="generalbox">
+  <tr>
+    <td align="center">
+      <table border="0" style="margin: -20px 0px -20px 0px;">
+        <tr><td>
+          <?php echo $OUTPUT->heading($grid_name.': '.$estates_ttl); ?>
+        </td></tr>
+      </table>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="generalboxcontent" align="center">
+      <table border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td align="center">
+            <table border="0" style="margin: -30px 0px -30px 0px;">
+              <tr><td>
+                <form name="gsess" method="post" action="<?php echo $this->action_url;?>">
+                  <input type="hidden" name="sesskey" value="<?php echo sesskey();?>" />
+                  <input type="hidden" name="course"  value="<?php echo $this->course_id;?>" />
+                  <input type="text"   name="estatename" size="18" maxlength="32" value="" />
+                  <input type="submit" name="addestate" value="<?php echo get_string('modlos_add','block_modlos');?>" />
+                </form>
+              </td></tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <form name="assignform" method="post" action="<?php echo $this->action_url?>">
+              <input type="hidden" name="sesskey" value="<?php echo sesskey();?>" />
+              <input type="hidden" name="course"  value="<?php echo $this->course_id;?>" />
+              <?php $count = $this->show_table(); ?>
+              <?php if ($count % $this->page_size != 0) { ?>
+              <input type="submit" name="updateestate" value="<?php echo get_string('modlos_updateordel','block_modlos');?>" />
+              <?php } ?>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

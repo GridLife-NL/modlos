@@ -84,7 +84,7 @@ class  ManagementBase
 					if ($profs!=null) modlos_set_profiles_from_users($profs, false);        // not over write
 				}
 				else if ($command=='debugcom') {
-					opensim_debug_command();
+					opensim_debug_command();		// set your debug command
 				}
 				else {
 					$this->managed = false;
