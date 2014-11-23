@@ -2,11 +2,7 @@
 <table align="center" class="generalbox">
   <tr>
     <td align="center">
-      <table border="0">
-        <tr><td>
-          <?php echo $OUTPUT->heading($grid_name.': '.$estates_ttl); ?>
-        </td></tr>
-      </table>
+      <?php echo $OUTPUT->heading($grid_name.': '.$estates_ttl); ?>
     </td>
   </tr>
 
@@ -28,20 +24,13 @@
     <td class="generalboxcontent" align="center">
       <table border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
           <td align="center">
-            <table border="0">
-              <tr><td>
-                <form name="gsess" method="post" action="<?php echo $this->action_url;?>">
-                  <input type="hidden" name="sesskey" value="<?php echo sesskey();?>" />
-                  <input type="hidden" name="course"  value="<?php echo $this->course_id;?>" />
-                  <input type="text"   name="estatename" size="18" maxlength="32" value="" />
-                  <input type="submit" name="addestate" value="<?php echo get_string('modlos_add','block_modlos');?>" />
-                </form>
-              </td></tr>
-            </table>
+            <form name="gsess" method="post" action="<?php echo $this->action_url;?>">
+              <input type="hidden" name="sesskey" value="<?php echo sesskey();?>" />
+              <input type="hidden" name="course"  value="<?php echo $this->course_id;?>" />
+              <input type="text"   name="estatename" size="18" maxlength="32" value="" />
+              <input type="submit" name="addestate" value="<?php echo get_string('modlos_add','block_modlos');?>" />
+            </form>
           </td>
         </tr>
         <tr>
