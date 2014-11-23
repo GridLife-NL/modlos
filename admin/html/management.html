@@ -9,8 +9,7 @@
         <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $content?></span></strong></td>
       </tr>
     </table>
-
-    <br /><br />
+    <br />
 
     <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
     <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
@@ -23,8 +22,7 @@
           <option value="<?php echo $com['com']?>" ><?php echo htmlspecialchars($com['ttl'])?></option>
         <?php }?>
       </select>&nbsp;&nbsp;
-      <br />
-      <br />
+      <br /><br />
 
       <input type="submit" value="<?php echo $manage_submit?>" /> 
     </div>
