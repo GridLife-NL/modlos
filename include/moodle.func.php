@@ -26,7 +26,7 @@ function  hasPermit($course_id=0)
 	if (jbxl_is_admin($USER->id)) return true;
 	if ($course_id==0 or $course_id==null) return false;
 
-	$cntxt = get_context_instance(CONTEXT_COURSE, $course_id);
+	$cntxt = jbxl_get_course_context($course_id);
     if (jbxl_is_teacher($USER->id, $cntxt, false)) return true;
     if (jbxl_is_assistant($USER->id, $cntxt)) return true;
 

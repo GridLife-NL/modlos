@@ -1236,19 +1236,17 @@ function  print_modlos_header($currenttab, $course)
 		$title = get_string('modlos', 'block_modlos');
 		$head  = get_string('modlos_menu', 'block_modlos');
 		//$menu  = user_login_string($SITE);
-		$menu  = '';
 	}
 	else {
 		$title = $course->shortname.': '.get_string('modlos', 'block_modlos');
 		$head  = $course->fullname;
-		$menu  = navmenu($course);
 	}
 
     $PAGE->set_title($title);
     $PAGE->set_heading($head);
     $PAGE->set_cacheable(true);
     $PAGE->set_button('&nbsp;');
-    $PAGE->set_headingmenu($menu);
+    //$PAGE->set_headingmenu($menu);
 
 	echo $OUTPUT->header();
 
