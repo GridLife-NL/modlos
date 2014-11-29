@@ -62,20 +62,21 @@
         <tr><td class="styleText"><b><?php echo $region_size." X:&nbsp;".$sizeX."&nbsp;Y:&nbsp;".$sizeY?></b></td></tr>
         <tr><td class="styleText">&nbsp;</td></tr>
 
-        <tr><td class="styleText"><b><?php echo $estate_ttl.":&nbsp;".$estate_name."&nbsp;" ?></b>
+        <tr><td class="styleText"><b><?php echo $estate_ttl.":&nbsp;" ?></b>
         <?php if ($hasPermit) {?>
             <select wide="8" name="estateid">
               <option value="" ></option>
               <?php foreach($estates as $estate) {?>
+                <?php $estate_select = '['.$estate['estate_id'].']&nbsp;'.$estate['estate_name'] ?>
                 <?php if ($estate['estate_id']==$estate_id) {?>
-                  <option value="<?php echo $estate['estate_id']?>" selected><?php echo $estate['estate_id']?></option>
+                  <option value="<?php echo $estate['estate_id']?>" selected><?php echo $estate_select ?></option>
                 <?php } else {?>
-                  <option value="<?php echo $estate['estate_id']?>" ><?php echo $estate['estate_id']?></option>
+                  <option value="<?php echo $estate['estate_id']?>" ><?php echo $estate_select ?></option>
                 <?php }?>
               <?php }?>
             </select>
         <?php } else {?>
-          <b><?php echo "[$estate_id]" ?></b>
+          <b><?php echo "[$estate_id]&nbsp;".$estate_name ?></b>
         <?php }?>
         </td></tr>
 

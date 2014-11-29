@@ -149,7 +149,9 @@ class  Estates
 			$table->data[$i][] = $estate['regions'];
 
 			if (($i+1)%$this->page_size==0) {
-				$table->data[$i][] = '<input type="submit" name="updateestate" value="'.get_string('modlos_update','block_modlos').'" />';
+				$button  = '<input type="submit" name="updateestate" value="'.get_string('modlos_update','block_modlos').'" />&nbsp;&nbsp;';
+				$button .= '<input type="reset"  value="'.get_string('modlos_reset_ttl', 'block_modlos').'" />';
+				$table->data[$i][] = $button;
 			}
 			else  {
 				$table->data[$i][] = ' ';
