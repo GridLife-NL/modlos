@@ -16,9 +16,26 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 //
-//
-//
+$LOGIN_SCREEN_CONTENT = env_get_config('loginscreen_content');
 
+$alert = modlos_get_loginscreen_alert();
+$BOX_TITLE        = $alert['title'];
+$BOX_COLOR        = $alert['bordercolor'];
+$BOX_INFOTEXT     = $alert['information'];
+
+$GRID_NAME        = $CFG->modlos_grid_name;
+$REGION_TTL       = get_string('modlos_region','block_modlos');
+
+$DB_STATUS_TTL    = get_string('modlos_db_status','block_modlos');
+$ONLINE           = get_string('modlos_online_ttl','block_modlos');
+$OFFLINE          = get_string('modlos_offline_ttl','block_modlos');
+$TOTAL_USER_TTL   = get_string('modlos_total_users','block_modlos');
+$TOTAL_REGION_TTL = get_string('modlos_total_regions','block_modlos');
+$LAST_USERS_TTL   = get_string('modlos_visitors_last30days','block_modlos');
+$ONLINE_TTL       = get_string('modlos_online_now','block_modlos');
+
+
+//
 $Categories[0]  = get_string('modlos_events_all_category',	'block_modlos');
 $Categories[18] = get_string('modlos_events_discussion',	'block_modlos');
 $Categories[19] = get_string('modlos_events_sports',		'block_modlos');
