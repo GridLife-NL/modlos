@@ -88,8 +88,11 @@ class  OwnerAvatar
 			print_error($meag, '', $this->return_url);
 		}
 		if ($avatar['uid']!=0) {
-			$mesg = ' '.get_string('modlos_owner_forbidden', 'block_modlos').' (User ID is not 0)';
-			print_error($mesg, '', $this->return_url);
+			$user_info = get_userinfo_by_id($avatar['uid']);
+			if ($user_info!=null) {
+				$mesg = ' '.get_string('modlos_owner_forbidden', 'block_modlos').' (User ID is not 0 and user is active)';
+				print_error($mesg, '', $this->return_url);
+			}
 		}
 		if (!((int)$avatar['state']&AVATAR_STATE_SYNCDB)) {
 			$mesg = ' '.get_string('modlos_owner_forbidden', 'block_modlos').' (not Acrive)';

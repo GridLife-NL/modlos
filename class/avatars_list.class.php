@@ -229,6 +229,7 @@ class  AvatarsList
 				$avatardata = modlos_get_avatar_info($UUID, $this->use_sloodle);
 			}
 
+			$user_info = null;
 			if ($avatardata!=null) {
 				if (!((int)$avatardata['state']&AVATAR_STATE_SYNCDB)) {
 					modlos_sync_opensimdb(false);
@@ -251,7 +252,7 @@ class  AvatarsList
 			if ($this->hasPermit or $USER->id==$uid) {
 				$dat['editable'] = AVATAR_EDITABLE;
 			}
-			elseif ($uid==0) {
+			elseif ($uid==0 or $user_info==null) {
 				if (!$this->isAvatarMax and $this->ownerloss) {
 					$dat['editable'] = AVATAR_OWNER_EDITABLE;
 				}
