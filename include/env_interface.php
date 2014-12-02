@@ -15,7 +15,7 @@ require_once(ENV_HELPER_PATH.'/../include/modlos.func.php');
 
 
 // for Login Page
-if ($LOGINPAGE) {
+if (isset($LOGINPAGE) and $LOGINPAGE) {
 	$LOGIN_SCREEN_CONTENT = env_get_config('loginscreen_content');
 
 	$alert = modlos_get_loginscreen_alert();
