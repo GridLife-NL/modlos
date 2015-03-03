@@ -83,6 +83,7 @@ if ($rginfo=='') $rginfo = opensim_get_region_info($region);
 if ($rginfo!=null) {
 	$regionName	 	= $rginfo['regionName'];
 	$serverIP		= $rginfo['serverIP'];
+	$serverName		= $rginfo['serverName'];
 	$serverHttpPort = $rginfo['serverHttpPort'];
 	$serverURI	  	= $rginfo['serverURI'];
 	$locX		   	= $rginfo['locX'];
@@ -104,7 +105,8 @@ if ($serverURI!='') {
 	if (!strncasecmp($dec[0], 'http', 4)) $server = "$dec[0]:$dec[1]";
 }   
 if ($server=='') {
-	$server = "http://$serverIP";
+	//$server = "http://$serverIP";
+	$server = "http://$serverName";
 }
 $server = $server.':'.$serverHttpPort;
 $guid = str_replace('-', '', $region);
@@ -123,7 +125,8 @@ if ($course_id>0) $course_amp = '&amp;course='.$course_id;
 $region_info_ttl= get_string('modlos_region_info',	 'block_modlos');
 $region_ttl   	= get_string('modlos_region',   	 'block_modlos');
 $estate_ttl   	= get_string('modlos_estate',   	 'block_modlos');
-$ipaddress_ttl 	= get_string('modlos_ipaddress',   	 'block_modlos');
+//$ipaddress_ttl 	= get_string('modlos_ipaddress',   	 'block_modlos');
+$server_ttl 	= get_string('modlos_server',   	 'block_modlos');
 $uuid_ttl     	= get_string('modlos_uuid',    		 'block_modlos');
 $change_ttl   	= get_string('modlos_change',		 'block_modlos');
 

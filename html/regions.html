@@ -138,7 +138,7 @@
         <?php //if ($this->hasPermit) {?>
         <?php if (!$this->isGuest) {?>
           <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=ip'">
-            <b><u><?php echo $ip_address?></u></b>
+            <b><u><?php echo $server_name?></u></b>
           </a>
         <?php }?>
       </td>
@@ -179,10 +179,10 @@
 
         <td style="color: #2222ff">
           <?php if ($this->isGuest) {?>
-            <b><?php echo htmlspecialchars($dat['est_firstname'])?>&nbsp;<?php echo htmlspecialchars($dat['est_lastname'])?></b>
+            <b><?php echo htmlspecialchars($dat['owner_name'])?></b>
           <?php } else {?>
             <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$dat['owner_uuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
-              <b><u><?php echo htmlspecialchars($dat['est_firstname']).'&nbsp;'.htmlspecialchars($dat['est_lastname'])?></u></b>
+              <b><u><?php echo htmlspecialchars($dat['owner_name'])?></u></b>
             </a>
           <?php }?>
         </td>
@@ -196,8 +196,8 @@
         <td style="color: #222222">
           <?php //if ($this->hasPermit) {?>
           <?php if (!$this->isGuest) {?>
-            <a style="cursor:pointer" onClick="window.open('http://<?php echo $dat['serverIP']?>:9000/SStats/','<?php echo $dat['ip_name']?>','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=1000,height=800')">
-              <b><u><?php echo $dat['serverIP']?></u></b>
+            <a style="cursor:pointer" onClick="window.open('http://<?php echo $dat['serverName']?>:9000/SStats/','<?php echo $dat['serverName']?>','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=1000,height=800')">
+              <b><u><?php echo $dat['serverName']?></u></b>
             </a>
           <?php }?>
         </td>

@@ -118,6 +118,7 @@ $string['modlos_region'] 			= 'リージョン';
 $string['modlos_estate'] 			= 'エステート';
 $string['modlos_estate_name'] 		= 'エステート名';
 $string['modlos_ipaddress']			= 'IPアドレス';
+$string['modlos_server']			= 'サーバ';
 $string['modlos_region_info'] 		= 'リージョン情報';
 $string['modlos_region_name'] 		= 'リージョン名';
 $string['modlos_regions_found'] 	= 'リージョン';

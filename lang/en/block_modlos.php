@@ -118,6 +118,7 @@ $string['modlos_region'] 			= 'Region';
 $string['modlos_estate'] 			= 'Estate';
 $string['modlos_estate_name'] 		= 'Estate Name';
 $string['modlos_ipaddress'] 		= 'IP Address';
+$string['modlos_server'] 			= 'Server';
 $string['modlos_region_info'] 		= 'Region Information';
 $string['modlos_region_name'] 		= 'Region Name';
 $string['modlos_regions_found'] 	= 'Regions Found';

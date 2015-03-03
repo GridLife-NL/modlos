@@ -162,8 +162,17 @@ class  RegionsList
 			$this->db_data[$colum]['voice'] = $voice_mode[$vcmode];
 
 			$this->db_data[$colum]['uuid']	  = str_replace('-', '',  $region['UUID']);
-			$this->db_data[$colum]['ow_uuid'] = str_replace('-', '',  $region['owner_uuid']);
-			$this->db_data[$colum]['ip_name'] = str_replace('.', 'X', $region['serverIP']);
+//			$this->db_data[$colum]['ow_uuid'] = str_replace('-', '',  $region['owner_uuid']);
+//			$this->db_data[$colum]['ip_name'] = str_replace('.', 'X', $region['serverIP2']);
+
+			if ($region['est_fullname']!=null) {
+				$this->db_data[$colum]['owner_name'] = $region['est_fullname'];
+				$this->db_data[$colum]['owner_uuid'] = $region['estate_owner'];
+			}
+			else {
+				$this->db_data[$colum]['owner_name'] = $region['rgn_fullname'];
+				$this->db_data[$colum]['owner_uuid'] = $region['owner_uuid'];
+			}
 
 			$colum++;
 		}
@@ -195,6 +204,7 @@ class  RegionsList
 		$estate_name	 = get_string('modlos_estate',         'block_modlos');
 		$estate_owner	 = get_string('modlos_estate_owner',   'block_modlos');
 		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
+		$server_name	 = get_string('modlos_server',		   'block_modlos');
 		$regions_found   = get_string('modlos_regions_found',  'block_modlos');
 		$page_num		 = get_string('modlos_page',		   'block_modlos');
 		$page_num_of	 = get_string('modlos_page_of',		   'block_modlos');
