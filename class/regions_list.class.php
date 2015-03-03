@@ -203,6 +203,7 @@ class  RegionsList
 		$region_name	 = get_string('modlos_region_name',	   'block_modlos');
 		$estate_name	 = get_string('modlos_estate',         'block_modlos');
 		$estate_owner	 = get_string('modlos_estate_owner',   'block_modlos');
+		$owner_ttl	 	 = get_string('modlos_owner',   	   'block_modlos');
 		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
 		$server_name	 = get_string('modlos_server',		   'block_modlos');
 		$regions_found   = get_string('modlos_regions_found',  'block_modlos');
