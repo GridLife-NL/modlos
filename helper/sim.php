@@ -94,6 +94,11 @@ if ($rginfo!=null) {
 	$owner_uuid	 	= $rginfo['owner_uuid'];
 	$estate_name 	= $rginfo['estate_name'];
 	$estate_id	 	= $rginfo['estate_id'];
+	//
+ 	if ($owner_name=='') {
+		$name = opensim_get_avatar_name($owner_uuid);
+		$owner_name = $name['fullname'];
+	}
 }
 else {
 	exit("<h4>cannot get region information!! ($region)</h4>");
