@@ -196,7 +196,7 @@
         <td style="color: #222222">
           <?php //if ($this->hasPermit) {?>
           <?php if (!$this->isGuest) {?>
-            <a style="cursor:pointer" onClick="window.open('http://<?php echo $dat['serverName']?>:9000/SStats/','<?php echo $dat['serverName']?>','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=1000,height=800')">
+            <a style="cursor:pointer" onClick="window.open('http://<?php echo $dat['serverName'].':'.$dat['serverPort']?>/SStats/','<?php echo $dat['serverName']?>','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=1000,height=800')">
               <b><u><?php echo $dat['serverName']?></u></b>
             </a>
           <?php }?>

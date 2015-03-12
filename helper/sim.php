@@ -85,6 +85,7 @@ if ($rginfo!=null) {
 	$serverIP		= $rginfo['serverIP'];
 	$serverName		= $rginfo['serverName'];
 	$serverHttpPort = $rginfo['serverHttpPort'];
+	$serverPort     = $rginfo['serverPort'];		// serverHttpPort と同じ物
 	$serverURI	  	= $rginfo['serverURI'];
 	$locX		   	= $rginfo['locX'];
 	$locY		   	= $rginfo['locY'];
