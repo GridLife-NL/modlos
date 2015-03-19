@@ -212,7 +212,7 @@ $string['modlos_sloodle_update_error']='Sloodleのユーザデータの更新に
 $string['modlos_inactivate_error']	= 'アバターの無効化に失敗しました!!';
 $string['modlos_activate_error']	= 'アバターの有効化に失敗しました!!';
 
-$string['modlos_voice_chat_mode']	= 'ボイスチャネル';
+$string['modlos_voice_chat_mode']	= 'ボイス';
 $string['modlos_voice_chat_mode_chng']='モード変更';
 $string['modlos_voice_inactive_chnl']= 'ボイス無効';
 $string['modlos_voice_private_chnl']= 'プライベート';

@@ -212,7 +212,7 @@ $string['modlos_sloodle_update_error']='It failed in updating data of Sloodle!!'
 $string['modlos_inactivate_error']  = 'It failed in the inactivation of avatar!!';
 $string['modlos_activate_error']    = 'It failed in the activation of avatar!!';
 
-$string['modlos_voice_chat_mode']   = 'Voice Channel';
+$string['modlos_voice_chat_mode']   = 'Voice';
 $string['modlos_voice_chat_mode_chng']='Change Mode';
 $string['modlos_voice_inactive_chnl']='Inactive';
 $string['modlos_voice_private_chnl']= 'Private';
