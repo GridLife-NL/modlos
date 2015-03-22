@@ -19,14 +19,12 @@ $centerX = optional_param('ctX',  $mapstartX, PARAM_INT);
 $centerY = optional_param('ctY',  $mapstartY, PARAM_INT);
 $tsize   = optional_param('size', $CFG->modlos_map_size, PARAM_INT);
 
-
 $size = $CFG->modlos_map_size;
 if ($allow_zoom) {
-	if($tsize==16 or $tsize==32 or $tsize==64 or $tsize==128 or $tsize==256 or $tsize==512) {
+	if($tsize==4 or $tsize==8 or $tsize==16 or $tsize==32 or $tsize==64 or $tsize==128 or $tsize==256 or $tsize==512) {
 		$size = $tsize;
 	}
 }
-
 
 ob_start();
 
@@ -37,4 +35,3 @@ ob_end_clean();
  
 include(CMS_MODULE_PATH.'/html/world_map.html');
 
-?>

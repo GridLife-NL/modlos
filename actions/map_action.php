@@ -33,4 +33,3 @@ $object_url = CMS_MODULE_URL.'/helper/world_map.php';
 include(CMS_MODULE_PATH.'/html/object.html');
 
 echo $OUTPUT->footer($course);
-?>
