@@ -8,7 +8,6 @@ require_once(ENV_HELPER_PATH.'/../include/modlos.func.php');
 $world_map_url = CMS_MODULE_URL.'/helper/world_map.php';
 $allow_zoom = true;
 
-
 global $CFG;
 
 $grid_name = $CFG->modlos_grid_name;

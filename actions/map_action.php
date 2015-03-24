@@ -29,6 +29,7 @@ else $isAvatarMax = false;
 
 print_tabnav($action, $course, !$isAvatarMax);
 
+//$object_url = CMS_MODULE_URL.'/helper/world_map.php?ctX=8000&ctY=8000';
 $object_url = CMS_MODULE_URL.'/helper/world_map.php';
 include(CMS_MODULE_PATH.'/html/object.html');
 

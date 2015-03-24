@@ -28,4 +28,3 @@ $regions->execute();
 $regions->print_page();
 
 echo $OUTPUT->footer($course);
-?>	
