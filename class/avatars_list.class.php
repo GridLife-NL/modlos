@@ -69,10 +69,17 @@ class  AvatarsList
 		$this->url_param = '?dmmy_param=';	
 		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;
 
-		$this->action_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param;
+		if ($this->show_all) {
+			$this->action_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param;
+			$this->search_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param.'&amp;pstart=0';
+		}
+		else {
+			$this->action_url  = CMS_MODULE_URL.'/actions/my_avatars.php'.$this->url_param;
+			$this->search_url  = CMS_MODULE_URL.'/actions/my_avatars.php'.$this->url_param.'&amp;pstart=0';
+		}
+
 		$this->edit_url	   = CMS_MODULE_URL.'/actions/edit_avatar.php'. $this->url_param;
 		$this->owner_url   = CMS_MODULE_URL.'/actions/owner_avatar.php'.$this->url_param;
-		$this->search_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param.'&amp;pstart=0';
 		$this->avatar_url  = $CFG->wwwroot.'/user/view.php'.$this->url_param;
 
 		$avatars_num = modlos_get_avatars_num($USER->id);
@@ -346,8 +353,7 @@ class  AvatarsList
 		$order_			= '&amp;order=';
 		$ownerloss_		= '&amp;ownerloss=';
 
-		$avatars_list	= get_string('modlos_avatars_list',  'block_modlos');
-		$my_avatars_list= get_string('modlos_my_avatars',    'block_modlos');
+		$my_avatars		= get_string('modlos_my_avatars',    'block_modlos');
 		$number_ttl		= get_string('modlos_num',			 'block_modlos');
 		$edit_ttl		= get_string('modlos_edit',			 'block_modlos');
 		$editable_ttl	= get_string('modlos_edit_ttl',		 'block_modlos');
@@ -371,6 +377,14 @@ class  AvatarsList
 		$users_found  	= get_string('modlos_users_found', 	 'block_modlos');
 		$sloodle_ttl  	= get_string('modlos_sloodle_short', 'block_modlos');
 
+		$avarars_list_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param;
+
+		if ($this->show_all) {
+			$avatars_list = get_string('modlos_avatars_list',  'block_modlos');
+		}
+		else {
+			$avatars_list = get_string('modlos_my_avatars',  'block_modlos');
+		}
 		include(CMS_MODULE_PATH.'/html/avatars.html');
 	}
 }
