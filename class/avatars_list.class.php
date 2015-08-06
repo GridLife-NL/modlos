@@ -187,97 +187,57 @@ class  AvatarsList
 		$colum = 0;
 		$dat = array();
 
-		if ($this->show_all) {
+		if ($this->show_all) {	// 	全アバター
 			$users = opensim_get_avatars_infos($this->sql_condition);
+			foreach($users as $user) {
+				$user['state']	  = AVATAR_STATE_NOSTATE;
+				$user['editable'] = AVATAR_NOT_EDITABLE;
+				$user['hmregion_id'] = $user['hmregion'];
+				//
+				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle);
+				if ($avatardata!=null) {
+					$user['uid'] = $avatardata['uid'];
+					$user['hmregion'] = $avatardata['hmregion'];
+					$user['state'] = (int)$avatardata['state'];
+				}
+				//
+				$dat  = $this->get_avatar_info($user, $colum); 
+				$show = !$this->ownerloss;
+				if ($show or $dat['editable']==AVATAR_EDITABLE or ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE))) {
+					$this->db_data[$colum] = $dat;
+					$colum++;
+				}
+			}
 		}
-		else {
+		//
+		else {					// 自分のアバター
 			$users = modlos_get_avatars($USER->id);
-		}
-
-		foreach($users as $user) {
-			//
-			$dat				= $user;
-			$dat['num']			= $colum;
-			$dat['ownername']	= ' - ';
-			$dat['region_id']	= $user['hmregion'];
-			$dat['region']		= opensim_get_region_name($user['hmregion']);
-			$dat['state']		= AVATAR_STATE_NOSTATE;
-			$dat['editable']	= AVATAR_NOT_EDITABLE;
-
-			$created = $dat['created'];
-			if ($created==null or $created=='' or $created=='0') {
-				$dat['born'] = ' - ';
-			}
-			else {
-				$dat['born'] = date(DATE_FORMAT, $created);
-			}
-
-			$lastlogin = $dat['lastlogin'];
-			if ($lastlogin==null or $lastlogin=='' or $lastlogin=='0') {
-				$dat['lastin'] = ' - ';
-			}
-			else {
-				$dat['lastin'] = date(DATE_FORMAT, $lastlogin);
-			}
-
-			// Agent Online Info
-			$UUID = $dat['UUID'];
-			$online = opensim_get_avatar_online($UUID);
-			$dat['online'] = $online['online'];
-			if ($online['online']) {
-				$dat['region_id']	= $online['region_id'];
-				$dat['region'] 	= $online['region_name'];
-			}
-
-			$dat['uuid']	  = str_replace('-', '', $UUID);
-			$dat['rg_uuid'] = str_replace('-', '', $dat['region_id']);
-
-			// serach Moodle, Modlos and Sloodle DB
-			$uid = -1;
-			$avatardata = modlos_get_avatar_info($UUID, $this->use_sloodle);
-
-			// synchro
-			if ($avatardata==null) {
-				modlos_sync_opensimdb(false);
-				if ($this->use_sloodle) modlos_sync_sloodle_users(false);
-				$avatardata = modlos_get_avatar_info($UUID, $this->use_sloodle);
-			}
-
-			$user_info = null;
-			if ($avatardata!=null) {
-				if (!((int)$avatardata['state']&AVATAR_STATE_SYNCDB)) {
-					modlos_sync_opensimdb(false);
+			foreach($users as $user) {
+				$user['uid'] = $USER->id;
+				$user['state']	  = AVATAR_STATE_NOSTATE;
+				$user['editable'] = AVATAR_NOT_EDITABLE;
+				//
+				$avatardata = opensim_get_avatar_info($user['UUID']);
+				if ($avatardata!=null) {
+					$user['lastlogin']   = $avatardata['lastlogin'];
+					$user['hmregion_id'] = $avatardata['regionUUID'];
+					$user['hmregion']    = $avatardata['regionName'];
+					$user['created']   	 = $avatardata['created'];
 				}
-
-				$uid = $avatardata['uid'];
-				$dat['state'] = (int)$avatardata['state'];
-
-				if ($uid>0) {
-					$user_info = get_userinfo_by_id($uid);
-					if ($user_info!=null) {
-						$dat['ownername'] = get_display_username($user_info->firstname, $user_info->lastname);
-					}
+ 				unset($avatardata);
+				//
+				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle);
+				if ($avatardata!=null) {
+					$user['hmregion']  = $avatardata['hmregion'];
+					$user['state'] = (int)$avatardata['state'];
+				}
+				//
+				$dat  = $this->get_avatar_info($user, $colum); 
+				if ($dat['editable']==AVATAR_EDITABLE or ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE))) {
+					$this->db_data[$colum] = $dat;
+					$colum++;
 				}
 			}
-
-			$dat['uid'] = $uid;
-
-			if ($this->hasPermit or $USER->id==$uid) {
-				$dat['editable'] = AVATAR_EDITABLE;
-			}
-			elseif ($uid==0 or $user_info==null) {
-				if (!$this->isAvatarMax and $this->ownerloss) {
-					$dat['editable'] = AVATAR_OWNER_EDITABLE;
-				}
-			}
-
-			//
-			$show = ($this->show_all and !$this->ownerloss);
-			if ($show or $dat['editable']==AVATAR_EDITABLE or ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE))) {
-				$this->db_data[$colum] = $dat;
-				$colum++;
-			}
- 			unset($dat);
 		}
 
 		// 一般ユーザ
@@ -387,6 +347,68 @@ class  AvatarsList
 		}
 		include(CMS_MODULE_PATH.'/html/avatars.html');
 	}
-}
 
+
+
+	function  get_avatar_info($user, $colum) 
+	{
+		global $USER;
+
+		$dat				= $user;
+		$dat['num']			= $colum;
+		$dat['ownername']	= ' - ';
+		$dat['region_id']	= $user['hmregion_id'];
+		$dat['region']		= $user['hmregion'];
+		$dat['state']		= $user['state'];
+		$dat['editable']	= AVATAR_NOT_EDITABLE;
+
+		$created = $dat['created'];
+		if ($created==null or $created=='' or $created=='0') {
+			$dat['born'] = ' - ';
+		}
+		else {
+			$dat['born'] = date(DATE_FORMAT, $created);
+		}
+
+		$lastlogin = $dat['lastlogin'];
+		if ($lastlogin==null or $lastlogin=='' or $lastlogin=='0') {
+			$dat['lastin'] = ' - ';
+		}
+		else {
+			$dat['lastin'] = date(DATE_FORMAT, $lastlogin);
+		}
+
+		// Agent Online Info
+		$UUID = $dat['UUID'];
+		$online = opensim_get_avatar_online($UUID);
+		$dat['online'] = $online['online'];
+		if ($online['online']) {
+			$dat['region'] 	  = $online['region_name'];
+			$dat['region_id'] = $online['region_id'];
+		}
+
+		$dat['uuid']	= str_replace('-', '', $UUID);
+		$dat['rg_uuid'] = str_replace('-', '', $dat['region_id']);
+
+		$uid = $dat['uid'];
+		if ($uid>0) {
+			$user_info = get_userinfo_by_id($uid);
+			if ($user_info!=null) {
+				$dat['ownername'] = get_display_username($user_info->firstname, $user_info->lastname);
+			}
+		}
+
+		if ($this->hasPermit or $USER->id==$uid) {
+			$dat['editable'] = AVATAR_EDITABLE;
+		}
+		elseif ($uid==0 or $user_info==null) {
+			if (!$this->isAvatarMax and $this->ownerloss) {
+				$dat['editable'] = AVATAR_OWNER_EDITABLE;
+			}
+		}
+
+		return $dat;
+	}
+
+}
 ?>

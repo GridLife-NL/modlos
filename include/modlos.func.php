@@ -317,7 +317,6 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 	if ($avatar==null and $sloodle==null) return null;
 	if ($avatar->firstname=='' or $avatar->lastname=='') return null;
 
-
 	//
 	$avatar_info['UUID'] 	  = $uuid;
 	$avatar_info['firstname'] = $avatar->firstname;
