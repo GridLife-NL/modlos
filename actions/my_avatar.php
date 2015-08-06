@@ -10,7 +10,7 @@ if (!$course_id) $course_id = 1;
 
 $urlparams = array();
 $urlparams['course'] = $course_id;
-$PAGE->set_url('/blocks/modlos/actions/my__avatars_list.php', $urlparams);
+$PAGE->set_url('/blocks/modlos/actions/my__avatars.php', $urlparams);
 
 $course = $DB->get_record('course', array('id'=>$course_id));
 $action = 'my_avatars_list';

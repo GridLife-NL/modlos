@@ -347,6 +347,7 @@ class  AvatarsList
 		$ownerloss_		= '&amp;ownerloss=';
 
 		$avatars_list	= get_string('modlos_avatars_list',  'block_modlos');
+		$my_avatars_list= get_string('modlos_my_avatars',    'block_modlos');
 		$number_ttl		= get_string('modlos_num',			 'block_modlos');
 		$edit_ttl		= get_string('modlos_edit',			 'block_modlos');
 		$editable_ttl	= get_string('modlos_edit_ttl',		 'block_modlos');
