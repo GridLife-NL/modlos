@@ -10,16 +10,16 @@ if (!$course_id) $course_id = 1;
 
 $urlparams = array();
 $urlparams['course'] = $course_id;
-$PAGE->set_url('/blocks/modlos/actions/avatars_list.php', $urlparams);
+$PAGE->set_url('/blocks/modlos/actions/my__avatars_list.php', $urlparams);
 
 $course = $DB->get_record('course', array('id'=>$course_id));
-$action = 'avatars_list';
+$action = 'my_avatars_list';
 
 require_login($course_id);
 print_modlos_header($action, $course);
 
 require_once(CMS_MODULE_PATH.'/class/avatars_list.class.php');
-$avatars = new AvatarsList($course_id, true);
+$avatars = new AvatarsList($course_id, false);
 
 print_tabnav($action, $course, !$avatars->isAvatarMax);
 

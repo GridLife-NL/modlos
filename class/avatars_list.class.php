@@ -25,6 +25,7 @@ class  AvatarsList
 	var $use_sloodle = false;
 	var $isAvatarMax = false;
 
+	var $show_all   = false;
 	var $hasPermit 	= false;
 	var $isGuest   	= true;
 
@@ -49,7 +50,7 @@ class  AvatarsList
 
 
 
-	function  AvatarsList($course_id)
+	function  AvatarsList($course_id, $show_all)
 	{
 		global $CFG, $USER;
 
@@ -63,6 +64,7 @@ class  AvatarsList
 		$this->hasPermit   = hasModlosPermit($course_id);
 		$this->course_id   = $course_id;
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
+		$this->show_all    = $show_all;
 
 		$this->url_param = '?dmmy_param=';	
 		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;
@@ -174,11 +176,17 @@ class  AvatarsList
 		modlos_sync_opensimdb();
 		if ($this->use_sloodle) modlos_sync_sloodle_users();
 
-
 		// OpenSim DB
 		$colum = 0;
 		$dat = array();
-		$users = opensim_get_avatars_infos($this->sql_condition);
+
+		if ($this->show_all) {
+			$users = opensim_get_avatars_infos($this->sql_condition);
+		}
+		else {
+			$users = modlos_get_avatars($USER->id);
+		}
+
 		foreach($users as $user) {
 			//
 			$dat				= $user;
@@ -217,7 +225,6 @@ class  AvatarsList
 			$dat['uuid']	  = str_replace('-', '', $UUID);
 			$dat['rg_uuid'] = str_replace('-', '', $dat['region_id']);
 
-
 			// serach Moodle, Modlos and Sloodle DB
 			$uid = -1;
 			$avatardata = modlos_get_avatar_info($UUID, $this->use_sloodle);
@@ -248,7 +255,6 @@ class  AvatarsList
 
 			$dat['uid'] = $uid;
 
-
 			if ($this->hasPermit or $USER->id==$uid) {
 				$dat['editable'] = AVATAR_EDITABLE;
 			}
@@ -259,12 +265,14 @@ class  AvatarsList
 			}
 
 			//
-			if ($dat['editable']==AVATAR_EDITABLE or ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE))) {
+			$show = ($this->show_all and !$this->ownerloss);
+			if ($show or $dat['editable']==AVATAR_EDITABLE or ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE))) {
 				$this->db_data[$colum] = $dat;
 				$colum++;
 			}
  			unset($dat);
 		}
+
 		// 一般ユーザ
 		if (!$this->hasPermit) $this->number = $colum;
 

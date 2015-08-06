@@ -62,7 +62,8 @@ class block_modlos extends block_base
 
 		$isguest = isguestuser();
 		if (!$isguest and $USER->id!=0) {
-			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php?course='.$id.'">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/my_avatars_list.php?course='.$id.'">'.get_string('modlos_my_avatars_list','block_modlos').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php?course='.$id.'&order=login">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';
 
 			$isAvatarMax = false;
 			if ($db_ver!=null) { 
