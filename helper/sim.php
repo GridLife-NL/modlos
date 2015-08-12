@@ -98,7 +98,7 @@ if ($rginfo!=null) {
 	//
  	if ($owner_name=='') {
 		$name = opensim_get_avatar_name($owner_uuid);
-		$owner_name = $name['fullname'];
+		if (array_key_exists('fullname', $name)) $owner_name = $name['fullname'];
 	}
 }
 else {
