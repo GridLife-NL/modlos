@@ -165,7 +165,7 @@
           </a>
         </td>
         <td width="80">
-          <?php if ($this->hasPermit or $this->userid==$dat['uid']) {?>
+          <?php if ($this->hasPermit or $this->userid==$dat->uid) {?>
             <a href=<?php echo $this->edit_url.$dat->eventid;?>   ><strong><u style="color: #cc1010"><?php echo $modlos_edit?></u></strong></a>&nbsp;
             <a href=<?php echo $this->delete_url.$dat->eventid;?> ><strong><u style="color: #cc1010"><?php echo $modlos_delete?></u></strong></a>
           <?php } else {?>
