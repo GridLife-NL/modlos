@@ -95,7 +95,6 @@ class  DeleteEvent
 		$creator_name = opensim_get_avatar_name($this->event['creatoruuid']);
 		$this->event_creatorname = $creator_name['fullname'];
 
-
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
