@@ -137,7 +137,6 @@ class  EditEvent
 
 		$event = array();
 
-
 		// Post
 		if (data_submitted()) {
 			if (!confirm_sesskey()) { 
@@ -154,7 +153,6 @@ class  EditEvent
 				redirect($this->delete_url.$this->event_id, 'Please wait....', 0);
 				exit('<h4>delete page open error!!</h4>');
 			}
-			
 	
 			$parcel = explode('|', optional_param('parcel_name', '|', PARAM_TEXT));
 			$this->global_pos  = $parcel[0];
@@ -185,7 +183,6 @@ class  EditEvent
 			  
 			if ($this->cover_charge==0) $this->cover_amount = 0;
 			if (!isGUID($this->region_uuid)) $this->rgion_uuid = '00000000-0000-0000-0000-000000000000';
-
 
 			// Error check
 			if (!isGUID($this->creator_uuid)) {
@@ -229,7 +226,6 @@ class  EditEvent
 				$this->errorMsg[] = get_string('modlos_invalid_date_error', 'block_modlos')." ($ftr < ".get_string('modlos_time_now', 'block_modlos').')';
 			}
 
-
 			//
 			if (!$this->hasError) {
 				$event['id']	  	  = $this->event_id;
@@ -250,7 +246,6 @@ class  EditEvent
 
 				// save to DB
 				$this->event_saved = modlos_set_event($event);
-
 
 				// Saved Event
 				if ($this->event_saved) {
@@ -405,4 +400,3 @@ class  EditEvent
 	}
 }
 
-?>

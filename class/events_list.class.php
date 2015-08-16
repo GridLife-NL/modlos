@@ -118,7 +118,6 @@ class  EventsList
 		if ($this->plimit != 50)  $this->icon[5] = 'icon_limit_50_on';
 		if ($this->plimit != 100) $this->icon[6] = 'icon_limit_100_on';
 
-
 		//
 		if ($this->hasPermit) {
 			$events = modlos_get_events(0, $this->pstart, $this->plimit, OPENSIM_PG_ONLY);
