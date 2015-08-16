@@ -466,7 +466,10 @@ function  modlos_insert_userstable($user)
 	else {
 		$insobj->time = time();
 	}
-	$insobj->hmregion = modlos_get_region_name($user['hmregion']);
+
+	$insobj->hmregion = null;
+	if (array_key_exists('hmregion', $user)) $insobj->hmregion = $user['hmregion'];
+	if ($insobj->hmregion==null) $insobj->hmregion = modlos_get_region_name($user['hmregion_id']);
 	if ($insobj->hmregion==null) $insobj->hmregion = '';
 
 	$ret = $DB->insert_record('modlos_users', $insobj);
@@ -496,7 +499,11 @@ function  modlos_update_userstable($user, $updobj=null)
 	if ($user['state']!='') $updobj->state   = (int)$user['state'];
 	if ($user['time']!='') 	$updobj->time 	 = $user['time'];
 	else 				 	$updobj->time 	 = time();
-	$updobj->hmregion = modlos_get_region_name($user['hmregion_id']);
+
+    $updobj->hmregion = null;
+    if (array_key_exists('hmregion', $user)) $updobj->hmregion = $user['hmregion'];
+    if ($updobj->hmregion==null) $updobj->hmregion = modlos_get_region_name($user['hmregion_id']);
+    if ($updobj->hmregion==null) $updobj->hmregion = '';
 
 	$ret = $DB->update_record('modlos_users', $updobj);
 	return $ret;

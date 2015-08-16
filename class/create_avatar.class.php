@@ -288,12 +288,12 @@ class  CreateAvatar
 		if ($sloodle!='' and $this->use_sloodle) $state = (int)$state | AVATAR_STATE_SLOODLE;
 
 		//
-		$new_user['UUID']		= $this->UUID;
-		$new_user['uid']		= $this->uid;
-		$new_user['firstname'] 	= $this->firstname;
-		$new_user['lastname']  	= $this->lastname;
-		$new_user['hmregion']  	= $this->hmregion;
-		$new_user['state']	 	= $state;
+		$new_user['UUID']		 = $this->UUID;
+		$new_user['uid']		 = $this->uid;
+		$new_user['firstname'] 	 = $this->firstname;
+		$new_user['lastname']  	 = $this->lastname;
+		$new_user['hmregion']    = $this->hmregion;
+		$new_user['state']	 	 = $state;
 
 		$ret = modlos_set_avatar_info($new_user, $this->use_sloodle);
 		return $ret;
