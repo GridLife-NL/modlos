@@ -384,7 +384,6 @@ class  EditEvent
 		$modlos_delete_ttl 	= get_string('modlos_delete_ttl',		  'block_modlos');
 		$modlos_delete 		= get_string('modlos_delete',			  'block_modlos');
 
-
 		$date_file = CMS_MODULE_PATH.'/lang/'.current_language().'/modlos_events_date.html';
 		if (!file_exists($date_file)) {
 			$date_file = CMS_MODULE_PATH.'/lang/en_utf8/modlos_events_date.html';

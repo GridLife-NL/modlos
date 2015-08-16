@@ -16,6 +16,7 @@ class  EventsList
 
 	var $make_url;
 	var $edit_url;
+	var $show_url;
 	var $delete_url;
 
 	var $course_id	 = '';
@@ -62,6 +63,7 @@ class  EventsList
 		$this->action_url = CMS_MODULE_URL.'/actions/events_list.php'. $this->url_param;
 		$this->make_url	  = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param;
 		$this->edit_url   = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param.'&amp;eventid=';
+		$this->show_url   = CMS_MODULE_URL.'/actions/show_event.php'.  $this->url_param.'&amp;eventid=';
 		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$this->url_param.'&amp;eventid=';
 	}
 

@@ -116,7 +116,7 @@
         <strong><?php echo $events_type?></strong>
       </td>
       <td width="300">
-        <strong>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $events_name?></strong>
+        <strong><?php echo $events_name?></strong>
       </td>
       <td width="160">
         <strong><?php echo $events_category?></strong>
@@ -127,7 +127,6 @@
       <td width="80" >&nbsp;</td>
       <td width="1"  >&nbsp;</td>
     </tr>
-
 
     <tr>
       <td bgcolor="#e8e8e8">&nbsp;</td>
@@ -148,7 +147,9 @@
         <td width="40"  style="color: #ff2222">
           <strong><img height=20px width=20px <?php echo $dat->type;?> /></strong>
         </td>
-        <td width="300" style="color: #115500"><strong><?php echo $dat->name;?></strong></td>
+        <td width="300" style="color: #115500">
+          <a href=<?php echo $this->show_url.$dat->eventid;?>   ><strong><u><?php echo $dat->name;?></u></strong></a>
+        </td>
 
         <td width="160" style="color: #551111"><strong><?php echo $Categories[$dat->category];?></strong></td>
 
