@@ -384,6 +384,7 @@ $string['modlos_access_forbidden'] 	= 'このページへのアクセスは許�
 
 $string['modlos_events_make_ttl']   = 'イベント作成';
 $string['modlos_events_edit_ttl']   = 'イベント編集';
+$string['modlos_events_show_ttl']   = 'イベント詳細';
 $string['modlos_events_make_link']  = 'イベントを新規作成する場合は，';
 $string['modlos_events_click_here'] = 'ここをクリック';
 

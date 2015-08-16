@@ -41,7 +41,6 @@ function checklength(obj,warning_div){
               <td class="even">
                 <textarea name="event_desc" rows="7" cols="" style="width:90%" wrap="virtual" maxlength="1024" onfocus="return checklength(this,'contact_max_warning')" onkeyup="return checklength(this,'contact_max_warning')" ><?php echo $this->event_desc?></textarea><br />
                 <div>
-                <div>
                   <em id="contact_max_warning"><?php echo $events_max?> <strong>1024</strong> </em> 
                   <?php echo $events_chars?>&nbsp;&nbsp;<?php echo $events_inputed?>: <em id="counter"></em>
                 </div>

@@ -99,17 +99,6 @@ class  EditEvent
 		global $DB;
 
 		// List of Parcels
-/*
-		$modobj = $DB->get_records('modlos_search_parcels');
-		$i = 0;
-		foreach ($modobj as $mod) {
-			//$this->parcels[$i]['uuid'] 		= $mod->parceluuid;
-			$this->parcels[$i]['name'] 			= $mod->parcelname;
-			$this->parcels[$i]['regionUUID'] 	= $mod->regionuuid;
-			$this->parcels[$i]['landingpoint'] 	= $mod->landingpoint;
-			$i++;
-		}
-*/
 		$modobj = opensim_get_regions_infos();
 		$i = 0;
 		foreach ($modobj as $mod) {

@@ -10,15 +10,15 @@ if (!$course_id) $course_id = 1;
 
 $urlparams = array();
 $urlparams['course'] = $course_id;
-$PAGE->set_url('/blocks/modlos/actions/edit_event.php', $urlparams);
+$PAGE->set_url('/blocks/modlos/actions/show_event.php', $urlparams);
 
 $course = $DB->get_record('course', array('id'=>$course_id));
-$action = 'edit_event';
+$action = 'show_event';
 
 require_login($course_id);
 print_modlos_header($action, $course);
 
-require_once(CMS_MODULE_PATH.'/class/edit_event.class.php');
+require_once(CMS_MODULE_PATH.'/class/show_event.class.php');
 $event = new EditEvent($course_id);
 
 print_tabnav($action, $course, !$event->isAvatarMax);

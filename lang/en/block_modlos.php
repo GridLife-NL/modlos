@@ -385,6 +385,7 @@ $string['modlos_access_forbidden'] 	= 'Forbidden Access to this Page!!';
 
 $string['modlos_events_make_ttl']	= 'Make Event';
 $string['modlos_events_edit_ttl']	= 'Edit Event';
+$string['modlos_events_show_ttl']	= 'Show Event';
 $string['modlos_events_make_link']	= 'These are the upcoming events at this moment. To add a new event,';
 $string['modlos_events_click_here']	= 'Click Here';
 
