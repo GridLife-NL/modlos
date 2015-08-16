@@ -96,8 +96,8 @@ class  RegionsList
 
 	function  execute()
 	{
-		$this->number	= opensim_get_regions_num();
-		$this->sitemax   = ceil ($this->number/$this->plimit);
+		$this->number  = opensim_get_regions_num();
+		$this->sitemax = ceil ($this->number/$this->plimit);
 		//$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
 		$this->sitestart = floor(($this->pstart+$this->plimit-1)/$this->plimit) + 1;
 
@@ -140,11 +140,9 @@ class  RegionsList
 		if ($this->plimit != 50)  $this->icon[5] = 'icon_limit_50_on';
 		if ($this->plimit != 100) $this->icon[6] = 'icon_limit_100_on';
 
-
 		$voice_mode[0] = get_string('modlos_voice_inactive_chnl', 'block_modlos');
 		$voice_mode[1] = get_string('modlos_voice_private_chnl',  'block_modlos');
 		$voice_mode[2] = get_string('modlos_voice_percel_chnl',   'block_modlos');
-
 
 		// auto synchro
 		modlos_sync_opensimdb();
@@ -215,4 +213,3 @@ class  RegionsList
 	}
 }
 
-?>

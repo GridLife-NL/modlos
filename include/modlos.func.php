@@ -826,6 +826,7 @@ function  modlos_set_event($event)
 {
 	global $DB;
 
+	$dbobj = new stdClass();
 	$dbobj->id = 0;
 
 	if ($event['id']>0) {

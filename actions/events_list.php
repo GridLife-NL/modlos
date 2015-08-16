@@ -27,4 +27,3 @@ $events->execute();
 $events->print_page();
 
 echo $OUTPUT->footer($course);
-?>	
