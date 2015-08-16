@@ -352,6 +352,7 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 			$updobj = $DB->get_record(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
 			if ($updobj==null) {
 				if ((int)$avatar['state']&AVATAR_STATE_SLOODLE) {
+					$insobj = new stdClass();
 					$insobj->userid = $avatar['uid'];
 					$insobj->uuid 	= $avatar['UUID'];
 					$insobj->avname = $avatar['firstname'].' '.$avatar['lastname'];
@@ -974,6 +975,7 @@ function  modlos_inactivate_avatar($uuid)
 	$passwdhash = $passwd['passwordHash'];
 	if ($passwdhash==null or $passwdhash=='invalid_password') return false;
 
+	$insobj = new stdClass();
 	$insobj->uuid 	   = $uuid;
 	$insobj->agentinfo = $passwdhash;
 	$insobj->time 	   = time();
