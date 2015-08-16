@@ -228,8 +228,8 @@ class  AvatarsList
 				//
 				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle);
 				if ($avatardata!=null) {
-					$user['hmregion']  = $avatardata['hmregion'];
 					$user['state'] = (int)$avatardata['state'];
+					//$user['hmregion']  = $avatardata['hmregion'];
 				}
 				//
 				$dat  = $this->get_avatar_info($user, $colum); 
