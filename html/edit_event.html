@@ -18,7 +18,6 @@ function checklength(obj,warning_div){
 </style>
 
 <h2><center><?php echo $grid_name?>&nbsp;:&nbsp;<?php echo $events_make_ttl?></center></h2>
-<br />
 
 <form METHOD="POST" ACTION=<?php echo $this->action_url?> >
   <input type="hidden" name="uid" value="<?php echo $this->uid?>" />
@@ -30,7 +29,7 @@ function checklength(obj,warning_div){
         <td valign=top align=center>&nbsp;</td>
         <td valign=top align=center width=600>
 
-          <table width="600" border="1" bordercolor="#FFFFFF" align="center" cellpadding="2" cellspacing="1">
+          <table width="600" border="1" bordercolor="#ffffff" align="center" cellpadding="2" cellspacing="1">
 
             <tr align="left">
               <td class="head" width=200><?php echo $events_name?></td>
@@ -93,7 +92,7 @@ function checklength(obj,warning_div){
                   <option value="0" <?php if ($this->cover_charge==0){?>selected<?php }?> ><?php echo $modlos_no?></option>
                   <option value="1" <?php if ($this->cover_charge==1){?>selected<?php }?> ><?php echo $modlos_yes?></option>
                 </select>&nbsp;&nbsp;
-                <?php echo $events_amount?> (L$):&nbsp;<input type="text" name="cover_amount" size="3" maxlength="5" value="<?php echo $this->cover_amount?>" />
+                <?php echo $events_amount?>:&nbsp;<input type="text" name="cover_amount" size="3" maxlength="5" value="<?php echo $this->cover_amount?>" />
               </td>
             </tr>
 
@@ -127,7 +126,6 @@ function checklength(obj,warning_div){
 
             <tr>
               <td colspan=2 align=center>
-                <br />
                 <input type="submit" name="action_submit" value="<?php echo $events_save?>" />&nbsp;&nbsp;
                 <input type="reset"  value="<?php echo $modlos_reset_ttl?>" />
                 <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
@@ -147,8 +145,6 @@ function checklength(obj,warning_div){
 </form>
 
 
-
-<br />
 <hr />
 <?php if ($this->hasError) {?>
   <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
@@ -172,7 +168,6 @@ function checklength(obj,warning_div){
       </tr>
     </tbody>
   </table>
-  <br />
 
 <?php } else {?>
   <?php if ($this->event_saved) {?>
@@ -181,14 +176,13 @@ function checklength(obj,warning_div){
       <h3><font color=#1010e0><?php echo $events_saved?></font></h3>
     </div>
 
-    <br />
     <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
       <tbody>
         <tr>
           <td valign=top align=center>&nbsp;</td>
           <td valign=top align=center width=600>
 
-            <table width="600" border="1" bordercolor="#FFFFFF" align="center" cellpadding="2" cellspacing="1" style="color:#1010e0; font-weight:bold;">
+            <table width="600" border="1" bordercolor="#ffffff" align="center" cellpadding="2" cellspacing="1" style="color:#1010e0; font-weight:bold;">
               <tr align="left">
                 <td class="head" width=200><?php echo $events_name?></td>
                 <td class="even" width=400><?php echo $this->saved_event_name?></td>
