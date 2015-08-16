@@ -496,10 +496,9 @@ function  modlos_update_userstable($user, $updobj=null)
 	if ($user['state']!='') $updobj->state   = (int)$user['state'];
 	if ($user['time']!='') 	$updobj->time 	 = $user['time'];
 	else 				 	$updobj->time 	 = time();
-	$updobj->hmregion = modlos_get_region_name($user['hmregion']);
+	$updobj->hmregion = modlos_get_region_name($user['hmregion_id']);
 
 	$ret = $DB->update_record('modlos_users', $updobj);
-
 	return $ret;
 }
 	

@@ -351,7 +351,6 @@ class  EditEvent
 
 
 
-
 	function  print_page() 
 	{
 		global $CFG;
@@ -360,7 +359,13 @@ class  EditEvent
 		$grid_name	= $CFG->modlos_grid_name;
 		$module_url	= CMS_MODULE_URL;
 
-		$events_make_ttl 	= get_string('modlos_events_make_ttl',	  'block_modlos');
+		if (isNumeric($this->event_id) and $this->event_id>0) {
+			$events_make_ttl = get_string('modlos_events_edit_ttl',	  'block_modlos');
+		}
+		else {
+			$events_make_ttl = get_string('modlos_events_make_ttl',	  'block_modlos');
+		}
+
 		$events_save 		= get_string('modlos_events_save',		  'block_modlos');
 		$events_saved 		= get_string('modlos_events_saved',		  'block_modlos');
 
