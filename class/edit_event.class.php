@@ -220,7 +220,7 @@ class  EditEvent
 			}
 
 			$event_date = mktime($this->event_hour, $this->event_minute, 0, $this->event_month, $this->event_day, $this->event_year);
-			if ($event_date<time()) {
+			if ($event_date+$this->duration < time()) {
 				$this->hasError = true;
 				$ftr = date(DATE_FORMAT, $event_date);
 				$this->errorMsg[] = get_string('modlos_invalid_date_error', 'block_modlos')." ($ftr < ".get_string('modlos_time_now', 'block_modlos').')';
