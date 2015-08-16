@@ -192,13 +192,13 @@ class  AvatarsList
 			foreach($users as $user) {
 				$user['state']	  = AVATAR_STATE_NOSTATE;
 				$user['editable'] = AVATAR_NOT_EDITABLE;
-				$user['hmregion_id'] = $user['hmregion'];
+				$user['hmregion'] = modlos_get_region_name($user['hmregion_id']);
 				//
-				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle);
+				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
 				if ($avatardata!=null) {
 					$user['uid'] = $avatardata['uid'];
-					$user['hmregion'] = $avatardata['hmregion'];
 					$user['state'] = (int)$avatardata['state'];
+					//$user['hmregion'] = $avatardata['hmregion'];
 				}
 				//
 				$dat  = $this->get_avatar_info($user, $colum); 

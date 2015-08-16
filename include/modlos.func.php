@@ -1010,8 +1010,8 @@ function  modlos_sync_opensimdb($update_check=true)
 		set_config('opensim_update', $opensim_up);
 	}
 
-	$opnsim_users = opensim_get_avatars_infos();	// OpenSim DB       UUID,      firstname, lastname, hmregion,             created, lastlogin
-	$modlos_users = modlos_get_userstable(); 		// Modlos DB    id, UUID, uid, firstname, lastname, hmregion, state, time
+	$opnsim_users = opensim_get_avatars_infos();// OpenSim DB       UUID,      firstname, lastname, hmregion_id, created, lastlogin
+	$modlos_users = modlos_get_userstable(); 	// Modlos DB    id, UUID, uid, firstname, lastname, hmregion, state, time
 
 	// OpenSimに対応データが無い場合はデータを消す．
 	foreach ($modlos_users as $modlos_user) {
@@ -1025,7 +1025,7 @@ function  modlos_sync_opensimdb($update_check=true)
 	// OpenSimにデータがある場合は，Modlos のデータを OpenSimにあわせる．
 	foreach ($opnsim_users as $opnsim_user) {
 		$opnsim_uuid = $opnsim_user['UUID'];	
-		$opnsim_user['hmregion'] = modlos_get_region_name($opnsim_user['hmregion']);	// OpenSim DB のホームリージョン名
+		$opnsim_user['hmregion'] = modlos_get_region_name($opnsim_user['hmregion_id']);	// OpenSim DB のホームリージョン名
 		//
 		// 	ホームリージョンの名前を更新
 		if (array_key_exists($opnsim_uuid, $modlos_users)) {
