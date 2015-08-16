@@ -758,7 +758,7 @@ function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
 	global $DB;
 
 	$events = array();
-	if ($tm==0) $tm = time() - 86400;	// - 1day
+	if ($tm==0) $tm = time() - 3600;	// - 1hour
 
 	$select = "dateutc > '$tm'";
 	if ($pg_only) $select .= " AND eventflags='0'";
@@ -784,7 +784,7 @@ function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
 { 
 	global $DB;
 
-	if ($tm==0) $tm = time() - 86400;	// - 1day
+	if ($tm==0) $tm = time() - 3600;	// - 1hour
    
 	$select = "dateutc > '$tm'";
 	if ($pg_only) $select .= " AND eventflags='0'";
