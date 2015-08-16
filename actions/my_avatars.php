@@ -28,4 +28,3 @@ $avatars->execute();
 $avatars->print_page();
 
 echo $OUTPUT->footer($course);
-?>	

@@ -210,7 +210,7 @@ class  AvatarsList
 			}
 		}
 		//
-		else {					// 自分のアバター
+		else {					// マイ アバター
 			$users = modlos_get_avatars($USER->id);
 			foreach($users as $user) {
 				$user['uid'] = $USER->id;
@@ -345,7 +345,13 @@ class  AvatarsList
 		else {
 			$avatars_list = get_string('modlos_my_avatars',  'block_modlos');
 		}
-		include(CMS_MODULE_PATH.'/html/avatars.html');
+
+		if ($this->show_all) {	// 	全アバター
+			include(CMS_MODULE_PATH.'/html/avatars.html');
+		}
+		else {
+			include(CMS_MODULE_PATH.'/html/my_avatars.html');
+		}
 	}
 
 
