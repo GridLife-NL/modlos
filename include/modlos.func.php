@@ -1132,10 +1132,10 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$course_param, 
 																	'<b>'.get_string('modlos_regions_list','block_modlos').'</b>');
 	if (!isguestuser()) {
-		$toprow[] = new tabobject('my_avatars', CMS_MODULE_URL.'/actions/my_avatars.php'.$course_param, 
-																	'<b>'.get_string('modlos_my_avatars','block_modlos').'</b>');
 		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param.'&order=login', 
 																	'<b>'.get_string('modlos_avatars_list','block_modlos').'</b>');
+		$toprow[] = new tabobject('my_avatars', CMS_MODULE_URL.'/actions/my_avatars.php'.$course_param, 
+																	'<b>'.get_string('modlos_my_avatars','block_modlos').'</b>');
 		if ($show_create_tab) {
 			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $course_param, 
 																	'<b>'.get_string('modlos_avatar_create','block_modlos').'</b>');
