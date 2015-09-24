@@ -149,8 +149,9 @@ class  AvatarsList
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 		//
 
-		if ($this->hasPermit) $sql_limit = "LIMIT $this->pstart, $this->plimit";
-		else $sql_limit = "";	// 一般ユーザ：ページなし
+		$sql_limit = "LIMIT $this->pstart, $this->plimit";
+		//if ($this->hasPermit) $sql_limit = "LIMIT $this->pstart, $this->plimit";
+		//else $sql_limit = "";	// 一般ユーザ：ページなし
 
 		//
 		$this->ownerloss = optional_param('ownerloss', "$this->ownerloss", PARAM_INT);
@@ -173,11 +174,11 @@ class  AvatarsList
 	{
 		global $CFG, $USER;
 
-		if ($this->hasPermit) {
+//		if ($this->hasPermit) {
 			$dummy = opensim_get_avatars_infos($this->sql_countcnd);
 			if (is_array($dummy)) $this->number = count($dummy);
 			else $this->number = 0;
-		}
+//		}
 
 		// auto synchro
 		modlos_sync_opensimdb();
@@ -193,6 +194,7 @@ class  AvatarsList
 				$user['state']	  = AVATAR_STATE_NOSTATE;
 				$user['editable'] = AVATAR_NOT_EDITABLE;
 				$user['hmregion'] = modlos_get_region_name($user['hmregion_id']);
+				if (isGUID($user['hmregion'])) $user['hmregion'] = '';
 				//
 				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
 				if ($avatardata!=null) {
@@ -223,13 +225,13 @@ class  AvatarsList
 					$user['hmregion_id'] = $avatardata['regionUUID'];
 					$user['hmregion']    = $avatardata['regionName'];
 					$user['created']   	 = $avatardata['created'];
+					if (isGUID($user['hmregion'])) $user['hmregion'] = '';
 				}
  				unset($avatardata);
 				//
 				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle);
 				if ($avatardata!=null) {
 					$user['state'] = (int)$avatardata['state'];
-					//$user['hmregion']  = $avatardata['hmregion'];
 				}
 				//
 				$dat  = $this->get_avatar_info($user, $colum); 
@@ -241,7 +243,7 @@ class  AvatarsList
 		}
 
 		// 一般ユーザ
-		if (!$this->hasPermit) $this->number = $colum;
+//		if (!$this->hasPermit) $this->number = $colum;
 
 		//
 		$this->sitemax   = ceil ($this->number/$this->plimit);
