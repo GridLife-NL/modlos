@@ -36,7 +36,7 @@
 
     <tr>
       <td class="head"><?php echo $confirm_pass_ttl?></td>
-      <?php if (!($this->state==AVATAR_STATE_INACTIVE)) {?>
+      <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>
         <td class="odd"><input type="password" name="confirm_pass" size="32" maxlength="16" /></td>
       <?php } else {?>
         <td class="even">&nbsp;</td>
