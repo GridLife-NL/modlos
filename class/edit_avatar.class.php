@@ -229,7 +229,7 @@ class  EditAvatar
 		$avatar_edit   		= get_string('modlos_avatar_edit',	 'block_modlos');
 		$firstname_ttl  	= get_string('modlos_firstname',	 'block_modlos');
 		$lastname_ttl   	= get_string('modlos_lastname',		 'block_modlos');
-		$passwd_ttl  		= get_string('modlos_password',	 	 'block_modlos');
+		$new_passwd_ttl  	= get_string('modlos_new_password',	 'block_modlos');
 		$confirm_pass_ttl  	= get_string('modlos_confirm_pass',	 'block_modlos');
 		$home_region_ttl  	= get_string('modlos_home_region',	 'block_modlos');
 		$status_ttl	 		= get_string('modlos_status',		 'block_modlos');

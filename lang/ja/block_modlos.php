@@ -15,6 +15,7 @@ $string['modlos_uuid'] 				= 'UUID';
 $string['modlos_firstname'] 		= 'ファーストネーム';
 $string['modlos_lastname'] 			= 'ラストネーム';
 $string['modlos_password'] 			= 'パスワード';
+$string['modlos_new_password'] 		= '新しいパスワード';
 $string['modlos_confirm_pass'] 		= 'パスワード確認';
 $string['modlos_home_region'] 		= 'ホームリージョン';
 $string['modlos_ownername'] 		= 'オーナ のユーザ名';

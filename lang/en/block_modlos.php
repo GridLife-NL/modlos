@@ -15,6 +15,7 @@ $string['modlos_uuid'] 				= 'UUID';
 $string['modlos_firstname'] 		= 'First Name';
 $string['modlos_lastname'] 			= 'Last Name';
 $string['modlos_password'] 			= 'Password';
+$string['modlos_new_password'] 		= 'New Password';
 $string['modlos_confirm_pass']		= 'Confirm Pass';
 $string['modlos_home_region'] 		= 'Home Region';
 $string['modlos_ownername'] 		= 'Username of Owner';
