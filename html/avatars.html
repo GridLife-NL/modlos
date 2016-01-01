@@ -112,7 +112,7 @@
       <td>
         <?php if (!$has_permit and !$avatar_max) {?>
           <a href="<?php echo $avarars_list_url.$ownerloss_.'1'?>" target="_self">
-            <font color="#000"><b><u><?php echo $find_owner_ttl?></u></b></font>
+            <font color="#000"><b><?php echo $find_owner_ttl?></b></font>
           </a>
         <?php } else { ?>
           &nbsp;
@@ -120,7 +120,7 @@
       </td>
       <td>
         <a href="<?php echo $this->action_url.$plimit_amp.$pstart_amp.$order_amp?>" target="_self">
-          <font color="#000"><b><u><?php echo $reset_ttl?></u></b></font>
+          <font color="#000"><b><?php echo $reset_ttl?></b></font>
         </a>
       </td>
     </tr>
@@ -143,20 +143,20 @@
                   <td width=60 ><b><?php echo $edit_ttl?></b></td>
                   <td width=180>
                     <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp?>&amp;order=firstname" target="_self">
-                      <b><u><?php echo $firstname_ttl?></u></b>
+                      <b><?php echo $firstname_ttl?></b>
                     </a>
                   </td>
                   <td width=180>
                     <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp?>&amp;order=lastname" target="_self">
-                      <b><u><?php echo $lastname_ttl?></u></b>
+                      <b><?php echo $lastname_ttl?></b>
                     </a>
                   </td>
                   <td width=250>
                     <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp?>&amp;order=login" target="_self">
                       <?php if (USE_UTC_TIME) {?>
-                        <b><u><?php echo $lastlogin_ttl?>&nbsp;(UTC)</u></b>
+                        <b><?php echo $lastlogin_ttl?>&nbsp;(UTC)</b>
                       <?php }else{?>
-                        <b><u><?php echo $lastlogin_ttl?>&nbsp;(Local)</u></b>
+                        <b><?php echo $lastlogin_ttl?>&nbsp;(Local)</b>
                       <?php }?>
                     </a>
                   </td>
@@ -182,9 +182,9 @@
                     </td>
                     <td width=60>
                     <?php if ($dat['editable']==AVATAR_EDITABLE) {?>
-                      <a href="<?php echo $this->edit_url. '&amp;uuid='.$dat['UUID']?>" ><font color=#cc1010><b><u><?php echo $editable_ttl?></u></b></font></a>
+                      <a href="<?php echo $this->edit_url. '&amp;uuid='.$dat['UUID']?>" ><font color=#cc1010><b><?php echo $editable_ttl?></b></font></a>
                     <?php } elseif ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {?>
-                      <a href="<?php echo $this->owner_url.'&amp;uuid='.$dat['UUID']?>"><font color=#aa5050><b><u><?php echo $get_owner_ttl?></u></b></font></a>
+                      <a href="<?php echo $this->owner_url.'&amp;uuid='.$dat['UUID']?>"><font color=#aa5050><b><?php echo $get_owner_ttl?></b></font></a>
                     <?php } else {?>
                       &nbsp;-&nbsp;
                     <?php }?>
@@ -217,16 +217,16 @@
                     <td width=150>
                       <a style="cursor:pointer" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_param.'&region='.$dat['region_id']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
                         <?php if ($dat['online']) {?>
-                          <b><font color=#005500><u><?php echo $dat['region']?></u></font></b>
+                          <b><font color=#005500><?php echo $dat['region']?></font></b>
                         <?php } else {?>
-                          <b><font color=#0055cc><u><?php echo $dat['region']?></u></font></b>
+                          <b><font color=#0055cc><?php echo $dat['region']?></font></b>
                         <?php }?>
                       </a>
                     </td>
                     <td width=250>
                       <?php if ($userinfo and $dat['ownername']!=' - ') { ?>
                         <a href="<?php echo $this->avatar_url.'&id='.$dat['uid']?>" target="_blank">
-                          <b><u><?php echo htmlspecialchars($dat['ownername'])?></u></b>
+                          <b><?php echo htmlspecialchars($dat['ownername'])?></b>
                         </a>
                       <?php } else {?>
                         <b><?php echo htmlspecialchars($dat['ownername'])?></b>
