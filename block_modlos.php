@@ -115,7 +115,6 @@ class block_modlos extends block_base
 	}
 
 
-
 	// setting of instance block. need config_instance.html
 	function instance_allow_config()
 	{
