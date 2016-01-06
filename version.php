@@ -17,5 +17,5 @@ $plugin->maturity  = MATURITY_STABLE;
 //$plugin->version = 2014060900;
 //$plugin->version = 2014112801;
 //$plugin->version = 2014120401;
-$plugin->version   = 2015112600;
+$plugin->version   = 2016010600;
 $plugin->release   = '2.8.4';
