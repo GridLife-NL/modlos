@@ -162,4 +162,3 @@ $sloodle_ttl 	= get_string('modlos_sloodle_short', 'block_modlos');
 
 include(CMS_MODULE_PATH.'/html/agent.html');
 
-?>

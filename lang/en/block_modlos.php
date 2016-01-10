@@ -64,7 +64,7 @@ $string['modlos_total_regions'] 	= 'Total Regions';
 $string['modlos_visitors_last30days']= 'Visitors last 30 days';
 $string['modlos_online_now'] 		= 'OnLine Now';
 
-$string['modlos_user'] 				= 'User';
+$string['modlos_user'] 				= 'Avatar';
 $string['modlos_born_on'] 			= 'Born on';
 $string['modlos_profile'] 			= 'Profile';
 $string['modlos_has_noprofile'] 	= 'This User has no Profile';
