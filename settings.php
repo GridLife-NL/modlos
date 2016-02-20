@@ -135,7 +135,7 @@ $settings->add(new admin_setting_configcheckbox('modlos_teacher_admin',
 
 $settings->add(new admin_setting_configcheckbox('modlos_cooperate_sloodle', 
 					get_string('modlos_cprt_sloodle', 'block_modlos'),
-				   	get_string('modlos_cprt_sloodle_desc', 'block_modlos'), 1));
+				   	get_string('modlos_cprt_sloodle_desc', 'block_modlos'), 0));
 
 // Ex Function
 $settings->add(new admin_setting_configtext('modlos_groupdb_read_key', 
