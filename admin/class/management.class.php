@@ -25,7 +25,6 @@ class  ManagementBase
 	var	$command   = '';
 
 
-
 	function  ManagementBase($course_id) 
 	{
 		$this->course_id = $course_id;
@@ -74,15 +73,18 @@ class  ManagementBase
 					$command  = "cd $cachedir && /bin/sh cache_clear.sh";
 					exec($command);
 				}
+				//
 				else if ($command=='clpresence') {
 					opensim_clear_login_table();
 				}
+				//
 				else if ($command=='convertdb') {
 					opensim_succession_data(env_get_config('home_region'));
 					opensim_recreate_presence();
 					$profs = opensim_get_avatars_profiles_from_users();
 					if ($profs!=null) modlos_set_profiles_from_users($profs, false);        // not over write
 				}
+				//
 				else if ($command=='debugcom') {
 					opensim_debug_command();		// set your debug command
 				}
@@ -129,4 +131,3 @@ class  ManagementBase
 
 }
 
-?>
