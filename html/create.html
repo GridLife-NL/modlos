@@ -5,8 +5,55 @@
 
 
 <h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_create_ttl?></center></h2>
-<br />
 
+<!-- echo Messages -->
+<?php if ($this->created_avatar) {?>
+  <div align="center">
+    <h3><font color=#1010e0><?php echo $avatar_created?></font></h3>
+  </div>
+  <table width="640" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
+    <?php if ($this->hasPermit) {?>
+      <tr>
+        <td width="180" class="head"><?php echo $uuid_ttl?></td>
+        <td width="460" class="even"><font color="#2060b0"><?php echo $this->UUID?></font></td>	
+      </tr>
+    <?php }?>
+    <tr>
+      <td width="180" class="head"><?php echo $firstname_ttl?></td>
+      <td width="460" class="odd" ><?php echo $this->firstname?></td>
+    </tr>
+    <tr>
+      <td class="head"><?php echo $lastname_ttl?></td>
+      <td class="even"><?php echo $this->lastname?></td>	
+    </tr>
+    <tr>
+      <td class="head"><?php echo $home_region_ttl?></td>
+      <td class="odd" ><?php echo $this->hmregion?></td>	
+    </tr>
+
+    <?php if ($this->hasPermit) {?>
+      <tr>
+        <td class="head"><?php echo $ownername_ttl?></td>
+        <td class="even"><?php echo $this->ownername?></td>	
+      </tr>
+    <?php }?>
+
+  </table>
+<?php }?>
+
+<?php if ($this->hasError) {?>
+  <div align="center">
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
+      <?php }?>
+    </ul>
+  </div>
+  <hr />
+<?php }?>
+
+
+<br />
 <form action="<?php echo $this->action_url?>" method="POST">
   <table width="640" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 
@@ -57,7 +104,7 @@
       <td class="even">
         <select wide="25" name="hmregion">
           <?php foreach ($this->regionNames as $region) {?>
-            <?php if ($region==stripslashes($this->hmregion)) {?>
+            <?php if ($region==$this->hmregion) {?>
               <option value="<?php echo $region?>" selected><?php echo $region?></option>
             <?php } else {?>
               <option value="<?php echo $region?>" ><?php echo $region?></option>
@@ -109,52 +156,3 @@
 </form>
 <br />
 
-
-<!-- echo Messages -->
-<hr />
-
-<?php if ($this->created_avatar) {?>
-  <div align="center">
-    <h3><font color=#1010e0><?php echo $avatar_created?></font></h3>
-  </div>
-  <table width="640" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
-    <?php if ($this->hasPermit) {?>
-      <tr>
-        <td width="180" class="head"><?php echo $uuid_ttl?></td>
-        <td width="460" class="even"><font color="#2060b0"><?php echo $this->UUID?></font></td>	
-      </tr>
-    <?php }?>
-    <tr>
-      <td width="180" class="head"><?php echo $firstname_ttl?></td>
-      <td width="460" class="odd" ><?php echo stripslashes($this->firstname);?></td>
-    </tr>
-    <tr>
-      <td class="head"><?php echo $lastname_ttl?></td>
-      <td class="even"><?php echo stripslashes($this->lastname);?></td>	
-    </tr>
-    <tr>
-      <td class="head"><?php echo $home_region_ttl?></td>
-      <td class="odd" ><?php echo stripslashes($this->hmregion);?></td>	
-    </tr>
-
-    <?php if ($this->hasPermit) {?>
-      <tr>
-        <td class="head"><?php echo $ownername_ttl?></td>
-        <td class="even"><?php echo stripslashes($this->ownername);?></td>	
-      </tr>
-    <?php }?>
-
-  </table>
-<?php }?>
-<br />
-
-<?php if ($this->hasError) {?>
-  <div align="center">
-    <ul>
-      <?php foreach($this->errorMsg as $mesg) {?>
-        <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
-      <?php }?>
-    </ul>
-  </div>
-<?php }?>
-<br />
