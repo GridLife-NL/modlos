@@ -58,12 +58,12 @@ class block_modlos extends block_base
 		$this->content = new stdClass;
 		$this->content->text = '<a href="'.CMS_MODULE_URL.'/actions/show_status.php?course='.$id.'">'. get_string('modlos_status','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.  get_string('modlos_world_map','block_modlos').'</a><br />';
-		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'&order=name">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
 
 		$isguest = isguestuser();
 		if (!$isguest and $USER->id!=0) {
-			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php?course='.$id.'&order=login">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';
-			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/my_avatars.php?course='.$id.'">'.get_string('modlos_my_avatars','block_modlos').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php?course='.$id.'&order=login&desc=1">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/personal_avatars.php?course='.$id.'">'.get_string('modlos_my_avatars','block_modlos').'</a><br />';
 
 			$isAvatarMax = false;
 			if ($db_ver!=null) { 

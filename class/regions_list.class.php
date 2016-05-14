@@ -107,16 +107,18 @@ class  RegionsList
 			if (!$this->order_desc) $this->desc_estateid = 1;
 		}
 		else if ($this->order=='owner') {
-			if ($db_ver=='0.6') $sql_order = ' ORDER BY username';
-			else				$sql_order = ' ORDER BY FirstName';
+			if ($db_ver==OPENSIM_V06) $sql_order = ' ORDER BY username';
+			else				      $sql_order = ' ORDER BY FirstName';
 			if (!$this->order_desc) $this->desc_owner = 1;
 		}
 		//
-		if ($this->order_desc) {
-			$sql_order .= ' DESC';
-		}
-		else {
-			$sql_order .= ' ASC';
+		if ($sql_order!='') {
+			if ($this->order_desc) {
+				$sql_order .= ' DESC';
+			}
+			else {
+				$sql_order .= ' ASC';
+			}
 		}
 
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);

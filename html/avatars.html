@@ -142,17 +142,17 @@
                   <td width=50 >&nbsp;</b></td>
                   <td width=60 ><b><?php echo $edit_ttl?></b></td>
                   <td width=180>
-                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp?>&amp;order=firstname" target="_self">
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp.$desc_fname?>&amp;order=firstname" target="_self">
                       <b><?php echo $firstname_ttl?></b>
                     </a>
                   </td>
                   <td width=200>
-                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp?>&amp;order=lastname" target="_self">
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp.$desc_lname?>&amp;order=lastname" target="_self">
                       <b><?php echo $lastname_ttl?></b>
                     </a>
                   </td>
                   <td width=250>
-                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp?>&amp;order=login" target="_self">
+                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp.$desc_login?>&amp;order=login" target="_self">
                       <?php if (USE_UTC_TIME) {?>
                         <b><?php echo $lastlogin_ttl?>&nbsp;(UTC)</b>
                       <?php }else{?>
@@ -239,7 +239,7 @@
                     </td>
                     <td width=250>
                       <?php if ($userinfo and $dat['ownername']!=' - ') { ?>
-                        <a href="<?php echo $this->avatar_url.'&id='.$dat['uid']?>" target="_blank">
+                        <a href="<?php echo $this->personal_url.'&userid='.$dat['uid']?>" target="_blank">
                           <b><?php echo htmlspecialchars($dat['ownername'])?></b>
                         </a>
                       <?php } else {?>

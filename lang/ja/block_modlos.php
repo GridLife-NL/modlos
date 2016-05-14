@@ -83,6 +83,7 @@ $string['modlos_show_db'] 			= 'データベース';
 $string['modlos_world_map'] 		= 'ワールドマップ';
 $string['modlos_user_info'] 		= 'ユーザ情報';
 $string['modlos_my_avatars'] 		= 'マイ アバター';
+$string['modlos_personal_avatars'] 	= '{$a} のアバター';
 $string['modlos_avatars_list'] 		= 'アバターリスト';
 $string['modlos_regions_list'] 		= 'リージョンリスト';
 $string['modlos_editable_list'] 	= '編集可能アバターリスト';

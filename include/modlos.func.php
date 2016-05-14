@@ -1129,12 +1129,12 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 																	'<b>'.get_string('modlos_show_status_tab','block_modlos').'</b>');
 	$toprow[] = new tabobject('world_map', CMS_MODULE_URL.'/actions/map_action.php'.$course_param, 
 																	'<b>'.get_string('modlos_world_map','block_modlos').'</b>');
-	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$course_param, 
+	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$course_param.'&order=name', 
 																	'<b>'.get_string('modlos_regions_list','block_modlos').'</b>');
 	if (!isguestuser()) {
-		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param.'&order=login', 
+		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param.'&order=login&desc=1', 
 																	'<b>'.get_string('modlos_avatars_list','block_modlos').'</b>');
-		$toprow[] = new tabobject('my_avatars', CMS_MODULE_URL.'/actions/my_avatars.php'.$course_param, 
+		$toprow[] = new tabobject('my_avatars', CMS_MODULE_URL.'/actions/personal_avatars.php'.$course_param, 
 																	'<b>'.get_string('modlos_my_avatars','block_modlos').'</b>');
 		if ($show_create_tab) {
 			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $course_param, 

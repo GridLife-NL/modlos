@@ -41,9 +41,6 @@
                   <?php }?>
 
                   <td width=250><b><?php echo $crntregion_ttl?></b></td>
-                  <td width=250>
-                    <b><?php echo $owner_ttl?></b>
-                  </td>
                   <td>&nbsp;</td>
                 </tr>
 
@@ -112,15 +109,6 @@
                           <b><font color=#0055cc><?php echo $dat['region']?></font></b>
                         <?php }?>
                       </a>
-                    </td>
-                    <td width=250>
-                      <?php if ($userinfo and $dat['ownername']!=' - ') { ?>
-                        <a href="<?php echo $this->avatar_url.'&id='.$dat['uid']?>" target="_blank">
-                          <b><?php echo htmlspecialchars($dat['ownername'])?></b>
-                        </a>
-                      <?php } else {?>
-                        <b><?php echo htmlspecialchars($dat['ownername'])?></b>
-                      <?php }?>
                     </td>
                     <td>&nbsp;</td>
                   </tr>
