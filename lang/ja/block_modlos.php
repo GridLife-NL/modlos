@@ -86,6 +86,8 @@ $string['modlos_my_avatars'] 		= 'マイ アバター';
 $string['modlos_personal_avatars'] 	= '{$a} のアバター';
 $string['modlos_avatars_list'] 		= 'アバターリスト';
 $string['modlos_regions_list'] 		= 'リージョンリスト';
+$string['modlos_my_regions'] 		= 'マイ リージョン';
+$string['modlos_personal_regions'] 	= '{$a} のリージョン';
 $string['modlos_editable_list'] 	= '編集可能アバターリスト';
 
 $string['modlos_avatar_info'] 		= 'アバター情報';

@@ -242,7 +242,7 @@ class  AvatarsList
 					//$user['hmregion'] = $avatardata['hmregion'];
 				}
 				//
-				$dat  = $this->get_avatar_info($user, $colum); 
+				$dat = $this->get_avatar_info($user, $colum); 
 
 				//if (!$this->ownerloss or $dat['editable']==AVATAR_EDITABLE 
 				//                      or ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE))) {
@@ -288,9 +288,6 @@ class  AvatarsList
 				}
 			}
 		}
-
-		// 一般ユーザ
-//		if (!$this->hasPermit) $this->number = $colum;
 
 		//
 		$this->sitemax   = ceil ($this->number/$this->plimit);
@@ -396,16 +393,16 @@ class  AvatarsList
 		$avarars_list_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param;
 
 		if ($this->show_all) {
-			$avatars_list = get_string('modlos_avatars_list',  'block_modlos');
+			$avatars_list = get_string('modlos_avatars_list', 'block_modlos');
 		}
 		else if ($this->user_id==$USER->id) {
-			$avatars_list = get_string('modlos_my_avatars',  'block_modlos');
+			$avatars_list = get_string('modlos_my_avatars', 'block_modlos');
 		}
 		else {
 			$userinfo = get_userinfo_by_id($this->user_id);
 			$username = get_display_username($userinfo->firstname, $userinfo->lastname);
 			$userurl  = '<a href="'.$this->avatar_url.'&id='.$this->user_id.'" target="_blank">'.$username.'</a>';
-			$avatars_list = get_string('modlos_personal_avatars',  'block_modlos', $userurl);
+			$avatars_list = get_string('modlos_personal_avatars', 'block_modlos', $userurl);
 		}
 
 		if ($this->show_all) {	// 	全アバター

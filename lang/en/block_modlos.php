@@ -86,6 +86,8 @@ $string['modlos_my_avatars'] 		= 'My Avatars';
 $string['modlos_personal_avatars'] 	= '{$a}\'s Avatars';
 $string['modlos_avatars_list'] 		= 'Avatars List';
 $string['modlos_regions_list'] 		= 'Regions List';
+$string['modlos_my_regions'] 		= 'My Regions';
+$string['modlos_personal_regions'] 	= '{$a}\'s Regions';
 $string['modlos_editable_list'] 	= 'Editable Avatars List';
 
 $string['modlos_avatar_info'] 		= 'Avatar Information';

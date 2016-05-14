@@ -13,12 +13,17 @@ class  RegionsList
 	var $db_data = array();
 
 	var $action_url;
+	var $search_url;
+	var $avatar_url;
+
 	var $course_id;
+	var $user_id;
 	var $url_param = '';
 
 	var $isAvatarMax = false;
 	var $use_sloodle = false;
 
+	var $show_all  = false;
 	var $hasPermit = false;
 	var $isGuest   = true;
 
@@ -44,24 +49,28 @@ class  RegionsList
 
 
 
-	function  RegionsList($course_id)
+	function  RegionsList($course_id, $show_all, $userid=0)
 	{
 		global $CFG, $USER;
 
 		$this->isGuest   = isguestuser();
 		$this->hasPermit = hasModlosPermit($course_id);
 		$this->course_id = $course_id;
+		$this->user_id   = $userid;
+		$this->show_all	 = $show_all;
+		if (!$show_all and $userid==0) $this->user_id = $USER->id;
 
 		$this->url_param = '?dmmy_param=';
 		if ($course_id>0) $this->url_param .= '&course='.$course_id;
 
-		$this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param;
+		if ($show_all) $this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param;
+		else           $this->action_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param.'&userid='.$userid;
+		$this->avatar_url   = $CFG->wwwroot.'/user/view.php'.$this->url_param;
 
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
-
 	}
 
 
@@ -135,7 +144,62 @@ class  RegionsList
 
 	function  execute()
 	{
-		$this->number  = opensim_get_regions_num();
+		$where = '';
+
+		if ($this->show_all) {
+			$this->number = opensim_get_regions_num();
+		}
+		else {
+			$users = modlos_get_avatars($this->user_id);
+			$i = 0;
+			foreach($users as $user) {
+				$uuid  = $user['UUID'];
+				if ($i==0) $where = " WHERE owner_uuid='$uuid' ";
+				else       $where.= " or owner_uuid='$uuid' ";
+				$i++;
+			}
+			if ($where!='') $this->number = opensim_get_regions_num($where);
+		}
+		if (!$this->number) return false;
+
+		// auto synchro
+		modlos_sync_opensimdb();
+		if ($this->use_sloodle) modlos_sync_sloodle_users();
+
+		// Voice Mode
+		$voice_mode[0] = get_string('modlos_voice_inactive_chnl', 'block_modlos');
+		$voice_mode[1] = get_string('modlos_voice_private_chnl',  'block_modlos');
+		$voice_mode[2] = get_string('modlos_voice_percel_chnl',   'block_modlos');
+
+		//
+		$colum = 0;
+		$regions = opensim_get_regions_infos($where.$this->sql_condition);
+
+		foreach($regions as $region) {
+			$this->db_data[$colum] = $region;
+			$this->db_data[$colum]['num']   = $colum;
+			$this->db_data[$colum]['locX']  = $this->db_data[$colum]['locX']/256;
+			$this->db_data[$colum]['locY']  = $this->db_data[$colum]['locY']/256;
+			$vcmode = opensim_get_voice_mode($region['UUID']);
+			$this->db_data[$colum]['voice'] = $voice_mode[$vcmode];
+
+			$this->db_data[$colum]['uuid']	  = str_replace('-', '',  $region['UUID']);
+//			$this->db_data[$colum]['ow_uuid'] = str_replace('-', '',  $region['owner_uuid']);
+//			$this->db_data[$colum]['ip_name'] = str_replace('.', 'X', $region['serverIP2']);
+
+			if ($region['est_fullname']!=null) {
+				$this->db_data[$colum]['owner_name'] = $region['est_fullname'];
+				$this->db_data[$colum]['owner_uuid'] = $region['estate_owner'];
+			}
+			else {
+				$this->db_data[$colum]['owner_name'] = $region['rgn_fullname'];
+				$this->db_data[$colum]['owner_uuid'] = $region['owner_uuid'];
+			}
+
+			$colum++;
+		}
+
+		//
 		$this->sitemax = ceil ($this->number/$this->plimit);
 		//$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
 		$this->sitestart = floor(($this->pstart+$this->plimit-1)/$this->plimit) + 1;
@@ -179,41 +243,6 @@ class  RegionsList
 		if ($this->plimit != 50)  $this->icon[5] = 'icon_limit_50_on';
 		if ($this->plimit != 100) $this->icon[6] = 'icon_limit_100_on';
 
-		$voice_mode[0] = get_string('modlos_voice_inactive_chnl', 'block_modlos');
-		$voice_mode[1] = get_string('modlos_voice_private_chnl',  'block_modlos');
-		$voice_mode[2] = get_string('modlos_voice_percel_chnl',   'block_modlos');
-
-		// auto synchro
-		modlos_sync_opensimdb();
-		if ($this->use_sloodle) modlos_sync_sloodle_users();
-
-		//
-		$regions = opensim_get_regions_infos($this->sql_condition);
-		$colum = 0;
-		foreach($regions as $region) {
-			$this->db_data[$colum] = $region;
-			$this->db_data[$colum]['num']   = $colum;
-			$this->db_data[$colum]['locX']  = $this->db_data[$colum]['locX']/256;
-			$this->db_data[$colum]['locY']  = $this->db_data[$colum]['locY']/256;
-			$vcmode = opensim_get_voice_mode($region['UUID']);
-			$this->db_data[$colum]['voice'] = $voice_mode[$vcmode];
-
-			$this->db_data[$colum]['uuid']	  = str_replace('-', '',  $region['UUID']);
-//			$this->db_data[$colum]['ow_uuid'] = str_replace('-', '',  $region['owner_uuid']);
-//			$this->db_data[$colum]['ip_name'] = str_replace('.', 'X', $region['serverIP2']);
-
-			if ($region['est_fullname']!=null) {
-				$this->db_data[$colum]['owner_name'] = $region['est_fullname'];
-				$this->db_data[$colum]['owner_uuid'] = $region['estate_owner'];
-			}
-			else {
-				$this->db_data[$colum]['owner_name'] = $region['rgn_fullname'];
-				$this->db_data[$colum]['owner_uuid'] = $region['owner_uuid'];
-			}
-
-			$colum++;
-		}
-
 		return true;
 	}
 
@@ -221,7 +250,7 @@ class  RegionsList
 
 	function  print_page() 
 	{
-		global $CFG;
+		global $CFG, $USER;
 
 		$grid_name	= $CFG->modlos_grid_name;
 		$content	= $CFG->modlos_regions_content;
@@ -240,7 +269,6 @@ class  RegionsList
 		$desc_ip 	= "&amp;desc=$this->desc_ip";
 		$desc_owner = "&amp;desc=$this->desc_owner";
 
-		$regions_list_ttl= get_string('modlos_regions_list',   'block_modlos');
 		$location_x		 = get_string('modlos_location_x',	   'block_modlos');
 		$location_y	  	 = get_string('modlos_location_y',	   'block_modlos');
 		$region_name	 = get_string('modlos_region_name',	   'block_modlos');
@@ -253,6 +281,19 @@ class  RegionsList
 		$page_num		 = get_string('modlos_page',		   'block_modlos');
 		$page_num_of	 = get_string('modlos_page_of',		   'block_modlos');
 		$voice_chat_mode = get_string('modlos_voice_chat_mode','block_modlos');
+
+        if ($this->show_all) {
+			$regions_list = get_string('modlos_regions_list', 'block_modlos');
+        }
+        else if ($this->user_id==$USER->id) {
+			$regions_list = get_string('modlos_my_regions', 'block_modlos');
+        }
+        else {
+            $userinfo = get_userinfo_by_id($this->user_id);
+            $username = get_display_username($userinfo->firstname, $userinfo->lastname);
+            $userurl  = '<a href="'.$this->avatar_url.'&id='.$this->user_id.'" target="_blank">'.$username.'</a>';
+			$regions_list = get_string('modlos_personal_regions', 'block_modlos', $userurl);
+        }
 
 		include(CMS_MODULE_PATH.'/html/regions.html');
 	}
