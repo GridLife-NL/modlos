@@ -15,6 +15,7 @@ class  AvatarsList
 
 	var $action_url;
 	var $edit_url;
+	var $currency_url;
 	var $owner_url;
 	var $search_url;
 	var $avatar_url;
@@ -22,8 +23,9 @@ class  AvatarsList
 	var $course_id  = 0;
 	var $url_param  = '';
 
-	var $use_sloodle = false;
-	var $isAvatarMax = false;
+	var $use_sloodle  = false;
+	var $isAvatarMax  = false;
+	var	$use_currency = false;
 
 	var $show_all   = false;
 	var $hasPermit 	= false;
@@ -60,11 +62,12 @@ class  AvatarsList
 			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
-		$this->course_id   = $course_id;
-		$this->hasPermit   = hasModlosPermit($course_id);
-		$this->course_id   = $course_id;
-		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
-		$this->show_all    = $show_all;
+		$this->course_id    = $course_id;
+		$this->hasPermit    = hasModlosPermit($course_id);
+		$this->course_id    = $course_id;
+		$this->use_sloodle  = $CFG->modlos_cooperate_sloodle;
+		$this->use_currency = modlos_use_currency_server;
+		$this->show_all     = $show_all;
 
 		$this->url_param = '?dmmy_param=';	
 		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;
@@ -78,9 +81,10 @@ class  AvatarsList
 			$this->search_url  = CMS_MODULE_URL.'/actions/my_avatars.php'.$this->url_param.'&amp;pstart=0';
 		}
 
-		$this->edit_url	   = CMS_MODULE_URL.'/actions/edit_avatar.php'. $this->url_param;
-		$this->owner_url   = CMS_MODULE_URL.'/actions/owner_avatar.php'.$this->url_param;
-		$this->avatar_url  = $CFG->wwwroot.'/user/view.php'.$this->url_param;
+		$this->edit_url	    = CMS_MODULE_URL.'/actions/edit_avatar.php'. $this->url_param;
+		$this->owner_url    = CMS_MODULE_URL.'/actions/owner_avatar.php'.$this->url_param;
+		$this->currency_url = CMS_MODULE_URL.'/actions/show_currency.php'.$this->url_param;
+		$this->avatar_url   = $CFG->wwwroot.'/user/view.php'.$this->url_param;
 
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
@@ -204,8 +208,16 @@ class  AvatarsList
 				}
 				//
 				$dat  = $this->get_avatar_info($user, $colum); 
-				$show = !$this->ownerloss;
-				if ($show or $dat['editable']==AVATAR_EDITABLE or ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE))) {
+
+				//if (!$this->ownerloss or $dat['editable']==AVATAR_EDITABLE 
+				//                      or ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE))) {
+				if ($this->ownerloss) {
+					if ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {
+						$this->db_data[$colum] = $dat;
+						$colum++;
+					}
+				} 
+				else {
 					$this->db_data[$colum] = $dat;
 					$colum++;
 				}
@@ -303,6 +315,7 @@ class  AvatarsList
 
 		$has_permit		= $this->hasPermit;
 		$avatar_max		= $this->isAvatarMax;
+		$use_currency	= $this->use_currency;
 		$lnk_firstname	= $this->lnk_firstname;
 		$lnk_lastname	= $this->lnk_lastname;
 		$url_param		= $this->url_param;
@@ -318,6 +331,7 @@ class  AvatarsList
 		$my_avatars		= get_string('modlos_my_avatars',    'block_modlos');
 		$number_ttl		= get_string('modlos_num',			 'block_modlos');
 		$edit_ttl		= get_string('modlos_edit',			 'block_modlos');
+		$show_ttl		= get_string('modlos_show',			 'block_modlos');
 		$editable_ttl	= get_string('modlos_edit_ttl',		 'block_modlos');
 		$lastlogin_ttl	= get_string('modlos_lastlogin',	 'block_modlos');
 		$status_ttl		= get_string('modlos_status',		 'block_modlos');
@@ -338,6 +352,7 @@ class  AvatarsList
 		$user_search	= get_string('modlos_avatar_search', 'block_modlos');
 		$users_found  	= get_string('modlos_users_found', 	 'block_modlos');
 		$sloodle_ttl  	= get_string('modlos_sloodle_short', 'block_modlos');
+		$currency_ttl  	= get_string('modlos_currency_ttl',  'block_modlos');
 
 		$avarars_list_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param;
 

@@ -35,6 +35,7 @@ $string['modlos_edit'] 				= 'Edit';
 $string['modlos_delete'] 			= 'Delete';
 $string['modlos_change'] 			= 'Change';
 $string['modlos_time_now']			= 'Present Time';
+$string['modlos_show']			    = 'Show';
 
 $string['modlos_online_ttl'] 		= ' ONLINE ';
 $string['modlos_offline_ttl'] 		= ' OFFLINE ';
@@ -106,6 +107,8 @@ $string['modlos_manage_out']        = 'The relationship with Moodle is DISABLED!
 $string['modlos_sloodle_ttl']       = 'SLOODLE';
 $string['modlos_sloodle_short']     = 'SLDL';
 $string['modlos_manage_sloodle']    = 'Cooperation with Sloodle';
+
+$string['modlos_currency_ttl']      = 'Currency';
 
 $string['modlos_avatar_upd_submit'] = 'Update Avatar';
 $string['modlos_avatar_dlt_canceled']='Avatar Delete Canceled';

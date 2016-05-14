@@ -103,41 +103,41 @@
 
     <tr bgcolor="#e8e8e8">
       <td width="15" >&nbsp;</td>
-      <td width="30" ><b>No.</b></td>
+      <td width="40" ><b>&nbsp;No.</b></td>
       <td width="250">
-        <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=name'">
+        <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp.$desc_name?>&amp;order=name'">
           <b><?php echo $region_name?></b>
         </a>
       </td>
       <td width="100">
-        <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=x'">
+        <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp.$desc_x?>&amp;order=x'">
           <b><?php echo $location_x?></b>
         </a>
       </td>
-      <td width="180">
-        <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=y'">
+      <td width="100">
+        <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp.$desc_y?>&amp;order=y'">
           <b><?php echo $location_y?></b>
         </a>
       </td>
-      <td width="150">
+      <td width="200">
         <b><?php echo $estate_name?>
       </td>
       <td width="200">
-        <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=owner'">
+        <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp.$desc_owner?>&amp;order=owner'">
           <b><?php echo $owner_ttl?></b>
         </a>
       </td>
-      <td width="200">
+      <td width="100">
         <?php if (!$this->isGuest) {?>
           <b><?php echo $voice_chat_mode?></b>
         <?php }?>
       </td>
       </td>
       <td width="50" >&nbsp;</td>
-      <td width="120">
+      <td width="250">
         <?php //if ($this->hasPermit) {?>
         <?php if (!$this->isGuest) {?>
-          <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp?>&amp;order=ip'">
+          <a style="cursor:pointer" onclick="document.location.href='<?php echo $this->action_url.$pstart_amp.$plimit_amp.$desc_ip?>&amp;order=ip'">
             <b><?php echo $server_name?></b>
           </a>
         <?php }?>
@@ -160,7 +160,7 @@
       <tr style='background-color: #e8e8e8'>
       <?php }?>
         <td width=15>&nbsp;</td>
-        <td width=30  style="color: #000000"><b>&nbsp;<?php echo $dat['num']+1+$this->pstart?></b></td>
+        <td width=40  style="color: #000000"><b>&nbsp;<?php echo $dat['num']+1+$this->pstart?></b></td>
         <td height=26 style="color: #000000">
           <?php if ($this->isGuest) {?>
             <b><?php echo htmlspecialchars($dat['regionName'])?></b>

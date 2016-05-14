@@ -26,7 +26,7 @@ $string['modlos_crntregion'] 		= 'リージョン';
 $string['modlos_state'] 			= '現在の状態';
 $string['modlos_state_invalid'] 	= '拒否設定';
 $string['modlos_state_deleted'] 	= '削除済み';
-$string['modlos_status'] 			= 'ステータス';
+$string['modlos_status'] 			= '状態';
 $string['modlos_grid_status'] 		= 'グリッドの状態';
 $string['modlos_num'] 				= 'No.';
 $string['modlos_ipaddr'] 			= 'IPアドレス';
@@ -35,6 +35,7 @@ $string['modlos_edit'] 				= '編集';
 $string['modlos_delete'] 			= '削除';
 $string['modlos_change'] 			= '変更';
 $string['modlos_time_now']			= '現時刻';
+$string['modlos_show']			    = '表示';
 
 $string['modlos_online_ttl'] 		= ' オンライン ';
 $string['modlos_offline_ttl'] 		= ' オフライン ';
@@ -106,6 +107,8 @@ $string['modlos_manage_out']		= 'アバターの関連付けを中止';
 $string['modlos_sloodle_ttl']		= 'SLOODLE';
 $string['modlos_sloodle_short']		= 'SLDL';
 $string['modlos_manage_sloodle']	= 'Sloodle との連携';
+
+$string['modlos_currency_ttl']	    = 'マネー';
 
 $string['modlos_avatar_upd_submit'] = 'アバター更新';
 $string['modlos_avatar_dlt_canceled']= 'アバター削除取り消し';

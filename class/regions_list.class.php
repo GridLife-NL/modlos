@@ -25,6 +25,16 @@ class  RegionsList
 	var $Cpstart = 0;
 	var $Cplimit = 25;
 	var $order   = '';
+	var $order_desc = 0;
+
+	var $desc_name = 0;
+	var $desc_estate = 0;
+	var $desc_x = 0;
+	var $desc_y = 0;
+	var $desc_ip = 0;
+	var $desc_estateid = 0;
+	var $desc_owner = 0;
+
 	var $pstart;
 	var $plimit;
 	var $number;
@@ -61,6 +71,7 @@ class  RegionsList
 		global $CFG;
 
 		$this->order = optional_param('order', '', PARAM_TEXT);
+		$this->order_desc = optional_param('desc', '0', PARAM_INT);
 		if (!isAlphabetNumeric($this->order)) $this->order = '';
 
 		$db_ver = opensim_get_db_version(); 
@@ -71,15 +82,41 @@ class  RegionsList
 		}
 
 		$sql_order = '';
-		if ($this->order=='name')	 	$sql_order = ' ORDER BY regionName ASC';
-		else if ($this->order=='estate')$sql_order = ' ORDER BY EstateName ASC';
-		else if ($this->order=='x')	 	$sql_order = ' ORDER BY locX ASC';
-		else if ($this->order=='y')	 	$sql_order = ' ORDER BY locY ASC';
-		else if ($this->order=='ip')	$sql_order = ' ORDER BY serverIP ASC';
-		else if ($this->order=='estid') $sql_order = ' ORDER BY estate_map.EstateID ASC';
+		if ($this->order=='name') {
+	 		$sql_order = ' ORDER BY regionName';
+			if (!$this->order_desc) $this->desc_name = 1;
+		}
+		else if ($this->order=='estate') {
+			$sql_order = ' ORDER BY EstateName';
+			if (!$this->order_desc) $this->desc_estate = 1;
+		}
+		else if ($this->order=='x')	{
+			$sql_order = ' ORDER BY locX';
+			if (!$this->order_desc) $this->desc_x = 1;
+		}
+		else if ($this->order=='y')	{
+			$sql_order = ' ORDER BY locY';
+			if (!$this->order_desc) $this->desc_y = 1;
+		}
+		else if ($this->order=='ip') {
+			$sql_order = ' ORDER BY serverIP';
+			if (!$this->order_desc) $this->desc_ip = 1;
+		}
+		else if ($this->order=='estid') {
+			$sql_order = ' ORDER BY estate_map.EstateID';
+			if (!$this->order_desc) $this->desc_estateid = 1;
+		}
 		else if ($this->order=='owner') {
-			if ($db_ver=='0.6') $sql_order = ' ORDER BY username, lastname ASC';
-			else				$sql_order = ' ORDER BY FirstName,LastName ASC';
+			if ($db_ver=='0.6') $sql_order = ' ORDER BY username';
+			else				$sql_order = ' ORDER BY FirstName';
+			if (!$this->order_desc) $this->desc_owner = 1;
+		}
+		//
+		if ($this->order_desc) {
+			$sql_order .= ' DESC';
+		}
+		else {
+			$sql_order .= ' ASC';
 		}
 
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
@@ -184,16 +221,22 @@ class  RegionsList
 	{
 		global $CFG;
 
-		$grid_name	   	 = $CFG->modlos_grid_name;
-		$content		 = $CFG->modlos_regions_content;
+		$grid_name	= $CFG->modlos_grid_name;
+		$content	= $CFG->modlos_regions_content;
 
-		$url_param 		 = $this->url_param;
-		$order_amp 		 = "&amp;order=$this->order";
-		$course_amp 	 = "&amp;course=$this->course_id";
-		$pstart_amp	 	 = "&amp;pstart=$this->pstart";
-		$plimit_amp	 	 = "&amp;plimit=$this->plimit";
-		$pstart_		 = '&amp;pstart=';
-		$plimit_		 = '&amp;plimit=';
+		$url_param 	= $this->url_param;
+		$order_amp 	= "&amp;order=$this->order&amp;desc=$this->order_desc";
+		$course_amp = "&amp;course=$this->course_id";
+		$pstart_amp	= "&amp;pstart=$this->pstart";
+		$plimit_amp	= "&amp;plimit=$this->plimit";
+		$pstart_	= '&amp;pstart=';
+		$plimit_	= '&amp;plimit=';
+
+		$desc_name  = "&amp;desc=$this->desc_name";
+		$desc_x 	= "&amp;desc=$this->desc_x";
+		$desc_y 	= "&amp;desc=$this->desc_y";
+		$desc_ip 	= "&amp;desc=$this->desc_ip";
+		$desc_owner = "&amp;desc=$this->desc_owner";
 
 		$regions_list_ttl= get_string('modlos_regions_list',   'block_modlos');
 		$location_x		 = get_string('modlos_location_x',	   'block_modlos');
