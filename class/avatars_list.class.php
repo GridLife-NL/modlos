@@ -191,11 +191,7 @@ class  AvatarsList
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 		//
-
 		$sql_limit = "LIMIT $this->pstart, $this->plimit";
-		//if ($this->hasPermit) $sql_limit = "LIMIT $this->pstart, $this->plimit";
-		//else $sql_limit = "";	// 一般ユーザ：ページなし
-
 		//
 		$this->ownerloss = optional_param('ownerloss', "$this->ownerloss", PARAM_INT);
 
