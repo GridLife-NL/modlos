@@ -372,6 +372,7 @@ class  AvatarsList
 		$lastlogin_ttl	= get_string('modlos_lastlogin',	 'block_modlos');
 		$status_ttl		= get_string('modlos_status',		 'block_modlos');
 		$crntregion_ttl	= get_string('modlos_crntregion',	 'block_modlos');
+		$avatar_ttl		= get_string('modlos_avatar',		 'block_modlos');
 		$owner_ttl		= get_string('modlos_owner',		 'block_modlos');
 		$get_owner_ttl	= get_string('modlos_get_owner_ttl', 'block_modlos');
 		$firstname_ttl 	= get_string('modlos_firstname', 	 'block_modlos');
@@ -421,7 +422,7 @@ class  AvatarsList
 
 		$dat				= $user;
 		$dat['num']			= $colum;
-		$dat['ownername']	= ' - ';
+		$dat['owner_name']	= ' - ';
 		$dat['region_id']	= $user['hmregion_id'];
 		$dat['region']		= $user['hmregion'];
 		$dat['state']		= $user['state'];
@@ -459,7 +460,7 @@ class  AvatarsList
 		if ($uid>0) {
 			$user_info = get_userinfo_by_id($uid);
 			if ($user_info!=null) {
-				$dat['ownername'] = get_display_username($user_info->firstname, $user_info->lastname);
+				$dat['owner_name'] = get_display_username($user_info->firstname, $user_info->lastname);
 			}
 		}
 

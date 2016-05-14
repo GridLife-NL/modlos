@@ -237,15 +237,17 @@
                         <?php }?>
                       </a>
                     </td>
+
                     <td width=250>
                       <?php if ($userinfo and $dat['ownername']!=' - ') { ?>
-                        <a href="<?php echo $this->personal_url.'&userid='.$dat['uid']?>" target="_blank">
-                          <b><?php echo htmlspecialchars($dat['ownername'])?></b>
+                        <a href="<?php echo $this->personal_url.'&userid='.$dat['uid']?>">
+                          <b><?php echo htmlspecialchars($dat['owner_name'])?></b>
                         </a>
                       <?php } else {?>
-                        <b><?php echo htmlspecialchars($dat['ownername'])?></b>
+                        <b><?php echo htmlspecialchars($dat['owner_name'])?></b>
                       <?php }?>
                     </td>
+
                     <td>&nbsp;</td>
                   </tr>
                 <?php }?>

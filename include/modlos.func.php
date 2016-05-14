@@ -1162,10 +1162,10 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 
 	$tabs = array($toprow);
 
-//	echo '<table align="center"><tr><td>';
 	echo "<input type='hidden' name='course' value='$course_id' />";
+	echo '<table align="center"><tr><td>';
 	print_tabs($tabs, $currenttab, NULL, NULL);
-//	echo '</td></tr></table>';
+	echo '</td></tr></table>';
 }
 
 
@@ -1216,10 +1216,10 @@ function  print_tabnav_manage($currenttab, $course)
 
 	$tabs = array($toprow);
 
-//	echo '<table align="center"><tr><td>';
 	echo "<input type='hidden' name='course' value='$course_id' />";
+	echo '<table align="center"><tr><td>';
 	print_tabs($tabs, $currenttab, NULL, NULL);
-//	echo '</td></tr></table>';
+	echo '</td></tr></table>';
 }
 
 

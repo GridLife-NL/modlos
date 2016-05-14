@@ -16,7 +16,7 @@
     <td>&nbsp;</td>
 
     <td width=200>
-      <font color=#e8e8e8><strong>&nbsp;<?php echo $this->number?> <?php echo $events_found?></strong></font>
+      <font color=#202020><strong>&nbsp;<?php echo $this->number?> <?php echo $events_found?></strong></font>
     </td>
     <td width="50">
       <?php if ($this->icon[0]=="on") {?>
@@ -102,7 +102,7 @@
       <td background="<?php echo $module_url?>/images/main/regions_right.gif">&nbsp;</td>
     </tr>
 
-    <tr bgcolor="#e8e8e8">
+    <tr bgcolor="#f0f0f0">
       <td width="1" >&nbsp;</td>
       <td width="30" ><strong>No.</strong></td>
       <td width="140">
@@ -129,16 +129,16 @@
     </tr>
 
     <tr>
-      <td bgcolor="#e8e8e8">&nbsp;</td>
-      <td colspan="7" bgcolor="#e8e8e8"><hr /></td>
-      <td bgcolor="#e8e8e8">&nbsp;</td>
+      <td bgcolor="#f0f0f0">&nbsp;</td>
+      <td colspan="7" bgcolor="#f0f0f0"><hr /></td>
+      <td bgcolor="#f0f0f0">&nbsp;</td>
     </tr>
 
     <?php foreach ($this->db_data as $dat) {?>
       <?php if ($dat->num%2==0) {?>
       <tr style='background-color: #d8d8d8'>
       <?php } else {?>
-      <tr style='background-color: #e8e8e8'>
+      <tr style='background-color: #f0f0f0'>
       <?php }?>
         <td width="1">&nbsp;</td>
         <td width="30"><font color=#000><strong>&nbsp;<?php echo $dat->num+1+$this->pstart;?></strong></font></td>

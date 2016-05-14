@@ -20,6 +20,7 @@ $string['modlos_confirm_pass']		= 'Confirm Password';
 $string['modlos_home_region'] 		= 'Home Region';
 $string['modlos_ownername'] 		= 'Username of Owner';
 $string['modlos_owner'] 			= 'Owner';
+$string['modlos_avatar'] 			= 'Avatar';
 $string['modlos_created'] 			= 'Created';
 $string['modlos_lastlogin'] 		= 'Last Login';
 $string['modlos_crntregion'] 		= 'Region';

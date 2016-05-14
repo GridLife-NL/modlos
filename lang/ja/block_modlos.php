@@ -20,6 +20,7 @@ $string['modlos_confirm_pass'] 		= 'パスワード確認';
 $string['modlos_home_region'] 		= 'ホームリージョン';
 $string['modlos_ownername'] 		= 'オーナ のユーザ名';
 $string['modlos_owner'] 			= 'オーナ';
+$string['modlos_avatar'] 			= 'アバター';
 $string['modlos_created'] 			= '作成';
 $string['modlos_lastlogin'] 		= '前回のログイン';
 $string['modlos_crntregion'] 		= 'リージョン';

@@ -15,6 +15,7 @@ class  RegionsList
 	var $action_url;
 	var $search_url;
 	var $avatar_url;
+	var $personal_url;
 
 	var $course_id;
 	var $user_id;
@@ -38,7 +39,7 @@ class  RegionsList
 	var $desc_y = 0;
 	var $desc_ip = 0;
 	var $desc_estateid = 0;
-	var $desc_owner = 0;
+	var $desc_avatar = 0;
 
 	var $pstart;
 	var $plimit;
@@ -66,6 +67,7 @@ class  RegionsList
 		if ($show_all) $this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param;
 		else           $this->action_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param.'&userid='.$userid;
 		$this->avatar_url   = $CFG->wwwroot.'/user/view.php'.$this->url_param;
+		$this->personal_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param;
 
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		$avatars_num = modlos_get_avatars_num($USER->id);
@@ -115,10 +117,10 @@ class  RegionsList
 			$sql_order = ' ORDER BY estate_map.EstateID';
 			if (!$this->order_desc) $this->desc_estateid = 1;
 		}
-		else if ($this->order=='owner') {
+		else if ($this->order=='avatar') {
 			if ($db_ver==OPENSIM_V06) $sql_order = ' ORDER BY username';
 			else				      $sql_order = ' ORDER BY FirstName';
-			if (!$this->order_desc) $this->desc_owner = 1;
+			if (!$this->order_desc) $this->desc_avatar = 1;
 		}
 		//
 		if ($sql_order!='') {
@@ -188,12 +190,23 @@ class  RegionsList
 //			$this->db_data[$colum]['ip_name'] = str_replace('.', 'X', $region['serverIP2']);
 
 			if ($region['est_fullname']!=null) {
-				$this->db_data[$colum]['owner_name'] = $region['est_fullname'];
-				$this->db_data[$colum]['owner_uuid'] = $region['estate_owner'];
+				$this->db_data[$colum]['avatar_name'] = $region['est_fullname'];
+				$this->db_data[$colum]['avatar_uuid'] = $region['estate_owner'];
 			}
 			else {
-				$this->db_data[$colum]['owner_name'] = $region['rgn_fullname'];
-				$this->db_data[$colum]['owner_uuid'] = $region['owner_uuid'];
+				$this->db_data[$colum]['avatar_name'] = $region['rgn_fullname'];
+				$this->db_data[$colum]['avatar_uuid'] = $region['owner_uuid'];
+			}
+
+			$this->db_data[$colum]['user_id'] = 0; 
+			$this->db_data[$colum]['owner_name'] = ' - '; 
+			$avatar = modlos_get_avatar_info($this->db_data[$colum]['avatar_uuid'], $this->use_sloodle);
+	        if ($avatar['uid']>0) {
+				$user_info = get_userinfo_by_id($avatar['uid']);
+        	    if ($user_info!=null) {
+            	     $this->db_data[$colum]['user_id'] = $avatar['uid'];
+            	     $this->db_data[$colum]['owner_name'] = get_display_username($user_info->firstname, $user_info->lastname);
+            	}
 			}
 
 			$colum++;
@@ -267,7 +280,7 @@ class  RegionsList
 		$desc_x 	= "&amp;desc=$this->desc_x";
 		$desc_y 	= "&amp;desc=$this->desc_y";
 		$desc_ip 	= "&amp;desc=$this->desc_ip";
-		$desc_owner = "&amp;desc=$this->desc_owner";
+		$desc_avatar= "&amp;desc=$this->desc_avatar";
 
 		$location_x		 = get_string('modlos_location_x',	   'block_modlos');
 		$location_y	  	 = get_string('modlos_location_y',	   'block_modlos');
@@ -275,6 +288,7 @@ class  RegionsList
 		$estate_name	 = get_string('modlos_estate',         'block_modlos');
 		$estate_owner	 = get_string('modlos_estate_owner',   'block_modlos');
 		$owner_ttl	 	 = get_string('modlos_owner',   	   'block_modlos');
+		$avatar_ttl	 	 = get_string('modlos_avatar',   	   'block_modlos');
 		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
 		$server_name	 = get_string('modlos_server',		   'block_modlos');
 		$regions_found   = get_string('modlos_regions_found',  'block_modlos');
