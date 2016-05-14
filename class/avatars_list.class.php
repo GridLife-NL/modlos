@@ -122,6 +122,10 @@ class  AvatarsList
 			print_error('modlos_db_connect_error', 'block_modlos', $course_url);
 		}
 
+		$this->order = optional_param('order', '', PARAM_TEXT);
+		$this->order_desc = optional_param('desc', '0', PARAM_INT);
+		if (!isAlphabetNumeric($this->order)) $this->order = '';
+
 		// Post Check
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
@@ -132,11 +136,8 @@ class  AvatarsList
 		// firstname & lastname Seacrh
 		$this->firstname = optional_param('firstname', '', PARAM_TEXT);
 		$this->lastname  = optional_param('lastname',  '', PARAM_TEXT);
-		if (!isAlphabetNumeric($this->firstname)) $this->firstname = '';
-		if (!isAlphabetNumeric($this->lastname))  $this->lastname  = '';
-
-		$this->order = optional_param('order', '', PARAM_ALPHA);
-		$this->order_desc = optional_param('desc', '0', PARAM_INT);
+		if (!isAlphabetNumericSpecial($this->firstname)) $this->firstname = '';
+		if (!isAlphabetNumericSpecial($this->lastname))  $this->lastname  = '';
 
 		$sql_validuser = $sql_firstname = $sql_lastname = '';
 		if ($this->firstname=='' and $this->lastname=='') {
@@ -375,7 +376,7 @@ class  AvatarsList
 		$avatar_ttl		= get_string('modlos_avatar',		 'block_modlos');
 		$owner_ttl		= get_string('modlos_owner',		 'block_modlos');
 		$get_owner_ttl	= get_string('modlos_get_owner_ttl', 'block_modlos');
-		$firstname_ttl 	= get_string('modlos_firstname', 	 'block_modlos');
+		$firstname_ttl	= get_string('modlos_firstname', 	 'block_modlos');
 		$lastname_ttl 	= get_string('modlos_lastname', 	 'block_modlos');
 		$not_syncdb_ttl = get_string('modlos_not_syncdb',	 'block_modlos');
 		$online_ttl	 	= get_string('modlos_online_ttl',	 'block_modlos');
@@ -387,7 +388,7 @@ class  AvatarsList
 		$page_num		= get_string('modlos_page',			 'block_modlos');
 		$page_num_of	= get_string('modlos_page_of',		 'block_modlos');
 		$user_search	= get_string('modlos_avatar_search', 'block_modlos');
-		$users_found  	= get_string('modlos_users_found', 	 'block_modlos');
+		$users_found  	= get_string('modlos_avatars_found', 'block_modlos');
 		$sloodle_ttl  	= get_string('modlos_sloodle_short', 'block_modlos');
 		$currency_ttl  	= get_string('modlos_currency_ttl',  'block_modlos');
 

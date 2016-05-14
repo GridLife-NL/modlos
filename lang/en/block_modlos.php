@@ -118,10 +118,13 @@ $string['modlos_avatar_upd_submit'] = 'Update Avatar';
 $string['modlos_avatar_dlt_canceled']='Avatar Delete Canceled';
 $string['modlos_avatar_dlt_confrm'] = 'Is Avatar really DELETE?';
 
+$string['modlos_user_search'] 		= 'User Search';
 $string['modlos_users_found'] 		= 'Users Found';
 $string['modlos_nouser_found'] 		= 'User not Found in Moodle';
-$string['modlos_user_search'] 		= 'User Search';
 $string['modlos_avatar_search'] 	= 'Avatar Search';
+$string['modlos_avatars_found'] 	= 'Avatars Found';
+$string['modlos_region_search'] 	= 'Region Search';
+$string['modlos_regionss_found'] 	= 'Regions Found';
 
 $string['modlos_region'] 			= 'Region';
 $string['modlos_estate'] 			= 'Estate';
@@ -130,7 +133,6 @@ $string['modlos_ipaddress'] 		= 'IP Address';
 $string['modlos_server'] 			= 'Server';
 $string['modlos_region_info'] 		= 'Region Information';
 $string['modlos_region_name'] 		= 'Region Name';
-$string['modlos_regions_found'] 	= 'Regions Found';
 $string['modlos_location_x'] 		= 'Loc: X';
 $string['modlos_location_y'] 		= 'Loc: Y';
 $string['modlos_page'] 				= 'Page';

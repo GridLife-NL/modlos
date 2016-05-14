@@ -28,6 +28,8 @@ class  RegionsList
 	var $hasPermit = false;
 	var $isGuest   = true;
 
+	var $regionname = '';
+
 	var $Cpstart = 0;
 	var $Cplimit = 25;
 	var $order   = '';
@@ -46,6 +48,10 @@ class  RegionsList
 	var $number;
 	var $sitemax;
 	var $sitestart;
+
+	// SQL
+	var $lnk_regionname = '';
+	var $sql_regionname = '';
 	var $sql_condition = '';
 
 
@@ -64,8 +70,14 @@ class  RegionsList
 		$this->url_param = '?dmmy_param=';
 		if ($course_id>0) $this->url_param .= '&course='.$course_id;
 
-		if ($show_all) $this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param;
-		else           $this->action_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param.'&userid='.$userid;
+		if ($show_all) {
+			$this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param;
+			$this->search_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param.'&amp;pstart=0';
+		}
+		else {
+        	$this->action_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param.'&amp;userid='.$userid;
+			$this->search_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param.'&amp;pstart=0&amp;userid='.$userid;
+		}
 		$this->avatar_url   = $CFG->wwwroot.'/user/view.php'.$this->url_param;
 		$this->personal_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param;
 
@@ -81,10 +93,6 @@ class  RegionsList
 	{
 		global $CFG;
 
-		$this->order = optional_param('order', '', PARAM_TEXT);
-		$this->order_desc = optional_param('desc', '0', PARAM_INT);
-		if (!isAlphabetNumeric($this->order)) $this->order = '';
-
 		$db_ver = opensim_get_db_version(); 
 		if ($db_ver==null) {
 			$course_url = $CFG->wwwroot;
@@ -92,6 +100,26 @@ class  RegionsList
 			print_error('modlos_db_connect_error', 'block_modlos', $course_url);
 		}
 
+		$this->order = optional_param('order', '', PARAM_TEXT);
+		$this->order_desc = optional_param('desc', '0', PARAM_INT);
+		if (!isAlphabetNumeric($this->order)) $this->order = '';
+
+        // Post Check
+        if (data_submitted()) {
+            if (!confirm_sesskey()) {
+                print_error('modlos_sesskey_error', 'block_modlos', $this->action_url);
+            }
+        }
+
+        // regionname Seacrh
+        $this->regionname = optional_param('regionname', '', PARAM_TEXT);
+        if (!isAlphabetNumericSpecial($this->regionname)) $this->regionname = '';
+        if ($this->regionname!='') {
+            $this->sql_regionname = "regionName LIKE '$this->regionname'";
+            $this->lnk_regionname = "&amp;regionname=$this->regionname";
+        }
+
+		// ORDER
 		$sql_order = '';
 		if ($this->order=='name') {
 	 		$sql_order = ' ORDER BY regionName';
@@ -147,22 +175,22 @@ class  RegionsList
 	function  execute()
 	{
 		$where = '';
-
-		if ($this->show_all) {
-			$this->number = opensim_get_regions_num();
-		}
-		else {
+		if (!$this->show_all) {
 			$users = modlos_get_avatars($this->user_id);
 			$i = 0;
 			foreach($users as $user) {
 				$uuid  = $user['UUID'];
-				if ($i==0) $where = " WHERE owner_uuid='$uuid' ";
-				else       $where.= " or owner_uuid='$uuid' ";
+				if ($i==0) $where = " WHERE (owner_uuid='$uuid' ";
+				else       $where.= " OR owner_uuid='$uuid' ";
 				$i++;
 			}
-			if ($where!='') $this->number = opensim_get_regions_num($where);
 		}
-		if (!$this->number) return false;
+		if ($where!='') $where = $where.") ";
+		if      ($where=='' and $this->sql_regionname!='') $where = ' WHERE '.$this->sql_regionname;
+		else if ($where!='' and $this->sql_regionname!='') $where.= ' AND '.$this->sql_regionname;
+
+		if ($where!='' or $this->show_all) $this->number = opensim_get_regions_num($where);
+		if ($this->number==0) return false;
 
 		// auto synchro
 		modlos_sync_opensimdb();
@@ -174,9 +202,9 @@ class  RegionsList
 		$voice_mode[2] = get_string('modlos_voice_percel_chnl',   'block_modlos');
 
 		//
-		$colum = 0;
 		$regions = opensim_get_regions_infos($where.$this->sql_condition);
 
+		$colum = 0;
 		foreach($regions as $region) {
 			$this->db_data[$colum] = $region;
 			$this->db_data[$colum]['num']   = $colum;
@@ -273,6 +301,7 @@ class  RegionsList
 		$course_amp = "&amp;course=$this->course_id";
 		$pstart_amp	= "&amp;pstart=$this->pstart";
 		$plimit_amp	= "&amp;plimit=$this->plimit";
+		$lnk_region = $this->lnk_regionname;
 		$pstart_	= '&amp;pstart=';
 		$plimit_	= '&amp;plimit=';
 
@@ -284,17 +313,19 @@ class  RegionsList
 
 		$location_x		 = get_string('modlos_location_x',	   'block_modlos');
 		$location_y	  	 = get_string('modlos_location_y',	   'block_modlos');
-		$region_name	 = get_string('modlos_region_name',	   'block_modlos');
+		$region_name_ttl = get_string('modlos_region_name',	   'block_modlos');
 		$estate_name	 = get_string('modlos_estate',         'block_modlos');
 		$estate_owner	 = get_string('modlos_estate_owner',   'block_modlos');
 		$owner_ttl	 	 = get_string('modlos_owner',   	   'block_modlos');
 		$avatar_ttl	 	 = get_string('modlos_avatar',   	   'block_modlos');
+		$reset_ttl       = get_string('modlos_reset_ttl',      'block_modlos');
 		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
 		$server_name	 = get_string('modlos_server',		   'block_modlos');
-		$regions_found   = get_string('modlos_regions_found',  'block_modlos');
 		$page_num		 = get_string('modlos_page',		   'block_modlos');
 		$page_num_of	 = get_string('modlos_page_of',		   'block_modlos');
 		$voice_chat_mode = get_string('modlos_voice_chat_mode','block_modlos');
+		$region_search   = get_string('modlos_region_search',  'block_modlos');
+		$regions_found   = get_string('modlos_regions_found',  'block_modlos');
 
         if ($this->show_all) {
 			$regions_list = get_string('modlos_regions_list', 'block_modlos');
