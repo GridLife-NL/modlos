@@ -85,6 +85,10 @@ class  ManagementBase
 					if ($profs!=null) modlos_set_profiles_from_users($profs, false);        // not over write
 				}
 				//
+				else if ($command=='cleandb') {
+					opensim_cleanup_db();
+				}
+				//
 				else if ($command=='debugcom') {
 					opensim_debug_command();		// set your debug command
 				}
@@ -120,11 +124,11 @@ class  ManagementBase
 		$commands[0]['ttl'] = get_string('modlos_cltexture_ttl', 'block_modlos');
 		$commands[1]['com'] = 'clpresence';
 		$commands[1]['ttl'] = get_string('modlos_clpresence_ttl', 'block_modlos');
+		$commands[2]['com'] = 'cleandb';
+		$commands[2]['ttl'] = get_string('modlos_cleandb_ttl', 'block_modlos');
 		//
-		$commands[2]['com'] = 'debugcom';
-		$commands[2]['ttl'] = get_string('modlos_debugcom_ttl', 'block_modlos');
-		//$commands[2]['com'] = 'convertdb';
-		//$commands[2]['ttl'] = get_string('modlos_convertdb_ttl', 'block_modlos');
+		$commands[3]['com'] = 'debugcom';
+		$commands[3]['ttl'] = get_string('modlos_debugcom_ttl', 'block_modlos');
 
 		include(CMS_MODULE_PATH.'/admin/html/management.html');
 	}

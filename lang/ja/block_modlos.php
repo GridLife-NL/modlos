@@ -386,7 +386,8 @@ $string['modlos_lgnscrn_boxttl']	= 'タイトル';
 
 $string['modlos_cltexture_ttl']     = 'テクスチャのキャッシュデータをクリア';
 $string['modlos_clpresence_ttl']    = 'ログイン情報テーブルをクリア';
-$string['modlos_debugcom_ttl']      = 'デバッグ用コマンド';
+$string['modlos_cleandb_ttl']       = 'データベースのクリーンアップ';
+$string['modlos_debugcom_ttl']      = 'デバッグ用コマンド（実験用）';
 
 $string['modlos_return_tab'] 		= 'コースに戻る';
 $string['modlos_return_sitetop_tab']= 'サイトトップに戻る';

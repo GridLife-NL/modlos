@@ -14,12 +14,12 @@
 <table width=85% cellpadding=3 border=0 cellspacing=0 bgcolor=#999999 align="center">
   <tr style="filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#0000cc', endColorStr='#ffffff', gradientType='1')">
 
-    <td width=200><strong style="color: #ffffff;">&nbsp;<?php echo $this->number." ".$users_found ?></strong></td>
+    <td width=200><strong style="color: #000000;">&nbsp;<?php echo $this->number." ".$users_found ?></strong></td>
 
     <!-- icon line -->
     <td width="50">
       <?php if ($this->icon[0]=="on") {?>
-        <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.'0'.$order_amp?>" target="_self">
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.'0'.$order_amp?>" target="_self">
       <?php }?>
         <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_more_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
       <?php if ($this->icon[0]=="on") {?>
@@ -29,7 +29,7 @@
 
     <td width="50">
       <?php if ($this->icon[0]=="on") {?>
-        <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[0].$order_amp?>" target="_self">
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.$this->pnum[0].$order_amp?>" target="_self">
       <?php }?>
         <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_back_one_'.$this->icon[0].'.gif'?>" width=15 height=15 border="0">
       <?php if ($this->icon[0]=="on") {?>
@@ -43,7 +43,7 @@
 
     <td width="50">
       <?php if ($this->icon[1]=="on") {?>
-        <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[1].$order_amp?>" target="_self">
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.$this->pnum[1].$order_amp?>" target="_self">
       <?php }?>
           <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_one_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
       <?php if ($this->icon[1]=="on") {?>
@@ -53,7 +53,7 @@
 
     <td width="50">
       <?php if ($this->icon[1]=="on") {?>
-        <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_.$this->pnum[2].$order_amp?>" target="_self">
+        <a href="<?php echo $action_url.$plimit_amp.$pstart_.$this->pnum[2].$order_amp?>" target="_self">
       <?php }?>
           <img src="<?php echo CMS_MODULE_URL.'/images/icons/icon_forward_more_'.$this->icon[1].'.gif'?>" width=15 height=15 border="0">
       <?php if ($this->icon[1]=="on") {?>
@@ -65,21 +65,21 @@
     <td width="10"></td>
 
     <td width="30">
-      <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'10'.$order_amp?>" target="_self">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'10'.$order_amp?>" target="_self">
       <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[3].'.gif'?>" width=15 height=15 border="0" ALT="Limit 10"></a>
     </td>
     <td width="30">
-      <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'25'.$order_amp?>" target="_self">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'25'.$order_amp?>" target="_self">
         <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[4].'.gif'?>" width=15 height=15 border="0" ALT="Limit 25">
       </a>
     </td>
     <td width="30">
-      <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'50'.$order_amp?>" target="_self">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'50'.$order_amp?>" target="_self">
         <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[5].'.gif'?>" width=15 height=15 border="0" ALT="Limit 50">
       </a>
     </td>
     <td width="30">
-      <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$pstart_.'0'.$plimit_.'100'.$order_amp?>" target="_self">
+      <a href="<?php echo $action_url.$pstart_.'0'.$plimit_.'100'.$order_amp?>" target="_self">
         <img src="<?php echo CMS_MODULE_URL.'/images/icons/'.$this->icon[6].'.gif'?>" width=15 height=15 border="0" ALT="Limit 100">
       </a>
     </td>
@@ -93,7 +93,7 @@
 
 <!-- search -->
 <table width="85%" cellpadding=3 border=0 cellspacing=1 bgcolor="#e0e0e0" align="center">
-  <form action="<?php echo $this->search_url.$plimit_amp.$ownerloss_amp.$order_amp?>" method="POST">
+  <form action="<?php echo $this->search_url.$plimit_amp.$loss_amp.$order_amp?>" method="POST">
     <tr bgcolor="#f0a0a0">
       <td>&nbsp;</td>
       <td style="color: #000000;"><strong><?php echo $user_search?></strong><br /></td>
@@ -113,7 +113,7 @@
       <td>&nbsp;</td>
       <td style="color: #000000;">
         <?php if (!$has_permit and !$avatar_max) {?>
-          <a href="<?php echo $avarars_list_url.$ownerloss_.'1'?>" target="_self">
+          <a href="<?php echo $avarars_list_url.$loss_.'1'?>" target="_self">
             <strong><?php echo $find_owner_ttl?></strong>
           </a>
         <?php } else { ?>
@@ -144,17 +144,17 @@
                   <td width=50 >&nbsp;</strong></td>
                   <td width=60 ><strong><?php echo $edit_ttl?></strong></td>
                   <td width=180>
-                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp.$desc_fname?>&amp;order=firstname" target="_self">
+                    <a href="<?php echo $action_url.$plimit_amp.$pstart_amp.$desc_fname?>&amp;order=firstname" target="_self">
                       <strong><?php echo $firstname_ttl?></strong>
                     </a>
                   </td>
                   <td width=200>
-                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp.$desc_lname?>&amp;order=lastname" target="_self">
+                    <a href="<?php echo $action_url.$plimit_amp.$pstart_amp.$desc_lname?>&amp;order=lastname" target="_self">
                       <strong><?php echo $lastname_ttl?></strong>
                     </a>
                   </td>
                   <td width=250>
-                    <a href="<?php echo $this->action_url.$lnk_firstname.$lnk_lastname.$plimit_amp.$pstart_amp.$desc_login?>&amp;order=login" target="_self">
+                    <a href="<?php echo $action_url.$plimit_amp.$pstart_amp.$desc_login?>&amp;order=login" target="_self">
                       <?php if (USE_UTC_TIME) {?>
                         <strong><?php echo $lastlogin_ttl?>&nbsp;(UTC)</strong>
                       <?php }else{?>

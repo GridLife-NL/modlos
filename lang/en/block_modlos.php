@@ -124,7 +124,7 @@ $string['modlos_nouser_found'] 		= 'User not Found in Moodle';
 $string['modlos_avatar_search'] 	= 'Avatar Search';
 $string['modlos_avatars_found'] 	= 'Avatars Found';
 $string['modlos_region_search'] 	= 'Region Search';
-$string['modlos_regionss_found'] 	= 'Regions Found';
+$string['modlos_regions_found'] 	= 'Regions Found';
 
 $string['modlos_region'] 			= 'Region';
 $string['modlos_estate'] 			= 'Estate';
@@ -387,7 +387,8 @@ $string['modlos_lgnscrn_boxttl']	= 'Title';
 
 $string['modlos_cltexture_ttl']		= 'Clear Texture Cache Data';
 $string['modlos_clpresence_ttl']	= 'Clear Login Information Table';
-$string['modlos_debugcom_ttl']	    = 'Command for Debug';
+$string['modlos_cleandb_ttl']       = 'Clean Up DB';
+$string['modlos_debugcom_ttl']	    = 'Command for Debug (for Experiment)';
 
 $string['modlos_return_tab'] 		= 'Return to Course';
 $string['modlos_return_sitetop_tab']= 'Return to Site Top';
