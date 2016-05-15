@@ -202,8 +202,8 @@
             </a>
           <?php }?>
         </td>
-        <td style="color: #115500"><strong><?php echo $dat['locX']?></strong></td>
-        <td style="color: #115500"><strong><?php echo $dat['locY']?></strong></td>
+        <td><a href="<?php echo $worldmap_url.'&amp;ctX='.$dat['locX'].'&amp;ctY='.$dat['locY']?>" target="_blank"><strong style="color: #115555"><?php echo $dat['locX']?></strong></a></td>
+        <td><a href="<?php echo $worldmap_url.'&amp;ctX='.$dat['locX'].'&amp;ctY='.$dat['locY']?>" target="_blank"><strong style="color: #115555"><?php echo $dat['locY']?></strong></a></td>
 
         <td style="color: #115500">
           <strong><?php echo htmlspecialchars($dat['estate_name'])?></strong>

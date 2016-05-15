@@ -308,6 +308,7 @@ class  RegionsList
 		$pstart_		 = '&amp;pstart=';
 		$plimit_		 = '&amp;plimit=';
 		$action_url 	 = $this->action_url.$lnk_region.$action_amp;
+		$worldmap_url	 = CMS_MODULE_URL.'/actions/map_action.php?course='.$this->course_id;
 
 		$desc_name  	 = "&amp;desc=$this->desc_name";
 		$desc_x 		 = "&amp;desc=$this->desc_x";
