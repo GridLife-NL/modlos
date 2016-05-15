@@ -1,0 +1,76 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/table.css")?>
+</style>
+
+
+<h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$region_reset_ttl?></center></h2>
+<br />
+
+<form name="assignform" id="assignform" action="<?php echo $this->reset_url?>" method="POST">
+
+  <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+  <input type="hidden" name="uuid"    value="<?php echo $this->UUID?>" />
+  <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+
+  <table width="500" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
+    <tr>
+      <td width="120" class="head"><?php echo $region_name_ttl?></td>
+      <td width="260" class="even"><strong><?php echo $this->regionName?></strong></td>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $server_ttl?></td>
+      <td class="odd" ><strong><?php echo $this->serverName?></strong></td>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $coordinates_ttl?></td>
+      <td class="even"><strong><?php echo"X:&nbsp;".$this->locX.",&nbsp;&nbsp;Y:&nbsp;".$this->locY?></strong></td>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $region_size_ttl?></td>
+      <td class="odd"><strong><?php echo"X:&nbsp;".$this->sizeX.",&nbsp;&nbsp;Y:&nbsp;".$this->sizeY?></strong></td>
+    </tr>
+
+    <tr>
+      <td class="head"><?php echo $admin_user_ttl?></td>
+      <td class="even"><strong><?php echo htmlspecialchars($this->ownerName)?></strong></td>
+    </tr>
+
+    <tr>
+      <td class="head">&nbsp;</td>
+      <td class="odd">&nbsp;<img src="<?php echo $server.'/index.php?method=regionImage'.$guid?>" width="256" height="256" /></td>
+    </tr>
+  </table>
+
+  <br />
+  <div align="center">
+    <input name="reset_region" type="submit" id="reset_region" value="Reset of Region" />&nbsp;&nbsp;&nbsp;
+    <a href="<?php echo $this->return_url?>"><strong>Cancel</strong></a>
+  </div>
+
+</form>
+<br />
+
+
+<!-- echo Message -->
+<hr />
+<?php if ($this->hasError) {?>
+  <div align="center">
+    <ul>
+      <?php foreach ($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f01010;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+
+<?php } else {?>
+  <?php if ($this->reseted) {?>
+    <h3 style="color: #1010e0;"><center><?php echo $region_reseted?></center></h3>
+    <h3 style="color: #1010e0;"><center><?php echo $region_reseted_exp?></center></h3>
+
+  <?php }?>
+<?php }?>
+<br />
