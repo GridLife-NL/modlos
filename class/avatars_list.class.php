@@ -22,7 +22,7 @@ class  AvatarsList
 	var $personal_url;
 
 	var $course_id  = 0;
-	var $user_id    = 0;
+	var $user_id	= 0;
 	var $url_param  = '';
 
 	var $use_sloodle  = false;
@@ -48,16 +48,17 @@ class  AvatarsList
 	var $sitestart;
 	var $my_avatars = 0;
 
-    var $desc_fname = 0;
-    var $desc_lname = 0;
-    var $desc_login = 0;
-    var $desc_created = 0;
+	var $desc_fname = 0;
+	var $desc_lname = 0;
+	var $desc_login = 0;
+	var $desc_created = 0;
  
 	// SQL
 	var $lnk_firstname = '';
 	var $lnk_lastname  = '';
-	var $sql_countcnd  = '';
 	var $sql_condition = '';
+	var $sql_username  = '';
+	var $sql_uuid_str  = '';
 
 
 
@@ -71,12 +72,12 @@ class  AvatarsList
 			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
-		$this->course_id    = $course_id;
-		$this->hasPermit    = hasModlosPermit($course_id);
-		$this->course_id    = $course_id;
+		$this->course_id	= $course_id;
+		$this->hasPermit	= hasModlosPermit($course_id);
+		$this->course_id	= $course_id;
 		$this->use_sloodle  = $CFG->modlos_cooperate_sloodle;
 		$this->use_currency = modlos_use_currency_server;
-		$this->show_all     = $show_all;
+		$this->show_all	 = $show_all;
 		$this->user_id		= $userid;
 
 		if (!$show_all and $userid==0) $this->user_id = $USER->id;
@@ -89,12 +90,12 @@ class  AvatarsList
 			$this->search_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param.'&amp;pstart=0';
 		}
 		else {
-			$this->action_url  = CMS_MODULE_URL.'/actions/personal_avatars.php'.$this->url_param;
-			$this->search_url  = CMS_MODULE_URL.'/actions/personal_avatars.php'.$this->url_param.'&amp;pstart=0';
+			$this->action_url  = CMS_MODULE_URL.'/actions/personal_avatars.php'.$this->url_param.'&amp;userid='.$userid;
+			$this->search_url  = CMS_MODULE_URL.'/actions/personal_avatars.php'.$this->url_param.'&amp;userid='.$userid.'&amp;pstart=0';
 		}
 
-		$this->edit_url	    = CMS_MODULE_URL.'/actions/edit_avatar.php'.  $this->url_param;
-		$this->owner_url    = CMS_MODULE_URL.'/actions/owner_avatar.php'. $this->url_param;
+		$this->edit_url		= CMS_MODULE_URL.'/actions/edit_avatar.php'.  $this->url_param;
+		$this->owner_url	= CMS_MODULE_URL.'/actions/owner_avatar.php'. $this->url_param;
 		$this->currency_url = CMS_MODULE_URL.'/actions/show_currency.php'.$this->url_param;
 		$this->personal_url = CMS_MODULE_URL.'/actions/personal_avatars.php'.$this->url_param;
 		$this->avatar_url   = $CFG->wwwroot.'/user/view.php'.$this->url_param;
@@ -138,12 +139,12 @@ class  AvatarsList
 		$sql_validuser = $sql_firstname = $sql_lastname = '';
 		if ($this->firstname=='' and $this->lastname=='') {
 			if ($db_ver==OPENSIM_V06) $sql_validuser = "username!=''";
-			else				      $sql_validuser = "FirstName!=''";
+			else					  $sql_validuser = "FirstName!=''";
 		}
 		else {
 			if ($this->firstname!='') { 
 				if ($db_ver==OPENSIM_V06) $sql_firstname = "username  LIKE '$this->firstname'";
-				else				      $sql_firstname = "FirstName LIKE '$this->firstname'";
+				else					  $sql_firstname = "FirstName LIKE '$this->firstname'";
 				$this->lnk_firstname = "&amp;firstname=$this->firstname";
 			}
 			if ($this->lastname!='') { 
@@ -154,37 +155,37 @@ class  AvatarsList
 		}
 
 		// ORDER
-        // OPENSIM_V06: users.UUID,  username,  lastname, created, lastLogin, regions.uuid 
-        // OPENSIM_V07: PrincipalID, FirstName, LastName, Created, Login,     homeRegionID  
+		// OPENSIM_V06: users.UUID,  username,  lastname, created, lastLogin, regions.uuid 
+		// OPENSIM_V07: PrincipalID, FirstName, LastName, Created, Login,	 homeRegionID  
 		$sql_order = '';
 		if ($this->order=='firstname') {
 			if ($db_ver==OPENSIM_V06) $sql_order = 'ORDER BY username';
-			else                      $sql_order = 'ORDER BY FirstName';
+			else					  $sql_order = 'ORDER BY FirstName';
 			if (!$this->order_desc) $this->desc_fname = 1;
 		}
 		else if ($this->order=='lastname') {
 			if ($db_ver==OPENSIM_V06) $sql_order = 'ORDER BY lastname';
-			else                      $sql_order = 'ORDER BY LastName';
+			else					  $sql_order = 'ORDER BY LastName';
 			if (!$this->order_desc) $this->desc_lname = 1;
 		}
 		else if ($this->order=='login') {
 			if ($db_ver==OPENSIM_V06) $sql_order = 'ORDER BY lastlogin';
-			else                      $sql_order = 'ORDER BY Login';
+			else					  $sql_order = 'ORDER BY Login';
 			if (!$this->order_desc) $this->desc_login = 1;
 		}
 		else {
 			if ($db_ver==OPENSIM_V06) $sql_order = 'ORDER BY created';
-			else                      $sql_order = 'ORDER BY Created';
+			else					  $sql_order = 'ORDER BY Created';
 			if (!$this->order_desc) $this->desc_created = 1;
 		}
 		//
 		if ($sql_order!='') {
-            if ($this->order_desc) {
-                $sql_order .= ' DESC';
-            }
-            else {
-                $sql_order .= ' ASC';
-            }
+			if ($this->order_desc) {
+				$sql_order .= ' DESC';
+			}
+			else {
+				$sql_order .= ' ASC';
+			}
 		}
 
 		// pstart & plimit
@@ -196,8 +197,10 @@ class  AvatarsList
 		$this->ownerloss = optional_param('ownerloss', "$this->ownerloss", PARAM_INT);
 
 		// SQL Condition
-		$this->sql_countcnd  = " WHERE $sql_validuser $sql_firstname $sql_lastname $sql_order";
-		$this->sql_condition = " WHERE $sql_validuser $sql_firstname $sql_lastname $sql_order $sql_limit";
+		$this->sql_username  = " $sql_validuser $sql_firstname $sql_lastname";
+		$this->sql_condition = " $sql_order";
+		if ($db_ver==OPENSIM_V06) $this->sql_uuid_str = 'users.UUID';
+		else                      $this->sql_uuid_str = 'PrincipalID';
 
 		return true;
 	}
@@ -208,80 +211,77 @@ class  AvatarsList
 	{
 		global $CFG, $USER;
 
+		// auto synchro
+		modlos_sync_opensimdb();
+		if ($this->use_sloodle) modlos_sync_sloodle_users();
+
 		////////////////////////////////////////////////////////////////////
-		// Read DB
+		// Set Search Condition
+		$where = '';
+		if (!$this->show_all) {
+			$users = modlos_get_avatars($this->user_id);
+			$i = 0;
+			foreach($users as $user) {
+				$uuid  = $user['UUID'];
+				if ($i==0) $where = ' WHERE ('.$this->sql_uuid_str."='$uuid' ";
+				else	   $where.=     ' OR '.$this->sql_uuid_str."='$uuid' ";
+				$i++;
+			}
+			if ($where!='') $where = $where.") ";
+			unset($users);
+		}
+
+		if      ($where=='' and $this->sql_username!='') $where = ' WHERE '.$this->sql_username;
+		else if ($where!='' and $this->sql_username!='') $where.= ' AND '.$this->sql_username;
+
+		////////////////////////////////////////////////////////////////////
+		// Read Data from DB
+		$dummy = opensim_get_avatars_infos($where.$this->sql_condition);
+		if (!is_array($dummy)) return false;
+
 		$num = 0;
 		$los = 0;
 		$all_users = array();
 
-		if ($this->show_all) {	// 	全アバター
-			$dummy = opensim_get_avatars_infos($this->sql_countcnd);
-			if (is_array($dummy)) {
-				foreach($dummy as $user) {
-					$all_users[$num] = $user;
-					$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
-					if ($avatardata==null) {
-						$all_users[$num]['uid']   = 0;
-						$all_users[$num]['state'] = AVATAR_STATE_NOSTATE;
+		foreach($dummy as $user) {
+			$all_users[$num] = $user;
+			$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
+			if ($avatardata==null) {
+				$all_users[$num]['uid']   = 0;
+				$all_users[$num]['state'] = AVATAR_STATE_NOSTATE;
+				$all_users[$num]['owner_name'] = ' - ';
+				$los++;
+			}
+			else {
+				$all_users[$num]['uid']   = $avatardata['uid'];
+				$all_users[$num]['state'] = $avatardata['state'];
+				if ($avatardata['uid']>0) {
+					$user_info = get_userinfo_by_id($avatardata['uid']);
+					if ($user_info!=null) {
+						$all_users[$num]['owner_name'] = get_display_username($user_info->firstname, $user_info->lastname);
+					}
+					else {
+						$all_users[$num]['uid'] = 0;
 						$all_users[$num]['owner_name'] = ' - ';
 						$los++;
 					}
-					else {
-						$all_users[$num]['uid']   = $avatardata['uid'];
-						$all_users[$num]['state'] = $avatardata['state'];
-						if ($avatardata['uid']>0) {
-							$user_info = get_userinfo_by_id($avatardata['uid']);
-							if ($user_info!=null) {
-								$all_users[$num]['owner_name'] = get_display_username($user_info->firstname, $user_info->lastname);
-							}
-							else {
-								$all_users[$num]['uid'] = 0;
-								$all_users[$num]['owner_name'] = ' - ';
-								$los++;
-							}
-						}
-						else {
-							if (!($avatardata['state']&AVATAR_STATE_INACTIVE)) {
-								$all_users[$num]['uid'] = 0;
-								$los++;
-							}
-						}
+				}
+				else {
+					if (!($avatardata['state']&AVATAR_STATE_INACTIVE)) {
+						$all_users[$num]['uid'] = 0;
+						$los++;
 					}
-					$num++;
 				}
 			}
+			$num++;
 		}
-		//
-		else {					// パーソナル アバター
-			$dummy = modlos_get_avatars($this->user_id);
-			if (is_array($dummy)) {
-				$num = 0;
-				foreach($dummy as $user) {
-					$all_users[$num] = $user;
-					$all_users[$num]['uid'] = $this->user_id;
-					$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
-					if ($avatardata!=null) {
-						$all_users[$num]['state'] = $avatardata['state'];
-					}
-					unset($avatardata);
-					//
-					$avatardata = opensim_get_avatar_info($user['UUID']);
-					if ($avatardata!=null) {
-						$all_users[$num]['lastlogin']   = $avatardata['lastlogin'];
-						$all_users[$num]['hmregion_id'] = $avatardata['regionUUID'];
-						$all_users[$num]['hmregion']    = $avatardata['regionName'];
-						$all_users[$num]['created'] 	= $avatardata['created'];
-						if (isGUID($all_users[$num]['hmregion'])) $all_users[$num]['hmregion'] = '';
-					}
-					$num++;
-				}
-			}
-		}
-		//
-		if ($this->ownerloss) $this->number = $los;
-		else                  $this->number = $num;
+		unset($dummy);
 
-		//
+		if ($this->ownerloss) $this->number = $los;
+		else				  $this->number = $num;
+
+		////////////////////////////////////////////////////////////////////
+		// Select Data
 		$i = 0;
 		$count = 0;
 		$users = array();
@@ -297,49 +297,31 @@ class  AvatarsList
 		}
 		unset($all_users);
 
-		// auto synchro
-		modlos_sync_opensimdb();
-		if ($this->use_sloodle) modlos_sync_sloodle_users();
-
-		////////////////////////////////////////////////////////////////////
-		// OpenSim DB
 		$colum = 0;
 		$dat   = array();
 
-		if ($this->show_all) {	// 	全アバター
-			foreach($users as $user) {
-				$user['editable'] = AVATAR_NOT_EDITABLE;
-				$user['hmregion'] = modlos_get_region_name($user['hmregion_id']);
-				if (isGUID($user['hmregion'])) $user['hmregion'] = '';
-				//
-				$dat = $this->get_avatar_info($user, $colum); 
+		foreach($users as $user) {
+			$user['editable'] = AVATAR_NOT_EDITABLE;
+			$user['hmregion'] = modlos_get_region_name($user['hmregion_id']);
+			if (isGUID($user['hmregion'])) $user['hmregion'] = '';
+			//
+			$dat = $this->get_avatar_info($user, $colum); 
 
-				if ($this->ownerloss) {
-					if ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {
-						$this->db_data[$colum] = $dat;
-						$colum++;
-					}
-				} 
-				else {
+			if ($this->ownerloss) {
+				if ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {
 					$this->db_data[$colum] = $dat;
 					$colum++;
 				}
-			}
-		}
-		//
-		else {					// パーソナル アバター
-			foreach($users as $user) {
-				$user['editable'] = AVATAR_NOT_EDITABLE;
-				//
-				$this->db_data[$colum] = $this->get_avatar_info($user, $colum); 
+			} 
+			else {
+				$this->db_data[$colum] = $dat;
 				$colum++;
 			}
 		}
-
 		unset($users);
 
 		////////////////////////////////////////////////////////////////////
-		//
+		// Paging
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		$this->sitestart = floor(($this->pstart+$this->plimit-1)/$this->plimit) + 1;
 		if ($this->sitemax==0) $this->sitemax = 1;
@@ -411,10 +393,10 @@ class  AvatarsList
 		$loss_			= '&amp;ownerloss=';
 		$action_url		= $this->action_url.$lnk_firstname.$lnk_lastname.$loss_amp;
 
-        $desc_fname  	= "&amp;desc=$this->desc_fname";
-        $desc_lname  	= "&amp;desc=$this->desc_lname";
-        $desc_login    	= "&amp;desc=$this->desc_login";
-        $desc_created 	= "&amp;desc=$this->desc_created";
+		$desc_fname  	= "&amp;desc=$this->desc_fname";
+		$desc_lname  	= "&amp;desc=$this->desc_lname";
+		$desc_login		= "&amp;desc=$this->desc_login";
+		$desc_created 	= "&amp;desc=$this->desc_created";
 
 		$number_ttl		= get_string('modlos_num',			 'block_modlos');
 		$edit_ttl		= get_string('modlos_edit',			 'block_modlos');
@@ -457,12 +439,7 @@ class  AvatarsList
 			$avatars_list = get_string('modlos_personal_avatars', 'block_modlos', $userurl);
 		}
 
-		if ($this->show_all) {	// 	全アバター
-			include(CMS_MODULE_PATH.'/html/avatars.html');
-		}
-		else {
-			include(CMS_MODULE_PATH.'/html/personal_avatars.html');
-		}
+		include(CMS_MODULE_PATH.'/html/avatars.html');
 	}
 
 

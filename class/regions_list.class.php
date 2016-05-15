@@ -75,8 +75,8 @@ class  RegionsList
 			$this->search_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param.'&amp;pstart=0';
 		}
 		else {
-        	$this->action_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param.'&amp;userid='.$userid;
-			$this->search_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param.'&amp;pstart=0&amp;userid='.$userid;
+			$this->action_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param.'&amp;userid='.$userid;
+			$this->search_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param.'&amp;userid='.$userid.'&amp;pstart=0';
 		}
 		$this->avatar_url   = $CFG->wwwroot.'/user/view.php'.$this->url_param;
 		$this->personal_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param;
@@ -104,20 +104,20 @@ class  RegionsList
 		$this->order_desc = optional_param('desc', '0', PARAM_INT);
 		if (!isAlphabetNumeric($this->order)) $this->order = '';
 
-        // Post Check
-        if (data_submitted()) {
-            if (!confirm_sesskey()) {
-                print_error('modlos_sesskey_error', 'block_modlos', $this->action_url);
-            }
-        }
+		// Post Check
+		if (data_submitted()) {
+			if (!confirm_sesskey()) {
+				print_error('modlos_sesskey_error', 'block_modlos', $this->action_url);
+			}
+		}
 
-        // regionname Seacrh
-        $this->regionname = optional_param('regionname', '', PARAM_TEXT);
-        if (!isAlphabetNumericSpecial($this->regionname)) $this->regionname = '';
-        if ($this->regionname!='') {
-            $this->sql_regionname = "regionName LIKE '$this->regionname'";
-            $this->lnk_regionname = "&amp;regionname=$this->regionname";
-        }
+		// regionname Seacrh
+		$this->regionname = optional_param('regionname', '', PARAM_TEXT);
+		if (!isAlphabetNumericSpecial($this->regionname)) $this->regionname = '';
+		if ($this->regionname!='') {
+			$this->sql_regionname = "regionName LIKE '$this->regionname'";
+			$this->lnk_regionname = "&amp;regionname=$this->regionname";
+		}
 
 		// ORDER
 		$sql_order = '';
@@ -147,7 +147,7 @@ class  RegionsList
 		}
 		else if ($this->order=='avatar') {
 			if ($db_ver==OPENSIM_V06) $sql_order = ' ORDER BY username';
-			else				      $sql_order = ' ORDER BY FirstName';
+			else					  $sql_order = ' ORDER BY FirstName';
 			if (!$this->order_desc) $this->desc_avatar = 1;
 		}
 		//
@@ -174,6 +174,11 @@ class  RegionsList
 
 	function  execute()
 	{
+		// auto synchro
+		modlos_sync_opensimdb();
+		if ($this->use_sloodle) modlos_sync_sloodle_users();
+
+		//
 		$where = '';
 		if (!$this->show_all) {
 			$users = modlos_get_avatars($this->user_id);
@@ -181,20 +186,18 @@ class  RegionsList
 			foreach($users as $user) {
 				$uuid  = $user['UUID'];
 				if ($i==0) $where = " WHERE (owner_uuid='$uuid' ";
-				else       $where.= " OR owner_uuid='$uuid' ";
+				else	   $where.=     " OR owner_uuid='$uuid' ";
 				$i++;
 			}
+			if ($where!='') $where = $where.") ";
+			unset($users);
 		}
-		if ($where!='') $where = $where.") ";
+
 		if      ($where=='' and $this->sql_regionname!='') $where = ' WHERE '.$this->sql_regionname;
 		else if ($where!='' and $this->sql_regionname!='') $where.= ' AND '.$this->sql_regionname;
 
 		if ($where!='' or $this->show_all) $this->number = opensim_get_regions_num($where);
 		if ($this->number==0) return false;
-
-		// auto synchro
-		modlos_sync_opensimdb();
-		if ($this->use_sloodle) modlos_sync_sloodle_users();
 
 		// Voice Mode
 		$voice_mode[0] = get_string('modlos_voice_inactive_chnl', 'block_modlos');
@@ -229,12 +232,12 @@ class  RegionsList
 			$this->db_data[$colum]['user_id'] = 0; 
 			$this->db_data[$colum]['owner_name'] = ' - '; 
 			$avatar = modlos_get_avatar_info($this->db_data[$colum]['avatar_uuid'], $this->use_sloodle);
-	        if ($avatar['uid']>0) {
+			if ($avatar['uid']>0) {
 				$user_info = get_userinfo_by_id($avatar['uid']);
-        	    if ($user_info!=null) {
-            	     $this->db_data[$colum]['user_id'] = $avatar['uid'];
-            	     $this->db_data[$colum]['owner_name'] = get_display_username($user_info->firstname, $user_info->lastname);
-            	}
+				if ($user_info!=null) {
+					 $this->db_data[$colum]['user_id'] = $avatar['uid'];
+					 $this->db_data[$colum]['owner_name'] = get_display_username($user_info->firstname, $user_info->lastname);
+				}
 			}
 
 			$colum++;
@@ -304,6 +307,7 @@ class  RegionsList
 		$lnk_region = $this->lnk_regionname;
 		$pstart_	= '&amp;pstart=';
 		$plimit_	= '&amp;plimit=';
+		$action_url = $this->action_url.$lnk_region;
 
 		$desc_name  = "&amp;desc=$this->desc_name";
 		$desc_x 	= "&amp;desc=$this->desc_x";
@@ -314,11 +318,11 @@ class  RegionsList
 		$location_x		 = get_string('modlos_location_x',	   'block_modlos');
 		$location_y	  	 = get_string('modlos_location_y',	   'block_modlos');
 		$region_name_ttl = get_string('modlos_region_name',	   'block_modlos');
-		$estate_name	 = get_string('modlos_estate',         'block_modlos');
+		$estate_name	 = get_string('modlos_estate',		 'block_modlos');
 		$estate_owner	 = get_string('modlos_estate_owner',   'block_modlos');
 		$owner_ttl	 	 = get_string('modlos_owner',   	   'block_modlos');
 		$avatar_ttl	 	 = get_string('modlos_avatar',   	   'block_modlos');
-		$reset_ttl       = get_string('modlos_reset_ttl',      'block_modlos');
+		$reset_ttl	   = get_string('modlos_reset_ttl',	  'block_modlos');
 		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
 		$server_name	 = get_string('modlos_server',		   'block_modlos');
 		$page_num		 = get_string('modlos_page',		   'block_modlos');
@@ -327,18 +331,18 @@ class  RegionsList
 		$region_search   = get_string('modlos_region_search',  'block_modlos');
 		$regions_found   = get_string('modlos_regions_found',  'block_modlos');
 
-        if ($this->show_all) {
+		if ($this->show_all) {
 			$regions_list = get_string('modlos_regions_list', 'block_modlos');
-        }
-        else if ($this->user_id==$USER->id) {
+		}
+		else if ($this->user_id==$USER->id) {
 			$regions_list = get_string('modlos_my_regions', 'block_modlos');
-        }
-        else {
-            $userinfo = get_userinfo_by_id($this->user_id);
-            $username = get_display_username($userinfo->firstname, $userinfo->lastname);
-            $userurl  = '<a href="'.$this->avatar_url.'&id='.$this->user_id.'" target="_blank">'.$username.'</a>';
+		}
+		else {
+			$userinfo = get_userinfo_by_id($this->user_id);
+			$username = get_display_username($userinfo->firstname, $userinfo->lastname);
+			$userurl  = '<a href="'.$this->avatar_url.'&id='.$this->user_id.'" target="_blank">'.$username.'</a>';
 			$regions_list = get_string('modlos_personal_regions', 'block_modlos', $userurl);
-        }
+		}
 
 		include(CMS_MODULE_PATH.'/html/regions.html');
 	}
