@@ -91,6 +91,8 @@ $string['modlos_my_regions'] 		= 'マイ リージョン';
 $string['modlos_personal_regions'] 	= '{$a} のリージョン';
 $string['modlos_editable_list'] 	= '編集可能アバターリスト';
 
+$string['modlos_region_reset'] 		= 'リージョンのリセット';
+
 $string['modlos_avatar_info'] 		= 'アバター情報';
 $string['modlos_avatar_created'] 	= 'アバターを作成しました';
 $string['modlos_avatar_updated'] 	= 'アバターのデータを更新しました';
@@ -456,4 +458,3 @@ $string['modlos_event_creator_required']='有効な登録者を選択してく�
 
 $string['modlos_should_have_avatar']= 'あなたはアバターを少なくとも一体は持つ必要があります．';
 
-?>

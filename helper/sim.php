@@ -144,4 +144,3 @@ $voice_mode	  	= get_string('modlos_voice_chat_mode','block_modlos');
 
 include(CMS_MODULE_PATH.'/html/sim.html');
 
-?>

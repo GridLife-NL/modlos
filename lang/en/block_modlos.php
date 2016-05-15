@@ -91,6 +91,8 @@ $string['modlos_my_regions'] 		= 'My Regions';
 $string['modlos_personal_regions'] 	= '{$a}\'s Regions';
 $string['modlos_editable_list'] 	= 'Editable Avatars List';
 
+$string['modlos_region_reset']      = 'Reset of Region';
+
 $string['modlos_avatar_info'] 		= 'Avatar Information';
 $string['modlos_avatar_created'] 	= 'Avatar Created!!';
 $string['modlos_avatar_updated'] 	= 'Avatar Updated!!';
@@ -455,5 +457,3 @@ $string['modlos_event_owner_required']='You must select valid event Owner!!';
 $string['modlos_event_creator_required']='You must select valid event Creator!!';
 
 $string['modlos_should_have_avatar']= 'You should have avatar at least one.';
-
-?>

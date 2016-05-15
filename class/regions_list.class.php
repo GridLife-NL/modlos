@@ -15,11 +15,13 @@ class  RegionsList
 	var $action_url;
 	var $search_url;
 	var $avatar_url;
-	var $personal_url;
+	var $rest_url;
 
 	var $course_id;
 	var $user_id;
+	var $get_action;
 	var $url_param = '';
+	var $action_param = '';
 
 	var $isAvatarMax = false;
 	var $use_sloodle = false;
@@ -70,16 +72,13 @@ class  RegionsList
 		$this->url_param = '?dmmy_param=';
 		if ($course_id>0) $this->url_param .= '&course='.$course_id;
 
-		if ($show_all) {
-			$this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param;
-			$this->search_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param.'&amp;pstart=0';
-		}
-		else {
-			$this->action_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param.'&amp;userid='.$userid;
-			$this->search_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param.'&amp;userid='.$userid.'&amp;pstart=0';
-		}
-		$this->avatar_url   = $CFG->wwwroot.'/user/view.php'.$this->url_param;
-		$this->personal_url = CMS_MODULE_URL.'/actions/personal_regions.php'.$this->url_param;
+		if ($show_all) $this->action_param = '&amp;action=all';
+		else           $this->action_param = '&amp;action=personal&amp;userid='.$userid;
+
+		$this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param;
+		$this->search_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param.$this->action_param.'&amp;pstart=0';
+		$this->reset_url  = CMS_MODULE_URL.'/actions/reset_region.php'.$this->url_param.$this->action_param;
+		$this->avatar_url = $CFG->wwwroot.'/user/view.php'.$this->url_param;
 
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		$avatars_num = modlos_get_avatars_num($USER->id);
@@ -300,6 +299,7 @@ class  RegionsList
 
 		$has_permit 	 = $this->hasPermit;
 		$url_param 		 = $this->url_param;
+		$action_amp 	 = $this->action_param;
 		$course_amp 	 = "&amp;course=$this->course_id";
 		$order_amp 		 = "&amp;order=$this->order&amp;desc=$this->order_desc";
 		$pstart_amp		 = "&amp;pstart=$this->pstart";
@@ -307,7 +307,7 @@ class  RegionsList
 		$lnk_region 	 = $this->lnk_regionname;
 		$pstart_		 = '&amp;pstart=';
 		$plimit_		 = '&amp;plimit=';
-		$action_url 	 = $this->action_url.$lnk_region;
+		$action_url 	 = $this->action_url.$lnk_region.$action_amp;
 
 		$desc_name  	 = "&amp;desc=$this->desc_name";
 		$desc_x 		 = "&amp;desc=$this->desc_x";

@@ -19,11 +19,11 @@ class  AvatarsList
 	var $owner_url;
 	var $search_url;
 	var $avatar_url;
-	var $personal_url;
 
-	var $course_id  = 0;
-	var $user_id	= 0;
-	var $url_param  = '';
+	var $course_id    = 0;
+	var $user_id	  = 0;
+	var $url_param    = '';
+	var $action_param = '';
 
 	var $use_sloodle  = false;
 	var $isAvatarMax  = false;
@@ -79,25 +79,19 @@ class  AvatarsList
 		$this->use_currency = $CFG->modlos_use_currency_server;
 		$this->show_all	    = $show_all;
 		$this->user_id		= $userid;
-
 		if (!$show_all and $userid==0) $this->user_id = $USER->id;
 
 		$this->url_param = '?dmmy_param=';	
 		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;
 
-		if ($this->show_all) {
-			$this->action_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param;
-			$this->search_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param.'&amp;pstart=0';
-		}
-		else {
-			$this->action_url  = CMS_MODULE_URL.'/actions/personal_avatars.php'.$this->url_param.'&amp;userid='.$userid;
-			$this->search_url  = CMS_MODULE_URL.'/actions/personal_avatars.php'.$this->url_param.'&amp;userid='.$userid.'&amp;pstart=0';
-		}
+		if ($show_all) $this->action_param = '&amp;action=all';
+		else           $this->action_param = '&amp;action=personal&amp;userid='.$userid;
 
-		$this->edit_url		= CMS_MODULE_URL.'/actions/edit_avatar.php'.  $this->url_param;
-		$this->owner_url	= CMS_MODULE_URL.'/actions/owner_avatar.php'. $this->url_param;
-		$this->currency_url = CMS_MODULE_URL.'/actions/show_currency.php'.$this->url_param;
-		$this->personal_url = CMS_MODULE_URL.'/actions/personal_avatars.php'.$this->url_param;
+		$this->action_url   = CMS_MODULE_URL.'/actions/avatars_list.php'. $this->url_param;
+		$this->search_url   = CMS_MODULE_URL.'/actions/avatars_list.php'. $this->url_param.$this->action_param.'&amp;pstart=0';
+		$this->edit_url		= CMS_MODULE_URL.'/actions/edit_avatar.php'.  $this->url_param.$this->action_param;
+		$this->owner_url	= CMS_MODULE_URL.'/actions/owner_avatar.php'. $this->url_param.$this->action_param;
+		$this->currency_url = CMS_MODULE_URL.'/actions/show_currency.php'.$this->url_param.$this->action_param;
 		$this->avatar_url   = $CFG->wwwroot.'/user/view.php'.$this->url_param;
 
 		$this->my_avatars = modlos_get_avatars_num($USER->id);
@@ -400,6 +394,7 @@ class  AvatarsList
 		$lnk_firstname	= $this->lnk_firstname;
 		$lnk_lastname	= $this->lnk_lastname;
 		$url_param		= $this->url_param;
+		$action_amp		= $this->action_param;
 		$plimit_amp		= "&amp;plimit=$this->plimit";
 		$pstart_amp		= "&amp;pstart=$this->pstart";
 		$order_amp		= "&amp;order=$this->order&amp;desc=$this->order_desc";
@@ -408,7 +403,7 @@ class  AvatarsList
 		$pstart_		= '&amp;pstart=';
 		$order_			= '&amp;order=';
 		$loss_			= '&amp;ownerloss=';
-		$action_url		= $this->action_url.$lnk_firstname.$lnk_lastname.$loss_amp;
+		$action_url		= $this->action_url.$lnk_firstname.$lnk_lastname.$loss_amp.$action_amp;
 
 		$desc_fname  	= "&amp;desc=$this->desc_fname";
 		$desc_lname  	= "&amp;desc=$this->desc_lname";

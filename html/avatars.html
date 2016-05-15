@@ -121,7 +121,7 @@
         <?php } ?>
       </td>
       <td style="color: #000000;">
-        <a href="<?php echo $this->action_url.$plimit_amp.$pstart_amp.$order_amp?>" target="_self">
+        <a href="<?php echo $this->action_url.$plimit_amp.$pstart_amp.$order_amp.$loss_amp.$action_amp?>" target="_self">
           <strong><?php echo $reset_ttl?></strong>
         </a>
       </td>
@@ -243,7 +243,7 @@
                     <td>
                       <?php if (!$this->isGuest and $this->show_all) {?>
                         <?php if ($userinfo and $dat['owner_name']!=' - ') { ?>
-                          <a href="<?php echo $this->personal_url.'&userid='.$dat['uid']?>">
+                          <a href="<?php echo $this->action_url.'&action=personal&userid='.$dat['uid']?>">
                             <strong><?php echo htmlspecialchars($dat['owner_name'])?></strong>
                           </a>
                         <?php } else {?>

@@ -7,8 +7,6 @@ php -l edit_event.php
 php -l events_list.php
 php -l map_action.php
 php -l owner_avatar.php
-php -l personal_avatars.php
-php -l personal_regions.php
 php -l regions_list.php
 php -l show_currency.php
 php -l show_event.php

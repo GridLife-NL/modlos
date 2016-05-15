@@ -7,41 +7,43 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
-class  EditAvatar
+class  ResetRegion
 {
-	var $regionNames = array();
-
 	var $hasPermit	= false;
 	var $isGuest	= true;
-	var $action_url = '';
-	var $delete_url = '';
 	var $course_id	= 0;
 
-	var $updated_avatar = false;
+	var $action_url = '';
+	var $reset_url  = '';
+	var $retun_url  = '';
+	var $action 	= 'all';	// 'all', 'personal' 
+	var $userid 	= 0;		// 0: my, >1: other
 
 	var $use_sloodle = false;
 	var $avatars_num = false;
 	var $max_avatars = false;
 	var $isAvatarMax = false;
 
+	var $reseted    = false;
 	var $hasError	= false;
 	var $errorMsg 	= array();
 
 	// Moodle DB
-	var $avatar		= null;
 	var $UUID		= '';
 	var $uid 	   	= 0;
-	var $firstname 	= '';
-	var $lastname  	= '';
-	var $passwd  	= '';
-	var $hmregion  	= '';
-	var $state	 	= 0;
-	var $ostate		= 0;
-	var $ownername 	= '';
+	var $regionName = '';
+	var $serverName = '';
+	var $ownerName  = '';
+	var $locX  		= 0;
+	var $locY	 	= 0;
+	var $sizeX  	= 0;
+	var $sizeY	 	= 0;
+	var $serverURI	= '';
+	var $serverPort	= '';
 
 
 
-	function  EditAvatar($course_id) 
+	function  ResetRegion($course_id) 
 	{
 		global $CFG, $USER;
 
@@ -50,6 +52,7 @@ class  EditAvatar
 		if ($this->isGuest) {
 			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
+		$this->hasPermit = hasModlosPermit($course_id);
 
 		// for HTTPS
 		$use_https = $CFG->modlos_use_https;
@@ -60,41 +63,45 @@ class  EditAvatar
 		}
 		else $module_url = CMS_MODULE_URL;
 
-		//
-		$course_param = '?course='.$course_id;
-		$this->course_id  = $course_id;
-		$this->action_url = $module_url.'/actions/edit_avatar.php';
-		$this->delete_url = $module_url.'/actions/delete_avatar.php'.$course_param;
+		// Parameters
+		$uuid   = required_param('region', PARAM_TEXT);
+		$action = optional_param('action', 'all', PARAM_ALPHA);
+		$userid = optional_param('userid', '0', PARAM_INT);
 
+		$course_param = '?course='.$course_id;
+		$option_param = '&amp;action='.$action.'&amp;userid='.$userid;
+
+		$this->course_id   = $course_id;
+		$this->action_url  = $module_url.'/actions/reset_region.php'.$course_param.$option_param;
+		$this->reset_url   = $module_url.'/actions/reset_region.php'.$course_param.$option_param;
+		$this->return_url  = $module_url.'/actions/regions_list.php'.$course_param.$option_param;
+		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
 		// get UUID from POST or GET
-		$return_url = $module_url.'/actions/avatars_list.php'. $course_param;
-		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
 			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)";
 			print_error($mesg, '', $return_url);
 		}
-		$this->UUID = $uuid;
-		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
-
 
 		// get uid from Modlos and Sloodle DB
-		$avatar = modlos_get_avatar_info($this->UUID, $this->use_sloodle);
-		$this->uid	  	= $avatar['uid'];
-		$this->ostate 	= (int)$avatar['state'];
-		$this->firstname= $avatar['firstname'];
-		$this->lastname = $avatar['lastname'];
-		$this->avatar 	= $avatar;
+		$region = opensim_get_region_info($uuid);
+		$avatar = modlos_get_avatar_info($region['owner_uuid'], $this->use_sloodle);
 
+		$this->UUID 	  = $uuid;
+		$this->uid	  	  = $avatar['uid'];
+		$this->regionName = $region['regionName'];
+		$this->serverName = $region['serverName'];
+		$this->ownerName  = $region['fullname'];
+		$this->locX       = (int)$region['locX']/256;
+		$this->locY       = (int)$region['locY']/256;
+		$this->sizeX      = (int)$region['sizeX'];
+		$this->sizeY      = (int)$region['sizeY'];
+		$this->serverURI  = $region['serverURI'];
+		$this->serverPort = $region['serverHttpPort'];
 
-		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			print_error('modlos_access_forbidden', 'block_modlos', $return_url);
+			print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
 		}
-
-		$this->avatars_num = modlos_get_avatars_num($USER->id);
-		$this->max_avatars = $CFG->modlos_max_own_avatars;
-		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 	}
 
 
@@ -103,8 +110,10 @@ class  EditAvatar
 	{
 		global $USER;
 
-		// OpenSim DB
-		$this->regionNames = opensim_get_regions_names('ORDER BY regionName ASC');
+		//
+		if (!$this->hasPermit and $USER->id!=$this->uid) {
+			print_error('modlos_access_forbidden', 'block_modlos', $return_url);
+		}
 
 		// Form
 		if (data_submitted()) {
@@ -113,11 +122,11 @@ class  EditAvatar
 				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 			}
 
-			// Delete Avatar
-			$del = optional_param('submit_delete', '', PARAM_TEXT);
-			if ($del!='') {
-				redirect($this->delete_url.'&amp;uuid='.$this->UUID, 'Please wait....', 0);
-				exit('<h4>delete page open error!!</h4>');
+			// Reset Region
+			$reset = optional_param('reset_region', '', PARAM_TEXT);
+			if ($reset!='') {
+				redirect($this->reset_url.'&amp;region='.$this->UUID, 'Please wait....', 0);
+				exit('<h4>reset page open error!!</h4>');
 			}
 
 			// Sate (Active/Inactive)
@@ -204,15 +213,7 @@ class  EditAvatar
 
 		// GET
 		else {
-			$this->passwd	= '';
-			$this->hmregion = $this->avatar['hmregion'];
-			$this->state  	= $this->avatar['state'];
 
-			if ($this->hasPermit and $this->uid>0) {
-				$user_info = get_userinfo_by_id($this->uid);
-				$this->ownername  = $user_info->username;	//get_display_username($user_info->firstname, $user_info->lastname);
-			}
-			else $this->ownername = $USER->username;		//get_display_username($USER->firstname, $USER->lastname);
 		}
 
 		return true;
@@ -226,28 +227,29 @@ class  EditAvatar
 
 		$grid_name = $CFG->modlos_grid_name;
 
-		$avatar_edit_ttl	= get_string('modlos_avatar_edit',	 'block_modlos');
-		$firstname_ttl  	= get_string('modlos_firstname',	 'block_modlos');
-		$lastname_ttl   	= get_string('modlos_lastname',		 'block_modlos');
-		$new_passwd_ttl  	= get_string('modlos_new_password',	 'block_modlos');
-		$confirm_pass_ttl  	= get_string('modlos_confirm_pass',	 'block_modlos');
-		$home_region_ttl  	= get_string('modlos_home_region',	 'block_modlos');
-		$status_ttl	 		= get_string('modlos_status',		 'block_modlos');
-		$active_ttl	 		= get_string('modlos_active',		 'block_modlos');
-		$inactive_ttl   	= get_string('modlos_inactive',	  	 'block_modlos');
-		$owner_ttl	  		= get_string('modlos_owner',		 'block_modlos');
-		$ownername_ttl	  	= get_string('modlos_ownername',	 'block_modlos');
-		$update_ttl	  		= get_string('modlos_update_ttl', 	 'block_modlos');
-		$delete_ttl	  		= get_string('modlos_delete', 	 	 'block_modlos');
-		$reset_ttl	  		= get_string('modlos_reset_ttl', 	 'block_modlos');
-		$avatar_updated	  	= get_string('modlos_avatar_updated','block_modlos');
-		$uuid_ttl	  		= get_string('modlos_uuid',			 'block_modlos');
-		$manage_avatar_ttl	= get_string('modlos_manage_avatar', 'block_modlos');
-		$manage_out			= get_string('modlos_manage_out',	 'block_modlos');
-		$sloodle_ttl		= get_string('modlos_sloodle_ttl',	 'block_modlos');
-		$manage_sloodle		= get_string('modlos_manage_sloodle','block_modlos');
+		$region_reset_ttl	= get_string('modlos_region_reset', 'block_modlos');
+		$region_name_ttl	= get_string('modlos_region',	 	'block_modlos');
+		$server_ttl			= get_string('modlos_server',       'block_modlos');
+		$coordinates_ttl	= get_string('modlos_coordinates',  'block_modlos');
+		$region_size_ttl	= get_string('modlos_region_size',  'block_modlos');
+		$admin_user_ttl		= get_string('modlos_admin_user',   'block_modlos');
+		$region_owner_ttl	= get_string('modlos_region_owner', 'block_modlos');
+		$region_reseted 	= 'sxxx';
+		$region_reseted_exp = 'explain';
 
-		include(CMS_MODULE_PATH.'/html/edit.html');
+		//
+		$server = '';
+		if ($this->serverURI!='') {
+    		$dec = explode(':', $this->serverURI);
+    		if (!strncasecmp($dec[0], 'http', 4)) $server = "$dec[0]:$dec[1]";
+		}  
+		if ($server=='') {
+    		$server = "http://$serverName";
+		}	
+		$server = $server.':'.$this->serverPort;
+		$guid = str_replace('-', '', $this->UUID);
+
+		include(CMS_MODULE_PATH.'/html/reset_region.html');
 	}
 
 
@@ -300,6 +302,7 @@ class  EditAvatar
 				}
 			}
 		}
+
 
 		// Modlos and Sloodle DB
 		$update_user['id']	  	  = $this->avatar['id'];

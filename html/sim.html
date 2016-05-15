@@ -45,24 +45,24 @@
         <?php //if ($hasPermit) {?>
         <?php if (!$isGuest) {?>
           <tr><td>&nbsp;</td></tr>
-          <tr><td class="styleText"><b><?php echo $uuid_ttl.":&nbsp;".$region?></b></td></tr>
+          <tr><td class="styleText"><strong><?php echo $uuid_ttl.":&nbsp;".$region?></strong></td></tr>
           <tr><td>&nbsp;</td></tr>
           <tr><td class="styleText">
-            <b><?php echo $server_ttl.":&nbsp;"?>
+            <strong><?php echo $server_ttl.":&nbsp;"?>
               <a style="cursor:pointer" onclick="window.open(<?php echo '\'http://'.$serverName.':'.$serverPort.'/SStats/\''?>,'Stats','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=1000,height=800')">
                 <?php echo $serverName?>
               </a>
-            </b>
+            </strong>
           </td></tr>
 
         <?php }?>
         <tr><td>&nbsp;</td></tr>
-        <tr><td class="styleText"><b><?php echo $coordinates." X:&nbsp;".$locX."&nbsp;Y:&nbsp;".$locY?></b></td></tr>
+        <tr><td class="styleText"><strong><?php echo $coordinates." X:&nbsp;".$locX."&nbsp;Y:&nbsp;".$locY?></strong></td></tr>
         <tr><td class="styleText">&nbsp;</td></tr>
-        <tr><td class="styleText"><b><?php echo $region_size." X:&nbsp;".$sizeX."&nbsp;Y:&nbsp;".$sizeY?></b></td></tr>
+        <tr><td class="styleText"><strong><?php echo $region_size." X:&nbsp;".$sizeX."&nbsp;Y:&nbsp;".$sizeY?></strong></td></tr>
         <tr><td class="styleText">&nbsp;</td></tr>
 
-        <tr><td class="styleText"><b><?php echo $estate_ttl.":&nbsp;" ?></b>
+        <tr><td class="styleText"><strong><?php echo $estate_ttl.":&nbsp;" ?></strong>
         <?php if ($hasPermit) {?>
             <select wide="8" name="estateid">
               <option value="" ></option>
@@ -76,16 +76,16 @@
               <?php }?>
             </select>
         <?php } else {?>
-          <b><?php echo "[$estate_id]&nbsp;".$estate_name ?></b>
+          <strong><?php echo "[$estate_id]&nbsp;".$estate_name ?></strong>
         <?php }?>
         </td></tr>
 
         <tr><td class="styleText">&nbsp;</td></tr>
         <tr>
           <td class="styleText">
-            <b><?php echo $admin_user?>:&nbsp;
+            <strong><?php echo $admin_user?>:&nbsp;
               <a href="<?php echo CMS_MODULE_URL.'/helper/agent.php?agent='.$owner_uuid.$course_amp?>"><?php echo htmlspecialchars($owner_name)?></a>
-            </b>
+            </strong>
           </td>
         </tr>
         <tr><td>&nbsp;</td></tr>
@@ -93,7 +93,7 @@
         <tr>
           <td class="styleText">
           <?php if ($hasPermit) {?>
-            <b><?php echo $voice_mode?>:&nbsp;
+            <strong><?php echo $voice_mode?>:&nbsp;
               <select wide="32" name="voice_mode">
                 <?php foreach($voice_modes as $vcm) {?>
                   <?php if ($vcm['id']==$vcmode) {?>
@@ -102,10 +102,10 @@
                     <option value="<?php echo $vcm['id']?>" ><?php echo $vcm['title']?></option>
                   <?php }?>
                 <?php }?>
-              </b>
+              </strong>
             </select>
           <?php } else {?>
-            <b><?php echo $voice_mode?>:&nbsp;<?php echo $vcmode_title?></b>
+            <strong><?php echo $voice_mode?>:&nbsp;<?php echo $vcmode_title?></strong>
           <?php }?>
           </td>
         </tr>

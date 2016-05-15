@@ -287,8 +287,17 @@ function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
 }
 
 
-
-
+/*
+return:
+    $avatar_info['id'] ......... Key
+    $avatar_info['uid'] ........ Moodle User ID
+    $avatar_info['UUID'] ....... OpenSim User UUID
+    $avatar_info['firstname']
+    $avatar_info['lastname']
+    $avatar_info['hmregion']
+    $avatar_info['state']
+    $avatar_info['time']
+*/
 function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 {
 	global $DB;
@@ -1132,11 +1141,11 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$course_param.'&order=name', 
 																	'<b>'.get_string('modlos_regions_list','block_modlos').'</b>');
 	if (!isguestuser()) {
-		$toprow[] = new tabobject('personal_regions', CMS_MODULE_URL.'/actions/personal_regions.php'.$course_param.'&order=name', 
+		$toprow[] = new tabobject('personal_regions', CMS_MODULE_URL.'/actions/regions_list.php'.$course_param.'&action=personal&order=name', 
 																	'<b>'.get_string('modlos_my_regions','block_modlos').'</b>');
 		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param.'&order=login&desc=1', 
 																	'<b>'.get_string('modlos_avatars_list','block_modlos').'</b>');
-		$toprow[] = new tabobject('personal_avatars', CMS_MODULE_URL.'/actions/personal_avatars.php'.$course_param, 
+		$toprow[] = new tabobject('personal_avatars', CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param.'&amp;action=personal', 
 																	'<b>'.get_string('modlos_my_avatars','block_modlos').'</b>');
 		if ($show_create_tab) {
 			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $course_param, 
