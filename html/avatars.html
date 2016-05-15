@@ -215,7 +215,7 @@
                       <strong style="color: #cc0000;"><?php echo $unknown_status?></strong>
                     <?php }?>
 
-                    <?php if ($dat['state']&AVATAR_STATE_SLOODLE and $dat['ownername']!=' - ' and $this->use_sloodle) {?>
+                    <?php if ($dat['state']&AVATAR_STATE_SLOODLE and $dat['owner_name']!=' - ' and $this->use_sloodle) {?>
                       ,&nbsp;<?php echo $sloodle_ttl?>
                     <?php }?>
                     </td>
@@ -242,7 +242,7 @@
 
                     <td>
                       <?php if (!$this->isGuest and $this->show_all) {?>
-                        <?php if ($userinfo and $dat['ownername']!=' - ') { ?>
+                        <?php if ($userinfo and $dat['owner_name']!=' - ') { ?>
                           <a href="<?php echo $this->personal_url.'&userid='.$dat['uid']?>">
                             <strong><?php echo htmlspecialchars($dat['owner_name'])?></strong>
                           </a>

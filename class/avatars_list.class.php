@@ -76,8 +76,8 @@ class  AvatarsList
 		$this->hasPermit	= hasModlosPermit($course_id);
 		$this->course_id	= $course_id;
 		$this->use_sloodle  = $CFG->modlos_cooperate_sloodle;
-		$this->use_currency = modlos_use_currency_server;
-		$this->show_all	 = $show_all;
+		$this->use_currency = $CFG->modlos_use_currency_server;
+		$this->show_all	    = $show_all;
 		$this->user_id		= $userid;
 
 		if (!$show_all and $userid==0) $this->user_id = $USER->id;
@@ -232,71 +232,98 @@ class  AvatarsList
 		}
 
 		if      ($where=='' and $this->sql_username!='') $where = ' WHERE '.$this->sql_username;
-		else if ($where!='' and $this->sql_username!='') $where.= ' AND '.$this->sql_username;
+		else if ($where!='' and $this->sql_username!='') $where.=   ' AND '.$this->sql_username;
 
 		////////////////////////////////////////////////////////////////////
 		// Read Data from DB
 		$dummy = opensim_get_avatars_infos($where.$this->sql_condition);
-		if (!is_array($dummy)) return false;
 
 		$num = 0;
-		$los = 0;
-		$all_users = array();
+		$con = 0;
+		$users = array();
 
-		foreach($dummy as $user) {
-			$all_users[$num] = $user;
-			$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
-			if ($avatardata==null) {
-				$all_users[$num]['uid']   = 0;
-				$all_users[$num]['state'] = AVATAR_STATE_NOSTATE;
-				$all_users[$num]['owner_name'] = ' - ';
-				$los++;
-			}
-			else {
-				$all_users[$num]['uid']   = $avatardata['uid'];
-				$all_users[$num]['state'] = $avatardata['state'];
-				if ($avatardata['uid']>0) {
-					$user_info = get_userinfo_by_id($avatardata['uid']);
-					if ($user_info!=null) {
-						$all_users[$num]['owner_name'] = get_display_username($user_info->firstname, $user_info->lastname);
+		if (!$this->ownerloss) {
+			foreach($dummy as $user) {
+				if ($con>=$this->pstart and $con<$this->pstart+$this->plimit) {
+					$users[$num] = $user;
+					$users[$num]['owner_name'] = ' - ';
+					$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
+					if ($avatardata==null) {
+						$users[$num]['uid']   = 0;
+						$users[$num]['state'] = AVATAR_STATE_NOSTATE;
 					}
 					else {
-						$all_users[$num]['uid'] = 0;
-						$all_users[$num]['owner_name'] = ' - ';
-						$los++;
+						$users[$num]['uid']   = $avatardata['uid'];
+						$users[$num]['state'] = $avatardata['state'];
+						if ($avatardata['uid']>0) {
+							$user_info = get_userinfo_by_id($avatardata['uid']);
+							if ($user_info!=null) {
+								$users[$num]['owner_name'] = get_display_username($user_info->firstname, $user_info->lastname);
+							}
+							else {
+								$users[$num]['uid'] = 0;
+							}
+						}
+						else {
+							if (!($avatardata['state']&AVATAR_STATE_INACTIVE)) {
+								$users[$num]['uid'] = 0;
+							}
+						}
 					}
+					$num++;
+				}
+				$con++;
+			}
+		}
+		//
+		else {		// Search lost avatars
+			foreach($dummy as $user) {
+				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
+				if ($avatardata==null) {
+					if ($con>=$this->pstart and $con<$this->pstart + $this->plimit) {
+						$users[$num] = $user;
+						$users[$num]['uid']   = 0;
+						$users[$num]['state'] = AVATAR_STATE_NOSTATE;
+						$users[$num]['owner_name'] = ' - ';
+						$num++;
+					}
+					$con++;
 				}
 				else {
-					if (!($avatardata['state']&AVATAR_STATE_INACTIVE)) {
-						$all_users[$num]['uid'] = 0;
-						$los++;
+					if ($avatardata['uid']>0) {
+						$user_info = get_userinfo_by_id($avatardata['uid']);
+						if ($user_info==null) {
+							if ($con>=$this->pstart and $con<$this->pstart + $this->plimit) {
+								$users[$num] = $user;
+								$users[$num]['uid']   = 0;
+								$users[$num]['state'] = $avatardata['state'];
+								$users[$num]['owner_name'] = ' - ';
+								$num++;
+							}
+							$con++;
+						}
+					}
+					else {
+						if (!($avatardata['state']&AVATAR_STATE_INACTIVE)) {
+							if ($con>=$this->pstart and $con<$this->pstart + $this->plimit) {
+								$users[$num] = $user;
+								$users[$num]['uid'] = 0;
+								$users[$num]['state'] = $avatardata['state'];
+								$users[$num]['owner_name'] = ' - ';
+								$num++;
+							}
+							$con++;
+						}
 					}
 				}
 			}
-			$num++;
 		}
 		unset($dummy);
 
-		if ($this->ownerloss) $this->number = $los;
-		else				  $this->number = $num;
+		$this->number = $con;
 
 		////////////////////////////////////////////////////////////////////
 		// Select Data
-		$i = 0;
-		$count = 0;
-		$users = array();
-		foreach($all_users as $user) {
-			if ($user['uid']==0 or !$this->ownerloss) {
-				if ($i>=$this->pstart) {
-					$users[$count] = $user;
-					$count++;
-					if ($count==$this->plimit) break;
-				}
-				$i++;
-			}
-		}
-		unset($all_users);
-
 		$colum = 0;
 		$dat   = array();
 
@@ -305,18 +332,8 @@ class  AvatarsList
 			$user['hmregion'] = modlos_get_region_name($user['hmregion_id']);
 			if (isGUID($user['hmregion'])) $user['hmregion'] = '';
 			//
-			$dat = $this->get_avatar_info($user, $colum); 
-
-			if ($this->ownerloss) {
-				if ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {
-					$this->db_data[$colum] = $dat;
-					$colum++;
-				}
-			} 
-			else {
-				$this->db_data[$colum] = $dat;
-				$colum++;
-			}
+			$this->db_data[$colum] = $this->get_avatar_info($user, $colum); 
+			$colum++;
 		}
 		unset($users);
 
@@ -486,7 +503,7 @@ class  AvatarsList
 		if ($this->hasPermit or $USER->id==$dat['uid']) {
 			$dat['editable'] = AVATAR_EDITABLE;
 		}
-		elseif ($dat['uid']==0) {
+		else if ($dat['uid']==0) {
 			if (!$this->isAvatarMax and $this->ownerloss) {
 				$dat['editable'] = AVATAR_OWNER_EDITABLE;
 			}

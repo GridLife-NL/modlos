@@ -18,6 +18,7 @@
     </td>
 
     <td width="50">
+      <?php echo $this->icon[0];?>
       <?php if ($this->icon[0]=="on") {?>
         <a href="<?php echo $action_url.$order_amp.$plimit_amp.$pstart_.'0'?>" target="_self">
       <?php }?>
@@ -108,15 +109,7 @@
         <input type="Submit" value="Search" style="height:20">&nbsp;&nbsp;&nbsp;
       </td>
       <td>&nbsp;</td>
-      <td style="color: #000000;">
-        <?php if (!$has_permit and !$avatar_max) {?>
-          <a href="<?php echo $avarars_list_url.$ownerloss_.'1'?>" target="_self">
-            <strong><?php echo $find_owner_ttl?></strong>
-          </a>
-        <?php } else { ?>
-          &nbsp;
-        <?php } ?>
-      </td>
+      <td>&nbsp;</td>
       <td style="color: #000000;">
         <a href="<?php echo $this->action_url.$plimit_amp.$pstart_amp.$order_amp?>" target="_self">
           <strong><?php echo $reset_ttl?></strong>
@@ -130,7 +123,7 @@
   <tbody>
     <tr>
       <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_left.gif" height="26">&nbsp;</td>
-      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg" colspan="10">&nbsp;</td>
+      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_middle.jpg" colspan="11">&nbsp;</td>
       <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_right.gif">&nbsp;</td>
     </tr>
 
@@ -165,7 +158,6 @@
           <strong><?php echo $voice_chat_mode?></strong>
         <?php }?>
       </td>
-      </td>
       <td width="30" >&nbsp;</td>
       <td width="220">
         <?php if (!$this->isGuest) {?>
@@ -181,12 +173,13 @@
         <?php }?>
       </td>
 
+      <td width="50" >&nbsp;</td>
       <td width="15" >&nbsp;</td>
     </tr>
 
     <tr>
       <td bgcolor="#f0f0f0">&nbsp;</td>
-      <td colspan="10" bgcolor="#f0f0f0"><hr style="margin: 10px 0;"/></td>
+      <td colspan="11" bgcolor="#f0f0f0"><hr style="margin: 10px 0;"/></td>
       <td bgcolor="#f0f0f0">&nbsp;</td>
     </tr>
 
@@ -252,13 +245,21 @@
           <?php }?>
         </td>
 
+        <td>
+          <?php if ($has_permit or $dat['user_id']==$USER->id) { ?>
+            <strong style="color: #ff2020;">Reset</strong>
+          <?php } else {?>
+            &nbsp;
+          <?php }?> 
+        </td>
+
         <td>&nbsp;</td>
       </tr>
     <?php }?>
 
     <tr>
       <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_left.gif" height="28">&nbsp;</td>
-      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg" colspan="10">&nbsp;</td>
+      <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_middle.jpg" colspan="11">&nbsp;</td>
       <td background="<?php echo CMS_MODULE_URL?>/images/main/regions_d_right.gif">&nbsp;</td>
     </tr>
   </tbody>

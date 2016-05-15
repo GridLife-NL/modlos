@@ -197,7 +197,7 @@ class  RegionsList
 		else if ($where!='' and $this->sql_regionname!='') $where.= ' AND '.$this->sql_regionname;
 
 		if ($where!='' or $this->show_all) $this->number = opensim_get_regions_num($where);
-		if ($this->number==0) return false;
+		//if ($this->number==0) return false;
 
 		// Voice Mode
 		$voice_mode[0] = get_string('modlos_voice_inactive_chnl', 'block_modlos');
@@ -239,7 +239,6 @@ class  RegionsList
 					 $this->db_data[$colum]['owner_name'] = get_display_username($user_info->firstname, $user_info->lastname);
 				}
 			}
-
 			$colum++;
 		}
 
@@ -251,7 +250,7 @@ class  RegionsList
 		if ($this->sitemax==0) $this->sitemax = 1; 
 
 		// back more and back one
-		if (0==$this->pstart) {
+		if ($this->pstart==0) {
 			$this->icon[0] = 'off';
 			$this->pnum[0] = 0;
 		}
@@ -296,24 +295,25 @@ class  RegionsList
 	{
 		global $CFG, $USER;
 
-		$grid_name	= $CFG->modlos_grid_name;
-		$content	= $CFG->modlos_regions_content;
+		$grid_name		 = $CFG->modlos_grid_name;
+		$content		 = $CFG->modlos_regions_content;
 
-		$url_param 	= $this->url_param;
-		$order_amp 	= "&amp;order=$this->order&amp;desc=$this->order_desc";
-		$course_amp = "&amp;course=$this->course_id";
-		$pstart_amp	= "&amp;pstart=$this->pstart";
-		$plimit_amp	= "&amp;plimit=$this->plimit";
-		$lnk_region = $this->lnk_regionname;
-		$pstart_	= '&amp;pstart=';
-		$plimit_	= '&amp;plimit=';
-		$action_url = $this->action_url.$lnk_region;
+		$has_permit 	 = $this->hasPermit;
+		$url_param 		 = $this->url_param;
+		$course_amp 	 = "&amp;course=$this->course_id";
+		$order_amp 		 = "&amp;order=$this->order&amp;desc=$this->order_desc";
+		$pstart_amp		 = "&amp;pstart=$this->pstart";
+		$plimit_amp		 = "&amp;plimit=$this->plimit";
+		$lnk_region 	 = $this->lnk_regionname;
+		$pstart_		 = '&amp;pstart=';
+		$plimit_		 = '&amp;plimit=';
+		$action_url 	 = $this->action_url.$lnk_region;
 
-		$desc_name  = "&amp;desc=$this->desc_name";
-		$desc_x 	= "&amp;desc=$this->desc_x";
-		$desc_y 	= "&amp;desc=$this->desc_y";
-		$desc_ip 	= "&amp;desc=$this->desc_ip";
-		$desc_avatar= "&amp;desc=$this->desc_avatar";
+		$desc_name  	 = "&amp;desc=$this->desc_name";
+		$desc_x 		 = "&amp;desc=$this->desc_x";
+		$desc_y 		 = "&amp;desc=$this->desc_y";
+		$desc_ip 		 = "&amp;desc=$this->desc_ip";
+		$desc_avatar	 = "&amp;desc=$this->desc_avatar";
 
 		$location_x		 = get_string('modlos_location_x',	   'block_modlos');
 		$location_y	  	 = get_string('modlos_location_y',	   'block_modlos');
@@ -322,7 +322,7 @@ class  RegionsList
 		$estate_owner	 = get_string('modlos_estate_owner',   'block_modlos');
 		$owner_ttl	 	 = get_string('modlos_owner',   	   'block_modlos');
 		$avatar_ttl	 	 = get_string('modlos_avatar',   	   'block_modlos');
-		$reset_ttl	   = get_string('modlos_reset_ttl',	  'block_modlos');
+		$reset_ttl	     = get_string('modlos_reset_ttl',	  'block_modlos');
 		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
 		$server_name	 = get_string('modlos_server',		   'block_modlos');
 		$page_num		 = get_string('modlos_page',		   'block_modlos');
