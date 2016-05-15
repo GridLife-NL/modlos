@@ -45,23 +45,30 @@ $rginfo = '';
 // POST
 if ($hasPermit and data_submitted() and confirm_sesskey()) {
 	//
-	$estateid = optional_param('estateid', '', PARAM_INT);
-	if (isNumeric($estateid)) { 
-		$rginfo = opensim_get_region_info($region);
-		if ($rginfo!=null and $rginfo['estate_id']!=$estateid) {
-			opensim_set_region_estateid($region, $estateid);
-			$rginfo = '';
-		}
+	$reset = optional_param('reset_region', '', PARAM_TEXT);
+	if ($reset!='') {
+		opensim_delete_region($region);
 	}
-
-	$voice_mode = optional_param('voice_mode', '', PARAM_TEXT);
-	if (isNumeric($voice_mode)) {
-		$vcmode = opensim_get_voice_mode($region);
-		if ($vcmode!=$voice_mode) {
-			opensim_set_voice_mode($region, $voice_mode);
-			$vcmode = '';
+	//
+	else {
+		$estateid = optional_param('estateid', '', PARAM_INT);
+		if (isNumeric($estateid)) { 
+			$rginfo = opensim_get_region_info($region);
+			if ($rginfo!=null and $rginfo['estate_id']!=$estateid) {
+				opensim_set_region_estateid($region, $estateid);
+				$rginfo = '';
+			}
 		}
-	}	
+
+		$voice_mode = optional_param('voice_mode', '', PARAM_TEXT);
+		if (isNumeric($voice_mode)) {
+			$vcmode = opensim_get_voice_mode($region);
+			if ($vcmode!=$voice_mode) {
+			opensim_set_voice_mode($region, $voice_mode);
+				$vcmode = '';
+			}
+		}	
+	}
 }
 
 
@@ -135,6 +142,7 @@ $estate_ttl   	= get_string('modlos_estate',   	 'block_modlos');
 $server_ttl 	= get_string('modlos_server',   	 'block_modlos');
 $uuid_ttl     	= get_string('modlos_uuid',    		 'block_modlos');
 $change_ttl   	= get_string('modlos_change',		 'block_modlos');
+$reset_ttl   	= get_string('modlos_region_reset',	 'block_modlos');
 
 $coordinates  	= get_string('modlos_coordinates', 	 'block_modlos');
 $region_size  	= get_string('modlos_region_size', 	 'block_modlos');

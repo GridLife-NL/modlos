@@ -10,7 +10,7 @@
 <form name="assignform" id="assignform" action="<?php echo $this->reset_url?>" method="POST">
 
   <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
-  <input type="hidden" name="uuid"    value="<?php echo $this->UUID?>" />
+  <input type="hidden" name="region"  value="<?php echo $this->UUID?>" />
   <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
 
   <table width="500" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
@@ -47,7 +47,9 @@
 
   <br />
   <div align="center">
-    <input name="reset_region" type="submit" id="reset_region" value="<?php echo $reset_region_ttl?>" />&nbsp;&nbsp;&nbsp;
+    <?php if (!$this->reseted) {?>
+      <input name="reset_region" type="submit" id="reset_region" value="<?php echo $reset_region_ttl?>" />&nbsp;&nbsp;&nbsp;
+    <?php }?>
     <a href="<?php echo $this->return_url?>"><strong><?php echo $return_ttl?></strong></a>
   </div>
 
@@ -68,9 +70,12 @@
 
 <?php } else {?>
   <?php if ($this->reseted) {?>
-    <h3 style="color: #1010e0;"><center><?php echo $region_reseted?></center></h3>
-    <h3 style="color: #1010e0;"><center><?php echo $region_reseted_exp?></center></h3>
-
+    <div align="center">
+      <ul>
+        <li><strong style="color: #1010e0;"><?php echo $region_reseted?></li>
+        <li><strong style="color: #1010e0;"><?php echo $region_reseted_exp?></li>
+      </ul>
+    </div>
   <?php }?>
 <?php }?>
 <br />

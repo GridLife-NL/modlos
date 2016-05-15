@@ -92,6 +92,9 @@ $string['modlos_personal_regions'] 	= '{$a} のリージョン';
 $string['modlos_editable_list'] 	= '編集可能アバターリスト';
 
 $string['modlos_region_reset'] 		= 'リージョンのリセット';
+$string['modlos_region_reseted']    = 'データベースからリージョン情報を削除しました';
+$string['modlos_region_reset_exp']  = 'データベース上のリージョン情報は，リージョンを再起動すれば再生成されます';
+$string['modlos_region_reset_error']= 'データベースからリージョン情報を削除するに失敗しました';
 
 $string['modlos_avatar_info'] 		= 'アバター情報';
 $string['modlos_avatar_created'] 	= 'アバターを作成しました';

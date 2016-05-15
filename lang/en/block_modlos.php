@@ -92,12 +92,15 @@ $string['modlos_personal_regions'] 	= '{$a}\'s Regions';
 $string['modlos_editable_list'] 	= 'Editable Avatars List';
 
 $string['modlos_region_reset']      = 'Reset of Region';
+$string['modlos_region_reseted']    = 'Delete information of the Region on DB';
+$string['modlos_region_reset_exp']  = 'When the Region is restarted, Information of the Region on DB is recreated automatically';
+$string['modlos_region_reset_error']= 'Failed to dlete information of the Region on DB';
 
 $string['modlos_avatar_info'] 		= 'Avatar Information';
 $string['modlos_avatar_created'] 	= 'Avatar Created!!';
 $string['modlos_avatar_updated'] 	= 'Avatar Updated!!';
 $string['modlos_avatar_gotted'] 	= 'Get a this Avatar by relationship with Moodle User';
-$string['modlos_avatar_gotted_error']= 'Failed to get a relationship with Moodle User!!';
+$string['modlos_avatar_gotted_error']='Failed to get a relationship with Moodle User!!';
 $string['modlos_avatar_deleted'] 	= 'Avatar Deleted!!';
 
 $string['modlos_avatar_create'] 	= 'Create Avatar';
