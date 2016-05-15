@@ -5,13 +5,23 @@ require_once(realpath(dirname(__FILE__).'/../include/env_interface.php'));
 require_once(realpath(dirname(__FILE__).'/../include/modlos.func.php'));
 
 
+global $CFG;
+
+$centerX   = optional_param('ctX',  $CFG->modlos_map_start_x, PARAM_INT);
+$centerY   = optional_param('ctY',  $CFG->modlos_map_start_y, PARAM_INT);
+$tsize     = optional_param('size', $CFG->modlos_map_size,    PARAM_INT);
 $course_id = optional_param('course', '1', PARAM_INT);
 if (!$course_id) $course_id = 1;
 
 $urlparams = array();
 $urlparams['course'] = $course_id;
+$urlparams['ctX']    = $centerX;
+$urlparams['ctY']    = $centerY;
+$urlparams['size']   = $tsize;
 $PAGE->set_url('/blocks/modlos/actions/map_action.php', $urlparams);
+$url_param = '?course='.$course_id.'&amp;ctX='.$centerX.'&amp;ctY='.$centerY.'&amp;size='.$tsize;
 
+$action_url = CMS_MODULE_URL.'/actions/map_action.php?course='.$course_id;
 $course = $DB->get_record('course', array('id'=>$course_id));
 $action = 'world_map';
 
@@ -29,8 +39,7 @@ else $isAvatarMax = false;
 
 print_tabnav($action, $course, !$isAvatarMax);
 
-//$object_url = CMS_MODULE_URL.'/helper/world_map.php?ctX=8000&ctY=8000';
-$object_url = CMS_MODULE_URL.'/helper/world_map.php';
+$object_url = CMS_MODULE_URL.'/helper/world_map.php'.$url_param;
 include(CMS_MODULE_PATH.'/html/object.html');
 
 echo $OUTPUT->footer($course);
