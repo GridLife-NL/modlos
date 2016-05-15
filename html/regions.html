@@ -94,7 +94,7 @@
 <!-- search -->
 <table width="85%" cellpadding=3 border=0 cellspacing=1 bgcolor="#e0e0e0" align="center">
   <form action="<?php echo $this->search_url.$plimit_amp.$order_amp?>" method="POST">
-    <tr bgcolor="#f0a0a0">
+    <tr bgcolor="#f0f0a0">
       <td>&nbsp;</td>
       <td style="color: #000000;"><strong><?php echo $region_search?></strong><br /></td>
       <td style="color: #000000;">
@@ -185,9 +185,9 @@
     <!-- Data -->
     <?php foreach ($this->db_data as $dat) {?>
       <?php if ($dat['num']%2==0) {?>
-      <tr style='background-color: #d8d8d8'>
+      <tr style='background-color: #e8e8e8'>
       <?php } else {?>
-      <tr style='background-color: #f0f0f0'>
+      <tr style='background-color: #f8f8f8'>
       <?php }?>
         <td width=15>&nbsp;</td>
         <td width=40  style="color: #000000"><strong>&nbsp;<?php echo $dat['num']+1+$this->pstart?></strong></td>
