@@ -15,9 +15,9 @@
   <tr>
     <td align="center">
       <form action="<?php echo $action_url?>" method="POST">
-        PosX <input type="text" name="ctX" id="ctX" size="10" value="<?php echo $centerX?>" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        PosY <input type="text" name="ctY" id="ctX" size="10" value="<?php echo $centerY?>" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Size <select wide="8" name="size">
+        PosX <input type="text" name="ctX" id="ctX" size="10" value="<?php echo $centerX?>" style="margin-right: 20px;"/>
+        PosY <input type="text" name="ctY" id="ctX" size="10" value="<?php echo $centerY?>" style="margin-right: 20px;"/>
+        Size <select wide="8" name="size"style="margin-right: 20px;">
                <option value="2"   <?php if ($tsize==2)  {?>selected<?php }?> >2</option>
                <option value="4"   <?php if ($tsize==4)  {?>selected<?php }?> >4</option>
                <option value="8"   <?php if ($tsize==8)  {?>selected<?php }?> >8</option>
@@ -26,8 +26,9 @@
                <option value="64"  <?php if ($tsize==64) {?>selected<?php }?> >64</option>
                <option value="128" <?php if ($tsize==128){?>selected<?php }?> >128</option>
                <option value="512" <?php if ($tsize==512){?>selected<?php }?> >512</option>
-            </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" name="map_go" id="map_go" value=" GO " />
+            </select>
+        <input type="submit" name="map_go" id="map_go" value=" GO " style="margin-right: 50px;"/>
+        <a href="<?php echo $action_url?>">Center Regions</a>
       </form>
     </td>
   </tr>
