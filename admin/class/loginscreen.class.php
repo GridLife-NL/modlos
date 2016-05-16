@@ -159,7 +159,4 @@ class  LoginScreen
 
 		include(CMS_MODULE_PATH.'/admin/html/loginscreen.html');
 	}
-
 }
-
-?>
