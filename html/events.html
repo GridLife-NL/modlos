@@ -16,7 +16,7 @@
     <td>&nbsp;</td>
 
     <td width=200>
-      <font color=#202020><strong>&nbsp;<?php echo $this->number?> <?php echo $events_found?></strong></font>
+      <strong style="color: #202020;">&nbsp;<?php echo $this->number?> <?php echo $events_found?></strong>
     </td>
     <td width="50">
       <?php if ($this->icon[0]=="on") {?>
@@ -38,10 +38,8 @@
       <?php }?>
     </td>
 
-    <td width="200" align=center>
-      <font color="#000000">
-        <?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;
-      </font>
+    <td width="200" align=center style="color: #000;">
+      <?php echo $page_num." ".$this->sitestart." ".$page_num_of." ".$this->sitemax?>&nbsp;&nbsp;
     </td>
 
     <td width="50">
@@ -97,75 +95,64 @@
 <table width="85%" border=0 align=center cellpadding="0" cellspacing="0">
   <tbody>
     <tr>
-      <td background="<?php echo $module_url?>/images/main/regions_left.gif" height="26">&nbsp;</td>
+      <td background="<?php echo $module_url?>/images/main/regions_left.gif" height="20">&nbsp;</td>
       <td background="<?php echo $module_url?>/images/main/regions_middle.jpg" colspan="7">&nbsp;</td>
       <td background="<?php echo $module_url?>/images/main/regions_right.gif">&nbsp;</td>
     </tr>
 
-    <tr bgcolor="#f0f0f0">
-      <td width="1" >&nbsp;</td>
-      <td width="30" ><strong>No.</strong></td>
+    <!-- Header -->
+    <tr bgcolor="#c0c0c0">
+      <td width="15" height=20>&nbsp;</td>
+      <td width="30" ><strong style="color: #222">&nbsp;No.</strong></td>
       <td width="140">
         <?php if (USE_UTC_TIME) {?>
-          <strong>&nbsp;&nbsp;<?php echo $events_date?>&nbsp;(UTC)</strong>
+          <strong style="color: #222">&nbsp;&nbsp;<?php echo $events_date?>&nbsp;(UTC)</strong>
         <?php }else{?>
-          <strong>&nbsp;&nbsp;<?php echo $events_date?>&nbsp;(Local)</strong>
+          <strong style="color: #222">&nbsp;&nbsp;<?php echo $events_date?>&nbsp;(Local)</strong>
         <?php }?>
       </td>
       <td width="60" >
-        <strong><?php echo $events_type?></strong>
+        <strong style="color: #222"><?php echo $events_type?></strong>
       </td>
       <td width="300">
-        <strong><?php echo $events_name?></strong>
+        <strong style="color: #222"><?php echo $events_name?></strong>
       </td>
       <td width="160">
-        <strong><?php echo $events_category?></strong>
+        <strong style="color: #222"><?php echo $events_category?></strong>
       </td>
       <td width="120">
-        <strong><?php echo $events_creator?></strong>
+        <strong style="color: #222"><?php echo $events_creator?></strong>
       </td>
       <td width="80" >&nbsp;</td>
       <td width="1"  >&nbsp;</td>
     </tr>
 
-    <tr>
-      <td bgcolor="#f0f0f0">&nbsp;</td>
-      <td colspan="7" bgcolor="#f0f0f0"><hr /></td>
-      <td bgcolor="#f0f0f0">&nbsp;</td>
-    </tr>
-
+    <!-- Data -->
     <?php foreach ($this->db_data as $dat) {?>
       <?php if ($dat->num%2==0) {?>
       <tr style='background-color: #d8d8d8'>
       <?php } else {?>
       <tr style='background-color: #f0f0f0'>
       <?php }?>
-        <td width="1">&nbsp;</td>
-        <td width="30"><font color=#000><strong>&nbsp;<?php echo $dat->num+1+$this->pstart;?></strong></font></td>
+        <td height=20>&nbsp;</td>
+        <td><strong style="color: #000;">&nbsp;<?php echo $dat->num+1+$this->pstart;?></strong></td>
 
-        <td width="140" height=26 style="color: #000000"><strong><?php echo $dat->time;?></strong> </td>
-        <td width="40"  style="color: #ff2222">
-          <strong><img height=20px width=20px <?php echo $dat->type;?> /></strong>
+        <td><strong style="color: #000"><?php echo $dat->time;?></strong> </td>
+        <td>
+          <strong style="color: #ff2222"><img height=20px width=20px <?php echo $dat->type;?> /></strong>
         </td>
-        <td width="300" style="color: #115500">
+        <td style="color: #115500">
           <a href=<?php echo $this->show_url.$dat->eventid;?>   ><strong><?php echo $dat->name;?></strong></a>
         </td>
 
-        <td width="160" style="color: #551111"><strong><?php echo $Categories[$dat->category];?></strong></td>
+        <td><strong style="color: #551111"><?php echo $Categories[$dat->category];?></strong></td>
 
-<!--
-        <td width="120" style="color: #2222cc">
-          <a style="cursor:pointer" onClick="window.open('<?php echo $module_url?>/helper/agent.php?agent=<?php echo $dat->owneruuid;?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
-            <strong><?php echo $dat->owner;?></strong>
-          </a>
-        </td>
--->
-        <td width="120" style="color: #2222cc">
+        <td style="color: #2222cc">
           <a style="cursor:pointer" onClick="window.open('<?php echo $module_url?>/helper/agent.php?agent=<?php echo $dat->creatoruuid;?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
             <strong><?php echo $dat->creator;?></strong>
           </a>
         </td>
-        <td width="80">
+        <td>
           <?php if ($this->hasPermit or $this->userid==$dat->uid) {?>
             <a href=<?php echo $this->edit_url.$dat->eventid;?>   ><strong style="color: #cc1010"><?php echo $modlos_edit?></strong></a>&nbsp;&nbsp;
             <a href=<?php echo $this->delete_url.$dat->eventid;?> ><strong style="color: #cc1010"><?php echo $modlos_delete?></strong></a>
@@ -173,12 +160,12 @@
             &nbsp;
           <?php }?>
         </td>
-        <td width="1">&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
     <?php }?>
 
     <tr>
-      <td background="<?php echo $module_url?>/images/main/regions_d_left.gif" height="28">&nbsp;</td>
+      <td background="<?php echo $module_url?>/images/main/regions_d_left.gif" height="20">&nbsp;</td>
       <td background="<?php echo $module_url?>/images/main/regions_d_middle.jpg" colspan="7">&nbsp;</td>
       <td background="<?php echo $module_url?>/images/main/regions_d_right.gif" >&nbsp;</td>
     </tr>
