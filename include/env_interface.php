@@ -33,6 +33,7 @@ if (isset($LOGINPAGE) and $LOGINPAGE) {
 	$TOTAL_REGION_TTL = get_string('modlos_total_regions','block_modlos');
 	$LAST_USERS_TTL   = get_string('modlos_visitors_last30days','block_modlos');
 	$ONLINE_TTL       = get_string('modlos_online_now','block_modlos');
+	$HG_ONLINE_TTL    = get_string('modlos_online_hg','block_modlos');
 }
 
 

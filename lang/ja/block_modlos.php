@@ -65,8 +65,8 @@ $string['modlos_db_status'] 		= 'データベース';
 $string['modlos_total_users'] 		= '全体のユーザ人数';
 $string['modlos_total_regions'] 	= '全体のリージョン数';
 $string['modlos_visitors_last30days']= '過去30日間の利用者数';
-$string['modlos_online_now'] 		= 'オンライン中のユーザ数';
-$string['modlos_online_hg'] 		= 'ハイパーグリッドユーザ数';
+$string['modlos_online_now'] 		= 'オンライン中のユーザ';
+$string['modlos_online_hg'] 		= 'ハイパーグリッドのユーザ';
 
 $string['modlos_user'] 				= 'アバター';
 $string['modlos_born_on'] 			= '作成日時';
