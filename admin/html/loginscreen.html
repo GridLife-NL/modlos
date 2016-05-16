@@ -24,8 +24,8 @@
 
 <?php if ($updated and !$preview) {?>
   <!-- Update DB -->
-  <h3><font color=#2222FF><center><?php echo $lgnscrn_msg ?></center></font></h3>
-  <h3><center><a href="<?php echo $lgnscrn_url?>" ><u><?php echo $return_ttl?></u></a></center></h3>
+  <h4 style="color#2222ff;"><center><?php echo $lgnscrn_msg ?></center></h4>
+  <h4><center><a href="<?php echo $lgnscrn_url?>" ><u><?php echo $return_ttl?></u></a></center></h4>
 
 <?php } else {?>
 
@@ -36,7 +36,7 @@
     <!-- PreView -->
     <?php if ($preview) {?>
       <input type="hidden" name="lgnscrn_color"  value="<?php echo $lgnscrn_color ?>" />
-      <input type="hidden" name="lgnscrn_altbox" value="<?php echo $lgnscrn_altbox?>" />
+      <input type="hidden" name="lgnscrn_altbox" value="<?php echo htmlspecialchars($lgnscrn_altbox)?>" />
 
       <style type="text/css">
         <?php include(CMS_MODULE_PATH.'/helper/loginscreen/alert_box.css');?>
@@ -95,7 +95,7 @@
                   <tr align=left>
                     <td class=head size=200 vAlign=top><strong><?php echo $edit_altbox?></strong></td>
                     <td class=odd  size=300>
-                      <textarea name="lgnscrn_altbox" cols="50" rows="5" value="lgnscrn_altbox"><?php echo $lgnscrn_altbox?></textarea><br />
+                      <textarea name="lgnscrn_altbox" cols="50" rows="5" value="lgnscrn_altbox"><?php echo htmlspecialchars($lgnscrn_altbox)?></textarea><br />
                     </td>
                   </tr>
                 </tbody>
@@ -129,7 +129,7 @@
   <div align=center>
     <ul>
       <?php foreach($this->errorMsg as $mesg) {?>
-        <li><font color="#F02022"><b><?php echo $mesg?></b></font></li>
+        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
       <?php }?>
     </ul>
   </div>
