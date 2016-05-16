@@ -40,6 +40,6 @@ else $isAvatarMax = false;
 print_tabnav($action, $course, !$isAvatarMax);
 
 $object_url = CMS_MODULE_URL.'/helper/world_map.php'.$url_param;
-include(CMS_MODULE_PATH.'/html/object.html');
+include(CMS_MODULE_PATH.'/html/map_object.html');
 
 echo $OUTPUT->footer($course);

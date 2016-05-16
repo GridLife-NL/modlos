@@ -422,6 +422,7 @@ class  AvatarsList
 		$get_owner_ttl	= get_string('modlos_get_owner_ttl', 'block_modlos');
 		$firstname_ttl	= get_string('modlos_firstname', 	 'block_modlos');
 		$lastname_ttl 	= get_string('modlos_lastname', 	 'block_modlos');
+		$avatarname_ttl = get_string('modlos_avatar_name', 	 'block_modlos');
 		$not_syncdb_ttl = get_string('modlos_not_syncdb',	 'block_modlos');
 		$online_ttl	 	= get_string('modlos_online_ttl',	 'block_modlos');
 		$active_ttl		= get_string('modlos_active',		 'block_modlos');
