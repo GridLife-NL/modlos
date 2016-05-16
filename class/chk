@@ -7,5 +7,6 @@ php -l edit_event.class.php
 php -l events_list.class.php
 php -l owner_avatar.class.php
 php -l regions_list.class.php
+php -l reset_region.class.php
 php -l show_event.class.php
 php -l show_status.class.php

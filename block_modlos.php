@@ -17,6 +17,7 @@ class block_modlos extends block_base
 	var $region_count;
 	var $lastmonth_online;
 	var $now_online;
+	var $hg_online;
 
 
 	function init()
@@ -34,6 +35,7 @@ class block_modlos extends block_base
 		$this->grid_name 		= $CFG->modlos_grid_name;
 		$this->grid_status 		= false;
 		$this->now_online 		= '0';
+		$this->hg_online 		= '0';
 		$this->lastmonth_online = '0';
 		$this->user_count 		= '0';
 		$this->region_count 	= '0';
@@ -88,6 +90,7 @@ class block_modlos extends block_base
 			$db_state = opensim_check_db();
 			$this->grid_status 		= $db_state['grid_status'];
 			$this->now_online 	 	= $db_state['now_online'];
+			$this->hg_online 	 	= $db_state['hg_online'];
 			$this->lastmonth_online = $db_state['lastmonth_online'];
 			$this->user_count  		= $db_state['user_count'];
 			$this->region_count		= $db_state['region_count'];
@@ -95,6 +98,7 @@ class block_modlos extends block_base
 		else {
 			$this->grid_status 		= false;
 			$this->now_online 	 	= 0;
+			$this->hg_online 	 	= 0;
 			$this->lastmonth_online = 0;
 			$this->user_count  		= 0;
 			$this->region_count		= 0;
@@ -109,6 +113,7 @@ class block_modlos extends block_base
 		$this->content->text.= get_string('modlos_total_regions','block_modlos').": <b>".$this->region_count."</b><br />";		
 		$this->content->text.= get_string('modlos_visitors_last30days','block_modlos').": <b>".$this->lastmonth_online."</b><br />";		
 		$this->content->text.= get_string('modlos_online_now','block_modlos').": <b>".$this->now_online."</b><br />";		
+		$this->content->text.= get_string('modlos_online_hg', 'block_modlos').": <b>".$this->hg_online."</b><br />";		
 
 		$this->content->footer = '<hr /><a href="http://www.nsl.tuis.ac.jp/xoops/modules/xpwiki/?Modlos" target="_blank"><i>Modlos '.$this->release.'</i></a>';
 

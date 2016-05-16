@@ -39,7 +39,7 @@ function checklength(obj,warning_div){
             <tr align="left">
               <td class="head" valign="top"><?php echo $events_desc?></td>
               <td class="even">
-                <textarea name="event_desc" rows="7" cols="" style="width:90%" wrap="virtual" maxlength="1024" onfocus="return checklength(this,'contact_max_warning')" onkeyup="return checklength(this,'contact_max_warning')" ><?php echo $this->event_desc?></textarea><br />
+                <textarea name="event_desc" rows="7" cols="" style="width:90%;" wrap="virtual" maxlength="1024" onfocus="return checklength(this,'contact_max_warning')" onkeyup="return checklength(this,'contact_max_warning')" ><?php echo $this->event_desc?></textarea><br />
                 <div>
                   <em id="contact_max_warning"><?php echo $events_max?> <strong>1024</strong> </em> 
                   <?php echo $events_chars?>&nbsp;&nbsp;<?php echo $events_inputed?>: <em id="counter"></em>
@@ -156,7 +156,7 @@ function checklength(obj,warning_div){
               <td>
                 <ul>
                   <?php foreach ($this->errorMsg as $errval) {?>
-                    <li><font color="#f01010"><b><?php echo $errval?></b></font></li>
+                    <li><strong style="color: #f01010;"><?php echo $errval?></strong></li>
                   <?php }?>
                 </ul>
               </td>
@@ -172,7 +172,7 @@ function checklength(obj,warning_div){
   <?php if ($this->event_saved) {?>
 
     <div align="center">
-      <h4><font color=#1010e0><?php echo $events_saved?></font></h4>
+      <h4 style="color: #1010e0;"><?php echo $events_saved?></h4>
     </div>
 
     <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>

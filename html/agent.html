@@ -49,56 +49,58 @@
         <tr><td><span class="styleTitel"><?php echo $user_ttl.":&nbsp;".htmlspecialchars($firstN)."&nbsp;&nbsp;".htmlspecialchars($lastN)?></span></td></tr>
         <?php if ($hasPermit) {?>
           <tr><td>&nbsp;</td></tr>
-          <tr><td class="styleText"><b><?php echo $uuid_ttl.":&nbsp;".$UUID?></b></td></tr>
+          <tr><td class="styleText"><strong><?php echo $uuid_ttl.":&nbsp;".$UUID?></strong></td></tr>
         <?php }?>
         <tr><td>&nbsp;</td></tr>
-        <tr><td class="styleText"><b><?php echo $born_on_ttl.":&nbsp;".$born?></b></td></tr>
+        <tr><td class="styleText"><strong><?php echo $born_on_ttl.":&nbsp;".$born?></strong></td></tr>
         <tr><td>&nbsp;</td></tr>
-        <tr><td class="styleText"><b><?php echo $lastlogin_ttl.":&nbsp;".$lastin?></b></td></tr>
+        <tr><td class="styleText"><strong><?php echo $lastlogin_ttl.":&nbsp;".$lastin?></strong></td></tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-          <td class="styleText"><b><?php echo $ownername_ttl.":&nbsp;"?><font color="#105ba7">
+          <td class="styleText"><strong><?php echo $ownername_ttl.":&nbsp;"?><style="color: #105ba7;">
             <?php if ($userinfo and $owner!=' - ') {?>
               <a href="<?php echo $CFG->wwwroot.'/user/view.php?id='.$userid.$course_amp?>" target="_blank"><?php echo htmlspecialchars($owner)?></a>
             <?php } else {?>
               <?php echo $owner?>
             <?php }?>
-            </font></b>
+            </style></strong>
           </td>
         </tr>
         <tr><td>&nbsp;</td></tr>
         <tr>
-          <td class="styleText"><b><?php echo $status_ttl?>:&nbsp;
+          <td class="styleText"><strong><?php echo $status_ttl?>:&nbsp;
             <?php if (!($state&AVATAR_STATE_SYNCDB)) {?>
-              <font color=#cc0000><?php echo $not_syncdb_ttl?>
+              <style="color: #cc0000;"><?php echo $not_syncdb_ttl?>
             <?php } elseif ($state&AVATAR_STATE_INACTIVE) {?>
-              <font color=#cc0000><?php echo $inactive_ttl?>
+              <style="color: #cc0000;"><?php echo $inactive_ttl?>
             <?php } elseif ($state&AVATAR_STATE_SYNCDB) {?>
-              <font color=#0000cc><?php echo $active_ttl?>
+              <style="color: #0000cc;"><?php echo $active_ttl?>
             <?php } else {?>
-              <font color=#cc0000><?php echo $unknown_status."(".$state.")"?>
+              <style="color: #cc0000;"><?php echo $unknown_status."(".$state.")"?>
             <?php }?>
             <?php if ($state&AVATAR_STATE_SLOODLE and $owner!=' - ' and $use_sloodle) {?>
               ,&nbsp;<?php echo $sloodle_ttl?>
             <?php }?>
-              </font>
+              </style>
 
             <?php if ($agentOnline) {?>
               &nbsp;<span class='styleOnline'>[<?php echo $online_ttl?>]</span>
             <?php } else {?>
               &nbsp;<span class='styleOffline'>[<?php echo $offline_ttl?>]</span>
             <?php }?>
-            </b>
+            </strong>
           </td>
         </tr>
         <tr><td class="styleText">&nbsp;</td></tr>
         <tr>
-          <td class="styleText"><b><?php echo $home_region_ttl?>:&nbsp;
-            <a href="<?php echo CMS_MODULE_URL.'/helper/sim.php?region='.$regionUUID.$course_amp?>"><font color="#0055cc"><?php echo $regionName?></font></a>
-          </b></td>
+          <td class="styleText"><strong><?php echo $home_region_ttl?>:&nbsp;
+            <a href="<?php echo CMS_MODULE_URL.'/helper/sim.php?region='.$regionUUID.$course_amp?>">
+              <style="color: #0055cc;"><?php echo $regionName?></style>i
+            </a>
+          </strong></td>
         </tr>
         <tr><td>&nbsp;</td></tr>
-        <tr><td><span class="styleText"><b><?php echo $profile_ttl?></b></span></td></tr>
+        <tr><td><span class="styleText"><strong><?php echo $profile_ttl?></strong></span></td></tr>
         <tr><td><span class="styleplace">.</span></td></tr>
         <tr>
           <td><span class="styleText">
@@ -124,9 +126,9 @@
                 <tr>
                   <td bgcolor="#ffffff">
                   <?php if ($profileImage=='') {?>
-                    <img style="border-color:#999999" src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width=256 border=5 />
+                    <img style="border-color:#999999;" src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width=256 border=5 />
                   <?php } else {?>
-                    <img style="border-color:#999999" src="<?php echo $texture_url.$profileImage?>&amp;xsize=256&amp;ysize=256" width=256 border=5 />
+                    <img style="border-color:#999999;" src="<?php echo $texture_url.$profileImage?>&amp;xsize=256&amp;ysize=256" width=256 border=5 />
                   <?php }?>
                   </td>
                 </tr>

@@ -9,13 +9,13 @@
 <!-- echo Messages -->
 <?php if ($this->created_avatar) {?>
   <div align="center">
-    <h4><font color=#1010e0><?php echo $avatar_created?></font></h4>
+    <h4 style="color: #1010e0;"><?php echo $avatar_created?></h4>
   </div>
   <table width="640" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
     <?php if ($this->hasPermit) {?>
       <tr>
         <td width="180" class="head"><?php echo $uuid_ttl?></td>
-        <td width="460" class="even"><font color="#2060b0"><?php echo $this->UUID?></font></td>	
+        <td width="460" class="even" style="color: #2060b0;"><?php echo $this->UUID?></td>	
       </tr>
     <?php }?>
     <tr>
@@ -45,7 +45,7 @@
   <div align="center">
     <ul>
       <?php foreach($this->errorMsg as $mesg) {?>
-        <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
+        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
       <?php }?>
     </ul>
   </div>

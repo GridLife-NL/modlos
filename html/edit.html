@@ -17,12 +17,12 @@
 
     <tr>
       <td width="120" class="head"><?php echo $firstname_ttl?></td>
-      <td width="320" class="even"><b><?php echo $this->firstname?></b></td>
+      <td width="320" class="even"><strong><?php echo $this->firstname?></strong></td>
     </tr>
 
     <tr>
       <td class="head"><?php echo $lastname_ttl?></td>
-      <td class="odd" ><b><?php echo $this->lastname?></b></td>
+      <td class="odd" ><strong><?php echo $this->lastname?></strong></td>
     </tr>
 
     <tr>
@@ -99,7 +99,6 @@
     <input type="reset"  value="<?php echo $reset_ttl?>" />
     <?php if ($this->state&AVATAR_STATE_INACTIVE) { ?>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <!--<a href="<?php echo $this->delete_url?>" ><font color=#f01010><?php echo $delete_ttl?></font></a> -->
       <input name="submit_delete" type="submit" id="submit_delete" value="<?php echo $delete_ttl?>" />
     <?php }?>
   </div>
@@ -114,19 +113,19 @@
   <div align="center">
     <ul>
       <?php foreach ($this->errorMsg as $mesg) {?>
-        <li><font color="#f01010"><b><?php echo $mesg?></b></font></li>
+        <li><strong style="color: #f01010;"><?php echo $mesg?></strong></li>
       <?php }?>
     </ul>
   </div>
 
 <?php } else {?>
   <?php if ($this->updated_avatar) {?>
-    <h4><font color=#1010e0><center><?php echo $avatar_updated?></center></font></h4>
+    <h4 style="color: #1010e0;"><center><?php echo $avatar_updated?></center></h4>
     <table width="520" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff" >
       <?php if ($this->hasPermit) {?>
         <tr>
           <td width="120" class="head"><?php echo $uuid_ttl?></td>
-          <td width="320" class="even"><font color="#2060b0"><?php echo $this->UUID?></font></td>	
+          <td width="320" class="even"style="color: #2060b0;"><?php echo $this->UUID?></td>	
         </tr>
       <?php }?>
 
@@ -146,19 +145,18 @@
         <td class="head"><?php echo $status_ttl?></td>
         <td class="even" >
           <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
-            <font color=#cc0000><?php echo $not_syncdb_ttl?>
+            <style="color: #cc0000;"><?php echo $not_syncdb_ttl?>
           <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
-            <font color=#cc0000><?php echo $inactive_ttl?>
+            <style="color: #cc0000;"><?php echo $inactive_ttl?>
           <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
-            <font color=#005500><?php echo $active_ttl?>
+            <style="color: #005500;"><?php echo $active_ttl?>
           <?php } else {?>
-            <font color=#cc0000><?php echo $unknown_status?>
+            <style="color: #cc0000;"><?php echo $unknown_status?>
           <?php }?>
           <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
             ,&nbsp;<?php echo $sloodle_ttl?>
           <?php }?>
-            </font>
-
+            </style>
         </td>
       </tr>
       <?php if ($this->hasPermit or $this->ownername=="") {?>

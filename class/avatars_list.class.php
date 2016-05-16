@@ -491,6 +491,7 @@ class  AvatarsList
 		if ($online['online']) {
 			$dat['region'] 	  = $online['region_name'];
 			$dat['region_id'] = $online['region_id'];
+			//$dat['lastin']    = date(DATE_FORMAT, $online['time_stamp']);
 		}
 
 		$dat['uuid']	= str_replace('-', '', $UUID);

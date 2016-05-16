@@ -14,6 +14,7 @@ class  ShowStatus
 {
 	var	$grid_status;
 	var $now_online;
+	var $hg_online;
 	var $lastmonth_online;
 	var $user_count;
 	var $region_count;
@@ -32,6 +33,7 @@ class  ShowStatus
 
 		$this->grid_status 		= false;
 		$this->now_online 		= '0';
+		$this->hg_online 		= '0';
 		$this->lastmonth_online = '0';
 		$this->user_count 		= '0';
 		$this->region_count 	= '0';
@@ -56,6 +58,7 @@ class  ShowStatus
 
 		$this->grid_status      = $ret['grid_status'];
 		$this->now_online       = $ret['now_online'];
+		$this->hg_online        = $ret['hg_online'];
 		$this->lastmonth_online = $ret['lastmonth_online'];
 		$this->user_count       = $ret['user_count'];
 		$this->region_count     = $ret['region_count'];
@@ -79,6 +82,7 @@ class  ShowStatus
 		$total_regions 		= get_string('modlos_total_regions', 	  'block_modlos');
 		$visitors_last30days= get_string('modlos_visitors_last30days','block_modlos');
 		$online_now 		= get_string('modlos_online_now', 		  'block_modlos');
+		$online_hg 		    = get_string('modlos_online_hg', 		  'block_modlos');
 
 		include(CMS_MODULE_PATH.'/html/show_status.html');
 	}

@@ -66,6 +66,7 @@ $string['modlos_total_users'] 		= 'Total Users';
 $string['modlos_total_regions'] 	= 'Total Regions';
 $string['modlos_visitors_last30days']= 'Visitors last 30 days';
 $string['modlos_online_now'] 		= 'OnLine Now';
+$string['modlos_online_hg'] 		= 'HyperGrid Users';
 
 $string['modlos_user'] 				= 'Avatar';
 $string['modlos_born_on'] 			= 'Born on';

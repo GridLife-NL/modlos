@@ -33,21 +33,21 @@
         <td class="head"><?php echo $status_ttl?></td>
         <td class="odd" >
           <?php if ($this->deleted_avatar) {?>
-            <font color=#cc0000><?php echo $state_deleted?></font>
+            <style="color: #cc0000;"><?php echo $state_deleted?>
           <?php } else {?>
             <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
-              <font color=#cc0000><?php echo $not_syncdb_ttl?>
+              <style="color: #cc0000;"><?php echo $not_syncdb_ttl?>
             <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
-              <font color=#cc0000><?php echo $inactive_ttl?>
+              <style="color: #cc0000;"><?php echo $inactive_ttl?>
             <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
-              <font color=#005500><?php echo $active_ttl?>
+              <style="color: #005500;"><?php echo $active_ttl?>
             <?php } else {?>
-              <font color=#cc0000><?php echo $unknown_status?>
+              <style="color: #cc0000;"><?php echo $unknown_status?>
             <?php }?>
             <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
               ,&nbsp;<?php echo $sloodle_ttl?>
             <?php }?>
-            </font>
+            </style>
           <?php }?>
         </td>
       </tr>
@@ -85,7 +85,7 @@
   <div align="center">
     <ul>
       <?php foreach($this->errorMsg as $mesg) {?>
-        <li><font color="#f02022"><b><?php echo $mesg?></b></font></li>
+        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
       <?php }?>
     </ul>
   </div>
@@ -94,9 +94,9 @@
 
   <div align="center">
     <?php if ($this->deleted_avatar) {?>
-      <h4><font color=#2020e0><?php echo $avatar_deleted?></font></h4>
+      <h4 style="color: #2020e0;"><?php echo $avatar_deleted?></h4>
     <?php } else {?>
-      <h4><font color=#c02020><?php echo $avatar_dlt_confrm?></font></b></h4>
+      <h4 style="color: #c02020;"><?php echo $avatar_dlt_confrm?></h4>
     <?php }?>
   </div>
 
