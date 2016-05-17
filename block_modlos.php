@@ -55,8 +55,6 @@ class block_modlos extends block_base
 		}
 		$id = optional_param('id', 0, PARAM_INT);
 	   
-		$db_ver = opensim_get_db_version();
-
 		$this->content = new stdClass;
 		$this->content->text = '<a href="'.CMS_MODULE_URL.'/actions/show_status.php?course='.$id.'">'. get_string('modlos_status','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.  get_string('modlos_world_map','block_modlos').'</a><br />';
@@ -69,11 +67,10 @@ class block_modlos extends block_base
 			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php?course='.$id.'&action=personal">'.get_string('modlos_my_avatars','block_modlos').'</a><br />';
 
 			$isAvatarMax = false;
-			if ($db_ver!=null) { 
-				$avatars_num = modlos_get_avatars_num($USER->id);
-				$max_avatars = $CFG->modlos_max_own_avatars;
-				if (!hasModlosPermit($id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
-			}
+			$avatars_num = modlos_get_avatars_num($USER->id);
+			$max_avatars = $CFG->modlos_max_own_avatars;
+			if (!hasModlosPermit($id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
+			//
 			if (!$isAvatarMax) {
 				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar.php?course='.$id.'">'.get_string('modlos_avatar_create','block_modlos').'</a><br />';
 			}
@@ -86,7 +83,7 @@ class block_modlos extends block_base
 		}
 		$this->content->text.= "<hr />";		
 
-		if ($db_ver!=null and $CFG->modlos_connect_db) { 
+		if ($CFG->modlos_connect_db) { 
 			$db_state = opensim_check_db();
 			$this->grid_status 		= $db_state['grid_status'];
 			$this->now_online 	 	= $db_state['now_online'];

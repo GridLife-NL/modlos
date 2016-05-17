@@ -92,13 +92,6 @@ class  RegionsList
 	{
 		global $CFG;
 
-		$db_ver = opensim_get_db_version(); 
-		if ($db_ver==null) {
-			$course_url = $CFG->wwwroot;
-			if ($this->course_id>0) $course_url .= '/course/view.php?id='.$this->course_id;
-			print_error('modlos_db_connect_error', 'block_modlos', $course_url);
-		}
-
 		$this->order = optional_param('order', '', PARAM_TEXT);
 		$this->order_desc = optional_param('desc', '0', PARAM_INT);
 		if (!isAlphabetNumeric($this->order)) $this->order = '';
@@ -145,8 +138,7 @@ class  RegionsList
 			if (!$this->order_desc) $this->desc_estateid = 1;
 		}
 		else if ($this->order=='avatar') {
-			if ($db_ver==OPENSIM_V06) $sql_order = ' ORDER BY username';
-			else					  $sql_order = ' ORDER BY FirstName';
+			$sql_order = ' ORDER BY FirstName';
 			if (!$this->order_desc) $this->desc_avatar = 1;
 		}
 		//

@@ -75,15 +75,6 @@ class  ManagementBase
 					opensim_clear_login_table();
 				}
 				//
-				else if ($command=='convertdb') {
-					opensim_succession_data(env_get_config('home_region'));
-					opensim_recreate_presence();
-					$profs = opensim_get_avatars_profiles_from_users();
-					if ($profs!=null) {	// 0.6.x
-						modlos_set_profiles_from_users($profs, false);        // not over write
-					}
-				}
-				//
 				else if ($command=='cleandb') {
 					opensim_cleanup_db();
 				}

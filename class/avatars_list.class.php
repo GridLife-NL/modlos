@@ -106,13 +106,6 @@ class  AvatarsList
 	{
 		global $CFG, $USER;
 
-		$db_ver = opensim_get_db_version();
-		if ($db_ver==null) {
-			$course_url = $CFG->wwwroot;
-			if ($this->course_id>0) $course_url.= '/course/view.php?id='.$this->course_id;
-			print_error('modlos_db_connect_error', 'block_modlos', $course_url);
-		}
-
 		$this->order = optional_param('order', '', PARAM_TEXT);
 		$this->order_desc = optional_param('desc', '0', PARAM_INT);
 		if (!isAlphabetNumeric($this->order)) $this->order = '';
@@ -132,13 +125,11 @@ class  AvatarsList
 
 		$sql_validuser = $sql_firstname = $sql_lastname = '';
 		if ($this->firstname=='' and $this->lastname=='') {
-			if ($db_ver==OPENSIM_V06) $sql_validuser = "username!=''";
-			else					  $sql_validuser = "FirstName!=''";
+			$sql_validuser = "FirstName!=''";
 		}
 		else {
 			if ($this->firstname!='') { 
-				if ($db_ver==OPENSIM_V06) $sql_firstname = "username  LIKE '$this->firstname'";
-				else					  $sql_firstname = "FirstName LIKE '$this->firstname'";
+				 $sql_firstname = "FirstName LIKE '$this->firstname'";
 				$this->lnk_firstname = "&amp;firstname=$this->firstname";
 			}
 			if ($this->lastname!='') { 
@@ -149,27 +140,21 @@ class  AvatarsList
 		}
 
 		// ORDER
-		// OPENSIM_V06: users.UUID,  username,  lastname, created, lastLogin, regions.uuid 
-		// OPENSIM_V07: PrincipalID, FirstName, LastName, Created, Login,	 homeRegionID  
 		$sql_order = '';
 		if ($this->order=='firstname') {
-			if ($db_ver==OPENSIM_V06) $sql_order = 'ORDER BY username';
-			else					  $sql_order = 'ORDER BY FirstName';
+			  $sql_order = 'ORDER BY FirstName';
 			if (!$this->order_desc) $this->desc_fname = 1;
 		}
 		else if ($this->order=='lastname') {
-			if ($db_ver==OPENSIM_V06) $sql_order = 'ORDER BY lastname';
-			else					  $sql_order = 'ORDER BY LastName';
+			$sql_order = 'ORDER BY LastName';
 			if (!$this->order_desc) $this->desc_lname = 1;
 		}
 		else if ($this->order=='login') {
-			if ($db_ver==OPENSIM_V06) $sql_order = 'ORDER BY lastlogin';
-			else					  $sql_order = 'ORDER BY Login';
+			$sql_order = 'ORDER BY Login';
 			if (!$this->order_desc) $this->desc_login = 1;
 		}
 		else {
-			if ($db_ver==OPENSIM_V06) $sql_order = 'ORDER BY created';
-			else					  $sql_order = 'ORDER BY Created';
+			$sql_order = 'ORDER BY Created';
 			if (!$this->order_desc) $this->desc_created = 1;
 		}
 		//
@@ -193,8 +178,7 @@ class  AvatarsList
 		// SQL Condition
 		$this->sql_username  = " $sql_validuser $sql_firstname $sql_lastname";
 		$this->sql_condition = " $sql_order";
-		if ($db_ver==OPENSIM_V06) $this->sql_uuid_str = 'users.UUID';
-		else                      $this->sql_uuid_str = 'PrincipalID';
+		$this->sql_uuid_str  = 'PrincipalID';
 
 		return true;
 	}
