@@ -90,7 +90,4 @@ class  UpdateDataBase
 
 		include(CMS_MODULE_PATH.'/admin/html/updatedb.html');
 	}
-
 }
-
-?>

@@ -29,4 +29,3 @@ $updatedb->execute();
 $updatedb->print_page();
 
 echo $OUTPUT->footer($course);
-?>	

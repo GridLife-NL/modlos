@@ -29,4 +29,3 @@ $estates->execute();
 $estates->print_page();
 
 echo $OUTPUT->footer($course);
-?>	

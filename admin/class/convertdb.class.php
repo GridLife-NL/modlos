@@ -2,10 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //	convertdb.class.php
 //
-//	OpenSimのDBと MoodleのDBの同期をとる．
-//
-// 		OpenSimにデータがある場合は，Moodleのデータを OpenSimに合わせる．
-// 		OpenSimに対応データが無い場合は，Moodleのデータを消す．
+//	OpenSimのDB 0.6.x を 0.7に変換する
 //
 //                                   			by Fumi.Iseki
 //
@@ -67,7 +64,9 @@ class  ConvertDataBase
 				opensim_succession_data(env_get_config('home_region'));
 				opensim_recreate_presence();
 				$profs = opensim_get_avatars_profiles_from_users();
-				if ($profs!=null) modlos_set_profiles_from_users($profs, false);		// not over write
+				if ($profs!=null) {		// 0.6.x
+					modlos_set_profiles_from_users($profs, false);		// not over write
+				}
 
 				$this->dbconverted = true;
 			}
@@ -90,7 +89,4 @@ class  ConvertDataBase
 
 		include(CMS_MODULE_PATH.'/admin/html/convertdb.html');
 	}
-
 }
-
-?>

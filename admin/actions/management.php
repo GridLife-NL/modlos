@@ -29,4 +29,3 @@ $manage->execute();
 $manage->print_page();
 
 echo $OUTPUT->footer($course);
-?>	

@@ -29,4 +29,3 @@ $lastnames->execute();
 $lastnames->print_page();
 
 echo $OUTPUT->footer($course);
-?>	

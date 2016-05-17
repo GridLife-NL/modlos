@@ -29,4 +29,3 @@ $convertdb->execute();
 $convertdb->print_page();
 
 echo $OUTPUT->footer($course);
-?>	

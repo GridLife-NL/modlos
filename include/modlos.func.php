@@ -676,8 +676,6 @@ function  modlos_get_profile($uuid)
 }
 
 
-
-
 // called from updatedb.class.php
 function  modlos_set_profiles_from_users($profs, $ovwrite=true)
 {
@@ -740,8 +738,6 @@ function  modlos_set_profiles_from_users($profs, $ovwrite=true)
 }
 
 
-
-
 function  modlos_delete_profiles($uuid)
 {
 	global $DB;
@@ -788,8 +784,6 @@ function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
 }
 
 
-
-
 function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
 { 
 	global $DB;
@@ -804,7 +798,6 @@ function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
    
 	return $events_num;
 }
-
 
    
 function  modlos_get_event($id)
@@ -834,8 +827,6 @@ function  modlos_get_event($id)
    
 	return $ret;
 }
-
-
 
 
 function  modlos_set_event($event)

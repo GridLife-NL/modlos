@@ -29,4 +29,3 @@ $synchro->execute();
 $synchro->print_page();
 
 echo $OUTPUT->footer($course);
-?>	

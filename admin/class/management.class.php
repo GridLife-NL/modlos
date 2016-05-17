@@ -4,9 +4,6 @@
 //
 //	管理
 //
-//
-//
-//
 //                                   			by Fumi.Iseki
 //
 
@@ -82,7 +79,9 @@ class  ManagementBase
 					opensim_succession_data(env_get_config('home_region'));
 					opensim_recreate_presence();
 					$profs = opensim_get_avatars_profiles_from_users();
-					if ($profs!=null) modlos_set_profiles_from_users($profs, false);        // not over write
+					if ($profs!=null) {	// 0.6.x
+						modlos_set_profiles_from_users($profs, false);        // not over write
+					}
 				}
 				//
 				else if ($command=='cleandb') {
@@ -132,6 +131,5 @@ class  ManagementBase
 
 		include(CMS_MODULE_PATH.'/admin/html/management.html');
 	}
-
 }
 
