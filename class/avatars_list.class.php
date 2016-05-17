@@ -74,7 +74,6 @@ class  AvatarsList
 
 		$this->course_id	= $course_id;
 		$this->hasPermit	= hasModlosPermit($course_id);
-		$this->course_id	= $course_id;
 		$this->use_sloodle  = $CFG->modlos_cooperate_sloodle;
 		$this->use_currency = $CFG->modlos_use_currency_server;
 		$this->show_all	    = $show_all;
