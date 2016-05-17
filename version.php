@@ -7,9 +7,10 @@ $plugin->component = 'block_modlos';	// Full name of the plugin (used for diagno
 $plugin->cron      = 0;
 $plugin->maturity  = MATURITY_STABLE;
 
-$plugin->release   = '2.9.0';
+$plugin->release   = '3.0.0';
 
-$plugin->version   = 2016051500;
+$plugin->version   = 2016051700;
+//$plugin->version = 2016051500;
 //$plugin->version = 2016010600;
 //$plugin->version = 2014120401;
 //$plugin->version = 2014112801;
