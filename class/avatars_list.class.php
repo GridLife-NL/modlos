@@ -142,7 +142,7 @@ class  AvatarsList
 		// ORDER
 		$sql_order = '';
 		if ($this->order=='firstname') {
-			  $sql_order = 'ORDER BY FirstName';
+			$sql_order = 'ORDER BY FirstName';
 			if (!$this->order_desc) $this->desc_fname = 1;
 		}
 		else if ($this->order=='lastname') {
