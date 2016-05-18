@@ -106,8 +106,8 @@ class  AvatarsList
 	{
 		global $CFG, $USER;
 
-		$this->order = optional_param('order', '', PARAM_TEXT);
-		$this->order_desc = optional_param('desc', '0', PARAM_INT);
+		$this->order = optional_param('order', 'login', PARAM_TEXT);
+		$this->order_desc = optional_param('desc', '1', PARAM_INT);
 		if (!isAlphabetNumeric($this->order)) $this->order = '';
 
 		// Post Check

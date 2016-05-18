@@ -92,7 +92,7 @@ class  RegionsList
 	{
 		global $CFG;
 
-		$this->order = optional_param('order', '', PARAM_TEXT);
+		$this->order = optional_param('order', 'name', PARAM_TEXT);
 		$this->order_desc = optional_param('desc', '0', PARAM_INT);
 		if (!isAlphabetNumeric($this->order)) $this->order = '';
 
