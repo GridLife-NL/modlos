@@ -60,6 +60,7 @@ class  AvatarsList
 	var $sql_condition = '';
 	var $sql_username  = '';
 	var $sql_uuid_str  = '';
+	var $sql_limit     = '';
 
 
 
@@ -169,8 +170,7 @@ class  AvatarsList
 		// pstart & plimit
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
-		//
-		$sql_limit = "LIMIT $this->pstart, $this->plimit";
+		$this->sql_limit = " LIMIT $this->pstart, $this->plimit ";
 		//
 		$this->ownerloss = optional_param('ownerloss', "$this->ownerloss", PARAM_INT);
 
@@ -212,47 +212,51 @@ class  AvatarsList
 
 		////////////////////////////////////////////////////////////////////
 		// Read Data from DB
-		$dummy = opensim_get_avatars_infos($where.$this->sql_condition);
+		//$dummy = opensim_get_avatars_infos($where.$this->sql_condition);
 
 		$num = 0;
 		$con = 0;
 		$users = array();
 
 		if (!$this->ownerloss) {
+			//
+			$con = opensim_get_avatars_num();
+			$dummy = opensim_get_avatars_infos($where.$this->sql_condition.$this->sql_limit);
+			//
 			foreach($dummy as $user) {
-				if ($con>=$this->pstart and $con<$this->pstart+$this->plimit) {
-					$users[$num] = $user;
-					$users[$num]['owner_name'] = ' - ';
-					$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
-					if ($avatardata==null) {
-						$users[$num]['uid']   = 0;
-						$users[$num]['state'] = AVATAR_STATE_NOSTATE;
-					}
-					else {
-						$users[$num]['uid']   = $avatardata['uid'];
-						$users[$num]['state'] = $avatardata['state'];
-						if ($avatardata['uid']>0) {
-							$user_info = get_userinfo_by_id($avatardata['uid']);
-							if ($user_info!=null) {
-								$users[$num]['owner_name'] = get_display_username($user_info->firstname, $user_info->lastname);
-							}
-							else {
-								$users[$num]['uid'] = 0;
-							}
+				$users[$num] = $user;
+				$users[$num]['owner_name'] = ' - ';
+				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
+				if ($avatardata==null) {
+					$users[$num]['uid']   = 0;
+					$users[$num]['state'] = AVATAR_STATE_NOSTATE;
+				}
+				else {
+					$users[$num]['uid']   = $avatardata['uid'];
+					$users[$num]['state'] = $avatardata['state'];
+					if ($avatardata['uid']>0) {
+						$user_info = get_userinfo_by_id($avatardata['uid']);
+						if ($user_info!=null) {
+							$users[$num]['owner_name'] = get_display_username($user_info->firstname, $user_info->lastname);
 						}
 						else {
-							if (!($avatardata['state']&AVATAR_STATE_INACTIVE)) {
-								$users[$num]['uid'] = 0;
-							}
+							$users[$num]['uid'] = 0;
 						}
 					}
-					$num++;
+					else {
+						if (!($avatardata['state']&AVATAR_STATE_INACTIVE)) {
+							$users[$num]['uid'] = 0;
+						}
+					}
 				}
-				$con++;
+				$num++;
 			}
 		}
 		//
 		else {		// Search lost avatars
+			//
+			$dummy = opensim_get_avatars_infos($where.$this->sql_condition);
+			//
 			foreach($dummy as $user) {
 				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
 				if ($avatardata==null) {
