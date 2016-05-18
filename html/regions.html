@@ -197,29 +197,42 @@
         <?php }?> 
 
         <td style="color: #000;">
-          <?php if ($this->isGuest) {?>
-            <strong><?php echo htmlspecialchars($dat['regionName'])?></strong>
-          <?php } else {?>
+          <?php if (!$this->isGuest) {?>
             <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_param.'&region='.$dat['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
               <strong style="color: #000060;"><?php echo $dat['regionName']?></strong>
             </a>
+          <?php } else {?>
+            <strong><?php echo htmlspecialchars($dat['regionName'])?></strong>
+          <?php }?>
+        </td>
+
+        <td>
+          <?php if (!$this->isGuest) {?>
+            <a href="<?php echo $worldmap_url.'&amp;ctX='.$dat['locX'].'&amp;ctY='.$dat['locY']?>" target="_blank">
+              <strong style="color: #115500;"><?php echo $dat['locX']?></strong>
+            </a>
+          <?php } else {?>
+            <strong style="color: #115500;"><?php echo $dat['locX']?></strong>
           <?php }?>
         </td>
         <td>
-          <a href="<?php echo $worldmap_url.'&amp;ctX='.$dat['locX'].'&amp;ctY='.$dat['locY']?>" target="_blank"><strong style="color: #115500;"><?php echo $dat['locX']?></strong></a>
-        </td>
-        <td>
-          <a href="<?php echo $worldmap_url.'&amp;ctX='.$dat['locX'].'&amp;ctY='.$dat['locY']?>" target="_blank"><strong style="color: #115500;"><?php echo $dat['locY']?></strong></a>
+          <?php if (!$this->isGuest) {?>
+            <a href="<?php echo $worldmap_url.'&amp;ctX='.$dat['locX'].'&amp;ctY='.$dat['locY']?>" target="_blank">
+              <strong style="color: #115500;"><?php echo $dat['locY']?></strong>
+            </a>
+          <?php } else {?>
+            <strong style="color: #115500;"><?php echo $dat['locY']?></strong>
+          <?php }?>
         </td>
         <td>&nbsp;</td>
 
         <td style="color: #2222ff;">
-          <?php if ($this->isGuest) {?>
-            <strong><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
-          <?php } else {?>
+          <?php if (!$this->isGuest) {?>
             <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$dat['avatar_uuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
               <strong><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
             </a>
+          <?php } else {?>
+            <strong><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
           <?php }?>
         </td>
         <td>&nbsp;</td>

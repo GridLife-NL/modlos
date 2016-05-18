@@ -111,7 +111,7 @@ class block_modlos extends block_base
 		$this->content->text.= get_string('modlos_total_users','block_modlos').": <strong>".$this->user_count."</strong><br />";		
 		$this->content->text.= get_string('modlos_total_regions','block_modlos').": <strong>".$this->region_count."</strong><br />";		
 		$this->content->text.= get_string('modlos_visitors_last30days','block_modlos').": <strong>".$this->lastmonth_online."</strong><br />";		
-		$this->content->text.= get_string('modlos_online_now','block_modlos').": <strong>".$this->now_online."</strong><br />";		
+		$this->content->text.= '<strong>'.get_string('modlos_online_now','block_modlos').': '.$this->now_online."</strong><br />";		
 		$this->content->text.= get_string('modlos_online_hg', 'block_modlos').": <strong>".$this->hg_online."</strong><br />";		
 
 		$this->content->footer = '<hr /><a href="http://www.nsl.tuis.ac.jp/xoops/modules/xpwiki/?Modlos" target="_blank"><i>Modlos '.$this->release.'</i></a>';
