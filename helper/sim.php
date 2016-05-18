@@ -11,7 +11,7 @@ require_once(realpath(dirname(__FILE__).'/../include/modlos.func.php'));
 
 
 if (isguestuser()) {
-	exit('<h4>guest user is not allowed to access this page!!</h4>');
+	exit('<h4>Guest User is not allowed to access this page!!</h4>');
 }
 
 $region    = required_param('region', PARAM_TEXT);

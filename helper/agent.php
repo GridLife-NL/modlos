@@ -6,7 +6,7 @@ require_once(realpath(dirname(__FILE__).'/../include/modlos.func.php'));
 
 
 if (isguestuser()) {
-    exit('<h4>guest user is not allowed to access this page!!</h4>');
+    exit('<h4>Guest User is not allowed to access this page!!</h4>');
 }
 
 $agent 	   = required_param('agent', PARAM_TEXT);
@@ -50,6 +50,8 @@ if ($agent) {
 		$serverIP		= $avinfo['serverIP'];
 		$serverHttpPort	= $avinfo['serverHttpPort'];
 		$serverURI		= $avinfo['serverURI'];
+		$hgURI			= $avinfo['hgURI'];
+		$hgName			= $avinfo['hgName'];
 
 		$profileText 	= $avinfo['profileText'];
 		$profileImage	= $avinfo['profileImage'];
@@ -154,6 +156,7 @@ $profile_ttl	= get_string('modlos_profile',		 'block_modlos');
 $born_on_ttl  	= get_string('modlos_born_on',		 'block_modlos');
 $lastlogin_ttl 	= get_string('modlos_lastlogin',	 'block_modlos');
 $home_region_ttl= get_string('modlos_home_region',	 'block_modlos');
+$hyper_grid_ttl = get_string('modlos_hg_name_ttl',	 'block_modlos');
 $ownername_ttl	= get_string('modlos_ownername',	 'block_modlos');
 $unknown_status	= get_string('modlos_unknown_status','block_modlos');
 $has_noprofile	= get_string('modlos_has_noprofile', 'block_modlos');

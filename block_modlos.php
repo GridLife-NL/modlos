@@ -56,7 +56,9 @@ class block_modlos extends block_base
 		$id = optional_param('id', 0, PARAM_INT);
 	   
 		$this->content = new stdClass;
-		$this->content->text = '<a href="'.CMS_MODULE_URL.'/actions/show_status.php?course='.$id.'">'. get_string('modlos_status','block_modlos').'</a><br />';
+		$this->content->text = '';
+//		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/show_status.php?course='.$id.'">'. get_string('modlos_status','block_modlos').'</a><br />';
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_online.php?course='.$id.'&order=login&desc=1">'. get_string('modlos_online','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.  get_string('modlos_world_map','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'&order=name">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
 
@@ -102,15 +104,15 @@ class block_modlos extends block_base
 		}
 		if (!$this->grid_status) set_config('modlos_connect_db', 0);
 
-		$this->content->text.= "<center><b>".$this->grid_name."</b></center>";		
+		$this->content->text.= "<center><strong>".$this->grid_name."</strong></center>";		
 		$this->content->text.= get_string('modlos_db_status','block_modlos').": ";		
-		if ($this->grid_status) $this->content->text.= "<b><font color=\"#129212\">ONLINE</font></b><br />";		
-		else					$this->content->text.= "<b><font color=\"#ea0202\">OFFLINE</font></b><br />";		
-		$this->content->text.= get_string('modlos_total_users','block_modlos').": <b>".$this->user_count."</b><br />";		
-		$this->content->text.= get_string('modlos_total_regions','block_modlos').": <b>".$this->region_count."</b><br />";		
-		$this->content->text.= get_string('modlos_visitors_last30days','block_modlos').": <b>".$this->lastmonth_online."</b><br />";		
-		$this->content->text.= get_string('modlos_online_now','block_modlos').": <b>".$this->now_online."</b><br />";		
-		$this->content->text.= get_string('modlos_online_hg', 'block_modlos').": <b>".$this->hg_online."</b><br />";		
+		if ($this->grid_status) $this->content->text.= "<strong style=\"color:#129212\">ONLINE</strong><br />";		
+		else					$this->content->text.= "<strong style=\"color:#ea0202\">OFFLINE</strong><br />";		
+		$this->content->text.= get_string('modlos_total_users','block_modlos').": <strong>".$this->user_count."</strong><br />";		
+		$this->content->text.= get_string('modlos_total_regions','block_modlos').": <strong>".$this->region_count."</strong><br />";		
+		$this->content->text.= get_string('modlos_visitors_last30days','block_modlos').": <strong>".$this->lastmonth_online."</strong><br />";		
+		$this->content->text.= get_string('modlos_online_now','block_modlos').": <strong>".$this->now_online."</strong><br />";		
+		$this->content->text.= get_string('modlos_online_hg', 'block_modlos').": <strong>".$this->hg_online."</strong><br />";		
 
 		$this->content->footer = '<hr /><a href="http://www.nsl.tuis.ac.jp/xoops/modules/xpwiki/?Modlos" target="_blank"><i>Modlos '.$this->release.'</i></a>';
 

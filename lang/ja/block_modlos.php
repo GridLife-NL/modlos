@@ -67,10 +67,11 @@ $string['modlos_total_regions'] 	= '全体のリージョン数';
 $string['modlos_visitors_last30days']= '過去30日間の利用者数';
 $string['modlos_online_now'] 		= 'オンライン中のユーザ';
 $string['modlos_online_hg'] 		= 'ハイパーグリッドのユーザ';
+$string['modlos_online']            = 'オンライン';
 
 $string['modlos_online_avatars']    = 'オンライン アバターリスト';
 $string['modlos_login_time'] 		= 'ログイン';
-$string['modlos_hg_name_ttl'] 		= 'HG名';
+$string['modlos_hg_name_ttl'] 		= 'ハイパーグリッド';
 
 $string['modlos_user'] 				= 'アバター';
 $string['modlos_born_on'] 			= '作成日時';

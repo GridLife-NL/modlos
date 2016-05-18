@@ -129,7 +129,11 @@
     <tr bgcolor="#c0c0c0">
       <td width="15" height=26>&nbsp;</td>
       <td width="40" style="color: #222;"><strong><?php echo $number_ttl?></strong></td>
-      <td width="50" style="color: #222;"><strong><?php echo $edit_ttl?></strong></td>
+
+      <?php if (!$this->isGuest) {?>
+        <td width="50" style="color: #222;"><strong><?php echo $edit_ttl?></strong></td>
+      <?php }?>
+
       <td width="200">
         <a style="cursor:pointer;" onclick="document.location.href='<?php echo $action_url.$pstart_amp.$plimit_amp.$desc_name?>&amp;order=name'">
           <strong><?php echo $region_name_ttl?></strong>
@@ -180,21 +184,23 @@
         <td width=15 height=26>&nbsp;</td>
         <td width=40 style="color: #000;"><strong>&nbsp;<?php echo $dat['num']+1+$this->pstart?></strong></td>
 
-        <td>
-          <?php if ($has_permit or $dat['user_id']==$USER->id) { ?>
-            <a href="<?php echo $this->reset_url.'&amp;region='.$dat['UUID']?>" >
-              <strong style="color: #cc1010;">EDIT</strong>
-            </a>
-          <?php } else {?>
-            &nbsp;-&nbsp;
-          <?php }?> 
-        </td>
+        <?php if (!$this->isGuest) {?>
+          <td>
+            <?php if ($has_permit or $dat['user_id']==$USER->id) { ?>
+              <a href="<?php echo $this->reset_url.'&amp;region='.$dat['UUID']?>" >
+                <strong style="color: #cc1010;">EDIT</strong>
+              </a>
+            <?php } else {?>
+              &nbsp;-&nbsp;
+            <?php }?> 
+          </td>
+        <?php }?> 
 
         <td style="color: #000;">
           <?php if ($this->isGuest) {?>
             <strong><?php echo htmlspecialchars($dat['regionName'])?></strong>
           <?php } else {?>
-            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_param.'&region='.$dat['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=420')">
+            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_param.'&region='.$dat['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
               <strong style="color: #000060;"><?php echo $dat['regionName']?></strong>
             </a>
           <?php }?>
@@ -211,7 +217,7 @@
           <?php if ($this->isGuest) {?>
             <strong><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
           <?php } else {?>
-            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$dat['avatar_uuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=420')">
+            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$dat['avatar_uuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
               <strong><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
             </a>
           <?php }?>

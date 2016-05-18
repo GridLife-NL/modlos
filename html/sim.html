@@ -45,13 +45,14 @@
         <tr><td>&nbsp;</td></tr>
         <tr><td class="styleText">
           <strong><?php echo $uuid_ttl.":&nbsp;"?></strong>
-          <strong style="color:#106010;"><?php echo $region?></strong>
+          <strong style="color:#080;"><?php echo $region?></strong>
         </td></tr>
 
         <tr><td>&nbsp;</td></tr>
         <tr><td class="styleText">
-          <strong><?php echo $server_ttl.":&nbsp;"?>
-            <a style="color:#101060; cursor:pointer;" onclick="window.open(<?php echo '\'http://'.$serverName.':'.$serverPort.'/SStats/\''?>,'Stats','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=1000,height=800')">
+          <strong><?php echo $server_ttl.":&nbsp;"?></strong>
+          <strong style="color: #105ba7;">
+            <a style="cursor:pointer;" onclick="window.open(<?php echo '\'http://'.$serverName.':'.$serverPort.'/SStats/\''?>,'Stats','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=1000,height=800')">
               <?php echo $serverName?>
             </a>
           </strong>
@@ -60,17 +61,17 @@
         <tr><td>&nbsp;</td></tr>
         <tr><td class="styleText">
           <strong><?php echo $coordinates." X:&nbsp;"?></strong>
-          <strong style="color:#000;"><?php echo $locX?></strong>
+          <strong style="color:#008;"><?php echo $locX?></strong>
           <strong><?php echo "&nbsp;Y:&nbsp;"?></strong>
-          <strong style="color:#000;"><?php echo $locY?></strong>
+          <strong style="color:#008;"><?php echo $locY?></strong>
         </td></tr>
 
         <tr><td class="styleText">&nbsp;</td></tr>
         <tr><td class="styleText">
-         <strong><?php echo $region_size." X:&nbsp;".$sizeX."&nbsp;Y:&nbsp;".$sizeY?></strong>
-         <strong><?php echo $region_size." X:&nbsp;".$sizeX."&nbsp;Y:&nbsp;".$sizeY?></strong>
-         <strong><?php echo $region_size." X:&nbsp;".$sizeX."&nbsp;Y:&nbsp;".$sizeY?></strong>
-         <strong><?php echo $region_size." X:&nbsp;".$sizeX."&nbsp;Y:&nbsp;".$sizeY?></strong>
+         <strong><?php echo $region_size." X:&nbsp;"?></strong>
+         <strong style="color:#008;"><?php echo $sizeX?></strong>
+         <strong><?php echo "&nbsp;Y:&nbsp;"?></strong>
+         <strong style="color:#008;"><?php echo $sizeY?></strong>
         </td></tr>
 
         <tr><td class="styleText">&nbsp;</td></tr>
@@ -88,7 +89,7 @@
               <?php }?>
             </select>
           <?php } else {?>
-            <strong><?php echo $estate_name ?></strong>
+            <strong style="color:#008;"><?php echo $estate_name ?></strong>
           <?php }?>
         </td></tr>
 
@@ -117,7 +118,8 @@
               </select>
             </strong>
           <?php } else {?>
-            <strong><?php echo $voice_mode?>:&nbsp;<?php echo $vcmode_title?></strong>
+            <strong><?php echo $voice_mode?>:&nbsp;</strong>
+            <strong style="color:#008;"><?php echo $vcmode_title?></strong>
           <?php }?>
           </td>
         </tr>
