@@ -41,6 +41,7 @@ $estates = opensim_get_estates_infos();
 
 $vcmode = '';
 $rginfo = '';
+$external_rg = false;
 
 // POST
 if ($hasPermit and data_submitted() and confirm_sesskey()) {
@@ -64,7 +65,7 @@ if ($hasPermit and data_submitted() and confirm_sesskey()) {
 		if (isNumeric($voice_mode)) {
 			$vcmode = opensim_get_voice_mode($region);
 			if ($vcmode!=$voice_mode) {
-			opensim_set_voice_mode($region, $voice_mode);
+				opensim_set_voice_mode($region, $voice_mode);
 				$vcmode = '';
 			}
 		}	
@@ -78,13 +79,15 @@ $voice_modes[1]['id']	 = '1';
 $voice_modes[2]['id']	 = '2';
 $voice_modes[0]['title'] = get_string('modlos_voice_inactive_chnl','block_modlos');
 $voice_modes[1]['title'] = get_string('modlos_voice_private_chnl', 'block_modlos');
-$voice_modes[2]['title'] = get_string('modlos_voice_percel_chnl',  'block_modlos');
+$voice_modes[2]['title'] = get_string('modlos_voice_parcel_chnl',  'block_modlos');
 
 if ($vcmode=='') $vcmode = opensim_get_voice_mode($region);
-$vcmode_title = $voice_modes[$vcmode]['title'];
+if ($vcmode==9)  $vcmode_title = get_string('modlos_voice_unknown_chnl', 'block_modlos');
+else             $vcmode_title = $voice_modes[$vcmode]['title'];
 
 
 //////////////
+
 $owner_name = $owner_uuid = '';
 if ($rginfo=='') $rginfo = opensim_get_region_info($region);
 if ($rginfo!=null) {
@@ -112,6 +115,12 @@ else {
 	exit("<h4>cannot get region information!! ($region)</h4>");
 }
 
+if ($estate_name=='') {
+	if ($vcmode==9) $external_rg = true;
+	$estate_name = get_string('modlos_estate_unknown', 'block_modlos');
+}
+
+//
 $server = '';
 if ($serverURI!='') {
 	$dec = explode(':', $serverURI);

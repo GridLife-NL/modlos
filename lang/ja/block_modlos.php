@@ -68,6 +68,10 @@ $string['modlos_visitors_last30days']= '過去30日間の利用者数';
 $string['modlos_online_now'] 		= 'オンライン中のユーザ';
 $string['modlos_online_hg'] 		= 'ハイパーグリッドのユーザ';
 
+$string['modlos_online_avatars']    = 'オンライン アバターリスト';
+$string['modlos_login_time'] 		= 'ログイン';
+$string['modlos_hg_name_ttl'] 		= 'HG名';
+
 $string['modlos_user'] 				= 'アバター';
 $string['modlos_born_on'] 			= '作成日時';
 $string['modlos_profile'] 			= 'プロフィール';
@@ -230,11 +234,12 @@ $string['modlos_sloodle_update_error']='Sloodleのユーザデータの更新に
 $string['modlos_inactivate_error']	= 'アバターの無効化に失敗しました!!';
 $string['modlos_activate_error']	= 'アバターの有効化に失敗しました!!';
 
+$string['modlos_voice_unknown_chnl']= '不明';
 $string['modlos_voice_chat_mode']	= 'ボイス';
 $string['modlos_voice_chat_mode_chng']='モード変更';
 $string['modlos_voice_inactive_chnl']= 'ボイス無効';
 $string['modlos_voice_private_chnl']= 'プライベート';
-$string['modlos_voice_percel_chnl']	= 'パーセル';
+$string['modlos_voice_parcel_chnl']	= 'パーセル';
 
 $string['modlos_add'] 				= '登録';
 $string['modlos_update'] 			= '更新';
@@ -379,6 +384,7 @@ $string['modlos_estate_tab']        = 'エステート管理';
 $string['modlos_estate_ttl']        = 'エステート管理';
 $string['modlos_estate_owner']      = 'エステート オーナ';
 $string['modlos_estate_regions']    = 'リージョン';
+$string['modlos_estate_unknown']    = '不明';
 
 $string['modlos_lgnscrn_tab']   	= 'ログイン スクリーン';
 $string['modlos_lgnscrn_ttl']   	= 'ログインスクリーン 情報ボックス';

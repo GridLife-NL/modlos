@@ -34,20 +34,21 @@ class  AvatarsList
 	var $isGuest   	= true;
 
 	// Page Control
-	var $ownerloss  = 0;	// false
 	var $Cpstart 	= 0;
 	var $Cplimit 	= 25;
-	var $firstname 	= '';
-	var $lastname  	= '';
-	var $order		= '';
-	var $order_desc	= 0;
 	var $pstart;
 	var $plimit;
 	var $number;
 	var $sitemax;
 	var $sitestart;
-	var $my_avatars = 0;
 
+	var $firstname 	= '';
+	var $lastname  	= '';
+	var $my_avatars = 0;
+	var $ownerloss  = 0;	// false
+
+	var $order		= '';
+	var $order_desc	= 0;
 	var $desc_fname = 0;
 	var $desc_lname = 0;
 	var $desc_login = 0;
@@ -97,7 +98,6 @@ class  AvatarsList
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $this->my_avatars>=$max_avatars) $this->isAvatarMax = true;
 	}
-
 
 
 	// アバターの検索条件
@@ -181,7 +181,6 @@ class  AvatarsList
 
 		return true;
 	}
-
 
 
 	function  execute()
@@ -300,13 +299,11 @@ class  AvatarsList
 		$this->number = $con;
 
 		////////////////////////////////////////////////////////////////////
-		// Select Data
+		// set Information of Avatars
 		$colum = 0;
-		$dat   = array();
-
 		foreach($users as $user) {
 			$user['editable'] = AVATAR_NOT_EDITABLE;
-			$user['hmregion'] = modlos_get_region_name($user['hmregion_id']);
+			$user['hmregion'] = opensim_get_region_name($user['hmregion_id']);
 			if (isGUID($user['hmregion'])) $user['hmregion'] = '';
 			//
 			$this->db_data[$colum] = $this->get_avatar_info($user, $colum); 
@@ -361,7 +358,6 @@ class  AvatarsList
 	}
 
 
-
 	function  print_page() 
 	{
 		global $CFG, $USER;
@@ -397,10 +393,9 @@ class  AvatarsList
 		$edit_ttl		= get_string('modlos_edit',			 'block_modlos');
 		$show_ttl		= get_string('modlos_show',			 'block_modlos');
 		$editable_ttl	= get_string('modlos_edit_ttl',		 'block_modlos');
-		$lastlogin_ttl	= get_string('modlos_lastlogin',	 'block_modlos');
+		$lastlogin_ttl	= get_string('modlos_login_time',	 'block_modlos');
 		$status_ttl		= get_string('modlos_status',		 'block_modlos');
 		$crntregion_ttl	= get_string('modlos_crntregion',	 'block_modlos');
-		$avatar_ttl		= get_string('modlos_avatar',		 'block_modlos');
 		$owner_ttl		= get_string('modlos_owner',		 'block_modlos');
 		$get_owner_ttl	= get_string('modlos_get_owner_ttl', 'block_modlos');
 		$firstname_ttl	= get_string('modlos_firstname', 	 'block_modlos');
@@ -439,7 +434,6 @@ class  AvatarsList
 	}
 
 
-
 	function  get_avatar_info($user, $colum) 
 	{
 		global $USER;
@@ -472,9 +466,9 @@ class  AvatarsList
 		$online = opensim_get_avatar_online($UUID);
 		$dat['online'] = $online['online'];
 		if ($online['online']) {
-			$dat['region'] 	  = $online['region_name'];
-			$dat['region_id'] = $online['region_id'];
-			//$dat['lastin']    = date(DATE_FORMAT, $online['time_stamp']);
+			$dat['region'] 	  = $online['regionName'];
+			$dat['region_id'] = $online['regionUUID'];
+			//$dat['lastin']    = date(DATE_FORMAT, $online['timeStamp']);
 		}
 
 		$dat['uuid']	= str_replace('-', '', $UUID);

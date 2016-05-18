@@ -59,8 +59,8 @@ if ($agent) {
 
 		$online			= opensim_get_avatar_online($UUID);
 		$agentOnline	= $online['online'];
-		$crrntRegion	= $online['region_id'];
-		//$crrntRegion  = $online['region_name'];
+		$crrntRegion	= $online['regionUUID'];
+		//$crrntRegion  = $online['regionName'];
 	}
 
 

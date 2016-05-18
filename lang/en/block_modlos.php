@@ -68,6 +68,10 @@ $string['modlos_visitors_last30days']= 'Visitors last 30 days';
 $string['modlos_online_now'] 		= 'OnLine Now';
 $string['modlos_online_hg'] 		= 'HyperGrid Users';
 
+$string['modlos_online_avatars']    = 'Online Avatars List';
+$string['modlos_login_time']        = 'Login Time';
+$string['modlos_hg_name_ttl']       = 'HG Name';
+
 $string['modlos_user'] 				= 'Avatar';
 $string['modlos_born_on'] 			= 'Born on';
 $string['modlos_profile'] 			= 'Profile';
@@ -230,11 +234,12 @@ $string['modlos_sloodle_update_error']='It failed in updating data of Sloodle!!'
 $string['modlos_inactivate_error']  = 'It failed in the inactivation of avatar!!';
 $string['modlos_activate_error']    = 'It failed in the activation of avatar!!';
 
+$string['modlos_voice_unknown_chnl']= 'unknown';
 $string['modlos_voice_chat_mode']   = 'Voice';
 $string['modlos_voice_chat_mode_chng']='Change Mode';
 $string['modlos_voice_inactive_chnl']='Inactive';
 $string['modlos_voice_private_chnl']= 'Private';
-$string['modlos_voice_percel_chnl'] = 'Percel';
+$string['modlos_voice_parcel_chnl'] = 'Percel';
 
 $string['modlos_add']               = 'Add';
 $string['modlos_update']       		= 'Update';
@@ -380,6 +385,7 @@ $string['modlos_estate_tab']		= 'Manage of Estates';
 $string['modlos_estate_ttl']		= 'Manage of Estates';
 $string['modlos_estate_owner']      = 'Estate Owner';
 $string['modlos_estate_regions']    = 'Regions';
+$string['modlos_estate_unknown']    = 'unknown';
 
 $string['modlos_lgnscrn_tab']		= 'Login Screen';
 $string['modlos_lgnscrn_ttl']		= 'Login Screen Alert Information Box';

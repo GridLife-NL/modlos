@@ -479,7 +479,7 @@ function  modlos_insert_userstable($user)
 
 	$insobj->hmregion = null;
 	if (array_key_exists('hmregion', $user)) $insobj->hmregion = $user['hmregion'];
-	if ($insobj->hmregion==null) $insobj->hmregion = modlos_get_region_name($user['hmregion_id']);
+	if ($insobj->hmregion==null) $insobj->hmregion = opensim_get_region_name($user['hmregion_id']);
 	if ($insobj->hmregion==null) $insobj->hmregion = '';
 
 	$ret = $DB->insert_record('modlos_users', $insobj);
@@ -512,7 +512,7 @@ function  modlos_update_userstable($user, $updobj=null)
 
     $updobj->hmregion = null;
     if (array_key_exists('hmregion', $user)) $updobj->hmregion = $user['hmregion'];
-    if ($updobj->hmregion==null) $updobj->hmregion = modlos_get_region_name($user['hmregion_id']);
+    if ($updobj->hmregion==null) $updobj->hmregion = opensim_get_region_name($user['hmregion_id']);
     if ($updobj->hmregion==null) $updobj->hmregion = '';
 
 	$ret = $DB->update_record('modlos_users', $updobj);
@@ -521,7 +521,7 @@ function  modlos_update_userstable($user, $updobj=null)
 	
 
 
-
+/*
 function  modlos_get_region_name($region)
 {
 	if (isGUID($region)) {
@@ -531,9 +531,7 @@ function  modlos_get_region_name($region)
 
 	return $region;
 }
-
-
-
+*/
 
 
 
@@ -1034,7 +1032,7 @@ function  modlos_sync_opensimdb($update_check=true)
 	// OpenSimにデータがある場合は，Modlos のデータを OpenSimにあわせる．
 	foreach ($opnsim_users as $opnsim_user) {
 		$opnsim_uuid = $opnsim_user['UUID'];	
-		$opnsim_user['hmregion'] = modlos_get_region_name($opnsim_user['hmregion_id']);	// OpenSim DB のホームリージョン名
+		$opnsim_user['hmregion'] = opensim_get_region_name($opnsim_user['hmregion_id']);	// OpenSim DB のホームリージョン名
 		//
 		// 	ホームリージョンの名前を更新
 		if (array_key_exists($opnsim_uuid, $modlos_users)) {

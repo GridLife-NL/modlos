@@ -155,8 +155,8 @@ class  RegionsList
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 
 		// SQL Condition
-		$sql_limit = "LIMIT $this->pstart, $this->plimit";
-		$this->sql_condition = " $sql_order $sql_limit";
+		$sql_limit = " LIMIT $this->pstart, $this->plimit ";
+		$this->sql_condition = $sql_order.$sql_limit;
 
 		return true;
 	}
@@ -193,7 +193,8 @@ class  RegionsList
 		// Voice Mode
 		$voice_mode[0] = get_string('modlos_voice_inactive_chnl', 'block_modlos');
 		$voice_mode[1] = get_string('modlos_voice_private_chnl',  'block_modlos');
-		$voice_mode[2] = get_string('modlos_voice_percel_chnl',   'block_modlos');
+		$voice_mode[2] = get_string('modlos_voice_parcel_chnl',   'block_modlos');
+		$voice_mode[9] = get_string('modlos_voice_unknown_chnl',  'block_modlos');
 
 		//
 		$regions = opensim_get_regions_infos($where.$this->sql_condition);
@@ -309,15 +310,15 @@ class  RegionsList
 		$desc_avatar	 = "&amp;desc=$this->desc_avatar";
 
 
-        $number_ttl     = get_string('modlos_num',             'block_modlos');
-        $edit_ttl       = get_string('modlos_edit',            'block_modlos');
+        $number_ttl      = get_string('modlos_num',             'block_modlos');
+        $edit_ttl        = get_string('modlos_edit',            'block_modlos');
 		$location_x		 = get_string('modlos_location_x',	   'block_modlos');
 		$location_y	  	 = get_string('modlos_location_y',	   'block_modlos');
 		$region_name_ttl = get_string('modlos_region_name',	   'block_modlos');
 		$estate_name	 = get_string('modlos_estate',		   'block_modlos');
 		$estate_owner	 = get_string('modlos_estate_owner',   'block_modlos');
 		$owner_ttl	 	 = get_string('modlos_owner',   	   'block_modlos');
-		$avatar_ttl	 	 = get_string('modlos_avatar',   	   'block_modlos');
+		$avatarname_ttl  = get_string('modlos_avatar_name',   'block_modlos');
 		$reset_ttl	     = get_string('modlos_reset_ttl',	   'block_modlos');
 		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
 		$server_name	 = get_string('modlos_server',		   'block_modlos');
