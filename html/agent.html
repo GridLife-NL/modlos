@@ -46,11 +46,18 @@
     <td width="55%" valign="top">
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr><td>&nbsp;</td></tr>
-        <tr><td><span class="styleTitel"><?php echo $user_ttl.":&nbsp;".htmlspecialchars($firstN)."&nbsp;&nbsp;".htmlspecialchars($lastN)?></span></td></tr>
+        <tr><td>
+          <span class="styleTitel"><?php echo $user_ttl.":&nbsp;".htmlspecialchars($firstN)."&nbsp;&nbsp;".htmlspecialchars($lastN)?></span>
+        </td></tr>
+
         <?php if ($hasPermit) {?>
           <tr><td>&nbsp;</td></tr>
-          <tr><td class="styleText"><strong><?php echo $uuid_ttl.":&nbsp;".$UUID?></strong></td></tr>
+          <tr><td class="styleText">
+            <strong><?php echo $uuid_ttl.":&nbsp;"?></strong>
+            <strong style="color:#060;"><?php echo $UUID?></strong>
+          </td></tr>
         <?php }?>
+
         <tr><td>&nbsp;</td></tr>
         <tr><td class="styleText">
          <strong><?php echo $born_on_ttl.":&nbsp;"?></strong>
