@@ -199,7 +199,7 @@
         <td style="color: #000;">
           <?php if (!$this->isGuest) {?>
             <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_param.'&region='.$dat['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
-              <strong style="color: #000060;"><?php echo $dat['regionName']?></strong>
+              <strong><?php echo $dat['regionName']?></strong>
             </a>
           <?php } else {?>
             <strong><?php echo htmlspecialchars($dat['regionName'])?></strong>
@@ -229,10 +229,10 @@
         <td style="color: #2222ff;">
           <?php if (!$this->isGuest) {?>
             <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$dat['avatar_uuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
-              <strong><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
+              <strong style="color: #005;"><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
             </a>
           <?php } else {?>
-            <strong><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
+            <strong style="color: #005;><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
           <?php }?>
         </td>
         <td>&nbsp;</td>
@@ -240,7 +240,7 @@
         <td style="color: #2266aa;">
           <?php if (!$this->isGuest) {?>
             <a style="cursor:pointer;" onClick="window.open('http://<?php echo $dat['serverName'].':'.$dat['serverPort']?>/SStats/','<?php echo $dat['serverName']?>','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=1000,height=800')">
-              <strong><?php echo $dat['serverName']?></strong>
+              <strong style="color: #055;"><?php echo $dat['serverName']?></strong>
             </a>
           <?php }?>
         </td>
@@ -249,10 +249,10 @@
           <?php if (!$this->isGuest and $this->show_all) {?>
             <?php if ($dat['owner_name']!=' - ') { ?>
               <a href="<?php echo $this->action_url?>&amp;action=personal&amp;userid=<?php echo $dat['user_id'] ?>">
-                <strong><?php echo htmlspecialchars($dat['owner_name'])?></strong>
+                <strong style="color: #505;"><?php echo htmlspecialchars($dat['owner_name'])?></strong>
               </a>
             <?php } else {?>
-              <strong><?php echo htmlspecialchars($dat['owner_name'])?></strong>
+              <strong style="color: #505;"><?php echo htmlspecialchars($dat['owner_name'])?></strong>
             <?php }?>
           <?php }?>
         </td>
