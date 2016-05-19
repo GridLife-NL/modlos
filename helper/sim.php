@@ -25,7 +25,7 @@ $isGuest   = isguestuser();
 
 $grid_name  = $CFG->modlos_grid_name;
 $action_url = CMS_MODULE_URL.'/helper/sim.php';
-$reset_url  = CMS_MODULE_URL.'/actions/reset_region.php?course='.$course_id.'&action=all&region=';
+$reset_url  = CMS_MODULE_URL.'/actions/reset_region.php?course='.$course_id.'&action=personal&region=';
 
 
 //////////////
@@ -49,7 +49,8 @@ if ($hasPermit and data_submitted() and confirm_sesskey()) {
 	//
 	$reset = optional_param('reset_region', '', PARAM_TEXT);
 	if ($reset!='') {
-		opensim_delete_region($region);
+		// not used now
+		//opensim_delete_region($region);
 	}
 	//
 	else {
@@ -148,7 +149,6 @@ if ($course_id>0) $course_amp = '&amp;course='.$course_id;
 $region_info_ttl= get_string('modlos_region_info',	 'block_modlos');
 $region_ttl   	= get_string('modlos_region',   	 'block_modlos');
 $estate_ttl   	= get_string('modlos_estate',   	 'block_modlos');
-//$ipaddress_ttl 	= get_string('modlos_ipaddress',   	 'block_modlos');
 $server_ttl 	= get_string('modlos_server',   	 'block_modlos');
 $uuid_ttl     	= get_string('modlos_uuid',    		 'block_modlos');
 $change_ttl   	= get_string('modlos_change',		 'block_modlos');
