@@ -15,7 +15,7 @@ class  ResetRegion
 
 	var $action_url = '';
 	var $reset_url  = '';
-	var $retun_url  = '';
+	var $cancel_url = '';
 	var $action 	= 'all';	// 'all', 'personal' 
 	var $userid 	= 0;		// 0: my, >1: other
 
@@ -74,13 +74,13 @@ class  ResetRegion
 		$this->course_id   = $course_id;
 		$this->action_url  = $module_url.'/actions/reset_region.php'.$course_param.$option_param;
 		$this->reset_url   = $module_url.'/actions/reset_region.php'.$course_param.$option_param;
-		$this->return_url  = $module_url.'/actions/regions_list.php'.$course_param.$option_param;
+		$this->cancel_url  = $module_url.'/actions/regions_list.php'.$course_param.$option_param;
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
 		// get UUID from POST or GET
 		if (!isGUID($uuid)) {
 			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)";
-			print_error($mesg, '', $return_url);
+			print_error($mesg, '', $cancel_url);
 		}
 
 		// get uid from Modlos and Sloodle DB
@@ -100,7 +100,7 @@ class  ResetRegion
 		$this->serverPort = $region['serverHttpPort'];
 
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
+			print_error('modlos_access_forbidden', 'block_modlos', $this->cancel_url);
 		}
 	}
 
@@ -112,7 +112,7 @@ class  ResetRegion
 
 		//
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			print_error('modlos_access_forbidden', 'block_modlos', $return_url);
+			print_error('modlos_access_forbidden', 'block_modlos', $cancel_url);
 		}
 
 		// Form
@@ -159,7 +159,7 @@ class  ResetRegion
 		$region_size_ttl	= get_string('modlos_region_size',  	'block_modlos');
 		$admin_user_ttl		= get_string('modlos_admin_user',   	'block_modlos');
 		$region_owner_ttl	= get_string('modlos_region_owner', 	'block_modlos');
-		$return_ttl			= get_string('modlos_return_ttl',   	'block_modlos');
+		$cancel_ttl			= get_string('modlos_cancel_ttl',   	'block_modlos');
 		$reset_region_ttl   = get_string('modlos_region_reset', 	'block_modlos');
 		$region_reseted 	= get_string('modlos_region_reseted',  	'block_modlos');;
 		$region_reseted_exp = get_string('modlos_region_reset_exp',	'block_modlos');

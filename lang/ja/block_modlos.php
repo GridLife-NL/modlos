@@ -77,7 +77,8 @@ $string['modlos_hg_name_ttl'] 		= 'ハイパーグリッド';
 $string['modlos_user'] 				= 'アバター';
 $string['modlos_born_on'] 			= '作成日時';
 $string['modlos_profile'] 			= 'プロフィール';
-$string['modlos_has_noprofile'] 	= 'このユーザにプロフィールはありません';
+$string['modlos_has_noprofile'] 	= 'このアバターにプロフィールはありません';
+$string['modlos_hg_profile'] 	    = 'このアバターは他のハイパーグリッドからのお客さんです';
 
 $string['modlos_not_syncdb'] 		= '未同期';
 $string['modlos_active'] 			= 'アクティブ';

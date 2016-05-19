@@ -137,7 +137,10 @@
             <?php if ($profileText!="") {?>
               <?php echo htmlspecialchars($profileText)?>
             <?php } else {?>
-              <?php echo $has_noprofile?>
+              <?php 
+                if ($hgName!='') echo $hg_profile;
+                else             echo $has_noprofile;
+              ?>
             <?php }?>
           </span></td>
         </tr>

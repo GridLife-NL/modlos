@@ -160,6 +160,7 @@ $hyper_grid_ttl = get_string('modlos_hg_name_ttl',	 'block_modlos');
 $ownername_ttl	= get_string('modlos_ownername',	 'block_modlos');
 $unknown_status	= get_string('modlos_unknown_status','block_modlos');
 $has_noprofile	= get_string('modlos_has_noprofile', 'block_modlos');
+$hg_profile		= get_string('modlos_hg_profile',    'block_modlos');
 $sloodle_ttl 	= get_string('modlos_sloodle_short', 'block_modlos');
 
 

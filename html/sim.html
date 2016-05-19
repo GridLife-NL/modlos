@@ -153,7 +153,14 @@
                 <tr><td>&nbsp;</td></tr>
                 <?php if ($hasPermit) {?>
                   <tr>
-                    <td><input type="submit" name="reset_region" value="<?php echo $reset_ttl?>" /></td>
+                    <td>
+                      <a href="<?php echo $reset_url.$region?>" target="_blank">
+                        <strong style="colr:#c02020;"><?php echo $reset_ttl?></strong>
+                      </a>
+                      <!--
+                      <input type="submit" name="reset_region" value="<?php echo $reset_ttl?>" />
+                      -->
+                    </td>
                   </tr>
                 <?php }?>
               </table>
