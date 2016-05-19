@@ -25,7 +25,6 @@
                 <br />
               </td>
             </tr>
-
             <tr align="left">
               <td class="head" valign="top"><?php echo $events_creator?></td>
               <td class="odd">
@@ -50,7 +49,10 @@
             <tr align="left">
               <td nowrap class="head"><?php echo $events_charge?></td>
               <td class="even">
-                <?php if ($this->cover_charge==0){echo $modlos_no;}else{echo $modlos_yes;}?>
+                <?php 
+                  if ($this->cover_charge==0) echo get_string('modlos_no', 'block_modlos');
+                  else                        echo get_string('modlos_yes','block_modlos');
+                ?>
                 &nbsp;&nbsp;
                 <?php echo $events_amount?>:&nbsp;<?php echo $this->cover_amount?>
               </td>

@@ -50,16 +50,13 @@
               <td class="even">
 
                 <?php
-                  for ($h=0; $h<13; $h++) {
-                    if ($h==$this->event_hour) {
-                      echo "$h am";
-                    }
+                  $h = $this->event_hour;
+                  if ($h<13) {
+                    echo "$h am";
                   }
-                  for ($h=12; $h<24; $h++) { 
-                    if ($h==$this->event_hour) {
-                      $h = $h - 12;
-                      echo "$h pm";
-                    }
+                  else {
+                    $h = $h - 12;
+                    echo "$h pm";
                   }
                 ?>
 

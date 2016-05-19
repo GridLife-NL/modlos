@@ -43,16 +43,13 @@
 
               <td class="even">
                 <?php 
-                  for ($h=0; $h<13; $h++) {
-                    if ($h==$this->event_hour) {
-                      echo "午前 $h 時";
-                    }
+                  $h = $this->event_hour;
+                  if ($h<13) {
+                    echo "午前 $h 時";
                   }
-                  for ($h=12; $h<24; $h++) {
-                    if ($h==$this->event_hour) {
-                      $h = $h - 12;
-                      echo "午後 $h 時";
-                    }
+                  else {
+                    $h = $h - 12;
+                    echo "午後 $h 時";
                   }
                 ?>
 
