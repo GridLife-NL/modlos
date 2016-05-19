@@ -5,7 +5,27 @@
 
 
 <h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_delete_ttl?></center></h2>
-<br />
+
+
+<!-- echo Message -->
+<?php if ($this->hasError) {?>
+  <div align="center">
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php } else {?>
+  <div align="center">
+    <?php if ($this->deleted_avatar) {?>
+      <h4 style="color: #2020e0;"><?php echo $avatar_deleted?></h4>
+    <?php } else {?>
+      <h4 style="color: #c02020;"><?php echo $avatar_dlt_confrm?></h4>
+    <?php }?>
+  </div>
+<?php }?>
+
 
 <?php if ($showPostForm) {?>
   <form action="<?php echo $this->action_url?>" method="POST">
@@ -76,31 +96,4 @@
   </div>
 </form>
 <br />
-
-
-<!-- echo Message -->
-<hr />
-<?php if ($this->hasError) {?>
-
-  <div align="center">
-    <ul>
-      <?php foreach($this->errorMsg as $mesg) {?>
-        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
-      <?php }?>
-    </ul>
-  </div>
-
-<?php } else {?>
-
-  <div align="center">
-    <?php if ($this->deleted_avatar) {?>
-      <h4 style="color: #2020e0;"><?php echo $avatar_deleted?></h4>
-    <?php } else {?>
-      <h4 style="color: #c02020;"><?php echo $avatar_dlt_confrm?></h4>
-    <?php }?>
-  </div>
-
-<?php }?>
-<br />
-
 

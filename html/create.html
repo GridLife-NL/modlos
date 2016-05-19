@@ -6,7 +6,18 @@
 
 <h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_create_ttl?></center></h2>
 
+
 <!-- echo Messages -->
+<?php if ($this->hasError) {?>
+  <div align="center">
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php }?>
+
 <?php if ($this->created_avatar) {?>
   <div align="center">
     <h4 style="color: #1010e0;"><?php echo $avatar_created?></h4>
@@ -39,21 +50,11 @@
     <?php }?>
 
   </table>
-<?php }?>
-
-<?php if ($this->hasError) {?>
-  <div align="center">
-    <ul>
-      <?php foreach($this->errorMsg as $mesg) {?>
-        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
-      <?php }?>
-    </ul>
-  </div>
   <hr />
+  <br />
 <?php }?>
 
 
-<br />
 <form action="<?php echo $this->action_url?>" method="POST">
   <table width="640" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 
@@ -97,7 +98,6 @@
       <td class="head"><?php echo $confirm_pass_ttl?></td>
       <td class="odd"><input type="password" name="confirm_pass" size="32" maxlength="16" value="" /></td>
     </tr>
-
 
     <tr>
       <td class="head"><?php echo $home_region_ttl?></td>

@@ -5,7 +5,70 @@
 
 
 <h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_edit_ttl?></center></h2>
-<br />
+
+
+<!-- echo Message -->
+<?php if ($this->hasError) {?>
+  <div align="center">
+    <ul>
+      <?php foreach ($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f01010;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php }?>
+
+<?php if ($this->updated_avatar) {?>
+  <h4 style="color: #1010e0;"><center><?php echo $avatar_updated?></center></h4>
+  <table width="520" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff" >
+    <?php if ($this->hasPermit) {?>
+      <tr>
+        <td width="120" class="head"><?php echo $uuid_ttl?></td>
+        <td width="320" class="even"style="color: #2060b0;"><?php echo $this->UUID?></td>	
+      </tr>
+    <?php }?>
+
+    <tr>
+      <td width="120" class="head"><?php echo $firstname_ttl?></td>
+      <td width="320" class="odd" ><?php echo $this->firstname?></td>	
+    </tr>
+    <tr>
+      <td class="head"><?php echo $lastname_ttl?></td>
+      <td class="even"><?php echo $this->lastname?></td>	
+    </tr>
+    <tr>
+      <td class="head"><?php echo $home_region_ttl?></td>
+      <td class="odd" ><?php echo stripslashes($this->hmregion)?></td>	
+    </tr>
+    <tr>
+      <td class="head"><?php echo $status_ttl?></td>
+      <td class="even" >
+        <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
+          <style="color: #cc0000;"><?php echo $not_syncdb_ttl?>
+        <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
+          <style="color: #cc0000;"><?php echo $inactive_ttl?>
+        <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
+          <style="color: #005500;"><?php echo $active_ttl?>
+        <?php } else {?>
+          <style="color: #cc0000;"><?php echo $unknown_status?>
+        <?php }?>
+        <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
+          ,&nbsp;<?php echo $sloodle_ttl?>
+        <?php }?>
+          </style>
+      </td>
+    </tr>
+    <?php if ($this->hasPermit or $this->ownername=="") {?>
+      <tr>
+        <td class="head"><?php echo $ownername_ttl ?></td>
+        <td class="odd" ><?php echo stripslashes($this->ownername);?></td>	
+      </tr>
+    <?php }?>
+  </table>
+  <hr />
+  <br />
+<?php }?>
+
 
 <form name="assignform" id="assignform" action="<?php echo $this->action_url?>" method="POST">
 
@@ -105,68 +168,3 @@
 
 </form>
 <br />
-
-
-<!-- echo Message -->
-<hr />
-<?php if ($this->hasError) {?>
-  <div align="center">
-    <ul>
-      <?php foreach ($this->errorMsg as $mesg) {?>
-        <li><strong style="color: #f01010;"><?php echo $mesg?></strong></li>
-      <?php }?>
-    </ul>
-  </div>
-
-<?php } else {?>
-  <?php if ($this->updated_avatar) {?>
-    <h4 style="color: #1010e0;"><center><?php echo $avatar_updated?></center></h4>
-    <table width="520" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff" >
-      <?php if ($this->hasPermit) {?>
-        <tr>
-          <td width="120" class="head"><?php echo $uuid_ttl?></td>
-          <td width="320" class="even"style="color: #2060b0;"><?php echo $this->UUID?></td>	
-        </tr>
-      <?php }?>
-
-      <tr>
-        <td width="120" class="head"><?php echo $firstname_ttl?></td>
-        <td width="320" class="odd" ><?php echo $this->firstname?></td>	
-      </tr>
-      <tr>
-        <td class="head"><?php echo $lastname_ttl?></td>
-        <td class="even"><?php echo $this->lastname?></td>	
-      </tr>
-      <tr>
-        <td class="head"><?php echo $home_region_ttl?></td>
-        <td class="odd" ><?php echo stripslashes($this->hmregion)?></td>	
-      </tr>
-      <tr>
-        <td class="head"><?php echo $status_ttl?></td>
-        <td class="even" >
-          <?php if (!($this->state&AVATAR_STATE_SYNCDB)) {?>
-            <style="color: #cc0000;"><?php echo $not_syncdb_ttl?>
-          <?php } elseif ($this->state&AVATAR_STATE_INACTIVE) { ?>
-            <style="color: #cc0000;"><?php echo $inactive_ttl?>
-          <?php } elseif ($this->state&AVATAR_STATE_SYNCDB) {?>
-            <style="color: #005500;"><?php echo $active_ttl?>
-          <?php } else {?>
-            <style="color: #cc0000;"><?php echo $unknown_status?>
-          <?php }?>
-          <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
-            ,&nbsp;<?php echo $sloodle_ttl?>
-          <?php }?>
-            </style>
-        </td>
-      </tr>
-      <?php if ($this->hasPermit or $this->ownername=="") {?>
-        <tr>
-          <td class="head"><?php echo $ownername_ttl ?></td>
-          <td class="odd" ><?php echo stripslashes($this->ownername);?></td>	
-        </tr>
-      <?php }?>
-    </table>
-  <?php }?>
-<?php }?>
-<br />
-

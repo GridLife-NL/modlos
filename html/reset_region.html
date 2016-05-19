@@ -5,7 +5,28 @@
 
 
 <h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$region_reset_ttl?></center></h2>
-<br />
+
+
+<!-- echo Message -->
+<?php if ($this->hasError) {?>
+  <div align="center">
+    <ul>
+      <?php foreach ($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f01010;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php } else {?>
+  <?php if ($this->reseted) {?>
+    <div align="center">
+      <ul>
+        <li><strong style="color: #1010e0;"><?php echo $region_reseted?></li>
+        <li><strong style="color: #1010e0;"><?php echo $region_reseted_exp?></li>
+      </ul>
+    </div>
+  <?php }?>
+<?php }?>
+
 
 <form name="assignform" id="assignform" action="<?php echo $this->reset_url?>" method="POST">
 
@@ -54,28 +75,4 @@
   </div>
 
 </form>
-<br />
-
-
-<!-- echo Message -->
-<hr />
-<?php if ($this->hasError) {?>
-  <div align="center">
-    <ul>
-      <?php foreach ($this->errorMsg as $mesg) {?>
-        <li><strong style="color: #f01010;"><?php echo $mesg?></strong></li>
-      <?php }?>
-    </ul>
-  </div>
-
-<?php } else {?>
-  <?php if ($this->reseted) {?>
-    <div align="center">
-      <ul>
-        <li><strong style="color: #1010e0;"><?php echo $region_reseted?></li>
-        <li><strong style="color: #1010e0;"><?php echo $region_reseted_exp?></li>
-      </ul>
-    </div>
-  <?php }?>
-<?php }?>
 <br />

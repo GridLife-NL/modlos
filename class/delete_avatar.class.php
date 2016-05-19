@@ -50,10 +50,10 @@ class  DeleteAvatar
 		$course_param = '?course='.$course_id;
 		$this->course_id  = $course_id;
 		$this->action_url = CMS_MODULE_URL.'/actions/delete_avatar.php';
-		$this->cancel_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param;
+		$this->cancel_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param.'&amp;action=personal';
 
 		// get UUID from POST or GET
-		$this->return_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param;
+		$this->return_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param.'&amp;action=personal';
 		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
 			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos').' ($uuid)';
@@ -91,7 +91,6 @@ class  DeleteAvatar
 	}
 
 
-
 	function  execute()
 	{
 		if (data_submitted()) {
@@ -115,7 +114,6 @@ class  DeleteAvatar
 		}
 		return true;
 	}
-
 
 
 	function  print_page() 
@@ -148,8 +146,6 @@ class  DeleteAvatar
 	}
 
 
-
-
 	function del_avatar()
 	{
 		if (!isGUID($this->UUID)) {
@@ -178,5 +174,3 @@ class  DeleteAvatar
 		return $ret;
 	}
 }
-
-?>
