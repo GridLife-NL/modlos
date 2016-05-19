@@ -172,7 +172,7 @@
                     <?php if (!$this->isGuest) {?>
                       <td>
                         <?php if ($userinfo and $dat['owner_name']!=' - ') { ?>
-                          <a href="<?php echo $this->avatar_url.$dat['uid']?>" target="_blank">
+                          <a href="<?php echo $this->avatar_url.$dat['uid']?>">
                             <strong style="color:#505;"><?php echo htmlspecialchars($dat['owner_name'])?></strong>
                           </a>
                         <?php } else {?>
