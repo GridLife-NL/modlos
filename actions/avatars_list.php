@@ -17,8 +17,12 @@ $urlparams['action'] = $get_action;
 $PAGE->set_url('/blocks/modlos/actions/avatars_list.php', $urlparams);
 
 $course = $DB->get_record('course', array('id'=>$course_id));
+
 if ($get_action=='all') $tab_action = 'avatars_list';
-else                    $tab_action = 'personal_avatars';
+else {
+   if ($user_id==$USER->id) $tab_action = 'personal_avatars';
+   else                     $tab_action = '';
+}
 
 require_login($course_id);
 print_modlos_header($tab_action, $course);

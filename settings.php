@@ -62,8 +62,8 @@ $settings->add(new admin_setting_configtext('modlos_invent_uri',
 				   	get_string('modlos_invent_uri_desc', 'block_modlos'), 'http://opensim.jp:8003/', PARAM_URL));
 
 $settings->add(new admin_setting_configtext('modlos_currency_uri', 
-					get_string('modlos_crncy_uri', 'block_modlos'),
-				   	get_string('modlos_crncy_uri_desc', 'block_modlos'), 'http://opensim.jp:8008/', PARAM_URL));
+					get_string('modlos_currency_uri', 'block_modlos'),
+				   	get_string('modlos_currency_uri_desc', 'block_modlos'), 'http://opensim.jp:8008/', PARAM_URL));
 */
 
 // Modlos
@@ -147,16 +147,20 @@ $settings->add(new admin_setting_configtext('modlos_groupdb_write_key',
 				   	get_string('modlos_grpdb_wkey_desc', 'block_modlos'), '1234', PARAM_TEXT));
 
 $settings->add(new admin_setting_configcheckbox('modlos_use_currency_server', 
-					get_string('modlos_use_crncy_svr', 'block_modlos'),
-				   	get_string('modlos_use_crncy_svr_desc', 'block_modlos'), 0));
+					get_string('modlos_use_currency_svr', 'block_modlos'),
+				   	get_string('modlos_use_currency_svr_desc', 'block_modlos'), 0));
+
+$settings->add(new admin_setting_configtext('modlos_currency_unit', 
+					get_string('modlos_currency_unit', 'block_modlos'),
+				   	get_string('modlos_currency_unit_desc', 'block_modlos'), 'OS$', PARAM_TEXT));
 
 $settings->add(new admin_setting_configtext('modlos_currency_script_key', 
-					get_string('modlos_crncy_key', 'block_modlos'),
-				   	get_string('modlos_crncy_key_desc', 'block_modlos'), '123456789', PARAM_TEXT));
+					get_string('modlos_currency_key', 'block_modlos'),
+				   	get_string('modlos_currency_key_desc', 'block_modlos'), '123456789', PARAM_TEXT));
 /*
 $settings->add(new admin_setting_configtext('modlos_groupdb_currency_key', 
-					get_string('modlos_crncy_key', 'block_modlos'),
-				   	get_string('modlos_crncy_key_desc', 'block_modlos'), '1234', PARAM_TEXT));
+					get_string('modlos_currency_key', 'block_modlos'),
+				   	get_string('modlos_currency_key_desc', 'block_modlos'), '1234', PARAM_TEXT));
 
 $settings->add(new admin_setting_configtext('modlos_banker_avatar', 
 					get_string('modlos_banker', 'block_modlos'),

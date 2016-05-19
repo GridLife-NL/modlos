@@ -277,8 +277,6 @@ $string['modlos_asset_uri'] 		= 'Asset Server URL';
 $string['modlos_asset_uri_desc'] 	= 'Specify Asset server URL';
 $string['modlos_invent_uri'] 		= 'Inventory Server URL';
 $string['modlos_invent_uri_desc'] 	= 'Specify Inventory server URL';
-$string['modlos_crncy_uri'] 		= 'Money Server URL';
-$string['modlos_crncy_uri_desc'] 	= 'Specify DTL/NSL Money server URL, if exist.';
 
 $string['modlos_map_stx'] 			= 'World Map Start Point (X)';
 $string['modlos_map_stx_desc'] 		= 'Specify initial X coordinates of World Map';
@@ -308,12 +306,16 @@ $string['modlos_grpdb_wkey'] 		= 'Group Database Write Key';
 $string['modlos_grpdb_wkey_desc'] 	= 'Specify same write key code with XmlRpcServiceWriteKey in [Groups] section of OpenSim.ini';
 
 
-$string['modlos_use_crncy_svr'] 	= 'Do you use DTL/NSL Money Server?';
-$string['modlos_use_crncy_svr_desc']= 'Please specify whether to use DTL/NSL Money Server.';
-$string['modlos_crncy_key'] 		= 'Money Script Access key';
-$string['modlos_crncy_key_desc']	= 'Please specify Money Script access key code. You can specify any string.';
+$string['modlos_use_currency_svr'] 	= 'Do you use DTL/NSL Money Server?';
+$string['modlos_use_currency_svr_desc'] = 'Please specify whether to use DTL/NSL Money Server.';
 $string['modlos_banker'] 			= 'UUID of Banker Avatar';
 $string['modlos_banker_desc'] 		= 'Specify UUID(GUID) of Banker Avatar';
+$string['modlos_currency_key'] 		= 'Money Script Access key';
+$string['modlos_currency_key_desc']	= 'Please specify Money Script access key code. You can specify any string.';
+$string['modlos_currency_uri'] 		= 'Money Server URL';
+$string['modlos_currency_uri_desc'] = 'Specify DTL/NSL Money server URL, if exist.';
+$string['modlos_currency_unit'] 	= 'Unit of Money';
+$string['modlos_currency_unit_desc']= 'Specify Unit of Money';
 
 $string['modlos_userinfo_link']     = 'Link from Moodle user\'s name to user information page';
 $string['modlos_userinfo_link_desc']= 'It is specified whether to put the link form Moodle user\'s name to Moodle account information page, '.

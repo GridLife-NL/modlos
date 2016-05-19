@@ -99,7 +99,7 @@ class  EditEvent
 		global $DB;
 
 		// List of Parcels
-		$modobj = opensim_get_regions_infos();
+		$modobj = opensim_get_regions_infos('ORDER BY regionName');
 		$i = 0;
 		foreach ($modobj as $mod) {
 			$locX = $mod['locX'] + ($mod['sizeX']-1)*0.5;

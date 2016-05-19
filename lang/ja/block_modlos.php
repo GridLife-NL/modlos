@@ -276,8 +276,6 @@ $string['modlos_asset_uri'] 		= 'Asset サーバのURI';
 $string['modlos_asset_uri_desc'] 	= "OpenSim Asset サーバの URLを指定する．'localhost(127.0.0.1)' は使用しないこと";
 $string['modlos_invent_uri'] 		= 'Inventory サーバのURI';
 $string['modlos_invent_uri_desc'] 	= "OpenSim Inventory サーバの URLを指定する．'localhost(127.0.0.1)' は使用しないこと";
-$string['modlos_crncy_uri'] 		= 'Money サーバのURI';
-$string['modlos_crncy_uri_desc'] 	= 'DTL/NSL Money サーバを使用する場合は，そのURLを指定する';
 
 $string['modlos_map_stx'] 			= 'ワールドマップのスタート位置 (X)';
 $string['modlos_map_stx_desc'] 		= 'ワールドマップを表示する時の 中心 X座標の初期値';
@@ -308,12 +306,16 @@ $string['modlos_grpdb_wkey'] 		= 'Flotsam グループデータベースの書�
 $string['modlos_grpdb_wkey_desc'] 	= 'Flotsam Group Function を使用する場合に指定する書き込み用キー．'.
 									  'OpnenSim.iniの [Groups]セクションの XmlRpcServiceWriteKeyの値と一致させる必要がある．';
 
-$string['modlos_use_crncy_svr']		= 'DTL/NSL Money サーバの使用';
-$string['modlos_use_crncy_svr_desc']= 'DTL/NSL Money サーバを使用するかどうか？';
-$string['modlos_crncy_key'] 		= 'ViewerとMoneyスクリプトとのアクセスキー';
-$string['modlos_crncy_key_desc'] 	= 'ViewerとMoneyスクリプトとのアクセスキーを指定する．任意の文字列なら何でも良い';
+$string['modlos_use_currency_svr']	= 'DTL/NSL Money サーバの使用';
+$string['modlos_use_currency_svr_desc'] = 'DTL/NSL Money サーバを使用するかどうか？';
 $string['modlos_banker'] 			= 'バンカーアバターのUUID　（未実装）';
 $string['modlos_banker_desc'] 		= 'バンカーアバター （お金の管理を行うアバター） のUUID (GUID)';
+$string['modlos_currency_uri'] 		= 'Money サーバのURI';
+$string['modlos_currency_key'] 		= 'ViewerとMoneyスクリプトとのアクセスキー';
+$string['modlos_currency_key_desc'] = 'ViewerとMoneyスクリプトとのアクセスキーを指定する．任意の文字列なら何でも良い';
+$string['modlos_currency_uri_desc'] = 'DTL/NSL Money サーバを使用する場合は，そのURLを指定する';
+$string['modlos_currency_unit'] 	= 'お金の単位';
+$string['modlos_currency_unit_desc']= 'お金の単位を指定する';
 
 $string['modlos_userinfo_link'] 	= 'Moodleユーザの名前からアカウントページへのリンク';
 $string['modlos_userinfo_link_desc']= 'ページ上に Moodleユーザの名前が表示された場合に，そのユーザのアカウント情報画面へのリンクを張るかどうかを指定する．';

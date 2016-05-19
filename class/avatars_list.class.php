@@ -369,6 +369,7 @@ class  AvatarsList
 		$grid_name 		= $CFG->modlos_grid_name;
 		$content   		= $CFG->modlos_avatars_content;
 		$userinfo		= $CFG->modlos_userinfo_link;
+		$money_unit 	= $CFG->modlos_currency_unit;
 		$date_format	= DATE_FORMAT;
 
 		$has_permit		= $this->hasPermit;
