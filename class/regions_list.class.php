@@ -318,7 +318,8 @@ class  RegionsList
 		$estate_name	 = get_string('modlos_estate',		   'block_modlos');
 		$estate_owner	 = get_string('modlos_estate_owner',   'block_modlos');
 		$owner_ttl	 	 = get_string('modlos_owner',   	   'block_modlos');
-		$avatarname_ttl  = get_string('modlos_avatar_name',   'block_modlos');
+//		$avatar_name_ttl = get_string('modlos_avatar_name',    'block_modlos');
+		$manager_name_ttl= get_string('modlos_manager_name',   'block_modlos');
 		$reset_ttl	     = get_string('modlos_reset_ttl',	   'block_modlos');
 		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
 		$server_name	 = get_string('modlos_server',		   'block_modlos');

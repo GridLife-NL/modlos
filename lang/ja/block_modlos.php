@@ -15,6 +15,7 @@ $string['modlos_uuid'] 				= 'UUID';
 $string['modlos_firstname'] 		= 'ファーストネーム';
 $string['modlos_lastname'] 			= 'ラストネーム';
 $string['modlos_avatar_name'] 		= 'アバター名';
+$string['modlos_manager_name'] 		= '管理者';
 $string['modlos_password'] 			= 'パスワード';
 $string['modlos_new_password'] 		= '新しいパスワード';
 $string['modlos_confirm_pass'] 		= 'パスワード確認';
