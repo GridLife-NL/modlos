@@ -52,6 +52,7 @@ $string['modlos_get_owner_ttl'] 	= ' OWNER ';
 $string['modlos_update_ttl'] 		= ' 更新 ';
 $string['modlos_create_ttl'] 		= ' 作成 ';
 $string['modlos_return_ttl'] 		= ' 戻る ';
+$string['modlos_close_ttl'] 		= ' 閉じる ';
 
 $string['modlos_avatar_reset_ttl'] 	= ' リセット ';
 $string['modlos_avatar_create_ttl'] = ' 作成 ';

@@ -6,7 +6,6 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
-
 class  ResetRegion
 {
 	var $hasPermit	= false;
@@ -15,8 +14,8 @@ class  ResetRegion
 
 	var $action_url = '';
 	var $reset_url  = '';
-	var $cancel_url = '';
-	var $action 	= 'all';	// 'all', 'personal' 
+	var $return_url = '';
+	var $action 	= 'all';	// 'all', 'personal', 'close'
 	var $userid 	= 0;		// 0: my, >1: other
 
 	var $use_sloodle = false;
@@ -65,22 +64,24 @@ class  ResetRegion
 
 		// Parameters
 		$uuid   = required_param('region', PARAM_TEXT);
-		$action = optional_param('action', 'all', PARAM_ALPHA);
+		$action = optional_param('action', 'personal', PARAM_ALPHA);
 		$userid = optional_param('userid', '0', PARAM_INT);
 
 		$course_param = '?course='.$course_id;
 		$option_param = '&amp;action='.$action.'&amp;userid='.$userid;
+		if ($action=='close') $option_param = '&amp;action=personal&amp;userid='.$userid;
 
+		$this->action      = $action;
 		$this->course_id   = $course_id;
 		$this->action_url  = $module_url.'/actions/reset_region.php'.$course_param.$option_param;
 		$this->reset_url   = $module_url.'/actions/reset_region.php'.$course_param.$option_param;
-		$this->cancel_url  = $module_url.'/actions/regions_list.php'.$course_param.$option_param;
+		$this->return_url  = $module_url.'/actions/regions_list.php'.$course_param.$option_param;
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
 		// get UUID from POST or GET
 		if (!isGUID($uuid)) {
 			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)";
-			print_error($mesg, '', $cancel_url);
+			print_error($mesg, '', $return_url);
 		}
 
 		// get uid from Modlos and Sloodle DB
@@ -100,10 +101,9 @@ class  ResetRegion
 		$this->serverPort = $region['serverHttpPort'];
 
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			print_error('modlos_access_forbidden', 'block_modlos', $this->cancel_url);
+			print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
 		}
 	}
-
 
 
 	function  execute()
@@ -112,7 +112,7 @@ class  ResetRegion
 
 		//
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			print_error('modlos_access_forbidden', 'block_modlos', $cancel_url);
+			print_error('modlos_access_forbidden', 'block_modlos', $return_url);
 		}
 
 		// Form
@@ -145,7 +145,6 @@ class  ResetRegion
 	}
 
 
-
 	function  print_page() 
 	{
 		global $CFG;
@@ -159,7 +158,8 @@ class  ResetRegion
 		$region_size_ttl	= get_string('modlos_region_size',  	'block_modlos');
 		$admin_user_ttl		= get_string('modlos_admin_user',   	'block_modlos');
 		$region_owner_ttl	= get_string('modlos_region_owner', 	'block_modlos');
-		$cancel_ttl			= get_string('modlos_cancel_ttl',   	'block_modlos');
+		$return_ttl			= get_string('modlos_return_ttl',   	'block_modlos');
+		$close_ttl			= get_string('modlos_close_ttl',   	    'block_modlos');
 		$reset_region_ttl   = get_string('modlos_region_reset', 	'block_modlos');
 		$region_reseted 	= get_string('modlos_region_reseted',  	'block_modlos');;
 		$region_reseted_exp = get_string('modlos_region_reset_exp',	'block_modlos');
@@ -179,4 +179,3 @@ class  ResetRegion
 		include(CMS_MODULE_PATH.'/html/reset_region.html');
 	}
 }
-

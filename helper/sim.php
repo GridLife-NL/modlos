@@ -25,7 +25,7 @@ $isGuest   = isguestuser();
 
 $grid_name  = $CFG->modlos_grid_name;
 $action_url = CMS_MODULE_URL.'/helper/sim.php';
-$reset_url  = CMS_MODULE_URL.'/actions/reset_region.php?course='.$course_id.'&action=personal&region=';
+$reset_url  = CMS_MODULE_URL.'/actions/reset_region.php?course='.$course_id.'&action=close&region=';
 
 
 //////////////

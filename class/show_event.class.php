@@ -120,7 +120,6 @@ class  EditEvent
 		if ($this->creators==null) {
 			print_error('modlos_should_have_avatar', 'block_modlos', CMS_MODULE_URL.'/actions/events_list.php');
 		}
-
 		foreach ($this->creators as $creator) {
 			$this->event_owner = $creator['fullname'];
 			break;
@@ -155,7 +154,7 @@ class  EditEvent
 
 				$date = getdate($event['dateutc']);
 			}
-					
+
 			$this->event_year   = $date['year'];
 			$this->event_month  = $date['mon'];
 			$this->event_day	= $date['mday'];

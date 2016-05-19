@@ -52,6 +52,7 @@ $string['modlos_get_owner_ttl'] 	= ' OWNER ';
 $string['modlos_update_ttl'] 		= ' UPDATE ';
 $string['modlos_create_ttl'] 		= ' CREATE ';
 $string['modlos_return_ttl'] 		= ' RETURN ';
+$string['modlos_close_ttl'] 		= ' CLOSE ';
 
 $string['modlos_avatar_reset_ttl'] 	= ' RESET AVATAR ';
 $string['modlos_avatar_create_ttl'] = ' CREATE AVATAR ';

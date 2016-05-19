@@ -28,14 +28,7 @@
             <tr align="left">
               <td class="head" valign="top"><?php echo $events_creator?></td>
               <td class="odd">
-	      		<?php 
-                  foreach ($this->creators as $creator) {
-                    if ($creator['fullname']==$this->event_creator) {
-                      echo $creator['fullname']; 
-                      break;
-                    }
-	      		  }
-                ?>
+	      		<?php echo $this->event_creator?>
               </td>
             </tr>
 
@@ -81,6 +74,7 @@
 
             <tr>
               <td colspan=2 align=center>
+                <br />
                 <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
                 <input name="submit_return" type="submit" value="<?php echo $return_ttl?>" />
               </td>
