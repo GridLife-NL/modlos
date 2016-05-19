@@ -67,11 +67,12 @@ $string['modlos_db_status'] 		= 'DB Status';
 $string['modlos_total_users'] 		= 'Total Users';
 $string['modlos_total_regions'] 	= 'Total Regions';
 $string['modlos_visitors_last30days']= 'Visitors last 30 days';
+
 $string['modlos_online_now'] 		= 'Online Now';
 $string['modlos_online_hg'] 		= 'HyperGrid Users';
-$string['modlos_online'] 		    = 'Online';
+$string['modlos_online_avatars'] 	= 'Online Avatars';
+$string['modlos_online_list']       = 'Online Avatars List';
 
-$string['modlos_online_avatars']    = 'Online Avatars List';
 $string['modlos_login_time']        = 'Login Time';
 $string['modlos_hg_name_ttl']       = 'HyperGrid';
 

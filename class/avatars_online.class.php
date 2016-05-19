@@ -61,7 +61,8 @@ class  AvatarsOnline
 		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;
 
 		$this->action_url = CMS_MODULE_URL.'/actions/avatars_online.php'.$this->url_param;
-		$this->avatar_url = $CFG->wwwroot.'/user/view.php'.$this->url_param;
+		$this->avatar_url = CMS_MODULE_URL.'/actions/avatars_list.php'.  $this->url_param.'&amp;action=personal&amp;userid=';
+//		$this->avatar_url = $CFG->wwwroot.'/user/view.php'.$this->url_param.'&amp;id=';
 
 		$this->my_avatars = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
@@ -241,7 +242,7 @@ class  AvatarsOnline
 
 		$desc_login		= "&amp;desc=$this->desc_login";
 
-		$avatars_list  	= get_string('modlos_online_avatars','block_modlos');
+		$avatars_list  	= get_string('modlos_online_list',   'block_modlos');
 		$hg_name_ttl	= get_string('modlos_hg_name_ttl',   'block_modlos');
 
 		$number_ttl		= get_string('modlos_num',			 'block_modlos');

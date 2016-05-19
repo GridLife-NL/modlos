@@ -58,7 +58,7 @@ class block_modlos extends block_base
 		$this->content = new stdClass;
 		$this->content->text = '';
 //		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/show_status.php?course='.$id.'">'. get_string('modlos_status','block_modlos').'</a><br />';
-		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_online.php?course='.$id.'&order=login&desc=1">'. get_string('modlos_online','block_modlos').'</a><br />';
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_online.php?course='.$id.'&order=login&desc=1">'. get_string('modlos_online_avatars','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.  get_string('modlos_world_map','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'&order=name">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
 
