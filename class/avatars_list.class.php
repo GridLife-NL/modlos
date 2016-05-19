@@ -434,6 +434,8 @@ class  AvatarsList
 			$avatars_list = get_string('modlos_personal_avatars', 'block_modlos', $userurl);
 		}
 
+		$show_edit = !($this->isGuest or (!$this->show_all and $this->user_id!=$USER->id and !$this->hasPermit));
+
 		include(CMS_MODULE_PATH.'/html/avatars.html');
 	}
 

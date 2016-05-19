@@ -147,7 +147,8 @@
                 <tr>
                   <td width=15 height=26>&nbsp;</td>
                   <td width=40><strong style="color: #222;">&nbsp;<?php echo $number_ttl?></strong></td>
-                  <?php if (!$this->isGuest) {?>
+
+                  <?php if ($show_edit) {?>
                     <td width=80><strong style="color: #222;"><?php echo $edit_ttl?></strong></td>
                   <?php }?>
 
@@ -196,7 +197,7 @@
                     <td height=26>&nbsp;</strong></td>
                     <td><strong style="color: #000;">&nbsp;<?php echo $dat['num']+1+$this->pstart?></strong></td>
 
-                    <?php if (!$this->isGuest) {?>
+                    <?php if ($show_edit) {?>
                       <td>
                         <?php if ($dat['editable']==AVATAR_EDITABLE) {?>
                           <a href="<?php echo $this->edit_url. '&amp;uuid='.$dat['UUID']?>" ><strong style="color: #cc1010;"><?php echo $editable_ttl?></strong></a>
