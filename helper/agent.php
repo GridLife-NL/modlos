@@ -17,7 +17,16 @@ if (!$course_id) $course_id = 1;
 require_login($course_id);
 
 $hasPermit = hasModlosPermit($course_id);
+$use_sloodle = $CFG->modlos_cooperate_sloodle;
+$grid_name   = $CFG->modlos_grid_name;
+$userinfo    = $CFG->modlos_userinfo_link;
+$action_url  = CMS_MODULE_URL.'/helper/agent.php';
+$texture_url = CMS_MODULE_URL.'/helper/get_texture.php?uuid=';
+
 if (!$hasPermit) {
+    $avatardata = modlos_get_avatar_info($agent, $use_sloodle); 
+    if ($avatardata!=null and $USER->id==$avatardata['uid']) $hasPermit = true;
+/*
     $users = modlos_get_avatars($USER->id);
     $i = 0;
     foreach($users as $user) {
@@ -28,13 +37,9 @@ if (!$hasPermit) {
         $i++;
     }
     unset($users);
+*/
 }
 
-$use_sloodle = $CFG->modlos_cooperate_sloodle;
-$grid_name   = $CFG->modlos_grid_name;
-$userinfo    = $CFG->modlos_userinfo_link;
-$action_url  = CMS_MODULE_URL.'/helper/agent.php';
-$texture_url = CMS_MODULE_URL.'/helper/get_texture.php?uuid=';
 
 //////////////
 //global $USER;
