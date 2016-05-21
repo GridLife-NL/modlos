@@ -253,6 +253,7 @@ $string['modlos_updateordel']       = 'Update or Delete';
 
 $string['modlos_my_currency']       = 'My Currency Log';
 $string['modlos_peraonal_currency'] = '{$a}\'s Currency Log';
+$string['modlos_currency_found']    = 'Records Found';
 
 
 // Config

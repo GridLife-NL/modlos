@@ -252,8 +252,9 @@ $string['modlos_add'] 				= '登録';
 $string['modlos_update'] 			= '更新';
 $string['modlos_updateordel'] 		= '更新または削除';
 
-$string['modlos_my_currency']	    = '残高の記録';
-$string['modlos_peraonal_currency'] = '{$a} の残高の記録';
+$string['modlos_my_currency']	    = 'マネー残高の記録';
+$string['modlos_peraonal_currency'] = '{$a} のマネー残高の記録';
+$string['modlos_currency_found']  = '行';
 
 
 // Config
