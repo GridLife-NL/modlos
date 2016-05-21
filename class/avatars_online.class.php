@@ -35,7 +35,6 @@ class  AvatarsOnline
 	var $number;
 	var $sitemax;
 	var $sitestart;
-	var $my_avatars = 0;
 
 	// SQL
 	var $sql_condition = '';
@@ -64,11 +63,10 @@ class  AvatarsOnline
 		$this->avatar_url = CMS_MODULE_URL.'/actions/avatars_list.php'.  $this->url_param.'&amp;action=personal&amp;userid=';
 //		$this->avatar_url = $CFG->wwwroot.'/user/view.php'.$this->url_param.'&amp;id=';
 
-		$this->my_avatars = modlos_get_avatars_num($USER->id);
+		$my_avatars = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
-		if (!$this->hasPermit and $max_avatars>=0 and $this->my_avatars>=$max_avatars) $this->isAvatarMax = true;
+		if (!$this->hasPermit and $max_avatars>=0 and $my_avatars>=$max_avatars) $this->isAvatarMax = true;
 	}
-
 
 
 	// アバターの検索条件
@@ -113,7 +111,6 @@ class  AvatarsOnline
 
 		return true;
 	}
-
 
 
 	function  execute()
@@ -216,7 +213,6 @@ class  AvatarsOnline
 
 		return true;
 	}
-
 
 
 	function  print_page() 

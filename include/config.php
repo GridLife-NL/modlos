@@ -81,6 +81,8 @@ if (USE_CURRENCY_SERVER) {
 	define('CURRENCY_DB_MYSQLI',		OPENSIM_DB_MYSQLI);
 	define('CURRENCY_MONEY_TBL',	  	'balances');
 	define('CURRENCY_TRANSACTION_TBL',	'transactions');
+	define('CURRENCY_USERINFO_TBL',		'userinfo');
+	define('CURRENCY_TOTALSALE_TBL',	'totalsales');
 }
 else {
 	define('CURRENCY_DB_HOST',			CMS_DB_HOST);
@@ -90,6 +92,8 @@ else {
 	define('CURRENCY_DB_MYSQLI',		CMS_DB_MYSQLI);
 	define('CURRENCY_MONEY_TBL',		MODLOS_DB_PREFIX.'economy_money');
 	define('CURRENCY_TRANSACTION_TBL',	MODLOS_DB_PREFIX.'economy_transactions');
+	define('CURRENCY_USERINFO_TBL',		MODLOS_DB_PREFIX.'economy_userinfo');
+	define('CURRENCY_TOTALSALE_TBL',	MODLOS_DB_PREFIX.'economy_totalsales');
 }
 
 

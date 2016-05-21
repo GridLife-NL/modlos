@@ -44,7 +44,6 @@ class  AvatarsList
 
 	var $firstname 	= '';
 	var $lastname  	= '';
-	var $my_avatars = 0;
 	var $ownerloss  = 0;	// false
 
 	var $order		= '';
@@ -95,9 +94,9 @@ class  AvatarsList
 		$this->currency_url = CMS_MODULE_URL.'/actions/show_currency.php'.$this->url_param.$this->action_param;
 		$this->avatar_url   = $CFG->wwwroot.'/user/view.php'.$this->url_param;
 
-		$this->my_avatars = modlos_get_avatars_num($USER->id);
+		$my_avatars = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
-		if (!$this->hasPermit and $max_avatars>=0 and $this->my_avatars>=$max_avatars) $this->isAvatarMax = true;
+		if (!$this->hasPermit and $max_avatars>=0 and $my_avatars>=$max_avatars) $this->isAvatarMax = true;
 	}
 
 
@@ -379,6 +378,7 @@ class  AvatarsList
 		$lnk_lastname	= $this->lnk_lastname;
 		$url_param		= $this->url_param;
 		$action_amp		= $this->action_param;
+
 		$plimit_amp		= "&amp;plimit=$this->plimit";
 		$pstart_amp		= "&amp;pstart=$this->pstart";
 		$order_amp		= "&amp;order=$this->order&amp;desc=$this->order_desc";
