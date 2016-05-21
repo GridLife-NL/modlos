@@ -26,6 +26,7 @@ if ($allow_zoom) {
 }
 
 require_login($course_id);
+$isGuest = isguestuser();
 
 ob_start();
 $course_id = optional_param('course', '1', PARAM_INT);

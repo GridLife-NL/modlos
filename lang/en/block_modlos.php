@@ -204,6 +204,7 @@ $string['modlos_active_avatar'] 	= 'Avatar is Active';
 $string['modlos_moodle_user_name'] 	= 'Moodle User Name';
 $string['modlos_admin'] 			= 'Admin';
 $string['modlos_admin_user'] 		= 'Admin User';
+$string['modlos_admin_avatar'] 		= 'Admin Avatar';
 $string['modlos_administrator'] 	= 'Administrator';
 
 $string['modlos_over_max_avatars'] 	= 'Number of Your Avatars is Maximum';

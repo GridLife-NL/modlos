@@ -156,7 +156,7 @@ $reset_ttl   	= get_string('modlos_region_reset',	 'block_modlos');
 
 $coordinates  	= get_string('modlos_coordinates', 	 'block_modlos');
 $region_size  	= get_string('modlos_region_size', 	 'block_modlos');
-$admin_user   	= get_string('modlos_admin_user',  	 'block_modlos');
+$admin_user   	= get_string('modlos_admin_avatar',  'block_modlos');
 $region_owner 	= get_string('modlos_region_owner',	 'block_modlos');
 $voice_mode	  	= get_string('modlos_voice_chat_mode','block_modlos');
 

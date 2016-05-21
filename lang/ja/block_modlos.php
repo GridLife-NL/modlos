@@ -205,6 +205,7 @@ $string['modlos_active_avatar'] 	= 'アクティブなアバターです';
 $string['modlos_moodle_user_name'] 	= 'MoodleのユーザID';
 $string['modlos_admin'] 			= '管理者';
 $string['modlos_admin_user'] 		= '管理ユーザ';
+$string['modlos_admin_avatar'] 		= '管理アバター';
 $string['modlos_administrator'] 	= '管理者';
 
 $string['modlos_over_max_avatars'] 	= 'アバターの所持数が最大です';

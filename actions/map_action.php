@@ -26,6 +26,7 @@ $course = $DB->get_record('course', array('id'=>$course_id));
 $action = 'world_map';
 
 require_login($course_id);
+$isGuest = isguestuser();
 print_modlos_header($action, $course);
 
 $grid_name = $CFG->modlos_grid_name;

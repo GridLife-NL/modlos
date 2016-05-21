@@ -156,7 +156,7 @@ class  ResetRegion
 		$server_ttl			= get_string('modlos_server',       	'block_modlos');
 		$coordinates_ttl	= get_string('modlos_coordinates',  	'block_modlos');
 		$region_size_ttl	= get_string('modlos_region_size',  	'block_modlos');
-		$admin_user_ttl		= get_string('modlos_admin_user',   	'block_modlos');
+		$admin_user_ttl		= get_string('modlos_admin_avatar',   	'block_modlos');
 		$region_owner_ttl	= get_string('modlos_region_owner', 	'block_modlos');
 		$return_ttl			= get_string('modlos_return_ttl',   	'block_modlos');
 		$close_ttl			= get_string('modlos_close_ttl',   	    'block_modlos');
