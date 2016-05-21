@@ -66,7 +66,6 @@ class  EditAvatar
 		$this->action_url = $module_url.'/actions/edit_avatar.php';
 		$this->delete_url = $module_url.'/actions/delete_avatar.php'.$course_param;
 
-
 		// get UUID from POST or GET
 		$return_url = $module_url.'/actions/avatars_list.php'. $course_param;
 		$uuid = optional_param('uuid', '', PARAM_TEXT);
@@ -77,7 +76,6 @@ class  EditAvatar
 		$this->UUID = $uuid;
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
-
 		// get uid from Modlos and Sloodle DB
 		$avatar = modlos_get_avatar_info($this->UUID, $this->use_sloodle);
 		$this->uid	  	= $avatar['uid'];
@@ -85,7 +83,6 @@ class  EditAvatar
 		$this->firstname= $avatar['firstname'];
 		$this->lastname = $avatar['lastname'];
 		$this->avatar 	= $avatar;
-
 
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
@@ -96,7 +93,6 @@ class  EditAvatar
 		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 	}
-
 
 
 	function  execute()
@@ -146,7 +142,6 @@ class  EditAvatar
 				$this->errorMsg[] = get_string('modlos_passwd_minlength', 'block_modlos', AVATAR_PASSWD_MINLEN);
 			}
 
-
 			// Owner Name
 			if ($this->hasPermit) {		// for admin
 				$this->ownername = optional_param('ownername', '', PARAM_TEXT);
@@ -182,7 +177,6 @@ class  EditAvatar
 				}
 			}
 
-
 			// Home Region
  			$region_uuid = opensim_get_region_uuid($this->hmregion);
 			if ($region_uuid==null) {
@@ -191,7 +185,6 @@ class  EditAvatar
 			}
 
 			if ($this->hasError) return false;
-
 
 			//////////
 			$this->updated_avatar = $this->updateAvatar();
@@ -217,7 +210,6 @@ class  EditAvatar
 
 		return true;
 	}
-
 
 
 	function  print_page() 
@@ -249,7 +241,6 @@ class  EditAvatar
 
 		include(CMS_MODULE_PATH.'/html/edit.html');
 	}
-
 
 
 	function updateAvatar()
