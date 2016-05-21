@@ -252,6 +252,10 @@ $string['modlos_add'] 				= '登録';
 $string['modlos_update'] 			= '更新';
 $string['modlos_updateordel'] 		= '更新または削除';
 
+$string['modlos_my_currency']	    = '残高の記録';
+$string['modlos_peraonal_currency'] = '{$a} の残高の記録';
+
+
 // Config
 $string['modlos_mdl_name'] 			= 'Moodle OpenSim';
 $string['modlos_mdl_desc'] 			= 'Moodle OpenSim インターフェイス';

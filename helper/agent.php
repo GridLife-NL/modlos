@@ -15,14 +15,26 @@ if (!isGUID($agent)) exit("<h4>bad agent uuid!! ($agent)</h4>");
 if (!$course_id) $course_id = 1; 
 
 require_login($course_id);
+
 $hasPermit = hasModlosPermit($course_id);
+if (!$hasPermit) {
+    $users = modlos_get_avatars($USER->id);
+    $i = 0;
+    foreach($users as $user) {
+        if ($agent==$user['UUID']) {
+            $hasPermit = true;
+            break;
+        }
+        $i++;
+    }
+    unset($users);
+}
 
 $use_sloodle = $CFG->modlos_cooperate_sloodle;
 $grid_name   = $CFG->modlos_grid_name;
 $userinfo    = $CFG->modlos_userinfo_link;
 $action_url  = CMS_MODULE_URL.'/helper/agent.php';
 $texture_url = CMS_MODULE_URL.'/helper/get_texture.php?uuid=';
-
 
 //////////////
 //global $USER;
@@ -88,7 +100,6 @@ if ($agent) {
 		}
 	}
 
-
 	$prof = modlos_get_profile($agent);
 	if ($prof!=null) {
         if ($prof['Partnar']!='')	 	 $partner 	   = $prof['Partnar'];
@@ -107,7 +118,6 @@ if ($agent) {
         //$prof['SkillsText']
         //$prof['LanguagesText']
 	}
-
 
 	//
 	if ($created=='0' or $created==null or $created=='' or $created=='0') {
