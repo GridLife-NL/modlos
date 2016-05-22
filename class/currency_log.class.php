@@ -289,7 +289,6 @@ class  CurrencyLog
 		$order_			= '&amp;order=';
 
 		$number_ttl		= get_string('modlos_num',			  'block_modlos');
-		$currency_log	= get_string('modlos_my_currency',    'block_modlos');
 		$currency_found	= get_string('modlos_currency_found', 'block_modlos');
 		$currency_date	= get_string('modlos_currency_date',  'block_modlos');
 		$currency_type	= get_string('modlos_currency_type',  'block_modlos');
@@ -330,12 +329,14 @@ class  CurrencyLog
 		$currency_ttl  	= get_string('modlos_currency_ttl',  'block_modlos');
 */
 
-		if ($this->user_id!=$USER->id) {
-			$userinfo = get_userinfo_by_id($this->user_id);
-			$username = get_display_username($userinfo->firstname, $userinfo->lastname);
-			$userurl  = '<a href="'.$this->owner_url.'&id='.$this->user_id.'" target="_blank">'.$username.'</a>';
-			$currency_log = get_string('modlos_peraonal_currency', 'block_modlos', $userurl);
-		}
+		$avtname = opensim_get_avatar_name($this->agent_id);
+
+		$userurl = "<a style=\"cursor:pointer;\" onClick=\"window.open('".CMS_MODULE_URL.'/helper/agent.php'.
+                               $url_param.'&agent='.$this->agent_id."',null,'toolbar=no,location=no,directories=no,".
+                               "status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')\">";
+		$userurl.= $avtname['fullname'];
+		$userurl.= '</a>';
+		$currency_log = get_string('modlos_peraonal_currency', 'block_modlos', $userurl);
 
 		include(CMS_MODULE_PATH.'/html/currency_log.html');
 	}
