@@ -142,7 +142,8 @@ class  CurrencyLog
 			$this->sql_condition = ' '.$sql_order;
 		}
 		else {
-			$this->sql_condition = " AND objectUUID!='00000000-0000-0000-0000-000000000000' ".$sql_order;
+			$this->sql_condition = " AND sender!='00000000-0000-0000-0000-000000000000' AND ".
+                                      "receiver!='00000000-0000-0000-0000-000000000000' ".$sql_order;
 		}
 
 		return true;
@@ -207,11 +208,10 @@ class  CurrencyLog
 			}
 
 			if (!$this->db_data[$colum]['objectName']) {
-				$this->db_data[$colum]['objectName'] = ' - ';
 				if ($this->db_data[$colum]['objectUUID']) {
 					$this->db_data[$colum]['objectName'] = opensim_get_object_name($this->db_data[$colum]['objectUUID']);
-					if (!$this->db_data[$colum]['objectName']) $this->db_data[$colum]['objectName'] = ' - ';
 				}
+				if (!$this->db_data[$colum]['objectName']) $this->db_data[$colum]['objectName'] = ' - ';
 			}
 
 			$oppname = opensim_get_avatar_name($this->db_data[$colum]['oppuuid']);
