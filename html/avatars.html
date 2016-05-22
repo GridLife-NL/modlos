@@ -15,7 +15,7 @@
 
     <td>&nbsp;</td>
     <td width=200>
-      <strong style="color: #000;">&nbsp;<?php echo $this->number." ".$users_found ?></strong>
+      <strong style="color: #000;">&nbsp;<?php echo number_format($this->number)." ".$users_found ?></strong>
     </td>
 
     <!-- icon line -->
@@ -204,7 +204,7 @@
                             <strong style="color: #cc1010;"><?php echo $editable_ttl?></strong>
                           </a>
                         <?php } elseif ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {?>
-                          <a href="<?php echo $this->owner_url.'&amp;uuid='.$dat['UUID']?>">
+                          <a href="<?php echo $this->avatar_url.'&amp;uuid='.$dat['UUID']?>">
                             <strong style="color: #aa5050;"><?php echo $get_owner_ttl?></strong>
                           </a>
                         <?php } else {?>
@@ -282,7 +282,7 @@
                     <?php if ($use_currency and $show_edit) {?>
                       <td>
                         <?php if ($dat['editable']==AVATAR_EDITABLE) {?>
-                          <a href="<?php echo $this->currency_url. '&amp;uuid='.$dat['UUID']?>" ><strong><?php echo $show_ttl?></strong></a>
+                          <a href="<?php echo $this->currency_url. '&amp;agent='.$dat['UUID']?>" ><strong><?php echo $show_ttl?></strong></a>
                         <?php } else {?>
                           &nbsp;-&nbsp;
                         <?php }?>

@@ -50,7 +50,7 @@
           <span class="styleTitel"><?php echo $user_ttl.":&nbsp;".htmlspecialchars($firstN)."&nbsp;&nbsp;".htmlspecialchars($lastN)?></span>
         </td></tr>
 
-        <?php if ($hasPermit) {?>
+        <?php if ($hasPermit or $editPermit) {?>
           <tr><td>&nbsp;</td></tr>
           <tr><td class="styleText">
             <strong><?php echo $uuid_ttl.":&nbsp;"?></strong>

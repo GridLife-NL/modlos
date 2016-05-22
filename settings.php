@@ -174,12 +174,11 @@ $settings->add(new admin_setting_configcheckbox('modlos_userinfo_link',
 
 // Context
 if (class_exists('admin_setting_confightmleditor')) {
-/*
 	$settings->add(new admin_setting_confightmleditor('modlos_status_content',
 					get_string('modlos_status_cntnt', 'block_modlos'),
 				   	get_string('modlos_status_cntnt_desc', 'block_modlos'), 
 						'<center><span style="font-size: medium;">Welcome to Moodle OpenSim Interface</span></center>', PARAM_RAW));
-*/
+
 	$settings->add(new admin_setting_confightmleditor('modlos_regions_content', 
 					get_string('modlos_rg_cntnt', 'block_modlos'),
 				   	get_string('modlos_rg_cntnt_desc', 'block_modlos'), '', PARAM_RAW));
@@ -197,12 +196,11 @@ if (class_exists('admin_setting_confightmleditor')) {
 				   	get_string('modlos_lgnscrn_cntnt_desc', 'block_modlos'), '<p>Welcome to OpenSim</p>', PARAM_RAW));
 }
 else {
-/*
 	$settings->add(new admin_setting_configtextarea('modlos_status_content',
 					get_string('modlos_status_cntnt', 'block_modlos'),
 				   	get_string('modlos_status_cntnt_desc', 'block_modlos'), 
 						'<h2><center>Welcome to Moodle OpenSim Interface</center></h2>', PARAM_RAW));
-*/
+
 	$settings->add(new admin_setting_configtextarea('modlos_regions_content', 
 					get_string('modlos_rg_cntnt', 'block_modlos'),
 				   	get_string('modlos_rg_cntnt_desc', 'block_modlos'), '', PARAM_RAW));

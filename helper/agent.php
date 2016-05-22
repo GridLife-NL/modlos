@@ -11,34 +11,18 @@ if (isguestuser()) {
 
 $agent 	   = required_param('agent', PARAM_TEXT);
 $course_id = optional_param('course', '1', PARAM_INT);
-if (!isGUID($agent)) exit("<h4>bad agent uuid!! ($agent)</h4>");
+if (!isGUID($agent) or $agent=='00000000-0000-0000-0000-000000000000') exit("<h4>bad agent uuid!! ($agent)</h4>");
 if (!$course_id) $course_id = 1; 
 
 require_login($course_id);
 
-$hasPermit = hasModlosPermit($course_id);
 $use_sloodle = $CFG->modlos_cooperate_sloodle;
 $grid_name   = $CFG->modlos_grid_name;
 $userinfo    = $CFG->modlos_userinfo_link;
 $action_url  = CMS_MODULE_URL.'/helper/agent.php';
 $texture_url = CMS_MODULE_URL.'/helper/get_texture.php?uuid=';
-
-if (!$hasPermit) {
-    $avatardata = modlos_get_avatar_info($agent, $use_sloodle); 
-    if ($avatardata!=null and $USER->id==$avatardata['uid']) $hasPermit = true;
-/*
-    $users = modlos_get_avatars($USER->id);
-    $i = 0;
-    foreach($users as $user) {
-        if ($agent==$user['UUID']) {
-            $hasPermit = true;
-            break;
-        }
-        $i++;
-    }
-    unset($users);
-*/
-}
+$hasPermit   = hasModlosPermit($course_id);
+$editPermit  = $hasPermit;
 
 
 //////////////
@@ -82,7 +66,6 @@ if ($agent) {
 		//$crrntRegion  = $online['regionName'];
 	}
 
-
 	// auto synchro
 	modlos_sync_opensimdb();
 	if ($use_sloodle) modlos_sync_sloodle_users();
@@ -103,6 +86,7 @@ if ($agent) {
 		if ($moodle = $DB->get_record('user', array('id'=>$userid))) {
 			$owner  = get_display_username($moodle->firstname, $moodle->lastname);
 		}
+    	if (!$editPermit and $USER->id==$userid) $editPermit = true;
 	}
 
 	$prof = modlos_get_profile($agent);

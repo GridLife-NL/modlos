@@ -16,9 +16,9 @@ class  AvatarsList
 	var $action_url;
 	var $edit_url;
 	var $currency_url;
-	var $owner_url;
 	var $search_url;
 	var $avatar_url;
+	var $owner_url;
 
 	var $course_id    = 0;
 	var $user_id	  = 0;
@@ -87,12 +87,12 @@ class  AvatarsList
 		if ($show_all) $this->action_param = '&amp;action=all';
 		else           $this->action_param = '&amp;action=personal&amp;userid='.$userid;
 
-		$this->action_url   = CMS_MODULE_URL.'/actions/avatars_list.php'. $this->url_param;
-		$this->search_url   = CMS_MODULE_URL.'/actions/avatars_list.php'. $this->url_param.$this->action_param.'&amp;pstart=0';
-		$this->edit_url		= CMS_MODULE_URL.'/actions/edit_avatar.php'.  $this->url_param.$this->action_param;
-		$this->owner_url	= CMS_MODULE_URL.'/actions/owner_avatar.php'. $this->url_param.$this->action_param;
-		$this->currency_url = CMS_MODULE_URL.'/actions/show_currency.php'.$this->url_param.$this->action_param;
-		$this->avatar_url   = $CFG->wwwroot.'/user/view.php'.$this->url_param;
+		$this->action_url   = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param;
+		$this->search_url   = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_param.$this->action_param.'&amp;pstart=0';
+		$this->edit_url		= CMS_MODULE_URL.'/actions/edit_avatar.php'. $this->url_param.$this->action_param;
+		$this->avatar_url	= CMS_MODULE_URL.'/actions/owner_avatar.php'.$this->url_param.$this->action_param;
+		$this->currency_url = CMS_MODULE_URL.'/actions/currency_log.php'.$this->url_param.$this->action_param;
+		$this->owner_url 	= $CFG->wwwroot.'/user/view.php'.$this->url_param;
 
 		$my_avatars = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
@@ -431,7 +431,7 @@ class  AvatarsList
 		else {
 			$userinfo = get_userinfo_by_id($this->user_id);
 			$username = get_display_username($userinfo->firstname, $userinfo->lastname);
-			$userurl  = '<a href="'.$this->avatar_url.'&id='.$this->user_id.'" target="_blank">'.$username.'</a>';
+			$userurl  = '<a href="'.$this->owner_url.'&id='.$this->user_id.'" target="_blank">'.$username.'</a>';
 			$avatars_list = get_string('modlos_personal_avatars', 'block_modlos', $userurl);
 		}
 

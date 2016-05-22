@@ -252,9 +252,17 @@ $string['modlos_add'] 				= '登録';
 $string['modlos_update'] 			= '更新';
 $string['modlos_updateordel'] 		= '更新または削除';
 
-$string['modlos_my_currency']	    = 'マネー残高の記録';
-$string['modlos_peraonal_currency'] = '{$a} のマネー残高の記録';
-$string['modlos_currency_found']  = '行';
+$string['modlos_my_currency']	    = 'マネー残高のログ';
+$string['modlos_peraonal_currency'] = '{$a} のマネー残高のログ';
+$string['modlos_currency_found']    = '行';
+$string['modlos_currency_date']     = '日付';
+$string['modlos_currency_type']     = '取引内容';
+$string['modlos_currency_object']   = 'オブジェクト名';
+$string['modlos_currency_amount']   = '残高';
+$string['modlos_currency_pay']      = '支払い';
+$string['modlos_currency_income']   = '受取り';
+$string['modlos_currency_unknown']  = '不明';
+$string['modlos_currency_opponent'] = '取引相手';
 
 
 // Config

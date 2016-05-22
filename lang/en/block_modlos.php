@@ -254,6 +254,14 @@ $string['modlos_updateordel']       = 'Update or Delete';
 $string['modlos_my_currency']       = 'My Currency Log';
 $string['modlos_peraonal_currency'] = '{$a}\'s Currency Log';
 $string['modlos_currency_found']    = 'Records Found';
+$string['modlos_currency_date']     = 'Date';
+$string['modlos_currency_type']     = 'Type';
+$string['modlos_currency_object']   = 'Object Name';
+$string['modlos_currency_amount']   = 'Amount';
+$string['modlos_currency_pay']      = 'Pay';
+$string['modlos_currency_income']   = 'Income';
+$string['modlos_currency_unknown']  = 'unknown';
+$string['modlos_currency_opponent'] = 'seller/customer';
 
 
 // Config
