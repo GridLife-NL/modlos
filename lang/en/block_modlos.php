@@ -262,6 +262,7 @@ $string['modlos_currency_pay']      = 'Pay';
 $string['modlos_currency_income']   = 'Income';
 $string['modlos_currency_unknown']  = 'unknown';
 $string['modlos_currency_opponent'] = 'seller/customer';
+$string['modlos_currency_nosystem'] = 'Do not show the trading with the System';
 
 
 // Config

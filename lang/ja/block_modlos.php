@@ -263,6 +263,7 @@ $string['modlos_currency_pay']      = '支払い';
 $string['modlos_currency_income']   = '受取り';
 $string['modlos_currency_unknown']  = '不明';
 $string['modlos_currency_opponent'] = '取引相手';
+$string['modlos_currency_nosystem'] = 'System との取引を表示しない';
 
 
 // Config

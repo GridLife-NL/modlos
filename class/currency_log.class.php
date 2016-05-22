@@ -14,6 +14,8 @@ class  CurrencyLog
 	var $icon 		 = array();
 	var $pnum 		 = array();
 
+	var $nosystem    = 0;
+
 	var $course_id   = 0;
 	var $agent_id	 = '';
 	var $user_id	 = 0;
@@ -41,8 +43,8 @@ class  CurrencyLog
 	var $desc_next   = 0;
  
 	// SQL
-	var $sql_order   = '';
-	var $sql_limit   = '';
+	var $sql_condition = '';
+	var $sql_limit     = '';
 
 
 
@@ -105,6 +107,8 @@ class  CurrencyLog
 		$this->order_desc = optional_param('desc', '1', PARAM_INT);
 		if (!isAlphabetNumeric($this->order)) $this->order = '';
 
+		$this->nosystem = optional_param('nosystem', '0', PARAM_INT);
+
 		// Post Check
 		if (data_submitted()) {
 			if (!confirm_sesskey()) {
@@ -134,7 +138,12 @@ class  CurrencyLog
 		$this->sql_limit = " LIMIT $this->pstart, $this->plimit ";
 
 		// SQL Condition
-		$this->sql_order = ' '.$sql_order;
+		if ($this->nosystem==0) {
+			$this->sql_condition = ' '.$sql_order;
+		}
+		else {
+			$this->sql_condition = " AND objectUUID!='00000000-0000-0000-0000-000000000000' ".$sql_order;
+		}
 
 		return true;
 	}
@@ -162,9 +171,9 @@ class  CurrencyLog
 
 		////////////////////////////////////////////////////////////////////
 		//
-		$this->number = opensim_get_currency_amounts_num($this->agent_id);
+		$this->number = opensim_get_currency_amounts_num($this->agent_id, $this->sql_condition);
 		//
-		$logs = opensim_get_currency_amounts_log($this->agent_id, $this->sql_order.$this->sql_limit);
+		$logs = opensim_get_currency_amounts_log($this->agent_id, $this->sql_condition.$this->sql_limit);
 
 		$colum = 0;
 		foreach ($logs as $log) {
@@ -197,7 +206,13 @@ class  CurrencyLog
 				$this->db_data[$colum]['balance'] = ' - ';
 			}
 
-			if (!$this->db_data[$colum]['objectName']) $this->db_data[$colum]['objectName'] = ' - ';
+			if (!$this->db_data[$colum]['objectName']) {
+				$this->db_data[$colum]['objectName'] = ' - ';
+				if ($this->db_data[$colum]['objectUUID']) {
+					$this->db_data[$colum]['objectName'] = opensim_get_object_name($this->db_data[$colum]['objectUUID']);
+					if (!$this->db_data[$colum]['objectName']) $this->db_data[$colum]['objectName'] = ' - ';
+				}
+			}
 
 			$oppname = opensim_get_avatar_name($this->db_data[$colum]['oppuuid']);
 			$this->db_data[$colum]['opponent'] = $oppname['fullname'];
@@ -264,6 +279,7 @@ class  CurrencyLog
 		$url_param		= $this->url_param;
 		$action_url		= $this->action_url;
 		$desc_amp		= "&amp;desc=$this->desc_next";
+		$nosystem_amp	= "&amp;nosystem=$this->nosystem";
 
 		$plimit_amp		= "&amp;plimit=$this->plimit";
 		$pstart_amp		= "&amp;pstart=$this->pstart";
@@ -282,10 +298,13 @@ class  CurrencyLog
 		$currency_pay   = get_string('modlos_currency_pay',   'block_modlos');
 		$currency_income= get_string('modlos_currency_income','block_modlos');
 		$currency_opponent = get_string('modlos_currency_opponent','block_modlos');
+		$currency_nosystem = get_string('modlos_currency_nosystem','block_modlos');
 
 		$page_num		= get_string('modlos_page',			  'block_modlos');
 		$page_num_of	= get_string('modlos_page_of',		  'block_modlos');
 
+		$nosystem_checked = '';
+		if ($this->nosystem) $nosystem_checked = 'checked';
 /*
 		$edit_ttl		= get_string('modlos_edit',			 'block_modlos');
 		$show_ttl		= get_string('modlos_show',			 'block_modlos');
