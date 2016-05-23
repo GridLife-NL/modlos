@@ -64,12 +64,13 @@ $string['modlos_avatar_dlt_cncld_ttl']=' AVATAR delete CANCELED ';
 
 $string['modlos_status_page'] 		= 'OpenSim Status';
 $string['modlos_db_status'] 		= 'DB Status';
-$string['modlos_total_users'] 		= 'Total Users';
+$string['modlos_total_users'] 		= 'Total Avatars';
 $string['modlos_total_regions'] 	= 'Total Regions';
 $string['modlos_visitors_last30days']= 'Visitors last 30 days';
 
 $string['modlos_online_now'] 		= 'Online Now';
-$string['modlos_online_hg'] 		= 'HyperGrid Users';
+$string['modlos_online_hg'] 		= 'HyperGrid Avatars';
+$string['modlos_online'] 			= 'Online';
 $string['modlos_online_avatars'] 	= 'Online Avatars';
 $string['modlos_online_list']       = 'Online Avatars List';
 
@@ -113,7 +114,7 @@ $string['modlos_avatar_updated'] 	= 'Avatar Updated!!';
 $string['modlos_avatar_gotted'] 	= 'Get a this Avatar by relationship with Moodle User';
 $string['modlos_avatar_gotted_error']='Failed to get a relationship with Moodle User!!';
 $string['modlos_avatar_deleted'] 	= 'Avatar Deleted!!';
-$string['modlos_avatar_select']     = 'Select Avatar';
+$string['modlos_avatar_select']     = 'Select Initail Avatar';
 
 $string['modlos_avatar_create'] 	= 'Create Avatar';
 $string['modlos_avatar_update'] 	= 'Update Avatar';
@@ -129,11 +130,14 @@ $string['modlos_sloodle_ttl']       = 'SLOODLE';
 $string['modlos_sloodle_short']     = 'SLDL';
 $string['modlos_manage_sloodle']    = 'Cooperation with Sloodle';
 
-$string['modlos_currency_ttl']      = 'Currency';
-
 $string['modlos_avatar_upd_submit'] = 'Update Avatar';
 $string['modlos_avatar_dlt_canceled']='Avatar Delete Canceled';
 $string['modlos_avatar_dlt_confrm'] = 'Is Avatar really DELETE?';
+
+$string['modlos_online_tab'] 		= 'Online';
+$string['modlos_avatars_tab'] 		= 'Avatars';
+$string['modlos_regions_tab'] 		= 'Regions';
+$string['modlos_world_map_tab'] 	= 'Map';
 
 $string['modlos_user_search'] 		= 'User Search';
 $string['modlos_users_found'] 		= 'Users Found';
@@ -252,6 +256,8 @@ $string['modlos_add']               = 'Add';
 $string['modlos_update']       		= 'Update';
 $string['modlos_updateordel']       = 'Update or Delete';
 
+$string['modlos_currency_tab']      = 'Currency';
+$string['modlos_currency_ttl']      = 'Management of Currency';
 $string['modlos_my_currency']       = 'My Currency Log';
 $string['modlos_peraonal_currency'] = '{$a}\'s Currency Log';
 $string['modlos_currency_found']    = 'Records Found';
@@ -394,8 +400,8 @@ $string['modlos_lastnames'] 		= 'Lastnames Management';
 //$string['modlos_convertdb_contents']= 'Convert OpenSim DB from 0,6.x to 0.7.x ?';
 //$string['modlos_convertdb_converted']='OpenSim DB is Converted!!';
 
-$string['modlos_avatar_select_tab'] = 'for Base Avatars';
-$string['modlos_avatar_select_ttl'] = 'Management of Base Avatars';
+$string['modlos_avatar_select_tab'] = 'Initial Avatars';
+$string['modlos_avatar_select_ttl'] = 'Management of Initail Avatars';
 
 $string['modlos_manage_tab']		= 'Management';
 $string['modlos_manage_menu']		= 'Management';
@@ -407,7 +413,7 @@ $string['modlos_manage_done']		= 'Management Command was Executed!!';
 $string['modlos_manage_select']		= 'Select a Management Command';
 $string['modlos_manage_return']		= 'Return to Management Commands';
 
-$string['modlos_estate_tab']		= 'for Estates';
+$string['modlos_estate_tab']		= 'Estates';
 $string['modlos_estate_ttl']		= 'Management of Estates';
 $string['modlos_estate_owner']      = 'Estate Owner';
 $string['modlos_estate_regions']    = 'Regions';
@@ -429,8 +435,8 @@ $string['modlos_clpresence_ttl']	= 'Clear Login Information Table';
 $string['modlos_cleandb_ttl']       = 'Clean Up DB';
 $string['modlos_debugcom_ttl']	    = 'Command for Debug (for Experiment)';
 
-$string['modlos_return_tab'] 		= 'Return to Course';
-$string['modlos_return_sitetop_tab']= 'Return to Site Top';
+$string['modlos_return_tab'] 		= 'to Course';
+$string['modlos_return_sitetop_tab']= 'to Site Top';
 $string['modlos_access_forbidden'] 	= 'Forbidden Access to this Page!!';
 
 $string['modlos_events_make_ttl']	= 'Make Event';

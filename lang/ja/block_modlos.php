@@ -61,19 +61,19 @@ $string['modlos_avatar_update_ttl'] = ' 更新 ';
 $string['modlos_avatar_delete_ttl'] = ' 削除 ';
 $string['modlos_avatar_own_ttl'] 	= ' オーナの変更 ';
 $string['modlos_avatar_dlt_cncld_ttl']=' 取消し ';
-$string['modlos_avatar_select']     = 'アバター選択';
+$string['modlos_avatar_select']     = '初期アバターの選択';
 
 $string['modlos_status_page'] 		= 'ステータス';
 $string['modlos_db_status'] 		= 'データベース';
-$string['modlos_total_users'] 		= '全体のユーザ人数';
+$string['modlos_total_users'] 		= '全体のアバター数';
 $string['modlos_total_regions'] 	= '全体のリージョン数';
 $string['modlos_visitors_last30days']= '過去30日間の利用者数';
 
-$string['modlos_online_now'] 		= 'オンライン中のユーザ';
-$string['modlos_online_hg'] 		= 'ハイパーグリッドのユーザ';
+$string['modlos_online_now']        = 'オンライン アバター';
+$string['modlos_online_hg'] 		= 'ハイパーグリッド アバター';
 $string['modlos_online']            = 'オンライン';
-$string['modlos_online_avatars']    = 'オンライン アバター';
-$string['modlos_online_list']       = 'オンライン アバターリスト';
+$string['modlos_online_avatars']    = 'オンライン';
+$string['modlos_online_list']       = 'オンライン アバター リスト';
 
 $string['modlos_login_time'] 		= 'ログイン';
 $string['modlos_hg_name_ttl'] 		= 'ハイパーグリッド';
@@ -94,12 +94,12 @@ $string['modlos_inactive_list'] 	= '使用停止リスト';
 
 $string['modlos_show_status'] 		= 'Modlos';
 $string['modlos_show_db'] 			= 'データベース';
-$string['modlos_world_map'] 		= 'ワールドマップ';
+$string['modlos_world_map'] 		= 'ワールド マップ';
 $string['modlos_user_info'] 		= 'ユーザ情報';
 $string['modlos_my_avatars'] 		= 'マイ アバター';
 $string['modlos_personal_avatars'] 	= '{$a} のアバター';
-$string['modlos_avatars_list'] 		= 'アバターリスト';
-$string['modlos_regions_list'] 		= 'リージョンリスト';
+$string['modlos_avatars_list'] 		= 'アバター リスト';
+$string['modlos_regions_list'] 		= 'リージョン リスト';
 $string['modlos_my_regions'] 		= 'マイ リージョン';
 $string['modlos_personal_regions'] 	= '{$a} のリージョン';
 $string['modlos_editable_list'] 	= '編集可能アバターリスト';
@@ -130,11 +130,14 @@ $string['modlos_sloodle_ttl']		= 'SLOODLE';
 $string['modlos_sloodle_short']		= 'SLDL';
 $string['modlos_manage_sloodle']	= 'Sloodle との連携';
 
-$string['modlos_currency_ttl']	    = 'マネー';
-
 $string['modlos_avatar_upd_submit'] = 'アバター更新';
 $string['modlos_avatar_dlt_canceled']= 'アバター削除取り消し';
 $string['modlos_avatar_dlt_confrm']	= '本当にアバターを削除しますか？';
+
+$string['modlos_online_tab']        = 'オンライン';
+$string['modlos_avatars_tab']       = 'アバター一覧';
+$string['modlos_regions_tab']       = 'リージョン一覧';
+$string['modlos_world_map_tab']     = 'マップ';
 
 $string['modlos_user_search'] 		= 'ユーザ検索';
 $string['modlos_nouser_found'] 		= 'ユーザがいません';
@@ -253,6 +256,8 @@ $string['modlos_add'] 				= '登録';
 $string['modlos_update'] 			= '更新';
 $string['modlos_updateordel'] 		= '更新または削除';
 
+$string['modlos_currency_tab']	    = 'マネー';
+$string['modlos_currency_ttl']	    = 'マネー管理';
 $string['modlos_my_currency']	    = 'マネー残高のログ';
 $string['modlos_peraonal_currency'] = '{$a} のマネー残高のログ';
 $string['modlos_currency_found']    = '行';
@@ -394,10 +399,10 @@ $string['modlos_lastnames'] 		= 'ラストネーム管理';
 //$string['modlos_convertdb_contents']= 'OpenSimデータベースを 0.6.x から 0.7.x へ変換';
 //$string['modlos_convertdb_converted']='OpenSimデータベースの変換完了!';
 
-$string['modlos_avatar_select_tab'] = 'アバター選択管理';
-$string['modlos_avatar_select_ttl'] = 'アバター選択管理';
+$string['modlos_avatar_select_tab'] = '初期アバター';
+$string['modlos_avatar_select_ttl'] = '初期アバター管理';
 
-$string['modlos_manage_tab']        = '管理画面';
+$string['modlos_manage_tab']        = '管理';
 $string['modlos_manage_menu']       = '管理画面';
 $string['modlos_manage_cmnd_tab']   = '管理コマンド';
 $string['modlos_manage_ttl']        = '管理コマンド';
@@ -407,7 +412,7 @@ $string['modlos_manage_done']       = '管理コマンド正常終了!!';
 $string['modlos_manage_select']     = '実行する管理コマンドを選択してください';
 $string['modlos_manage_return']     = '管理コマンド画面に戻る';
 
-$string['modlos_estate_tab']        = 'エステート管理';
+$string['modlos_estate_tab']        = 'エステート';
 $string['modlos_estate_ttl']        = 'エステート管理';
 $string['modlos_estate_owner']      = 'エステート オーナ';
 $string['modlos_estate_regions']    = 'リージョン';
@@ -429,8 +434,8 @@ $string['modlos_clpresence_ttl']    = 'ログイン情報テーブルをクリ�
 $string['modlos_cleandb_ttl']       = 'データベースのクリーンアップ';
 $string['modlos_debugcom_ttl']      = 'デバッグ用コマンド（実験用）';
 
-$string['modlos_return_tab'] 		= 'コースに戻る';
-$string['modlos_return_sitetop_tab']= 'サイトトップに戻る';
+$string['modlos_return_tab'] 		= '戻る';
+$string['modlos_return_sitetop_tab']= '戻る';
 $string['modlos_access_forbidden'] 	= 'このページへのアクセスは許可されていません';
 
 $string['modlos_events_make_ttl']   = 'イベント作成';
@@ -440,7 +445,7 @@ $string['modlos_events_make_link']  = 'イベントを新規作成する場合�
 $string['modlos_events_click_here'] = 'ここをクリック';
 
 $string['modlos_events_tab']		= 'イベント';
-$string['modlos_events_list']       = 'イベントリスト';
+$string['modlos_events_list']       = 'イベント リスト';
 $string['modlos_events_date']       = '日時';
 $string['modlos_events_type']       = 'タイプ';
 $string['modlos_events_name']       = 'イベント名';

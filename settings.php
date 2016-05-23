@@ -82,11 +82,11 @@ $settings->add(new admin_setting_configselect('modlos_map_size',
 
 $settings->add(new admin_setting_configcheckbox('modlos_use_utc_time', 
 					get_string('modlos_use_utc', 'block_modlos'),
-				   	get_string('modlos_use_utc_desc', 'block_modlos'), 1));
+				   	get_string('modlos_use_utc_desc', 'block_modlos'), 0));
 
 $settings->add(new admin_setting_configtext('modlos_date_format', 
 					get_string('modlos_date_format', 'block_modlos'),
-				   	get_string('modlos_date_format_desc', 'block_modlos'), 'Y.m.d - H:i', PARAM_TEXT));
+				   	get_string('modlos_date_format_desc', 'block_modlos'), 'd.m.Y - H:i', PARAM_TEXT));
 
 $settings->add(new admin_setting_configtext('modlos_max_own_avatars', 
 					get_string('modlos_max_avatars', 'block_modlos'),
@@ -119,7 +119,7 @@ $settings->add(new admin_setting_configcheckbox('modlos_activate_events',
 
 $settings->add(new admin_setting_configcheckbox('modlos_pg_only', 
 					get_string('modlos_pg_only', 'block_modlos'),
-				   	get_string('modlos_pg_only_desc', 'block_modlos'), 0));
+				   	get_string('modlos_pg_only_desc', 'block_modlos'), 1));
 
 $settings->add(new admin_setting_configcheckbox('modlos_use_https', 
 					get_string('modlos_use_https', 'block_modlos'),
@@ -169,7 +169,7 @@ $settings->add(new admin_setting_configtext('modlos_banker_avatar',
 
 $settings->add(new admin_setting_configcheckbox('modlos_userinfo_link', 
 					get_string('modlos_userinfo_link', 'block_modlos'),
-				   	get_string('modlos_userinfo_link_desc', 'block_modlos'), 0));
+				   	get_string('modlos_userinfo_link_desc', 'block_modlos'), 1));
 
 
 // Context

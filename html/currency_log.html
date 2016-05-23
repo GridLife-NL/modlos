@@ -130,9 +130,9 @@
                 <!-- Title Line -->
                 <tr>
                   <td width=15 height=26>&nbsp;</td>
-                  <td width=40><strong style="color: #222;">&nbsp;<?php echo $number_ttl?></strong></td>
+                  <td width=40 align="left"><strong style="color: #222;">&nbsp;<?php echo $number_ttl?></strong></td>
 
-                  <td width=130 align="right">
+                  <td width=150>
                     <a href="<?php echo $action_url.$plimit_amp.$pstart_amp.$desc_amp?>&amp;order=time" target="_self">
                       <?php if (USE_UTC_TIME) {?>
                         <strong style="color:#115500;"><?php echo $currency_date?>&nbsp;(UTC)</strong>
@@ -165,7 +165,7 @@
                   <?php }?>
                     <td height=26>&nbsp;</strong></td>
                     <td><strong style="color: #000000;">&nbsp;<?php echo $dat['num']+1+$this->pstart?></strong></td>
-                    <td align="right"><strong style="color: #444444;"><?php echo $dat['date']?></strong></td>
+                    <td align="left"><strong style="color: #444444;"><?php echo $dat['date']?></strong></td>
                     <td>&nbsp;</td>
 
                     <td align="right">
