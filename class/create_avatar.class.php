@@ -104,7 +104,7 @@ class  CreateAvatar
 		$this->base_select[2]['desc'] = 'AZZZZZZZZZZZZ';
 		$this->base_select[2]['uuid'] = '00000000-0000-0000-0000-000000000003';
 
-		$this->base_num = 3;
+		$this->base_num = 0;
 
 		//
 		if ($this->base_num>0) {

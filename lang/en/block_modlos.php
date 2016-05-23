@@ -403,6 +403,7 @@ $string['modlos_lastnames'] 		= 'Lastnames Management';
 $string['modlos_avatar_select_tab'] = 'Initial Avatars';
 $string['modlos_avatar_select_ttl'] = 'Management of Initail Avatars';
 
+$string['modlos_menu_tab']		    = 'Normal Menu';
 $string['modlos_manage_tab']		= 'Management';
 $string['modlos_manage_menu']		= 'Management';
 $string['modlos_manage_cmnd_tab']	= 'Commands';

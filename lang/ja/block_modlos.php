@@ -402,7 +402,8 @@ $string['modlos_lastnames'] 		= 'ラストネーム管理';
 $string['modlos_avatar_select_tab'] = '初期アバター';
 $string['modlos_avatar_select_ttl'] = '初期アバター管理';
 
-$string['modlos_manage_tab']        = '管理';
+$string['modlos_menu_tab']          = '一般メニュー';
+$string['modlos_manage_tab']        = '管理画面';
 $string['modlos_manage_menu']       = '管理画面';
 $string['modlos_manage_cmnd_tab']   = '管理コマンド';
 $string['modlos_manage_ttl']        = '管理コマンド';
