@@ -7,6 +7,11 @@ td {
 	padding: 0.5em;
 }
 
+select {
+	height: 24px;
+	line-height: 26px;
+}
+
 .head {
     font-weight: bold;
     color: #105ba7;
