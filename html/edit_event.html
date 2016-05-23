@@ -108,7 +108,6 @@ function checklength(obj,warning_div){
     </tbody>
   </table>
   <hr />
-  <br ?>
 <?php }?>
 
 
@@ -132,7 +131,7 @@ function checklength(obj,warning_div){
             <tr align="left">
               <td class="head" valign="top"><?php echo $events_desc?></td>
               <td class="even">
-                <textarea name="event_desc" rows="7" cols="" style="width:90%;" wrap="virtual" maxlength="1024" onfocus="return checklength(this,'contact_max_warning')" onkeyup="return checklength(this,'contact_max_warning')" ><?php echo $this->event_desc?></textarea><br />
+                <textarea name="event_desc" rows="7" cols="" style="width:90%;" wrap="virtual" maxlength="1024" onfocus="return checklength(this,'contact_max_warning')" onkeyup="return checklength(this,'contact_max_warning')" ><?php echo $this->event_desc?></textarea>
                 <div>
                   <em id="contact_max_warning"><?php echo $events_max?> <strong>1024</strong> </em> 
                   <?php echo $events_chars?>&nbsp;&nbsp;<?php echo $events_inputed?>: <em id="counter"></em>
@@ -218,7 +217,6 @@ function checklength(obj,warning_div){
 
             <tr>
               <td colspan=2 align=center>
-                <br />
                 <input type="submit" name="action_submit" value="<?php echo $events_save?>" />&nbsp;&nbsp;
                 <input type="reset"  value="<?php echo $modlos_reset_ttl?>" />
                 <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
@@ -236,4 +234,3 @@ function checklength(obj,warning_div){
     </tbody>
   </table>
 </form>
-<br />
