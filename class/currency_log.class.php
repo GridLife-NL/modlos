@@ -215,6 +215,7 @@ class  CurrencyLog
 			}
 
 			$oppname = opensim_get_avatar_name($this->db_data[$colum]['oppuuid']);
+			if ($oppname['fullname']==null) $oppname['fullname'] = ' - ';
 			$this->db_data[$colum]['opponent'] = $oppname['fullname'];
 
 			$colum++;
@@ -304,33 +305,8 @@ class  CurrencyLog
 
 		$nosystem_checked = '';
 		if ($this->nosystem) $nosystem_checked = 'checked';
-/*
-		$edit_ttl		= get_string('modlos_edit',			 'block_modlos');
-		$show_ttl		= get_string('modlos_show',			 'block_modlos');
-		$editable_ttl	= get_string('modlos_edit_ttl',		 'block_modlos');
-		$lastlogin_ttl	= get_string('modlos_login_time',	 'block_modlos');
-		$status_ttl		= get_string('modlos_status',		 'block_modlos');
-		$crntregion_ttl	= get_string('modlos_crntregion',	 'block_modlos');
-		$owner_ttl		= get_string('modlos_owner',		 'block_modlos');
-		$get_owner_ttl	= get_string('modlos_get_owner_ttl', 'block_modlos');
-		$firstname_ttl	= get_string('modlos_firstname', 	 'block_modlos');
-		$lastname_ttl 	= get_string('modlos_lastname', 	 'block_modlos');
-		$avatarname_ttl = get_string('modlos_avatar_name', 	 'block_modlos');
-		$not_syncdb_ttl = get_string('modlos_not_syncdb',	 'block_modlos');
-		$online_ttl	 	= get_string('modlos_online_ttl',	 'block_modlos');
-		$active_ttl		= get_string('modlos_active',		 'block_modlos');
-		$inactive_ttl	= get_string('modlos_inactive',		 'block_modlos');
-		$reset_ttl		= get_string('modlos_reset_ttl',	 'block_modlos');
-		$find_owner_ttl	= get_string('modlos_find_owner_ttl','block_modlos');
-		$unknown_status	= get_string('modlos_unknown_status','block_modlos');
-		$user_search	= get_string('modlos_avatar_search', 'block_modlos');
-		$users_found  	= get_string('modlos_avatars_found', 'block_modlos');
-		$sloodle_ttl  	= get_string('modlos_sloodle_short', 'block_modlos');
-		$currency_ttl  	= get_string('modlos_currency_ttl',  'block_modlos');
-*/
 
 		$avtname = opensim_get_avatar_name($this->agent_id);
-
 		$userurl = "<a style=\"cursor:pointer;\" onClick=\"window.open('".CMS_MODULE_URL.'/helper/agent.php'.
                                $url_param.'&agent='.$this->agent_id."',null,'toolbar=no,location=no,directories=no,".
                                "status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')\">";
