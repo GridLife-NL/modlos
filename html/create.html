@@ -145,8 +145,28 @@
 
   </table>
 
-  <br />
+  <!-- Select Avatar -->
+  <?php if ($avatar_select) { ?>
+  <table width="640" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
+    <tr>
+      <td width="180" class="head" align="top" style="vertical-align:top;"><?php echo $avatar_select_ttl?></td>
+      <td width="460" class="even">
+        <table border="0" bordercolor="#f8f8f8" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
+        <?php for ($i=0; $i<$base_num; $i++) {?>
+          <?php if ($avatar_num==$i) $checked='checked'; else $checked=''?>
+          <tr>
+            <td  class="even"><input type="radio" name="baseavatae" value="$i" <?php echo $checked?> ></td>
+            <td  class="even"><?php echo $base_select[$i]['pic']?></td>
+            <td  class="even"><?php echo $base_select[$i]['desc']?></td>
+          </tr>
+        <?php }?>
+        </table>
+     </td>
+    </tr>
+  </table>
+  <?php }?>
 
+  <br />
   <div align="center">
     <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
     <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />

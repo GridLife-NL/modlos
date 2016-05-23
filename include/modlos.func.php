@@ -1164,6 +1164,9 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 
 	echo "<input type='hidden' name='course' value='$course_id' />";
 	echo '<table align="center"><tr><td>';
+    echo '<style type="text/css">';
+    include(CMS_MODULE_PATH."/html/table.css");
+    echo '</style>';
 	print_tabs($tabs, $currenttab, NULL, NULL);
 	echo '</td></tr></table>';
 }
@@ -1197,6 +1200,10 @@ function  print_tabnav_manage($currenttab, $course)
 			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos'.$course_amp, 
 																	'<strong>'.get_string('modlos_general_setting_tab','block_modlos').'</strong>');
 		}
+
+		$toprow[] = new tabobject('avatar_select', CMS_MODULE_URL.'/admin/actions/avatar_select.php'.$course_param, 
+																	'<strong>'.get_string('modlos_avatar_select_tab','block_modlos').'</strong>');
+
 		$toprow[] = new tabobject('loginscreen', CMS_MODULE_URL.'/admin/actions/loginscreen.php'.$course_param, 
 																	'<strong>'.get_string('modlos_lgnscrn_tab','block_modlos').'</strong>');
 		if ($CFG->modlos_activate_lastname) {
@@ -1220,6 +1227,9 @@ function  print_tabnav_manage($currenttab, $course)
 
 	echo "<input type='hidden' name='course' value='$course_id' />";
 	echo '<table align="center"><tr><td>';
+    echo '<style type="text/css">';
+    include(CMS_MODULE_PATH."/html/table.css");
+    echo '</style>';
 	print_tabs($tabs, $currenttab, NULL, NULL);
 	echo '</td></tr></table>';
 }

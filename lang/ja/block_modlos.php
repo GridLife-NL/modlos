@@ -61,6 +61,7 @@ $string['modlos_avatar_update_ttl'] = ' 更新 ';
 $string['modlos_avatar_delete_ttl'] = ' 削除 ';
 $string['modlos_avatar_own_ttl'] 	= ' オーナの変更 ';
 $string['modlos_avatar_dlt_cncld_ttl']=' 取消し ';
+$string['modlos_avatar_select']     = 'アバター選択';
 
 $string['modlos_status_page'] 		= 'ステータス';
 $string['modlos_db_status'] 		= 'データベース';
@@ -381,17 +382,20 @@ $string['modlos_general_setting_tab']='一般設定';
 $string['modlos_lastnames_tab'] 	= 'ラストネーム';
 $string['modlos_lastnames'] 		= 'ラストネーム管理';
 
-$string['modlos_synchro_tab'] 		= 'データベース同期';
-$string['modlos_synchro_db'] 		= 'データベース同期';
-$string['modlos_synchro_submit'] 	= 'データベース同期の実行';
-$string['modlos_synchro_contents'] 	= 'OpenSimデータベースと Modlosデータベースとの同期を取ります';
-$string['modlos_synchronized'] 		= 'OpenSimデータベースとの同期完了!';
+//$string['modlos_synchro_tab'] 		= 'データベース同期';
+//$string['modlos_synchro_db'] 		= 'データベース同期';
+//$string['modlos_synchro_submit'] 	= 'データベース同期の実行';
+//$string['modlos_synchro_contents'] 	= 'OpenSimデータベースと Modlosデータベースとの同期を取ります';
+//$string['modlos_synchronized'] 		= 'OpenSimデータベースとの同期完了!';
 
-$string['modlos_convertdb_tab'] 	= 'データベース変換';
-$string['modlos_convertdb_ttl'] 	= 'データベースを 0.6.x から 0.7.x へ変換';
-$string['modlos_convertdb_submit'] 	= 'データベース変換の実行';
-$string['modlos_convertdb_contents']= 'OpenSimデータベースを 0.6.x から 0.7.x へ変換';
-$string['modlos_convertdb_converted']='OpenSimデータベースの変換完了!';
+//$string['modlos_convertdb_tab'] 	= 'データベース変換';
+//$string['modlos_convertdb_ttl'] 	= 'データベースを 0.6.x から 0.7.x へ変換';
+//$string['modlos_convertdb_submit'] 	= 'データベース変換の実行';
+//$string['modlos_convertdb_contents']= 'OpenSimデータベースを 0.6.x から 0.7.x へ変換';
+//$string['modlos_convertdb_converted']='OpenSimデータベースの変換完了!';
+
+$string['modlos_avatar_select_tab'] = 'アバター選択管理';
+$string['modlos_avatar_select_ttl'] = 'アバター選択管理';
 
 $string['modlos_manage_tab']        = '管理画面';
 $string['modlos_manage_menu']       = '管理画面';

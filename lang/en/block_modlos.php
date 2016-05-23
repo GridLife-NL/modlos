@@ -113,6 +113,7 @@ $string['modlos_avatar_updated'] 	= 'Avatar Updated!!';
 $string['modlos_avatar_gotted'] 	= 'Get a this Avatar by relationship with Moodle User';
 $string['modlos_avatar_gotted_error']='Failed to get a relationship with Moodle User!!';
 $string['modlos_avatar_deleted'] 	= 'Avatar Deleted!!';
+$string['modlos_avatar_select']     = 'Select Avatar';
 
 $string['modlos_avatar_create'] 	= 'Create Avatar';
 $string['modlos_avatar_update'] 	= 'Update Avatar';
@@ -381,21 +382,24 @@ $string['modlos_general_setting_tab']='Preferences';
 $string['modlos_lastnames_tab'] 	= 'Lastnames';
 $string['modlos_lastnames'] 		= 'Lastnames Management';
 
-$string['modlos_synchro_tab'] 		= 'Synchro DB';
-$string['modlos_synchro_db'] 		= 'Synchronization of Data Base';
-$string['modlos_synchro_submit'] 	= 'Synchro DB';
-$string['modlos_synchro_contents'] 	= 'Synchronize with OpenSim DB ?';
-$string['modlos_synchronized'] 		= 'Synchronized OpenSim DB!!';
+//$string['modlos_synchro_tab'] 		= 'Synchro DB';
+//$string['modlos_synchro_db'] 		= 'Synchronization of Data Base';
+//$string['modlos_synchro_submit'] 	= 'Synchro DB';
+//$string['modlos_synchro_contents'] 	= 'Synchronize with OpenSim DB ?';
+//$string['modlos_synchronized'] 		= 'Synchronized OpenSim DB!!';
 
-$string['modlos_convertdb_tab']		= 'Convert DB';
-$string['modlos_convertdb_ttl']		= 'Conversion of Data Base from 0.6.x to 0.7.x';
-$string['modlos_convertdb_submit']	= 'Convert DB';
-$string['modlos_convertdb_contents']= 'Convert OpenSim DB from 0,6.x to 0.7.x ?';
-$string['modlos_convertdb_converted']='OpenSim DB is Converted!!';
+//$string['modlos_convertdb_tab']		= 'Convert DB';
+//$string['modlos_convertdb_ttl']		= 'Conversion of Data Base from 0.6.x to 0.7.x';
+//$string['modlos_convertdb_submit']	= 'Convert DB';
+//$string['modlos_convertdb_contents']= 'Convert OpenSim DB from 0,6.x to 0.7.x ?';
+//$string['modlos_convertdb_converted']='OpenSim DB is Converted!!';
+
+$string['modlos_avatar_select_tab'] = 'for Base Avatars';
+$string['modlos_avatar_select_ttl'] = 'Management of Base Avatars';
 
 $string['modlos_manage_tab']		= 'Management';
 $string['modlos_manage_menu']		= 'Management';
-$string['modlos_manage_cmnd_tab']	= 'Commands of Manage';
+$string['modlos_manage_cmnd_tab']	= 'Commands';
 $string['modlos_manage_ttl']		= 'Management Commands';
 $string['modlos_manage_submit']		= 'Exec';
 $string['modlos_manage_contents']	= 'Execute Management Command';
@@ -403,8 +407,8 @@ $string['modlos_manage_done']		= 'Management Command was Executed!!';
 $string['modlos_manage_select']		= 'Select a Management Command';
 $string['modlos_manage_return']		= 'Return to Management Commands';
 
-$string['modlos_estate_tab']		= 'Manage of Estates';
-$string['modlos_estate_ttl']		= 'Manage of Estates';
+$string['modlos_estate_tab']		= 'for Estates';
+$string['modlos_estate_ttl']		= 'Management of Estates';
 $string['modlos_estate_owner']      = 'Estate Owner';
 $string['modlos_estate_regions']    = 'Regions';
 $string['modlos_estate_unknown']    = 'unknown';

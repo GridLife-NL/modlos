@@ -27,4 +27,3 @@ $avatar->execute();
 $avatar->print_page();
 
 echo $OUTPUT->footer($course);
-?>	

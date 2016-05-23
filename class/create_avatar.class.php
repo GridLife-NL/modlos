@@ -8,37 +8,41 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 class  CreateAvatar
 {
-	var $regionNames  = array();
-	var $lastNames    = array();
-	var $actvLastName = false;
+	var $regionNames  	= array();
+	var $lastNames    	= array();
+	var $actvLastName 	= false;
 
-	var $hasPermit 	= false;
-	var $isGuest 	= true;
-	var $action_url	= '';
+	var $hasPermit 		= false;
+	var $isGuest 		= true;
+	var $action_url		= '';
 	var $created_avatar = false;
 
-	var $base_avatar = '00000000-0000-0000-0000-000000000000';
+	var $base_avatar 	= '00000000-0000-0000-0000-000000000000';
+	var $base_select 	= array();
+	var $base_num    	= 0;
+	var $avatar_select 	= false;
+	var $avatar_num 	= 0;
 
-	var	$avatars_num = 0;
-	var	$max_avatars = 0;
-	var $isAvatarMax = false;
+	var	$avatars_num 	= 0;
+	var	$max_avatars 	= 0;
+	var $isAvatarMax 	= false;
 
-	var $course_id  = 0;
-	var $use_sloodle= false;
-	var	$isDisclaimer=false;
+	var $course_id   	= 0;
+	var $use_sloodle 	= false;
+	var	$isDisclaimer	= false;
 
-	var $hasError	= false;
-	var $errorMsg	= array();
+	var $hasError	 	= false;
+	var $errorMsg		= array();
 
 	// Moodle DB
-	var $UUID		= '';
-	var $nx_UUID	= '';
-	var $uid		= 0;			// owner id of avatar
-	var $firstname 	= '';
-	var $lastname  	= '';
-	var $passwd 	= '';
-	var $hmregion  	= '';
-	var $ownername 	= '';			// owner name of avatar
+	var $UUID			= '';
+	var $nx_UUID		= '';
+	var $uid			= 0;			// owner id of avatar
+	var $firstname 		= '';
+	var $lastname  		= '';
+	var $passwd 		= '';
+	var $hmregion  		= '';
+	var $ownername 		= '';			// owner name of avatar
 
 
 
@@ -71,7 +75,6 @@ class  CreateAvatar
 		$this->avatars_num = modlos_get_avatars_num($USER->id);
 		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
-		$this->base_avatar = $CFG->modlos_base_avatar;
 
 		// Number of Avatars Check
 		if ($this->isAvatarMax) {
@@ -80,15 +83,46 @@ class  CreateAvatar
 			$mesg = ' '.get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)";
 			print_error($mesg, '', $course_url);
 		}
+
+
+
+////////////////////////////////////////////////////////////////////////////
+
+
+		$this->avatar_num = optional_param('baseavatar', '0', PARAM_INT);
+
+		//
+		$this->base_select = array();
+		$this->base_select[0]['pic']  = 'SSSSSSSSSSSSS';
+		$this->base_select[0]['desc'] = 'SSSSSSSSSSSSS';
+		$this->base_select[0]['uuid'] = '22412bc4-6011-4126-b2e5-4adb91b0039e';
+
+		$this->base_select[1]['pic']  = '1111111111111';
+		$this->base_select[1]['desc'] = '2222222222222';
+		$this->base_select[1]['uuid'] = '00000000-0000-0000-0000-000000000002';
+		$this->base_select[2]['pic']  = 'ZZZZZZZZZZZZZ';
+		$this->base_select[2]['desc'] = 'AZZZZZZZZZZZZ';
+		$this->base_select[2]['uuid'] = '00000000-0000-0000-0000-000000000003';
+
+		$this->base_num = 0;
+
+		//
+		if ($this->base_num>0) {
+			$this->avatar_select = true;
+			if (array_key_exists($this->avatar_num, $this->base_select)) {
+				$this->set_base_avatar($this->base_select[$this->avatar_num]['uuid']);
+			}
+			else {
+				$this->set_base_avatar($CFG->modlos_base_avatar);
+			}
+		}
+		else {
+			$this->set_base_avatar($CFG->modlos_base_avatar);
+			$this->avatar_select = false;
+		}
+
+		return;
 	}
-
-
-
-	function  set_base_avatar($base)
-	{
-		if (isGUID($base)) $this->base_avatar = $base;
-	}
-
 
 
 	function  execute()
@@ -190,7 +224,6 @@ class  CreateAvatar
 	}
 
 
-
 	function  print_page() 
 	{
 		global $CFG;
@@ -199,6 +232,7 @@ class  CreateAvatar
 		$disclaimer	  = $CFG->modlos_disclaimer_content;
 
 		$avatar_create_ttl  = get_string('modlos_avatar_create', 'block_modlos');
+		$avatar_select_ttl  = get_string('modlos_avatar_select', 'block_modlos');
 		$uuid_ttl			= get_string('modlos_uuid',			 'block_modlos');
 		$firstname_ttl		= get_string('modlos_firstname',	 'block_modlos');
 		$lastname_ttl		= get_string('modlos_lastname',		 'block_modlos');
@@ -216,6 +250,11 @@ class  CreateAvatar
 		$disclaim_agree		= get_string('modlos_disclaimer_agree','block_modlos');
 		$disclaim_need_agree= get_string('modlos_need_agree_disclaimer','block_modlos');
 
+		$base_select   = $this->base_select;
+		$base_num      = $this->base_num;
+		$avatar_select = $this->avatar_select;
+		$avatar_num    = $this->avatar_num;
+
 		// 
 		$pv_ownername = $this->ownername;
 		if ($this->created_avatar) {
@@ -231,6 +270,12 @@ class  CreateAvatar
 		include(CMS_MODULE_PATH.'/html/create.html');
 	}
 
+
+	//
+	function  set_base_avatar($base)
+	{
+		if (isGUID($base)) $this->base_avatar = $base;
+	}
 
 
 	function create_avatar()
@@ -298,7 +343,4 @@ class  CreateAvatar
 		$ret = modlos_set_avatar_info($new_user, $this->use_sloodle);
 		return $ret;
 	}
-
 }
-
-?>
