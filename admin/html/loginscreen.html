@@ -17,14 +17,12 @@
 </style>
 
 <h2><center><?php echo $grid_name.":&nbsp;".$lgnscrn_ttl?></center></h2>
-<br />
 
 <table width="600" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#F0F0F0">
   <tr>
     <td width=80%  align="center"><strong><span style="color:#116644;"><?php echo $contents?></span></strong></td>
   </tr>
 </table>
-<br /><br />
 
 
 <?php if ($updated and !$preview) {?>
@@ -54,13 +52,11 @@
       <div id=Infobox  align=center>
         <?php include("../../helper/loginscreen/alert_box.php"); ?>
       </div>
-
-      <br />
       <div align="center">
         <input type="submit" name="submit_update" id="submit_update" value="<?php echo $lgnscrn_submit ?>" />&nbsp;&nbsp;
         <input type="submit" name="submit_cancel" id="submit_cancel" value="<?php echo $lgnscrn_cancel ?>" />
       </div>
-      <br /><br /><hr /><br />
+      <hr />
     <?php }?>
 
 
@@ -94,13 +90,13 @@
                   <tr align=left>
                     <td class=head size=200 vAlign=top><strong><?php echo $edit_boxttl?></strong></td>
                     <td class=odd  size=300>
-                      <input type="text" name="lgnscrn_title" size=50 value="<?php echo $lgnscrn_title?>" /><br />
+                      <input type="text" name="lgnscrn_title" size=50 value="<?php echo $lgnscrn_title?>" />
                     </td>
                   </tr>
                   <tr align=left>
                     <td class=head size=200 vAlign=top><strong><?php echo $edit_altbox?></strong></td>
                     <td class=odd  size=300>
-                      <textarea name="lgnscrn_altbox" cols="50" rows="5" value="lgnscrn_altbox"><?php echo htmlspecialchars($lgnscrn_altbox)?></textarea><br />
+                      <textarea name="lgnscrn_altbox" cols="50" rows="5" value="lgnscrn_altbox"><?php echo htmlspecialchars($lgnscrn_altbox)?></textarea>
                     </td>
                   </tr>
                 </tbody>
@@ -112,7 +108,6 @@
         </tbody>
       </table>
 
-      <br />
       <div align="center">
         <input type="submit" name="submit_preview" id="submit_preview" value="<?php echo $lgnscrn_preview?>" />&nbsp;
         <input type="reset"  value="<?php echo $lgnscrn_reset?>" />
@@ -127,8 +122,6 @@
 
 
 <!-- Error Message -->
-<br />
-<br />
 <hr />
 <?php if ($this->hasError) {?>
   <div align=center>
@@ -139,4 +132,3 @@
     </ul>
   </div>
 <?php }?>
-<br />

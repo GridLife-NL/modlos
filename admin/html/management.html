@@ -4,7 +4,6 @@
 </style>
 
 <h2><center><?php echo $grid_name.":&nbsp;".$manage_ttl?></center></h2>
-<br />
 
 <?php if (!$this->managed) {?>
   <form action="<?php echo $this->action_url?>" method="POST">
@@ -13,7 +12,6 @@
         <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $content?></span></strong></td>
       </tr>
     </table>
-    <br />
 
     <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
     <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
@@ -26,7 +24,6 @@
           <option value="<?php echo $com['com']?>" ><?php echo htmlspecialchars($com['ttl'])?></option>
         <?php }?>
       </select>&nbsp;&nbsp;
-      <br /><br />
 
       <input type="submit" value="<?php echo $manage_submit?>" /> 
     </div>
@@ -51,12 +48,9 @@
     <h4><a href="<?php echo $manage_url?>" ><u><?php echo $return_ttl?></u></a></h4>
   </div>
 <?php }?>
-<br />
 
 
 <!-- Error Message -->
-<br />
-<br />
 <hr />
 <?php if ($this->hasError) {?>
   <div align=center>
@@ -67,5 +61,4 @@
     </ul>
   </div>
 <?php }?>
-<br />
 

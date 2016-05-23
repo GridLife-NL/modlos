@@ -150,17 +150,17 @@
     </td>
 
     <td width="45%" valign="top">
-      <table border="0" align="center" cellpadding="0" cellspacing="0">
+      <table border="0" align="center" cellpadding="5" cellspacing="0">
         <tr>
-          <td bgcolor="#999999">
+          <td>
             <div align="center">
               <table width="256" height="256" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tr>
                   <td bgcolor="#ffffff">
                   <?php if ($profileImage=='') {?>
-                    <img style="border-color:#999999;" src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width=256 border=5 />
+                    <img src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width=256 />
                   <?php } else {?>
-                    <img style="border-color:#999999;" src="<?php echo $texture_url.$profileImage?>&amp;xsize=256&amp;ysize=256" width=256 border=5 />
+                    <img src="<?php echo $texture_url.$profileImage?>&amp;xsize=256&amp;ysize=256" width=256 />
                   <?php }?>
                   </td>
                 </tr>
