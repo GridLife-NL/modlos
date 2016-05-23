@@ -1,16 +1,12 @@
 
 table {
-	margin-bottom: 0.5em;
+	margin-bottom: 0.3em;
 }
 
 td {
-	padding: 0.5em;
+	padding: 0.3em;
 }
 
-select {
-	height: 24px;
-	line-height: 26px;
-}
 
 .head {
     font-weight: bold;
