@@ -68,7 +68,6 @@ class  EventsList
 	}
 
 
-
 	function  execute()
 	{
 		if ($this->hasPermit) {
@@ -121,13 +120,14 @@ class  EventsList
 		if ($this->plimit != 100) $this->icon[6] = 'icon_limit_100_on';
 
 		//
-		if ($this->hasPermit) {
+		$events = modlos_get_events(0, $this->pstart, $this->plimit, OPENSIM_PG_ONLY);
+/*		if ($this->hasPermit) {
 			$events = modlos_get_events(0, $this->pstart, $this->plimit, OPENSIM_PG_ONLY);
 		}
 		else {
 			$events = modlos_get_events($this->userid, $this->pstart, $this->plimit, OPENSIM_PG_ONLY);
 		}
-   
+*/
 		$colum = 0;
 		foreach($events as $event) {
 			if (!OPENSIM_PG_ONLY or $event->eventflags==0) {
@@ -153,7 +153,6 @@ class  EventsList
 
 		return true;
 	}
-
 
 
 	function  print_page() 
@@ -189,4 +188,3 @@ class  EventsList
 		include(CMS_MODULE_PATH.'/html/events.html');
 	}
 }
-

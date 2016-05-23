@@ -92,8 +92,6 @@ class  EditEvent
 	}
 
 
-
-
 	function  execute()
 	{
 		global $DB;
@@ -117,7 +115,7 @@ class  EditEvent
 		// List of Creators
 		$this->creators = modlos_get_avatars($this->userid);
 		if ($this->creators==null) {
-			print_error('modlos_should_have_avatar', 'block_modlos', CMS_MODULE_URL.'/actions/events_list.php');
+			//print_error('modlos_should_have_avatar', 'block_modlos', CMS_MODULE_URL.'/actions/events_list.php');
 		}
 		foreach ($this->creators as $creator) {
 			$this->event_owner = $creator['fullname'];
@@ -339,7 +337,6 @@ class  EditEvent
 	}
 
 
-
 	function  print_page() 
 	{
 		global $CFG;
@@ -392,4 +389,3 @@ class  EditEvent
 		include(CMS_MODULE_PATH.'/html/edit_event.html');
 	}
 }
-

@@ -133,7 +133,8 @@ class  EditEvent
 		if (isNumeric($this->event_id) and $this->event_id>0) {
 			$event = modlos_get_event($this->event_id);
 				
-			if ($event!=null and ($event['uid']==$this->userid or $this->hasPermit)) {
+			//if ($event!=null and ($event['uid']==$this->userid or $this->hasPermit)) {
+			if ($event!=null and !$this->isGuest) {
 				$this->uid			= $event['uid'];
 				$this->event_name	= $event['name'];
 				$this->owner_uuid	= $event['owneruuid'];
@@ -218,4 +219,3 @@ class  EditEvent
 		include(CMS_MODULE_PATH.'/html/show_event.html');
 	}
 }
-

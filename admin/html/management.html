@@ -5,9 +5,23 @@
 
 <h2><center><?php echo $grid_name.":&nbsp;".$manage_ttl?></center></h2>
 
+
+<!-- Error Message -->
+<?php if ($this->hasError) {?>
+  <div align=center>
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+         <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+  <br />
+<?php }?>
+
+
 <?php if (!$this->managed) {?>
   <form action="<?php echo $this->action_url?>" method="POST">
-    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#F0F0F0">
+    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
       <tr>
         <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $content?></span></strong></td>
       </tr>
@@ -19,6 +33,7 @@
 
     <div align=center>
       <strong><div style="padding:4px;" ><?php echo $select_cmd?></div></strong>
+      <br />
       <select wide="48" name="manage_command">
         <?php foreach($commands as $com) {?>
           <option value="<?php echo $com['com']?>" ><?php echo htmlspecialchars($com['ttl'])?></option>
@@ -27,7 +42,6 @@
 
       <input type="submit" value="<?php echo $manage_submit?>" /> 
     </div>
-
   </form>
 
 <?php } else {?>
@@ -45,20 +59,8 @@
 
   <div align=center>
     <h4 style="color: #2222ff;"><?php echo $manage_msg ?></h4>
+    <br />
     <h4><a href="<?php echo $manage_url?>" ><u><?php echo $return_ttl?></u></a></h4>
   </div>
 <?php }?>
-
-
-<!-- Error Message -->
-<hr />
-<?php if ($this->hasError) {?>
-  <div align=center>
-    <ul>
-      <?php foreach($this->errorMsg as $mesg) {?>
-         <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
-      <?php }?>
-    </ul>
-  </div>
-<?php }?>
-
+<br />

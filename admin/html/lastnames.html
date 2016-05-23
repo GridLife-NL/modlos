@@ -7,6 +7,19 @@
 
 <div style="margin-left:15%; margin-right:15%">
 
+
+<!-- Error Message -->
+<?php if ($this->hasError) {?>
+  <div align=center>
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php }?>
+
+
 <form name="assignform" id="assignform" action="<?php echo $this->action_url?>" method="POST">
 
   <table cellpadding="2" cellspacing="1" align="center" border="2" bordercolor="#FFFFFF" bgcolor="#F8F8F8">
@@ -68,16 +81,4 @@
 
 </form>
 </div>
-
-
-<!-- Error Message -->
-<hr />
-<?php if ($this->hasError) {?>
-  <div align=center>
-    <ul>
-      <?php foreach($this->errorMsg as $mesg) {?>
-        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
-      <?php }?>
-    </ul>
-  </div>
-<?php }?>
+<br />

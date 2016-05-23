@@ -18,16 +18,29 @@
 
 <h2><center><?php echo $grid_name.":&nbsp;".$lgnscrn_ttl?></center></h2>
 
+
+<!-- Error Message -->
+<?php if ($this->hasError) {?>
+  <div align=center>
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+<?php }?>
+
+
 <table width="600" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#F0F0F0">
   <tr>
     <td width=80%  align="center"><strong><span style="color:#116644;"><?php echo $contents?></span></strong></td>
   </tr>
 </table>
 
-
 <?php if ($updated and !$preview) {?>
   <!-- Update DB -->
   <h4 style="color#2222ff;"><center><?php echo $lgnscrn_msg ?></center></h4>
+  <br />
   <h4><center><a href="<?php echo $lgnscrn_url?>" ><u><?php echo $return_ttl?></u></a></center></h4>
 
 <?php } else {?>
@@ -56,6 +69,7 @@
         <input type="submit" name="submit_update" id="submit_update" value="<?php echo $lgnscrn_submit ?>" />&nbsp;&nbsp;
         <input type="submit" name="submit_cancel" id="submit_cancel" value="<?php echo $lgnscrn_cancel ?>" />
       </div>
+      <br />
       <hr />
     <?php }?>
 
@@ -119,16 +133,4 @@
 
   </form>
 <?php }?>
-
-
-<!-- Error Message -->
-<hr />
-<?php if ($this->hasError) {?>
-  <div align=center>
-    <ul>
-      <?php foreach($this->errorMsg as $mesg) {?>
-        <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
-      <?php }?>
-    </ul>
-  </div>
-<?php }?>
+<br />

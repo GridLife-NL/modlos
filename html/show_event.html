@@ -7,11 +7,6 @@
 <form action="<?php echo $this->return_url?>" method="GET">
   <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
     <tbody>
-      <tr>
-        <td valign=top align=center>&nbsp;</td>
-        <td valign=top align=center width=600>
-
-          <table width="600" border="1" bordercolor="#ffffff" align="center" cellpadding="2" cellspacing="1">
 
             <tr align="left">
               <td class="head" width=200><?php echo $events_name?></td>
@@ -70,19 +65,14 @@
                 <td class="even"><?php echo $events_mature_ttl?></td>
               </tr>
             <?php }?>
-
-            <tr>
-              <td colspan=2 align=center>
-                <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
-                <input name="submit_return" type="submit" value="<?php echo $return_ttl?>" />
-              </td>
-            </tr>
-          </table>
-
-        </td>
-        <td valign=top align=center>&nbsp;</td>
-      </tr>
     </tbody>
   </table>
 
+            <div align="center">
+                <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+                <input name="submit_return" type="submit" value="<?php echo $return_ttl?>" />
+            </div>
+
+
 </form>
+<br />

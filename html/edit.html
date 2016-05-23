@@ -65,7 +65,9 @@
       </tr>
     <?php }?>
   </table>
+  <br />
   <hr />
+  <br />
 <?php }?>
 
 
@@ -123,7 +125,7 @@
     <tr>
       <td class="head"><?php echo $status_ttl?></td>
       <td class="odd" >
-        <input type="radio" name="state" value="<?php echo AVATAR_STATE_ACTIVE?>" <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>checked<?php }?> /><?php echo $active_ttl?>&nbsp;|
+        <input type="radio" name="state" value="<?php echo AVATAR_STATE_ACTIVE?>" <?php if (!($this->state&AVATAR_STATE_INACTIVE)) {?>checked<?php }?> /><?php echo $active_ttl?>&nbsp;&nbsp;&nbsp;
         <input type="radio" name="state" value="<?php echo AVATAR_STATE_INACTIVE?>" <?php if ($this->state&AVATAR_STATE_INACTIVE) {?>checked<?php }?> /><?php echo $inactive_ttl?>
       </td>
     </tr>
@@ -165,3 +167,4 @@
   </div>
 
 </form>
+<br />

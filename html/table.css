@@ -13,6 +13,10 @@
     background-color: #eee;
 }
 
+td {
+	padding: 0.5em;
+}
+
 .tabtree .tabrow0 li {
-	margin-right:0px;
+	margin-right: 0px;
 }

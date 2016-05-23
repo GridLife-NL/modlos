@@ -50,12 +50,15 @@
     <?php }?>
 
   </table>
+  <br />
   <hr />
+  <br />
 <?php }?>
 
 
 <form action="<?php echo $this->action_url?>" method="POST">
   <table width="640" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
+  <tbody>
 
   <?php if ($this->hasPermit) {?>
     <tr>
@@ -129,7 +132,6 @@
       </tr>
     <?php }?>
 
-
 	<?php if ($this->isDisclaimer and !$this->hasPermit) {?>
       <tr>
         <td class="head"><?php echo $disclaimer_ttl?></td>
@@ -142,6 +144,7 @@
       <input type="hidden" name="agree" value="agree" />
     <?php }?>
 
+  </tbody>
   </table>
 
   <!-- Select Avatar -->
@@ -172,4 +175,4 @@
     <input type="reset"  value="<?php echo $reset_ttl?>" />
   </div>
 </form>
-
+<br />
