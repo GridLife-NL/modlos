@@ -1,4 +1,14 @@
 
+table {
+	margin-bottom: 0.5em;
+}
+
+td {
+	padding: 0.5em;
+}
+
+
+
 .head {
     font-weight: bold;
     color: #105ba7;
@@ -15,14 +25,7 @@
     background-color: #eee;
 }
 
-table {
-	margin-bottom: 0.5em;
-}
-
-td {
-	padding: 0.5em;
-}
-
 .tabtree .tabrow0 li {
 	margin-right: 0px;
 }
+
