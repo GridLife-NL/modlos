@@ -429,10 +429,11 @@ class  AvatarsList
 			$avatars_list = get_string('modlos_my_avatars', 'block_modlos');
 		}
 		else {
-			$userinfo = get_userinfo_by_id($this->user_id);
-			$username = get_display_username($userinfo->firstname, $userinfo->lastname);
-			$userurl  = '<a href="'.$this->owner_url.'&id='.$this->user_id.'" target="_blank">'.$username.'</a>';
-			$avatars_list = get_string('modlos_personal_avatars', 'block_modlos', $userurl);
+			$ownerinfo = get_userinfo_by_id($this->user_id);
+			$ownername = get_display_username($ownerinfo->firstname, $ownerinfo->lastname);
+			if ($userinfo) $ownerurl = '<a href="'.$this->avatar_url.'&id='.$this->user_id.'" target="_blank">'.$ownername.'</a>';
+			else           $ownerurl = '<strong style="color:#202088;">'.$ownername.'</strong>';
+			$avatars_list = get_string('modlos_personal_avatars', 'block_modlos', $ownerurl);
 		}
 
 		$show_edit = !($this->isGuest or (!$this->show_all and $this->user_id!=$USER->id and !$this->hasPermit));

@@ -18,7 +18,10 @@ $PAGE->set_url('/blocks/modlos/actions/regions_list.php', $urlparams);
 
 $course = $DB->get_record('course', array('id'=>$course_id));
 if ($get_action=='all') $tab_action = 'regions_list';
-else                    $tab_action = 'personal_regions';
+else {
+   if ($user_id==$USER->id) $tab_action = 'personal_regions';
+   else                     $tab_action = '';
+}
 
 require_login($course_id);
 print_modlos_header($tab_action, $course);

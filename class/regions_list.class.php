@@ -87,7 +87,6 @@ class  RegionsList
 	}
 
 
-
 	function  set_condition() 
 	{
 		global $CFG;
@@ -160,7 +159,6 @@ class  RegionsList
 
 		return true;
 	}
-
 
 
 	function  execute()
@@ -282,13 +280,13 @@ class  RegionsList
 	}
 
 
-
 	function  print_page() 
 	{
 		global $CFG, $USER;
 
 		$grid_name		 = $CFG->modlos_grid_name;
 		$content		 = $CFG->modlos_regions_content;
+		$userinfo        = $CFG->modlos_userinfo_link;
 
 		$has_permit 	 = $this->hasPermit;
 		$url_param 		 = $this->url_param;
@@ -336,13 +334,13 @@ class  RegionsList
 			$regions_list = get_string('modlos_my_regions', 'block_modlos');
 		}
 		else {
-			$userinfo = get_userinfo_by_id($this->user_id);
-			$username = get_display_username($userinfo->firstname, $userinfo->lastname);
-			$userurl  = '<a href="'.$this->avatar_url.'&id='.$this->user_id.'" target="_blank">'.$username.'</a>';
-			$regions_list = get_string('modlos_personal_regions', 'block_modlos', $userurl);
+			$ownerinfo = get_userinfo_by_id($this->user_id);
+			$ownername = get_display_username($ownerinfo->firstname, $ownerinfo->lastname);
+			if ($userinfo) $ownerurl = '<a href="'.$this->avatar_url.'&id='.$this->user_id.'" target="_blank">'.$ownername.'</a>';
+			else           $ownerurl = '<strong style="color:#202088;">'.$ownername.'</strong>';
+			$regions_list = get_string('modlos_personal_regions', 'block_modlos', $ownerurl);
 		}
 
 		include(CMS_MODULE_PATH.'/html/regions.html');
 	}
 }
-

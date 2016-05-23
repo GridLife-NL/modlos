@@ -275,6 +275,7 @@ class  CurrencyLog
 		$grid_name 		= $CFG->modlos_grid_name;
 		$money_unit 	= $CFG->modlos_currency_unit;
 		$date_format	= DATE_FORMAT;
+		$userinfo       = $CFG->modlos_userinfo_link;
 
 		$has_permit		= $this->hasPermit;
 		$url_param		= $this->url_param;
@@ -307,11 +308,16 @@ class  CurrencyLog
 		if ($this->nosystem) $nosystem_checked = 'checked';
 
 		$avtname = opensim_get_avatar_name($this->agent_id);
-		$userurl = "<a style=\"cursor:pointer;\" onClick=\"window.open('".CMS_MODULE_URL.'/helper/agent.php'.
+		if ($userinfo) {
+			$userurl = "<a style=\"cursor:pointer;\" onClick=\"window.open('".CMS_MODULE_URL.'/helper/agent.php'.
                                $url_param.'&agent='.$this->agent_id."',null,'toolbar=no,location=no,directories=no,".
                                "status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')\">";
-		$userurl.= $avtname['fullname'];
-		$userurl.= '</a>';
+			$userurl.= $avtname['fullname'];
+			$userurl.= '</a>';
+		}
+		else {
+			$userurl = '<strong style="color:#202088;">'.$avtname['fullname'].'</strong>';
+		}
 		$currency_log = get_string('modlos_peraonal_currency', 'block_modlos', $userurl);
 
 		include(CMS_MODULE_PATH.'/html/currency_log.html');

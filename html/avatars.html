@@ -262,7 +262,7 @@
 
                     <?php if (!$this->isGuest and $this->show_all) {?>
                       <td>
-                        <?php if ($userinfo and $dat['owner_name']!=' - ') { ?>
+                        <?php if ($dat['owner_name']!=' - ') { ?>
                           <a href="<?php echo $this->action_url.'&action=personal&userid='.$dat['uid']?>">
                             <strong style="color:#505;"><?php echo htmlspecialchars($dat['owner_name'])?></strong>
                           </a>
