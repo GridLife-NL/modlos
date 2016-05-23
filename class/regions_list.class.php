@@ -14,7 +14,7 @@ class  RegionsList
 
 	var $action_url;
 	var $search_url;
-	var $avatar_url;
+	var $owner_url;
 	var $rest_url;
 
 	var $course_id;
@@ -78,7 +78,7 @@ class  RegionsList
 		$this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param;
 		$this->search_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param.$this->action_param.'&amp;pstart=0';
 		$this->reset_url  = CMS_MODULE_URL.'/actions/reset_region.php'.$this->url_param.$this->action_param;
-		$this->avatar_url = $CFG->wwwroot.'/user/view.php'.$this->url_param;
+		$this->owner_url  = $CFG->wwwroot.'/user/view.php'.$this->url_param;
 
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		$avatars_num = modlos_get_avatars_num($USER->id);
@@ -336,7 +336,7 @@ class  RegionsList
 		else {
 			$ownerinfo = get_userinfo_by_id($this->user_id);
 			$ownername = get_display_username($ownerinfo->firstname, $ownerinfo->lastname);
-			if ($userinfo) $ownerurl = '<a href="'.$this->avatar_url.'&id='.$this->user_id.'" target="_blank">'.$ownername.'</a>';
+			if ($userinfo) $ownerurl = '<a href="'.$this->owner_url.'&id='.$this->user_id.'" target="_blank">'.$ownername.'</a>';
 			else           $ownerurl = '<strong style="color:#202088;">'.$ownername.'</strong>';
 			$regions_list = get_string('modlos_personal_regions', 'block_modlos', $ownerurl);
 		}

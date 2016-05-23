@@ -431,7 +431,7 @@ class  AvatarsList
 		else {
 			$ownerinfo = get_userinfo_by_id($this->user_id);
 			$ownername = get_display_username($ownerinfo->firstname, $ownerinfo->lastname);
-			if ($userinfo) $ownerurl = '<a href="'.$this->avatar_url.'&id='.$this->user_id.'" target="_blank">'.$ownername.'</a>';
+			if ($userinfo) $ownerurl = '<a href="'.$this->owner_url.'&id='.$this->user_id.'" target="_blank">'.$ownername.'</a>';
 			else           $ownerurl = '<strong style="color:#202088;">'.$ownername.'</strong>';
 			$avatars_list = get_string('modlos_personal_avatars', 'block_modlos', $ownerurl);
 		}
