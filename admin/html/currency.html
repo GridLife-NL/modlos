@@ -1,0 +1,56 @@
+
+<style type="text/css">
+  <?php include(CMS_MODULE_PATH."/html/table.css")?>
+</style>
+
+<table align="center" class="generalbox">
+  <tr>
+    <td align="center">
+      <?php echo $OUTPUT->heading($grid_name.': '.$currency_ttl); ?>
+    </td>
+  </tr>
+
+<?php if ($this->hasError) {?>
+  <tr>
+    <td class="generalboxcontent" align="center">
+      <div align=center>
+        <ul>
+          <?php foreach($this->errorMsg as $mesg) {?>
+            <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
+          <?php }?>
+        </ul>
+      </div>
+    </td>
+  </tr>
+<?php }?>
+
+  <tr>
+    <td class="generalboxcontent" align="center">
+      <table border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td align="center">
+            <form name="gsess" method="post" action="<?php echo $this->action_url;?>">
+              <input type="hidden" name="sesskey" value="<?php echo sesskey();?>" />
+              <input type="hidden" name="course"  value="<?php echo $this->course_id;?>" />
+              <input type="text"   name="estatename" size="18" maxlength="32" value="" />
+              <input type="submit" name="addestate" value="<?php echo get_string('modlos_add','block_modlos');?>" />
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <form name="assignform" method="post" action="<?php echo $this->action_url?>">
+              <input type="hidden" name="sesskey" value="<?php echo sesskey();?>" />
+              <input type="hidden" name="course"  value="<?php echo $this->course_id;?>" />
+              <?php $count = $this->show_table(); ?>
+              <?php if ($count%$this->page_size!=0) { ?>
+              <input type="submit" name="updateestate" value="<?php echo get_string('modlos_update','block_modlos');?>" />&nbsp;&nbsp;
+              <input type="reset"  value="<?php echo get_string('modlos_reset_ttl', 'block_modlos');?>" />
+              <?php }?>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
