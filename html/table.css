@@ -4,13 +4,19 @@
     color: #105ba7;
     background-color: #ddd;
 }
+
 .odd {
     font-weight: bold;
     background-color: #eee;
 }
+
 .even {
     font-weight: bold;
     background-color: #eee;
+}
+
+table {
+	margin-bottom: 0.5em;
 }
 
 td {

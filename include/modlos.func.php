@@ -1190,8 +1190,6 @@ function  print_tabnav_manage($currenttab, $course)
 	$toprow = array();
 //	$toprow[] = new tabobject('show_status', CMS_MODULE_URL.'/actions/show_status.php'.$course_param, 
 //																	'<strong>'.get_string('modlos_menu_tab','block_modlos').'</strong>');
-	$toprow[] = new tabobject('avatars_online', CMS_MODULE_URL.'/actions/avatars_online.php'.$course_param.'&order=login&desc=1', 
-																	'<strong>'.get_string('modlos_menu_tab','block_modlos').'</strong>');
 	if ($hasPermit) {
 		if (jbxl_is_admin($USER->id)) {
 			$course_amp = '';
@@ -1219,6 +1217,8 @@ function  print_tabnav_manage($currenttab, $course)
 																	'<strong>'.get_string('modlos_manage_cmnd_tab','block_modlos').'</strong>');
 	}
 
+	$toprow[] = new tabobject('avatars_online', CMS_MODULE_URL.'/actions/avatars_online.php'.$course_param.'&order=login&desc=1', 
+																	'<strong>'.get_string('modlos_menu_tab','block_modlos').'</strong>');
 	if ($course_id>1) {
 		$toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, '<strong>'.get_string('modlos_return_tab', 'block_modlos').'</strong>');
 	}
