@@ -12,7 +12,7 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 class  CurrencyManage
 {
 	var $action_url;
-    var $url_params;
+    var $url_param;
 	var $course_id  = 0;
 	var $hasPermit  = false;
 
@@ -35,13 +35,14 @@ class  CurrencyManage
 			return;
 		}
 	
-		$this->url_params = '?course='.$this->course_id;
+		$this->url_param  = '?course='.$this->course_id;
 		$this->action_url = CMS_MODULE_URL.'/admin/actions/currency.php';
 	}
 
 
 	function  execute()
 	{
+		global $CFG;
 		if (!$this->hasPermit) return false;
 
 		$this->errNum = 0;
@@ -56,12 +57,16 @@ class  CurrencyManage
 
 			$money = (int)optional_param('send_money', '0', PARAM_INT);
 			if ($money>0) {
+				$regionserver = $CFG->modlos_currency_regionserver;
+        		if ($regionserver=='http://123.456.78.90:9000/' or $regionserver=='') $regionserver = null;
+				//
 				require_once(CMS_MODULE_PATH.'/helper/helpers.php');
 				$avatars = opensim_get_avatars_infos();
 				foreach ($avatars as $avatar) {
-					$ret = false;//send_money($avatar['UUID'], $money);
+					$ret = send_money($avatar['UUID'], $money, $regionserver);
 					if (!$ret) {
 						$this->errAvatars[$this->errNum] = $avatar;
+						$this->errAvatars[$this->errNum]['fullname'] = $avatar['firstname'].' '.$avatar['lastname'];
 						$this->errNum++;
 					}
 				}
@@ -82,14 +87,16 @@ class  CurrencyManage
 		$errAvatars = $this->errAvatars;
 		$transfered = $this->transfered;
 
-		$url_params = $this->url_params;
+		$url_param  = $this->url_param;
 		$action_url = $this->action_url;
 
-		$currency_ttl  = get_string('modlos_currency_ttl', 'block_modlos');
-		$currency_send = get_string('modlos_currency_send', 'block_modlos');
-		$return_ttl    = get_string('modlos_return_ttl', 'block_modlos');
+		$currency_ttl  	 = get_string('modlos_currency_ttl',    	'block_modlos');
+		$currency_send 	 = get_string('modlos_currency_send',   	'block_modlos');
+		$currency_return = get_string('modlos_currency_return', 	'block_modlos');
+		$currency_trans  = get_string('modlos_currency_transfered',	'block_modlos');
+		$currency_mis    = get_string('modlos_currency_mistrans', 	'block_modlos');
 
-		$content       = '<center>'.get_string('modlos_currency_contents', 'block_modlos').'</center>';
+		$content = '<center>'.get_string('modlos_currency_contents', 'block_modlos').'</center>';
 
 		include(CMS_MODULE_PATH.'/admin/html/currency.html');
 	}

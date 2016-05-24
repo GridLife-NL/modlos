@@ -157,6 +157,11 @@ $settings->add(new admin_setting_configtext('modlos_currency_unit',
 $settings->add(new admin_setting_configtext('modlos_currency_script_key', 
 					get_string('modlos_currency_key', 'block_modlos'),
 				   	get_string('modlos_currency_key_desc', 'block_modlos'), '123456789', PARAM_TEXT));
+
+$settings->add(new admin_setting_configtext('modlos_currency_regionserver', 
+					get_string('modlos_currency_regionserver', 'block_modlos'),
+				   	get_string('modlos_currency_regionserver_desc', 'block_modlos'), 'http://123.456.78.90:9000/', PARAM_TEXT));
+
 /*
 $settings->add(new admin_setting_configtext('modlos_groupdb_currency_key', 
 					get_string('modlos_currency_key', 'block_modlos'),

@@ -274,6 +274,8 @@ $string['modlos_currency_opponent'] = '取引相手';
 $string['modlos_currency_nosystem'] = 'System との取引を表示しない';
 $string['modlos_currency_contents'] = '一斉送金の実行';
 $string['modlos_currency_return']   = 'マネー管理画面に戻る';
+$string['modlos_currency_transfered']='一斉送金を実行しました';
+$string['modlos_currency_mistrans'] = '以下のアバターへの送金に失敗しました';
 
 
 // Config
@@ -338,12 +340,15 @@ $string['modlos_use_currency_svr_desc'] = 'DTL/NSL Money サーバを使用す�
 $string['modlos_banker'] 			= 'バンカーアバターのUUID　（未実装）';
 $string['modlos_banker_desc'] 		= 'バンカーアバター （お金の管理を行うアバター） のUUID (GUID)';
 $string['modlos_currency_uri'] 		= 'Money サーバのURI';
+$string['modlos_currency_uri_desc'] = 'DTL/NSL Money サーバを使用する場合は，そのURLを指定する';
 $string['modlos_currency_key'] 		= 'ViewerとMoneyスクリプトとのアクセスキー';
 $string['modlos_currency_key_desc'] = 'ViewerとMoneyスクリプトとのアクセスキーを指定する．'.
 									  'MoneyServer.ini の [MoneyServer]セクションの MoneyScriptAccessKey の値と一致させる必要がある．';
-$string['modlos_currency_uri_desc'] = 'DTL/NSL Money サーバを使用する場合は，そのURLを指定する';
 $string['modlos_currency_unit'] 	= 'お金の単位';
 $string['modlos_currency_unit_desc']= 'お金の単位を指定する';
+$string['modlos_currency_regionserver']= 'お金の処理を行うリージョンサーバを指定する';
+$string['modlos_currency_regionserver_desc']= 'アバターがオフラインの時に，お金の処理を依頼するリージョンサーバを '.
+                                      '"http://IPアドレス:ポート番号形式/" で指定する．リージョンサーバであればどのサーバでも選択可能';
 
 $string['modlos_userinfo_link'] 	= 'Moodleユーザの名前からアカウントページへのリンク';
 $string['modlos_userinfo_link_desc']= 'ページ上に Moodleユーザの名前が表示された場合に，そのユーザのアカウント情報画面へのリンクを張るかどうかを指定する．';

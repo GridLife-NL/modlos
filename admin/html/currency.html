@@ -18,14 +18,14 @@
   <br />
 <?php }?>
 
+<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+  <tr>
+    <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $content?></span></strong></td>
+  </tr>
+</table>
 
 <?php if (!$transfered) {?>
   <form action="<?php echo $this->action_url?>" method="POST">
-    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
-      <tr>
-        <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $content?></span></strong></td>
-      </tr>
-    </table>
 
     <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
     <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
@@ -42,25 +42,24 @@
   </form>
 
 <?php } else {?>
+  <div align="center" style="color:#202088;">
+      <h4><?php echo $currency_trans?></h4>
+  </div>
 
   <?php if ($errNum>0) {?>
     <div align="center" style="color:#cc2020;">
-      <h4><?php echo $return_ttl?></h4>
+      <h4><?php echo $currency_mis?></h4>
+      <?php foreach($errAvatars as $avatar) {?>
+        <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$avatar['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+          <strong style="color:#882020;"><?php echo $avatar['fullname']?></strong>
+        </a><br />
+      <?php }?>
     </div>
-    <ul>
-    <?php foreach($errAvatars as $avatar) {?>
-      <li align="center"><strong style="color:#882020;"><?php echo $avatar['firstname'].' '.$avatar['lastname']?></strong></li>
-    <?php }?>
-    </ul>
-  <?php } else {?>
-    <div align="center" style="color:#208820;">
-      <h4><?php echo $return_ttl?></h4>
-    </div>
+    <hr />
   <?php }?>
 
-  <br />
   <div align="center" style="color:#202088;">
-    <h4><a href="<?php echo $action_url.$url_params?>" ><?php echo $return_ttl?></a></h4>
+    <h4><a href="<?php echo $action_url.$url_param?>" ><?php echo $currency_return?></a></h4>
   </div>
 <?php }?>
 <br />

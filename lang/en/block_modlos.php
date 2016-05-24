@@ -274,6 +274,8 @@ $string['modlos_currency_opponent'] = 'Seller/Customer';
 $string['modlos_currency_nosystem'] = 'Do not show the logs with the System';
 $string['modlos_currency_contents'] = 'Execution of simultaneous remittance';
 $string['modlos_currency_return']   = 'Return to Currency Management';
+$string['modlos_currency_transfered']='Simultaneous remittance was executed';
+$string['modlos_currency_mistrans'] = 'It failed to remit to the following avatars';
 
 
 // Config
@@ -337,13 +339,16 @@ $string['modlos_use_currency_svr'] 	= 'Do you use DTL/NSL Money Server?';
 $string['modlos_use_currency_svr_desc'] = 'Please specify whether to use DTL/NSL Money Server.';
 $string['modlos_banker'] 			= 'UUID of Banker Avatar';
 $string['modlos_banker_desc'] 		= 'Specify UUID(GUID) of Banker Avatar';
-$string['modlos_currency_key'] 		= 'Money Script Access key';
-$string['modlos_currency_key_desc']	= 'Please specify Money Script access key code. You can specify any string.'.
-									  'Specify same key code with MoneyScriptAccessKey in [MoneyServer] section of MoneyServer.ini';
 $string['modlos_currency_uri'] 		= 'Money Server URL';
 $string['modlos_currency_uri_desc'] = 'Specify DTL/NSL Money server URL, if exist.';
+$string['modlos_currency_key'] 		= 'Money Script Access key';
+$string['modlos_currency_key_desc']	= 'Please specify Money Script access key code. You can specify any string. '.
+									  'Specify same key code with MoneyScriptAccessKey in [MoneyServer] section of MoneyServer.ini';
 $string['modlos_currency_unit'] 	= 'Unit of Money';
 $string['modlos_currency_unit_desc']= 'Specify Unit of Money';
+$string['modlos_currency_regionserver']= 'Specify a Region Server\'s URL that operates currency.';
+$string['modlos_currency_regionserver_desc']= 'Specify a Region Server\'s URL (using http://IP-address:port-number/ format) '.
+                                      'that operates currency when the avatar is off-line. It is possible to choose any Region Server.';
 
 $string['modlos_userinfo_link']     = 'Link from Moodle user\'s name to user information page';
 $string['modlos_userinfo_link_desc']= 'It is specified whether to put the link form Moodle user\'s name to Moodle account information page, '.

@@ -147,12 +147,17 @@ class  CurrencyLog
 	{
 		global $CFG, $USER;
 
+		if (!USE_CURRENCY_SERVER) return false;
+
+		$regionserver = $CFG->modlos_currency_regionserver;
+		if ($regionserver=='http://123.456.78.90:9000/' or $regionserver=='') $regionserver = null;
+
 		if (data_submitted()) {
 			if (confirm_sesskey()) {
 				$money = (int)optional_param('send_money', '0', PARAM_INT);
 				if ($money>0 and $this->hasPermit) {
 					require_once(CMS_MODULE_PATH.'/helper/helpers.php');
-					send_money($this->agent_id, $money);
+					send_money($this->agent_id, $money, $regionserver);
 				}
 			}
 		}
