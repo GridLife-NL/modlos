@@ -96,23 +96,41 @@
 </table>
 
 
-<!-- Reload -->
+<!-- Function Line -->
 <table width="85%" cellpadding=3 border=0 cellspacing=1 bgcolor="#e0e0e0" align="center">
-  <form action="<?php echo $this->action_url.$plimit_amp.$order_amp?>" method="POST">
-    <tr bgcolor="#f0f0a0">
-      <td height=28>&nbsp;</td>
-      <td style="color: #000;">
+  <tr bgcolor="#f0f0a0">
+    <td style="height:28px; width:50px; table-layout:fixed;">&nbsp;</td>
+
+    <td style="width:300px; table-layout:fixed; color:#000;">
+      <form action="<?php echo $this->action_url.$plimit_amp.$order_amp?>" method="POST">
         <strong>
           <input type="checkbox" name="nosystem" value="1" <?php echo $nosystem_checked?> >
           <?php echo $currency_nosystem?>&nbsp;&nbsp;&nbsp;
         </strong>
         <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
         <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
-        <input type="Submit" value="Reload" style="height:20;">&nbsp;&nbsp;&nbsp;
-      </td>
-      <td width=200>&nbsp;</td>
-    </tr>
-  </form>
+        <input type="Submit" value="Reload" style="height:20px;">
+      </form>
+    </td>
+
+    <td width=50>&nbsp;</td>
+
+    <td width=400 style="color: #000;" align="right">
+      <?php if ($has_permit) {?>
+      <form action="<?php echo $this->action_url.$plimit_amp.$order_amp?>" method="POST">
+        <strong>
+          <?php echo $currency_send?>&nbsp;
+          <input name="" id="re" size="10" maxlength="10" value="0" />
+        </strong>
+        <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+        <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+        <input type="Submit" value="Send" style="height:20px;">
+      </form>
+      <?php }?>
+    </td>
+
+    <td style="width:50px; table-layout:fixed;">&nbsp;</td>
+  </tr>
 </table>
 
 

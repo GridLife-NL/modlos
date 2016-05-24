@@ -135,9 +135,9 @@ $string['modlos_avatar_dlt_canceled']= 'アバター削除取り消し';
 $string['modlos_avatar_dlt_confrm']	= '本当にアバターを削除しますか？';
 
 $string['modlos_online_tab']        = 'オンライン';
-$string['modlos_avatars_tab']       = 'アバター一覧';
-$string['modlos_regions_tab']       = 'リージョン一覧';
-$string['modlos_world_map_tab']     = 'マップ';
+$string['modlos_avatars_tab']       = 'アバター リスト';
+$string['modlos_regions_tab']       = 'リージョン リスト';
+$string['modlos_world_map_tab']     = 'ワールド マップ';
 
 $string['modlos_user_search'] 		= 'ユーザ検索';
 $string['modlos_nouser_found'] 		= 'ユーザがいません';
@@ -267,6 +267,7 @@ $string['modlos_currency_object']   = 'オブジェクト名';
 $string['modlos_currency_amount']   = '残高';
 $string['modlos_currency_pay']      = '支払い';
 $string['modlos_currency_income']   = '受取り';
+$string['modlos_currency_send']     = '送金';
 $string['modlos_currency_unknown']  = '不明';
 $string['modlos_currency_opponent'] = '取引相手';
 $string['modlos_currency_nosystem'] = 'System との取引を表示しない';
@@ -335,7 +336,8 @@ $string['modlos_banker'] 			= 'バンカーアバターのUUID　（未実装）
 $string['modlos_banker_desc'] 		= 'バンカーアバター （お金の管理を行うアバター） のUUID (GUID)';
 $string['modlos_currency_uri'] 		= 'Money サーバのURI';
 $string['modlos_currency_key'] 		= 'ViewerとMoneyスクリプトとのアクセスキー';
-$string['modlos_currency_key_desc'] = 'ViewerとMoneyスクリプトとのアクセスキーを指定する．任意の文字列なら何でも良い';
+$string['modlos_currency_key_desc'] = 'ViewerとMoneyスクリプトとのアクセスキーを指定する．'.
+									  'MoneyServer.ini の [MoneyServer]セクションの MoneyScriptAccessKey の値と一致させる必要がある．';
 $string['modlos_currency_uri_desc'] = 'DTL/NSL Money サーバを使用する場合は，そのURLを指定する';
 $string['modlos_currency_unit'] 	= 'お金の単位';
 $string['modlos_currency_unit_desc']= 'お金の単位を指定する';
@@ -383,7 +385,7 @@ $string['modlos_user_log_desc'] 	= 'ユーザサーバのログの保存先';
 // Admin
 $string['modlos_show_status_tab'] 	= 'ステータス';
 $string['modlos_admin_title'] 		= 'Moodle OpenSim';
-$string['modlos_general_setting_tab']='設定';
+$string['modlos_general_setting_tab']='全般設定';
 $string['modlos_lastnames_tab'] 	= 'ラストネーム';
 $string['modlos_lastnames'] 		= 'ラストネーム管理';
 

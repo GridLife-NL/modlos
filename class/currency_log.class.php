@@ -163,10 +163,7 @@ class  CurrencyLog
 		$avatardata = modlos_get_avatar_info($this->agent_id, $this->use_sloodle);
 		if ($avatardata!=null) $this->user_id = $avatardata['uid'];
 
-		if (!$this->hasPermit) {
-			if ($USER->id==$this->user_id) $this->hasPermit = true;
-		}
-		if (!$this->hasPermit) {
+		if (!$this->hasPermit and $USER->id!=$this->user_id) {
 			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
@@ -275,7 +272,7 @@ class  CurrencyLog
 		$grid_name 		= $CFG->modlos_grid_name;
 		$money_unit 	= $CFG->modlos_currency_unit;
 		$date_format	= DATE_FORMAT;
-		$userinfo       = $CFG->modlos_userinfo_link;
+//		$userinfo       = $CFG->modlos_userinfo_link;
 
 		$has_permit		= $this->hasPermit;
 		$url_param		= $this->url_param;
@@ -298,6 +295,7 @@ class  CurrencyLog
 		$currency_object= get_string('modlos_currency_object','block_modlos');
 		$currency_pay   = get_string('modlos_currency_pay',   'block_modlos');
 		$currency_income= get_string('modlos_currency_income','block_modlos');
+		$currency_send  = get_string('modlos_currency_send','block_modlos');
 		$currency_opponent = get_string('modlos_currency_opponent','block_modlos');
 		$currency_nosystem = get_string('modlos_currency_nosystem','block_modlos');
 
@@ -308,16 +306,11 @@ class  CurrencyLog
 		if ($this->nosystem) $nosystem_checked = 'checked';
 
 		$avtname = opensim_get_avatar_name($this->agent_id);
-		if ($userinfo) {
-			$userurl = "<a style=\"cursor:pointer;\" onClick=\"window.open('".CMS_MODULE_URL.'/helper/agent.php'.
-                               $url_param.'&agent='.$this->agent_id."',null,'toolbar=no,location=no,directories=no,".
-                               "status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')\">";
-			$userurl.= $avtname['fullname'];
-			$userurl.= '</a>';
-		}
-		else {
-			$userurl = '<strong style="color:#202088;">'.$avtname['fullname'].'</strong>';
-		}
+		$userurl = "<a style=\"cursor:pointer;\" onClick=\"window.open('".CMS_MODULE_URL.'/helper/agent.php'.
+                              $url_param.'&agent='.$this->agent_id."',null,'toolbar=no,location=no,directories=no,".
+                              "status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')\">";
+		$userurl.= $avtname['fullname'];
+		$userurl.= '</a>';
 		$currency_log = get_string('modlos_peraonal_currency', 'block_modlos', $userurl);
 
 		include(CMS_MODULE_PATH.'/html/currency_log.html');

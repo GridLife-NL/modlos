@@ -134,10 +134,10 @@ $string['modlos_avatar_upd_submit'] = 'Update Avatar';
 $string['modlos_avatar_dlt_canceled']='Avatar Delete Canceled';
 $string['modlos_avatar_dlt_confrm'] = 'Is Avatar really DELETE?';
 
-$string['modlos_online_tab'] 		= 'Online';
-$string['modlos_avatars_tab'] 		= 'Avatars';
-$string['modlos_regions_tab'] 		= 'Regions';
-$string['modlos_world_map_tab'] 	= 'Map';
+$string['modlos_online_tab'] 		= 'Online Avatars';
+$string['modlos_avatars_tab'] 		= 'Avatar List';
+$string['modlos_regions_tab'] 		= 'Region List';
+$string['modlos_world_map_tab'] 	= 'World Map';
 
 $string['modlos_user_search'] 		= 'User Search';
 $string['modlos_users_found'] 		= 'Users Found';
@@ -267,6 +267,7 @@ $string['modlos_currency_object']   = 'Object Name';
 $string['modlos_currency_amount']   = 'Amount';
 $string['modlos_currency_pay']      = 'Pay';
 $string['modlos_currency_income']   = 'Income';
+$string['modlos_currency_send']     = 'Send Currency';
 $string['modlos_currency_unknown']  = 'unknown';
 $string['modlos_currency_opponent'] = 'seller/customer';
 $string['modlos_currency_nosystem'] = 'Do not show the trading with the System';
@@ -334,7 +335,8 @@ $string['modlos_use_currency_svr_desc'] = 'Please specify whether to use DTL/NSL
 $string['modlos_banker'] 			= 'UUID of Banker Avatar';
 $string['modlos_banker_desc'] 		= 'Specify UUID(GUID) of Banker Avatar';
 $string['modlos_currency_key'] 		= 'Money Script Access key';
-$string['modlos_currency_key_desc']	= 'Please specify Money Script access key code. You can specify any string.';
+$string['modlos_currency_key_desc']	= 'Please specify Money Script access key code. You can specify any string.'.
+									  'Specify same key code with MoneyScriptAccessKey in [MoneyServer] section of MoneyServer.ini';
 $string['modlos_currency_uri'] 		= 'Money Server URL';
 $string['modlos_currency_uri_desc'] = 'Specify DTL/NSL Money server URL, if exist.';
 $string['modlos_currency_unit'] 	= 'Unit of Money';
