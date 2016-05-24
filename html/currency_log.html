@@ -120,7 +120,7 @@
       <form action="<?php echo $this->action_url.$plimit_amp.$order_amp?>" method="POST">
         <strong>
           <?php echo $currency_send?>&nbsp;
-          <input name="send_money" id="send_money" size="11" maxlength="10" value="0" />
+          <input name="send_money" id="send_money" size="11" maxlength="10" value="0" style="height:16px;" />
         </strong>
         <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
         <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />

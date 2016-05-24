@@ -24,8 +24,9 @@ class  LastNames
 	var $select_inactive   	= array();		// move to inactive
 	var $addname;
 
-	var $hasError = false;
-	var $errorMsg = array();
+	var $hasPermit = false;
+	var $hasError  = false;
+	var $errorMsg  = array();
 
 
 
@@ -189,6 +190,3 @@ class  LastNames
 		}
 	}
 }
-
-
-?>

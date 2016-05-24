@@ -272,6 +272,8 @@ $string['modlos_currency_send']     = '送金';
 $string['modlos_currency_unknown']  = '不明';
 $string['modlos_currency_opponent'] = '取引相手';
 $string['modlos_currency_nosystem'] = 'System との取引を表示しない';
+$string['modlos_currency_contents'] = '一斉送金の実行';
+$string['modlos_currency_return']   = 'マネー管理画面に戻る';
 
 
 // Config

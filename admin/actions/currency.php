@@ -21,11 +21,11 @@ $permit = hasModlosPermit($course_id);
 if (!$permit) print_error('modlos_access_forbidden', 'block_modlos');
 
 require_once(CMS_MODULE_PATH.'/admin/class/currency.class.php');
-$avatar = new Currency($course_id);
+$currency = new CurrencyManage($course_id);
 
 print_tabnav_manage($action, $course);
 
-$avatar->execute();
-$avatar->print_page();
+$currency->execute();
+$currency->print_page();
 
 echo $OUTPUT->footer($course);

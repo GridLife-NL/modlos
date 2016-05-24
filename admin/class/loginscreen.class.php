@@ -17,7 +17,7 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 class  LoginScreen
 {
 	var $action_url;
-	var $hashPermit;
+	var $hasPermit = false;
 	var $course_id = 0;
 	var	$preview   = false;
 	var	$updated   = false;

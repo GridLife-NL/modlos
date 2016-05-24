@@ -14,9 +14,9 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 class  ManagementBase
 {
 	var $action_url;
-	var $hashPermit;
 	var $course_id = 0;
 	var	$managed   = false;
+	var $hasPermit = false;
 	var	$hasError  = false;
 	var	$errorMsg  = array();
 	var	$command   = '';
@@ -123,4 +123,3 @@ class  ManagementBase
 		include(CMS_MODULE_PATH.'/admin/html/management.html');
 	}
 }
-

@@ -272,6 +272,8 @@ $string['modlos_currency_send']     = 'Send Currency';
 $string['modlos_currency_unknown']  = 'unknown';
 $string['modlos_currency_opponent'] = 'Seller/Customer';
 $string['modlos_currency_nosystem'] = 'Do not show the logs with the System';
+$string['modlos_currency_contents'] = 'Execution of simultaneous remittance';
+$string['modlos_currency_return']   = 'Return to Currency Management';
 
 
 // Config

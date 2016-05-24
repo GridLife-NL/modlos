@@ -3,55 +3,64 @@
   <?php include(CMS_MODULE_PATH."/html/html.css")?>
 </style>
 
-<table align="center" class="generalbox">
-  <tr>
-    <td align="center">
-      <?php echo $OUTPUT->heading($grid_name.': '.$currency_ttl); ?>
-    </td>
-  </tr>
+<h2><center><?php echo $grid_name.":&nbsp;".$currency_ttl?></center></h2>
 
+
+<!-- Error Message -->
 <?php if ($this->hasError) {?>
-  <tr>
-    <td class="generalboxcontent" align="center">
-      <div align=center>
-        <ul>
-          <?php foreach($this->errorMsg as $mesg) {?>
-            <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
-          <?php }?>
-        </ul>
-      </div>
-    </td>
-  </tr>
+  <div align=center>
+    <ul>
+      <?php foreach($this->errorMsg as $mesg) {?>
+         <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
+      <?php }?>
+    </ul>
+  </div>
+  <br />
 <?php }?>
 
-  <tr>
-    <td class="generalboxcontent" align="center">
-      <table border="0" align="center" cellpadding="0" cellspacing="0">
-        <tr>
-          <td align="center">
-            <form name="gsess" method="post" action="<?php echo $this->action_url;?>">
-              <input type="hidden" name="sesskey" value="<?php echo sesskey();?>" />
-              <input type="hidden" name="course"  value="<?php echo $this->course_id;?>" />
-              <input type="text"   name="estatename" size="18" maxlength="32" value="" />
-              <input type="submit" name="addestate" value="<?php echo get_string('modlos_add','block_modlos');?>" />
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td align="center">
-            <form name="assignform" method="post" action="<?php echo $this->action_url?>">
-              <input type="hidden" name="sesskey" value="<?php echo sesskey();?>" />
-              <input type="hidden" name="course"  value="<?php echo $this->course_id;?>" />
-              <?php $count = $this->show_table(); ?>
-              <?php if ($count%$this->page_size!=0) { ?>
-              <input type="submit" name="updateestate" value="<?php echo get_string('modlos_update','block_modlos');?>" />&nbsp;&nbsp;
-              <input type="reset"  value="<?php echo get_string('modlos_reset_ttl', 'block_modlos');?>" />
-              <?php }?>
-            </form>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
+
+<?php if (!$transfered) {?>
+  <form action="<?php echo $this->action_url?>" method="POST">
+    <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+      <tr>
+        <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $content?></span></strong></td>
+      </tr>
+    </table>
+
+    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
+    <input type="hidden" name="quest"   value="yes" />
+
+    <div align=center>
+      <br />
+      <strong style="padding:4px;">
+        <?php echo $currency_send?>&nbsp;&nbsp;
+        <input name="send_money" id="send_money" size="11" maxlength="10" value="0" style="height:16px;" />
+      </strong>
+      <input type="submit" value="Send" style="height:20px;" /> 
+    </div>
+  </form>
+
+<?php } else {?>
+
+  <?php if ($errNum>0) {?>
+    <div align="center" style="color:#cc2020;">
+      <h4><?php echo $return_ttl?></h4>
+    </div>
+    <ul>
+    <?php foreach($errAvatars as $avatar) {?>
+      <li align="center"><strong style="color:#882020;"><?php echo $avatar['firstname'].' '.$avatar['lastname']?></strong></li>
+    <?php }?>
+    </ul>
+  <?php } else {?>
+    <div align="center" style="color:#208820;">
+      <h4><?php echo $return_ttl?></h4>
+    </div>
+  <?php }?>
+
+  <br />
+  <div align="center" style="color:#202088;">
+    <h4><a href="<?php echo $action_url.$url_params?>" ><?php echo $return_ttl?></a></h4>
+  </div>
+<?php }?>
 <br />

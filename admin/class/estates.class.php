@@ -17,10 +17,11 @@ class  Estates
 	var $course_id = 0;
 	var $page_size = 15;
 
-	var $estates  = array();
+	var $estates   = array();
 
-	var $hasError = false;
-	var $errorMsg = array();
+	var $hasPermit = false;
+	var $hasError  = false;
+	var $errorMsg  = array();
 
 
 	function  Estates($course_id) 
@@ -32,19 +33,17 @@ class  Estates
 			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 			return;
 		}
+
 		$this->action_url = CMS_MODULE_URL.'/admin/actions/estates.php';
 	}
 
 
 	function  execute()
 	{
+		if (!$this->hasPermit) return false;
+
 		// Form	
 		if (data_submitted()) {
-			if (!$this->hasPermit) {
-				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
-				return false;
-			}
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
@@ -216,6 +215,3 @@ class  Estates
 	}
 
 }
-
-
-?>

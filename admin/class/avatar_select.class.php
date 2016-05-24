@@ -17,10 +17,11 @@ class  AvatarSelect
 	var $course_id = 0;
 	var $page_size = 15;
 
-	var $estates  = array();
+	var $hasPermit = false;
+	var $estates   = array();
 
-	var $hasError = false;
-	var $errorMsg = array();
+	var $hasError  = false;
+	var $errorMsg  = array();
 
 
 	function  AvatarSelect($course_id) 
@@ -216,6 +217,3 @@ class  AvatarSelect
 	}
 
 }
-
-
-?>
