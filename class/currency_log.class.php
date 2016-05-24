@@ -109,13 +109,6 @@ class  CurrencyLog
 
 		$this->nosystem = optional_param('nosystem', '0', PARAM_INT);
 
-		// Post Check
-		if (data_submitted()) {
-			if (!confirm_sesskey()) {
-				print_error('modlos_sesskey_error', 'block_modlos', $this->action_url);
-			}
-		}
-
 		// ORDER
 		$sql_order = '';
 		if ($this->order=='time') {
@@ -153,6 +146,16 @@ class  CurrencyLog
 	function  execute()
 	{
 		global $CFG, $USER;
+
+		if (data_submitted()) {
+			if (confirm_sesskey()) {
+				$money = (int)optional_param('send_money', '0', PARAM_INT);
+				if ($money>0 and $this->hasPermit) {
+					require_once(CMS_MODULE_PATH.'/helper/helpers.php');
+					send_money($this->agent_id, $money);
+				}
+			}
+		}
 
 		// auto synchro
 		modlos_sync_opensimdb();
@@ -287,15 +290,16 @@ class  CurrencyLog
 		$pstart_		= '&amp;pstart=';
 		$order_			= '&amp;order=';
 
-		$number_ttl		= get_string('modlos_num',			  'block_modlos');
-		$currency_found	= get_string('modlos_currency_found', 'block_modlos');
-		$currency_date	= get_string('modlos_currency_date',  'block_modlos');
-		$currency_type	= get_string('modlos_currency_type',  'block_modlos');
-		$currency_amount= get_string('modlos_currency_amount','block_modlos');
-		$currency_object= get_string('modlos_currency_object','block_modlos');
-		$currency_pay   = get_string('modlos_currency_pay',   'block_modlos');
-		$currency_income= get_string('modlos_currency_income','block_modlos');
-		$currency_send  = get_string('modlos_currency_send','block_modlos');
+		$number_ttl		= get_string('modlos_num',			   'block_modlos');
+		$currency_found	= get_string('modlos_currency_found',  'block_modlos');
+		$currency_date	= get_string('modlos_currency_date',   'block_modlos');
+		$currency_type	= get_string('modlos_currency_type',   'block_modlos');
+		$currency_amount= get_string('modlos_currency_amount', 'block_modlos');
+		$currency_balance=get_string('modlos_currency_balance','block_modlos');
+		$currency_object= get_string('modlos_currency_object', 'block_modlos');
+		$currency_pay   = get_string('modlos_currency_pay',    'block_modlos');
+		$currency_income= get_string('modlos_currency_income', 'block_modlos');
+		$currency_send  = get_string('modlos_currency_send',   'block_modlos');
 		$currency_opponent = get_string('modlos_currency_opponent','block_modlos');
 		$currency_nosystem = get_string('modlos_currency_nosystem','block_modlos');
 

@@ -127,7 +127,7 @@
       <td>&nbsp;</td>
 
       <td style="width:150px; table-layout:fixed; color:#000;" align="right">
-        <?php if ($has_permit and !$avatar_max) {?>
+        <?php if (!$has_permit and !$avatar_max) {?>
           <a href="<?php echo $avarars_list_url.$loss_.'1'?>" target="_self">
             <strong><?php echo $find_owner_ttl?></strong>
           </a>

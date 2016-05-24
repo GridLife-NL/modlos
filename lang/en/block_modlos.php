@@ -265,12 +265,13 @@ $string['modlos_currency_date']     = 'Date';
 $string['modlos_currency_type']     = 'Type';
 $string['modlos_currency_object']   = 'Object Name';
 $string['modlos_currency_amount']   = 'Amount';
+$string['modlos_currency_balance']  = 'Balance';
 $string['modlos_currency_pay']      = 'Pay';
 $string['modlos_currency_income']   = 'Income';
 $string['modlos_currency_send']     = 'Send Currency';
 $string['modlos_currency_unknown']  = 'unknown';
-$string['modlos_currency_opponent'] = 'seller/customer';
-$string['modlos_currency_nosystem'] = 'Do not show the trading with the System';
+$string['modlos_currency_opponent'] = 'Seller/Customer';
+$string['modlos_currency_nosystem'] = 'Do not show the logs with the System';
 
 
 // Config

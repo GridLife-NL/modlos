@@ -101,7 +101,7 @@
   <tr bgcolor="#f0f0a0">
     <td style="height:28px; width:50px; table-layout:fixed;">&nbsp;</td>
 
-    <td style="width:300px; table-layout:fixed; color:#000;">
+    <td style="width:400px; table-layout:fixed; color:#000;">
       <form action="<?php echo $this->action_url.$plimit_amp.$order_amp?>" method="POST">
         <strong>
           <input type="checkbox" name="nosystem" value="1" <?php echo $nosystem_checked?> >
@@ -120,7 +120,7 @@
       <form action="<?php echo $this->action_url.$plimit_amp.$order_amp?>" method="POST">
         <strong>
           <?php echo $currency_send?>&nbsp;
-          <input name="" id="re" size="10" maxlength="10" value="0" />
+          <input name="send_money" id="send_money" size="11" maxlength="10" value="0" />
         </strong>
         <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
         <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
@@ -164,7 +164,7 @@
                   <td width=20>&nbsp;</td>
                   <td width=100 align="right"><strong style="color: #222;"><?php echo $currency_income?></strong></td>
 
-                  <td width=100 align="right"><strong style="color: #222;"><?php echo $currency_amount?></strong></td>
+                  <td width=100 align="right"><strong style="color: #222;"><?php echo $currency_balance?></strong></td>
                   <td width=50>&nbsp;</td>
                   <td width=200><strong style="color: #222;"><?php echo $currency_object?></strong></td>
                   <td width=30>&nbsp;</td>
