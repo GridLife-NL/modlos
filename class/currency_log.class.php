@@ -157,7 +157,9 @@ class  CurrencyLog
 				$money = (int)optional_param('send_money', '0', PARAM_INT);
 				if ($money>0 and $this->hasPermit) {
 					require_once(CMS_MODULE_PATH.'/helper/helpers.php');
-					send_money($this->agent_id, $money, $regionserver);
+					//send_money($this->agent_id, $money, $regionserver);
+					//echo get_balance($this->agent_id, $regionserver);
+					echo get_balance($this->agent_id);
 				}
 			}
 		}

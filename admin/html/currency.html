@@ -43,22 +43,26 @@
 
 <?php } else {?>
   <div align="center" style="color:#202088;">
-      <h4><?php echo $currency_trans?></h4>
+    <br />
+    <h4><?php echo $currency_trans?></h4>
   </div>
 
   <?php if ($errNum>0) {?>
     <div align="center" style="color:#cc2020;">
+      <br />
       <h4><?php echo $currency_mis?></h4>
+      <hr />
       <?php foreach($errAvatars as $avatar) {?>
         <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$avatar['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
           <strong style="color:#882020;"><?php echo $avatar['fullname']?></strong>
         </a><br />
       <?php }?>
+      <hr />
     </div>
-    <hr />
   <?php }?>
 
   <div align="center" style="color:#202088;">
+    <br />
     <h4><a href="<?php echo $action_url.$url_param?>" ><?php echo $currency_return?></a></h4>
   </div>
 <?php }?>
