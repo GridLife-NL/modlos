@@ -71,6 +71,7 @@ class  CurrencyLog
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $my_avatars>=$max_avatars) $this->isAvatarMax = true;
 
+		$this->trans_types['1000']  = 'BirthGift';
 		$this->trans_types['1002']  = 'GroupCreate';
 		$this->trans_types['1004']  = 'GroupJoin';
 		$this->trans_types['1101']  = 'UploadCharge';
