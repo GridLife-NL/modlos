@@ -1,6 +1,6 @@
 <?php
 //
-// CMS/LMS Interface for Moodle
+// CMS/LMS Web Interface for Moodle
 //												by Fumi.Iseki
 //
 //
@@ -9,7 +9,6 @@ require_once(realpath(dirname(__FILE__).'/config.php'));
 
 require_once(ENV_HELPER_PATH.'/../include/tools.func.php');
 require_once(ENV_HELPER_PATH.'/../include/mysql.func.php');
-require_once(ENV_HELPER_PATH.'/../include/env.mysql.php');
 require_once(ENV_HELPER_PATH.'/../include/opensim.mysql.php');
 require_once(ENV_HELPER_PATH.'/../include/modlos.func.php');
 
@@ -36,7 +35,6 @@ if (isset($LOGINPAGE) and $LOGINPAGE) {
 	$HG_ONLINE_TTL    = get_string('modlos_online_hg','block_modlos');
 }
 
-
 //
 $Categories[0]  = get_string('modlos_events_all_category',	'block_modlos');
 $Categories[18] = get_string('modlos_events_discussion',	'block_modlos');
@@ -54,15 +52,12 @@ if (!OPENSIM_PG_ONLY) $Categories[23] = get_string('modlos_events_nightlife', 'b
 
 
 //
-//
-//
 function  env_get_user_email($uid)
 {                  
     return modlos_get_user_email($uid);
 }
 
 
-                   
 function  env_get_config($name)
 {                  
     global $CFG;
@@ -71,7 +66,6 @@ function  env_get_config($name)
  
     return $CFG->$name;
 }
-
 
 
 
@@ -90,7 +84,6 @@ define('MDL_MUTE_LIST_TBL', 				'modlos_mute_list');
 
 
 
-
 //////////////////////////////////////////////////////////////////////////////////
 //
 // External other Modules
@@ -98,7 +91,6 @@ define('MDL_MUTE_LIST_TBL', 				'modlos_mute_list');
 
 // for Sloodle
 define('MDL_SLOODLE_USERS_TBL',             'sloodle_users');
-
 
 // XML Group.  see also xmlgroups_config.php 
 define('MDL_XMLGROUP_ACTIVE_TBL',			'modlos_group_active');
@@ -109,14 +101,12 @@ define('MDL_XMLGROUP_NOTICE_TBL',			'modlos_group_notice');
 define('MDL_XMLGROUP_ROLE_MEMBER_TBL',  	'modlos_group_rolemembership');
 define('MDL_XMLGROUP_ROLE_TBL',				'modlos_group_role');
 
-
 // Avatar Profile. see also profile_config.php 
 define('MDL_PROFILE_CLASSIFIEDS_TBL',   	'modlos_profile_classifieds');
 define('MDL_PROFILE_USERNOTES_TBL',  		'modlos_profile_usernotes');
 define('MDL_PROFILE_USERPICKS_TBL',  		'modlos_profile_userpicks');
 define('MDL_PROFILE_USERPROFILE_TBL',  		'modlos_profile_userprofile');
 define('MDL_PROFILE_USERSETTINGS_TBL',		'modlos_profile_usersettings');
-
 
 // Search the In World. see also search_config.php 
 define('MDL_SEARCH_ALLPARCELS_TBL',			'modlos_search_allparcels');
@@ -128,8 +118,6 @@ define('MDL_SEARCH_PARCELSALES_TBL',		'modlos_search_parcelsales');
 define('MDL_SEARCH_POPULARPLACES_TBL', 		'modlos_search_popularplaces');
 define('MDL_SEARCH_REGIONS_TBL',			'modlos_search_regions');
 define('MDL_SEARCH_CLASSIFIEDS_TBL',		MDL_PROFILE_CLASSIFIEDS_TBL);
-
-
 
 //
 if (!defined('ENV_READED_INTERFACE')) define('ENV_READED_INTERFACE', 'YES');

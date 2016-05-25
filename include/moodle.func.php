@@ -34,7 +34,6 @@ function  hasPermit($course_id=0)
 }
 
 
-
 //
 // only use to display
 //
@@ -57,7 +56,6 @@ function  get_display_username($firstname, $lastname)
 
 	return $username;
 }
-
 
 
 function  get_names_from_display_username($username)
@@ -88,7 +86,6 @@ function  get_names_from_display_username($username)
 }
 
 
-
 function  get_userinfo_by_username($username)
 {
 	global $DB;
@@ -96,7 +93,6 @@ function  get_userinfo_by_username($username)
 	$user_info = $DB->get_record('user', array('username'=>$username, 'deleted'=>'0'));
 	return $user_info;
 }
-
 
 
 function  get_userinfo_by_name($firstname, $lastname='')
@@ -115,8 +111,6 @@ function  get_userinfo_by_name($firstname, $lastname='')
 }
 
 
-
-
 function  get_userinfo_by_id($id)
 {
 	global $DB;
@@ -126,5 +120,4 @@ function  get_userinfo_by_id($id)
 	$user_info = $DB->get_record('user', array('id'=>$id, 'deleted'=>'0'));
 	return $user_info;
 }
-
 

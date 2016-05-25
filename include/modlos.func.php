@@ -80,13 +80,11 @@
 
  ****************************************************************/
 
-
 /****************************************************************
  Reference: Moodle DB 1.9.x Functions from lib/dmllib.php  (Memo)
 
  function record_exists($table, $field1='', $value1='', $field2='', $value2='', $field3='', $value3='')
  function count_records($table, $field1='', $value1='', $field2='', $value2='', $field3='', $value3='')
-
 
  function get_record($table, $field1, $value1, $field2='', $value2='', $field3='', $value3='', $fields='*')
  function get_records($table, $field='', $value='', $sort='', $fields='*', $limitfrom='', $limitnum='')
@@ -105,7 +103,6 @@
  ****************************************************************/
 
 
-
 if (!defined('CMS_MODULE_PATH')) exit();
 
 require_once(CMS_MODULE_PATH.'/include/env_interface.php');
@@ -116,8 +113,6 @@ require_once(CMS_MODULE_PATH.'/include/opensim.mysql.php');
 require_once(CMS_MODULE_PATH.'/include/moodle.func.php');
 
 require_once(CMS_MODULE_PATH.'/include/jbxl_moodle_tools.php');
-
-
 
 
 
@@ -135,7 +130,6 @@ function  hasModlosPermit($course_id=0)
 
 	return $ret;
 }
-
 
 
 
@@ -158,7 +152,6 @@ function  modlos_get_update_time($fullname_table)
 }
 
 
-
 function  modlos_count_records($tablename)
 {
 	global $DB;
@@ -169,8 +162,6 @@ function  modlos_count_records($tablename)
 
 	return $count;
 }
-
-
 
 
 function  modlos_get_user_email($uuid)
@@ -186,7 +177,6 @@ function  modlos_get_user_email($uuid)
 
     return $email;
 }
-
 
 
 
@@ -250,7 +240,6 @@ function  modlos_get_avatars($uid=0, $use_sloodle=false)
 
 	return $avatars;
 }
-
 
 
 function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
@@ -347,8 +336,6 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 }
 
 
-
-
 function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 {
 	global $DB;
@@ -396,8 +383,6 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 }
 
 
-
-
 function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 {
 	global $DB;
@@ -416,7 +401,6 @@ function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 	if (!$ret) return false;
 	return true;
 }
-
 
 
 
@@ -449,12 +433,9 @@ function  modlos_get_userstable()
 }
 
 
-
-
 //
 //	UUID, firstname, lastname, uid, state, time, hmregion are setted in $user[]
 //
-
 function  modlos_insert_userstable($user)
 {
 	global $DB;
@@ -488,8 +469,6 @@ function  modlos_insert_userstable($user)
 }
 
 
-
-
 //
 // update (Moodle's)uid, hmregion, state, time of users (Moodle DB).
 //
@@ -520,8 +499,9 @@ function  modlos_update_userstable($user, $updobj=null)
 }
 	
 
-
 /*
+// Use opensim_get_region_name
+//
 function  modlos_get_region_name($region)
 {
 	if (isGUID($region)) {
@@ -532,7 +512,6 @@ function  modlos_get_region_name($region)
 	return $region;
 }
 */
-
 
 
 function  modlos_delete_userstable($user)
@@ -556,7 +535,6 @@ function  modlos_delete_userstable($user)
 
 
 
-
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Last Names
@@ -575,8 +553,6 @@ function  modlos_get_lastnames($sort='')
 
 	return $lastnames;
 }
-
-
 
 
 
@@ -606,8 +582,6 @@ function  modlos_delete_groupdb($uuid, $delallgrp=false)
 }
 
 
-
-
 function  modlos_delete_groupdb_by_uuid($uuid)
 { 
 	global $DB;
@@ -619,8 +593,6 @@ function  modlos_delete_groupdb_by_uuid($uuid)
 
 	return true;
 }
-
-
 
 
 function  modlos_delete_groupdb_by_gpid($gpid)
@@ -637,7 +609,6 @@ function  modlos_delete_groupdb_by_gpid($gpid)
 
 	return true;
 }
-
 
 
 
@@ -710,7 +681,6 @@ function  modlos_set_profiles_from_users($profs, $ovwrite=true)
 		}
 	}
 
-
 	foreach($profs as $prof) {
 		if ($prof['UUID']!='') {
 			$insert = false;
@@ -748,7 +718,6 @@ function  modlos_delete_profiles($uuid)
 
 	return;
 }
-
 
 
 
@@ -871,7 +840,6 @@ function  modlos_set_event($event)
 
 
 
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // 
 // Login Screen
@@ -900,7 +868,6 @@ function  modlos_get_loginscreen_alert()
 
 	return $ret;
 }
-
 
 
 function  modlos_set_loginscreen_alert($alert)
@@ -933,7 +900,6 @@ function  modlos_set_loginscreen_alert($alert)
 
 
 
-
 ///////////////////////////////////////////////////////////////////////////////////////
 //
 // Bann List
@@ -962,7 +928,6 @@ function  modlos_activate_avatar($uuid)
 }
 
 
-
 function  modlos_inactivate_avatar($uuid)
 {
 	global $DB;
@@ -987,7 +952,6 @@ function  modlos_inactivate_avatar($uuid)
 }
 
 
-
 function  modlos_delete_banneddb($uuid)
 {
 	global $DB;
@@ -996,8 +960,6 @@ function  modlos_delete_banneddb($uuid)
 	if (!$ret) return false;
 	return true;
 }
-
-
 
 
 
@@ -1056,7 +1018,6 @@ function  modlos_sync_opensimdb($update_check=true)
 }
 
 
-
 function  modlos_sync_sloodle_users($update_check=true)
 {
 	global $DB, $CFG;
@@ -1098,7 +1059,6 @@ function  modlos_sync_sloodle_users($update_check=true)
 
 	return;
 }
-
 
 
 
@@ -1172,7 +1132,6 @@ function  print_tabnav($currenttab, $course, $show_create_tab=true)
 }
 
 
-
 function  print_tabnav_manage($currenttab, $course)
 {
 	global $CFG, $USER;
@@ -1238,7 +1197,6 @@ function  print_tabnav_manage($currenttab, $course)
 }
 
 
-
 function  print_modlos_header($currenttab, $course)
 {
 	global $SITE, $OUTPUT, $PAGE;
@@ -1280,5 +1238,3 @@ function  print_modlos_header($currenttab, $course)
 
 	return;
 }
-
-

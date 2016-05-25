@@ -1,12 +1,12 @@
 <?php
 
-require_once(realpath(dirname(__FILE__)."/../../config.php"));
-require_once(realpath(dirname(__FILE__)."/include/config.php"));
+require_once(realpath(dirname(__FILE__).'/../../config.php'));
+require_once(realpath(dirname(__FILE__).'/include/config.php'));
 
 if (!defined('CMS_MODULE_PATH')) exit();
 
-require_once(CMS_MODULE_PATH."/include/opensim.mysql.php");
-require_once(CMS_MODULE_PATH."/include/modlos.func.php");
+require_once(CMS_MODULE_PATH.'/include/opensim.mysql.php');
+require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 class block_modlos extends block_base 
