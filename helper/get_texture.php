@@ -17,10 +17,7 @@ $xsize = optional_param('xsize', '0', PARAM_INT);
 $ysize = optional_param('ysize', '0', PARAM_INT);
 
 $prog  = env_get_config('image_processor_jp2');
-//$path  = env_get_config('image_processor_path');
 $cache = CMS_MODULE_PATH.'/helper/texture_cache';
 
 $ret = opensim_display_texture_data($uuid, $prog, $xsize, $ysize, $cache, true);
 if (!$ret) exit();
- 
-?>

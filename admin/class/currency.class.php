@@ -61,7 +61,7 @@ class  CurrencyManage
         		if ($regionserver=='http://123.456.78.90:9000/' or $regionserver=='') $regionserver = null;
 				//
 				require_once(CMS_MODULE_PATH.'/helper/helpers.php');
-				$avatars = opensim_get_avatars_infos();
+				$avatars = opensim_get_userinfos();
 				foreach ($avatars as $avatar) {
 					$ret = send_money($avatar['UUID'], $money, $regionserver);
 					if (!$ret) {

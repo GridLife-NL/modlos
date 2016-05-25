@@ -1,10 +1,12 @@
 <?php
 //
-// Configuration file for Moodle
-//											by Fumi.Iseki
+// Module Configuration file 
 //
+//                        for Moodle by Fumi.Iseki
 //
+
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
+
 
 if (!defined('CMS_DIR_NAME'))	 define('CMS_DIR_NAME',	   basename(dirname(dirname(__FILE__))));
 if (!defined('CMS_MODULE_URL'))	 define('CMS_MODULE_URL',  $CFG->wwwroot.'/blocks/'.CMS_DIR_NAME);
@@ -13,87 +15,77 @@ if (!defined('CMS_MODULE_PATH')) define('CMS_MODULE_PATH', $CFG->dirroot.'/block
 if (!defined('ENV_HELPER_URL'))	 define('ENV_HELPER_URL',  $CFG->wwwroot.'/blocks/'.CMS_DIR_NAME.'/helper');
 if (!defined('ENV_HELPER_PATH')) define('ENV_HELPER_PATH', $CFG->dirroot.'/blocks/'.CMS_DIR_NAME.'/helper');
 
-//
-$GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
-
-
 
 //////////////////////////////////////////////////////////////////////////////////
-//
 // for OpenSim
-//
 
 // for OpenSim DB
-define('OPENSIM_DB_HOST',			$CFG->modlos_sql_server_name);
-define('OPENSIM_DB_NAME',			$CFG->modlos_sql_db_name);
-define('OPENSIM_DB_USER',			$CFG->modlos_sql_db_user);
-define('OPENSIM_DB_PASS',			$CFG->modlos_sql_db_pass);
-
-define('USE_CURRENCY_SERVER',		$CFG->modlos_use_currency_server);
-define('CURRENCY_SCRIPT_KEY',		$CFG->modlos_currency_script_key);
+define('OPENSIM_DB_HOST',		$CFG->modlos_sql_server_name);
+define('OPENSIM_DB_NAME',		$CFG->modlos_sql_db_name);
+define('OPENSIM_DB_USER',		$CFG->modlos_sql_db_user);
+define('OPENSIM_DB_PASS',		$CFG->modlos_sql_db_pass);
 
 if (!property_exists($CFG, 'modlos_use_mysqli')) $CFG->modlos_use_mysqli = false;
-define('OPENSIM_DB_MYSQLI',			$CFG->modlos_use_mysqli);
+define('OPENSIM_DB_MYSQLI',		$CFG->modlos_use_mysqli);
+
+define('USE_CURRENCY_SERVER',	$CFG->modlos_use_currency_server);
+define('CURRENCY_SCRIPT_KEY',	$CFG->modlos_currency_script_key);
+
+define('XMLGROUP_RKEY',			$CFG->modlos_groupdb_read_key);
+define('XMLGROUP_WKEY',	   		$CFG->modlos_groupdb_write_key);
+
+define('OPENSIM_PG_ONLY',		$CFG->modlos_pg_only);
+define('USE_UTC_TIME',			$CFG->modlos_use_utc_time);
+
+
+///////////////////////////////////////////////////////////
+// for Moodle DB
+
+define('CMS_DB_HOST',			$CFG->dbhost);
+define('CMS_DB_NAME', 			$CFG->dbname);
+define('CMS_DB_USER',			$CFG->dbuser);
+define('CMS_DB_PASS',			$CFG->dbpass);
+define('CMS_DB_MYSQLI',			$CFG->modlos_use_mysqli);
+
+
+
+////////////////////////////////////////////////////////////
+// Functions 
+//
+function  env_get_user_email($uid)
+{
+	return modlos_get_user_email($uid);
+}
+
+
+//
+function  env_get_config($name)
+{
+	global $CFG;
+
+	$name = 'modlos_'.$name;
+
+	if (property_exists($CFG, $name)) return $CFG->$name;
+	else return null;
+}
 
 
 
 //////////////////////////////////////////////////////////////////////////////////
-//
-// for Moodle
-//
+// // You need not change the below usually. 
 
-// for CMS/LMS DB
-define('CMS_DB_HOST',				$CFG->dbhost);
-define('CMS_DB_NAME', 				$CFG->dbname);
-define('CMS_DB_USER',				$CFG->dbuser);
-define('CMS_DB_PASS',				$CFG->dbpass);
-define('CMS_DB_MYSQLI',				$CFG->modlos_use_mysqli);
-
-//
-define('SYSURL',					$CFG->wwwroot);
-define('OPENSIM_PG_ONLY',			$CFG->modlos_pg_only);
-define('DATE_FORMAT',				$CFG->modlos_date_format);
-define('USE_UTC_TIME',				$CFG->modlos_use_utc_time);
+define('SYSURL', $CFG->wwwroot);
+$GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
 
 if (USE_UTC_TIME) date_default_timezone_set('UTC');
 
-//
+
+////////////////////////////////////////////////////////////
+// External NSL Modules
+
 define('MDL_DB_PREFIX',				$CFG->prefix);
 define('MODLOS_DB_PREFIX',     		$CFG->prefix.'modlos_');
 
-
-
-//////////////////////////////////////////////////////////////////////////////////
-//
-// External NSL Modules
-//
-
-// for Sloodle
-define('SLOODLE_USERS_TBL',			$CFG->prefix.'sloodle_users');
-
-// Currency DB for helpers.php
-if (USE_CURRENCY_SERVER) {
-	define('CURRENCY_DB_HOST',		OPENSIM_DB_HOST);
-	define('CURRENCY_DB_NAME',		OPENSIM_DB_NAME);
-	define('CURRENCY_DB_USER',		OPENSIM_DB_USER);
-	define('CURRENCY_DB_PASS',		OPENSIM_DB_PASS);
-	define('CURRENCY_DB_MYSQLI',	OPENSIM_DB_MYSQLI);
-	define('CURRENCY_MONEY_TBL',	'balances');
-	define('CURRENCY_USERINFO_TBL',	'userinfo');
-	define('CURRENCY_TOTALSALE_TBL','totalsales');
-	define('CURRENCY_TRANSACTION_TBL','transactions');
-}
-else {
-	define('CURRENCY_DB_HOST',		'');
-	define('CURRENCY_DB_NAME',		'');
-	define('CURRENCY_DB_USER',		'');
-	define('CURRENCY_DB_PASS',		'');
-	define('CURRENCY_DB_MYSQLI',	'');
-	define('CURRENCY_MONEY_TBL',	'');
-	define('CURRENCY_USERINFO_TBL',	'');
-	define('CURRENCY_TOTALSALE_TBL','');
-	define('CURRENCY_TRANSACTION_TBL','');
-}
 
 // Offline Message
 define('OFFLINE_DB_HOST',  			CMS_DB_HOST);
@@ -113,9 +105,10 @@ define('MUTE_LIST_TBL', 			MODLOS_DB_PREFIX.'mute_list');
 
 
 
-//////////////////////////////////////////////////////////////////////////////////
-//
+////////////////////////////////////////////////////////////
 // External other Modules
+//
+//         CMS/LMS の外側から使用する場合の変数
 //
 
 // XML Group.  see also xmlgroups_config.php 
@@ -126,9 +119,6 @@ define('XMLGROUP_MEMBERSHIP_TBL',  	MODLOS_DB_PREFIX.'group_membership');
 define('XMLGROUP_NOTICE_TBL',		MODLOS_DB_PREFIX.'group_notice');
 define('XMLGROUP_ROLE_MEMBER_TBL', 	MODLOS_DB_PREFIX.'group_rolemembership');
 define('XMLGROUP_ROLE_TBL',			MODLOS_DB_PREFIX.'group_role');
-
-define('XMLGROUP_RKEY',				$CFG->modlos_groupdb_read_key);
-define('XMLGROUP_WKEY',	   			$CFG->modlos_groupdb_write_key);
 
 // Avatar Profile. see also profile_config.php 
 define('PROFILE_CLASSIFIEDS_TBL',  	MODLOS_DB_PREFIX.'profile_classifieds');
@@ -150,30 +140,52 @@ define('SEARCH_CLASSIFIEDS_TBL',	PROFILE_CLASSIFIEDS_TBL);
 
 
 
-//////////////////////////////////////////////////////////////////////////////////
-//
-// Avatar State for CMS/LMS
-//
-define('AVATAR_STATE_NOSTATE', 		'0');		// 0x00
-define('AVATAR_STATE_SYNCDB',  		'1');		// 0x01
-define('AVATAR_STATE_SLOODLE', 		'2');		// 0x02
-define('AVATAR_STATE_INACTIVE',		'4');		// 0x04
+////////////////////////////////////////////////////////////
+// for Login Page
 
-define('AVATAR_STATE_NOSYNCDB',		'254');		// 0xfe
-define('AVATAR_STATE_NOSLOODLE',	'253');		// 0xfd
-define('AVATAR_STATE_ACTIVE',		'251');		// 0xfb
+if (isset($LOGINPAGE) and $LOGINPAGE)
+{
+	$LOGIN_SCREEN_CONTENT = env_get_config('loginscreen_content');
 
-// Editable
-define('AVATAR_NOT_EDITABLE',		'0');
-define('AVATAR_EDITABLE',	 		'1');
-define('AVATAR_OWNER_EDITABLE',		'2');
+	$alert = modlos_get_loginscreen_alert();
+	//	
+	$BOX_TITLE        = $alert['title'];
+	$BOX_COLOR        = $alert['bordercolor'];
+	$BOX_INFOTEXT     = $alert['information'];
 
-// Lastname
-define('AVATAR_LASTN_INACTIVE',		'0');
-define('AVATAR_LASTN_ACTIVE',  		'1');
+	$GRID_NAME        = $CFG->modlos_grid_name;
+	$REGION_TTL       = get_string('modlos_region','block_modlos');
+	
+	$DB_STATUS_TTL    = get_string('modlos_db_status','block_modlos');
+	$ONLINE           = get_string('modlos_online_ttl','block_modlos');
+	$OFFLINE          = get_string('modlos_offline_ttl','block_modlos');
+	$TOTAL_USER_TTL   = get_string('modlos_total_users','block_modlos');
+	$TOTAL_REGION_TTL = get_string('modlos_total_regions','block_modlos');
+	$LAST_USERS_TTL   = get_string('modlos_visitors_last30days','block_modlos');
+	$ONLINE_TTL       = get_string('modlos_online_now','block_modlos');
+	$HG_ONLINE_TTL    = get_string('modlos_online_hg','block_modlos');
+}
 
-// Password
-define('AVATAR_PASSWD_MINLEN',		'8');
 
-//
+
+////////////////////////////////////////////////////////////
+// Event Categories
+
+$Categories[0]  = get_string('modlos_events_all_category',  'block_modlos');
+$Categories[18] = get_string('modlos_events_discussion',    'block_modlos');
+$Categories[19] = get_string('modlos_events_sports',        'block_modlos');
+$Categories[20] = get_string('modlos_events_music',         'block_modlos');
+$Categories[22] = get_string('modlos_events_commercial',    'block_modlos');
+$Categories[23] = get_string('modlos_events_enteme',        'block_modlos');
+$Categories[24] = get_string('modlos_events_games',         'block_modlos');
+$Categories[25] = get_string('modlos_events_pageants',      'block_modlos');
+$Categories[26] = get_string('modlos_events_edu',           'block_modlos');
+$Categories[27] = get_string('modlos_events_arts',          'block_modlos');
+$Categories[28] = get_string('modlos_events_charity',       'block_modlos');
+$Categories[29] = get_string('modlos_events_misc',          'block_modlos');
+if (!OPENSIM_PG_ONLY) $Categories[23] = get_string('modlos_events_nightlife', 'block_modlos').$Categories[23];
+
+
+
+//////////////////////////////////////////////////////////////////////
 if (!defined('ENV_READED_CONFIG')) define('ENV_READED_CONFIG', 'YES');
