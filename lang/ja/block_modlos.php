@@ -256,7 +256,7 @@ $string['modlos_add'] 				= '登録';
 $string['modlos_update'] 			= '更新';
 $string['modlos_updateordel'] 		= '更新または削除';
 
-$string['modlos_currency_tab']	    = 'マネー';
+$string['modlos_currency_tab']	    = 'マネー管理';
 $string['modlos_currency_ttl']	    = 'マネー管理';
 $string['modlos_my_currency']	    = 'マネー残高のログ';
 $string['modlos_peraonal_currency'] = '{$a} のマネー残高のログ';
