@@ -7,7 +7,7 @@
 
 
 <!-- Error Message -->
-<?php if ($this->hasError) {?>
+<?php if ($this->hasError and $getPage) {?>
   <div align=center>
     <ul>
       <?php foreach($this->errorMsg as $mesg) {?>
@@ -21,112 +21,150 @@
 
 <?php if ($getPage) {?>
 
-<!-- 一斉送金 -->
-<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
-  <tr>
-    <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $content_trans?></span></strong></td>
-  </tr>
-</table>
-<form action="<?php echo $this->action_url?>" method="POST">
-  <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-  <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
-  <input type="hidden" name="quest"   value="yes" />
-  <div align=center>
-    <br />
-    <strong style="padding:4px;">
-      <?php echo $currency_send?>&nbsp;
-      <input name="send_money" id="send_money" size="10" maxlength="10" value="0" style="height:16px;" />
-    </strong>
-    <input type="submit" value="Send" style="height:20px;" /> 
-  </div>
-</form>
-<br /><br />
+  <!-- 一斉送金 -->
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+    <tr>
+      <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $transfer_ttl?></span></strong></td>
+    </tr>
+  </table>
+  <form action="<?php echo $this->action_url?>" method="POST">
+    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
+    <input type="hidden" name="quest"   value="yes" />
+    <div align=center>
+      <br />
+      <strong style="padding:4px;">
+        <?php echo $currency_send?>&nbsp;
+        <input name="send_money" id="send_money" size="10" maxlength="10" value="0" style="height:16px;" />
+      </strong>
+      <input type="submit" value="Send" style="height:20px;" /> 
+    </div>
+  </form>
+  <br /><br />
 
-<!-- 売上DBの作り直し -->
-<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
-  <tr>
-    <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $content_remake?></span></strong></td>
-  </tr>
-</table>
-<form action="<?php echo $this->action_url?>" method="POST">
-  <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-  <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
-  <input type="hidden" name="quest"   value="yes" />
-  <div align=center>
-    <br />
-    <strong style="padding:4px;">
-      <?php echo $sales_limit?>&nbsp;(<?php echo $date_format?>)&nbsp;
-      <input name="sales_limit" id="sales_limit" size="10" maxlength="10" value="<?php echo $date_time?>" style="height:16px;" />
-    </strong>
-    <input type="submit" value="Remake" style="height:20px;" /> 
-  </div>
-</form>
-<br /><br />
+  <!-- 売上DBの作り直し -->
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+    <tr>
+      <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $remake_ttl?></span></strong></td>
+    </tr>
+  </table>
+  <form action="<?php echo $this->action_url?>" method="POST">
+    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
+    <input type="hidden" name="quest"   value="yes" />
+    <div align=center>
+      <br />
+      <strong style="padding:4px;">
+        <?php echo $sales_limit?>&nbsp;(<?php echo $date_format?>)&nbsp;
+        <input name="sales_limit" id="sales_limit" size="10" maxlength="10" value="<?php echo $date_time?>" style="height:16px;" />
+      </strong>
+      <input type="submit" value="Remake" style="height:20px;" /> 
+    </div>
+  </form>
+  <br /><br />
 
-<!-- 売上DBの表示 -->
-<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
-  <tr>
-    <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $content_display?></span></strong></td>
-  </tr>
-</table>
-<form action="<?php echo $this->action_url?>" method="POST">
-  <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-  <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
-  <input type="hidden" name="quest"   value="yes" />
-  <div align=center>
-    <br />
-    <strong style="padding:4px;">
-      <?php echo $sales_condition?>&nbsp;
-      <input name="sales_condition" id="sales_condition" size="16" maxlength="100" value="type=5008" style="height:16px; margin-right:15px;" />
-      <?php echo $sales_order?>&nbsp;
-      <input name="sales_order" id="sales_order" size="16" maxlength="30" value="TotalCount DESN" style="height:16px;" />
-    </strong>
-    <input type="submit" value="Show" style="height:20px;" /> 
-  </div>
-</form>
-<br /><br />
+  <!-- 売上DBの表示 -->
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+    <tr>
+      <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $display_ttl?></span></strong></td>
+    </tr>
+  </table>
+  <form action="<?php echo $this->action_url?>" method="POST">
+    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
+    <input type="hidden" name="quest"   value="yes" />
+    <div align=center>
+      <br />
+      <strong style="padding:4px;">
+        <?php echo $sales_condition?>&nbsp;
+        <input name="sales_condition" id="sales_condition" size="25" maxlength="100" value="type=5008" style="height:16px; margin-right:15px;" />
+        <?php echo $sales_order?>&nbsp;
+        <input name="sales_order" id="sales_order" size="25" maxlength="50" value="TotalCount DESC Limit 10" style="height:16px;" />
+      </strong>
+      <input type="submit" value="Display" style="height:20px;" /> 
+    </div>
+  </form>
+  <br /><br />
 
 <?php } else {?>
 
+  <!-- POST -->
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+    <tr>
+      <td width=80% class="head" align="center"><strong><span style="color:#116644;"><?php echo $result_ttl?></span></strong></td>
+    </tr>
+  </table>
 
-<!-- 一斉送金 -->
-<?php if ($transfer) {?>
-<!--
-  <div align="center" style="color:#202088;">
-    <br />
-    <h4><?php echo $currency_trans?></h4>
-  </div>
 
-  一回もログインしていないと，送金できない
-  <?php if ($errNum>0) {?>
-    <div align="center" style="color:#cc2020;">
+  <?php if (!$this->hasError) {?>
+    <div align="center" style="color:#202088;">
       <br />
-      <h4><?php echo $currency_mis?></h4>
-      <hr />
-      <?php foreach($errAvatars as $avatar) {?>
-        <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$avatar['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
-          <strong style="color:#882020;"><?php echo $avatar['fullname']?></strong>
-        </a><br />
-      <?php }?>
-      <hr />
+      <h4><?php echo $result_msg?></h4>
     </div>
+
+    <!-- 売上DBの表示 -->
+    <?php if ($display) {?>
+      <table border="1" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+        <tr bgcolor=#c0c0c0>
+          <td style="width:30px;  table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'No.'?></strong></td>
+          <td style="width:300px; table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'Object'?></strong></td>
+          <td style="width:180px; table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'Avatar'?></strong></td>
+          <td style="width:60px;  table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'Counts'?></strong></td>
+          <td style="width:60px;  table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'Amount'?></strong></td>
+        </tr>
+        <?php foreach($results as $result) {?>
+          <?php if ($result['num']%2==1) {?>
+          <tr style='background-color: #e8e8e8;'>
+          <?php } else {?>
+          <tr style='background-color: #f8f8f8;'>
+          <?php }?>
+            <td><?php echo $result['num']+1?></td>
+            <td><?php echo $result['object']?></td>
+            <td><?php echo $result['name']?></td>
+            <td align="right"><?php echo number_format($result['count'])?></td>
+            <td align="right"><?php echo number_format($result['amount'])?></td>
+          </tr>
+        <?php }?>
+      </table>
+    <?php }?>
+
+
+  <?php } else {?>
+	<!-- エラー   -->
+    <!-- 一斉送金 -->
+    <?php if ($transfer) {?>
+      <div align="center" style="color:#cc2020;">
+        <br />
+        <h4><?php echo $currency_mis?></h4>
+        <hr />
+        <?php foreach($results as $result) {?>
+          <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$result['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <strong style="color:#882020;"><?php echo $result['fullname']?></strong>
+          </a><br />
+        <?php }?>
+        <hr />
+      </div>
+
+    <!-- 売上DBの作り直し -->
+    <?php } else if ($remake) {?>
+      <div align="center" style="color:#cc2020;">
+        <br />
+        <h4><?php echo $sales_remake_mis?></h4>
+      </div>
+
+    <!-- 売上DBの表示 -->
+    <?php } else if ($display) {?>
+      <div align="center" style="color:#cc2020;">
+        <br />
+        <h4><?php echo $sales_disp_mis?></h4>
+      </div>
+
+    <?php }?>
+
   <?php }?>
--->
 
-<!-- 売上DBの作り直し -->
-<?php } else if ($remake) {?>
-
-
-<!-- 売上DBの表示 -->
-<?php } else if ($display) {?>
-
-<?php }?>
-
-
-
-<div align="center" style="color:#202088;">
+  <div align="center" style="color:#202088;">
+    <h4><a href="<?php echo $action_url.$url_param?>" ><?php echo $currency_return?></a></h4>
+  </div>
   <br />
-  <h4><a href="<?php echo $action_url.$url_param?>" ><?php echo $currency_return?></a></h4>
-</div>
-<br />
 <?php }?>

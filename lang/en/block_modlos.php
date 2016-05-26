@@ -280,11 +280,13 @@ $string['modlos_currency_mistrans'] = 'It failed to remit to the following avata
 
 $string['modlos_sales_remake_ttl']  = 'Remake Sales DB';
 $string['modlos_sales_remake_limit']= 'The day to start the process';
-$string['modlos_sales_remaked']     = 'Remake is done. ({$a} - )';
-$string['modlos_sales_show_ttl']    = 'Display Sales DB';
-$string['modlos_sales_show_cndtn']  = 'Condition';
-$string['modlos_sales_show_order']  = 'Order';
-$string['modlos_sales_show_results']= 'Results';
+$string['modlos_sales_remaked']     = 'Remake is done ({$a} - )';
+$string['modlos_sales_remake_mis']  = 'Failed to remake DB';
+$string['modlos_sales_disp_ttl']    = 'Display Sales DB';
+$string['modlos_sales_disp_cndtn']  = 'Condition';
+$string['modlos_sales_disp_order']  = 'Order';
+$string['modlos_sales_displayed']   = 'Results of Sales Since {$a}';
+$string['modlos_sales_disp_mis']    = 'Failed to display the results';
 
 $string['modlos_date_dmY']          = 'd/m/Y';
 

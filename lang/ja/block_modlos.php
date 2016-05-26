@@ -281,10 +281,12 @@ $string['modlos_currency_mistrans'] = '以下のアバターへの送金に失�
 $string['modlos_sales_remake_ttl']  = '売上DB の作り直し';
 $string['modlos_sales_remake_limit']= '処理を開始する日付';
 $string['modlos_sales_remaked']     = '作り直し終了 （{$a}～）';
-$string['modlos_sales_show_ttl']    = '売上DB の表示';
-$string['modlos_sales_show_cndtn']  = '検索条件';
-$string['modlos_sales_show_order']  = '表示順序';
-$string['modlos_sales_show_results']= '検索結果';
+$string['modlos_sales_remake_mis']  = 'DB の作り直しに失敗しました';
+$string['modlos_sales_disp_ttl']    = '売上DB の表示';
+$string['modlos_sales_disp_cndtn']  = '検索条件';
+$string['modlos_sales_disp_order']  = '表示順序';
+$string['modlos_sales_displayed']   = '売り上げ検索結果 {$a} 以降';
+$string['modlos_sales_disp_mis']    = '検索に失敗しました';
 
 $string['modlos_date_dmY']         = 'Y/m/d';
 
