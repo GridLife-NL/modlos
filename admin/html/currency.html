@@ -106,8 +106,8 @@
     <?php if ($display) {?>
       <table border="1" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
         <tr bgcolor=#c0c0c0>
-          <td style="width:30px;  table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'No.'?></strong></td>
-          <td style="width:300px; table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'Object'?></strong></td>
+          <td style="width:40px;  table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'No.'?></strong></td>
+          <td style="width:350px; table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'Object'?></strong></td>
           <td style="width:180px; table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'Avatar'?></strong></td>
           <td style="width:60px;  table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'Counts'?></strong></td>
           <td style="width:60px;  table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'Amount'?></strong></td>
@@ -118,7 +118,7 @@
           <?php } else {?>
           <tr style='background-color: #f8f8f8;'>
           <?php }?>
-            <td><?php echo $result['num']+1?></td>
+            <td align="center"><?php echo $result['num']+1?></td>
             <td><?php echo $result['object']?></td>
             <td><?php echo $result['name']?></td>
             <td align="right"><?php echo number_format($result['count'])?></td>
