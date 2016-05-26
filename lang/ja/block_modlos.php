@@ -272,11 +272,21 @@ $string['modlos_currency_send']     = '送金';
 $string['modlos_currency_unknown']  = '不明';
 $string['modlos_currency_opponent'] = '取引相手';
 $string['modlos_currency_nosystem'] = 'System との取引を表示しない';
-$string['modlos_currency_contents'] = '一斉送金の実行';
 $string['modlos_currency_return']   = 'マネー管理画面に戻る';
+
+$string['modlos_currency_trans_ttl']= '一斉送金の実行';
 $string['modlos_currency_transfered']='一斉送金を実行しました';
 $string['modlos_currency_mistrans'] = '以下のアバターへの送金に失敗しました';
 
+$string['modlos_sales_remake_ttl']  = '売上DB の作り直し';
+$string['modlos_sales_remake_limit']= '処理を開始する日付';
+$string['modlos_sales_remaked']     = '作り直し終了 （{$a}～）';
+$string['modlos_sales_show_ttl']    = '売上DB の表示';
+$string['modlos_sales_show_cndtn']  = '検索条件';
+$string['modlos_sales_show_order']  = '表示順序';
+$string['modlos_sales_show_results']= '検索結果';
+
+$string['modlos_date_dmY']         = 'Y/m/d';
 
 // Config
 $string['modlos_mdl_name'] 			= 'Moodle OpenSim';

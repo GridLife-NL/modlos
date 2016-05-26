@@ -1161,8 +1161,10 @@ function  print_tabnav_manage($currenttab, $course)
 		$toprow[] = new tabobject('avatar_select', CMS_MODULE_URL.'/admin/actions/avatar_select.php'.$course_param, 
 																	'<strong>'.get_string('modlos_avatar_select_tab','block_modlos').'</strong>');
 
-		$toprow[] = new tabobject('currency', CMS_MODULE_URL.'/admin/actions/currency.php'.$course_param, 
+		if ($CFG->modlos_use_currency_server) {
+			$toprow[] = new tabobject('currency', CMS_MODULE_URL.'/admin/actions/currency.php'.$course_param, 
 																	'<strong>'.get_string('modlos_currency_tab','block_modlos').'</strong>');
+		}
 
 		$toprow[] = new tabobject('loginscreen', CMS_MODULE_URL.'/admin/actions/loginscreen.php'.$course_param, 
 																	'<strong>'.get_string('modlos_lgnscrn_tab','block_modlos').'</strong>');
@@ -1170,6 +1172,7 @@ function  print_tabnav_manage($currenttab, $course)
 			$toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/actions/lastnames.php'.$course_param, 
 																	'<strong>'.get_string('modlos_lastnames_tab','block_modlos').'</strong>');
 		}
+
 		$toprow[] = new tabobject('estates', CMS_MODULE_URL.'/admin/actions/estates.php'.$course_param, 
 																	'<strong>'.get_string('modlos_estate_tab','block_modlos').'</strong>');
 		$toprow[] = new tabobject('management', CMS_MODULE_URL.'/admin/actions/management.php'.$course_param, 

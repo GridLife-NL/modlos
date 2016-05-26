@@ -272,10 +272,21 @@ $string['modlos_currency_send']     = 'Send Currency';
 $string['modlos_currency_unknown']  = 'unknown';
 $string['modlos_currency_opponent'] = 'Seller/Customer';
 $string['modlos_currency_nosystem'] = 'Do not show the logs with the System';
-$string['modlos_currency_contents'] = 'Execution of simultaneous remittance';
 $string['modlos_currency_return']   = 'Return to Currency Management';
+
+$string['modlos_currency_trans_ttl']= 'Execution of simultaneous remittance';
 $string['modlos_currency_transfered']='Simultaneous remittance was executed';
 $string['modlos_currency_mistrans'] = 'It failed to remit to the following avatars';
+
+$string['modlos_sales_remake_ttl']  = 'Remake Sales DB';
+$string['modlos_sales_remake_limit']= 'The day to start the process';
+$string['modlos_sales_remaked']     = 'Remake is done. ({$a} - )';
+$string['modlos_sales_show_ttl']    = 'Display Sales DB';
+$string['modlos_sales_show_cndtn']  = 'Condition';
+$string['modlos_sales_show_order']  = 'Order';
+$string['modlos_sales_show_results']= 'Results';
+
+$string['modlos_date_dmY']          = 'd/m/Y';
 
 
 // Config

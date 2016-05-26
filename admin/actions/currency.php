@@ -7,6 +7,7 @@ require_once(realpath(dirname(__FILE__).'/../../include/modlos.func.php'));
 
 $course_id = optional_param('course', '1', PARAM_INT);
 if (!$course_id) $course_id = 1; 
+if (!USE_CURRENCY_SERVER) exit("<h4>Money Server is not used!!</h4>");
 
 $urlparams = array();
 $urlparams['course'] = $course_id;
