@@ -275,17 +275,17 @@ $string['modlos_currency_nosystem'] = 'Do not show the logs with the System';
 $string['modlos_currency_return']   = 'Return to Currency Management';
 
 $string['modlos_currency_trans_ttl']= 'Execution of simultaneous remittance';
-$string['modlos_currency_transfered']='Simultaneous remittance was executed';
+$string['modlos_currency_transfered']='Simultaneous remittance was executed ({$a})';
 $string['modlos_currency_mistrans'] = 'It failed to remit to the following avatars';
 
-$string['modlos_sales_remake_ttl']  = 'Remake Sales DB';
-$string['modlos_sales_remake_limit']= 'The day to start the process';
+$string['modlos_sales_remake_ttl']  = 'Remake the Sales DB';
+$string['modlos_sales_remake_limit']= 'The start day of the processing';
 $string['modlos_sales_remaked']     = 'Remake is done ({$a} - )';
-$string['modlos_sales_remake_mis']  = 'Failed to remake DB';
-$string['modlos_sales_disp_ttl']    = 'Display Sales DB';
+$string['modlos_sales_remake_mis']  = 'Failed to remake the Sales DB';
+$string['modlos_sales_disp_ttl']    = 'Display the Sales DB';
 $string['modlos_sales_disp_cndtn']  = 'Condition';
 $string['modlos_sales_disp_order']  = 'Order';
-$string['modlos_sales_displayed']   = 'Results of Sales Since {$a}';
+$string['modlos_sales_displayed']   = 'Results of the Sales since {$a}';
 $string['modlos_sales_disp_mis']    = 'Failed to display the results';
 
 $string['modlos_date_dmY']          = 'd/m/Y';

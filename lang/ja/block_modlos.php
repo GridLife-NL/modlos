@@ -275,18 +275,18 @@ $string['modlos_currency_nosystem'] = 'System との取引を表示しない';
 $string['modlos_currency_return']   = 'マネー管理画面に戻る';
 
 $string['modlos_currency_trans_ttl']= '一斉送金の実行';
-$string['modlos_currency_transfered']='一斉送金を実行しました';
+$string['modlos_currency_transfered']='一斉送金を実行しました （{$a}）';
 $string['modlos_currency_mistrans'] = '以下のアバターへの送金に失敗しました';
 
-$string['modlos_sales_remake_ttl']  = '売上DB の作り直し';
+$string['modlos_sales_remake_ttl']  = '売上DB の再構築';
 $string['modlos_sales_remake_limit']= '処理を開始する日付';
-$string['modlos_sales_remaked']     = '作り直し終了 （{$a}～）';
-$string['modlos_sales_remake_mis']  = 'DB の作り直しに失敗しました';
+$string['modlos_sales_remaked']     = '売上DB の再構築完了 （{$a}～）';
+$string['modlos_sales_remake_mis']  = '売上DB の再構築に失敗しました';
 $string['modlos_sales_disp_ttl']    = '売上DB の表示';
 $string['modlos_sales_disp_cndtn']  = '検索条件';
 $string['modlos_sales_disp_order']  = '表示順序';
-$string['modlos_sales_displayed']   = '売り上げ検索結果 {$a} 以降';
-$string['modlos_sales_disp_mis']    = '検索に失敗しました';
+$string['modlos_sales_displayed']   = '売上FB の検索結果： {$a} 以降';
+$string['modlos_sales_disp_mis']    = '売上DB の検索に失敗しました';
 
 $string['modlos_date_dmY']         = 'Y/m/d';
 

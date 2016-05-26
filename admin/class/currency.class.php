@@ -17,6 +17,8 @@ class  CurrencyManage
 	var $hasPermit  = false;
 
 	var $getPage    = true;
+
+	var $send_money = 0;
 	var	$date_format= 'd/m/Y';
 	var $date_time  = '01/01/1970';
 	var $unix_time  = 0;
@@ -71,8 +73,8 @@ class  CurrencyManage
 			// Send Money
 			if (isset($formdata->send_money))
 			{
-				$send_money = (int)optional_param('send_money', '0', PARAM_INT);
-				if ($send_money>0) {
+				$this->send_money = (int)optional_param('send_money', '0', PARAM_INT);
+				if ($this->send_money>0) {
 					$regionserver = $CFG->modlos_currency_regionserver;
         			if ($regionserver=='http://123.456.78.90:9000/' or $regionserver=='') $regionserver = null;
 					//
@@ -80,7 +82,7 @@ class  CurrencyManage
 					require_once(CMS_MODULE_PATH.'/helper/helpers.php');
 					$avatars = opensim_get_userinfos();
 					foreach ($avatars as $avatar) {
-						$ret = send_money($avatar['UUID'], $send_money, $regionserver);
+						$ret = send_money($avatar['UUID'], $this->send_money, $regionserver);
 						if (!$ret) {
 							$this->results[$num] = $avatar;
 							$this->results[$num]['fullname'] = $avatar['avatar'];
@@ -106,7 +108,7 @@ class  CurrencyManage
 				$this->remake = true;
 			}
 
-			// Show Total Sales DB
+			// Display Total Sales DB
 			else if (isset($formdata->sales_condition))	
 			{
 				$sales_cndtn = optional_param('sales_condition', '', PARAM_TEXT);
@@ -139,7 +141,7 @@ class  CurrencyManage
 	{
 		global $CFG;
 
-		$grid_name  = $CFG->modlos_grid_name;
+		$grid_name   = $CFG->modlos_grid_name;
 
 		$transfer    = $this->transfer;
 		$remake      = $this->remake;
@@ -153,6 +155,7 @@ class  CurrencyManage
 		$getPage	 = $this->getPage;
 		$url_param   = $this->url_param;
 		$action_url  = $this->action_url;
+		$send_money  = $CFG->modlos_currency_unit.' '.number_format($this->send_money);
 
 		$currency_ttl  	 = get_string('modlos_currency_ttl',    	'block_modlos');
 		$transfer_ttl  	 = get_string('modlos_currency_trans_ttl',  'block_modlos');
@@ -161,7 +164,7 @@ class  CurrencyManage
 		$currency_return = get_string('modlos_currency_return', 	'block_modlos');
 
 		$currency_send 	 = get_string('modlos_currency_send',   	'block_modlos');
-		$currency_trans  = get_string('modlos_currency_transfered',	'block_modlos');
+		$currency_trans  = get_string('modlos_currency_transfered',	'block_modlos', $send_money);
 		$currency_mis    = get_string('modlos_currency_mistrans', 	'block_modlos');
 
 		$sales_limit 	 = get_string('modlos_sales_remake_limit', 	'block_modlos');
