@@ -4,14 +4,13 @@
 //
 //	Login Screen Message
 //
-//
-//
-//
 //                                   			by Fumi.Iseki
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
+
 require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
+
 
 
 class  LoginScreen
@@ -139,7 +138,7 @@ class  LoginScreen
 		$select_color	= get_string('modlos_lgnscrn_color',   'block_modlos');
 		$edit_altbox	= get_string('modlos_lgnscrn_altbox',  'block_modlos');
 		$edit_boxttl	= get_string('modlos_lgnscrn_boxttl',  'block_modlos');
-		$contents		= get_string('modlos_lgnscrn_contents','block_modlos');
+		$content		= get_string('modlos_lgnscrn_contents','block_modlos');
 
 		$course_id		= $this->course_id;
 		$updated		= $this->updated;

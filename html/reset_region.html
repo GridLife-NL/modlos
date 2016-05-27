@@ -9,8 +9,8 @@
 
 <!-- echo Message -->
 <?php if ($this->hasError) {?>
-  <div align="center">
-    <ul>
+  <div align="center" style="margin-bottom:10px;">
+    <ul style="list-style:none;">
       <?php foreach ($this->errorMsg as $mesg) {?>
         <li><strong style="color: #f01010;"><?php echo $mesg?></strong></li>
       <?php }?>
@@ -66,7 +66,7 @@
     </tr>
   </table>
 
-  <div align="center">
+  <div align="center" style="margin-top:10px;">
     <?php if (!$this->reseted) {?>
       <input name="reset_region" type="submit" id="reset_region" value="<?php echo $reset_region_ttl?>" />&nbsp;&nbsp;&nbsp;
     <?php }?>

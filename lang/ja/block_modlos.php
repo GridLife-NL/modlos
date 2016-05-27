@@ -409,20 +409,29 @@ $string['modlos_general_setting_tab']='全般設定';
 $string['modlos_lastnames_tab'] 	= 'ラストネーム';
 $string['modlos_lastnames'] 		= 'ラストネーム管理';
 
-//$string['modlos_synchro_tab'] 		= 'データベース同期';
+//$string['modlos_synchro_tab'] 	= 'データベース同期';
 //$string['modlos_synchro_db'] 		= 'データベース同期';
 //$string['modlos_synchro_submit'] 	= 'データベース同期の実行';
-//$string['modlos_synchro_contents'] 	= 'OpenSimデータベースと Modlosデータベースとの同期を取ります';
-//$string['modlos_synchronized'] 		= 'OpenSimデータベースとの同期完了!';
+//$string['modlos_synchro_contents']= 'OpenSimデータベースと Modlosデータベースとの同期を取ります';
+//$string['modlos_synchronized'] 	= 'OpenSimデータベースとの同期完了!';
 
 //$string['modlos_convertdb_tab'] 	= 'データベース変換';
 //$string['modlos_convertdb_ttl'] 	= 'データベースを 0.6.x から 0.7.x へ変換';
-//$string['modlos_convertdb_submit'] 	= 'データベース変換の実行';
+//$string['modlos_convertdb_submit']= 'データベース変換の実行';
 //$string['modlos_convertdb_contents']= 'OpenSimデータベースを 0.6.x から 0.7.x へ変換';
 //$string['modlos_convertdb_converted']='OpenSimデータベースの変換完了!';
 
-$string['modlos_avatar_templ_tab'] = '初期アバター';
-$string['modlos_avatar_templ_ttl'] = '初期アバター管理';
+$string['modlos_avatar_templ_tab']  = '初期アバター';
+$string['modlos_avatar_templ_ttl']  = '初期アバター管理';
+$string['modlos_avatar_templ_add']  = '初期アバターの追加';
+$string['modlos_avatar_templ_edit'] = '初期アバターの編集';
+$string['modlos_avatar_templ_del']  = '初期アバターの削除';
+$string['modlos_templ_title']       = 'タイトル';
+$string['modlos_templ_uuid']        = '元になるアバターの UUID';
+$string['modlos_templ_text']        = '説明';
+$string['modlos_templ_pic']         = '画像';
+$string['modlos_templ_fail']        = '初期アバターとして登録することができませんでした';
+$string['modlos_templ_mis_uuid']    = '指定された UUIDを持つアバターが存在しません';
 
 $string['modlos_menu_tab']          = '一般メニュー';
 $string['modlos_manage_tab']        = '管理画面';

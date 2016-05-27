@@ -414,17 +414,26 @@ $string['modlos_lastnames'] 		= 'Lastnames Management';
 //$string['modlos_synchro_tab'] 		= 'Synchro DB';
 //$string['modlos_synchro_db'] 		= 'Synchronization of Data Base';
 //$string['modlos_synchro_submit'] 	= 'Synchro DB';
-//$string['modlos_synchro_contents'] 	= 'Synchronize with OpenSim DB ?';
-//$string['modlos_synchronized'] 		= 'Synchronized OpenSim DB!!';
+//$string['modlos_synchro_contents']= 'Synchronize with OpenSim DB ?';
+//$string['modlos_synchronized'] 	= 'Synchronized OpenSim DB!!';
 
-//$string['modlos_convertdb_tab']		= 'Convert DB';
-//$string['modlos_convertdb_ttl']		= 'Conversion of Data Base from 0.6.x to 0.7.x';
-//$string['modlos_convertdb_submit']	= 'Convert DB';
+//$string['modlos_convertdb_tab']	= 'Convert DB';
+//$string['modlos_convertdb_ttl']	= 'Conversion of Data Base from 0.6.x to 0.7.x';
+//$string['modlos_convertdb_submit']= 'Convert DB';
 //$string['modlos_convertdb_contents']= 'Convert OpenSim DB from 0,6.x to 0.7.x ?';
 //$string['modlos_convertdb_converted']='OpenSim DB is Converted!!';
 
 $string['modlos_avatar_templ_tab']  = 'Template Avatars';
 $string['modlos_avatar_templ_ttl']  = 'Management of Template Avatars';
+$string['modlos_avatar_templ_add']  = 'Add Template Avatar';
+$string['modlos_avatar_templ_edit'] = 'Edit Template Avatar';
+$string['modlos_avatar_templ_del']  = 'Delete Template Avatar';
+$string['modlos_templ_title']       = 'Title';
+$string['modlos_templ_uuid']        = 'UUID of original avatar';
+$string['modlos_templ_text']        = 'Description';
+$string['modlos_templ_pic']         = 'Picture';
+$string['modlos_templ_fail']        = 'Failed to add avatar as template';
+$string['modlos_templ_mis_uuid']    = 'Original avatar with the specified UUID does not exist';
 
 $string['modlos_menu_tab']		    = 'Normal Menu';
 $string['modlos_manage_tab']		= 'Management';

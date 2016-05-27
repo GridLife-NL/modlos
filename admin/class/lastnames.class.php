@@ -6,8 +6,8 @@
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
+require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
@@ -97,10 +97,12 @@ class  LastNames
 		}
 
 		$grid_name		= $CFG->modlos_grid_name;
-		$select1 		= $this->lastnames_active;
-		$select2 		= $this->lastnames_inactive;
 
 		$lastnames_ttl	= get_string('modlos_lastnames', 	'block_modlos');
+		$content		= get_string('modlos_lastnames', 	'block_modlos');
+
+		$select1 		= $this->lastnames_active;
+		$select2 		= $this->lastnames_inactive;
 		$select1_title	= get_string('modlos_active_list', 	'block_modlos');
 		$select2_title	= get_string('modlos_inactive_list', 'block_modlos');
 

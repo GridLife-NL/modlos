@@ -226,7 +226,7 @@ class  CreateAvatar
 
 	function  print_page() 
 	{
-		global $CFG;
+		global $CFG, $OUTPUT;
 
 		$grid_name 	  = $CFG->modlos_grid_name;
 		$disclaimer	  = $CFG->modlos_disclaimer_content;

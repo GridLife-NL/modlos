@@ -6,8 +6,8 @@
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
-require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
+require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
@@ -90,8 +90,9 @@ class  Estates
 	{
 		global $CFG, $OUTPUT;
 
-		$grid_name	  = $CFG->modlos_grid_name;
-		$estates_ttl  = get_string('modlos_estate_ttl','block_modlos');
+		$grid_name	 = $CFG->modlos_grid_name;
+		$estates_ttl = get_string('modlos_estate_ttl','block_modlos');
+		$content     = get_string('modlos_estate_ttl','block_modlos');
 
 		include(CMS_MODULE_PATH.'/admin/html/estates.html');
 	}

@@ -18,6 +18,7 @@ $action = 'currency';
 
 require_login($course_id);
 print_modlos_header($action, $course);
+
 $permit = hasModlosPermit($course_id);
 if (!$permit) print_error('modlos_access_forbidden', 'block_modlos');
 

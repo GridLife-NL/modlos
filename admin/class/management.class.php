@@ -8,6 +8,7 @@
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
+
 require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
@@ -33,7 +34,6 @@ class  ManagementBase
 		}
 		$this->action_url = CMS_MODULE_URL.'/admin/actions/management.php';
 	}
-
 
 
 	function  execute()
@@ -90,7 +90,6 @@ class  ManagementBase
 
 		return $this->managed;
 	}
-
 
 
 	function  print_page() 

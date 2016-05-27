@@ -9,8 +9,8 @@
 
 <!-- echo Message -->
 <?php if ($this->hasError) {?>
-  <div align="center">
-    <ul>
+  <div align="center" style="margin-bottom:10px;">
+    <ul style="list-style:none;">
       <?php foreach ($this->errorMsg as $mesg) {?>
         <li><strong style="color: #f01010;"><?php echo $mesg?></strong></li>
       <?php }?>
@@ -158,7 +158,7 @@
 
   </table>
 
-  <div align="center">
+  <div align="center" style="margin-top:10px;">
     <input name="submit_update" type="submit" id="submit_update" value="<?php echo $update_ttl?>" />&nbsp;
     <input type="reset"  value="<?php echo $reset_ttl?>" />
     <?php if ($this->state&AVATAR_STATE_INACTIVE) { ?>

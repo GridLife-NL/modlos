@@ -23,8 +23,8 @@ function checklength(obj,warning_div){
 
 
 <?php if ($this->hasError) {?>
-  <div align="center">
-    <ul>
+  <div align="center" style="margin-bottom:10px;">
+    <ul style="list-style:none;">
       <?php foreach ($this->errorMsg as $errval) {?>
         <li><strong style="color: #f01010;"><?php echo $errval?></strong></li>
       <?php }?>
@@ -200,7 +200,7 @@ function checklength(obj,warning_div){
     </tbody>
   </table>
 
-  <div align=center>
+  <div align="center" style="margin-top:10px;">
     <input type="submit" name="action_submit" value="<?php echo $events_save?>" />&nbsp;&nbsp;
     <input type="reset"  value="<?php echo $modlos_reset_ttl?>" />
     <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
