@@ -92,6 +92,7 @@ class  CurrencyManage
 					if ($num>0) $this->hasError = true;
 					$this->transfer = true;
 				}
+				else $this->getPage = true;
 			}
 
 			// Remake Total Sales DB

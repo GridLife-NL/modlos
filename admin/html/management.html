@@ -32,8 +32,7 @@
     <input type="hidden" name="quest"   value="yes" />
 
     <div align=center>
-      <br />
-      <strong><div style="padding:4px;" ><?php echo $select_cmd?></div></strong>
+      <strong><div style="padding:4px; margin-top:20px;" ><?php echo $select_cmd?></div></strong>
       <br />
       <select wide="48" name="manage_command">
         <?php foreach($commands as $com) {?>
@@ -59,10 +58,8 @@
   <?php }?>
 
   <div align=center>
-    <br />
-    <h4 style="color: #2222ff;"><?php echo $manage_msg ?></h4>
-    <br />
-    <h4><a href="<?php echo $manage_url?>" ><u><?php echo $return_ttl?></u></a></h4>
+    <h4 style="color: #2222ff; margin-top:20px;"><?php echo $manage_msg ?></h4>
+    <h4 style="margin-top:10px;"><a href="<?php echo $manage_url?>" ><?php echo $return_ttl?></a></h4>
   </div>
 <?php }?>
 <br />

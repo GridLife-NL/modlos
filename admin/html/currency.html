@@ -97,8 +97,7 @@
 
 
   <?php if (!$this->hasError) {?>
-    <div align="center" style="color:#202088;">
-      <br />
+    <div align="center" style="color:#202088; margin-top:20px; margin-bottom:10px;">
       <h4><?php echo $result_msg?></h4>
     </div>
 
@@ -133,8 +132,7 @@
 	<!-- エラー   -->
     <!-- 一斉送金 -->
     <?php if ($transfer) {?>
-      <div align="center" style="color:#cc2020;">
-        <br />
+      <div align="center" style="color:#cc2020; margin-top:10px;">
         <h4><?php echo $currency_mis?></h4>
         <hr />
         <?php foreach($results as $result) {?>
@@ -147,15 +145,13 @@
 
     <!-- 売上DBの作り直し -->
     <?php } else if ($remake) {?>
-      <div align="center" style="color:#cc2020;">
-        <br />
+      <div align="center" style="color:#cc2020; margin-top:10px;">
         <h4><?php echo $sales_remake_mis?></h4>
       </div>
 
     <!-- 売上DBの表示 -->
     <?php } else if ($display) {?>
-      <div align="center" style="color:#cc2020;">
-        <br />
+      <div align="center" style="color:#cc2020; margin-top:10px;">
         <h4><?php echo $sales_disp_mis?></h4>
       </div>
 
@@ -163,7 +159,7 @@
 
   <?php }?>
 
-  <div align="center" style="color:#202088;">
+  <div align="center" style="color:#202088; margin-top:10px;">
     <h4><a href="<?php echo $action_url.$url_param?>" ><?php echo $currency_return?></a></h4>
   </div>
   <br />
