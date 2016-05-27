@@ -14,7 +14,7 @@ class modlos_avatar_templ_form extends moodleform
 		$mform = $this->_form;
 		$mform->setDisableShortforms(true);
 		//
-		$mform->addElement('header', 'avatar_templ_add', get_string('modlos_avatar_templ_add', 'block_modlos'), '');
+		$mform->addElement('header', 'add_templ', get_string('modlos_avatar_templ_add', 'block_modlos'), null);
 
 		$mform->addElement('text', 'title', get_string('modlos_templ_title','block_modlos'), array('size'=>'48'));
 		$mform->setType('title', PARAM_TEXT);
@@ -24,12 +24,11 @@ class modlos_avatar_templ_form extends moodleform
 		$mform->setType('uuid', PARAM_ALPHAEXT);
 		$mform->addRule('uuid', null, 'required', null, '');
 
-
 		$mform->addElement('editor', 'desc', get_string('modlos_templ_text','block_modlos'), null, null);
+		$mform->setType('desc', PARAM_RAW);
 
 		$fmoption = array('subdirs'=>0, 'maxfiles'=>1, 'accepted_types'=>array('jpg','jpeg','png','tif','tiff','gif'));
 		$mform->addElement('filemanager', 'picfile', get_string('modlos_templ_pic','block_modlos'), null, $fmoption);
-
 
 		$this->add_action_buttons();
 

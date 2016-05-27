@@ -83,7 +83,8 @@ class  CurrencyManage
 					require_once(CMS_MODULE_PATH.'/helper/helpers.php');
 					$avatars = opensim_get_userinfos();
 					foreach ($avatars as $avatar) {
-						$ret = send_money($avatar['UUID'], $this->send_money, $regionserver);
+						//$ret = send_money($avatar['UUID'], $this->send_money, $regionserver);
+						$ret = false;
 						if (!$ret) {
 							$this->results[$num] = $avatar;
 							$this->results[$num]['fullname'] = $avatar['avatar'];
