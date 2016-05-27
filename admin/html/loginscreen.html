@@ -33,9 +33,8 @@ table {
 
 <?php if ($updated and !$preview) {?>
   <!-- Update DB -->
-  <h4 style="color#2222ff;"><center><?php echo $lgnscrn_msg ?></center></h4>
-  <br />
-  <h4><center><a href="<?php echo $lgnscrn_url?>" ><u><?php echo $return_ttl?></u></a></center></h4>
+  <h4 style="color#2222ff; margin-top:10px;"><center><?php echo $lgnscrn_msg ?></center></h4>
+  <h4 style="margin-top:10px;"><center><a href="<?php echo $lgnscrn_url?>" ><?php echo $return_ttl?></a></center></h4>
 
 <?php } else {?>
 
@@ -59,11 +58,10 @@ table {
       <div id=Infobox  align=center>
         <?php include("../../helper/loginscreen/alert_box.php"); ?>
       </div>
-      <div align="center">
+      <div align="center" style=" margin-bottom:20px;">
         <input type="submit" name="submit_update" id="submit_update" value="<?php echo $lgnscrn_submit ?>" />&nbsp;&nbsp;
         <input type="submit" name="submit_cancel" id="submit_cancel" value="<?php echo $lgnscrn_cancel ?>" />
       </div>
-      <br />
       <hr />
     <?php }?>
 

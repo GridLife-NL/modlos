@@ -114,7 +114,7 @@ $string['modlos_avatar_updated'] 	= 'Avatar Updated!!';
 $string['modlos_avatar_gotted'] 	= 'Get a this Avatar by relationship with Moodle User';
 $string['modlos_avatar_gotted_error']='Failed to get a relationship with Moodle User!!';
 $string['modlos_avatar_deleted'] 	= 'Avatar Deleted!!';
-$string['modlos_avatar_select']     = 'Select Initail Avatar';
+$string['modlos_avatar_select']     = 'Select Template Avatar';
 
 $string['modlos_avatar_create'] 	= 'Create Avatar';
 $string['modlos_avatar_update'] 	= 'Update Avatar';
@@ -423,8 +423,8 @@ $string['modlos_lastnames'] 		= 'Lastnames Management';
 //$string['modlos_convertdb_contents']= 'Convert OpenSim DB from 0,6.x to 0.7.x ?';
 //$string['modlos_convertdb_converted']='OpenSim DB is Converted!!';
 
-$string['modlos_avatar_select_tab'] = 'Initial Avatars';
-$string['modlos_avatar_select_ttl'] = 'Management of Initail Avatars';
+$string['modlos_avatar_templ_tab']  = 'Template Avatars';
+$string['modlos_avatar_templ_ttl']  = 'Management of Template Avatars';
 
 $string['modlos_menu_tab']		    = 'Normal Menu';
 $string['modlos_manage_tab']		= 'Management';

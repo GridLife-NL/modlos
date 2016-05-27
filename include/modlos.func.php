@@ -1158,8 +1158,8 @@ function  print_tabnav_manage($currenttab, $course)
 																	'<strong>'.get_string('modlos_general_setting_tab','block_modlos').'</strong>');
 		}
 
-		$toprow[] = new tabobject('avatar_select', CMS_MODULE_URL.'/admin/actions/avatar_select.php'.$course_param, 
-																	'<strong>'.get_string('modlos_avatar_select_tab','block_modlos').'</strong>');
+		$toprow[] = new tabobject('avatar_templ', CMS_MODULE_URL.'/admin/actions/avatar_templ.php'.$course_param, 
+																	'<strong>'.get_string('modlos_avatar_templ_tab','block_modlos').'</strong>');
 
 		if ($CFG->modlos_use_currency_server) {
 			$toprow[] = new tabobject('currency', CMS_MODULE_URL.'/admin/actions/currency.php'.$course_param, 

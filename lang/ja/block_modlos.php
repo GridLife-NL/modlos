@@ -421,8 +421,8 @@ $string['modlos_lastnames'] 		= 'ラストネーム管理';
 //$string['modlos_convertdb_contents']= 'OpenSimデータベースを 0.6.x から 0.7.x へ変換';
 //$string['modlos_convertdb_converted']='OpenSimデータベースの変換完了!';
 
-$string['modlos_avatar_select_tab'] = '初期アバター';
-$string['modlos_avatar_select_ttl'] = '初期アバター管理';
+$string['modlos_avatar_templ_tab'] = '初期アバター';
+$string['modlos_avatar_templ_ttl'] = '初期アバター管理';
 
 $string['modlos_menu_tab']          = '一般メニュー';
 $string['modlos_manage_tab']        = '管理画面';

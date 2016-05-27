@@ -1,17 +1,17 @@
 <?php
 //////////////////////////////////////////////////////////////////////////////////////////////
-// avatar_select.class.php
+// avatar_templ.class.php
 //
 //										by Fumi.Iseki
 //
 
 if (!defined('CMS_MODULE_PATH')) exit();
+
 require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
-
-class  AvatarSelect
+class  AvatarTempl
 {
 	var $action_url;
 	var $course_id = 0;
@@ -24,7 +24,7 @@ class  AvatarSelect
 	var $errorMsg  = array();
 
 
-	function  AvatarSelect($course_id) 
+	function  AvatarTempl($course_id) 
 	{
 		$this->course_id  = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
@@ -33,7 +33,7 @@ class  AvatarSelect
 			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 			return;
 		}
-		$this->action_url = CMS_MODULE_URL.'/admin/actions/avatar_select.php';
+		$this->action_url = CMS_MODULE_URL.'/admin/actions/avatar_templ.php';
 	}
 
 
@@ -93,9 +93,9 @@ class  AvatarSelect
 		global $CFG, $OUTPUT;
 
 		$grid_name	 = $CFG->modlos_grid_name;
-		$avatars_ttl = get_string('modlos_avatar_select_ttl','block_modlos');
+		$avatars_ttl = get_string('modlos_avatar_templ_ttl','block_modlos');
 
-		include(CMS_MODULE_PATH.'/admin/html/avatar_select.html');
+		include(CMS_MODULE_PATH.'/admin/html/avatar_templ.html');
 	}
 
 
