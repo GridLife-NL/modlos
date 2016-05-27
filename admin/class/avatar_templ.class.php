@@ -93,7 +93,7 @@ class  AvatarTempl
 
 		include(CMS_MODULE_PATH.'/admin/html/avatar_templ.html');
 
-		$mform->display();
+//		$mform->display();
 
 	}
 }

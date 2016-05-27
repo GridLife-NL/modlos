@@ -18,12 +18,17 @@ class modlos_avatar_templ_form extends moodleform
 
 		$mform->addElement('text', 'title', get_string('modlos_templ_title','block_modlos'), array('size'=>'48'));
 		$mform->setType('title', PARAM_TEXT);
-		$mform->addRule('title', null, 'required', null, 'client');
-		$mform->addRule('title', get_string('maximumchars', '', 255), 'maxlength', 255, '');
+		$mform->addRule('title', null, 'required', null, '');
 
-		$mform->addElement('text', 'UUID', get_string('modlos_templ_uuid','block_modlos'), array('size'=>'36'));
+		$mform->addElement('text', 'uuid', get_string('modlos_templ_uuid','block_modlos'), array('size'=>'36'));
+		$mform->setType('uuid', PARAM_ALPHAEXT);
+		$mform->addRule('uuid', null, 'required', null, '');
 
-		$mform->addElement('filemanager', 'picfile', get_string('modlos_templ_pic','block_modlos'), null, array('subdirs'=>0, 'accepted_types'=>'*'));
+
+		$mform->addElement('editor', 'desc', get_string('modlos_templ_text','block_modlos'), null, null);
+
+		$fmoption = array('subdirs'=>0, 'maxfiles'=>1, 'accepted_types'=>array('jpg','jpeg','png','tif','tiff','gif'));
+		$mform->addElement('filemanager', 'picfile', get_string('modlos_templ_pic','block_modlos'), null, $fmoption);
 
 
 		$this->add_action_buttons();
@@ -64,43 +69,5 @@ class modlos_avatar_templ_form extends moodleform
 			$this->add_action_buttons(true);
 		}
 */
-	}
-
-/// perform extra password change validation
-	function validation($data, $files) {
-		global $USER;
-		$errors = parent::validation($data, $files);
-
-		// ignore submitted username
-		if (!$user = authenticate_user_login($USER->username, $data['password'], true)) {
-			$errors['password'] = get_string('invalidlogin');
-			return $errors;
-		}
-
-		if ($data['newpassword1'] <> $data['newpassword2']) {
-			$errors['newpassword1'] = get_string('passwordsdiffer');
-			$errors['newpassword2'] = get_string('passwordsdiffer');
-			return $errors;
-		}
-
-		if ($data['password'] == $data['newpassword1']){
-			$errors['newpassword1'] = get_string('mustchangepassword');
-			$errors['newpassword2'] = get_string('mustchangepassword');
-			return $errors;
-		}
-
-		if (user_is_previously_used_password($USER->id, $data['newpassword1'])) {
-			$errors['newpassword1'] = get_string('errorpasswordreused', 'core_auth');
-			$errors['newpassword2'] = get_string('errorpasswordreused', 'core_auth');
-		}
-
-		$errmsg = '';//prevents eclipse warnings
-		if (!check_password_policy($data['newpassword1'], $errmsg)) {
-			$errors['newpassword1'] = $errmsg;
-			$errors['newpassword2'] = $errmsg;
-			return $errors;
-		}
-
-		return $errors;
 	}
 }
