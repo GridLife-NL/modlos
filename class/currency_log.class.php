@@ -71,6 +71,7 @@ class  CurrencyLog
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $my_avatars>=$max_avatars) $this->isAvatarMax = true;
 
+/*
 		$this->trans_types['1000']  = 'BirthGift';
 		$this->trans_types['1002']  = 'GroupCreate';
 		$this->trans_types['1004']  = 'GroupJoin';
@@ -96,6 +97,7 @@ class  CurrencyLog
 		$this->trans_types['6003']  = 'GroupLiability';
 		$this->trans_types['6004']  = 'GroupDividend';
 		$this->trans_types['10000'] = 'StipendBasic';
+*/
 	}
 
 
@@ -189,10 +191,9 @@ class  CurrencyLog
 			$this->db_data[$colum]['uuid'] = $this->agent_id;
 			$this->db_data[$colum]['date'] = date(DATE_FORMAT, $log['time']);
 
-			$this->db_data[$colum]['trans_type'] = ' - ';
-			if (array_key_exists($log['type'], $this->trans_types)) {
-				$this->db_data[$colum]['trans_type'] = $this->trans_types[$log['type']];
-			}
+			//$this->db_data[$colum]['trans_type'] = $TransactionType[$log['type']];
+			$this->db_data[$colum]['trans_type'] = opensim_get_transaction_type($log['type']);
+			if ($this->db_data[$colum]['trans_type']==null) $this->db_data[$colum]['trans_type'] = ' - ';
 	
 			if ($this->agent_id==$log['sender']) {
 				$this->db_data[$colum]['Iama']    = 'Sender';

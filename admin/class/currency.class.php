@@ -14,30 +14,30 @@ class  CurrencyManage
 {
 	var $action_url;
     var $url_param;
-	var $course_id  = 0;
-	var $hasPermit  = false;
+	var $course_id    = 0;
+	var $hasPermit    = false;
 
-	var $getPage    = true;
+	var $noProssecced = true;
 
-	var $transfer   = false;
-	var $remake     = false;
-	var $display    = false;
-	var $move       = false;
+	var $transfer  	  = false;
+	var $remake       = false;
+	var $display      = false;
+	var $move         = false;
 
-	var $send_money = 0;
-	var	$date_format= 'd/m/Y';
-	var $date_time  = '01/01/1970';
-	var $unix_time  = 0;
-	var $since      = '...';
+	var $send_money   = 0;
+	var	$date_format  = 'd/m/Y';
+	var $date_time    = '01/01/1970';
+	var $unix_time    = 0;
+	var $since        = '...';
 
-	var $move_money = 0;
-	var $move_type  = 0;
-	var $move_src   = '';
-	var $move_dst   = '';
+	var $move_money   = 0;
+	var $move_type    = 0;
+	var $move_src     = '';
+	var $move_dst     = '';
 
-	var	$hasError   = false;
-	var	$errorMsg   = array();
-	var	$results    = array();
+	var	$hasError     = false;
+	var	$errorMsg     = array();
+	var	$results      = array();
 
 
 
@@ -64,7 +64,6 @@ class  CurrencyManage
 
 		$this->errNum = 0;
 		$this->transfered = false;
-		//
 		$this->date_format = get_string('modlos_date_dmY', 'block_modlos');
 		$this->unix_time = strtotime($this->date_time);
 		$this->date_time = date($this->date_format, $this->unix_time);
@@ -75,40 +74,22 @@ class  CurrencyManage
 				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 				return false;
 			}
-			$this->getPage = false;
+			$this->noProssecced = false;
 
-			// Move Money
+			// Send Money
 			if (isset($formdata->send_money))
 			{
-				$this->move_money = (int)optional_param('move_money', '0', PARAM_INT);
-				$this->move_type  = (int)optional_param('move_type',  '0', PARAM_INT);
-				$this->move_src   = optional_param('move_src', '', PARAM_INT);
-				$this->move_src   = optional_param('move_src', '', PARAM_INT);
-				//
-				if ($this->move_money>0) {
-
-
-
-					$this->hasError = false;
-					$this->transfer = true;
-				}
-				else $this->getPage = true;
-			}
-
-			// Move Money
-			if (isset($formdata->send_money))
-			{
-				$this->move_money = (int)optional_param('move_money', '0', PARAM_INT);
-				if ($this->move_money>0) {
+				$this->send_money = (int)optional_param('send_money', '0', PARAM_INT);
+				if ($this->send_money>0) {
 					$regionserver = $CFG->modlos_currency_regionserver;
         			if ($regionserver=='http://123.456.78.90:9000/' or $regionserver=='') $regionserver = null;
 					//
 					$num = 0;
 					require_once(CMS_MODULE_PATH.'/helper/helpers.php');
 					$avatars = opensim_get_userinfos();
+					//
 					foreach ($avatars as $avatar) {
-						//$ret = send_money($avatar['UUID'], $this->send_money, $regionserver);
-						$ret = false;
+						$ret = send_money($avatar['UUID'], $this->send_money, $regionserver);
 						if (!$ret) {
 							$this->results[$num] = $avatar;
 							$this->results[$num]['fullname'] = $avatar['avatar'];
@@ -116,9 +97,45 @@ class  CurrencyManage
 						}
 					}
 					if ($num>0) $this->hasError = true;
-					$this->move = true;
+					$this->transfer = true;
 				}
-				else $this->getPage = true;
+				else $this->noProssecced = true;
+			}
+
+			// Move Money
+			else if (isset($formdata->move_money))
+			{
+				$this->move_money = (int)optional_param('move_money', '0', PARAM_INT);
+				if ($this->move_money>0) {
+					$this->move_type = (int)optional_param('move_type', '0', PARAM_INT);	// 9999
+					$this->move_src  = optional_param('move_src', '', PARAM_TEXT);
+					$this->move_dst  = optional_param('move_dst', '', PARAM_TEXT);
+
+					$uuid_src = opensim_get_avatar_uuid($this->move_src, $db);
+					$uuid_dst = opensim_get_avatar_uuid($this->move_dst, $db);
+					$this->move = true;
+
+					if (!isGuid($uuid_src)) {
+						$this->hasError = true;
+						$this->errorMsg[] = get_string('modlos_not_exist_avatar', 'block_modlos').': '.$this->move_src;
+						return false;
+					}
+					if (!isGuid($uuid_dst)) {
+						$this->hasError = true;
+						$this->errorMsg[] = get_string('modlos_not_exist_avatar', 'block_modlos').': '.$this->move_dst;
+						return false;
+					}
+
+					$this->hasError = true;
+					$this->errorMsg[] = "この機能は，まだ実装されていません．";
+
+					/*
+
+						move from to with
+			
+					*/
+				}
+				else $this->noProssecced = true;
 			}
 
 			// Remake Total Sales DB
@@ -166,47 +183,64 @@ class  CurrencyManage
 
 	function  print_page() 
 	{
-		global $CFG;
+		global $CFG, $TransactionType;
 
-		$grid_name   = $CFG->modlos_grid_name;
+		$grid_name    = $CFG->modlos_grid_name;
 
-		$transfer    = $this->transfer;
-		$remake      = $this->remake;
-		$display     = $this->display;
+		$transfer     = $this->transfer;
+		$remake       = $this->remake;
+		$display      = $this->display;
+		$move         = $this->move;
 
-		$results     = $this->results;
+		$results      = $this->results;
 
-		$date_time   = $this->date_time;
-		$date_format = $this->date_format;
+		$date_time    = $this->date_time;
+		$date_format  = $this->date_format;
 
-		$getPage	 = $this->getPage;
-		$url_param   = $this->url_param;
-		$action_url  = $this->action_url;
-		$send_money  = $CFG->modlos_currency_unit.' '.number_format($this->send_money);
+		$noProssecced = $this->noProssecced;
+		$url_param    = $this->url_param;
+		$action_url   = $this->action_url;
+		$send_money   = $CFG->modlos_currency_unit.' '.number_format($this->send_money);
 
-		$currency_ttl  	 = get_string('modlos_currency_ttl',    	'block_modlos');
-		$transfer_ttl  	 = get_string('modlos_currency_trans_ttl',  'block_modlos');
-		$remake_ttl 	 = get_string('modlos_sales_remake_ttl',    'block_modlos');
-		$display_ttl	 = get_string('modlos_sales_disp_ttl',      'block_modlos');
-		$currency_return = get_string('modlos_currency_return', 	'block_modlos');
+		$currency_ttl  	   = get_string('modlos_currency_ttl',    	 'block_modlos');
+		$transfer_ttl  	   = get_string('modlos_currency_trans_ttl', 'block_modlos');
+		$remake_ttl 	   = get_string('modlos_sales_remake_ttl',   'block_modlos');
+		$display_ttl	   = get_string('modlos_sales_disp_ttl',     'block_modlos');
+		$currency_return   = get_string('modlos_currency_return',  	 'block_modlos');
 
-		$currency_send 	 = get_string('modlos_currency_send',   	'block_modlos');
-		$currency_trans  = get_string('modlos_currency_transfered',	'block_modlos', $send_money);
-		$currency_mis    = get_string('modlos_currency_mistrans', 	'block_modlos');
+		$not_exist_avatar  = get_string('modlos_not_exist_avatar',	 'block_modlos');
 
-		$sales_limit 	 = get_string('modlos_sales_remake_limit', 	'block_modlos');
-		$sales_remaked 	 = get_string('modlos_sales_remaked', 		'block_modlos', $this->date_time);
-		$sales_remake_mis= get_string('modlos_sales_remake_mis', 	'block_modlos');
+		$currency_send 	   = get_string('modlos_currency_send',   	 'block_modlos');
+		$currency_trans    = get_string('modlos_currency_transfered','block_modlos', $send_money);
+		$currency_mis      = get_string('modlos_currency_mistrans',  'block_modlos');
 
-		$sales_condition = get_string('modlos_sales_disp_cndtn',	'block_modlos');
-		$sales_order     = get_string('modlos_sales_disp_order',	'block_modlos');
-		$sales_displayed = get_string('modlos_sales_displayed',		'block_modlos', $this->since);
-		$sales_disp_mis  = get_string('modlos_sales_disp_mis',		'block_modlos');
+		$currency_move_ttl = get_string('modlos_currency_move_ttl',  'block_modlos');
+		$currency_moved    = get_string('modlos_currency_moved',	 'block_modlos');
+		$currency_move_mis = get_string('modlos_currency_move_mis',	 'block_modlos');
+		$currency_move_src = get_string('modlos_currency_move_src',	 'block_modlos');
+		$currency_move_dst = get_string('modlos_currency_move_dst',	 'block_modlos');
+		$currency_amount   = get_string('modlos_currency_amount',    'block_modlos');
+		$currency_type     = get_string('modlos_currency_type',	     'block_modlos');
+
+		$sales_limit 	   = get_string('modlos_sales_remake_limit', 'block_modlos');
+		$sales_remaked 	   = get_string('modlos_sales_remaked', 	 'block_modlos', $this->date_time);
+		$sales_remake_mis  = get_string('modlos_sales_remake_mis', 	 'block_modlos');
+
+		$sales_condition   = get_string('modlos_sales_disp_cndtn',	 'block_modlos');
+		$sales_order       = get_string('modlos_sales_disp_order',	 'block_modlos');
+		$sales_displayed   = get_string('modlos_sales_displayed',	 'block_modlos', $this->since);
+		$sales_disp_mis    = get_string('modlos_sales_disp_mis',	 'block_modlos');
 
 		$result_ttl = '';
 		if ($transfer) {
 			$result_ttl = $transfer_ttl;
 			$result_msg = $currency_trans;
+		}
+		else if ($move) {
+			$result_ttl = $currency_move_ttl;
+			$result_msg = $currency_moved.'&nbsp;&nbsp;&nbsp;('.$currency_move_src.': '.$this->move_src.', '.
+ 											   					$currency_move_dst.': '.$this->move_dst.', '.
+											   					$currency_amount.  ': '.$this->move_money.')';
 		}
 		else if ($remake) {
 			$result_ttl = $remake_ttl;

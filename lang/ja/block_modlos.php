@@ -215,6 +215,7 @@ $string['modlos_administrator'] 	= '管理者';
 $string['modlos_over_max_avatars'] 	= 'アバターの所持数が最大です';
 $string['modlos_bad_uuid'] 			= '不正な UUID です';
 $string['modlos_not_exist_uuid'] 	= '存在しない UUID です';
+$string['modlos_not_exist_avatar'] 	= '存在しないアバター名です';
 $string['modlos_mismatch_uid'] 		= 'User ID が一致しません';
 $string['modlos_mismatch_passwd'] 	= 'パスワードが一致しません';
 $string['modlos_owner_forbidden'] 	= 'このアバターのオーナは変更できません';
@@ -264,7 +265,8 @@ $string['modlos_currency_found']    = '行';
 $string['modlos_currency_date']     = '日付';
 $string['modlos_currency_type']     = '取引内容';
 $string['modlos_currency_object']   = 'オブジェクト名';
-$string['modlos_currency_amount']   = '料金';
+$string['modlos_currency_amount']   = '金額';
+$string['modlos_currency_type']     = '種別';
 $string['modlos_currency_balance']  = '残高';
 $string['modlos_currency_pay']      = '支払い';
 $string['modlos_currency_income']   = '受取り';
@@ -273,10 +275,15 @@ $string['modlos_currency_unknown']  = '不明';
 $string['modlos_currency_opponent'] = '取引相手';
 $string['modlos_currency_nosystem'] = 'System との取引を表示しない';
 $string['modlos_currency_return']   = 'マネー管理画面に戻る';
-
-$string['modlos_currency_trans_ttl']= '一斉送金の実行';
+$string['modlos_currency_trans_ttl']= '一斉送金';
 $string['modlos_currency_transfered']='一斉送金を実行しました （{$a}）';
 $string['modlos_currency_mistrans'] = '以下のアバターへの送金に失敗しました';
+
+$string['modlos_currency_move_ttl'] = 'お金の移動';
+$string['modlos_currency_moved']    = 'お金を移動しました';
+$string['modlos_currency_move_mis'] = 'お金の移動に失敗しました';
+$string['modlos_currency_move_src'] = '支払い';
+$string['modlos_currency_move_dst'] = '受取り';
 
 $string['modlos_sales_remake_ttl']  = '売上DB の再構築';
 $string['modlos_sales_remake_limit']= '処理を開始する日付';
@@ -285,7 +292,7 @@ $string['modlos_sales_remake_mis']  = '売上DB の再構築に失敗しまし�
 $string['modlos_sales_disp_ttl']    = '売上DB の表示';
 $string['modlos_sales_disp_cndtn']  = '検索条件';
 $string['modlos_sales_disp_order']  = '表示順序';
-$string['modlos_sales_displayed']   = '売上FB の検索結果： {$a} 以降';
+$string['modlos_sales_displayed']   = '売上DB の検索結果： {$a} 以降';
 $string['modlos_sales_disp_mis']    = '売上DB の検索に失敗しました';
 
 $string['modlos_date_dmY']         = 'Y/m/d';

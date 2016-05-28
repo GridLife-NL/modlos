@@ -213,8 +213,9 @@ $string['modlos_admin_avatar'] 		= 'Admin Avatar';
 $string['modlos_administrator'] 	= 'Administrator';
 
 $string['modlos_over_max_avatars'] 	= 'Number of Your Avatars is Maximum';
-$string['modlos_bad_uuid'] 			= 'Specified UUID is Illegal';
-$string['modlos_not_exist_uuid'] 	= 'Specified UUID is Not Exist';
+$string['modlos_bad_uuid'] 			= 'Specified UUID is illegal';
+$string['modlos_not_exist_uuid'] 	= 'Specified UUID is not exist';
+$string['modlos_not_exist_avatar'] 	= 'Specified avatar name is not exist';
 $string['modlos_mismatch_uid'] 		= 'UID is mismatch';
 $string['modlos_mismatch_passwd'] 	= 'Passwrod is mismatch';
 $string['modlos_owner_forbidden']   = 'Cannot change owner of this avatar';
@@ -265,6 +266,7 @@ $string['modlos_currency_date']     = 'Date';
 $string['modlos_currency_type']     = 'Type';
 $string['modlos_currency_object']   = 'Object Name';
 $string['modlos_currency_amount']   = 'Amount';
+$string['modlos_currency_type']     = 'Type';
 $string['modlos_currency_balance']  = 'Balance';
 $string['modlos_currency_pay']      = 'Pay';
 $string['modlos_currency_income']   = 'Income';
@@ -273,10 +275,15 @@ $string['modlos_currency_unknown']  = 'unknown';
 $string['modlos_currency_opponent'] = 'Seller/Customer';
 $string['modlos_currency_nosystem'] = 'Do not show the logs with the System';
 $string['modlos_currency_return']   = 'Return to Currency Management';
-
-$string['modlos_currency_trans_ttl']= 'Execution of simultaneous remittance';
+$string['modlos_currency_trans_ttl']= 'Simultaneous Remittance';
 $string['modlos_currency_transfered']='Simultaneous remittance was executed ({$a})';
 $string['modlos_currency_mistrans'] = 'It failed to remit to the following avatars';
+
+$string['modlos_currency_move_ttl'] = 'Moving of Currency';
+$string['modlos_currency_moved']    = 'Currency is moved';
+$string['modlos_currency_move_mis'] = 'Failed to move the currency';
+$string['modlos_currency_move_src'] = 'From';
+$string['modlos_currency_move_dst'] = 'To';
 
 $string['modlos_sales_remake_ttl']  = 'Remake the Sales DB';
 $string['modlos_sales_remake_limit']= 'The start day of the processing';
