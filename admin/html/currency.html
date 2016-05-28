@@ -41,6 +41,30 @@
   </form>
   <br /><br />
 
+  <!-- お金の移動 -->
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+    <tr>
+      <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $move_ttl?></strong></td>
+    </tr>
+  </table>
+  <form action="<?php echo $this->action_url?>" method="POST">
+    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
+    <input type="hidden" name="quest"   value="yes" />
+    <div align="center">
+      <br />
+      <strong style="padding:4px;">
+        <?php echo $currency_moved?>&nbsp;
+        <input name="move_src"   id="move_dst" size="10" maxlength="10" value="0" style="height:16px;" />
+        <input name="move_dst"   id="move_dst" size="10" maxlength="10" value="0" style="height:16px;" />
+        <input name="move_money" id="move_money" size="10" maxlength="10" value="0" style="height:16px;" />
+        <input name="move_type"  id="move_type" size="10" maxlength="10" value="0" style="height:16px;" />
+      </strong>
+      <input type="submit" value="Move" style="height:20px;" /> 
+    </div>
+  </form>
+  <br /><br />
+
   <!-- 売上DBの作り直し -->
   <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
     <tr>
@@ -143,6 +167,12 @@
           <?php }?>
           <tr><td><hr /></td></tr>
         </table>
+      </div>
+
+    <!-- 売上DBの作り直し -->
+    <?php } else if ($move) {?>
+      <div align="center" style="color:#cc2020; margin-top:10px; margin-bottom:10px;">
+        <h4><?php echo $currency_move_mis?></h4>
       </div>
 
     <!-- 売上DBの作り直し -->

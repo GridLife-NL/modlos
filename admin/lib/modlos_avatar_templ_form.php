@@ -21,7 +21,7 @@ class modlos_avatar_templ_form extends moodleform
 		$mform->addRule('title', null, 'required', null, '');
 
 		$mform->addElement('text', 'uuid', get_string('modlos_templ_uuid','block_modlos'), array('size'=>'36'));
-		$mform->setType('uuid', PARAM_ALPHAEXT);
+		$mform->setType('uuid', PARAM_TEXT);
 		$mform->addRule('uuid', null, 'required', null, '');
 
 		$mform->addElement('editor', 'desc', get_string('modlos_templ_text','block_modlos'), null, null);

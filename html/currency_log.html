@@ -175,7 +175,9 @@
 
                 <!-- Data -->
                 <?php foreach($this->db_data as $dat) {?>
-                  <?php if ($dat['num']%2==0) { ?>                
+                  <?php if ($dat['status']=='9') { ?>                
+                    <tr style='background-color: #f04040;'>
+                  <?php } else if ($dat['num']%2==0) { ?>                
                     <tr style='background-color: #ffffff;'>
                   <?php } else {?>
                     <tr style='background-color: #f0f0f0;'>

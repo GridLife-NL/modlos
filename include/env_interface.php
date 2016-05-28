@@ -80,26 +80,26 @@ define('SLOODLE_USERS_TBL',	 $CFG->prefix.'sloodle_users');
 //
 // Avatar State for CMS/LMS
 //
-define('AVATAR_STATE_NOSTATE',	'0');	// 0x00
-define('AVATAR_STATE_SYNCDB',	'1');	// 0x01
-define('AVATAR_STATE_SLOODLE',	'2');	// 0x02
-define('AVATAR_STATE_INACTIVE',	'4');	// 0x04
+define('AVATAR_STATE_NOSTATE',		'0');	// 0x00
+define('AVATAR_STATE_SYNCDB',		'1');	// 0x01
+define('AVATAR_STATE_SLOODLE',		'2');	// 0x02
+define('AVATAR_STATE_INACTIVE',		'4');	// 0x04
 
-define('AVATAR_STATE_NOSYNCDB',	'254');	// 0xfe
-define('AVATAR_STATE_NOSLOODLE','253');	// 0xfd
-define('AVATAR_STATE_ACTIVE',	'251');	// 0xfb
+define('AVATAR_STATE_NOSYNCDB',		'254');	// 0xfe
+define('AVATAR_STATE_NOSLOODLE',	'253');	// 0xfd
+define('AVATAR_STATE_ACTIVE',		'251');	// 0xfb
 
 // Editable
-define('AVATAR_NOT_EDITABLE',	'0');
-define('AVATAR_EDITABLE',		'1');
-define('AVATAR_OWNER_EDITABLE',	'2');
+define('AVATAR_NOT_EDITABLE',		'0');
+define('AVATAR_EDITABLE',			'1');
+define('AVATAR_OWNER_EDITABLE',		'2');
 
 // Lastname
-define('AVATAR_LASTN_INACTIVE',	'0');
-define('AVATAR_LASTN_ACTIVE',	'1');
+define('AVATAR_LASTN_INACTIVE',		'0');
+define('AVATAR_LASTN_ACTIVE',		'1');
 
 // Password
-define('AVATAR_PASSWD_MINLEN',	'8');
+define('AVATAR_PASSWD_MINLEN',		'8');
 
 
 

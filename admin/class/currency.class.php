@@ -19,15 +19,21 @@ class  CurrencyManage
 
 	var $getPage    = true;
 
+	var $transfer   = false;
+	var $remake     = false;
+	var $display    = false;
+	var $move       = false;
+
 	var $send_money = 0;
 	var	$date_format= 'd/m/Y';
 	var $date_time  = '01/01/1970';
 	var $unix_time  = 0;
 	var $since      = '...';
 
-	var $transfer   = false;
-	var $remake     = false;
-	var $display    = false;
+	var $move_money = 0;
+	var $move_type  = 0;
+	var $move_src   = '';
+	var $move_dst   = '';
 
 	var	$hasError   = false;
 	var	$errorMsg   = array();
@@ -71,11 +77,29 @@ class  CurrencyManage
 			}
 			$this->getPage = false;
 
-			// Send Money
+			// Move Money
 			if (isset($formdata->send_money))
 			{
-				$this->send_money = (int)optional_param('send_money', '0', PARAM_INT);
-				if ($this->send_money>0) {
+				$this->move_money = (int)optional_param('move_money', '0', PARAM_INT);
+				$this->move_type  = (int)optional_param('move_type',  '0', PARAM_INT);
+				$this->move_src   = optional_param('move_src', '', PARAM_INT);
+				$this->move_src   = optional_param('move_src', '', PARAM_INT);
+				//
+				if ($this->move_money>0) {
+
+
+
+					$this->hasError = false;
+					$this->transfer = true;
+				}
+				else $this->getPage = true;
+			}
+
+			// Move Money
+			if (isset($formdata->send_money))
+			{
+				$this->move_money = (int)optional_param('move_money', '0', PARAM_INT);
+				if ($this->move_money>0) {
 					$regionserver = $CFG->modlos_currency_regionserver;
         			if ($regionserver=='http://123.456.78.90:9000/' or $regionserver=='') $regionserver = null;
 					//
@@ -92,7 +116,7 @@ class  CurrencyManage
 						}
 					}
 					if ($num>0) $this->hasError = true;
-					$this->transfer = true;
+					$this->move = true;
 				}
 				else $this->getPage = true;
 			}
