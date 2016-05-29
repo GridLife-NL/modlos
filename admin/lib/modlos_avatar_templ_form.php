@@ -7,6 +7,17 @@ require_once $CFG->libdir.'/formslib.php';
 
 class modlos_avatar_templ_form extends moodleform
 {
+	var $clear = false;
+
+
+	function modlos_avatar_templ_form($clear=false, $action=null, $customdata=null, $method='post', $target='', $attributes=null, $editable=true)
+	{
+		$this->clear = $clear;
+
+		parent::moodleform($action, $customdata, $method, $target, $attributes, $editable);
+	}
+
+
 	function definition() 
 	{
 		global $USER, $CFG;
@@ -14,6 +25,15 @@ class modlos_avatar_templ_form extends moodleform
 		$mform = $this->_form;
 		$mform->setDisableShortforms(true);
 		//
+        // hidden elements
+		$courseid = optional_param('course', 1, PARAM_INT);
+		$mform->addElement('hidden', 'course', $courseid);
+		$mform->setType('course', PARAM_INT);
+		
+		if ($this->clear) {
+			$_POST = array();
+		}
+
 		$mform->addElement('header', 'add_templ', get_string('modlos_avatar_templ_add', 'block_modlos'), null);
 
 		$mform->addElement('text', 'title', get_string('modlos_templ_title','block_modlos'), array('size'=>'48'));
@@ -33,6 +53,9 @@ class modlos_avatar_templ_form extends moodleform
 		$mform->addElement('filemanager', 'picfile', get_string('modlos_templ_pic','block_modlos'), null, $fmoption);
 		$mform->addHelpButton('picfile', 'modlos_templ_pic', 'block_modlos');
 
+
+        // buttons
+//		$mform->addElement('submit', 'add_item', get_string('add_item', 'apply'));
 		$this->add_action_buttons();
 
 

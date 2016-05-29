@@ -22,7 +22,7 @@ $tab_action = 'avatar_templ';
 print_modlos_header($tab_action, $course);
 
 require_once(CMS_MODULE_PATH.'/admin/class/avatar_templ.class.php');
-$avatar = new AvatarTempl($course);
+$avatar = new AvatarTempl($course_id);
 
 print_tabnav_manage($tab_action, $course);
 

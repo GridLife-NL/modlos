@@ -9,17 +9,17 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 
 	// 2010083024
 	if ($oldversion < 2010083024) {
-		$table = new XMLDBTable('modlos_mute_list');
+		$table = new xmldb_table('modlos_mute_list');
 
-		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
-		$table->addFieldInfo('agentid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('muteid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('mutename', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('mutetype',  XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
-		$table->addFieldInfo('muteflags', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
-		$table->addFieldInfo('timestamp', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
+		$table->add_field('agentid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('muteid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('mutename', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('mutetype',  XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
+		$table->add_field('muteflags', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
+		$table->add_field('timestamp', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
 
-		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
 		$dbman->create_table($table);
 	}
 
@@ -27,15 +27,15 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 
 	// 2010090100
 	if ($oldversion < 2010090100) {
-		$table = new XMLDBTable('modlos_login_screen');
+		$table = new xmldb_table('modlos_login_screen');
 
-		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
-		$table->addFieldInfo('title', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('information', XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('bordercolor', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, null, null, 'white');
-		$table->addFieldInfo('timestamp', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
+		$table->add_field('title', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('information', XMLDB_TYPE_TEXT, 'big', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('bordercolor', XMLDB_TYPE_CHAR, '20', null, XMLDB_NOTNULL, null, null, null, 'white');
+		$table->add_field('timestamp', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
 
-		$table->addKeyInfo('id', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('id', XMLDB_KEY_PRIMARY, array('id'));
 		$dbman->create_table($table);
 	}
 
@@ -43,168 +43,200 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 
 	//  2010092200
 	if ($oldversion < 2010092200) {
-		$table = new XMLDBTable('modlos_search_hostsregister');
- 		$dbman->drop_table($table);
+		$table = new xmldb_table('modlos_search_hostsregister');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 
-		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
-		$table->addFieldInfo('host', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('port', XMLDB_TYPE_INTEGER, '5', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('register', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('nextcheck', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('checked', XMLDB_TYPE_INTEGER, '1', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('failcounter', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
+		$table->add_field('host', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('port', XMLDB_TYPE_INTEGER, '5', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('register', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('nextcheck', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('checked', XMLDB_TYPE_INTEGER, '1', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('failcounter', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
 
-		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
-		$table->addKeyInfo('host', XMLDB_KEY_UNIQUE, array('host', 'port'));
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('host', XMLDB_KEY_UNIQUE, array('host', 'port'));
 		$dbman->create_table($table);
 	}
 
 
 	if ($oldversion < 2010092200) {
-		$table = new XMLDBTable('modlos_search_allparcels');
- 		$dbman->drop_table($table);
+		$table = new xmldb_table('modlos_search_allparcels');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 
-		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
-		$table->addFieldInfo('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('parcelname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('owneruuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, '00000000-0000-0000-0000-000000000000');
-		$table->addFieldInfo('groupuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, '00000000-0000-0000-0000-000000000000');
-		$table->addFieldInfo('landingpoint', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('parceluuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, '00000000-0000-0000-0000-000000000000');
-		$table->addFieldInfo('infouuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, '00000000-0000-0000-0000-000000000000');
-		$table->addFieldInfo('parcelarea', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
+		$table->add_field('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('parcelname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('owneruuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, '00000000-0000-0000-0000-000000000000');
+		$table->add_field('groupuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, '00000000-0000-0000-0000-000000000000');
+		$table->add_field('landingpoint', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('parceluuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, '00000000-0000-0000-0000-000000000000');
+		$table->add_field('infouuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, '00000000-0000-0000-0000-000000000000');
+		$table->add_field('parcelarea', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
 
-		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
-		$table->addKeyInfo('parceluuid', XMLDB_KEY_UNIQUE, array('parceluuid'));
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('parceluuid', XMLDB_KEY_UNIQUE, array('parceluuid'));
 		$dbman->create_table($table);
 	}
 
 
 	if ($oldversion < 2010092200) {
-		$table = new XMLDBTable('modlos_search_parcels');
- 		$dbman->drop_table($table);
+		$table = new xmldb_table('modlos_search_parcels');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 
-		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
-		$table->addFieldInfo('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('parcelname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('parceluuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('landingpoint', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('description', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('searchcategory', XMLDB_TYPE_CHAR, '50', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('build',  XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('script', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('public', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('dwell', XMLDB_TYPE_NUMBER, '20, 8', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('infouuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('mature', XMLDB_TYPE_CHAR, '10', null, XMLDB_NOTNULL, null, null, null, 'PG');
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
+		$table->add_field('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('parcelname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('parceluuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('landingpoint', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('description', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('searchcategory', XMLDB_TYPE_CHAR, '50', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('build',  XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('script', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('public', XMLDB_TYPE_CHAR, '6', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('dwell', XMLDB_TYPE_NUMBER, '20, 8', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('infouuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('mature', XMLDB_TYPE_CHAR, '10', null, XMLDB_NOTNULL, null, null, null, 'PG');
 
-		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
-		$table->addKeyInfo('uuid', XMLDB_KEY_UNIQUE, array('regionuuid', 'parceluuid'));
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('uuid', XMLDB_KEY_UNIQUE, array('regionuuid', 'parceluuid'));
 		$dbman->create_table($table);
 	}
 
 
 	if ($oldversion < 2010092200) {
-		$table = new XMLDBTable('modlos_search_parcelsales');
- 		$dbman->drop_table($table);
+		$table = new xmldb_table('modlos_search_parcelsales');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 
-		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
-		$table->addFieldInfo('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('parcelname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('parceluuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('area', XMLDB_TYPE_INTEGER, '6', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('saleprice', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('landingpoint', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('infouuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, '00000000-0000-0000-0000-000000000000');
-		$table->addFieldInfo('dwell', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('parentestate', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '1');
-		$table->addFieldInfo('mature', XMLDB_TYPE_CHAR, '10', null, XMLDB_NOTNULL, null, null, null, 'PG');
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
+		$table->add_field('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('parcelname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('parceluuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('area', XMLDB_TYPE_INTEGER, '6', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('saleprice', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('landingpoint', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('infouuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, '00000000-0000-0000-0000-000000000000');
+		$table->add_field('dwell', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('parentestate', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '1');
+		$table->add_field('mature', XMLDB_TYPE_CHAR, '10', null, XMLDB_NOTNULL, null, null, null, 'PG');
 
-		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
-		$table->addKeyInfo('uuid', XMLDB_KEY_UNIQUE, array('regionuuid', 'parceluuid'));
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('uuid', XMLDB_KEY_UNIQUE, array('regionuuid', 'parceluuid'));
 		$dbman->create_table($table);
 	}
 
 
 	if ($oldversion < 2010092200) {
-		$table = new XMLDBTable('modlos_search_events');
- 		$dbman->drop_table($table);
+		$table = new xmldb_table('modlos_search_events');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 
-		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
-		$table->addFieldInfo('uid', XMLDB_TYPE_INTEGER, '8', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
-		$table->addFieldInfo('owneruuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('eventid', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('creatoruuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('category', XMLDB_TYPE_INTEGER, '2', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('description', XMLDB_TYPE_TEXT, 'medium', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('dateutc', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('duration', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('covercharge', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('coveramount', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('simname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('globalpos', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('eventflags', XMLDB_TYPE_INTEGER, '1', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
+		$table->add_field('uid', XMLDB_TYPE_INTEGER, '8', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
+		$table->add_field('owneruuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('eventid', XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('creatoruuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('category', XMLDB_TYPE_INTEGER, '2', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('description', XMLDB_TYPE_TEXT, 'medium', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('dateutc', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('duration', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('covercharge', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('coveramount', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('simname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('globalpos', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('eventflags', XMLDB_TYPE_INTEGER, '1', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
 
-		$table->addKeyInfo('id', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('id', XMLDB_KEY_PRIMARY, array('id'));
 		$dbman->create_table($table);
 	}
 
 
 	if ($oldversion < 2010092200) {
-		$table = new XMLDBTable('modlos_search_regions');
- 		$dbman->drop_table($table);
+		$table = new xmldb_table('modlos_search_regions');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 
-		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
-		$table->addFieldInfo('regionname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('regionhandle', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('url', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('owner', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('owneruuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
+		$table->add_field('regionname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('regionhandle', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('url', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('owner', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('owneruuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
 
-		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
-		$table->addKeyInfo('regionuuid', XMLDB_KEY_UNIQUE, array('regionuuid'));
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('regionuuid', XMLDB_KEY_UNIQUE, array('regionuuid'));
 		$dbman->create_table($table);
 	}
 
 
 	if ($oldversion < 2010092200) {
-		$table = new XMLDBTable('modlos_search_popularplaces');
- 		$dbman->drop_table($table);
+		$table = new xmldb_table('modlos_search_popularplaces');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 
-		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
-		$table->addFieldInfo('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('dwell', XMLDB_TYPE_NUMBER, '20, 8', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('infouuid', XMLDB_TYPE_CHAR, '32', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('has_picture', XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('mature', XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
+		$table->add_field('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('dwell', XMLDB_TYPE_NUMBER, '20, 8', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('infouuid', XMLDB_TYPE_CHAR, '32', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('has_picture', XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('mature', XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, null);
 
-		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
 		$dbman->create_table($table);
 	}
 
 
 	if ($oldversion < 2010092200) {
-		$table = new XMLDBTable('modlos_search_objects');
- 		$dbman->drop_table($table);
+		$table = new xmldb_table('modlos_search_objects');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 
-		$table->addFieldInfo('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
-		$table->addFieldInfo('objectuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('parceluuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('location', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('description', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->addFieldInfo('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
+		$table->add_field('objectuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('parceluuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('location', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('description', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('regionuuid', XMLDB_TYPE_CHAR, '36', null, XMLDB_NOTNULL, null, null, null, null);
 
-		$table->addKeyInfo('primary', XMLDB_KEY_PRIMARY, array('id'));
-		$table->addKeyInfo('uuid', XMLDB_KEY_UNIQUE, array('objectuuid', 'parceluuid'));
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('uuid', XMLDB_KEY_UNIQUE, array('objectuuid', 'parceluuid'));
 		$dbman->create_table($table);
+	}
+
+
+	if ($oldversion < 2016052900) {
+		$table = new xmldb_table('modlos_template_avatars');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
+
+		$table->add_field('id',       XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null, null);
+		$table->add_field('num',      XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('title',    XMLDB_TYPE_CHAR,   '128', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('uuid',     XMLDB_TYPE_CHAR,    '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('text',     XMLDB_TYPE_TEXT,   'big', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('format',   XMLDB_TYPE_INTEGER,  '4', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('picuuid',  XMLDB_TYPE_CHAR,    '36', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('itemid',   XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('timestamp',XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
+
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$dbman->create_table($table);
+	}
+
+	if ($oldversion < 2016052900) {
+		$table = new xmldb_table('modlos_codetable');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
+	}
+
+	if ($oldversion < 2016052900) {
+		$table = new xmldb_table('modlos_economy_money');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
+	}
+
+	if ($oldversion < 2016052900) {
+		$table = new xmldb_table('modlos_economy_transactions');
+ 		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 	}
 
 
 	return true;
 }
-
-?>

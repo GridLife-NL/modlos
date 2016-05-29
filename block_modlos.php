@@ -148,5 +148,3 @@ class block_modlos extends block_base
 		require($CFG->dirroot.'/blocks/modlos/include/cron.php');
 	}
 }
-
-?>
