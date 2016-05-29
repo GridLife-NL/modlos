@@ -435,8 +435,10 @@ $string['modlos_avatar_templ_edit'] = '初期アバターの編集';
 $string['modlos_avatar_templ_del']  = '初期アバターの削除';
 $string['modlos_templ_title']       = 'タイトル';
 $string['modlos_templ_uuid']        = 'UUID';
+$string['modlos_templ_uuid_help']   = 'テンプレートとなるアバターの UUID';
 $string['modlos_templ_text']        = '説明';
 $string['modlos_templ_pic']         = '画像';
+$string['modlos_templ_pic_help']    = '登録するアバター（テンプレートアバター）のスナップショットをアップロードする．画像フォーマットは Jpeg, PNG, Tiff, GIF を使用する';
 $string['modlos_templ_fail']        = '初期アバターとして登録することができませんでした';
 $string['modlos_templ_mis_uuid']    = '指定された UUIDを持つアバターが存在しません';
 

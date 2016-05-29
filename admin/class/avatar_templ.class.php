@@ -12,6 +12,7 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 class  AvatarTempl
 {
+	var $course;
 	var $action_url;
     var $url_param;
 	var $course_id  = 0;
@@ -27,10 +28,11 @@ class  AvatarTempl
 
 
 
-	function  AvatarTempl($course_id) 
+	function  AvatarTempl($course) 
 	{
-		$this->course_id = $course_id;
-		$this->hasPermit = hasModlosPermit($course_id);
+		$this->course_id = $course->id;
+		$this->course = $course;
+		$this->hasPermit = hasModlosPermit($this->course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
@@ -54,6 +56,51 @@ class  AvatarTempl
 				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 				return false;
 			}
+
+			$entry = new stdClass;
+			$entry->id = null;
+			$maxfiles  = 1;
+			$maxbytes  = $this->course->maxbytes;
+
+
+			$definitionoptions = array('subdirs'=>false, 'maxfiles'=>$maxfiles, 'maxbytes'=>$maxbytes, 'trusttext'=>true);
+			$attachmentoptions = array('subdirs'=>false, 'maxfiles'=>$maxfiles, 'maxbytes'=>$maxbytes);
+			$entry = file_prepare_standard_editor($entry, 'explain', $definitionoptions, null, 'block_modlos', 'exntry', $entry->id);
+print_r($entry);
+echo "<br />";
+
+/*
+			if ($data = $formdata->get_data()) {
+    			// ... store or update $entry
+				$option = array('subdirs'=>0, 'maxbytes'=>$maxbytes, 'maxfiles'=>50);
+//				file_save_draft_area_files($data->attachments, $context->id, 'block_modlos', 'attachment', $entry->id, $option);
+print_r($data);
+			}
+*/
+
+//print_r($_POST);
+//$draftitemid = file_get_submitted_draft_itemid('picfile');
+//echo "XXX => $draftitemid";
+
+
+/*
+			$definitionoptions = array('subdirs'=>false, true, 'maxfiles'=>$maxfiles, 'maxbytes'=>$maxbytes, 'trusttext'=>true);
+			$attachmentoptions = array('subdirs'=>false, 'maxfiles'=>$maxfiles, 'maxbytes'=>$maxbytes);
+
+			$entry = file_prepare_standard_editor($entry, 'definition', $definitionoptions, $context, 'block_modlos', 'entry', $entry->id);
+			$entry = file_prepare_standard_filemanager($entry, 'attachment', $attachmentoptions, $context, 'block_modlos', 'attachment', $entry->id);
+
+			$entry->cmid = $cm->id;
+*/
+
+
+
+
+
+
+
+
+
 		}
 
 
@@ -63,16 +110,6 @@ class  AvatarTempl
 		require_once(CMS_MODULE_PATH.'/admin/lib/modlos_avatar_templ_form.php');
 		$this->mform = new modlos_avatar_templ_form();
 		$this->mform->set_data(array('id'=>$this->course_id));
-
-
-
-
-
-
-
-
-
-
 
 		return true;
 	}

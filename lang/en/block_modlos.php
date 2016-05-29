@@ -437,8 +437,10 @@ $string['modlos_avatar_templ_edit'] = 'Edit Template Avatar';
 $string['modlos_avatar_templ_del']  = 'Delete Template Avatar';
 $string['modlos_templ_title']       = 'Title';
 $string['modlos_templ_uuid']        = 'UUID';
+$string['modlos_templ_uuid_help']   = 'UUID of template avatar';
 $string['modlos_templ_text']        = 'Desc';
 $string['modlos_templ_pic']         = 'Pic';
+$string['modlos_templ_pic_help']    = 'Please upload a picture of template avatar with Jpeg, PNG, Tiff or GIF format';
 $string['modlos_templ_fail']        = 'Failed to add avatar as template';
 $string['modlos_templ_mis_uuid']    = 'Original avatar with the specified UUID does not exist';
 

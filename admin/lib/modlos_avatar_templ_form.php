@@ -23,12 +23,15 @@ class modlos_avatar_templ_form extends moodleform
 		$mform->addElement('text', 'uuid', get_string('modlos_templ_uuid','block_modlos'), array('size'=>'36'));
 		$mform->setType('uuid', PARAM_TEXT);
 		$mform->addRule('uuid', null, 'required', null, '');
+		$mform->addHelpButton('uuid', 'modlos_templ_uuid', 'block_modlos');
 
-		$mform->addElement('editor', 'desc', get_string('modlos_templ_text','block_modlos'), null, null);
-		$mform->setType('desc', PARAM_RAW);
+		$edoption = array('subdirs'=>0, 'maxfiles'=>1);
+		$mform->addElement('editor', 'explain', get_string('modlos_templ_text','block_modlos'), null, $edoption);
+		$mform->setType('explain', PARAM_RAW);
 
-		$fmoption = array('subdirs'=>0, 'maxfiles'=>1, 'accepted_types'=>array('jpg','jpeg','png','tif','tiff','gif'));
+		$fmoption = array('subdirs'=>0, 'maxfiles'=>1, 'accepted_types'=>array('.jpg','.jpeg','.png','.tif','.tiff','.gif'));
 		$mform->addElement('filemanager', 'picfile', get_string('modlos_templ_pic','block_modlos'), null, $fmoption);
+		$mform->addHelpButton('picfile', 'modlos_templ_pic', 'block_modlos');
 
 		$this->add_action_buttons();
 

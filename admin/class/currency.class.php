@@ -107,7 +107,7 @@ class  CurrencyManage
 			{
 				$this->move_money = (int)optional_param('move_money', '0', PARAM_INT);
 				if ($this->move_money>0) {
-					$this->move_type = (int)optional_param('move_type', '0', PARAM_INT);	// 9999
+					$this->move_type = (int)optional_param('move_type', '0', PARAM_INT);
 					$this->move_src  = optional_param('move_src', '', PARAM_TEXT);
 					$this->move_dst  = optional_param('move_dst', '', PARAM_TEXT);
 
