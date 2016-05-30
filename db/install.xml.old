@@ -433,9 +433,9 @@
         <FIELD NAME="uuid"      TYPE="char" LENGTH="36"  NOTNULL="true" SEQUENCE="false" PREVIOUS="title"    NEXT="text"/>
         <FIELD NAME="text"      TYPE="text"              NOTNULL="true" SEQUENCE="false" PREVIOUS="uuid"     NEXT="format"/>
         <FIELD NAME="format"    TYPE="int"  LENGTH="4"   NOTNULL="true" SEQUENCE="false" PREVIOUS="text"     NEXT="fileid"/>
-        <FIELD NAME="fileid"    TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="format"   NEXT="filehash"/>
-        <FIELD NAME="filehash"  TYPE="char" LENGTH="128" NOTNULL="true" SEQUENCE="false" PREVIOUS="fileid"   NEXT="itemid"/>
-        <FIELD NAME="itemid"    TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="filehash" NEXT="timestamp"/>
+        <FIELD NAME="fileid"    TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="format"   NEXT="filename"/>
+        <FIELD NAME="filename"  TYPE="char" LENGTH="128" NOTNULL="true" SEQUENCE="false" PREVIOUS="fileid"   NEXT="itemid"/>
+        <FIELD NAME="itemid"    TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="filename" NEXT="timestamp"/>
         <FIELD NAME="timestamp" TYPE="int"  LENGTH="11"  NOTNULL="true" SEQUENCE="false" UNSIGNED="true"  DEFAULT="0" PREVIOUS="itemid"/>
       </FIELDS>
       <KEYS>

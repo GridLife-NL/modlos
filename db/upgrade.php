@@ -204,7 +204,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
-	if ($oldversion < 2016053001) {
+	if ($oldversion < 2016053002) {
 		$table = new xmldb_table('modlos_template_avatars');
  		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 
@@ -215,7 +215,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$table->add_field('text',     XMLDB_TYPE_TEXT,   'big', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->add_field('format',   XMLDB_TYPE_INTEGER,  '4', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->add_field('fileid',   XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, null, null);
-		$table->add_field('filehash', XMLDB_TYPE_CHAR,   '128', null, XMLDB_NOTNULL, null, null, null, null);
+		$table->add_field('filename', XMLDB_TYPE_CHAR,   '128', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->add_field('itemid',   XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, null, null);
 		$table->add_field('timestamp',XMLDB_TYPE_INTEGER, '11', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, null, '0');
 
@@ -223,17 +223,17 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 		$dbman->create_table($table);
 	}
 
-	if ($oldversion < 2016053001) {
+	if ($oldversion < 2016053002) {
 		$table = new xmldb_table('modlos_codetable');
  		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 	}
 
-	if ($oldversion < 2016053001) {
+	if ($oldversion < 2016053002) {
 		$table = new xmldb_table('modlos_economy_money');
  		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 	}
 
-	if ($oldversion < 2016053001) {
+	if ($oldversion < 2016053002) {
 		$table = new xmldb_table('modlos_economy_transactions');
  		if ($dbman->table_exists($table)) $dbman->drop_table($table);
 	}

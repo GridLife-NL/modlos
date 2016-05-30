@@ -10,8 +10,7 @@ $instance_id = optional_param('instance', '0', PARAM_INT);
 if (!$course_id) $course_id = 1;
 $course = $DB->get_record('course', array('id'=>$course_id));
 
-echo "====> $instance_id";
-
+//
 ob_start();
 print_tabnav_manage('settings', $course_id, $instance_id);
 $tabnav = ob_get_contents();

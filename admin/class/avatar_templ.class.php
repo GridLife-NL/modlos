@@ -97,9 +97,9 @@ class  AvatarTempl
 			$template_avatar['uuid']      = $uuid;
 			$template_avatar['text']      = htmlspecialchars($explain['text']); // htmlspecialchars_decode
 			$template_avatar['format']    = $explain['format'];
-			$template_avatar['itemid'] 	  = 0;
 			$template_avatar['fileid']    = 0;
-			$template_avatar['filehash']  = '';
+			$template_avatar['filename']  = '';
+			$template_avatar['itemid'] 	  = 0;
 			$template_avatar['timestamp'] = time();
 
 			// File Manager. see lib/filelib.php
@@ -108,12 +108,12 @@ class  AvatarTempl
 
 			$condition = "itemid=$picid AND contextid=$context_id AND component='block_modlos' AND filearea='templ_picture' AND ".
                          "filename!='\\.' AND filesize!='0' AND source!='NULL'";
-			$query_str = 'SELECT id,contenthash FROM '.$CFG->prefix.'files WHERE '.$condition;
+			$query_str = 'SELECT id,filename FROM '.$CFG->prefix.'files WHERE '.$condition;
 
 			if ($files = $DB->get_records_sql($query_str)) {
 				foreach($files as $file) {
 					$template_avatar['fileid']   = $file->id;
-					$template_avatar['filehash'] = $file->contenthash;
+					$template_avatar['filename'] = $file->filename;
 					break;
 				}
 			}
@@ -126,19 +126,12 @@ class  AvatarTempl
 				break;
 			}
 			$template_avatar['num'] = $num + 1;
-
+			//
 			$DB->insert_record('modlos_template_avatars', $template_avatar);
 
 			//
 			$this->mform = new modlos_avatar_templ_form(true);		// clear POST
 			$this->mform->set_data(array('id'=>$this->course_id));
-
-
-
-			$url = file_rewrite_pluginfile_urls('@@PLUGINFILE@@/', 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $picid);
-
-echo $url;
-//com
 		}
 
 		// GET
@@ -146,18 +139,6 @@ echo $url;
 			$this->mform = new modlos_avatar_templ_form();
 			$this->mform->set_data(array('id'=>$this->course_id));
 		}
-
-/*
-$a = jbxl_get_course_context($this->course_id);
-echo $a->id."<br />"; 
-$context = jbxl_block_context('modlos');
-echo $context->contextlevel."<br />"; 
-echo $context->id."<br />"; 
-echo CONTEXT_BLOCK."<br />";
-$context = jbxl_module_context('apply');
-echo $context->contextlevel."<br />"; 
-echo $context->id."<br />"; 
-*/
 
 		$num = 0;
 		$templates = $DB->get_records('modlos_template_avatars', array(), 'num ASC');
@@ -167,9 +148,13 @@ echo $context->id."<br />";
 			$this->db_data[$num]['uuid'] 	 = $template->uuid;
 			$this->db_data[$num]['text'] 	 = $template->text;
 			$this->db_data[$num]['format'] 	 = $template->format;
-			$this->db_data[$num]['filehash'] = $template->filehash;
+			$this->db_data[$num]['filehash'] = $template->filename;
 			$this->db_data[$num]['text']     = $template->text;
-			$this->db_data[$num]['html']	 = htmlspecialchars_decode($template->text);
+
+			$path = '@@PLUGINFILE@@/'.$template->filename;
+			$this->db_data[$num]['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $template->itemid);
+			$this->db_data[$num]['html'] = htmlspecialchars_decode($template->text);
+
 			$num++;
 		}
 
