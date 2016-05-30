@@ -18,18 +18,6 @@
 <h2><center><?php echo $grid_name.":&nbsp;".$avatar_templ_ttl?></center></h2>
 
 
-<!-- Error Message -->
-<?php if ($this->hasError) {?>
-  <div align="center" style="margin-bottom:10px;">
-    <ul style="list-style:none;">
-      <?php foreach($this->errorMsg as $mesg) {?>
-         <li><strong style="color: #f02022;"><?php echo $mesg?></strong></li>
-      <?php }?>
-    </ul>
-  </div>
-<?php }?>
-
-
 <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0" style="margin-bottom:15px;">
   <tr>
     <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $content?></strong></td>
@@ -37,56 +25,45 @@
 </table>
 
 
-<!--
-<table align="center" class="generalbox">
-<tr>
-<td class="generalboxcontent" align="center">
-
-  <form action="<?php echo $this->action_url?>" method="POST">
-    <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>" />
-    <input type="hidden" name="course"   value="<?php echo $this->course_id ?>" />
-    <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
-    <input type="hidden" name="quest"    value="yes" />
-    <div align=center>
-      <br />
-      <strong style="padding:4px;">
-        <?php echo "XXXXX"?>&nbsp;
-      </strong>
-    </div>
-  </form>
-
--->
+<div style="margin-bottom:10px;" align="center">
+  <h4><a href="<?php echo $add_url?>" style="color:#c020c0;"><?php echo $add_avatar?></a></h4>
+</div>
 
 
-<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="margin-bottom:10px;">
+<table width="800" border="0" align="center" cellpadding="2" cellspacing="2" style="margin-bottom:10px; table-layout:fixed;">
   <tr>
     <td class="generalboxcontent" style="width:100%; table-layout:fixed;">
       <?php foreach($avatars as $avatar) {?>
-      <table width="100%" border="1" align="center" cellpadding="0" cellspacing="0" bgcolor="#f0f0f0">
-        <tr border=2>
-          <td><strong style="color:#co4040;">EDIT</strong></td>
-          <td><?php echo $avatar['num']?></td>
-          <td colspan="3"><?php echo $avatar['title']?></td>
+      <table width="100%" border="1" cellpadding="0" cellspacing="0" bgcolor="#f0f0f0" style="margin-bottom:10px;">
+        <tr>
+          <td style="width:40px; table-layout:fixed; color:#c02020;">
+            <strong>
+              <a href="<?php echo $edit_url.$avatar['id']?>" style="color:#c04040;"><?php echo $modlos_edit?></a>
+            </strong>
+          </td>
+          <td style="width:30px; table-layout:fixed;"><?php echo $avatar['num']?></td>
+          <td colspan="3" style="width:530px; table-layout:fixed;"><strong style="color:#2020c0;"><?php echo $avatar['title']?></strong></td>
         </tr>
         <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td><img src="<?php echo $avatar['url']?>" width="200" height="200"></td>
-          <td>&nbsp;</td>
-          <td align="left"><?php echo $avatar['html']?></td>
+          <td style="width: 40px; table-layout:fixed; color:#c02020;" valign="top">
+            <strong>
+              <a href="<?php echo $delete_url.$avatar['id']?>" style="color:#c02020;"><?php echo $modlos_delete?></a>
+            </strong>
+          </td>
+          <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
+          <td style="width:260px; table-layout:fixed;">
+            <?php if ($avatar['url']) {?>
+              <img src="<?php echo $avatar['url']?>" width="256" /></td>
+            <?php } else {?>
+              <img src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width="256" />
+            <?php }?>
+          </td>
+          <td style="width:  5px; table-layout:fixed;">&nbsp;</td>
+          <td style="width:465px; table-layout:fixed; word-break:break-all;" valign="top"><?php echo $avatar['html']?></td>
         </tr>
       </table>
       <?php }?>
     </td>
   </tr>
 </table>
-
-
 <br />
-<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0" style="margin-top:10px; margin-bottom:10px;">
-  <tr>
-    <td>
-      <?php $mform->display()?>
-    </td>
-  </tr>
-</table>

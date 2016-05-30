@@ -42,7 +42,7 @@ $string['modlos_show']			    = '表示';
 
 $string['modlos_online_ttl'] 		= ' オンライン ';
 $string['modlos_offline_ttl'] 		= ' オフライン ';
-$string['modlos_edit_ttl'] 			= ' EDIT';
+$string['modlos_edit_ttl'] 			= ' 編集';
 $string['modlos_edit_user_ttl'] 	= ' ユーザ情報の編集 ';
 $string['modlos_reset_ttl'] 		= ' リセット ';
 $string['modlos_find_owner_ttl'] 	= ' 迷子のアバターを捜す ';
@@ -428,11 +428,23 @@ $string['modlos_lastnames'] 		= 'ラストネーム管理';
 //$string['modlos_convertdb_contents']= 'OpenSimデータベースを 0.6.x から 0.7.x へ変換';
 //$string['modlos_convertdb_converted']='OpenSimデータベースの変換完了!';
 
-$string['modlos_avatar_templ_tab']  = '初期アバター';
-$string['modlos_avatar_templ_ttl']  = '初期アバター管理';
-$string['modlos_avatar_templ_add']  = '初期アバターの追加';
-$string['modlos_avatar_templ_edit'] = '初期アバターの編集';
-$string['modlos_avatar_templ_del']  = '初期アバターの削除';
+$string['modlos_templ_tab']  		= '初期アバター';
+$string['modlos_templ_ttl']  		= '初期アバター管理';
+
+$string['modlos_templ_add_ttl']  	= '初期アバターの登録';
+$string['modlos_templ_add_ok']      = 'アバターを登録しました';
+$string['modlos_templ_add_fail']    = 'アバターの登録に失敗しました';
+$string['modlos_templ_add_more_ttl']= 'さらにアバターを追加登録する';
+
+$string['modlos_templ_edit_ttl'] 	= '初期アバターの編集';
+$string['modlos_templ_edit_ok'] 	= 'アバターの登録を変更しました';
+$string['modlos_templ_edit_fail'] 	= 'アバターの登録変更に失敗しました';
+
+$string['modlos_templ_del_ttl']  	= '初期アバターの削除';
+$string['modlos_templ_del_cnfrm']  	= 'アバターの登録を削除しますか？';
+$string['modlos_templ_del_ok']  	= 'アバターの登録を削除しました';
+$string['modlos_templ_del_fail']  	= 'アバターの登録削除に失敗しました';
+
 $string['modlos_templ_title']       = 'タイトル';
 $string['modlos_templ_uuid']        = 'UUID';
 $string['modlos_templ_uuid_help']   = 'テンプレートとなるアバターの UUID';
@@ -440,7 +452,6 @@ $string['modlos_templ_text']        = '説明';
 $string['modlos_templ_pic']         = '画像';
 $string['modlos_templ_pic_help']    = '登録するアバター（テンプレートアバター）のスナップショットをアップロードする．画像フォーマットは Jpeg, PNG, Tiff, GIF を使用する';
 
-$string['modlos_templ_save_fail']   = '初期アバターとして登録することができませんでした';
 $string['modlos_templ_mis_uuid']    = '指定された UUIDを持つアバターが存在しません';
 $string['modlos_templ_invalid_ttl'] = '無効なタイトルです';
 $string['modlos_templ_invalid_uuid']= '無効な UUID です';

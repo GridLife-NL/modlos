@@ -1155,7 +1155,7 @@ function  print_tabnav_manage($currenttab, $course_id, $instance_id)
 		}
 
 		$toprow[] = new tabobject('avatar_templ', CMS_MODULE_URL.'/admin/actions/avatar_templ.php'.$url_params, 
-																	'<strong>'.get_string('modlos_avatar_templ_tab','block_modlos').'</strong>');
+																	'<strong>'.get_string('modlos_templ_tab','block_modlos').'</strong>');
 
 		if ($CFG->modlos_use_currency_server) {
 			$toprow[] = new tabobject('currency', CMS_MODULE_URL.'/admin/actions/currency.php'.$url_params, 

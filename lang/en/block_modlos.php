@@ -430,11 +430,23 @@ $string['modlos_lastnames'] 		= 'Lastnames Management';
 //$string['modlos_convertdb_contents']= 'Convert OpenSim DB from 0,6.x to 0.7.x ?';
 //$string['modlos_convertdb_converted']='OpenSim DB is Converted!!';
 
-$string['modlos_avatar_templ_tab']  = 'Template Avatars';
-$string['modlos_avatar_templ_ttl']  = 'Management of Template Avatars';
-$string['modlos_avatar_templ_add']  = 'Add Template Avatar';
-$string['modlos_avatar_templ_edit'] = 'Edit Template Avatar';
-$string['modlos_avatar_templ_del']  = 'Delete Template Avatar';
+$string['modlos_templ_tab']  		= 'Template Avatars';
+$string['modlos_templ_ttl']  		= 'Management of Template Avatars';
+
+$string['modlos_templ_add_ttl']  	= 'Add a Template Avatar';
+$string['modlos_templ_add_ok']      = 'Template avatar was added';
+$string['modlos_templ_add_fail']    = 'Failed to add a avatar as template';
+$string['modlos_templ_add_more_ttl']= 'Add More Template Avatar';
+
+$string['modlos_templ_edit_ttl'] 	= 'Edit Template Avatar';
+$string['modlos_templ_edit_ok']     = 'Template avatar was modified';
+$string['modlos_templ_edit_fail']   = 'Failed to edit the template avatar';
+
+$string['modlos_templ_del_ttl']  	= 'Delete Template Avatar';
+$string['modlos_templ_del_cnfrm']   = 'Do you delete the tempalae avatar?';
+$string['modlos_templ_del_ok']      = 'Template avatar was deleted';
+$string['modlos_templ_del_fail']    = 'Failed to delete the template avatar';
+
 $string['modlos_templ_title']       = 'Title';
 $string['modlos_templ_uuid']        = 'UUID';
 $string['modlos_templ_uuid_help']   = 'UUID of template avatar';
@@ -442,7 +454,6 @@ $string['modlos_templ_text']        = 'Explain';
 $string['modlos_templ_pic']         = 'Picture';
 $string['modlos_templ_pic_help']    = 'Please upload a picture of template avatar with Jpeg, PNG, Tiff or GIF format';
 
-$string['modlos_templ_save_fail']   = 'Failed to add avatar as template';
 $string['modlos_templ_mis_uuid']    = 'Original avatar with the specified UUID does not exist';
 $string['modlos_templ_invalid_ttl'] = 'Invalid title';
 $string['modlos_templ_invalid_uuid']= 'Invalid UUID';
