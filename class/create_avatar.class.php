@@ -28,6 +28,7 @@ class  CreateAvatar
 	var $isAvatarMax 	= false;
 
 	var $course_id   	= 0;
+	var $instance_id   	= 0;
 	var $use_sloodle 	= false;
 	var	$isDisclaimer	= false;
 
@@ -46,7 +47,7 @@ class  CreateAvatar
 
 
 
-	function  CreateAvatar($course_id)
+	function  CreateAvatar($course_id, $instance_id)
 	{
 		global $CFG, $USER;
 
@@ -66,6 +67,7 @@ class  CreateAvatar
 		else $module_url = CMS_MODULE_URL;
 
 		$this->course_id	= $course_id;
+		$this->instance_id	= $instance_id;
 		$this->hasPermit	= hasModlosPermit($course_id);
 		$this->action_url  	= $module_url.'/actions/create_avatar.php';
 		$this->use_sloodle 	= $CFG->modlos_cooperate_sloodle;

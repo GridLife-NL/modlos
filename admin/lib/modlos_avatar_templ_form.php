@@ -26,9 +26,12 @@ class modlos_avatar_templ_form extends moodleform
 		$mform->setDisableShortforms(true);
 		//
         // hidden elements
-		$courseid = optional_param('course', 1, PARAM_INT);
-		$mform->addElement('hidden', 'course', $courseid);
+		$course_id   = optional_param('course',   '1', PARAM_INT);
+		$instance_id = optional_param('instance', '0', PARAM_INT);
+		$mform->addElement('hidden', 'course',   $course_id);
+		$mform->addElement('hidden', 'instance', $instance_id);
 		$mform->setType('course', PARAM_INT);
+		$mform->setType('instance', PARAM_INT);
 		
 		if ($this->clear) {
 			$_POST = array();

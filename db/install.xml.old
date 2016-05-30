@@ -427,14 +427,15 @@
     </TABLE>
     <TABLE NAME="modlos_template_avatars" COMMENT="Template Avatars Informatoin" PREVIOUS="modlos_search_regions">
       <FIELDS>
-        <FIELD NAME="id"        TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="true"  UNSIGNED="true"    NEXT="num"/>
-        <FIELD NAME="num"       TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="id"      NEXT="title"/>
-        <FIELD NAME="title"     TYPE="char" LENGTH="128" NOTNULL="true" SEQUENCE="false" PREVIOUS="num"     NEXT="uuid"/>
-        <FIELD NAME="uuid"      TYPE="char" LENGTH="36"  NOTNULL="true" SEQUENCE="false" PREVIOUS="title"   NEXT="text"/>
-        <FIELD NAME="text"      TYPE="text"              NOTNULL="true" SEQUENCE="false" PREVIOUS="uuid"    NEXT="format"/>
-        <FIELD NAME="format"    TYPE="int"  LENGTH="4"   NOTNULL="true" SEQUENCE="false" PREVIOUS="text"    NEXT="picuuid"/>
-        <FIELD NAME="picuuid"   TYPE="char" LENGTH="36"  NOTNULL="true" SEQUENCE="false" PREVIOUS="format"  NEXT="itemid"/>
-        <FIELD NAME="itemid"    TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="picuuid" NEXT="timestamp"/>
+        <FIELD NAME="id"        TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="true"  UNSIGNED="true"     NEXT="num"/>
+        <FIELD NAME="num"       TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="id"       NEXT="title"/>
+        <FIELD NAME="title"     TYPE="char" LENGTH="128" NOTNULL="true" SEQUENCE="false" PREVIOUS="num"      NEXT="uuid"/>
+        <FIELD NAME="uuid"      TYPE="char" LENGTH="36"  NOTNULL="true" SEQUENCE="false" PREVIOUS="title"    NEXT="text"/>
+        <FIELD NAME="text"      TYPE="text"              NOTNULL="true" SEQUENCE="false" PREVIOUS="uuid"     NEXT="format"/>
+        <FIELD NAME="format"    TYPE="int"  LENGTH="4"   NOTNULL="true" SEQUENCE="false" PREVIOUS="text"     NEXT="fileid"/>
+        <FIELD NAME="fileid"    TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="format"   NEXT="filehash"/>
+        <FIELD NAME="filehash"  TYPE="char" LENGTH="128" NOTNULL="true" SEQUENCE="false" PREVIOUS="fileid"   NEXT="itemid"/>
+        <FIELD NAME="itemid"    TYPE="int"  LENGTH="10"  NOTNULL="true" SEQUENCE="false" PREVIOUS="filehash" NEXT="timestamp"/>
         <FIELD NAME="timestamp" TYPE="int"  LENGTH="11"  NOTNULL="true" SEQUENCE="false" UNSIGNED="true"  DEFAULT="0" PREVIOUS="itemid"/>
       </FIELDS>
       <KEYS>

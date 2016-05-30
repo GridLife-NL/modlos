@@ -17,7 +17,7 @@ class  AvatarsOnline
 	var $avatar_url;
 
 	var $course_id  = 0;
-	var $url_param  = '';
+	var $url_params = '';
 
 	var $use_sloodle  = false;
 	var $isAvatarMax  = false;
@@ -42,7 +42,7 @@ class  AvatarsOnline
 
 
 
-	function  AvatarsOnline($course_id)
+	function  AvatarsOnline($course_id, $instance_id)
 	{
 		global $CFG, $USER;
 
@@ -53,15 +53,14 @@ class  AvatarsOnline
 		//}
 
 		$this->course_id   = $course_id;
+		$this->instance_id = $instance_id;
 		$this->hasPermit   = hasModlosPermit($course_id);
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
+		$this->url_params  = '?course='.$course_id.'&amp;instance='.$instance_id;
 
-		$this->url_param = '?dmmy_param=';	
-		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;
-
-		$this->action_url = CMS_MODULE_URL.'/actions/avatars_online.php'.$this->url_param;
-		$this->avatar_url = CMS_MODULE_URL.'/actions/avatars_list.php'.  $this->url_param.'&amp;action=personal&amp;userid=';
-//		$this->avatar_url = $CFG->wwwroot.'/user/view.php'.$this->url_param.'&amp;id=';
+		$this->action_url = CMS_MODULE_URL.'/actions/avatars_online.php'.$this->url_params;
+		$this->avatar_url = CMS_MODULE_URL.'/actions/avatars_list.php'.  $this->url_params.'&amp;action=personal&amp;userid=';
+//		$this->avatar_url = $CFG->wwwroot.'/user/view.php'.$this->url_params.'&amp;id=';
 
 		$my_avatars = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
@@ -226,7 +225,7 @@ class  AvatarsOnline
 
 		$has_permit		= $this->hasPermit;
 		$avatar_max		= $this->isAvatarMax;
-		$url_param		= $this->url_param;
+		$url_params		= $this->url_params;
 		$plimit_amp		= "&amp;plimit=$this->plimit";
 		$pstart_amp		= "&amp;pstart=$this->pstart";
 		$order_amp		= "&amp;order=$this->order&amp;desc=$this->order_desc";

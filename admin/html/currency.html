@@ -27,9 +27,10 @@
     </tr>
   </table>
   <form action="<?php echo $this->action_url?>" method="POST">
-    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
-    <input type="hidden" name="quest"   value="yes" />
+    <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"   value="<?php echo $this->course_id ?>" />
+    <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
+    <input type="hidden" name="quest"    value="yes" />
     <div align="center">
       <br />
       <strong style="padding:4px;">
@@ -162,7 +163,7 @@
           <tr><td><h4><?php echo $currency_mis?></h4><hr /></td></tr>
           <?php foreach($results as $result) {?>
             <tr><td align="center">
-              <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$result['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+              <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_params.'&agent='.$result['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
                 <strong style="color:#882020;"><?php echo $result['fullname']?></strong>
               </a>
             </td></tr>
@@ -204,7 +205,7 @@
 
 
   <div align="center" style="color:#202088;">
-    <h4><a href="<?php echo $action_url.$url_param?>" ><?php echo $currency_return?></a></h4>
+    <h4><a href="<?php echo $action_url.$url_params?>" ><?php echo $currency_return?></a></h4>
   </div>
   <br />
 <?php }?>

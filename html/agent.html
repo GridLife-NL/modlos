@@ -75,7 +75,7 @@
           <td class="styleText"><strong><?php echo $ownername_ttl.":&nbsp;"?></strong>
             <strong style="color: #105ba7;">
             <?php if ($userinfo and $owner!=' - ') {?>
-              <a href="<?php echo $CFG->wwwroot.'/user/view.php?id='.$userid.$course_amp?>" target="_blank">
+              <a href="<?php echo $CFG->wwwroot.'/user/view.php?id='.$userid.$url_amp?>" target="_blank">
                 <?php echo htmlspecialchars($owner)?>
               </a>
             <?php } else {?>
@@ -122,7 +122,7 @@
             <td class="styleText">
               <strong><?php echo $home_region_ttl?>:&nbsp;</strong>
               <strong style="color: #105ba7;">
-              <a href="<?php echo CMS_MODULE_URL.'/helper/sim.php?region='.$regionUUID.$course_amp?>">
+              <a href="<?php echo CMS_MODULE_URL.'/helper/sim.php?region='.$regionUUID.$url_amp?>">
                 <?php echo $regionName?>
               </a>
             </strong></td>

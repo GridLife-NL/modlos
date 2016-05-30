@@ -75,9 +75,10 @@
 
 <form name="assignform" id="assignform" action="<?php echo $this->action_url?>" method="POST">
 
-  <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
-  <input type="hidden" name="uuid"    value="<?php echo $this->UUID?>" />
-  <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+  <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
+  <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
+  <input type="hidden" name="uuid"     value="<?php echo $this->UUID?>" />
+  <input type="hidden" name="sesskey"  value="<?php echo sesskey()?>" />
 
   <table width="520" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
 

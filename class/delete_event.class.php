@@ -8,27 +8,28 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 class  DeleteEvent
 {
-	var $hasPermit	= false;
-	var $isGuest	= true;
-	var $action_url = '';
-	var $return_url = '';
-	var $deleted	= false;
+	var $hasPermit	 = false;
+	var $isGuest	 = true;
+	var $action_url  = '';
+	var $return_url  = '';
+	var $deleted	 = false;
 
-	var $course_id	= 0;
-	var $userid		= 0;		// owner of this process
-	var $uid		= 0; 		// creator of event
+	var $course_id	 = 0;
+	var $instance_id = 0;
+	var $userid	 	 = 0;		// owner of this process
+	var $uid		 = 0; 		// creator of event
 
-	var $event 		= array();
+	var $event 		 = array();
 
-	var $event_id	= 0;
-	var $event_name = '';
-	var $event_date = '';
+	var $event_id	 = 0;
+	var $event_name  = '';
+	var $event_date  = '';
 	var $event_category = '';
-	var $event_ownername='';
-	var $event_creatorname='';
+	var $event_ownername ='';
+	var $event_creatorname ='';
 
-	var $hasError  	= false;
-	var $errorMsg  	= array();
+	var $hasError  	 = false;
+	var $errorMsg  	 = array();
 
 	var $avatars_num = 0;
 	var $max_avatars = 0;
@@ -36,9 +37,7 @@ class  DeleteEvent
 
 
 
-
-
-	function  DeleteEvent($course_id) 
+	function  DeleteEvent($course_id, $instance_id) 
 	{
 		global $CFG, $USER;
 
@@ -48,13 +47,14 @@ class  DeleteEvent
 			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
-		$this->hasPermit  = hasModlosPermit($course_id);
-		$this->userid	  = $USER->id;
+		$this->hasPermit   = hasModlosPermit($course_id);
+		$this->userid	   = $USER->id;
 		
-		$course_param 	  = '?course='.$course_id;
-		$this->course_id  = $course_id;
-		$this->action_url = CMS_MODULE_URL.'/actions/delete_event.php';
-		$this->return_url = CMS_MODULE_URL.'/actions/events_list.php'.$course_param;
+		$url_params 	   = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$this->course_id   = $course_id;
+		$this->instance_id = $instance_id;
+		$this->action_url  = CMS_MODULE_URL.'/actions/delete_event.php';
+		$this->return_url  = CMS_MODULE_URL.'/actions/events_list.php'.$url_params;
 
 		// GET eventid
 		$this->event_id = optional_param('eventid', '0', PARAM_INT);

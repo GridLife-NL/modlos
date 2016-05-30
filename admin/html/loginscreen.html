@@ -40,8 +40,9 @@ table {
 <?php } else {?>
 
   <form action="<?php echo $action_url?>" method="POST">
-    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-    <input type="hidden" name="course"  value="<?php echo $course_id ?>" />
+    <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"   value="<?php echo $course_id ?>" />
+    <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
 
     <!-- PreView -->
     <?php if ($preview) {?>

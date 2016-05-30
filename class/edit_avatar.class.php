@@ -11,11 +11,12 @@ class  EditAvatar
 {
 	var $regionNames = array();
 
-	var $hasPermit	= false;
-	var $isGuest	= true;
-	var $action_url = '';
-	var $delete_url = '';
-	var $course_id	= 0;
+	var $hasPermit	 = false;
+	var $isGuest	 = true;
+	var $action_url  = '';
+	var $delete_url  = '';
+	var $course_id	 = 0;
+	var $instance_id = 0;
 
 	var $updated_avatar = false;
 
@@ -41,7 +42,7 @@ class  EditAvatar
 
 
 
-	function  EditAvatar($course_id) 
+	function  EditAvatar($course_id, $instance_id) 
 	{
 		global $CFG, $USER;
 
@@ -61,13 +62,14 @@ class  EditAvatar
 		else $module_url = CMS_MODULE_URL;
 
 		//
-		$course_param = '?course='.$course_id;
-		$this->course_id  = $course_id;
-		$this->action_url = $module_url.'/actions/edit_avatar.php';
-		$this->delete_url = $module_url.'/actions/delete_avatar.php'.$course_param;
+		$url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$this->course_id   = $course_id;
+		$this->instance_id = $instance_id;
+		$this->action_url  = $module_url.'/actions/edit_avatar.php';
+		$this->delete_url  = $module_url.'/actions/delete_avatar.php'.$url_params;
 
 		// get UUID from POST or GET
-		$return_url = $module_url.'/actions/avatars_list.php'. $course_param;
+		$return_url = $module_url.'/actions/avatars_list.php'. $url_params;
 		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
 			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)";

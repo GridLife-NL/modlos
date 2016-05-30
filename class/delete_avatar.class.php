@@ -8,12 +8,13 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 class  DeleteAvatar
 {
-	var $hasPermit	= false;
-	var $isGuest	= true;
-	var $action_url = '';
-	var $cancel_url = '';
-	var $return_url = '';
-	var $course_id	= 0;
+	var $hasPermit	 = false;
+	var $isGuest	 = true;
+	var $action_url  = '';
+	var $cancel_url  = '';
+	var $return_url  = '';
+	var $course_id	 = 0;
+	var $instance_id = 0;
 
 	var $deleted_avatar = false;
 
@@ -22,22 +23,22 @@ class  DeleteAvatar
 	var $max_avatars = 0;
 	var $isAvatarMax = false;
 
-	var $hasError  	= false;
-	var $errorMsg  	= array();
+	var $hasError    = false;
+	var $errorMsg    = array();
 
 	// Moodle DB
-	var $avatar	   	= null;
-	var $UUID	   	= '';
-	var $uid 	   	= 0;			// owner of avatar
-	var $firstname 	= '';
-	var $lastname  	= '';
-	var $hmregion  	= '';
-	var $state	   	= -1;
-	var $ownername 	= '';
+	var $avatar	     = null;
+	var $UUID	     = '';
+	var $uid 	     = 0;			// owner of avatar
+	var $firstname   = '';
+	var $lastname    = '';
+	var $hmregion    = '';
+	var $state	     = -1;
+	var $ownername   = '';
 
 
 
-	function  DeleteAvatar($course_id) 
+	function  DeleteAvatar($course_id, $instance_id) 
 	{
 		global $CFG, $USER;
 
@@ -47,13 +48,14 @@ class  DeleteAvatar
 			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
-		$course_param = '?course='.$course_id;
-		$this->course_id  = $course_id;
-		$this->action_url = CMS_MODULE_URL.'/actions/delete_avatar.php';
-		$this->cancel_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param.'&amp;action=personal';
+		$url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$this->course_id   = $course_id;
+		$this->instance_id = $instance_id;
+		$this->action_url  = CMS_MODULE_URL.'/actions/delete_avatar.php';
+		$this->cancel_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params.'&amp;action=personal';
 
 		// get UUID from POST or GET
-		$this->return_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$course_param.'&amp;action=personal';
+		$this->return_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params.'&amp;action=personal';
 		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
 			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos').' ($uuid)';

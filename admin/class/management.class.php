@@ -15,17 +15,20 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 class  ManagementBase
 {
 	var $action_url;
-	var $course_id = 0;
-	var	$managed   = false;
-	var $hasPermit = false;
-	var	$hasError  = false;
-	var	$errorMsg  = array();
-	var	$command   = '';
+	var $course_id   = 0;
+	var $instance_id = 0;
+
+	var	$managed     = false;
+	var $hasPermit   = false;
+	var	$hasError    = false;
+	var	$errorMsg    = array();
+	var	$command     = '';
 
 
-	function  ManagementBase($course_id) 
+	function  ManagementBase($course_id, $instance_id) 
 	{
-		$this->course_id = $course_id;
+		$this->course_id   = $course_id;
+		$this->instance_id = $instance_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
@@ -104,9 +107,8 @@ class  ManagementBase
 		$command	   = $this->command;
 		$content	   = '<center>'.get_string('modlos_manage_contents', 'block_modlos').'</center>';
 
-		$course_param  = '';
-		if ($this->course_id>0) $course_param = '?course='.$this->course_id;
-		$manage_url    = CMS_MODULE_URL.'/admin/actions/management.php'.$course_param;
+		$url_params    = '?course='.$this->course_id.'&amp;instance='.$this->instance_id;
+		$manage_url    = CMS_MODULE_URL.'/admin/actions/management.php'.$url_params;
 		$return_ttl	   = get_string('modlos_manage_return', 'block_modlos');
 
 		$commands[0]['com'] = 'cltexture';

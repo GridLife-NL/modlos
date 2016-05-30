@@ -13,8 +13,10 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 class  CurrencyManage
 {
 	var $action_url;
-    var $url_param;
+    var $url_params;
+
 	var $course_id    = 0;
+	var $instance_id  = 0;
 	var $hasPermit    = false;
 
 	var $noProssecced = true;
@@ -41,9 +43,10 @@ class  CurrencyManage
 
 
 
-	function  CurrencyManage($course_id) 
+	function  CurrencyManage($course_id, $instance_id) 
 	{
-		$this->course_id = $course_id;
+		$this->course_id   = $course_id;
+		$this->instance_id = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
@@ -51,7 +54,7 @@ class  CurrencyManage
 			return;
 		}
 	
-		$this->url_param  = '?course='.$this->course_id;
+		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
 		$this->action_url = CMS_MODULE_URL.'/admin/actions/currency.php';
 	}
 
@@ -198,7 +201,7 @@ class  CurrencyManage
 		$date_format  = $this->date_format;
 
 		$noProssecced = $this->noProssecced;
-		$url_param    = $this->url_param;
+		$url_params   = $this->url_params;
 		$action_url   = $this->action_url;
 		$send_money   = $CFG->modlos_currency_unit.' '.number_format($this->send_money);
 

@@ -8,41 +8,42 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 class  ResetRegion
 {
-	var $hasPermit	= false;
-	var $isGuest	= true;
-	var $course_id	= 0;
+	var $hasPermit	 = false;
+	var $isGuest	 = true;
+	var $course_id	 = 0;
+	var $instance_id = 0;
 
-	var $action_url = '';
-	var $reset_url  = '';
-	var $return_url = '';
-	var $action 	= 'all';	// 'all', 'personal', 'close'
-	var $userid 	= 0;		// 0: my, >1: other
+	var $action_url  = '';
+	var $reset_url   = '';
+	var $return_url  = '';
+	var $action 	 = 'all';	// 'all', 'personal', 'close'
+	var $userid 	 = 0;		// 0: my, >1: other
 
 	var $use_sloodle = false;
 	var $avatars_num = false;
 	var $max_avatars = false;
 	var $isAvatarMax = false;
 
-	var $reseted    = false;
-	var $hasError	= false;
-	var $errorMsg 	= array();
+	var $reseted     = false;
+	var $hasError	 = false;
+	var $errorMsg 	 = array();
 
 	// Moodle DB
-	var $UUID		= '';
-	var $uid 	   	= 0;
-	var $regionName = '';
-	var $serverName = '';
-	var $ownerName  = '';
-	var $locX  		= 0;
-	var $locY	 	= 0;
-	var $sizeX  	= 0;
-	var $sizeY	 	= 0;
-	var $serverURI	= '';
-	var $serverPort	= '';
+	var $UUID		 = '';
+	var $uid 	   	 = 0;
+	var $regionName  = '';
+	var $serverName  = '';
+	var $ownerName   = '';
+	var $locX  		 = 0;
+	var $locY	 	 = 0;
+	var $sizeX  	 = 0;
+	var $sizeY	 	 = 0;
+	var $serverURI	 = '';
+	var $serverPort	 = '';
 
 
 
-	function  ResetRegion($course_id) 
+	function  ResetRegion($course_id, $instance_id) 
 	{
 		global $CFG, $USER;
 
@@ -67,15 +68,16 @@ class  ResetRegion
 		$action = optional_param('action', 'personal', PARAM_ALPHA);
 		$userid = optional_param('userid', '0', PARAM_INT);
 
-		$course_param = '?course='.$course_id;
-		$option_param = '&amp;action='.$action.'&amp;userid='.$userid;
-		if ($action=='close') $option_param = '&amp;action=personal&amp;userid='.$userid;
+		$url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$option_params = '&amp;action='.$action.'&amp;userid='.$userid;
+		if ($action=='close') $option_params = '&amp;action=personal&amp;userid='.$userid;
 
 		$this->action      = $action;
 		$this->course_id   = $course_id;
-		$this->action_url  = $module_url.'/actions/reset_region.php'.$course_param.$option_param;
-		$this->reset_url   = $module_url.'/actions/reset_region.php'.$course_param.$option_param;
-		$this->return_url  = $module_url.'/actions/regions_list.php'.$course_param.$option_param;
+		$this->instance_id = $instance_id;
+		$this->action_url  = $module_url.'/actions/reset_region.php'.$url_params.$option_params;
+		$this->reset_url   = $module_url.'/actions/reset_region.php'.$url_params.$option_params;
+		$this->return_url  = $module_url.'/actions/regions_list.php'.$url_params.$option_params;
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
 		// get UUID from POST or GET

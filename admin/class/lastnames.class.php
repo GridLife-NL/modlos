@@ -14,7 +14,8 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 class  LastNames
 {
 	var $action_url;
-	var $course_id = 0;
+	var $course_id   = 0;
+	var $instance_id = 0;
 
 	var $lastnames			= array();
 	var $lastnames_active	= array();
@@ -24,15 +25,16 @@ class  LastNames
 	var $select_inactive   	= array();		// move to inactive
 	var $addname;
 
-	var $hasPermit = false;
-	var $hasError  = false;
-	var $errorMsg  = array();
+	var $hasPermit   = false;
+	var $hasError    = false;
+	var $errorMsg    = array();
 
 
 
-	function  LastNames($course_id) 
+	function  LastNames($course_id, $instance_id) 
 	{
-		$this->course_id  = $course_id;
+		$this->course_id    = $course_id;
+		$this->instance_id  = $instance_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;

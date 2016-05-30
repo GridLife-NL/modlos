@@ -17,11 +17,12 @@ class  RegionsList
 	var $owner_url;
 	var $rest_url;
 
-	var $course_id;
-	var $user_id;
+	var $course_id   = 0;
+	var $instance_id = 0;
+	var $user_id     = 0;
 	var $get_action;
-	var $url_param = '';
-	var $action_param = '';
+	var $url_params = '';
+	var $action_params = '';
 
 	var $isAvatarMax = false;
 	var $use_sloodle = false;
@@ -58,27 +59,27 @@ class  RegionsList
 
 
 
-	function  RegionsList($course_id, $show_all, $userid=0)
+	function  RegionsList($course_id, $instance_id, $show_all, $userid=0)
 	{
 		global $CFG, $USER;
 
-		$this->isGuest   = isguestuser();
-		$this->hasPermit = hasModlosPermit($course_id);
-		$this->course_id = $course_id;
-		$this->user_id   = $userid;
-		$this->show_all	 = $show_all;
+		$this->isGuest     = isguestuser();
+		$this->hasPermit   = hasModlosPermit($course_id);
+		$this->course_id   = $course_id;
+		$this->instance_id = $instance_id;
+		$this->user_id     = $userid;
+		$this->show_all	   = $show_all;
 		if (!$show_all and $userid==0) $this->user_id = $USER->id;
 
-		$this->url_param = '?dmmy_param=';
-		if ($course_id>0) $this->url_param .= '&course='.$course_id;
+		$this->url_params  = '?course='.$course_id.'&amp;instance='.$instance_id;
 
-		if ($show_all) $this->action_param = '&amp;action=all';
-		else           $this->action_param = '&amp;action=personal&amp;userid='.$userid;
+		if ($show_all) $this->action_params = '&amp;action=all';
+		else           $this->action_params = '&amp;action=personal&amp;userid='.$userid;
 
-		$this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param;
-		$this->search_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_param.$this->action_param.'&amp;pstart=0';
-		$this->reset_url  = CMS_MODULE_URL.'/actions/reset_region.php'.$this->url_param.$this->action_param;
-		$this->owner_url  = $CFG->wwwroot.'/user/view.php'.$this->url_param;
+		$this->action_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_params;
+		$this->search_url = CMS_MODULE_URL.'/actions/regions_list.php'.$this->url_params.$this->action_params.'&amp;pstart=0';
+		$this->reset_url  = CMS_MODULE_URL.'/actions/reset_region.php'.$this->url_params.$this->action_params;
+		$this->owner_url  = $CFG->wwwroot.'/user/view.php'.$this->url_params;
 
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		$avatars_num = modlos_get_avatars_num($USER->id);
@@ -289,9 +290,8 @@ class  RegionsList
 		$userinfo        = $CFG->modlos_userinfo_link;
 
 		$has_permit 	 = $this->hasPermit;
-		$url_param 		 = $this->url_param;
-		$action_amp 	 = $this->action_param;
-		$course_amp 	 = "&amp;course=$this->course_id";
+		$url_params 	 = $this->url_params;
+		$action_amp 	 = $this->action_params;
 		$order_amp 		 = "&amp;order=$this->order&amp;desc=$this->order_desc";
 		$pstart_amp		 = "&amp;pstart=$this->pstart";
 		$plimit_amp		 = "&amp;plimit=$this->plimit";
@@ -299,7 +299,7 @@ class  RegionsList
 		$pstart_		 = '&amp;pstart=';
 		$plimit_		 = '&amp;plimit=';
 		$action_url 	 = $this->action_url.$lnk_region.$action_amp;
-		$worldmap_url	 = CMS_MODULE_URL.'/actions/map_action.php?course='.$this->course_id;
+		$worldmap_url	 = CMS_MODULE_URL.'/actions/map_action.php'.$this->url_params;
 
 		$desc_name  	 = "&amp;desc=$this->desc_name";
 		$desc_x 		 = "&amp;desc=$this->desc_x";
@@ -308,8 +308,8 @@ class  RegionsList
 		$desc_avatar	 = "&amp;desc=$this->desc_avatar";
 
 
-        $number_ttl      = get_string('modlos_num',             'block_modlos');
-        $edit_ttl        = get_string('modlos_edit',            'block_modlos');
+        $number_ttl      = get_string('modlos_num',            'block_modlos');
+        $edit_ttl        = get_string('modlos_edit',           'block_modlos');
 		$location_x		 = get_string('modlos_location_x',	   'block_modlos');
 		$location_y	  	 = get_string('modlos_location_y',	   'block_modlos');
 		$region_name_ttl = get_string('modlos_region_name',	   'block_modlos');

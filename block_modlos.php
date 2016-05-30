@@ -53,20 +53,23 @@ class block_modlos extends block_base
 		if ($this->content!=NULL) {
 			return $this->content;
 		}
+
 		$id = optional_param('id', 0, PARAM_INT);
+		$instance_id = $this->instance->id;
+		$params = '?course='.$id.'&amp;instance='.$instance_id;
 	   
 		$this->content = new stdClass;
 		$this->content->text = '';
-//		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/show_status.php?course='.$id.'">'. get_string('modlos_status','block_modlos').'</a><br />';
-		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_online.php?course='.$id.'&amp;order=login&amp;desc=1">'. get_string('modlos_online_avatars','block_modlos').'</a><br />';
-		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php?course='.$id.'">'.  get_string('modlos_world_map','block_modlos').'</a><br />';
-		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'&amp;order=name">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
+//		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/show_status.php'.$params.'">'. get_string('modlos_status','block_modlos').'</a><br />';
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_online.php'.$params.'&amp;order=login&amp;desc=1">'. get_string('modlos_online_avatars','block_modlos').'</a><br />';
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php'.$params.'">'.  get_string('modlos_world_map','block_modlos').'</a><br />';
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php'.$params.'&amp;order=name">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
 
 		$isguest = isguestuser();
 		if (!$isguest and $USER->id!=0) {
-			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php?course='.$id.'&amp;order=name&amp;action=personal&amp;userid='.$USER->id.'">'.get_string('modlos_my_regions','block_modlos').'</a><br />';
-			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php?course='.$id.'&amp;order=login&amp;desc=1">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';
-			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php?course='.$id.'&amp;action=personal&amp;userid='.$USER->id.'">'.get_string('modlos_my_avatars','block_modlos').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php'.$params.'&amp;order=name&amp;action=personal&amp;userid='.$USER->id.'">'.get_string('modlos_my_regions','block_modlos').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php'.$params.'&amp;order=login&amp;desc=1">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php'.$params.'&amp;action=personal&amp;userid='.$USER->id.'">'.get_string('modlos_my_avatars','block_modlos').'</a><br />';
 
 			$isAvatarMax = false;
 			$avatars_num = modlos_get_avatars_num($USER->id);
@@ -74,13 +77,13 @@ class block_modlos extends block_base
 			if (!hasModlosPermit($id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
 			//
 			if (!$isAvatarMax) {
-				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar.php?course='.$id.'">'.get_string('modlos_avatar_create','block_modlos').'</a><br />';
+				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar.php'.$params.'">'.get_string('modlos_avatar_create','block_modlos').'</a><br />';
 			}
 			if ($CFG->modlos_activate_events) {
-				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/events_list.php?course='.$id.'">'.get_string('modlos_events_list','block_modlos').'</a><br />';
+				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/events_list.php'.$params.'">'.get_string('modlos_events_list','block_modlos').'</a><br />';
 			}
 			if (hasModlosPermit($id)) {
-				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/admin/actions/management.php?course='.$id.'">'.get_string('modlos_manage_menu','block_modlos').'</a><br />';
+				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/admin/actions/management.php'.$params.'">'.get_string('modlos_manage_menu','block_modlos').'</a><br />';
 			}
 		}
 		$this->content->text.= "<hr />";		
@@ -142,7 +145,8 @@ class block_modlos extends block_base
 
 
 	// exec parser
-	function cron(){
+	function cron()
+	{
 		global $CFG;
        
 		require($CFG->dirroot.'/blocks/modlos/include/cron.php');

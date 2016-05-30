@@ -27,9 +27,10 @@
       </tr>
     </table>
 
-    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
-    <input type="hidden" name="quest"   value="yes" />
+    <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"   value="<?php echo $this->course_id ?>" />
+    <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
+    <input type="hidden" name="quest"    value="yes" />
 
     <div align=center>
       <strong><div style="padding:4px; margin-top:10px;" ><?php echo $select_cmd?></div></strong>

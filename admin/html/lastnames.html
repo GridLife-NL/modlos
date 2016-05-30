@@ -29,8 +29,8 @@
 
 <form name="assignform" id="assignform" action="<?php echo $this->action_url?>" method="POST">
 
-  <table cellpadding="2" cellspacing="1" align="center" border="2" bordercolor="#FFFFFF" bgcolor="#F8F8F8">
-    <tr height=26 style="background-color: #E0E0E0">
+  <table cellpadding="2" cellspacing="1" align="center" border="2" bordercolor="#ffffff" bgcolor="#f8f8f8">
+    <tr height=26 style="background-color: #e0e0e0;">
       <td style="width:45%; font-size:120%; text-align:center">
         <strong><?php echo $select1_title?></strong>
       </td>
@@ -54,9 +54,10 @@
         </select>
       </td>
 
-      <td valign="top" style="text-align:center; background-color: #E8E8E8">
-		<input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-		<input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
+      <td valign="top" style="text-align:center; background-color:#e8e8e8;">
+		<input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>" />
+		<input type="hidden" name="course"   value="<?php echo $this->course_id ?>" />
+        <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
         <input name="submit_left"   type="submit" id="submit_left"   value="&larr;" />
         <input name="submit_right"  type="submit" id="submit_right"  value="&rarr;" />
         <input name="submit_delete" type="submit" id="submit_delete" value="del" />
@@ -74,7 +75,7 @@
       </td>
     </tr>
 
-    <tr height=24 style="background-color: #E0E0E0">
+    <tr height=24 style="background-color: #e0e0e0;">
       <td style="width:45%; font-size:120%; text-align:left">
           <input type="text" name="addname" size="24" value="" 
                   onFocus ="document.assignform.submit_left.disabled=true;

@@ -110,8 +110,9 @@
         <input type="text" name="regionname" size="15" value="<?php echo htmlspecialchars($this->regionname)?>" style="height:16px;">
       </td>
       <td style="width:100px; table-layout:fixed;">
-        <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-        <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+        <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>" />
+        <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
+        <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
         <input type="Submit" value="Search" style="height:20px;">&nbsp;&nbsp;&nbsp;
       </td>
       <td style="width:50px; table-layout:fixed; color:#000;">
@@ -201,7 +202,7 @@
 
         <td style="color: #0055cc;">
           <?php if (!$this->isGuest) {?>
-            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_param.'&region='.$dat['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_params.'&region='.$dat['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
               <strong><?php echo $dat['regionName']?></strong>
             </a>
           <?php } else {?>
@@ -231,7 +232,7 @@
 
         <td style="color: #2222ff;">
           <?php if (!$this->isGuest) {?>
-            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$dat['avatar_uuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_params.'&agent='.$dat['avatar_uuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
               <strong style="color: #005;"><?php echo htmlspecialchars($dat['avatar_name'])?></strong>
             </a>
           <?php } else {?>

@@ -8,30 +8,36 @@
 if (!defined('CMS_MODULE_PATH')) exit();
 
 require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
+require_once(CMS_MODULE_PATH.'/admin/lib/modlos_avatar_templ_form.php');
 
 
 class  AvatarTempl
 {
+	var $db_data 	= array();
 	var $context;
 
+	var $course_id   = 0;
+	var $instance_id = 0;
+
 	var $action_url;
-    var $url_param;
-	var $course_id  = 0;
-	var $hasPermit  = false;
+    var $url_params;
+	var $hasPermit   = false;
 
-//	var $editAvatar = false;
-	var $editAvatar = true;
+//	var $editAvatar  = false;
+	var $editAvatar  = true;
 
-	var $mfrom		= null;
+	var $mform		 = null;
 
-	var	$hasError   = false;
-	var	$errorMsg   = array();
-
+	var	$hasError    = false;
+	var	$errorMsg    = array();
 
 
-	function  AvatarTempl($course_id) 
+
+	function  AvatarTempl($course_id, $instance_id) 
 	{
-		$this->course_id = $course_id;
+		$this->course_id   = $course_id;
+		$this->instance_id = $instance_id;
+
 		$this->hasPermit = hasModlosPermit($this->course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
@@ -39,18 +45,26 @@ class  AvatarTempl
 			return;
 		}
 	
-		$this->url_param  = '?course='.$this->course_id;
+		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
 		$this->action_url = CMS_MODULE_URL.'/admin/actions/avatar_templ.php';
-		$this->context    = jbxl_get_course_context($course_id);
+
+		//
+		if ($instance_id==0) {
+			$ids = jbxl_block_instance_ids('modlos', $course_id);
+			foreach ($ids as $id) {
+				$instance_id = $id->id;
+				break;
+			}
+		}
+		$this->context = context_block::instance($instance_id); 
 	}
 
 
 	function  execute()
 	{
-		global $CFG;
+		global $CFG, $DB;
 
 		if (!$this->hasPermit) return false;
-
 
 		if ($formdata = data_submitted()) {	// POST
 			if (!confirm_sesskey()) {
@@ -59,6 +73,7 @@ class  AvatarTempl
 				return false;
 			}
 			
+			$context_id = $this->context->id;
 			$title = required_param('title', PARAM_TEXT);
 			$uuid  = required_param('uuid',  PARAM_TEXT);
 
@@ -66,155 +81,97 @@ class  AvatarTempl
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_templ_invalid_ttl', 'block_modlos');
 			}
+			//if (!isGuid($uuid)) {
 			if (isGuid($uuid)) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_templ_invalid_uuid', 'block_modlos');
 			}
 			if ($this->hasError) return false;
 
-
-			// File Manager. see lib/filelib.php
-			$picid = file_get_submitted_draft_itemid('picfile');
-			file_save_draft_area_files($picid, $this->context->id, 'block_modlos', 'templ_picture', $picid, array('maxfiles'=>1));
-print_r($ret);
-echo "<br />";
-
 			// Editor
 			$explain = required_param_array('explain', PARAM_RAW);
 
+			$template_avatar = array();
+			$template_avatar['num']       = 0;
+			$template_avatar['title']     = $title;
+			$template_avatar['uuid']      = $uuid;
+			$template_avatar['text']      = htmlspecialchars($explain['text']); // htmlspecialchars_decode
+			$template_avatar['format']    = $explain['format'];
+			$template_avatar['itemid'] 	  = 0;
+			$template_avatar['fileid']    = 0;
+			$template_avatar['filehash']  = '';
+			$template_avatar['timestamp'] = time();
 
+			// File Manager. see lib/filelib.php
+			$picid = file_get_submitted_draft_itemid('picfile');
+			file_save_draft_area_files($picid, $context_id, 'block_modlos', 'templ_picture', $picid, array('maxfiles'=>1));
 
+			$condition = "itemid=$picid AND contextid=$context_id AND component='block_modlos' AND filearea='templ_picture' AND ".
+                         "filename!='\\.' AND filesize!='0' AND source!='NULL'";
+			$query_str = 'SELECT id,contenthash FROM '.$CFG->prefix.'files WHERE '.$condition;
 
+			if ($files = $DB->get_records_sql($query_str)) {
+				foreach($files as $file) {
+					$template_avatar['fileid']   = $file->id;
+					$template_avatar['filehash'] = $file->contenthash;
+					break;
+				}
+			}
+			$template_avatar['itemid'] = $picid;
 
+			$query_str = 'SELECT max(num) FROM '.$CFG->prefix.'modlos_template_avatars';
+			$obj_nums = $DB->get_records_sql($query_str);
+			foreach ($obj_nums as $obj_num) {
+				$num = $obj_num->{'max(num)'};
+				break;
+			}
+			$template_avatar['num'] = $num + 1;
 
+			$DB->insert_record('modlos_template_avatars', $template_avatar);
 
-
-
-
-
-
-/*
-//    file_get_submitted_draft_itemid()
-//    file_prepare_draft_area()
-//    file_save_draft_area_files()
-
-
-$editor = file_get_submitted_draft_itemid('explain');
-
-$text = file_prepare_draft_area($editor, $this->context->id, 'block_modlos', 'templ_explain', null, null);
-print_r($editor);
-echo "<br />";
-echo "------------------------------------------------------------------- <br />";
-print_r($text);
-echo "<br />";
-echo "------------------------------------------------------------------- <br />";
- 
-			$expid = file_get_submitted_draft_itemid('explain');														// see lib/filelib.php
-print_r($xxxx);
-echo "<br />";
-
-			file_save_draft_area_files($expid, $this->context->id, 'block_modlos', 'templ_explain', $expid, $maxfile_option);	// see lib/filelib.php
-*/
-
-/*
-			$explain = required_param_array('explain', PARAM_RAW);
-//			$data = new stdClass();
-//			$data->explain_editor = $explain;
-
-			$data = null;
-			$data = file_prepare_standard_editor   ($data, 'explain', array('maxfiles'=>100), null, 'block_modlos', 'templ_explain', null);
-			$data = file_postupdate_standard_editor($data, 'explain', $maxfile_option, $this->context, 'block_modlos', 'templ_explain', $explain['itemid']);
-*/
-
-
-/*
-
-
-
-$course_id = optional_param('course', SITEID, PARAM_INT);
-			//$expid = file_get_submitted_draft_itemid('explain');
-
-
-print_r($_POST);
-
-/*
-Array ( [course] => 95 [sesskey] => sLKVyrYHFl [_qf__modlos_avatar_templ_form] => 1 [title] => sss [uuid] => ssss [explain] => Array ( [text] => [format] => 1 [itemid] => 147255135 ) [picfile] => 876368646 [submitbutton] => 変更を保存する ) 
-
-
-			$text  = file_save_draft_area_files($expid, $this->context->id, 'block_modlos', 'templ_explain', $expid, array());
-
-//			redirect($this->action_url.$this->url_param, 'Please wait....', 0);
-
-
-			$data = file_prepare_standard_editor($data, 'textfield', $textfieldoptions, $context, 'mod_somemodule', 'somearea', $data->id);
-*/
-			
-
-
-/*
-			//file_prepare_draft_area   ($picid, $this->context->id, 'block_modlos', 'templ_picture', $entry->id, array());
-			$expid = file_get_submitted_draft_itemid('explain');
-			$text = file_prepare_draft_area($expid, $this->context->id, 'block_modlos', 'templ_explain', $entry->id, array());
-
-			$entry->attachments = $picid;
-			$entry->entry = array('text'=>$text, 'format'=>FORMAT_HTML, 'itemid'=>$expid);
-
+			//
+			$this->mform = new modlos_avatar_templ_form(true);		// clear POST
 			$this->mform->set_data(array('id'=>$this->course_id));
 
-/*
-
-			$maxfiles  = 1;
-			$maxbytes  = $this->course->maxbytes;
 
 
-//			$fmoption = array('subdirs'=>false, 'maxfiles'=>$maxfiles, 'maxbytes'=>$maxbytes);
-			$entry = file_prepare_standard_editor($entry, 'explain', array(), $this->context->id, 'block_modlos', 'templ_explain', $entry->id);
-			$entry = file_prepare_standard_filemanager($entry, 'picfile', array(), null, 'block_modlos', 'templ_picture', $entry->id);
-print_r($_POST);
-echo "$this->context->id<br />";
-			$entry = file_postupdate_standard_editor($entry, 'explain', array(), null, 'block_modlos', 'templ_explain', $entry->id);
-print_r($entry);
-echo "<br />";
+			$url = file_rewrite_pluginfile_urls('@@PLUGINFILE@@/', 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $picid);
 
-/*
-			if ($data = $formdata->get_data()) {
-    			// ... store or update $entry
-				$option = array('subdirs'=>0, 'maxbytes'=>$maxbytes, 'maxfiles'=>50);
-//				file_save_draft_area_files($data->attachments, $context->id, 'block_modlos', 'attachment', $entry->id, $option);
-print_r($data);
-			}
-*/
-
-//print_r($_POST);
-//$draftitemid = file_get_submitted_draft_itemid('explain');
-//echo "XXX => $draftitemid<br />";
-//$draftitemid = file_get_submitted_draft_itemid('picfile');
-//echo "XXX => $draftitemid<br />";
-
-
-/*
-			$definitionoptions = array('subdirs'=>false, true, 'maxfiles'=>$maxfiles, 'maxbytes'=>$maxbytes, 'trusttext'=>true);
-			$attachmentoptions = array('subdirs'=>false, 'maxfiles'=>$maxfiles, 'maxbytes'=>$maxbytes);
-
-			$entry = file_prepare_standard_editor($entry, 'definition', $definitionoptions, $context, 'block_modlos', 'entry', $entry->id);
-			$entry = file_prepare_standard_filemanager($entry, 'attachment', $attachmentoptions, $context, 'block_modlos', 'attachment', $entry->id);
-
-			$entry->cmid = $cm->id;
-*/
-
-
-
-
-
-
-
-
-
+echo $url;
+//com
 		}
 
-		require_once(CMS_MODULE_PATH.'/admin/lib/modlos_avatar_templ_form.php');
-		$this->mform = new modlos_avatar_templ_form(true);		// clear POST
-		$this->mform->set_data(array('id'=>$this->course_id));
+		// GET
+		else {
+			$this->mform = new modlos_avatar_templ_form();
+			$this->mform->set_data(array('id'=>$this->course_id));
+		}
+
+/*
+$a = jbxl_get_course_context($this->course_id);
+echo $a->id."<br />"; 
+$context = jbxl_block_context('modlos');
+echo $context->contextlevel."<br />"; 
+echo $context->id."<br />"; 
+echo CONTEXT_BLOCK."<br />";
+$context = jbxl_module_context('apply');
+echo $context->contextlevel."<br />"; 
+echo $context->id."<br />"; 
+*/
+
+		$num = 0;
+		$templates = $DB->get_records('modlos_template_avatars', array(), 'num ASC');
+		foreach($templates as $template) {
+			$this->db_data[$num]['num']  	 = $template->num;
+			$this->db_data[$num]['title'] 	 = $template->title;
+			$this->db_data[$num]['uuid'] 	 = $template->uuid;
+			$this->db_data[$num]['text'] 	 = $template->text;
+			$this->db_data[$num]['format'] 	 = $template->format;
+			$this->db_data[$num]['filehash'] = $template->filehash;
+			$this->db_data[$num]['text']     = $template->text;
+			$this->db_data[$num]['html']	 = htmlspecialchars_decode($template->text);
+			$num++;
+		}
 
 		return true;
 	}
@@ -226,7 +183,8 @@ print_r($data);
 
 		$grid_name  = $CFG->modlos_grid_name;
 
-		$url_param  = $this->url_param;
+		$avatars    = $this->db_data;
+		$url_params = $this->url_params;
 		$action_url = $this->action_url;
 		$mform      = $this->mform;
 

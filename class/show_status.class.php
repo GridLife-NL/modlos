@@ -27,7 +27,7 @@ class  ShowStatus
 
 
 
-	function  ShowStatus($course_id) 
+	function  ShowStatus($course_id, $instance_id) 
 	{
 		global $CFG, $USER;
 
@@ -44,7 +44,6 @@ class  ShowStatus
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 	}
-
 
 
 	function  execute()
@@ -67,7 +66,6 @@ class  ShowStatus
 	}
 
 
-
 	function  print_page() 
 	{
 		global $CFG;
@@ -86,7 +84,4 @@ class  ShowStatus
 
 		include(CMS_MODULE_PATH.'/html/show_status.html');
 	}
-
 }
-
-?>

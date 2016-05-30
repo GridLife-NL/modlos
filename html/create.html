@@ -27,7 +27,7 @@
     <?php if ($this->hasPermit) {?>
       <tr>
         <td width="180" class="head"><?php echo $uuid_ttl?></td>
-        <td width="460" class="even" style="color: #2060b0;"><?php echo $this->UUID?></td>	
+        <td width="460" class="even" style="color: #2060b0;"><?php echo $this->UUID?></td>
       </tr>
     <?php }?>
     <tr>
@@ -36,17 +36,17 @@
     </tr>
     <tr>
       <td class="head"><?php echo $lastname_ttl?></td>
-      <td class="even"><?php echo $this->lastname?></td>	
+      <td class="even"><?php echo $this->lastname?></td>
     </tr>
     <tr>
       <td class="head"><?php echo $home_region_ttl?></td>
-      <td class="odd" ><?php echo $this->hmregion?></td>	
+      <td class="odd" ><?php echo $this->hmregion?></td>
     </tr>
 
     <?php if ($this->hasPermit) {?>
       <tr>
         <td class="head"><?php echo $ownername_ttl?></td>
-        <td class="even"><?php echo $this->ownername?></td>	
+        <td class="even"><?php echo $this->ownername?></td>
       </tr>
     <?php }?>
 
@@ -115,8 +115,8 @@
               <option value="<?php echo $region?>" ><?php echo $region?></option>
             <?php }?>
           <?php }?>
-		</select>
-	  </td>
+        </select>
+      </td>
     </tr>
 
     <?php if ($this->use_sloodle and $this->avatars_num>0) {?>
@@ -128,19 +128,19 @@
       <input type="hidden" name="sloodle" value="sloodle" />
     <?php }?>
 
-	<?php if ($this->hasPermit) {?>
+    <?php if ($this->hasPermit) {?>
       <tr>
         <td class="head"><?php echo $ownername_ttl?></td>
         <td class="even"><input name="ownername" size="32" maxlength="30" value="<?php echo $pv_ownername?>" /></td>
       </tr>
     <?php }?>
 
-	<?php if ($this->isDisclaimer and !$this->hasPermit) {?>
+    <?php if ($this->isDisclaimer and !$this->hasPermit) {?>
       <tr>
         <td class="head"><?php echo $disclaimer_ttl?></td>
         <td class="odd">
           <textarea name="disclaimer" cols="64" rows="8" readonly="readonly"><?php echo $disclaimer?></textarea>
-      	  <label><input name="agree" type="checkbox" value="agree"  />&nbsp;<?php echo $disclaim_agree?></label>
+          <label><input name="agree" type="checkbox" value="agree"  />&nbsp;<?php echo $disclaim_agree?></label>
         </td>
       </tr>
     <?php } else {?>
@@ -172,8 +172,9 @@
   <?php }?>
 
   <div align="center" style="margin-top:10px;">
-    <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
-    <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
+    <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
+    <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
+    <input type="hidden" name="sesskey"  value="<?php echo sesskey()?>" />
     <input type="submit" value="<?php echo $create_ttl?>" />&nbsp;
     <input type="reset"  value="<?php echo $reset_ttl?>" />
   </div>

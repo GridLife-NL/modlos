@@ -5,13 +5,15 @@ if (!defined('CMS_MODULE_PATH')) {
 }
 require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
-$course_id = optional_param('course', '1', PARAM_INT);
+$course_id   = optional_param('course',   '1', PARAM_INT);
+$instance_id = optional_param('instance', '0', PARAM_INT);
 if (!$course_id) $course_id = 1;
 $course = $DB->get_record('course', array('id'=>$course_id));
 
+echo "====> $instance_id";
 
 ob_start();
-print_tabnav_manage('settings', $course);
+print_tabnav_manage('settings', $course_id, $instance_id);
 $tabnav = ob_get_contents();
 ob_end_clean();
 

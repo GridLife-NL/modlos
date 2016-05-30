@@ -17,11 +17,12 @@ class  CurrencyLog
 	var $nosystem    = 0;
 
 	var $course_id   = 0;
+	var $instance_id = 0;
 	var $agent_id	 = '';
 	var $user_id	 = 0;
 	var $action_url;
 	var $owner_url;
-	var $url_param   = '';
+	var $url_params  = '';
 
 	var $use_sloodle = false;
 	var $isAvatarMax = false;
@@ -48,7 +49,7 @@ class  CurrencyLog
 
 
 
-	function  CurrencyLog($course_id, $agent_id)
+	function  CurrencyLog($course_id, $instance_id, $agent_id)
 	{
 		global $CFG, $USER;
 
@@ -61,11 +62,12 @@ class  CurrencyLog
 		$this->hasPermit   = hasModlosPermit($course_id);
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		$this->course_id   = $course_id;
+		$this->instance_id = $instance_id;
 		$this->agent_id	   = $agent_id;
 
-		$this->url_param  = '?agent='.$agent_id.'&amp;course='.$course_id;
-		$this->action_url = CMS_MODULE_URL.'/actions/currency_log.php'. $this->url_param;
-		$this->owner_url  = $CFG->wwwroot.'/user/view.php'.$this->url_param;
+		$this->url_params = '?agent='.$agent_id.'&amp;course='.$course_id.'&amp;instance='.$instance_id;
+		$this->action_url = CMS_MODULE_URL.'/actions/currency_log.php'. $this->url_params;
+		$this->owner_url  = $CFG->wwwroot.'/user/view.php'.$this->url_params;
 
 		$my_avatars  = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
@@ -285,7 +287,7 @@ class  CurrencyLog
 //		$userinfo       = $CFG->modlos_userinfo_link;
 
 		$has_permit		= $this->hasPermit;
-		$url_param		= $this->url_param;
+		$url_params		= $this->url_params;
 		$action_url		= $this->action_url;
 		$desc_amp		= "&amp;desc=$this->desc_next";
 		$nosystem_amp	= "&amp;nosystem=$this->nosystem";
@@ -318,7 +320,7 @@ class  CurrencyLog
 
 		$avtname = opensim_get_avatar_name($this->agent_id);
 		$userurl = "<a style=\"cursor:pointer;\" onClick=\"window.open('".CMS_MODULE_URL.'/helper/agent.php'.
-                              $url_param.'&agent='.$this->agent_id."',null,'toolbar=no,location=no,directories=no,".
+                              $url_params.'&agent='.$this->agent_id."',null,'toolbar=no,location=no,directories=no,".
                               "status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')\">";
 		$userurl.= $avtname['fullname'];
 		$userurl.= '</a>';

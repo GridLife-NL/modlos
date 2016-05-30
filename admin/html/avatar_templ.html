@@ -30,21 +30,23 @@
 <?php }?>
 
 
-<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0" style="margin-bottom:10px;">
+<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0" style="margin-bottom:15px;">
   <tr>
     <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $content?></strong></td>
   </tr>
 </table>
 
 
+<!--
 <table align="center" class="generalbox">
 <tr>
 <td class="generalboxcontent" align="center">
 
   <form action="<?php echo $this->action_url?>" method="POST">
-    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
-    <input type="hidden" name="quest"   value="yes" />
+    <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"   value="<?php echo $this->course_id ?>" />
+    <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
+    <input type="hidden" name="quest"    value="yes" />
     <div align=center>
       <br />
       <strong style="padding:4px;">
@@ -53,12 +55,35 @@
     </div>
   </form>
 
-</td>
-</tr>
+-->
+
+
+<table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="margin-bottom:10px;">
+  <tr>
+    <td class="generalboxcontent" style="width:100%; table-layout:fixed;">
+      <?php foreach($avatars as $avatar) {?>
+      <table width="100%" border="1" align="center" cellpadding="0" cellspacing="0" bgcolor="#f0f0f0">
+        <tr border=2>
+          <td><strong style="color:#co4040;">EDIT</strong></td>
+          <td><?php echo $avatar['num']?></td>
+          <td colspan="3"><?php echo $avatar['title']?></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><?php echo $avatar['filehash']?></td>
+          <td>&nbsp;</td>
+          <td align="left"><?php echo $avatar['html']?></td>
+        </tr>
+      </table>
+      <?php }?>
+    </td>
+  </tr>
 </table>
 
+
+<br />
 <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0" style="margin-top:10px; margin-bottom:10px;">
-  <tr><td><hr /></td></tr>
   <tr>
     <td>
       <?php $mform->display()?>

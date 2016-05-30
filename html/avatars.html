@@ -103,7 +103,7 @@
 <table width="85%" cellpadding=3 border=0 cellspacing=1 bgcolor="#e0e0e0" align="center">
   <form action="<?php echo $this->search_url.$plimit_amp.$loss_amp.$order_amp?>" method="POST">
     <tr bgcolor="#f0f0a0">
-      <td style="width:20px;  table-layout:fixed;">&nbsp;</td>
+      <td style="width: 20px; table-layout:fixed;">&nbsp;</td>
       <td style="width:120px; table-layout:fixed; color:#000;">
         <strong><?php echo $user_search?>:</strong>
       </td>
@@ -116,9 +116,10 @@
         <input type="text" name="lastname"  size="15" value="<?php echo htmlspecialchars($this->lastname)?>"  style="height:16px;">
       </td>
       <td style="width:80px; table-layout:fixed;">
-        <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-        <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
-        <input type="Submit" value="Search" style="height:20px;">&nbsp;&nbsp;&nbsp;
+        <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>" />
+        <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
+        <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
+        <input type="Submit" value="Search"  style="height:20px;">&nbsp;&nbsp;&nbsp;
       </td>
       <td style="width:60px; table-layout:fixed; color:#000">
         <a href="<?php echo $this->action_url.$plimit_amp.$pstart_amp.$order_amp.$loss_amp.$action_amp?>" target="_self">
@@ -216,7 +217,7 @@
 
         <td>
           <?php if (!$this->isGuest) {?>
-            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_param.'&agent='.$dat['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_params.'&agent='.$dat['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
               <strong style="color: #005;">
                 <?php echo htmlspecialchars($dat['firstname'])?>&nbsp;&nbsp;<?php echo htmlspecialchars($dat['lastname'])?>
               </strong>
@@ -251,7 +252,7 @@
 
         <td>
           <?php if (!$this->isGuest) {?>
-            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_param.'&region='.$dat['region_id']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+            <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/sim.php'.$url_params.'&region='.$dat['region_id']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
               <?php if ($dat['online']) {?>
                 <strong style="color: #005500;"><?php echo $dat['region']?></strong>
               <?php } else {?>

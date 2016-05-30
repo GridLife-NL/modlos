@@ -13,7 +13,7 @@ class  EditEvent
 	var $userid	   = 0;			// owner id of this process
 	var $uid	   = 0;			// first creator of this event
 
-	var $url_param = '';
+	var $url_params = '';
 	var $hasError  = false;
 	var $errorMsg  = array();
 
@@ -26,6 +26,7 @@ class  EditEvent
 	var $return_url;
 
 	var $course_id	  = '';
+	var $instance_id  = '';
 	var $isAvatarMax  = false;
 
 	var $event_id	  = 0;
@@ -62,7 +63,7 @@ class  EditEvent
 
 
 
-	function  EditEvent($course_id)
+	function  EditEvent($course_id, $instance_id)
 	{
 		global $CFG, $USER;
 
@@ -73,24 +74,22 @@ class  EditEvent
 		}
 
 		$this->hasPermit = hasModlosPermit($course_id);
-		$this->course_id = $course_id;
-		$this->userid	 = $USER->id;
+		$this->course_id   = $course_id;
+		$this->instance_id = $instance_id;
+		$this->userid	   = $USER->id;
 
 		// GET eventid
 		$this->event_id  = optional_param('eventid', '0', PARAM_INT);
 
-		$this->url_param = '?dmmy_param=';
-		if ($course_id>0) $this->url_param .= '&amp;course='.$course_id;
+		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
 
-		$this->action_url = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_param;
-		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$this->url_param.'&amp;eventid=';
-		$this->return_url = CMS_MODULE_URL.'/actions/events_list.php'. $this->url_param;
+		$this->action_url = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_params;
+		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$this->url_params.'&amp;eventid=';
+		$this->return_url = CMS_MODULE_URL.'/actions/events_list.php'. $this->url_params;
 
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
-
-		if ($course_id>0) $this->course_patam = '?course='.$course_id;
 	}
 
 

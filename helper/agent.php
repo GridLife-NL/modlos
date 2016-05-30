@@ -9,8 +9,9 @@ if (isguestuser()) {
     exit('<h4>Guest User is not allowed to access this page!!</h4>');
 }
 
-$agent 	   = required_param('agent', PARAM_TEXT);
-$course_id = optional_param('course', '1', PARAM_INT);
+$agent 	     = required_param('agent', PARAM_TEXT);
+$course_id   = optional_param('course',   '1', PARAM_INT);
+$instance_id = optional_param('instance', '0', PARAM_INT);
 if (!isGUID($agent) or $agent=='00000000-0000-0000-0000-000000000000') exit("<h4>bad agent uuid!! ($agent)</h4>");
 if (!$course_id) $course_id = 1; 
 
@@ -138,8 +139,7 @@ $guid = str_replace('-', '', $UUID);
 
 ///////////////
 
-$course_amp = '';
-if ($course_id>0) $course_amp = '&amp;course='.$course_id;
+$url_amp = '&amp;course='.$course_id.'&amp;instance='.$instance_id;
 
 $user_info_ttl  = get_string('modlos_user_info',	 'block_modlos');
 $avatar_info_ttl= get_string('modlos_avatar_info',	 'block_modlos');
