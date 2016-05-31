@@ -53,6 +53,7 @@ $string['modlos_update_ttl'] 		= ' UPDATE ';
 $string['modlos_create_ttl'] 		= ' CREATE ';
 $string['modlos_return_ttl'] 		= ' RETURN ';
 $string['modlos_close_ttl'] 		= ' CLOSE ';
+$string['modlos_save_ttl'] 		    = ' SAVE ';
 
 $string['modlos_avatar_reset_ttl'] 	= ' RESET AVATAR ';
 $string['modlos_avatar_create_ttl'] = ' CREATE AVATAR ';
@@ -436,7 +437,7 @@ $string['modlos_templ_ttl']  		= 'Management of Template Avatars';
 $string['modlos_templ_add_ttl']  	= 'Add a Template Avatar';
 $string['modlos_templ_add_ok']      = 'Template avatar was added';
 $string['modlos_templ_add_fail']    = 'Failed to add a avatar as template';
-$string['modlos_templ_add_more_ttl']= 'Add More Template Avatar';
+$string['modlos_templ_add_more_ttl']= ' Add More Template Avatar ';
 
 $string['modlos_templ_edit_ttl'] 	= 'Edit Template Avatar';
 $string['modlos_templ_edit_ok']     = 'Template avatar was modified';
@@ -459,6 +460,8 @@ $string['modlos_templ_uuid_mis']    = 'Original avatar with the specified UUID d
 $string['modlos_templ_uuid_invalid']= 'Invalid UUID';
 $string['modlos_templ_title_invalid']='Invalid title';
 $string['modlos_templ_db_fail']     = 'DB operation failed';
+
+$string['modlos_order_num']         = 'Order Number';
 
 $string['modlos_menu_tab']		    = 'Normal Menu';
 $string['modlos_manage_tab']		= 'Management';

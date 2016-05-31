@@ -7,17 +7,6 @@ require_once $CFG->libdir.'/formslib.php';
 
 class modlos_avatar_templ_form extends moodleform
 {
-	var $clear = false;
-
-
-	function modlos_avatar_templ_form($clear=false, $action=null, $customdata=null, $method='post', $target='', $attributes=null, $editable=true)
-	{
-		$this->clear = $clear;
-
-		parent::moodleform($action, $customdata, $method, $target, $attributes, $editable);
-	}
-
-
 	function definition() 
 	{
 		global $USER, $CFG;
@@ -30,14 +19,15 @@ class modlos_avatar_templ_form extends moodleform
 		$instance_id = optional_param('instance', '0', PARAM_INT);
 		$mform->addElement('hidden', 'course',   $course_id);
 		$mform->addElement('hidden', 'instance', $instance_id);
-		$mform->setType('course', PARAM_INT);
+		$mform->addElement('hidden', 'avatar');
+		$mform->setType('course',   PARAM_INT);
 		$mform->setType('instance', PARAM_INT);
+		$mform->setType('avatar',   PARAM_INT);
 		
-		if ($this->clear) {
-			$_POST = array();
-		}
-
 		$mform->addElement('header', 'add_templ', get_string('modlos_templ_add_ttl', 'block_modlos'), null);
+
+		$mform->addElement('text', 'order', get_string('modlos_order_num','block_modlos'), array('size'=>'10'));
+		$mform->setType('order', PARAM_INT);
 
 		$mform->addElement('text', 'title', get_string('modlos_templ_title','block_modlos'), array('size'=>'52'));
 		$mform->setType('title', PARAM_TEXT);

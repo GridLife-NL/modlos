@@ -19,6 +19,8 @@ class  AvatarTempl
 	var $course_id   = 0;
 	var $instance_id = 0;
 
+	var $total_num   = 0;
+
 	var $action_url;
 	var $add_url;
 	var $edit_url;
@@ -68,6 +70,7 @@ class  AvatarTempl
 		if (!$this->hasPermit) return false;
 
 		$num = 0;
+
 		$templates = $DB->get_records('modlos_template_avatars', array(), 'num ASC');
 		foreach($templates as $template) {
 			$this->db_data[$num]['id']  	 = $template->id;
@@ -93,6 +96,7 @@ class  AvatarTempl
 			$num++;
 		}
 
+		$this->total_num = $num;
 		return true;
 	}
 
@@ -109,6 +113,7 @@ class  AvatarTempl
 		$add_url    = $this->add_url;
 		$edit_url   = $this->edit_url;
 		$delete_url = $this->delete_url;
+		$total_num  = $this->total_num;
 
 		$avatar_templ_ttl = get_string('modlos_templ_ttl', 'block_modlos');
 		$modlos_edit      = get_string('modlos_edit_ttl',  'block_modlos');

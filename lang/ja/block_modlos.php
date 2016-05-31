@@ -53,6 +53,7 @@ $string['modlos_update_ttl'] 		= ' 更新 ';
 $string['modlos_create_ttl'] 		= ' 作成 ';
 $string['modlos_return_ttl'] 		= ' 戻る ';
 $string['modlos_close_ttl'] 		= ' 閉じる ';
+$string['modlos_save_ttl'] 			= ' 保存 ';
 
 $string['modlos_avatar_reset_ttl'] 	= ' リセット ';
 $string['modlos_avatar_create_ttl'] = ' 作成 ';
@@ -434,7 +435,7 @@ $string['modlos_templ_ttl']  		= '初期アバター管理';
 $string['modlos_templ_add_ttl']  	= '初期アバターの登録';
 $string['modlos_templ_add_ok']      = 'アバターを登録しました';
 $string['modlos_templ_add_fail']    = 'アバターの登録に失敗しました';
-$string['modlos_templ_add_more_ttl']= 'さらにアバターを追加登録する';
+$string['modlos_templ_add_more_ttl']= ' さらにアバターを追加登録する ';
 
 $string['modlos_templ_edit_ttl'] 	= '初期アバターの編集';
 $string['modlos_templ_edit_ok'] 	= 'アバターの登録を変更しました';
@@ -457,6 +458,8 @@ $string['modlos_templ_uuid_mis']    = '指定された UUIDを持つアバター
 $string['modlos_templ_uuid_invalid']= '無効な UUID です';
 $string['modlos_templ_title_invalid']='無効なタイトルです';
 $string['modlos_templ_db_fail']     = 'DB の操作に失敗しました';
+
+$string['modlos_order_num']     	= '順序番号';
 
 $string['modlos_menu_tab']          = '一般メニュー';
 $string['modlos_manage_tab']        = '管理画面';

@@ -19,6 +19,7 @@ class  AvatarTemplAdd
 	var $course_id   = 0;
 	var $instance_id = 0;
 	var $isPost      = false;
+	var $order_num   = 1;
 
 	var $return_url;
 	var $add_url;
@@ -76,7 +77,19 @@ class  AvatarTemplAdd
 		$cancel = optional_param('cancel', null, PARAM_TEXT);
 		if ($cancel) redirect($this->return_url, 'Please wait ...', 0);
 
-		if ($formdata = data_submitted()) {	// POST
+		//
+		$num = 0;
+		$query_str = 'SELECT max(num) FROM '.$CFG->prefix.'modlos_template_avatars';
+		$obj_nums = $DB->get_records_sql($query_str);
+		foreach ($obj_nums as $obj_num) {
+			$num = $obj_num->{'max(num)'};
+			break;
+		}
+		$this->order_num = $num + 1;
+
+		//
+		// POST
+		if ($formdata = data_submitted()) {
 			//
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
@@ -87,6 +100,7 @@ class  AvatarTemplAdd
 			$context_id = $this->context->id;
 			$title = trim(required_param('title', PARAM_TEXT));
 			$uuid  = trim(required_param('uuid',  PARAM_TEXT));
+			$order = optional_param('order', $this->order_num, PARAM_INT);
 
 			// Check
 			if ($title==null) {
@@ -109,14 +123,15 @@ class  AvatarTemplAdd
 					$this->errorMsg[] = get_string('modlos_templ_uuid_dup', 'block_modlos');
 				}
 			}
+			if ($order<=0) $order = $this->order_num;
+
 			if ($this->hasError) return false;
 
-			//
 			// Editor
 			$explain = required_param_array('explain', PARAM_RAW);
 
 			$template = array();
-			$template['num']       = 0;
+			$template['num']       = $order;
 			$template['title']     = $title;
 			$template['uuid']      = $uuid;
 			$template['text']      = htmlspecialchars($explain['text']); // htmlspecialchars_decode
@@ -126,7 +141,6 @@ class  AvatarTemplAdd
 			$template['itemid']    = 0;
 			$template['timestamp'] = time();
 
-			//
 			// File Manager. see lib/filelib.php
 			$picid = file_get_submitted_draft_itemid('picfile');
 			file_save_draft_area_files($picid, $context_id, 'block_modlos', 'templ_picture', $picid, array('maxfiles'=>1));
@@ -144,15 +158,6 @@ class  AvatarTemplAdd
 			}
 			$template['itemid'] = $picid;
 
-			$query_str = 'SELECT max(num) FROM '.$CFG->prefix.'modlos_template_avatars';
-			$obj_nums = $DB->get_records_sql($query_str);
-			foreach ($obj_nums as $obj_num) {
-				$num = $obj_num->{'max(num)'};
-				break;
-			}
-			$template['num'] = $num + 1;
-
-			//
 			// insert to DB
 			$ret = $DB->insert_record('modlos_template_avatars', $template);
 			if (!$ret) {
@@ -161,7 +166,6 @@ class  AvatarTemplAdd
 				return false;
 			}
 
-			//
 			// for Display
 			$this->db_data             = $template;
 			$this->db_data['id']       = $ret;
@@ -190,12 +194,12 @@ class  AvatarTemplAdd
 
 		if (!$this->isPost) {
 			$this->mform = new modlos_avatar_templ_form();
-			$this->mform->set_data(array('id'=>$this->course_id));
+			$data = array('order'=>$this->order_num, 'submitbutton'=>get_string('modlos_save_ttl', 'block_modlos'));
+			$this->mform->set_data($data);
 		}
 
 		$grid_name  = $CFG->modlos_grid_name;
 
-//		$avatars    = $this->db_data;
 		$avatar     = $this->db_data;
 		$mform      = $this->mform;
 		$isPost		= $this->isPost;
@@ -208,8 +212,6 @@ class  AvatarTemplAdd
 		$add_more         = get_string('modlos_templ_add_more_ttl', 'block_modlos');
 		$add_success      = get_string('modlos_templ_add_ok',   'block_modlos');
 		$add_fail         = get_string('modlos_templ_add_fail', 'block_modlos');
-//		$modlos_edit      = get_string('modlos_edit_ttl',  'block_modlos');
-//		$modlos_delete    = get_string('modlos_delete_ttl','block_modlos');
 		$modlos_return    = get_string('modlos_return_ttl','block_modlos');
 
 		include(CMS_MODULE_PATH.'/admin/html/avatar_templ_add.html');

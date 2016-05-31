@@ -76,38 +76,24 @@ class  AvatarTemplEdit
 		$cancel = optional_param('cancel', null, PARAM_TEXT);
 		if ($cancel) redirect($this->return_url, 'Please wait ...', 0);
 
-		$avatarid = required_param('avatar', PARAM_INT);
-		$ret = $DB->get_record('modlos_template_avatars', array('id'=>$avatarid));
-		if (!$ret) redirect($this->return_url, get_string('modlos_templ_uuid_mis', 'block_modlos'), 2);
+		$avatarid = required_param('avatar', PARAM_INT);	// Primary Key
+		$template = $DB->get_record('modlos_template_avatars', array('id'=>$avatarid));
+		if (!$template) redirect($this->return_url, get_string('modlos_templ_uuid_mis', 'block_modlos'), 2);
 
-
-print_r($ret);
-
-
-
-
-
-		if ($this->hasError) return false;
-
-
-
-
-
-
-
-
-
-		if ($formdata = data_submitted()) {	// POST
+		//
+		// POST
+		if ($formdata = data_submitted()) {	
 			//
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 				return false;
 			}
-			
+
 			$context_id = $this->context->id;
 			$title = trim(required_param('title', PARAM_TEXT));
 			$uuid  = trim(required_param('uuid',  PARAM_TEXT));
+			$order = optional_param('order', '0', PARAM_INT);
 
 			// Check
 			if ($title==null) {
@@ -123,7 +109,8 @@ print_r($ret);
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_templ_uuid_mis', 'block_modlos');
 			}
-			else {
+			//
+			if ($uuid!=$template->uuid) {
 				$ret = $DB->get_record('modlos_template_avatars', array('uuid'=>$uuid));
 				if ($ret) {
 					$this->hasError = true;
@@ -131,23 +118,33 @@ print_r($ret);
 				}
 			}
 			if ($this->hasError) return false;
-
 			//
+			if ($order<=0) {
+				$num = 0;
+				$query_str = 'SELECT max(num) FROM '.$CFG->prefix.'modlos_template_avatars';
+				$obj_nums = $DB->get_records_sql($query_str);
+				foreach ($obj_nums as $obj_num) {
+					$num = $obj_num->{'max(num)'};
+					break;
+				}
+				$order = $num + 1;
+			}
+
 			// Editor
 			$explain = required_param_array('explain', PARAM_RAW);
 
-			$template = array();
-			$template['num']       = 0;
-			$template['title']     = $title;
-			$template['uuid']      = $uuid;
-			$template['text']      = htmlspecialchars($explain['text']); // htmlspecialchars_decode
-			$template['format']    = $explain['format'];
-			$template['fileid']    = 0;
-			$template['filename']  = '';
-			$template['itemid']    = 0;
-			$template['timestamp'] = time();
+			$update = array();
+			$update['id']        = $template->id;
+			$update['num']       = $order;
+			$update['title']     = $title;
+			$update['uuid']      = $uuid;
+			$update['text']      = htmlspecialchars($explain['text']); // htmlspecialchars_decode
+			$update['format']    = $explain['format'];
+			$update['fileid']    = 0;
+			$update['filename']  = '';
+			$update['itemid']    = 0;
+			$update['timestamp'] = time();
 
-			//
 			// File Manager. see lib/filelib.php
 			$picid = file_get_submitted_draft_itemid('picfile');
 			file_save_draft_area_files($picid, $context_id, 'block_modlos', 'templ_picture', $picid, array('maxfiles'=>1));
@@ -158,47 +155,53 @@ print_r($ret);
 
 			if ($files = $DB->get_records_sql($query_str)) {
 				foreach($files as $file) {
-					$template['fileid']   = $file->id;
-					$template['filename'] = $file->filename;
+					$update['fileid']   = $file->id;
+					$update['filename'] = $file->filename;
 					break;
 				}
 			}
-			$template['itemid'] = $picid;
+			$update['itemid'] = $picid;
 
-			$query_str = 'SELECT max(num) FROM '.$CFG->prefix.'modlos_template_avatars';
-			$obj_nums = $DB->get_records_sql($query_str);
-			foreach ($obj_nums as $obj_num) {
-				$num = $obj_num->{'max(num)'};
-				break;
-			}
-			$template['num'] = $num + 1;
-
-			//
 			// insert to DB
-			$ret = $DB->insert_record('modlos_template_avatars', $template);
+			$ret = $DB->update_record('modlos_template_avatars', $update);
 			if (!$ret) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_templ_db_fail', 'block_modlos').' (insert)';
+				$this->errorMsg[] = get_string('modlos_templ_db_fail', 'block_modlos').' (update)';
 				return false;
 			}
 
-			//
 			// for Display
-			$this->db_data             = $template;
-			$this->db_data['id']       = $ret;
-			$this->db_data['html']     = htmlspecialchars_decode($template['text']);
+			$this->db_data             = $update;
+			$this->db_data['html']     = $explain['text'];
 			$this->db_data['fullname'] = '';
 			$this->db_data['url']      = '';
 
-			$name = opensim_get_avatar_name($template['uuid']);
+			$name = opensim_get_avatar_name($update['uuid']);
 			if ($name) $this->db_data['fullname'] = $name['fullname'];
 
-			if ($template['filename']) {
-				$path = '@@PLUGINFILE@@/'.$template['filename'];
-				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $template['itemid']);
+			if ($update['filename']) {
+				$path = '@@PLUGINFILE@@/'.$update['filename'];
+				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $update['itemid']);
 			}
 
 			$this->isPost = true;
+		}
+
+		//
+		// GET
+		else {
+			$data = array();
+			$data['avatar']  = $template->id;
+			$data['order']   = $template->num;
+			$data['title'] 	 = $template->title;
+			$data['uuid'] 	 = $template->uuid;
+			$data['explain'] = array();
+			$data['explain']['text']   = htmlspecialchars_decode($template->text);
+			$data['explain']['format'] = $template->format;
+			$data['picfile'] = $template->itemid;
+
+			$this->mform = new modlos_avatar_templ_form();
+			$this->mform->set_data($data);
 		}
 
 		return true;
@@ -209,30 +212,24 @@ print_r($ret);
 	{
 		global $CFG;
 
-		if (!$this->isPost) {
-			$this->mform = new modlos_avatar_templ_form();
-			$this->mform->set_data(array('id'=>$this->course_id));
+		if (!$this->isPost and $this->mform==null) {
+			$this->mform = new modlos_avatar_templ_form();	// Error
 		}
 
 		$grid_name  = $CFG->modlos_grid_name;
 
-//		$avatars    = $this->db_data;
 		$avatar     = $this->db_data;
 		$mform      = $this->mform;
 		$isPost		= $this->isPost;
 
 		$return_url = $this->return_url;
-		$add_url    = $this->add_url;
 
 		$avatar_templ_ttl = get_string('modlos_templ_ttl', 'block_modlos');
-		$add_avatar       = get_string('modlos_templ_add_ttl', 'block_modlos');
-		$add_more         = get_string('modlos_templ_add_more_ttl', 'block_modlos');
-		$add_success      = get_string('modlos_templ_add_ok',   'block_modlos');
-		$add_fail         = get_string('modlos_templ_add_fail', 'block_modlos');
-//		$modlos_edit      = get_string('modlos_edit_ttl',  'block_modlos');
-//		$modlos_delete    = get_string('modlos_delete_ttl','block_modlos');
+		$edit_avatar      = get_string('modlos_templ_edit_ttl',  'block_modlos');
+		$edit_success     = get_string('modlos_templ_edit_ok',   'block_modlos');
+		$edit_fail        = get_string('modlos_templ_edit_fail', 'block_modlos');
 		$modlos_return    = get_string('modlos_return_ttl','block_modlos');
 
-		include(CMS_MODULE_PATH.'/admin/html/avatar_templ_add.html');
+		include(CMS_MODULE_PATH.'/admin/html/avatar_templ_edit.html');
 	}
 }
