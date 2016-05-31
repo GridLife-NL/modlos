@@ -59,10 +59,10 @@ class  AvatarTemplEdit
 
 		//
 		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
-		$this->return_url = CMS_MODULE_URL.'/admin/actions/avatar_templ.php'.$this->url_params.'&amp;action=add';
-		$this->add_url    = CMS_MODULE_URL.'/admin/actions/avatar_templ_add.php'.$this->url_params.'&amp;action=add';
-		$this->edit_url   = CMS_MODULE_URL.'/admin/actions/avatar_templ_edit.php'.$this->url_params.'&amp;action=';
-		$this->delete_url = CMS_MODULE_URL.'/admin/actions/avatar_templ_delete.php'.$this->url_params.'&amp;action=';
+		$this->return_url = CMS_MODULE_URL.'/admin/actions/avatar_templ.php'.$this->url_params;
+		$this->add_url    = CMS_MODULE_URL.'/admin/actions/avatar_templ_add.php'.$this->url_params;
+		$this->edit_url   = CMS_MODULE_URL.'/admin/actions/avatar_templ_edit.php'.$this->url_params.'&amp;avatar=';
+		$this->delete_url = CMS_MODULE_URL.'/admin/actions/avatar_templ_delete.php'.$this->url_params.'&amp;avatar=';
 	}
 
 
@@ -72,44 +72,82 @@ class  AvatarTemplEdit
 
 		if (!$this->hasPermit) return false;
 
+		// Cancel
+		$cancel = optional_param('cancel', null, PARAM_TEXT);
+		if ($cancel) redirect($this->return_url, 'Please wait ...', 0);
+
+		$avatarid = required_param('avatar', PARAM_INT);
+		$ret = $DB->get_record('modlos_template_avatars', array('id'=>$avatarid));
+		if (!$ret) redirect($this->return_url, get_string('modlos_templ_uuid_mis', 'block_modlos'), 2);
+
+
+print_r($ret);
+
+
+
+
+
+		if ($this->hasError) return false;
+
+
+
+
+
+
+
+
+
 		if ($formdata = data_submitted()) {	// POST
+			//
 			if (!confirm_sesskey()) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 				return false;
 			}
 			
-			$cancel = optional_param('cancel', null, PARAM_TEXT);
-			if ($cancel) redirect($this->action_url.$this->event_id, 'Please wait ...', 0);
-
 			$context_id = $this->context->id;
-			$title = required_param('title', PARAM_TEXT);
-			$uuid  = required_param('uuid',  PARAM_TEXT);
+			$title = trim(required_param('title', PARAM_TEXT));
+			$uuid  = trim(required_param('uuid',  PARAM_TEXT));
 
+			// Check
 			if ($title==null) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_templ_invalid_ttl', 'block_modlos');
+				$this->errorMsg[] = get_string('modlos_templ_title_invalid', 'block_modlos');
 			}
-			if (!isGuid($uuid)) {
+			$info = opensim_get_avatar_info($uuid);
+			if ($info==null) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_templ_invalid_uuid', 'block_modlos');
+				$this->errorMsg[] = get_string('modlos_templ_uuid_invalid', 'block_modlos');
+			}
+			else if ($info['fullname']==null or $info['hgURI']!=null) {
+				$this->hasError = true;
+				$this->errorMsg[] = get_string('modlos_templ_uuid_mis', 'block_modlos');
+			}
+			else {
+				$ret = $DB->get_record('modlos_template_avatars', array('uuid'=>$uuid));
+				if ($ret) {
+					$this->hasError = true;
+					$this->errorMsg[] = get_string('modlos_templ_uuid_dup', 'block_modlos');
+				}
 			}
 			if ($this->hasError) return false;
 
+			//
 			// Editor
 			$explain = required_param_array('explain', PARAM_RAW);
 
-			$template_avatar = array();
-			$template_avatar['num']       = 0;
-			$template_avatar['title']     = $title;
-			$template_avatar['uuid']      = $uuid;
-			$template_avatar['text']      = htmlspecialchars($explain['text']); // htmlspecialchars_decode
-			$template_avatar['format']    = $explain['format'];
-			$template_avatar['fileid']    = 0;
-			$template_avatar['filename']  = '';
-			$template_avatar['itemid'] 	  = 0;
-			$template_avatar['timestamp'] = time();
+			$template = array();
+			$template['num']       = 0;
+			$template['title']     = $title;
+			$template['uuid']      = $uuid;
+			$template['text']      = htmlspecialchars($explain['text']); // htmlspecialchars_decode
+			$template['format']    = $explain['format'];
+			$template['fileid']    = 0;
+			$template['filename']  = '';
+			$template['itemid']    = 0;
+			$template['timestamp'] = time();
 
+			//
 			// File Manager. see lib/filelib.php
 			$picid = file_get_submitted_draft_itemid('picfile');
 			file_save_draft_area_files($picid, $context_id, 'block_modlos', 'templ_picture', $picid, array('maxfiles'=>1));
@@ -120,12 +158,12 @@ class  AvatarTemplEdit
 
 			if ($files = $DB->get_records_sql($query_str)) {
 				foreach($files as $file) {
-					$template_avatar['fileid']   = $file->id;
-					$template_avatar['filename'] = $file->filename;
+					$template['fileid']   = $file->id;
+					$template['filename'] = $file->filename;
 					break;
 				}
 			}
-			$template_avatar['itemid'] = $picid;
+			$template['itemid'] = $picid;
 
 			$query_str = 'SELECT max(num) FROM '.$CFG->prefix.'modlos_template_avatars';
 			$obj_nums = $DB->get_records_sql($query_str);
@@ -133,13 +171,31 @@ class  AvatarTemplEdit
 				$num = $obj_num->{'max(num)'};
 				break;
 			}
-			$template_avatar['num'] = $num + 1;
+			$template['num'] = $num + 1;
+
 			//
-			$ret = $DB->insert_record('modlos_template_avatars', $template_avatar);
+			// insert to DB
+			$ret = $DB->insert_record('modlos_template_avatars', $template);
 			if (!$ret) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_templ_invalid_uuid', 'block_modlos');
+				$this->errorMsg[] = get_string('modlos_templ_db_fail', 'block_modlos').' (insert)';
 				return false;
+			}
+
+			//
+			// for Display
+			$this->db_data             = $template;
+			$this->db_data['id']       = $ret;
+			$this->db_data['html']     = htmlspecialchars_decode($template['text']);
+			$this->db_data['fullname'] = '';
+			$this->db_data['url']      = '';
+
+			$name = opensim_get_avatar_name($template['uuid']);
+			if ($name) $this->db_data['fullname'] = $name['fullname'];
+
+			if ($template['filename']) {
+				$path = '@@PLUGINFILE@@/'.$template['filename'];
+				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $template['itemid']);
 			}
 
 			$this->isPost = true;
@@ -160,16 +216,23 @@ class  AvatarTemplEdit
 
 		$grid_name  = $CFG->modlos_grid_name;
 
-		$avatars    = $this->db_data;
+//		$avatars    = $this->db_data;
+		$avatar     = $this->db_data;
 		$mform      = $this->mform;
 		$isPost		= $this->isPost;
 
-		$url_params = $this->url_params;
-		$action_url = $this->action_url;
+		$return_url = $this->return_url;
+		$add_url    = $this->add_url;
 
 		$avatar_templ_ttl = get_string('modlos_templ_ttl', 'block_modlos');
-		$content          = get_string('modlos_templ_add_ttl', 'block_modlos');
+		$add_avatar       = get_string('modlos_templ_add_ttl', 'block_modlos');
+		$add_more         = get_string('modlos_templ_add_more_ttl', 'block_modlos');
+		$add_success      = get_string('modlos_templ_add_ok',   'block_modlos');
+		$add_fail         = get_string('modlos_templ_add_fail', 'block_modlos');
+//		$modlos_edit      = get_string('modlos_edit_ttl',  'block_modlos');
+//		$modlos_delete    = get_string('modlos_delete_ttl','block_modlos');
+		$modlos_return    = get_string('modlos_return_ttl','block_modlos');
 
-		include(CMS_MODULE_PATH.'/admin/html/avatar_templ_edit.html');
+		include(CMS_MODULE_PATH.'/admin/html/avatar_templ_add.html');
 	}
 }
