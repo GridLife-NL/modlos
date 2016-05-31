@@ -85,8 +85,8 @@ class  AvatarTemplAdd
 			}
 			
 			$context_id = $this->context->id;
-			$title = required_param('title', PARAM_TEXT);
-			$uuid  = required_param('uuid',  PARAM_TEXT);
+			$title = trim(required_param('title', PARAM_TEXT));
+			$uuid  = trim(required_param('uuid',  PARAM_TEXT));
 
 			// Check
 			if ($title==null) {
@@ -163,10 +163,14 @@ class  AvatarTemplAdd
 
 			//
 			// for Display
-			$this->db_data         = $template;
-			$this->db_data['id']   = $ret;
-			$this->db_data['url']  = null;
-			$this->db_data['html'] = htmlspecialchars_decode($template['text']);
+			$this->db_data             = $template;
+			$this->db_data['id']       = $ret;
+			$this->db_data['html']     = htmlspecialchars_decode($template['text']);
+			$this->db_data['fullname'] = '';
+			$this->db_data['url']      = '';
+
+			$name = opensim_get_avatar_name($template['uuid']);
+			if ($name) $this->db_data['fullname'] = $name['fullname'];
 
 			if ($template['filename']) {
 				$path = '@@PLUGINFILE@@/'.$template['filename'];

@@ -36,29 +36,35 @@
       <?php foreach($avatars as $avatar) {?>
       <table width="100%" border="1" cellpadding="0" cellspacing="0" bgcolor="#f0f0f0" style="margin-bottom:10px;">
         <tr>
-          <td style="width:40px; table-layout:fixed;">
+          <td style="width: 40px; table-layout:fixed;">
             <strong>
               <a href="<?php echo $edit_url.$avatar['id']?>" style="color:#c02020;"><?php echo $modlos_edit?></a>
             </strong>
           </td>
-          <td style="width:30px; table-layout:fixed;"><?php echo $avatar['num']?></td>
-          <td colspan="3" style="width:530px; table-layout:fixed;"><strong style="color:#2020c0;"><?php echo $avatar['title']?></strong></td>
+          <td style="width: 30px; table-layout:fixed;"><?php echo $avatar['num']?></td>
+          <td colspan="3" style="width:730px; table-layout:fixed;">
+            <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
+          </td>
         </tr>
 
         <tr>
-          <td style="width:40px; table-layout:fixed;" valign="top">
+          <td style="width: 40px; table-layout:fixed;" valign="top">
             <strong>
               <a href="<?php echo $delete_url.$avatar['id']?>" style="color:#c02020;"><?php echo $modlos_delete?></a>
             </strong>
           </td>
-          <td style="width:30px; table-layout:fixed;">&nbsp;</td>
-          <td colspan="3" style="width:530px; table-layout:fixed;">
-           <strong style="color:#202020;"><?php echo $avatar['fullname'].' ('.$avatar['uuid'].')'?></strong>
+          <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
+          <td style="width:260px;table-layout:fixed;">
+            <strong style="color:#404040;"><?php echo $avatar['fullname']?></strong>
+          </td>
+          <td style="width: 10px; table-layout:fixed;">&nbsp;</td>
+          <td style="width:460px; table-layout:fixed;">
+            <strong style="color:#404040;"><?php echo $avatar['uuid']?></strong>
           </td>
         </tr>
 
         <tr>
-          <td style="width:40px; table-layout:fixed;">&nbsp;</td>
+          <td style="width: 40px; table-layout:fixed;">&nbsp;</td>
           <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
           <td style="width:260px; table-layout:fixed;">
             <?php if ($avatar['url']) {?>
@@ -67,8 +73,8 @@
               <img src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width="256" />
             <?php }?>
           </td>
-          <td style="width:  5px; table-layout:fixed;">&nbsp;</td>
-          <td style="width:465px; table-layout:fixed; word-break:break-all;" valign="top"><?php echo $avatar['html']?></td>
+          <td style="width: 10px; table-layout:fixed;">&nbsp;</td>
+          <td style="width:460px; table-layout:fixed; word-break:break-all;" valign="top"><?php echo $avatar['html']?></td>
         </tr>
       </table>
       <?php }?>
