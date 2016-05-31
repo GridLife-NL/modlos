@@ -337,8 +337,8 @@ $string['modlos_map_size_desc'] 	= 'Specify default size(px) of SIM icon on the 
 
 $string['modlos_max_avatars'] 		= 'Max Number of Avatars';
 $string['modlos_max_avatars_desc'] 	= 'Max number of avatars that a user can own';
-$string['modlos_base_avatar']       = 'Base Avatar\'s GUID';
-$string['modlos_base_avatar_desc']  = 'Specifies the GUID of the avatar as a base for creating the avatar.';
+$string['modlos_base_avatar']       = 'Base Avatar\'s UUID(GUID)';
+$string['modlos_base_avatar_desc']  = 'Specifies the UUID(GUID) of the avatar as a base for creating the avatar.';
 $string['modlos_template_system']   = 'Use of the Template Avatar System';
 $string['modlos_template_system_desc']  = 'When using the Template Avatar System and more than one avatar is registered as a template, '.
                                       'above-mentioned modlos_base_avatar is ignored';

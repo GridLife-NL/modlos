@@ -363,8 +363,8 @@ $string['modlos_grpdb_wkey_desc'] 	= 'Flotsam Group Function を使用する場�
 
 $string['modlos_use_currency_svr']	= 'DTL/NSL Money サーバの使用';
 $string['modlos_use_currency_svr_desc'] = 'DTL/NSL Money サーバを使用するかどうか？';
-$string['modlos_banker'] 			= 'バンカーアバターのUUID　（未実装）';
-$string['modlos_banker_desc'] 		= 'バンカーアバター （お金の管理を行うアバター） のUUID (GUID)';
+$string['modlos_banker'] 			= 'バンカーアバターのUUID(GUID)';
+$string['modlos_banker_desc'] 		= 'バンカーアバター （お金の管理を行うアバター） のUUID(GUID)';
 $string['modlos_currency_uri'] 		= 'Money サーバのURI';
 $string['modlos_currency_uri_desc'] = 'DTL/NSL Money サーバを使用する場合は，そのURLを指定する';
 $string['modlos_currency_key'] 		= 'ViewerとMoneyスクリプトとのアクセスキー';
