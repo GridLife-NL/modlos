@@ -158,7 +158,7 @@
     <input type="reset"  value="<?php echo $reset_ttl?>" />
   </div>
 
-<?php if ($use_template) {?>
+<?php if ($use_template and !$hide_template and $total_num>0) {?>
 
 <br />
 <table width="760" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0" style="margin-top:20px; margin-bottom:10px;">

@@ -22,6 +22,7 @@ class  CreateAvatar
 	var $base_avatar 	= '00000000-0000-0000-0000-000000000000';
 	var $db_data        = array();
 	var $select_num     = 0;
+	var $total_num      = 0;
 	var $isPost         = false;
 
 	var	$avatars_num 	= 0;
@@ -149,6 +150,7 @@ class  CreateAvatar
 			}
 			$count++;
 		}
+		$this->total_num = $count;
 
 		//
 		// POST
@@ -247,9 +249,10 @@ class  CreateAvatar
 	{
 		global $CFG, $OUTPUT;
 
-		$grid_name 	  = $CFG->modlos_grid_name;
-		$disclaimer	  = $CFG->modlos_disclaimer_content;
-		$use_template = $CFG->modlos_template_system;
+		$grid_name 	   = $CFG->modlos_grid_name;
+		$disclaimer	   = $CFG->modlos_disclaimer_content;
+		$use_template  = $CFG->modlos_template_system;
+		$hide_template = $CFG->modlos_template_hide;
 
 		$avatar_create_ttl  = get_string('modlos_avatar_create', 'block_modlos');
 		$avatar_select_ttl  = get_string('modlos_avatar_select', 'block_modlos');
@@ -274,6 +277,7 @@ class  CreateAvatar
 
 		$avatars    = $this->db_data;
 		$select_num	= $this->select_num;
+		$total_num  = $this->total_num;
 		// 
 		$pv_ownername = $this->ownername;
 		if ($this->created_avatar) {

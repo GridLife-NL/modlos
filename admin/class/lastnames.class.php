@@ -76,9 +76,9 @@ class  LastNames
 			$rgt = optional_param('submit_right',  '', PARAM_TEXT);
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
 
-			$this->select_inactive = optional_param('select_left',  '', PARAM_TEXT);
-			$this->select_active   = optional_param('select_right', '', PARAM_TEXT);
-			$this->addname		   = optional_param('addname',		'', PARAM_TEXT);
+			$this->select_inactive = optional_param_array('select_left',  array(), PARAM_TEXT);
+			$this->select_active   = optional_param_array('select_right', array(), PARAM_TEXT);
+			$this->addname		   = optional_param('addname', '', PARAM_TEXT);
 
 			if	   ($add!='') $this->action_add();
 			elseif ($lft!='') $this->action_move_active();
@@ -130,6 +130,7 @@ class  LastNames
 			return;
 		}
 
+		$obj = new stdClass();
 		$obj->lastname = $this->addname;
 		$obj->state    = AVATAR_LASTN_ACTIVE;
 		$DB->insert_record('modlos_lastnames', $obj);

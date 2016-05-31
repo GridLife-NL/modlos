@@ -68,33 +68,32 @@ class  AvatarTempl
 
 		if (!$this->hasPermit) return false;
 
-		$num = 0;
+		$count = 0;
 		$templates = $DB->get_records('modlos_template_avatars', array(), 'num ASC');
 		foreach($templates as $template) {
-			$this->db_data[$num]['id']  	 = $template->id;
-			$this->db_data[$num]['num']  	 = $template->num;
-			$this->db_data[$num]['title'] 	 = $template->title;
-			$this->db_data[$num]['uuid'] 	 = $template->uuid;
-			$this->db_data[$num]['text'] 	 = $template->text;
-			$this->db_data[$num]['format'] 	 = $template->format;
-			$this->db_data[$num]['filename'] = $template->filename;
-			$this->db_data[$num]['text']     = $template->text;
-			$this->db_data[$num]['html']     = htmlspecialchars_decode($template->text);
-			$this->db_data[$num]['fullname'] = '';
-			$this->db_data[$num]['url'] 	 = '';
+			$this->db_data[$count]['id']  	   = $template->id;
+			$this->db_data[$count]['num']  	   = $template->num;
+			$this->db_data[$count]['title']    = $template->title;
+			$this->db_data[$count]['uuid'] 	   = $template->uuid;
+			$this->db_data[$count]['text'] 	   = $template->text;
+			$this->db_data[$count]['format']   = $template->format;
+			$this->db_data[$count]['filename'] = $template->filename;
+			$this->db_data[$count]['text']     = $template->text;
+			$this->db_data[$count]['html']     = htmlspecialchars_decode($template->text);
+			$this->db_data[$count]['fullname'] = '';
+			$this->db_data[$count]['url'] 	   = '';
 
 			$name = opensim_get_avatar_name($template->uuid);
-			if ($name) $this->db_data[$num]['fullname'] = $name['fullname'];
+			if ($name) $this->db_data[$count]['fullname'] = $name['fullname'];
 
 			if ($template->filename) {
 				$path = '@@PLUGINFILE@@/'.$template->filename;
-				$this->db_data[$num]['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $template->itemid);
+				$this->db_data[$count]['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $template->itemid);
 			}
-
-			$num++;
+			$count++;
 		}
 
-		$this->total_num = $num;
+		$this->total_num = $count;
 		return true;
 	}
 
