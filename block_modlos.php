@@ -63,13 +63,17 @@ class block_modlos extends block_base
 //		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/show_status.php'.$params.'">'. get_string('modlos_status','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_online.php'.$params.'&amp;order=login&amp;desc=1">'. get_string('modlos_online_avatars','block_modlos').'</a><br />';
 		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/map_action.php'.$params.'">'.  get_string('modlos_world_map','block_modlos').'</a><br />';
-		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php'.$params.'&amp;order=name">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
 
 		$isguest = isguestuser();
 		if (!$isguest and $USER->id!=0) {
-			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php'.$params.'&amp;order=name&amp;action=personal&amp;userid='.$USER->id.'">'.get_string('modlos_my_regions','block_modlos').'</a><br />';
 			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php'.$params.'&amp;order=login&amp;desc=1">'.get_string('modlos_avatars_list','block_modlos').'</a><br />';
 			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/avatars_list.php'.$params.'&amp;action=personal&amp;userid='.$USER->id.'">'.get_string('modlos_my_avatars','block_modlos').'</a><br />';
+		}
+
+		$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php'.$params.'&amp;order=name">'.get_string('modlos_regions_list','block_modlos').'</a><br />';
+
+		if (!$isguest and $USER->id!=0) {
+			$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/regions_list.php'.$params.'&amp;order=name&amp;action=personal&amp;userid='.$USER->id.'">'.get_string('modlos_my_regions','block_modlos').'</a><br />';
 
 			$isAvatarMax = false;
 			$avatars_num = modlos_get_avatars_num($USER->id);

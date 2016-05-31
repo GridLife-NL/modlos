@@ -120,7 +120,7 @@ class  DeleteAvatar
 
 	function  print_page() 
 	{
-		global $CFG;
+		global $CFG, $USER;
 
 		$grid_name = $CFG->modlos_grid_name;
 		$showPostForm = !$this->deleted_avatar or $this->hasError;

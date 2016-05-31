@@ -17,6 +17,7 @@ class  CreateAvatar
 	var $hasPermit 		= false;
 	var $isGuest 		= true;
 	var $action_url		= '';
+	var $return_url		= '';
 	var $created_avatar = false;
 
 	var $base_avatar 	= '00000000-0000-0000-0000-000000000000';
@@ -82,6 +83,8 @@ class  CreateAvatar
 		$this->context 		= context_block::instance($instance_id);
 		$this->hasPermit	= hasModlosPermit($course_id);
 		$this->action_url  	= $module_url.'/actions/create_avatar.php';
+		$this->return_url  	= $module_url.'/actions/avatars_list.php';
+
 		$this->use_sloodle 	= $CFG->modlos_cooperate_sloodle;
 		$this->actvLastName	= $CFG->modlos_activate_lastname;
 		$this->isDisclaimer = $CFG->modlos_activate_disclaimer;
@@ -113,6 +116,8 @@ class  CreateAvatar
 				$this->errorMsg[] = get_string('modlos_sesskey_error', 'block_modlos');
 			}
 		}
+
+		// Generate UUI and $this->select_num<$countD
 		if ($this->hasPermit) {
 			do {
 				$uuid   = make_random_guid();
@@ -120,10 +125,6 @@ class  CreateAvatar
 			} while ($modobj!=null);
 			$this->nx_UUID = $uuid;
 		}
-
-		// Region Name
-		$this->regionNames = opensim_get_regions_names('ORDER BY regionName ASC');
-		$this->lastNames   = modlos_get_lastnames();
 
 		// Template System
 		$count = 0;
@@ -230,15 +231,18 @@ class  CreateAvatar
 				return false;
 			}
 
+			$this->select_num = 0;		// reset
 			$this->isPost = true;
 		}
 
 		// GET
 		else {
 			// Default Value
-			$this->hmregion  = $CFG->modlos_home_region;
-			$this->UUID		 = $this->nx_UUID;
-			$this->ownername = $USER->username; //get_display_username($USER->firstname, $USER->lastname);
+			$this->regionNames = opensim_get_regions_names('ORDER BY regionName ASC');
+			$this->lastNames   = modlos_get_lastnames();
+			$this->hmregion    = $CFG->modlos_home_region;
+			$this->UUID		   = $this->nx_UUID;
+			$this->ownername   = $USER->username; //get_display_username($USER->firstname, $USER->lastname);
 		}
 
 		return true;
@@ -247,7 +251,7 @@ class  CreateAvatar
 
 	function  print_page() 
 	{
-		global $CFG, $OUTPUT;
+		global $CFG, $USER;
 
 		$grid_name 	   = $CFG->modlos_grid_name;
 		$disclaimer	   = $CFG->modlos_disclaimer_content;
@@ -265,6 +269,7 @@ class  CreateAvatar
 		$ownername_ttl		= get_string('modlos_ownername',	 'block_modlos');
 		$create_ttl			= get_string('modlos_create_ttl',	 'block_modlos');
 		$reset_ttl			= get_string('modlos_reset_ttl',	 'block_modlos');
+		$return_ttl			= get_string('modlos_return_ttl',	 'block_modlos');
 		$avatar_created		= get_string('modlos_avatar_created','block_modlos');
 		$sloodle_ttl 		= get_string('modlos_sloodle_ttl',	 'block_modlos');
 		$manage_sloodle		= get_string('modlos_manage_sloodle','block_modlos');

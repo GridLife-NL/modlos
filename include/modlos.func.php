@@ -1080,6 +1080,8 @@ function  print_tabnav($currenttab, $course_id, $instance_id, $show_create_tab=t
 	if ($instance_id>0) $url_params.= '&amp;instance='.$instance_id;
 
 	///////
+	$isGuest = isguestuser();
+
 	$toprow = array();
 //	$toprow[] = new tabobject('show_status', CMS_MODULE_URL.'/actions/show_status.php'.$url_params, 
 //																	'<strong>'.get_string('modlos_show_status_tab','block_modlos').'</strong>');
@@ -1087,15 +1089,18 @@ function  print_tabnav($currenttab, $course_id, $instance_id, $show_create_tab=t
 																	'<strong>'.get_string('modlos_online_tab','block_modlos').'</strong>');
 	$toprow[] = new tabobject('world_map', CMS_MODULE_URL.'/actions/map_action.php'.$url_params, 
 																	'<strong>'.get_string('modlos_world_map_tab','block_modlos').'</strong>');
-	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$url_params.'&amp;order=name', 
-																	'<strong>'.get_string('modlos_regions_tab','block_modlos').'</strong>');
-	if (!isguestuser()) {
-		$toprow[] = new tabobject('personal_regions', CMS_MODULE_URL.'/actions/regions_list.php'.$url_params.'&amp;action=personal&amp;userid='.$USER->id.'&amp;order=name', 
-																	'<strong>'.get_string('modlos_my_regions','block_modlos').'</strong>');
+	if (!$isGuest) {
 		$toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params.'&amp;order=login&amp;desc=1', 
 																	'<strong>'.get_string('modlos_avatars_tab','block_modlos').'</strong>');
 		$toprow[] = new tabobject('personal_avatars', CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params.'&amp;action=personal&amp;userid='.$USER->id, 
 																	'<strong>'.get_string('modlos_my_avatars','block_modlos').'</strong>');
+	}
+
+	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$url_params.'&amp;order=name', 
+																	'<strong>'.get_string('modlos_regions_tab','block_modlos').'</strong>');
+	if (!$isGuest) {
+		$toprow[] = new tabobject('personal_regions', CMS_MODULE_URL.'/actions/regions_list.php'.$url_params.'&amp;action=personal&amp;userid='.$USER->id.'&amp;order=name', 
+																	'<strong>'.get_string('modlos_my_regions','block_modlos').'</strong>');
 		if ($show_create_tab) {
 			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $url_params, 
 																	'<strong>'.get_string('modlos_avatar_create','block_modlos').'</strong>');

@@ -92,6 +92,8 @@
     <?php } else {?>
       <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
       <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
+      <input type="hidden" name="action"   value="personal" />
+      <input type="hidden" name="userid"   value="<?php echo $USER->id ?>" />
       <input name="submit_return" type="submit" value="<?php echo $return_ttl?>" />
     <?php }?>
   </div>
