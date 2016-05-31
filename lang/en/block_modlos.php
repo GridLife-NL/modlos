@@ -454,9 +454,11 @@ $string['modlos_templ_text']        = 'Explain';
 $string['modlos_templ_pic']         = 'Picture';
 $string['modlos_templ_pic_help']    = 'Please upload a picture of template avatar with Jpeg, PNG, Tiff or GIF format';
 
-$string['modlos_templ_mis_uuid']    = 'Original avatar with the specified UUID does not exist';
-$string['modlos_templ_invalid_ttl'] = 'Invalid title';
-$string['modlos_templ_invalid_uuid']= 'Invalid UUID';
+$string['modlos_templ_uuid_dup']    = 'This UUID of avatar is already registered';
+$string['modlos_templ_uuid_mis']    = 'Original avatar with the specified UUID does not exist';
+$string['modlos_templ_uuid_invalid']= 'Invalid UUID';
+$string['modlos_templ_title_invalid']='Invalid title';
+$string['modlos_templ_db_fail']     = 'DB operation failed';
 
 $string['modlos_menu_tab']		    = 'Normal Menu';
 $string['modlos_manage_tab']		= 'Management';

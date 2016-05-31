@@ -67,7 +67,7 @@ class  LoginScreen
 			$update  = optional_param('submit_update', '', PARAM_TEXT);
 
             // Return to Edit
-			if ($cancel!='') redirect($this->action_url.'?course='.$this->course_id.'&amp;instance='.$instance_id, 'Please wait....', 0);
+			if ($cancel!='') redirect($this->action_url.'?course='.$this->course_id.'&amp;instance='.$instance_id, 'Please wait ...', 0);
 
 			$this->lgnscrn_title  = optional_param('lgnscrn_title', '',  PARAM_TEXT);	// title
 			$this->lgnscrn_ckey   = optional_param('lgnscrn_ckey',  '0', PARAM_INT);	// preview

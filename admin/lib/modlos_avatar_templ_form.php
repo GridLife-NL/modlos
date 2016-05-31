@@ -39,11 +39,11 @@ class modlos_avatar_templ_form extends moodleform
 
 		$mform->addElement('header', 'add_templ', get_string('modlos_templ_add_ttl', 'block_modlos'), null);
 
-		$mform->addElement('text', 'title', get_string('modlos_templ_title','block_modlos'), array('size'=>'48'));
+		$mform->addElement('text', 'title', get_string('modlos_templ_title','block_modlos'), array('size'=>'52'));
 		$mform->setType('title', PARAM_TEXT);
 		$mform->addRule('title', null, 'required', null, '');
 
-		$mform->addElement('text', 'uuid', get_string('modlos_templ_uuid','block_modlos'), array('size'=>'36'));
+		$mform->addElement('text', 'uuid', get_string('modlos_templ_uuid','block_modlos'), array('size'=>'42'));
 		$mform->setType('uuid', PARAM_TEXT);
 		$mform->addRule('uuid', null, 'required', null, '');
 		$mform->addHelpButton('uuid', 'modlos_templ_uuid', 'block_modlos');

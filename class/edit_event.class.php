@@ -136,7 +136,7 @@ class  EditEvent
 			// Delete Event
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
 			if ($del!='') {
-				redirect($this->delete_url.$this->event_id, 'Please wait....', 0);
+				redirect($this->delete_url.$this->event_id, 'Please wait ...', 0);
 				exit('<h4>delete page open error!!</h4>');
 			}
 	

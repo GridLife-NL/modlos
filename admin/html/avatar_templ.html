@@ -26,7 +26,7 @@
 
 
 <div style="margin-bottom:10px;" align="center">
-  <h4><a href="<?php echo $add_url?>" style="color:#c020c0;"><?php echo $add_avatar?></a></h4>
+  <h4><a href="<?php echo $add_url?>" style="color:#c04040;"><u><?php echo $add_avatar?></u></a></h4>
 </div>
 
 
@@ -36,20 +36,29 @@
       <?php foreach($avatars as $avatar) {?>
       <table width="100%" border="1" cellpadding="0" cellspacing="0" bgcolor="#f0f0f0" style="margin-bottom:10px;">
         <tr>
-          <td style="width:40px; table-layout:fixed; color:#c02020;">
+          <td style="width:40px; table-layout:fixed;">
             <strong>
-              <a href="<?php echo $edit_url.$avatar['id']?>" style="color:#c04040;"><?php echo $modlos_edit?></a>
+              <a href="<?php echo $edit_url.$avatar['id']?>" style="color:#c02020;"><?php echo $modlos_edit?></a>
             </strong>
           </td>
           <td style="width:30px; table-layout:fixed;"><?php echo $avatar['num']?></td>
           <td colspan="3" style="width:530px; table-layout:fixed;"><strong style="color:#2020c0;"><?php echo $avatar['title']?></strong></td>
         </tr>
+
         <tr>
-          <td style="width: 40px; table-layout:fixed; color:#c02020;" valign="top">
+          <td style="width:40px; table-layout:fixed;" valign="top">
             <strong>
               <a href="<?php echo $delete_url.$avatar['id']?>" style="color:#c02020;"><?php echo $modlos_delete?></a>
             </strong>
           </td>
+          <td style="width:30px; table-layout:fixed;">&nbsp;</td>
+          <td colspan="3" style="width:530px; table-layout:fixed;">
+           <strong style="color:#202020;"><?php echo $avatar['fullname'].' ('.$avatar['uuid'].')'?></strong>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="width:40px; table-layout:fixed;">&nbsp;</td>
           <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
           <td style="width:260px; table-layout:fixed;">
             <?php if ($avatar['url']) {?>

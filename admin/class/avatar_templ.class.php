@@ -78,8 +78,12 @@ class  AvatarTempl
 			$this->db_data[$num]['format'] 	 = $template->format;
 			$this->db_data[$num]['filename'] = $template->filename;
 			$this->db_data[$num]['text']     = $template->text;
-			$this->db_data[$num]['url'] 	 = '';
 			$this->db_data[$num]['html']     = htmlspecialchars_decode($template->text);
+			$this->db_data[$num]['fullname'] = '';
+			$this->db_data[$num]['url'] 	 = '';
+
+			$name = opensim_get_avatar_name($template->uuid);
+			if ($name) $this->db_data[$num]['fullname'] = $name['fullname'];
 
 			if ($template->filename) {
 				$path = '@@PLUGINFILE@@/'.$template->filename;

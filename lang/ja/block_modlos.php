@@ -452,9 +452,11 @@ $string['modlos_templ_text']        = '説明';
 $string['modlos_templ_pic']         = '画像';
 $string['modlos_templ_pic_help']    = '登録するアバター（テンプレートアバター）のスナップショットをアップロードする．画像フォーマットは Jpeg, PNG, Tiff, GIF を使用する';
 
-$string['modlos_templ_mis_uuid']    = '指定された UUIDを持つアバターが存在しません';
-$string['modlos_templ_invalid_ttl'] = '無効なタイトルです';
-$string['modlos_templ_invalid_uuid']= '無効な UUID です';
+$string['modlos_templ_uuid_dup']    = 'このアバターの UUID は既に登録済みです';
+$string['modlos_templ_uuid_mis']    = '指定された UUIDを持つアバターが存在しません';
+$string['modlos_templ_uuid_invalid']= '無効な UUID です';
+$string['modlos_templ_title_invalid']='無効なタイトルです';
+$string['modlos_templ_db_fail']     = 'DB の操作に失敗しました';
 
 $string['modlos_menu_tab']          = '一般メニュー';
 $string['modlos_manage_tab']        = '管理画面';

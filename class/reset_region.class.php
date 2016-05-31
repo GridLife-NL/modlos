@@ -127,7 +127,7 @@ class  ResetRegion
 			// Reset Region
 			$reset = optional_param('reset_region', '', PARAM_TEXT);
 			if ($reset=='') {
-				redirect($this->reset_url.'&amp;region='.$this->UUID, 'Please wait....', 2);
+				redirect($this->reset_url.'&amp;region='.$this->UUID, 'Please wait ...', 2);
 				exit('<h4>reset page open error!!</h4>');
 			}
 	
