@@ -222,6 +222,7 @@ class  AvatarTemplEdit
 		$mform      = $this->mform;
 		$isPost		= $this->isPost;
 
+		$url_params = $this->url_params;
 		$return_url = $this->return_url;
 
 		$avatar_templ_ttl = get_string('modlos_templ_ttl', 'block_modlos');

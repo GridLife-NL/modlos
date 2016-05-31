@@ -204,6 +204,7 @@ class  AvatarTemplAdd
 		$mform      = $this->mform;
 		$isPost		= $this->isPost;
 
+		$url_params = $this->url_params;
 		$return_url = $this->return_url;
 		$add_url    = $this->add_url;
 
