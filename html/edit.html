@@ -23,7 +23,7 @@
     <h4 style="color: #1010e0;"><?php echo $avatar_updated?></h4>
   </div>
 
-  <table width="520" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff" >
+  <table width="520" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#ffffff;" >
     <?php if ($this->hasPermit) {?>
       <tr>
         <td width="120" class="head"><?php echo $uuid_ttl?></td>
@@ -69,7 +69,7 @@
     <?php }?>
   </table>
 
-  <table width="520" border="0" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff" >
+  <table width="520" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#ffffff;" >
     <tr><td><hr /></td></tr>
   </table>
 <?php }?>
@@ -82,7 +82,7 @@
   <input type="hidden" name="uuid"     value="<?php echo $this->UUID?>" />
   <input type="hidden" name="sesskey"  value="<?php echo sesskey()?>" />
 
-  <table width="520" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
+  <table width="520" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#ffffff;">
 
     <tr>
       <td width="120" class="head"><?php echo $firstname_ttl?></td>
