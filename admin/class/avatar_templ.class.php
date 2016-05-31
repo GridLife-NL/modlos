@@ -35,8 +35,18 @@ class  AvatarTempl
 
 	function  AvatarTempl($course_id, $instance_id) 
 	{
+		if ($instance_id==0) {
+			$ids = jbxl_block_instance_ids('modlos', $course_id);
+			foreach ($ids as $id) {
+				$instance_id = $id->id;
+				$this->instance_id = $instance_id;
+				break;
+			}
+		}
+
 		$this->course_id   = $course_id;
 		$this->instance_id = $instance_id;
+		$this->context 	   = context_block::instance($instance_id); 
 
 		$this->hasPermit = hasModlosPermit($this->course_id);
 		if (!$this->hasPermit) {
@@ -45,16 +55,6 @@ class  AvatarTempl
 			return;
 		}
 	
-		//
-		if ($instance_id==0) {
-			$ids = jbxl_block_instance_ids('modlos', $course_id);
-			foreach ($ids as $id) {
-				$instance_id = $id->id;
-				break;
-			}
-		}
-		$this->context = context_block::instance($instance_id); 
-
 		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
 		$this->add_url    = CMS_MODULE_URL.'/admin/actions/avatar_templ_add.php'.$this->url_params;
 		$this->edit_url   = CMS_MODULE_URL.'/admin/actions/avatar_templ_edit.php'.$this->url_params.  '&amp;templid=';
@@ -69,7 +69,6 @@ class  AvatarTempl
 		if (!$this->hasPermit) return false;
 
 		$num = 0;
-
 		$templates = $DB->get_records('modlos_template_avatars', array(), 'num ASC');
 		foreach($templates as $template) {
 			$this->db_data[$num]['id']  	 = $template->id;

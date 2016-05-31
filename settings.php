@@ -97,6 +97,10 @@ $settings->add(new admin_setting_configtext('modlos_base_avatar',
 					get_string('modlos_base_avatar', 'block_modlos'),
 					get_string('modlos_base_avatar_desc', 'block_modlos'), '00000000-0000-0000-0000-000000000000', PARAM_TEXT));
 
+$settings->add(new admin_setting_configcheckbox('modlos_template_system', 
+					get_string('modlos_template_system', 'block_modlos'),
+				   	get_string('modlos_template_system_desc', 'block_modlos'), 1));
+
 $settings->add(new admin_setting_configcheckbox('modlos_activate_lastname', 
 					get_string('modlos_lname_activate', 'block_modlos'),
 				   	get_string('modlos_lname_desc', 'block_modlos'), 0));

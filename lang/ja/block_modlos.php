@@ -331,12 +331,16 @@ $string['modlos_map_stx_desc'] 		= 'ワールドマップを表示する時の �
 $string['modlos_map_sty'] 			= 'ワールドマップのスタート位置 (Y)';
 $string['modlos_map_sty_desc'] 		= 'ワールドマップを表示する時の 中心 Y座標の初期値';
 $string['modlos_map_size'] 			= 'マップ上のSIMのサイズ';
-$string['modlos_map_size_desc'] 		= 'ワールドマップ上のSIMのサイズ(px)のデフォルト値';
+$string['modlos_map_size_desc'] 	= 'ワールドマップ上のSIMのサイズ(px)のデフォルト値';
 
 $string['modlos_max_avatars'] 		= 'アバターの最大数';
 $string['modlos_max_avatars_desc'] 	= '一人の Moodleユーザが所有できるアバターの最大人数．負数の場合は無制限';
-$string['modlos_base_avatar'] 		= 'テンプレートアバターのGUID';
-$string['modlos_base_avatar_desc'] 	= 'アバターを作成する際のテンプレートとなるアバターのGUIDを指定する．';
+$string['modlos_base_avatar'] 		= 'ベース アバターの GUID';
+$string['modlos_base_avatar_desc'] 	= 'アバターを作成する際のベースとなるアバターの GUID を指定する';
+$string['modlos_template_system'] 	= 'テンプレートアバターシステムを使用する';
+$string['modlos_template_system_desc']	= 'テンプレートアバターシステムを使用し，一名以上のアバターをテンプレートとして登録した場合，modlos_base_avatar '.
+                                    'の指定は無視される';
+
 $string['modlos_lname_activate'] 	= 'ラストネーム管理';
 $string['modlos_lname_desc'] 		= 'ラストネームを，予めデータベースに用意していた物に制限するか？';
 $string['modlos_dst_region_name'] 	= 'デフォルトのホームリージョン';
@@ -436,6 +440,7 @@ $string['modlos_templ_add_ttl']  	= '初期アバターの登録';
 $string['modlos_templ_add_ok']      = 'アバターを登録しました';
 $string['modlos_templ_add_fail']    = 'アバターの登録に失敗しました';
 $string['modlos_templ_add_more_ttl']= ' さらにアバターを追加登録する ';
+$string['modlos_templ_select_ttl']  = 'アバターの選択';
 
 $string['modlos_templ_edit_ttl'] 	= '初期アバターの編集';
 $string['modlos_templ_edit_ok'] 	= 'アバターの登録を変更しました';
