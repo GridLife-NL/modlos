@@ -283,6 +283,8 @@ class  CreateAvatar
 		$avatars    = $this->db_data;
 		$select_num	= $this->select_num;
 		$total_num  = $this->total_num;
+		$hasPermit  = $this->hasPermit;
+
 		// 
 		$pv_ownername = $this->ownername;
 		if ($this->created_avatar) {

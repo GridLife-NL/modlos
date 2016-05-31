@@ -25,7 +25,7 @@
   </div>
 
   <table width="640" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
-    <?php if ($this->hasPermit) {?>
+    <?php if ($hasPermit) {?>
       <tr>
         <td width="180" class="head"><?php echo $uuid_ttl?></td>
         <td width="460" class="even" style="color: #2060b0;"><?php echo $this->UUID?></td>
@@ -44,7 +44,7 @@
       <td class="odd" ><?php echo $this->hmregion?></td>
     </tr>
 
-    <?php if ($this->hasPermit) {?>
+    <?php if ($hasPermit) {?>
       <tr>
         <td class="head"><?php echo $ownername_ttl?></td>
         <td class="even"><?php echo $this->ownername?></td>
@@ -66,6 +66,7 @@
   </tr>
 </table>
 
+
 <?php } else {?>
 
 
@@ -73,7 +74,7 @@
   <table width="640" border="1" bordercolor="#f8f8f8" align="center" cellpadding="2" cellspacing="2" bgcolor="#ffffff">
   <tbody>
 
-  <?php if ($this->hasPermit) {?>
+  <?php if ($hasPermit) {?>
     <tr>
       <td width="180" class="head"><?php echo $uuid_ttl?></td>
       <td width="460" class="even">
@@ -142,14 +143,14 @@
       <input type="hidden" name="sloodle" value="sloodle" />
     <?php }?>
 
-    <?php if ($this->hasPermit) {?>
+    <?php if ($hasPermit) {?>
       <tr>
         <td class="head"><?php echo $ownername_ttl?></td>
         <td class="even"><input name="ownername" size="32" maxlength="30" value="<?php echo $pv_ownername?>" /></td>
       </tr>
     <?php }?>
 
-    <?php if ($this->isDisclaimer and !$this->hasPermit) {?>
+    <?php if ($this->isDisclaimer and !$hasPermit) {?>
       <tr>
         <td class="head"><?php echo $disclaimer_ttl?></td>
         <td class="odd">
@@ -172,7 +173,7 @@
     <input type="reset"  value="<?php echo $reset_ttl?>" />
   </div>
 
-<?php if ($use_template and !$hide_template and $total_num>0) {?>
+<?php if ($use_template and (!$hide_template or $hasPermit) and $total_num>0) {?>
 
 <br />
 <table width="760" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0" style="margin-top:20px; margin-bottom:10px;">
@@ -185,7 +186,7 @@
   <tr>
     <td class="generalboxcontent" style="width:100%; table-layout:fixed;">
       <?php $num=0; foreach($avatars as $avatar) {?>
-      <table width="100%" border="1" cellpadding="0" cellspacing="0" bgcolor="#f0f0f0" style="margin-bottom:10px;">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f0f0f0" style="margin-bottom:10px;">
 
         <tr>
           <td style="width: 30px; table-layout:fixed;">
