@@ -1,7 +1,6 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
 //	avatar_templ_edit.class.php
-//
 //                                   			by Fumi.Iseki
 //
 
@@ -61,8 +60,8 @@ class  AvatarTemplEdit
 		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
 		$this->return_url = CMS_MODULE_URL.'/admin/actions/avatar_templ.php'.$this->url_params;
 		$this->add_url    = CMS_MODULE_URL.'/admin/actions/avatar_templ_add.php'.$this->url_params;
-		$this->edit_url   = CMS_MODULE_URL.'/admin/actions/avatar_templ_edit.php'.$this->url_params.'&amp;avatar=';
-		$this->delete_url = CMS_MODULE_URL.'/admin/actions/avatar_templ_delete.php'.$this->url_params.'&amp;avatar=';
+		$this->edit_url   = CMS_MODULE_URL.'/admin/actions/avatar_templ_edit.php'.$this->url_params.  '&amp;templid=';
+		$this->delete_url = CMS_MODULE_URL.'/admin/actions/avatar_templ_delete.php'.$this->url_params.'&amp;templid=';
 	}
 
 
@@ -76,8 +75,8 @@ class  AvatarTemplEdit
 		$cancel = optional_param('cancel', null, PARAM_TEXT);
 		if ($cancel) redirect($this->return_url, 'Please wait ...', 0);
 
-		$avatarid = required_param('avatar', PARAM_INT);	// Primary Key
-		$template = $DB->get_record('modlos_template_avatars', array('id'=>$avatarid));
+		$templ_id = required_param('templid', PARAM_INT);	// Primary Key
+		$template = $DB->get_record('modlos_template_avatars', array('id'=>$templ_id));
 		if (!$template) redirect($this->return_url, get_string('modlos_templ_uuid_mis', 'block_modlos'), 2);
 
 		//
@@ -134,7 +133,7 @@ class  AvatarTemplEdit
 			$explain = required_param_array('explain', PARAM_RAW);
 
 			$update = array();
-			$update['id']        = $template->id;
+			$update['id']        = $template->id;	// $templ_id
 			$update['num']       = $order;
 			$update['title']     = $title;
 			$update['uuid']      = $uuid;
@@ -191,7 +190,7 @@ class  AvatarTemplEdit
 		// GET
 		else {
 			$data = array();
-			$data['avatar']  = $template->id;
+			$data['templid'] = $template->id;
 			$data['order']   = $template->num;
 			$data['title'] 	 = $template->title;
 			$data['uuid'] 	 = $template->uuid;

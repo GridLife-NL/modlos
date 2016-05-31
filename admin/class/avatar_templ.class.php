@@ -1,7 +1,6 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
 //	avatar_templ.class.php
-//
 //                                   			by Fumi.Iseki
 //
 
@@ -58,8 +57,8 @@ class  AvatarTempl
 
 		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
 		$this->add_url    = CMS_MODULE_URL.'/admin/actions/avatar_templ_add.php'.$this->url_params;
-		$this->edit_url   = CMS_MODULE_URL.'/admin/actions/avatar_templ_edit.php'.$this->url_params.'&amp;avatar=';
-		$this->delete_url = CMS_MODULE_URL.'/admin/actions/avatar_templ_delete.php'.$this->url_params.'&amp;avatar=';
+		$this->edit_url   = CMS_MODULE_URL.'/admin/actions/avatar_templ_edit.php'.$this->url_params.  '&amp;templid=';
+		$this->delete_url = CMS_MODULE_URL.'/admin/actions/avatar_templ_delete.php'.$this->url_params.'&amp;templid=';
 	}
 
 

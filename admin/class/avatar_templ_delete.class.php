@@ -1,7 +1,6 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
 //	avatar_templ_delete.class.php
-//
 //                                   			by Fumi.Iseki
 //
 
@@ -61,8 +60,8 @@ class  AvatarTemplDelete
 		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
 		$this->return_url = CMS_MODULE_URL.'/admin/actions/avatar_templ.php'.$this->url_params;
 		$this->add_url    = CMS_MODULE_URL.'/admin/actions/avatar_templ_add.php'.$this->url_params;
-		$this->edit_url   = CMS_MODULE_URL.'/admin/actions/avatar_templ_edit.php'.$this->url_params.'&amp;avatar=';
-		$this->delete_url = CMS_MODULE_URL.'/admin/actions/avatar_templ_delete.php'.$this->url_params.'&amp;avatar=';
+		$this->edit_url   = CMS_MODULE_URL.'/admin/actions/avatar_templ_edit.php'.$this->url_params.  '&amp;templid=';
+		$this->delete_url = CMS_MODULE_URL.'/admin/actions/avatar_templ_delete.php'.$this->url_params.'&amp;templid=';
 	}
 
 
@@ -76,8 +75,8 @@ class  AvatarTemplDelete
 		$cancel = optional_param('cancel', null, PARAM_TEXT);
 		if ($cancel) redirect($this->return_url, 'Please wait ...', 0);
 
-		$avatarid = required_param('avatar', PARAM_INT);	// Primary Key
-		$template = $DB->get_record('modlos_template_avatars', array('id'=>$avatarid));
+		$templ_id = required_param('templid', PARAM_INT);	// Primary Key
+		$template = $DB->get_record('modlos_template_avatars', array('id'=>$templ_id));
 		if (!$template) redirect($this->return_url, get_string('modlos_templ_uuid_mis', 'block_modlos'), 2);
 
 		//
@@ -91,14 +90,11 @@ class  AvatarTemplDelete
 			}
 
 			// delete from DB
-			//$ret = $DB-delete_record('modlos_template_avatars', array('id'=>$avatar));
-			$ret = false;
+			$ret = $DB->delete_records('modlos_template_avatars', array('id'=>$templ_id));
 			if (!$ret) {
 				$this->hasError = true;
-				$this->errorMsg[] = get_string('modlos_templ_del_fail', 'block_modlos');
 				$this->errorMsg[] = get_string('modlos_templ_db_fail',  'block_modlos').' (delete)';
 			}
-			if ($this->hasError) return false;
 
 			$this->isPost = true;
 		}

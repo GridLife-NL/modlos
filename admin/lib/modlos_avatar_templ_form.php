@@ -19,10 +19,10 @@ class modlos_avatar_templ_form extends moodleform
 		$instance_id = optional_param('instance', '0', PARAM_INT);
 		$mform->addElement('hidden', 'course',   $course_id);
 		$mform->addElement('hidden', 'instance', $instance_id);
-		$mform->addElement('hidden', 'avatar');
+		$mform->addElement('hidden', 'templid');
 		$mform->setType('course',   PARAM_INT);
 		$mform->setType('instance', PARAM_INT);
-		$mform->setType('avatar',   PARAM_INT);
+		$mform->setType('templid',  PARAM_INT);
 		
 		$mform->addElement('header', 'add_templ', get_string('modlos_templ_add_ttl', 'block_modlos'), null);
 
