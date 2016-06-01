@@ -101,9 +101,11 @@ $settings->add(new admin_setting_configcheckbox('modlos_template_system',
 					get_string('modlos_template_system', 'block_modlos'),
 				   	get_string('modlos_template_system_desc', 'block_modlos'), 1));
 
+/*
 $settings->add(new admin_setting_configcheckbox('modlos_template_hide', 
 					get_string('modlos_template_hide', 'block_modlos'),
 				   	get_string('modlos_template_hide_desc', 'block_modlos'), 0));
+*/
 
 $settings->add(new admin_setting_configcheckbox('modlos_activate_lastname', 
 					get_string('modlos_lname_activate', 'block_modlos'),

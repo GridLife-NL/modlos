@@ -78,6 +78,7 @@ class  AvatarTempl
 			$this->db_data[$count]['text'] 	   = $template->text;
 			$this->db_data[$count]['format']   = $template->format;
 			$this->db_data[$count]['filename'] = $template->filename;
+			$this->db_data[$count]['status']   = $template->status;
 			$this->db_data[$count]['text']     = $template->text;
 			$this->db_data[$count]['html']     = htmlspecialchars_decode($template->text);
 			$this->db_data[$count]['fullname'] = '';
@@ -112,10 +113,12 @@ class  AvatarTempl
 		$delete_url = $this->delete_url;
 		$total_num  = $this->total_num;
 
-		$avatar_templ_ttl = get_string('modlos_templ_ttl', 'block_modlos');
-		$modlos_edit      = get_string('modlos_edit_ttl',  'block_modlos');
-		$modlos_delete    = get_string('modlos_delete_ttl','block_modlos');
-		$content          = get_string('modlos_templ_ttl', 'block_modlos');
+		$avatar_templ_ttl = get_string('modlos_templ_ttl',  'block_modlos');
+		$modlos_edit      = get_string('modlos_edit_ttl',   'block_modlos');
+		$modlos_delete    = get_string('modlos_delete_ttl', 'block_modlos');
+		$modlos_valid     = get_string('modlos_valid_ttl',  'block_modlos');
+		$modlos_invalid   = get_string('modlos_invalid_ttl','block_modlos');
+		$content          = get_string('modlos_templ_ttl',  'block_modlos');
 		$add_avatar		  = get_string('modlos_templ_add_ttl', 'block_modlos');
 
 		include(CMS_MODULE_PATH.'/admin/html/avatar_templ.html');

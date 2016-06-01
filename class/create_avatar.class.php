@@ -22,7 +22,7 @@ class  CreateAvatar
 
 	var $base_avatar 	= UUID_ZERO;
 	var $db_data        = array();
-	var $select_num     = 0;
+	var $select_num     = -1;
 	var $total_num      = 0;
 	var $isPost         = false;
 
@@ -117,7 +117,7 @@ class  CreateAvatar
 			}
 		}
 
-		// Generate UUI and $this->select_num<$countD
+		// Generate UUI
 		if ($this->hasPermit) {
 			do {
 				$uuid   = make_random_guid();
@@ -142,6 +142,7 @@ class  CreateAvatar
 			$this->db_data[$count]['format']   = $template->format;
 			$this->db_data[$count]['filename'] = $template->filename;
 			$this->db_data[$count]['text']	   = $template->text;
+			$this->db_data[$count]['status']   = $template->status;
 			$this->db_data[$count]['html']	   = htmlspecialchars_decode($template->text);
 			$this->db_data[$count]['fullname'] = '';
 			$this->db_data[$count]['url']	   = '';
@@ -153,6 +154,9 @@ class  CreateAvatar
 				$path = '@@PLUGINFILE@@/'.$template->filename;
 				$this->db_data[$count]['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $template->itemid);
 			}
+
+			if ($this->select_num==-1 and $this->db_data[$count]['status']>0) $this->select_num = $count;
+ 
 			$count++;
 		}
 		$this->total_num = $count;
@@ -167,7 +171,7 @@ class  CreateAvatar
 			$this->hmregion   = optional_param('hmregion', 	'',  PARAM_TEXT);
 			$this->select_num = optional_param('select_num','-1',PARAM_INT);
 		
-			if ($this->select_num>=0 and $this->select_num<$count) {
+			if ($this->select_num>=0 and $this->select_num<$count and $this->db_data[$this->select_num]>0) {
 				$this->set_base_avatar($this->db_data[$this->select_num]['uuid']);
 			}
 			else {
@@ -258,7 +262,7 @@ class  CreateAvatar
 		$grid_name 	   = $CFG->modlos_grid_name;
 		$disclaimer	   = $CFG->modlos_disclaimer_content;
 		$use_template  = $CFG->modlos_template_system;
-		$hide_template = $CFG->modlos_template_hide;
+//		$hide_template = $CFG->modlos_template_hide;
 
 		$avatar_create_ttl  = get_string('modlos_avatar_create', 'block_modlos');
 		$avatar_select_ttl  = get_string('modlos_avatar_select', 'block_modlos');

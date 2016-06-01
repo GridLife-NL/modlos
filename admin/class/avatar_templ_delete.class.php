@@ -140,8 +140,10 @@ class  AvatarTemplDelete
 		$delete_cnfrm     = get_string('modlos_templ_del_cnfrm', 'block_modlos');
 		$delete_success   = get_string('modlos_templ_del_ok',  'block_modlos');
 		$delete_fail      = get_string('modlos_templ_del_fail', 'block_modlos');
-		$modlos_return    = get_string('modlos_return_ttl','block_modlos');
-		$modlos_delete    = get_string('modlos_delete_ttl','block_modlos');
+		$modlos_return    = get_string('modlos_return_ttl', 'block_modlos');
+		$modlos_delete    = get_string('modlos_delete_ttl', 'block_modlos');
+		$modlos_valid     = get_string('modlos_valid_ttl',  'block_modlos');
+		$modlos_invalid   = get_string('modlos_invalid_ttl','block_modlos');
 
 		include(CMS_MODULE_PATH.'/admin/html/avatar_templ_delete.html');
 	}

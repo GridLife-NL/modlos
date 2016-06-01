@@ -44,18 +44,25 @@
 
 
 <?php if ($isPost) {?>
-<table width="640" border="0" align="center" cellpadding="2" cellspacing="2" style="table-layout:fixed;">
+<table width="660" border="0" align="center" cellpadding="2" cellspacing="2" style="table-layout:fixed;">
   <tr>
     <td class="generalboxcontent" style="width:100%; table-layout:fixed;">
       <table width="100%" border="0" bordercolor="#ffffff" cellpadding="0" cellspacing="0" style="background-color:#f0f0f0; margin-bottom:10px;">
         <tr>
-          <td style="width: 30px; table-layout:fixed;"><?php echo $avatar['num']?></td>
+          <td style="width: 50px; table-layout:fixed;"><?php echo $avatar['num']?></td>
           <td colspan="3" style="width:610px; table-layout:fixed;">
             <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
           </td>
         </tr>
+
         <tr>
-          <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
+          <td style="width: 50px; table-layout:fixed;">
+            <?php if ($avatar['status']==0) {?>
+              <strong style="color:#808080;"><?php echo $modlos_invalid?></strong>
+            <?php } else {?>
+              <strong style="color:#20a020;"><?php echo $modlos_valid?></strong>
+            <?php }?>
+          </td>
           <td style="width:260px;table-layout:fixed;">
             <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_params.'&agent='.$avatar['uuid']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
               <strong style="color:#105ba7;"><?php echo $avatar['fullname']?></strong>
@@ -66,8 +73,9 @@
             <strong style="color:#404040;"><?php echo $avatar['uuid']?></strong>
           </td>
         </tr>
+
         <tr>
-          <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
+          <td style="width: 50px; table-layout:fixed;">&nbsp;</td>
           <td style="width:260px; table-layout:fixed;">
             <?php if ($avatar['url']) {?>
               <a href="<?php echo $avatar['url']?>" target="_blank">

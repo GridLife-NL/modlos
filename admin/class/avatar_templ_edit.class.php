@@ -90,9 +90,10 @@ class  AvatarTemplEdit
 			}
 
 			$context_id = $this->context->id;
-			$title = trim(required_param('title', PARAM_TEXT));
-			$uuid  = trim(required_param('uuid',  PARAM_TEXT));
-			$order = optional_param('order', '0', PARAM_INT);
+			$title  = trim(required_param('title', PARAM_TEXT));
+			$uuid   = trim(required_param('uuid',  PARAM_TEXT));
+			$order  = optional_param('order', '0', PARAM_INT);
+			$status = optional_param('valid', '0', PARAM_INT);
 
 			// Check
 			if ($title==null) {
@@ -142,6 +143,7 @@ class  AvatarTemplEdit
 			$update['fileid']    = 0;
 			$update['filename']  = '';
 			$update['itemid']    = 0;
+			$update['status']    = $status;
 			$update['timestamp'] = time();
 
 			// File Manager. see lib/filelib.php
@@ -198,6 +200,7 @@ class  AvatarTemplEdit
 			$data['explain']['text']   = htmlspecialchars_decode($template->text);
 			$data['explain']['format'] = $template->format;
 			$data['picfile'] = $template->itemid;
+			$data['valid']   = $template->status;
 
 			$this->mform = new modlos_avatar_templ_form();
 			$this->mform->set_data($data);
@@ -225,10 +228,12 @@ class  AvatarTemplEdit
 		$return_url = $this->return_url;
 
 		$avatar_templ_ttl = get_string('modlos_templ_ttl', 'block_modlos');
-		$edit_avatar      = get_string('modlos_templ_edit_ttl',  'block_modlos');
-		$edit_success     = get_string('modlos_templ_edit_ok',   'block_modlos');
-		$edit_fail        = get_string('modlos_templ_edit_fail', 'block_modlos');
-		$modlos_return    = get_string('modlos_return_ttl','block_modlos');
+		$edit_avatar      = get_string('modlos_templ_edit_ttl', 'block_modlos');
+		$edit_success     = get_string('modlos_templ_edit_ok',  'block_modlos');
+		$edit_fail        = get_string('modlos_templ_edit_fail','block_modlos');
+		$modlos_return    = get_string('modlos_return_ttl', 'block_modlos');
+		$modlos_valid     = get_string('modlos_valid_ttl',  'block_modlos');
+		$modlos_invalid   = get_string('modlos_invalid_ttl','block_modlos');
 
 		include(CMS_MODULE_PATH.'/admin/html/avatar_templ_edit.html');
 	}

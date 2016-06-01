@@ -29,6 +29,9 @@ class modlos_avatar_templ_form extends moodleform
 		$mform->addElement('text', 'order', get_string('modlos_order_num','block_modlos'), array('size'=>'10'));
 		$mform->setType('order', PARAM_INT);
 
+		$mform->addElement('checkbox', 'valid', get_string('modlos_valid','block_modlos'), null);
+		$mform->setType('valid', PARAM_INT);
+
 		$mform->addElement('text', 'title', get_string('modlos_templ_title','block_modlos'), array('size'=>'52'));
 		$mform->setType('title', PARAM_TEXT);
 		$mform->addRule('title', null, 'required', null, '');

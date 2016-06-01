@@ -39,6 +39,8 @@ $string['modlos_delete'] 			= '削除';
 $string['modlos_change'] 			= '変更';
 $string['modlos_time_now']			= '現時刻';
 $string['modlos_show']			    = '表示';
+$string['modlos_valid']			    = '有効';
+$string['modlos_invalid']			= '無効';
 
 $string['modlos_online_ttl'] 		= ' オンライン ';
 $string['modlos_offline_ttl'] 		= ' オフライン ';
@@ -54,6 +56,8 @@ $string['modlos_create_ttl'] 		= ' 作成 ';
 $string['modlos_return_ttl'] 		= ' 戻る ';
 $string['modlos_close_ttl'] 		= ' 閉じる ';
 $string['modlos_save_ttl'] 			= ' 保存 ';
+$string['modlos_valid_ttl']			= ' 有効 ';
+$string['modlos_invalid_ttl']		=  '無効 ';
 
 $string['modlos_avatar_reset_ttl'] 	= ' リセット ';
 $string['modlos_avatar_create_ttl'] = ' 作成 ';

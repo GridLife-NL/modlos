@@ -39,6 +39,8 @@ $string['modlos_delete'] 			= 'Delete';
 $string['modlos_change'] 			= 'Change';
 $string['modlos_time_now']			= 'Present Time';
 $string['modlos_show']			    = 'Show';
+$string['modlos_valid']             = 'Valid';
+$string['modlos_invalid']           = 'Invalid';
 
 $string['modlos_online_ttl'] 		= ' ONLINE ';
 $string['modlos_offline_ttl'] 		= ' OFFLINE ';
@@ -54,6 +56,8 @@ $string['modlos_create_ttl'] 		= ' CREATE ';
 $string['modlos_return_ttl'] 		= ' RETURN ';
 $string['modlos_close_ttl'] 		= ' CLOSE ';
 $string['modlos_save_ttl'] 		    = ' SAVE ';
+$string['modlos_valid_ttl']         = ' VALID ';
+$string['modlos_invalid_ttl']       = ' INVALID ';
 
 $string['modlos_avatar_reset_ttl'] 	= ' RESET AVATAR ';
 $string['modlos_avatar_create_ttl'] = ' CREATE AVATAR ';
@@ -468,7 +472,7 @@ $string['modlos_templ_uuid_invalid']= 'Invalid UUID';
 $string['modlos_templ_title_invalid']='Invalid title';
 $string['modlos_templ_db_fail']     = 'DB operation failed';
 
-$string['modlos_order_num']         = 'Order Number';
+$string['modlos_order_num']         = 'Order';
 
 $string['modlos_menu_tab']		    = 'Normal Menu';
 $string['modlos_manage_tab']		= 'Management';
