@@ -117,7 +117,12 @@ class  ResetRegion
 			print_error('modlos_access_forbidden', 'block_modlos', $return_url);
 		}
 
-		// Form
+		// Cancel
+		$cancel = optional_param('cancel', null, PARAM_TEXT);
+		if ($cancel) redirect($this->return_url, 'Please wait ...', 0);
+
+		//
+		// POST
 		if (data_submitted()) {
 			if (!confirm_sesskey()) { 
 				$this->hasError = true;
@@ -162,6 +167,7 @@ class  ResetRegion
 		$region_owner_ttl	= get_string('modlos_region_owner', 	'block_modlos');
 		$return_ttl			= get_string('modlos_return_ttl',   	'block_modlos');
 		$close_ttl			= get_string('modlos_close_ttl',   	    'block_modlos');
+		$cancel_ttl			= get_string('modlos_cancel_ttl',  	    'block_modlos');
 		$reset_region_ttl   = get_string('modlos_region_reset', 	'block_modlos');
 		$region_reseted 	= get_string('modlos_region_reseted',  	'block_modlos');;
 		$region_reseted_exp = get_string('modlos_region_reset_exp',	'block_modlos');

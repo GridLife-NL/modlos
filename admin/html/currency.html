@@ -21,7 +21,7 @@
 <?php if ($noProssecced) {?>
 
   <!-- 一斉送金 -->
-  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0;">
     <tr>
       <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $transfer_ttl?></strong></td>
     </tr>
@@ -43,7 +43,7 @@
   <br /><br />
 
   <!-- お金の移動 -->
-  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0;">
     <tr>
       <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $currency_move_ttl?></strong></td>
     </tr>
@@ -69,7 +69,7 @@
   <br /><br />
 
   <!-- 売上DBの作り直し -->
-  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0;">
     <tr>
       <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $remake_ttl?></strong></td>
     </tr>
@@ -90,7 +90,7 @@
   <br /><br />
 
   <!-- 売上DBの表示 -->
-  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0;">
     <tr>
       <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $display_ttl?></strong></td>
     </tr>
@@ -115,7 +115,7 @@
 <?php } else {?>
 
   <!-- POST -->
-  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0;">
     <tr>
       <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $result_ttl?></strong></td>
     </tr>
@@ -129,7 +129,7 @@
 
     <!-- 売上DBの表示 -->
     <?php if ($display) {?>
-      <table border="1" align="center" cellpadding="2" cellspacing="2" bgcolor="#f0f0f0">
+      <table border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0;">
         <tr bgcolor=#c0c0c0>
           <td style="width:40px;  table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'No.'?></strong></td>
           <td style="width:320px; table-layout:fixed;" class="head" align="center"><strong style="color:#116644;"><?php echo 'Object'?></strong></td>
@@ -204,8 +204,8 @@
   <?php }?>
 
 
-  <div align="center" style="color:#202088;">
-    <h4><a href="<?php echo $action_url.$url_params?>" ><?php echo $currency_return?></a></h4>
+  <div align="center" style="margin-top:10px;">
+    <h4><a href="<?php echo $action_url.$url_params?>" style="color:#208820;"><?php echo $currency_return?></a></h4>
   </div>
   <br />
 <?php }?>

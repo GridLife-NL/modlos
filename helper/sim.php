@@ -30,7 +30,7 @@ $reset_url  = CMS_MODULE_URL.'/actions/reset_region.php?course='.$course_id.'&am
 
 //////////////
 //$col = 0;
-//$users = opensim_get_avatars_infos('ORDER BY firstname,lastname');
+//$users = opensim_get_avatars_infos('', 'firstname,lastname');
 //foreach($users as $user) {
 //	$avatars[$col]['name'] = $user['firstname'].' '.$user['lastname'];
 //	$avatars[$col]['uuid'] = $user['UUID'];

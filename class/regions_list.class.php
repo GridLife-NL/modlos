@@ -55,7 +55,8 @@ class  RegionsList
 	// SQL
 	var $lnk_regionname = '';
 	var $sql_regionname = '';
-	var $sql_condition = '';
+	var $sql_order      = '';
+	var $sql_limit      = '';
 
 
 
@@ -114,31 +115,31 @@ class  RegionsList
 		// ORDER
 		$sql_order = '';
 		if ($this->order=='name') {
-	 		$sql_order = ' ORDER BY regionName';
+	 		$sql_order = 'regionName';
 			if (!$this->order_desc) $this->desc_name = 1;
 		}
 		else if ($this->order=='estate') {
-			$sql_order = ' ORDER BY EstateName';
+			$sql_order = 'EstateName';
 			if (!$this->order_desc) $this->desc_estate = 1;
 		}
 		else if ($this->order=='x')	{
-			$sql_order = ' ORDER BY locX';
+			$sql_order = 'locX';
 			if (!$this->order_desc) $this->desc_x = 1;
 		}
 		else if ($this->order=='y')	{
-			$sql_order = ' ORDER BY locY';
+			$sql_order = 'locY';
 			if (!$this->order_desc) $this->desc_y = 1;
 		}
 		else if ($this->order=='ip') {
-			$sql_order = ' ORDER BY serverIP';
+			$sql_order = 'serverIP';
 			if (!$this->order_desc) $this->desc_ip = 1;
 		}
 		else if ($this->order=='estid') {
-			$sql_order = ' ORDER BY estate_map.EstateID';
+			$sql_order = 'estate_map.EstateID';
 			if (!$this->order_desc) $this->desc_estateid = 1;
 		}
 		else if ($this->order=='avatar') {
-			$sql_order = ' ORDER BY FirstName';
+			$sql_order = 'FirstName';
 			if (!$this->order_desc) $this->desc_avatar = 1;
 		}
 		//
@@ -155,8 +156,8 @@ class  RegionsList
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 
 		// SQL Condition
-		$sql_limit = " LIMIT $this->pstart, $this->plimit ";
-		$this->sql_condition = $sql_order.$sql_limit;
+		$this->sql_limit = "$this->pstart, $this->plimit ";
+		$this->sql_order = $sql_order;
 
 		return true;
 	}
@@ -175,15 +176,15 @@ class  RegionsList
 			$i = 0;
 			foreach($users as $user) {
 				$uuid  = $user['UUID'];
-				if ($i==0) $where = " WHERE (owner_uuid='$uuid' ";
-				else	   $where.=     " OR owner_uuid='$uuid' ";
+				if ($i==0) $where = "owner_uuid='$uuid' ";
+				else	   $where.= " OR owner_uuid='$uuid' ";
 				$i++;
 			}
-			if ($where!='') $where = $where.") ";
+			//if ($where!='') $where = $where.") ";
 			unset($users);
 		}
 
-		if      ($where=='' and $this->sql_regionname!='') $where = ' WHERE '.$this->sql_regionname;
+		if      ($where=='' and $this->sql_regionname!='') $where = $this->sql_regionname;
 		else if ($where!='' and $this->sql_regionname!='') $where.= ' AND '.$this->sql_regionname;
 
 		$this->number = 0;
@@ -196,7 +197,7 @@ class  RegionsList
 		$voice_mode[9] = get_string('modlos_voice_unknown_chnl',  'block_modlos');
 
 		//
-		$regions = opensim_get_regions_infos($where.$this->sql_condition);
+		$regions = opensim_get_regions_infos($where, $this->sql_order, $this->sql_limit);
 
 		$colum = 0;
 		foreach($regions as $region) {
@@ -319,6 +320,7 @@ class  RegionsList
 //		$avatar_name_ttl = get_string('modlos_avatar_name',    'block_modlos');
 		$manager_name_ttl= get_string('modlos_manager_name',   'block_modlos');
 		$reset_ttl	     = get_string('modlos_reset_ttl',	   'block_modlos');
+		$edit_ttl	     = get_string('modlos_edit_ttl',	   'block_modlos');
 		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
 		$server_name	 = get_string('modlos_server',		   'block_modlos');
 		$page_num		 = get_string('modlos_page',		   'block_modlos');

@@ -70,7 +70,7 @@ table {
     <!-- Input -->
     <?php if (!$updated or $preview) {?>
 
-      <table cellSpacing=0 cellPadding=0 width=600 border=0 align=center>
+      <table cellSpacing="0" cellPadding="0" width="600" border="0" align="center">
         <tbody>
           <tr><td colspan="2"><hr /></td></tr>
 
@@ -78,12 +78,12 @@ table {
             <td vAlign=top align=center>&nbsp;</td>
             <td vAlign=top align=center width=550>
 
-              <table cellPadding=2 cellSpacing=1 width=550 border=1 bordercolor="#FFFFFF" align=center>
+              <table cellPadding="2" cellSpacing="1" width="550" border="1" bordercolor="#ffffff" align="center">
                 <tbody>
                                                                  
-                  <tr align=left>
-                    <td class=head size=200 vAlign=top><strong><?php echo $select_color?></strong></td>
-                    <td class=odd  size=300>
+                  <tr align="left">
+                    <td class="head" size="200" vAlign="top"><strong><?php echo $select_color?></strong></td>
+                    <td class="odd"  size="300">
                       <select wide="48" name="lgnscrn_ckey">
                         <?php foreach($colors as $ckey => $color) {?>
                           <?php if ($lgnscrn_ckey==$ckey) {?>
@@ -95,15 +95,15 @@ table {
                       </select>
                     </td>
                   </tr>
-                  <tr align=left>
-                    <td class=head size=200 vAlign=top><strong><?php echo $edit_boxttl?></strong></td>
-                    <td class=odd  size=300>
-                      <input type="text" name="lgnscrn_title" size=50 value="<?php echo $lgnscrn_title?>" />
+                  <tr align="left">
+                    <td class="head" size="200" vAlign="top"><strong><?php echo $edit_boxttl?></strong></td>
+                    <td class="odd"  size="300">
+                      <input type="text" name="lgnscrn_title" size="50" value="<?php echo $lgnscrn_title?>" />
                     </td>
                   </tr>
-                  <tr align=left>
-                    <td class=head size=200 vAlign=top><strong><?php echo $edit_altbox?></strong></td>
-                    <td class=odd  size=300>
+                  <tr align="left">
+                    <td class="head" size="200" vAlign="top"><strong><?php echo $edit_altbox?></strong></td>
+                    <td class="odd"  size="300">
                       <textarea name="lgnscrn_altbox" cols="50" rows="5" value="lgnscrn_altbox"><?php echo htmlspecialchars($lgnscrn_altbox)?></textarea>
                     </td>
                   </tr>

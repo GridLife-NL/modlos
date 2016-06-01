@@ -58,7 +58,7 @@ class  AvatarsList
 	// SQL
 	var $lnk_firstname = '';
 	var $lnk_lastname  = '';
-	var $sql_condition = '';
+	var $sql_order     = '';
 	var $sql_username  = '';
 	var $sql_uuid_str  = '';
 	var $sql_limit     = '';
@@ -143,19 +143,19 @@ class  AvatarsList
 		// ORDER
 		$sql_order = '';
 		if ($this->order=='firstname') {
-			$sql_order = 'ORDER BY FirstName';
+			$sql_order = 'FirstName';
 			if (!$this->order_desc) $this->desc_fname = 1;
 		}
 		else if ($this->order=='lastname') {
-			$sql_order = 'ORDER BY LastName';
+			$sql_order = 'LastName';
 			if (!$this->order_desc) $this->desc_lname = 1;
 		}
 		else if ($this->order=='login') {
-			$sql_order = 'ORDER BY Login';
+			$sql_order = 'Login';
 			if (!$this->order_desc) $this->desc_login = 1;
 		}
 		else {
-			$sql_order = 'ORDER BY Created';
+			$sql_order = 'Created';
 			if (!$this->order_desc) $this->desc_created = 1;
 		}
 		//
@@ -171,14 +171,14 @@ class  AvatarsList
 		// pstart & plimit
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
-		$this->sql_limit = " LIMIT $this->pstart, $this->plimit ";
+		$this->sql_limit = " $this->pstart, $this->plimit ";
 		//
 		$this->ownerloss = optional_param('ownerloss', "$this->ownerloss", PARAM_INT);
 
 		// SQL Condition
-		$this->sql_username  = " $sql_validuser $sql_firstname $sql_lastname";
-		$this->sql_condition = " $sql_order";
-		$this->sql_uuid_str  = 'PrincipalID';
+		$this->sql_username = " $sql_validuser $sql_firstname $sql_lastname";
+		$this->sql_order    = " $sql_order";
+		$this->sql_uuid_str = 'PrincipalID';
 
 		return true;
 	}
@@ -200,20 +200,20 @@ class  AvatarsList
 			$i = 0;
 			foreach($users as $user) {
 				$uuid  = $user['UUID'];
-				if ($i==0) $where = ' WHERE ('.$this->sql_uuid_str."='$uuid' ";
-				else	   $where.=     ' OR '.$this->sql_uuid_str."='$uuid' ";
+				if ($i==0) $where = '('.$this->sql_uuid_str."='$uuid' ";
+				else	   $where.= ' OR '.$this->sql_uuid_str."='$uuid' ";
 				$i++;
 			}
 			if ($where!='') $where = $where.") ";
 			unset($users);
 		}
 
-		if      ($where=='' and $this->sql_username!='') $where = ' WHERE '.$this->sql_username;
-		else if ($where!='' and $this->sql_username!='') $where.=   ' AND '.$this->sql_username;
+		if      ($where=='' and $this->sql_username!='') $where = $this->sql_username;
+		else if ($where!='' and $this->sql_username!='') $where.= ' AND '.$this->sql_username;
 
 		////////////////////////////////////////////////////////////////////
 		// Read Data from DB
-		//$dummy = opensim_get_avatars_infos($where.$this->sql_condition);
+		//$infos = opensim_get_avatars_infos($where, $this->sql_order);
 
 		$num = 0;
 		$con = 0;
@@ -221,10 +221,10 @@ class  AvatarsList
 
 		if (!$this->ownerloss) {
 			//
-			$con = opensim_get_avatars_num();
-			$dummy = opensim_get_avatars_infos($where.$this->sql_condition.$this->sql_limit);
+			$con   = opensim_get_avatars_num($where);
+			$infos = opensim_get_avatars_infos($where, $this->sql_order, $this->sql_limit);
 			//
-			foreach($dummy as $user) {
+			foreach($infos as $user) {
 				$users[$num] = $user;
 				$users[$num]['owner_name'] = ' - ';
 				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
@@ -256,9 +256,9 @@ class  AvatarsList
 		//
 		else {		// Search lost avatars
 			//
-			$dummy = opensim_get_avatars_infos($where.$this->sql_condition);
+			$infos = opensim_get_avatars_infos($where, $this->sql_order);
 			//
-			foreach($dummy as $user) {
+			foreach($infos as $user) {
 				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
 				if ($avatardata==null) {
 					if ($con>=$this->pstart and $con<$this->pstart + $this->plimit) {
@@ -299,7 +299,7 @@ class  AvatarsList
 				}
 			}
 		}
-		unset($dummy);
+		unset($infos);
 
 		$this->number = $con;
 

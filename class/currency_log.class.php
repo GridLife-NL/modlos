@@ -45,6 +45,7 @@ class  CurrencyLog
  
 	// SQL
 	var $sql_condition = '';
+	var $sql_order     = '';
 	var $sql_limit     = '';
 
 
@@ -117,7 +118,7 @@ class  CurrencyLog
 		// ORDER
 		$sql_order = '';
 		if ($this->order=='time') {
-			$sql_order = 'ORDER BY time';
+			$sql_order = 'time';
 			if (!$this->order_desc) $this->desc_next = 1;
 		}
 		//
@@ -133,15 +134,13 @@ class  CurrencyLog
 		// pstart & plimit
 		$this->pstart = optional_param('pstart', "$this->Cpstart", PARAM_INT);
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
-		$this->sql_limit = " LIMIT $this->pstart, $this->plimit ";
+		$this->sql_limit = "$this->pstart, $this->plimit ";
 
 		// SQL Condition
-		if ($this->nosystem==0) {
-			$this->sql_condition = ' '.$sql_order;
-		}
-		else {
-			$this->sql_condition = " AND sender!='00000000-0000-0000-0000-000000000000' AND ".
-                                      "receiver!='00000000-0000-0000-0000-000000000000' ".$sql_order;
+		$this->sql_order = $sql_order;
+		if ($this->nosystem!=0) {
+			$this->sql_condition = "sender!='00000000-0000-0000-0000-000000000000' AND ".
+                                 "receiver!='00000000-0000-0000-0000-000000000000' ";
 		}
 
 		return true;
@@ -184,7 +183,7 @@ class  CurrencyLog
 		//
 		$this->number = opensim_get_currency_amounts_num($this->agent_id, $this->sql_condition);
 		//
-		$logs = opensim_get_currency_amounts_log($this->agent_id, $this->sql_condition.$this->sql_limit);
+		$logs = opensim_get_currency_amounts_log($this->agent_id, $this->sql_condition, $this->sql_order, $this->sql_limit);
 
 		$colum = 0;
 		foreach ($logs as $log) {

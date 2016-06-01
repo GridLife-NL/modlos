@@ -238,7 +238,7 @@ class  CreateAvatar
 		// GET
 		else {
 			// Default Value
-			$this->regionNames = opensim_get_regions_names('ORDER BY regionName ASC');
+			$this->regionNames = opensim_get_regions_names('', 'regionName ASC');
 			$this->lastNames   = modlos_get_lastnames();
 			$this->hmregion    = $CFG->modlos_home_region;
 			$this->UUID		   = $this->nx_UUID;

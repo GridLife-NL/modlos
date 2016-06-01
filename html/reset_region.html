@@ -74,7 +74,8 @@
     <?php if ($this->action=='close') {?>
       <a href="#" onclick="window.close()"><strong><?php echo $close_ttl?></strong></a>
     <?php } else {?>
-      <a href="<?php echo $this->return_url?>"><strong><?php echo $return_ttl?></strong></a>
+      <!-- <a href="<?php echo $this->return_url?>"><strong><?php echo $return_ttl?></strong></a> -->
+      <input name="cancel" type="submit" id="cancel" value="<?php echo $cancel_ttl?>" />
     <?php }?>
   </div>
 

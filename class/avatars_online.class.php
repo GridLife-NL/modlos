@@ -37,7 +37,8 @@ class  AvatarsOnline
 	var $sitestart;
 
 	// SQL
-	var $sql_condition = '';
+	var $sql_order  = '';
+	var $sql_limit  = '';
 	var $desc_login	= 0;
 
 
@@ -87,7 +88,7 @@ class  AvatarsOnline
 		// ORDER
 		$sql_order = '';
 		if ($this->order=='login') {
-			$sql_order = 'ORDER BY LastSeen';
+			$sql_order = 'LastSeen';
 			if (!$this->order_desc) $this->desc_login = 1;
 		}
 		//
@@ -105,8 +106,8 @@ class  AvatarsOnline
 		$this->plimit = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 		
 		// SQL Condition
-		$sql_limit = " LIMIT $this->pstart, $this->plimit ";
-		$this->sql_condition = $sql_order.$sql_limit;
+		$this->sql_limit = "$this->pstart, $this->plimit ";
+		$this->sql_order = $sql_order;
 
 		return true;
 	}
@@ -120,7 +121,7 @@ class  AvatarsOnline
 		modlos_sync_opensimdb();
 		if ($this->use_sloodle) modlos_sync_sloodle_users();
 
-		$avatars = opensim_get_avatars_online($this->sql_condition);
+		$avatars = opensim_get_avatars_online('', $this->sql_order, $this->sql_limit);
 
 		$users = array();
 		$num = 0;

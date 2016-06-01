@@ -15,6 +15,7 @@ class  EditAvatar
 	var $isGuest	 = true;
 	var $action_url  = '';
 	var $delete_url  = '';
+	var $return_url  = '';
 	var $course_id	 = 0;
 	var $instance_id = 0;
 
@@ -52,6 +53,9 @@ class  EditAvatar
 			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
+		$userid = optional_param('userid', '0', PARAM_INT);
+		$action = optional_param('action', 'personal', PARAM_ALPHA);
+
 		// for HTTPS
 		$use_https = $CFG->modlos_use_https;
 		if ($use_https) {
@@ -63,17 +67,18 @@ class  EditAvatar
 
 		//
 		$url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
+        $option_params = '&amp;action='.$action.'&amp;userid='.$userid;
 		$this->course_id   = $course_id;
 		$this->instance_id = $instance_id;
-		$this->action_url  = $module_url.'/actions/edit_avatar.php';
-		$this->delete_url  = $module_url.'/actions/delete_avatar.php'.$url_params;
+		$this->action_url  = $module_url.'/actions/edit_avatar.php'.  $url_params.$option_params;
+		$this->delete_url  = $module_url.'/actions/delete_avatar.php'.$url_params.$option_params;
+		$this->return_url  = $module_url.'/actions/avatars_list.php'. $url_params.$option_params;
 
 		// get UUID from POST or GET
-		$return_url = $module_url.'/actions/avatars_list.php'. $url_params;
 		$uuid = optional_param('uuid', '', PARAM_TEXT);
 		if (!isGUID($uuid)) {
 			$mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)";
-			print_error($mesg, '', $return_url);
+			print_error($mesg, '', $this->return_url);
 		}
 		$this->UUID = $uuid;
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
@@ -88,7 +93,7 @@ class  EditAvatar
 
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit and $USER->id!=$this->uid) {
-			print_error('modlos_access_forbidden', 'block_modlos', $return_url);
+			print_error('modlos_access_forbidden', 'block_modlos', $this->return_url);
 		}
 
 		$this->avatars_num = modlos_get_avatars_num($USER->id);
@@ -101,8 +106,12 @@ class  EditAvatar
 	{
 		global $USER;
 
+		// Cancel
+		$cancel = optional_param('cancel', null, PARAM_TEXT);
+		if ($cancel) redirect($this->return_url, 'Please wait ...', 0);
+
 		// OpenSim DB
-		$this->regionNames = opensim_get_regions_names('ORDER BY regionName ASC');
+		$this->regionNames = opensim_get_regions_names('', 'regionName ASC');
 
 		// Form
 		if (data_submitted()) {
@@ -234,6 +243,7 @@ class  EditAvatar
 		$update_ttl	  		= get_string('modlos_update_ttl', 	 'block_modlos');
 		$delete_ttl	  		= get_string('modlos_delete', 	 	 'block_modlos');
 		$reset_ttl	  		= get_string('modlos_reset_ttl', 	 'block_modlos');
+		$cancel_ttl	  		= get_string('modlos_cancel_ttl', 	 'block_modlos');
 		$avatar_updated	  	= get_string('modlos_avatar_updated','block_modlos');
 		$uuid_ttl	  		= get_string('modlos_uuid',			 'block_modlos');
 		$manage_avatar_ttl	= get_string('modlos_manage_avatar', 'block_modlos');
