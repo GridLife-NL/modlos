@@ -23,6 +23,7 @@ class  EditEvent
 
 	var $action_url;
 	var $delete_url;
+	var $return_url;
 
 	var $course_id	  = 0;
 	var $instance_id  = 0;
@@ -84,6 +85,7 @@ class  EditEvent
 
 		$this->action_url = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_params;
 		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$this->url_params.'&amp;eventid=';
+		$this->return_url = CMS_MODULE_URL.'/actions/events_list.php'. $this->url_params;
 
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
@@ -95,6 +97,11 @@ class  EditEvent
 	{
 		global $DB;
 
+		// Cancel
+		$cancel = optional_param('cancel', null, PARAM_TEXT);
+		if ($cancel) redirect($this->return_url, 'Please wait ...', 0);
+
+		//
 		// List of Parcels
 		$modobj = opensim_get_regions_infos('', 'regionName');
 		$i = 0;
@@ -379,6 +386,7 @@ class  EditEvent
 		$modlos_reset_ttl 	= get_string('modlos_reset_ttl',		  'block_modlos');
 		$modlos_delete_ttl 	= get_string('modlos_delete_ttl',		  'block_modlos');
 		$modlos_delete 		= get_string('modlos_delete',			  'block_modlos');
+		$modlos_cancel_ttl 	= get_string('modlos_cancel_ttl',		  'block_modlos');
 
 		$date_file = CMS_MODULE_PATH.'/lang/'.current_language().'/modlos_events_date.html';
 		if (!file_exists($date_file)) {

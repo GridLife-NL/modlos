@@ -205,8 +205,10 @@ function checklength(obj,warning_div){
     <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
     <?php if ($this->event_id>0) {?>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="submit" name="submit_delete" value="<?php echo $modlos_delete?>" />
+      <input type="submit" name="submit_delete" value="<?php echo $modlos_delete_ttl?>" />
     <?php }?>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="submit" name="cancel" value="<?php echo $modlos_cancel_ttl?>" />
   </div>
 </form>
 <br />
