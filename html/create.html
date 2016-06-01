@@ -25,7 +25,7 @@
     <h4 style="color: #1010e0;"><?php echo $avatar_created?></h4>
   </div>
 
-  <table width="640" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#ffffff;">
+  <table width="640" border="0" align="center" cellpadding="0" cellspacing="0" style="background-color:#ffffff;">
     <?php if ($hasPermit) {?>
       <tr>
         <td width="180" class="head"><?php echo $uuid_ttl?></td>
@@ -56,12 +56,16 @@
   <table border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
       <td align="center">
+        <?php if ($this->isAvatarMax) {?>
         <form name="assignform" method="GET"  action="<?php echo $this->return_url?>">
+        <?php } else {?>
+        <form name="assignform" method="GET"  action="<?php echo $this->action_url?>">
+        <?php }?>
           <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
           <input type="hidden" name="instance" value="<?php echo $this->instance_id?>" />
           <input type="hidden" name="action"   value="personal" />
           <input type="hidden" name="userid"   value="<?php echo $USER->id?>" />
-          <input type="submit" name="return"   value="<?php echo $return_ttl?>" />
+          <input type="submit" name="return"  value="<?php echo $return_ttl?>" />
         </form>
       </td>
     </tr>
@@ -71,20 +75,20 @@
 
   <!-- GET -->
   <form action="<?php echo $this->action_url?>" method="POST">
-    <table width="640" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#ffffff;">
+    <table width="640" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-bottom:10px; table-layout:fixed; background-color:#ffffff;">
       <tbody>
         <?php if ($hasPermit) {?>
           <tr>
-            <td width="180" class="head"><?php echo $uuid_ttl?></td>
-            <td width="460" class="even">
+            <td width="150" class="head" style="table-layout:fixed;"><?php echo $uuid_ttl?></td>
+            <td width="450" class="even" style="table-layout:fixed;">
               <input name="UUID" id="UUID" size="52" maxlength="36" value="<?php echo $this->nx_UUID?>" />
             </td>
           </tr>
         <?php }?>
 
         <tr>
-          <td width="180" class="head"><?php echo $firstname_ttl?></td>
-          <td width="460" class="even">
+          <td width="150" class="head" style="table-layout:fixed;"><?php echo $firstname_ttl?></td>
+          <td width="450" class="even" style="table-layout:fixed;">
             <input name="firstname" id="firstname" size="32" maxlength="30" value="<?php echo $pv_firstname?>" />
           </td>
         </tr>
@@ -151,7 +155,7 @@
 
         <?php if ($this->isDisclaimer and !$hasPermit) {?>
           <tr>
-            <td class="head"><?php echo $disclaimer_ttl?></td>
+            <td class="head" vAlign="top"><?php echo $disclaimer_ttl?></td>
             <td class="odd">
               <textarea name="disclaimer" cols="64" rows="8" readonly="readonly"><?php echo $disclaimer?></textarea>
               <label><input name="agree" type="checkbox" value="agree"  />&nbsp;<?php echo $disclaim_agree?></label>
@@ -164,33 +168,25 @@
       </tbody>
     </table>
 
-    <div align="center" style="margin-top:10px; margin-bottom: 0px;">
-      <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
-      <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
-      <input type="hidden" name="sesskey"  value="<?php echo sesskey()?>" />
-      <input type="submit" value="<?php echo $create_ttl?>" />&nbsp;
-      <input type="reset"  value="<?php echo $reset_ttl?>" />
-    </div>
-
     <!-- Template Avatar -->
     <?php if ($use_template and (!$hide_template or $hasPermit) and $total_num>0) {?>
       <br />
-      <table width="760" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0; margin-top:20px; margin-bottom:10px;">
+      <table width="640" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0; margin-bottom:10px;">
         <tr>
           <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $select_avatar_ttl?></strong></td>
         </tr>
       </table>
 
-      <table width="760" border="0" align="center" cellpadding="2" cellspacing="2" style="margin-bottom:10px; table-layout:fixed;">
+      <table width="640" border="0" align="center" cellpadding="2" cellspacing="2" style="margin-bottom:10px; table-layout:fixed;">
         <tr>
-          <td class="generalboxcontent" style="width:100%; table-layout:fixed;">
+          <td class="generalboxcontent" width="640" style="table-layout:fixed;">
             <?php $num=0; foreach($avatars as $avatar) {?>
             <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#f0f0f0; margin-bottom:10px;">
               <tr>
                 <td style="width: 30px; table-layout:fixed;" align="center">
                   <input type="radio" name="select_num" value="<?php echo $num?>" <?php if ($num==$select_num) echo 'checked'?> >
                 </td>
-                <td colspan="3" style="width:730px; table-layout:fixed;">
+                <td colspan="3" style="width:610px; table-layout:fixed;">
                   <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
                 </td>
               </tr>
@@ -198,13 +194,15 @@
                 <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
                 <td style="width:260px; table-layout:fixed;">
                   <?php if ($avatar['url']) {?>
-                    <img src="<?php echo $avatar['url']?>" width="256" style="margin-bottom:10px;"/></td>
+                    <a href="<?php echo $avatar['url']?>" target="_blank">
+                      <img src="<?php echo $avatar['url']?>" width="256" style="margin-bottom:10px;"/></td>
+                    </a>
                   <?php } else {?>
                     <img src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width="256" style="margin-bottom:10px;"/>
                   <?php }?>
                 </td>
                 <td style="width: 10px; table-layout:fixed;">&nbsp;</td>
-                <td style="width:460px; table-layout:fixed; word-break:break-all;" valign="top"><?php echo $avatar['html']?></td>
+                <td style="width:340px; table-layout:fixed; word-break:break-all;" valign="top"><?php echo $avatar['html']?></td>
               </tr>
             </table>
             <?php $num++; }?>
@@ -212,6 +210,14 @@
         </tr>
       </table>
     <?php }?>
+
+    <div align="center" style="margin-top:10px; margin-bottom: 0px;">
+      <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
+      <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
+      <input type="hidden" name="sesskey"  value="<?php echo sesskey()?>" />
+      <input type="submit" value="<?php echo $create_ttl?>" />&nbsp;
+      <input type="reset"  value="<?php echo $reset_ttl?>" />
+    </div>
 
   </form>
 <?php }?>

@@ -64,13 +64,13 @@
   </ul>
 </div>
 
-<table width="760" border="0" align="center" cellpadding="2" cellspacing="2" style="table-layout:fixed;">
+<table width="640" border="0" align="center" cellpadding="2" cellspacing="2" style="table-layout:fixed;">
   <tr>
     <td class="generalboxcontent" style="width:100%; table-layout:fixed;">
       <table width="100%" border="0" bordercolor="#ffffff" cellpadding="0" cellspacing="0" style="background-color:#f0f0f0; margin-bottom:10px;">
         <tr>
           <td style="width: 30px; table-layout:fixed;"><?php echo $avatar['num']?></td>
-          <td colspan="3" style="width:730px; table-layout:fixed;">
+          <td colspan="3" style="width:610px; table-layout:fixed;">
             <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
           </td>
         </tr>
@@ -82,7 +82,7 @@
             </a>
           </td>
           <td style="width: 10px; table-layout:fixed;">&nbsp;</td>
-          <td style="width:460px; table-layout:fixed;">
+          <td style="width:340px; table-layout:fixed;">
             <strong style="color:#404040;"><?php echo $avatar['uuid']?></strong>
           </td>
         </tr>
@@ -90,12 +90,14 @@
           <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
           <td style="width:260px; table-layout:fixed;">
             <?php if ($avatar['url']) {?>
-              <img src="<?php echo $avatar['url']?>" width="256" style="margin-bottom:10px;"/></td>
+              <a href="<?php echo $avatar['url']?>" target="_blank">
+                <img src="<?php echo $avatar['url']?>" width="256" style="margin-bottom:10px;"/></td>
+              </a>
             <?php } else {?>
               <img src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width="256" style="margin-bottom:10px;"/>
             <?php }?>
           <td style="width: 10px; table-layout:fixed;">&nbsp;</td>
-          <td style="width:460px; table-layout:fixed; word-break:break-all;" valign="top"><?php echo $avatar['html']?></td>
+          <td style="width:340px; table-layout:fixed; word-break:break-all;" valign="top"><?php echo $avatar['html']?></td>
         </tr>
       </table>
     </td>

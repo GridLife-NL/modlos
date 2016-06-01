@@ -70,7 +70,9 @@
           <td style="width: 30px; table-layout:fixed;">&nbsp;</td>
           <td style="width:260px; table-layout:fixed;">
             <?php if ($avatar['url']) {?>
-              <img src="<?php echo $avatar['url']?>" width="256" style="margin-bottom:10px;"/></td>
+              <a href="<?php echo $avatar['url']?>" target="_blank">
+                <img src="<?php echo $avatar['url']?>" width="256" style="margin-bottom:10px;"/></td>
+              </a>
             <?php } else {?>
               <img src="<?php echo CMS_MODULE_URL?>/images/info.jpg" width="256" style="margin-bottom:10px;"/>
             <?php }?>

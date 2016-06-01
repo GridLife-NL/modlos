@@ -20,7 +20,7 @@ class  CreateAvatar
 	var $return_url		= '';
 	var $created_avatar = false;
 
-	var $base_avatar 	= '00000000-0000-0000-0000-000000000000';
+	var $base_avatar 	= UUID_ZERO;
 	var $db_data        = array();
 	var $select_num     = 0;
 	var $total_num      = 0;
@@ -125,6 +125,10 @@ class  CreateAvatar
 			} while ($modobj!=null);
 			$this->nx_UUID = $uuid;
 		}
+
+		//
+		$this->regionNames = opensim_get_regions_names('', 'regionName ASC');
+		$this->lastNames   = modlos_get_lastnames();
 
 		// Template System
 		$count = 0;
@@ -238,8 +242,6 @@ class  CreateAvatar
 		// GET
 		else {
 			// Default Value
-			$this->regionNames = opensim_get_regions_names('', 'regionName ASC');
-			$this->lastNames   = modlos_get_lastnames();
 			$this->hmregion    = $CFG->modlos_home_region;
 			$this->UUID		   = $this->nx_UUID;
 			$this->ownername   = $USER->username; //get_display_username($USER->firstname, $USER->lastname);
