@@ -239,13 +239,14 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
-	if ($oldversion < 2016060100) {
+	if ($oldversion < 2016060200) {
 		$table = new xmldb_table('modlos_template_avatars');
         //
         $field = new xmldb_field('status',  XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, '0', 'itemid');
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
+		$table->add_key('uuid', XMLDB_KEY_UNIQUE, array('uuid'));
 	}
 
 

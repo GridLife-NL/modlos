@@ -440,6 +440,7 @@
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="uuid"    TYPE="unique"  FIELDS="uuid"/>
       </KEYS>
     </TABLE>
   </TABLES>
