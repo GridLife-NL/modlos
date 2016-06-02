@@ -273,6 +273,7 @@ class  CreateAvatar
 		$confirm_pass_ttl	= get_string('modlos_confirm_pass',  'block_modlos');
 		$home_region_ttl	= get_string('modlos_home_region',	 'block_modlos');
 		$ownername_ttl		= get_string('modlos_ownername',	 'block_modlos');
+		$invalid_ttl		= get_string('modlos_invalid',	 	 'block_modlos');
 		$create_ttl			= get_string('modlos_create_ttl',	 'block_modlos');
 		$reset_ttl			= get_string('modlos_reset_ttl',	 'block_modlos');
 		$return_ttl			= get_string('modlos_return_ttl',	 'block_modlos');
