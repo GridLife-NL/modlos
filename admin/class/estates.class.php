@@ -94,9 +94,10 @@ class  Estates
 	{
 		global $CFG, $OUTPUT;
 
-		$grid_name	 = $CFG->modlos_grid_name;
-		$estates_ttl = get_string('modlos_estate_ttl','block_modlos');
-		$content     = get_string('modlos_estate_ttl','block_modlos');
+		$grid_name	   = $CFG->modlos_grid_name;
+		$estates_ttl   = get_string('modlos_estate_ttl', 'block_modlos');
+		$content       = get_string('modlos_estate_ttl', 'block_modlos');
+		$modlos_estate = get_string('modlos_estate_name','block_modlos');
 
 		include(CMS_MODULE_PATH.'/admin/html/estates.html');
 	}

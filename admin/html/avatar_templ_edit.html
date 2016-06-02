@@ -51,14 +51,18 @@
         <tr>
           <td style="width: 50px; table-layout:fixed;"><?php echo $avatar['num']?></td>
           <td colspan="3" style="width:610px; table-layout:fixed;">
-            <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
+            <?php if ($avatar['status']==0) {?>
+              <strong style="color:#909090;"><?php echo $avatar['title']?></strong>
+            <?php } else {?>
+              <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
+            <?php }?>
           </td>
         </tr>
 
         <tr>
           <td style="width: 50px; table-layout:fixed;">
             <?php if ($avatar['status']==0) {?>
-              <strong style="color:#808080;"><?php echo $modlos_invalid?></strong>
+              <strong style="color:#909090;"><?php echo $modlos_invalid?></strong>
             <?php } else {?>
               <strong style="color:#109010;"><?php echo $modlos_valid?></strong>
             <?php }?>

@@ -181,14 +181,18 @@
         <tr>
           <td class="generalboxcontent" width="640" style="table-layout:fixed;">
             <?php $num=0; foreach($avatars as $avatar) {?>
-            <?php if ($avatar['status']>0) {?>
+            <?php if ($avatar['status']>0 or $hasPermit) {?>
             <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#f0f0f0; margin-bottom:10px;">
               <tr>
                 <td style="width: 30px; table-layout:fixed;" align="center">
                   <input type="radio" name="select_num" value="<?php echo $num?>" <?php if ($num==$select_num) echo 'checked'?> >
                 </td>
                 <td colspan="3" style="width:610px; table-layout:fixed;">
-                  <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
+                  <?php if ($avatar['status']==0) {?>
+                    <strong style="color:#909090;"><?php echo $avatar['title']?></strong>
+                  <?php } else {?>
+                    <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
+                  <?php }?>
                 </td>
               </tr>
               <tr>

@@ -51,7 +51,11 @@
         <tr>
           <td style="width: 30px; table-layout:fixed;"><?php echo $avatar['num']?></td>
           <td colspan="3" style="width:730px; table-layout:fixed;">
-            <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
+            <?php if ($avatar['status']==0) {?>
+              <strong style="color:#909090;"><?php echo $avatar['title']?></strong>
+            <?php } else {?>
+              <strong style="color:#2020c0;"><?php echo $avatar['title']?></strong>
+            <?php }?>
           </td>
         </tr>
         <tr>
