@@ -16,7 +16,6 @@ class  CurrencyManage
     var $url_params;
 
 	var $course_id    = 0;
-	var $instance_id  = 0;
 	var $hasPermit    = false;
 
 	var $noProssecced = true;
@@ -43,10 +42,9 @@ class  CurrencyManage
 
 
 
-	function  CurrencyManage($course_id, $instance_id) 
+	function  CurrencyManage($course_id) 
 	{
-		$this->course_id   = $course_id;
-		$this->instance_id = $course_id;
+		$this->course_id = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
@@ -54,7 +52,7 @@ class  CurrencyManage
 			return;
 		}
 	
-		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$this->url_params = '?course='.$course_id;
 		$this->action_url = CMS_MODULE_URL.'/admin/actions/currency.php';
 	}
 
@@ -62,6 +60,7 @@ class  CurrencyManage
 	function  execute()
 	{
 		global $CFG;
+
 		if (!$this->hasPermit) return false;
 		if (!USE_CURRENCY_SERVER) return false;
 

@@ -7,21 +7,19 @@ require_once(realpath(dirname(__FILE__).'/../include/modlos.func.php'));
 
 global $CFG;
 
-$centerX     = optional_param('ctX',  $CFG->modlos_map_start_x, PARAM_INT);
-$centerY     = optional_param('ctY',  $CFG->modlos_map_start_y, PARAM_INT);
-$tsize       = optional_param('size', $CFG->modlos_map_size,    PARAM_INT);
-$course_id   = optional_param('course',   '1', PARAM_INT);
-$instance_id = optional_param('instance', '0', PARAM_INT);
+$centerX   = optional_param('ctX',  $CFG->modlos_map_start_x, PARAM_INT);
+$centerY   = optional_param('ctY',  $CFG->modlos_map_start_y, PARAM_INT);
+$tsize     = optional_param('size', $CFG->modlos_map_size,    PARAM_INT);
+$course_id = optional_param('course',   '1', PARAM_INT);
 if (!$course_id) $course_id = 1;
 
 $urlparams = array();
-$urlparams['course']   = $course_id;
-$urlparams['instance'] = $instance_id;
-$urlparams['ctX']      = $centerX;
-$urlparams['ctY']      = $centerY;
-$urlparams['size']     = $tsize;
+$urlparams['course'] = $course_id;
+$urlparams['ctX']    = $centerX;
+$urlparams['ctY']    = $centerY;
+$urlparams['size']   = $tsize;
 $PAGE->set_url('/blocks/modlos/actions/map_action.php', $urlparams);
-$url_params = '?course='.$course_id.'&amp;instance='.$instance_id.'&amp;ctX='.$centerX.'&amp;ctY='.$centerY.'&amp;size='.$tsize;
+$url_params = '?course='.$course_id.'&amp;ctX='.$centerX.'&amp;ctY='.$centerY.'&amp;size='.$tsize;
 
 $action_url = CMS_MODULE_URL.'/actions/map_action.php?course='.$course_id;
 $course = $DB->get_record('course', array('id'=>$course_id));
@@ -40,7 +38,7 @@ $max_avatars = $CFG->modlos_max_own_avatars;
 if (!hasModlosPermit($course_id) and $max_avatars>=0 and $avatars_num>=$max_avatars) $isAvatarMax = true;
 else $isAvatarMax = false;
 
-print_tabnav($action, $course_id, $instance_id, !$isAvatarMax);
+print_tabnav($action, $course_id, !$isAvatarMax);
 
 $object_url = CMS_MODULE_URL.'/helper/world_map.php'.$url_params;
 include(CMS_MODULE_PATH.'/html/map_object.html');

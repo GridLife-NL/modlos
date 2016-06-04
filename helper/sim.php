@@ -13,9 +13,8 @@ if (isguestuser()) {
 	exit('<h4>Guest User is not allowed to access this page!!</h4>');
 }
 
-$region      = required_param('region', PARAM_TEXT);
-$course_id   = optional_param('course',   '1', PARAM_INT);
-$instance_id = optional_param('instance', '0', PARAM_INT);
+$region    = required_param('region', PARAM_TEXT);
+$course_id = optional_param('course',   '1', PARAM_INT);
 if (!isGUID($region)) exit("<h4>bad region uuid!! ($region)</h4>");
 if (!$course_id) $course_id = 1; 
 
@@ -25,7 +24,7 @@ $isGuest    = isguestuser();
 
 $grid_name  = $CFG->modlos_grid_name;
 $action_url = CMS_MODULE_URL.'/helper/sim.php';
-$reset_url  = CMS_MODULE_URL.'/actions/reset_region.php?course='.$course_id.'&amp;instance='.$instance_id.'&amp;action=close&region=';
+$reset_url  = CMS_MODULE_URL.'/actions/reset_region.php?course='.$course_id.'&amp;action=close&region=';
 
 
 //////////////
@@ -143,7 +142,7 @@ $locY = $locY/256;
 //if ($avatars_num>100) $avatar_select = false;
 
 //////////////
-$url_amp = '&amp;course='.$course_id.'&amp;instance='.$instance_id;
+$url_amp = '&amp;course='.$course_id;
 
 $region_info_ttl= get_string('modlos_region_info',	 'block_modlos');
 $region_ttl   	= get_string('modlos_region',   	 'block_modlos');

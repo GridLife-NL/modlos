@@ -20,7 +20,6 @@ class  EventsList
 	var $delete_url;
 
 	var $course_id	 = 0;
-	var $instance_id = 0;
 	var $isAvatarMax = false;
 
 	var $pstart;
@@ -38,7 +37,7 @@ class  EventsList
 
 
 
-	function  EventsList($course_id, $instance_id)
+	function  EventsList($course_id)
 	{
 		global $CFG, $USER;
 
@@ -48,19 +47,17 @@ class  EventsList
 			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
-		$this->hasPermit   = hasModlosPermit($course_id);
-		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
-		$this->userid	   = $USER->id;
-		$this->pstart 	   = optional_param('pstart', "$this->Cpstart", PARAM_INT);
-		$this->plimit 	   = optional_param('plimit', "$this->Cplimit", PARAM_INT);
+		$this->hasPermit = hasModlosPermit($course_id);
+		$this->course_id = $course_id;
+		$this->userid	 = $USER->id;
+		$this->pstart 	 = optional_param('pstart', "$this->Cpstart", PARAM_INT);
+		$this->plimit 	 = optional_param('plimit', "$this->Cplimit", PARAM_INT);
 
 		$avatars_num = modlos_get_avatars_num($USER->id);
 		$max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $max_avatars>=0 and $avatars_num>=$max_avatars) $this->isAvatarMax = true;
 
-		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
-
+		$this->url_params = '?course='.$course_id;
 		$this->action_url = CMS_MODULE_URL.'/actions/events_list.php'. $this->url_params;
 		$this->make_url	  = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_params;
 		$this->edit_url   = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_params.'&amp;eventid=';

@@ -17,9 +17,8 @@ class  RegionsList
 	var $owner_url;
 	var $rest_url;
 
-	var $course_id   = 0;
-	var $instance_id = 0;
-	var $user_id     = 0;
+	var $course_id  = 0;
+	var $user_id    = 0;
 	var $get_action;
 	var $url_params = '';
 	var $action_params = '';
@@ -60,19 +59,18 @@ class  RegionsList
 
 
 
-	function  RegionsList($course_id, $instance_id, $show_all, $userid=0)
+	function  RegionsList($course_id, $show_all, $userid=0)
 	{
 		global $CFG, $USER;
 
-		$this->isGuest     = isguestuser();
-		$this->hasPermit   = hasModlosPermit($course_id);
-		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
-		$this->user_id     = $userid;
-		$this->show_all	   = $show_all;
+		$this->isGuest   = isguestuser();
+		$this->hasPermit = hasModlosPermit($course_id);
+		$this->course_id = $course_id;
+		$this->user_id   = $userid;
+		$this->show_all	 = $show_all;
 		if (!$show_all and $userid==0) $this->user_id = $USER->id;
 
-		$this->url_params  = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$this->url_params  = '?course='.$course_id;
 
 		if ($show_all) $this->action_params = '&amp;action=all';
 		else           $this->action_params = '&amp;action=personal&amp;userid='.$userid;

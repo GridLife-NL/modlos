@@ -62,7 +62,6 @@
         <form name="assignform" method="GET"  action="<?php echo $this->action_url?>">
         <?php }?>
           <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
-          <input type="hidden" name="instance" value="<?php echo $this->instance_id?>" />
           <input type="hidden" name="action"   value="personal" />
           <input type="hidden" name="userid"   value="<?php echo $USER->id?>" />
           <input type="submit" name="return"  value="<?php echo $return_ttl?>" />
@@ -218,9 +217,8 @@
     <?php }?>
 
     <div align="center">
-      <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
-      <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
-      <input type="hidden" name="sesskey"  value="<?php echo sesskey()?>" />
+      <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+      <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
       <input type="submit" value="<?php echo $create_ttl?>" />
       <input type="reset"  value="<?php echo $reset_ttl?>" style="margin-left:30px;"/>
     </div>

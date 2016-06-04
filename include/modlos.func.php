@@ -1067,7 +1067,7 @@ function  modlos_sync_sloodle_users($update_check=true)
 // Tab Menu
 //
 
-function  print_tabnav($currenttab, $course_id, $instance_id, $show_create_tab=true)
+function  print_tabnav($currenttab, $course_id, $show_create_tab=true)
 {
 	global $CFG, $USER;
 
@@ -1077,7 +1077,6 @@ function  print_tabnav($currenttab, $course_id, $instance_id, $show_create_tab=t
 	$hasPermit = hasModlosPermit($course_id);
 
 	$url_params = '?course='.$course_id;
-	if ($instance_id>0) $url_params.= '&amp;instance='.$instance_id;
 
 	///////
 	$isGuest = isguestuser();
@@ -1126,7 +1125,6 @@ function  print_tabnav($currenttab, $course_id, $instance_id, $show_create_tab=t
 	$tabs = array($toprow);
 
 	echo "<input type='hidden' name='course'   value='$course_id' />";
-	echo "<input type='hidden' name='instance' value='$instance_id' />";
 	echo '<table align="center" style="margin-bottom:0.0em;"><tr><td>';
 	echo '<style type="text/css">';
 	include(CMS_MODULE_PATH."/html/html.css");
@@ -1136,17 +1134,15 @@ function  print_tabnav($currenttab, $course_id, $instance_id, $show_create_tab=t
 }
 
 
-function  print_tabnav_manage($currenttab, $course_id, $instance_id)
+function  print_tabnav_manage($currenttab, $course_id)
 {
 	global $CFG, $USER;
 
 	if (empty($currenttab)) $currenttab = 'management';
 	if (!$course_id or $course_id<=0) $course_id = 1;
 
-	$hasPermit = hasModlosPermit($course_id);
-
+	$hasPermit  = hasModlosPermit($course_id);
 	$url_params = '?course='.$course_id;
-	if ($instance_id>0) $url_params.= '&amp;instance='.$instance_id;
 
 	///////
 	$toprow = array();
@@ -1154,7 +1150,7 @@ function  print_tabnav_manage($currenttab, $course_id, $instance_id)
 //																	'<strong>'.get_string('modlos_menu_tab','block_modlos').'</strong>');
 	if ($hasPermit) {
 		if (jbxl_is_admin($USER->id)) {
-			$url_amp = '&amp;course='.$course_id.'&amp;instance='.$instance_id;
+			$url_amp = '&amp;course='.$course_id;
 			$toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos'.$url_amp, 
 																	'<strong>'.get_string('modlos_general_setting_tab','block_modlos').'</strong>');
 		}
@@ -1194,7 +1190,6 @@ function  print_tabnav_manage($currenttab, $course_id, $instance_id)
 	$tabs = array($toprow);
 
 	echo "<input type='hidden' name='course'   value='$course_id' />";
-	echo "<input type='hidden' name='instance' value='$instance_id' />";
 	echo '<table align="center" style="margin-bottom:0.0em;"><tr><td>';
     echo '<style type="text/css">';
 	include(CMS_MODULE_PATH."/html/html.css");

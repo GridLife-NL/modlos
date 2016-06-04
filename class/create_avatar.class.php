@@ -8,8 +8,6 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 class  CreateAvatar
 {
-//	var $context;
-
 	var $regionNames  	= array();
 	var $lastNames    	= array();
 	var $actvLastName 	= false;
@@ -31,7 +29,6 @@ class  CreateAvatar
 	var $isAvatarMax 	= false;
 
 	var $course_id   	= 0;
-	var $instance_id   	= 0;
 	var $use_sloodle 	= false;
 	var	$isDisclaimer	= false;
 
@@ -50,7 +47,7 @@ class  CreateAvatar
 
 
 
-	function  CreateAvatar($course_id, $instance_id)
+	function  CreateAvatar($course_id)
 	{
 		global $CFG, $USER;
 
@@ -69,20 +66,7 @@ class  CreateAvatar
 		}
 		else $module_url = CMS_MODULE_URL;
 
-/*
-		//
-		if ($instance_id==0) {
-			$ids = jbxl_get_block_instance_ids('modlos', $course_id);
-			foreach ($ids as $id) {
-				$instance_id = $id->id;
-				break;
-			}
-		}
-*/
-
 		$this->course_id	= $course_id;
-		$this->instance_id	= $instance_id;
-//		$this->context 		= context_block::instance($instance_id);
 		$this->hasPermit	= hasModlosPermit($course_id);
 		$this->action_url  	= $module_url.'/actions/create_avatar.php';
 		$this->return_url  	= $module_url.'/actions/avatars_list.php';
@@ -149,13 +133,13 @@ class  CreateAvatar
 			$this->db_data[$count]['fullname'] = '';
 			$this->db_data[$count]['url']	   = '';
 
-			$context_id = jbxl_get_block_id('modlos');
 			$name = opensim_get_avatar_name($template->uuid);
 			if ($name) $this->db_data[$count]['fullname'] = $name['fullname'];
 
+			$usercontext = context_user::instance($USER->id);   // dummy. see lib.php
 			if ($template->filename) {
 				$path = '@@PLUGINFILE@@/'.$template->filename;
-				$this->db_data[$count]['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $context_id, 'block_modlos', 'templ_picture', $template->itemid);
+				$this->db_data[$count]['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $usercontext->id, 'block_modlos', 'templ_picture', $template->itemid);
 			}
 
 			if ($this->select_num==-1 and $this->db_data[$count]['status']>0) $this->select_num = $count;

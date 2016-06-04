@@ -15,7 +15,6 @@ class  LastNames
 {
 	var $action_url;
 	var $course_id   = 0;
-	var $instance_id = 0;
 
 	var $lastnames			= array();
 	var $lastnames_active	= array();
@@ -31,10 +30,9 @@ class  LastNames
 
 
 
-	function  LastNames($course_id, $instance_id) 
+	function  LastNames($course_id) 
 	{
-		$this->course_id    = $course_id;
-		$this->instance_id  = $instance_id;
+		$this->course_id = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;

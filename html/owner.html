@@ -56,16 +56,14 @@
 
   <div align="center" style="margin-top:10px;">
     <?php if ($showPostForm) {?>
-      <input type="hidden" name="userid"   value="<?php echo $this->user_id?>" />
-      <input type="hidden" name="uuid"     value="<?php echo $this->UUID?>" />
-      <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
-      <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
-      <input type="hidden" name="sesskey"  value="<?php echo sesskey()?>" />
+      <input type="hidden" name="userid"  value="<?php echo $this->user_id?>" />
+      <input type="hidden" name="uuid"    value="<?php echo $this->UUID?>" />
+      <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+      <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
       <input type="submit" value="<?php echo $avatar_own_ttl?>" />&nbsp;
       <input type="reset"  value="<?php echo $reset_ttl?>" />
     <?php } else {?>
       <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
-      <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
       <input type="submit" value="<?php echo $return_ttl?>" />
     <?php }?>
   </div>

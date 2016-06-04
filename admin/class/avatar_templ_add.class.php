@@ -12,11 +12,9 @@ require_once(CMS_MODULE_PATH.'/admin/lib/modlos_avatar_templ_form.php');
 
 class  AvatarTemplAdd
 {
-	var $db_data 	= array();
-//	var $context;
+	var $db_data 	 = array();
 
 	var $course_id   = 0;
-	var $instance_id = 0;
 	var $isPost      = false;
 	var $order_num   = 1;
 
@@ -35,32 +33,17 @@ class  AvatarTemplAdd
 
 
 
-	function  AvatarTemplAdd($course_id, $instance_id) 
+	function  AvatarTemplAdd($course_id) 
 	{
-		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
-
+		$this->course_id = $course_id;
 		$this->hasPermit = hasModlosPermit($this->course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
 			$this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
 			return;
 		}
-	
-/*
 		//
-		if ($instance_id==0) {
-			$ids = jbxl_get_block_instance_ids('modlos', $course_id);
-			foreach ($ids as $id) {
-				$instance_id = $id->id;
-				break;
-			}
-		}
-		$this->context = context_block::instance($instance_id); 
-*/
-
-		//
-		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$this->url_params = '?course='.$course_id;
 		$this->return_url = CMS_MODULE_URL.'/admin/actions/avatar_templ.php'.$this->url_params;
 		$this->add_url    = CMS_MODULE_URL.'/admin/actions/avatar_templ_add.php'.$this->url_params;
 		$this->edit_url   = CMS_MODULE_URL.'/admin/actions/avatar_templ_edit.php'.$this->url_params.  '&amp;templid=';
@@ -70,7 +53,7 @@ class  AvatarTemplAdd
 
 	function  execute()
 	{
-		global $CFG, $DB;
+		global $CFG, $DB, $USER;
 
 		if (!$this->hasPermit) return false;
 
@@ -98,8 +81,6 @@ class  AvatarTemplAdd
 				return false;
 			}
 			
-//			$context_id = $this->context->id;
-			$context_id = jbxl_get_block_id('modlos');
 			$title  = trim(required_param('title', PARAM_TEXT));
 			$uuid   = trim(required_param('uuid',  PARAM_TEXT));
 			$order  = optional_param('order', $this->order_num, PARAM_INT);
@@ -147,6 +128,7 @@ class  AvatarTemplAdd
 
 			// File Manager. see lib/filelib.php
 			$picid = file_get_submitted_draft_itemid('picfile');
+			$context_id = jbxl_get_block_id('modlos');
 			file_save_draft_area_files($picid, $context_id, 'block_modlos', 'templ_picture', $picid, array('maxfiles'=>1));
 
 			$condition = "itemid=$picid AND contextid=$context_id AND component='block_modlos' AND filearea='templ_picture' AND ".
@@ -180,9 +162,10 @@ class  AvatarTemplAdd
 			$name = opensim_get_avatar_name($template['uuid']);
 			if ($name) $this->db_data['fullname'] = $name['fullname'];
 
+			$usercontext = context_user::instance($USER->id);   // dummy. see lib.php
 			if ($template['filename']) {
 				$path = '@@PLUGINFILE@@/'.$template['filename'];
-				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $context_id, 'block_modlos', 'templ_picture', $template['itemid']);
+				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $usercontext->id, 'block_modlos', 'templ_picture', $template['itemid']);
 			}
 
 			$this->isPost = true;

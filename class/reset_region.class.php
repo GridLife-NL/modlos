@@ -11,7 +11,6 @@ class  ResetRegion
 	var $hasPermit	 = false;
 	var $isGuest	 = true;
 	var $course_id	 = 0;
-	var $instance_id = 0;
 
 	var $action_url  = '';
 	var $reset_url   = '';
@@ -43,7 +42,7 @@ class  ResetRegion
 
 
 
-	function  ResetRegion($course_id, $instance_id) 
+	function  ResetRegion($course_id) 
 	{
 		global $CFG, $USER;
 
@@ -68,13 +67,12 @@ class  ResetRegion
 		$action = optional_param('action', 'personal', PARAM_ALPHA);
 		$userid = optional_param('userid', '0', PARAM_INT);
 
-		$url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$url_params = '?course='.$course_id;
 		$option_params = '&amp;action='.$action.'&amp;userid='.$userid;
 		if ($action=='close') $option_params = '&amp;action=personal&amp;userid='.$userid;
 
 		$this->action      = $action;
 		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
 		$this->action_url  = $module_url.'/actions/reset_region.php'.$url_params.$option_params;
 		$this->reset_url   = $module_url.'/actions/reset_region.php'.$url_params.$option_params;
 		$this->return_url  = $module_url.'/actions/regions_list.php'.$url_params.$option_params;

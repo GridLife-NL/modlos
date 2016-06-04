@@ -15,7 +15,6 @@ class  DeleteEvent
 	var $deleted	 = false;
 
 	var $course_id	 = 0;
-	var $instance_id = 0;
 	var $userid	 	 = 0;		// owner of this process
 	var $uid		 = 0; 		// creator of event
 
@@ -37,7 +36,7 @@ class  DeleteEvent
 
 
 
-	function  DeleteEvent($course_id, $instance_id) 
+	function  DeleteEvent($course_id) 
 	{
 		global $CFG, $USER;
 
@@ -47,14 +46,13 @@ class  DeleteEvent
 			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
-		$this->hasPermit   = hasModlosPermit($course_id);
-		$this->userid	   = $USER->id;
+		$this->hasPermit  = hasModlosPermit($course_id);
+		$this->userid	  = $USER->id;
 		
-		$url_params 	   = '?course='.$course_id.'&amp;instance='.$instance_id;
-		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
-		$this->action_url  = CMS_MODULE_URL.'/actions/delete_event.php';
-		$this->return_url  = CMS_MODULE_URL.'/actions/events_list.php'.$url_params;
+		$url_params 	  = '?course='.$course_id;
+		$this->course_id  = $course_id;
+		$this->action_url = CMS_MODULE_URL.'/actions/delete_event.php';
+		$this->return_url = CMS_MODULE_URL.'/actions/events_list.php'.$url_params;
 
 		// GET eventid
 		$this->event_id = optional_param('eventid', '0', PARAM_INT);

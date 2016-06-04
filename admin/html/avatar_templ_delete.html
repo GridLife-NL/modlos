@@ -49,7 +49,6 @@
     <td align="center">
       <form name="assignform" method="GET"  action="<?php echo $return_url?>">
         <input type="hidden" name="course"   value="<?php echo $this->course_id;?>" />
-        <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
         <input type="submit" name="cancel"   value="<?php echo $modlos_return?>" />
       </form>
     </td>
@@ -120,7 +119,6 @@
       <form name="assignform" method="POST" action="<?php echo $delete_url?>">
         <input type="hidden" name="sesskey"  value="<?php echo sesskey();?>" />
         <input type="hidden" name="course"   value="<?php echo $this->course_id;?>" />
-        <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
         <input type="hidden" name="templid"  value="<?php echo $avatar['id'] ?>" />
         <input type="submit" name="delete"   value="<?php echo $modlos_delete?>" />&nbsp;&nbsp;&nbsp;
         <input type="submit" name="cancel"   value="<?php echo $modlos_return?>" />

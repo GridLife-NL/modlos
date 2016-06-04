@@ -18,7 +18,6 @@ class  LoginScreen
 	var $action_url;
 	var $hasPermit   = false;
 	var $course_id   = 0;
-	var $instance_id = 0;
 
 	var	$preview     = false;
 	var	$updated     = false;
@@ -32,10 +31,9 @@ class  LoginScreen
 	var	$lgnscrn_altbox = '';
 
 
-	function  LoginScreen($course_id, $instance_id) 
+	function  LoginScreen($course_id) 
 	{
-		$this->course_id   = $course_id;
-		$this->instance_id = $course_id;
+		$this->course_id = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
@@ -67,7 +65,7 @@ class  LoginScreen
 			$update  = optional_param('submit_update', '', PARAM_TEXT);
 
             // Return to Edit
-			if ($cancel!='') redirect($this->action_url.'?course='.$this->course_id.'&amp;instance='.$instance_id, 'Please wait ...', 0);
+			if ($cancel!='') redirect($this->action_url.'?course='.$this->course_id, 'Please wait ...', 0);
 
 			$this->lgnscrn_title  = optional_param('lgnscrn_title', '',  PARAM_TEXT);	// title
 			$this->lgnscrn_ckey   = optional_param('lgnscrn_ckey',  '0', PARAM_INT);	// preview
@@ -144,7 +142,6 @@ class  LoginScreen
 		$content		= get_string('modlos_lgnscrn_contents','block_modlos');
 
 		$course_id		= $this->course_id;
-		$instance_id	= $this->instance_id;
 		$updated		= $this->updated;
 		$preview		= $this->preview;
 		$action_url		= $this->action_url;
@@ -155,7 +152,7 @@ class  LoginScreen
 		$lgnscrn_altbox = $this->lgnscrn_altbox;
 		$lgnscrn_title  = $this->lgnscrn_title;
 
-		$url_params     = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$url_params     = '?course='.$course_id;
 		$lgnscrn_url	= CMS_MODULE_URL.'/admin/actions/loginscreen.php'.$url_params;
 		$return_ttl	   	= get_string('modlos_lgnscrn_return', 'block_modlos');
 

@@ -41,7 +41,6 @@ table {
               <?php echo $modlos_estate?>&nbsp;
               <input type="hidden" name="sesskey"   value="<?php echo sesskey();?>" />
               <input type="hidden" name="course"    value="<?php echo $this->course_id;?>" />
-              <input type="hidden" name="instance"  value="<?php echo $this->instance_id ?>" />
               <input type="text"   name="estatename" size="18" maxlength="32" value="" />
               <input type="submit" name="addestate" value="<?php echo get_string('modlos_add','block_modlos');?>" />
             </form>
@@ -52,7 +51,6 @@ table {
             <form name="assignform" method="POST" action="<?php echo $this->action_url?>">
               <input type="hidden" name="sesskey"  value="<?php echo sesskey();?>" />
               <input type="hidden" name="course"   value="<?php echo $this->course_id;?>" />
-              <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
               <?php $count = $this->show_table(); ?>
               <?php if ($count%$this->page_size!=0) { ?>
               <input type="submit" name="updateestate" value="<?php echo get_string('modlos_update','block_modlos');?>" />&nbsp;&nbsp;

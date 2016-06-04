@@ -14,7 +14,6 @@ class  DeleteAvatar
 	var $cancel_url  = '';
 	var $return_url  = '';
 	var $course_id	 = 0;
-	var $instance_id = 0;
 
 	var $deleted_avatar = false;
 
@@ -38,7 +37,7 @@ class  DeleteAvatar
 
 
 
-	function  DeleteAvatar($course_id, $instance_id) 
+	function  DeleteAvatar($course_id) 
 	{
 		global $CFG, $USER;
 
@@ -48,11 +47,10 @@ class  DeleteAvatar
 			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
-		$url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
-		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
-		$this->action_url  = CMS_MODULE_URL.'/actions/delete_avatar.php';
-		$this->cancel_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params.'&amp;action=personal';
+		$url_params = '?course='.$course_id;
+		$this->course_id  = $course_id;
+		$this->action_url = CMS_MODULE_URL.'/actions/delete_avatar.php';
+		$this->cancel_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params.'&amp;action=personal';
 
 		// get UUID from POST or GET
 		$this->return_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params.'&amp;action=personal';

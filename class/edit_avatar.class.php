@@ -17,7 +17,6 @@ class  EditAvatar
 	var $delete_url  = '';
 	var $return_url  = '';
 	var $course_id	 = 0;
-	var $instance_id = 0;
 
 	var $updated_avatar = false;
 
@@ -43,7 +42,7 @@ class  EditAvatar
 
 
 
-	function  EditAvatar($course_id, $instance_id) 
+	function  EditAvatar($course_id) 
 	{
 		global $CFG, $USER;
 
@@ -66,13 +65,12 @@ class  EditAvatar
 		else $module_url = CMS_MODULE_URL;
 
 		//
-		$url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$url_params    = '?course='.$course_id;
         $option_params = '&amp;action='.$action.'&amp;userid='.$userid;
-		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
-		$this->action_url  = $module_url.'/actions/edit_avatar.php'.  $url_params.$option_params;
-		$this->delete_url  = $module_url.'/actions/delete_avatar.php'.$url_params.$option_params;
-		$this->return_url  = $module_url.'/actions/avatars_list.php'. $url_params.$option_params;
+		$this->course_id  = $course_id;
+		$this->action_url = $module_url.'/actions/edit_avatar.php'.  $url_params.$option_params;
+		$this->delete_url = $module_url.'/actions/delete_avatar.php'.$url_params.$option_params;
+		$this->return_url = $module_url.'/actions/avatars_list.php'. $url_params.$option_params;
 
 		// get UUID from POST or GET
 		$uuid = optional_param('uuid', '', PARAM_TEXT);

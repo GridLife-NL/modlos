@@ -16,7 +16,6 @@ class  ManagementBase
 {
 	var $action_url;
 	var $course_id   = 0;
-	var $instance_id = 0;
 
 	var	$managed     = false;
 	var $hasPermit   = false;
@@ -25,10 +24,9 @@ class  ManagementBase
 	var	$command     = '';
 
 
-	function  ManagementBase($course_id, $instance_id) 
+	function  ManagementBase($course_id) 
 	{
-		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
+		$this->course_id = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
@@ -107,7 +105,7 @@ class  ManagementBase
 		$command	   = $this->command;
 		$content	   = '<center>'.get_string('modlos_manage_contents', 'block_modlos').'</center>';
 
-		$url_params    = '?course='.$this->course_id.'&amp;instance='.$this->instance_id;
+		$url_params    = '?course='.$this->course_id;
 		$manage_url    = CMS_MODULE_URL.'/admin/actions/management.php'.$url_params;
 		$return_ttl	   = get_string('modlos_manage_return', 'block_modlos');
 

@@ -21,7 +21,6 @@ class  AvatarsList
 	var $owner_url;
 
 	var $course_id    = 0;
-	var $instance_id  = 0;
 
 	var $user_id	  = 0;
 	var $url_params   = '';
@@ -65,7 +64,7 @@ class  AvatarsList
 
 
 
-	function  AvatarsList($course_id, $instance_id, $show_all, $userid=0)
+	function  AvatarsList($course_id, $show_all, $userid=0)
 	{
 		global $CFG, $USER;
 
@@ -76,7 +75,6 @@ class  AvatarsList
 		}
 
 		$this->course_id	= $course_id;
-		$this->instance_id	= $instance_id;
 		$this->hasPermit	= hasModlosPermit($course_id);
 		$this->use_sloodle  = $CFG->modlos_cooperate_sloodle;
 		$this->use_currency = $CFG->modlos_use_currency_server;
@@ -84,7 +82,7 @@ class  AvatarsList
 		$this->user_id		= $userid;
 		if (!$show_all and $userid==0) $this->user_id = $USER->id;
 
-		$this->url_params   = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$this->url_params   = '?course='.$course_id;
 
 		if ($show_all) $this->action_params = '&amp;action=all';
 		else           $this->action_params = '&amp;action=personal&amp;userid='.$userid;

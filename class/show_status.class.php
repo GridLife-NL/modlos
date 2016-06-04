@@ -27,7 +27,7 @@ class  ShowStatus
 
 
 
-	function  ShowStatus($course_id, $instance_id) 
+	function  ShowStatus($course_id) 
 	{
 		global $CFG, $USER;
 

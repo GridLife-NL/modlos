@@ -109,9 +109,8 @@
           <input type="checkbox" name="nosystem" value="1" <?php echo $nosystem_checked?> >
           <?php echo $currency_nosystem?>&nbsp;&nbsp;&nbsp;
         </strong>
-        <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>" />
-        <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
-        <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
+        <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+        <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
         <input type="Submit" value="Reload" style="height:20px;">
       </form>
     </td>
@@ -125,10 +124,9 @@
           <?php echo $currency_send?>&nbsp;
           <input name="send_money" id="send_money" size="11" maxlength="10" value="0" style="height:16px;" />
         </strong>
-        <input type="hidden" name="sesskey"  value="<?php echo sesskey() ?>" />
-        <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
-        <input type="hidden" name="instance" value="<?php echo $this->instance_id ?>" />
-        <input type="Submit" value="Send" style="height:20px;">
+        <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+        <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+        <input type="Submit" value="Send"   style="height:20px;">
       </form>
       <?php }?>
     </td>

@@ -43,7 +43,7 @@ class  AvatarsOnline
 
 
 
-	function  AvatarsOnline($course_id, $instance_id)
+	function  AvatarsOnline($course_id)
 	{
 		global $CFG, $USER;
 
@@ -54,10 +54,9 @@ class  AvatarsOnline
 		//}
 
 		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
 		$this->hasPermit   = hasModlosPermit($course_id);
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
-		$this->url_params  = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$this->url_params  = '?course='.$course_id;
 
 		$this->action_url = CMS_MODULE_URL.'/actions/avatars_online.php'.$this->url_params;
 		$this->avatar_url = CMS_MODULE_URL.'/actions/avatars_list.php'.  $this->url_params.'&amp;action=personal&amp;userid=';

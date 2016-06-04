@@ -15,7 +15,6 @@ class  OwnerAvatar
 	var $updated_owner = false;
 
 	var $course_id	 = 0;
-	var $instance_id = 0;
 	var $user_id	 = 0;
 
 	var $use_sloodle = false;
@@ -35,7 +34,7 @@ class  OwnerAvatar
 	var $ownername 	 = '';
 
 
-	function  OwnerAvatar($course_id, $instance_id) 
+	function  OwnerAvatar($course_id) 
 	{
 		global $CFG, $USER;
 
@@ -55,10 +54,9 @@ class  OwnerAvatar
 		else $module_url = CMS_MODULE_URL;
 
 		//
-		$url_params 	   = '?course='.$course_id.'&amp;instance='.$instance_id;
+		$url_params 	   = '?course='.$course_id;
 		$this->return_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params;
 		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
 		$this->hasPermit   = hasModlosPermit($course_id);
 		$this->action_url  = $module_url.'/actions/owner_avatar.php';
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;

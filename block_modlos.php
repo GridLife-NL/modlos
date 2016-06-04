@@ -55,8 +55,7 @@ class block_modlos extends block_base
 		}
 
 		$id = optional_param('id', 0, PARAM_INT);
-		$instance_id = $this->instance->id;
-		$params = '?course='.$id.'&amp;instance='.$instance_id;
+		$params = '?course='.$id;
 	   
 		$this->content = new stdClass;
 		$this->content->text = '';

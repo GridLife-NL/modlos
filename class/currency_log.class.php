@@ -17,7 +17,6 @@ class  CurrencyLog
 	var $nosystem    = 0;
 
 	var $course_id   = 0;
-	var $instance_id = 0;
 	var $agent_id	 = '';
 	var $user_id	 = 0;
 	var $action_url;
@@ -50,7 +49,7 @@ class  CurrencyLog
 
 
 
-	function  CurrencyLog($course_id, $instance_id, $agent_id)
+	function  CurrencyLog($course_id, $agent_id)
 	{
 		global $CFG, $USER;
 
@@ -63,10 +62,9 @@ class  CurrencyLog
 		$this->hasPermit   = hasModlosPermit($course_id);
 		$this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
 		$this->agent_id	   = $agent_id;
 
-		$this->url_params = '?agent='.$agent_id.'&amp;course='.$course_id.'&amp;instance='.$instance_id;
+		$this->url_params = '?agent='.$agent_id.'&amp;course='.$course_id;
 		$this->action_url = CMS_MODULE_URL.'/actions/currency_log.php'. $this->url_params;
 		$this->owner_url  = $CFG->wwwroot.'/user/view.php'.$this->url_params;
 

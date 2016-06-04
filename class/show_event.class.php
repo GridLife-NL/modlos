@@ -26,7 +26,6 @@ class  EditEvent
 	var $return_url;
 
 	var $course_id	  = '';
-	var $instance_id  = '';
 	var $isAvatarMax  = false;
 
 	var $event_id	  = 0;
@@ -63,7 +62,7 @@ class  EditEvent
 
 
 
-	function  EditEvent($course_id, $instance_id)
+	function  EditEvent($course_id)
 	{
 		global $CFG, $USER;
 
@@ -73,16 +72,14 @@ class  EditEvent
 			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
 		}
 
-		$this->hasPermit = hasModlosPermit($course_id);
-		$this->course_id   = $course_id;
-		$this->instance_id = $instance_id;
-		$this->userid	   = $USER->id;
+		$this->hasPermit  = hasModlosPermit($course_id);
+		$this->course_id  = $course_id;
+		$this->userid	  = $USER->id;
 
 		// GET eventid
-		$this->event_id  = optional_param('eventid', '0', PARAM_INT);
+		$this->event_id   = optional_param('eventid', '0', PARAM_INT);
 
-		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
-
+		$this->url_params = '?course='.$course_id;
 		$this->action_url = CMS_MODULE_URL.'/actions/edit_event.php'.  $this->url_params;
 		$this->delete_url = CMS_MODULE_URL.'/actions/delete_event.php'.$this->url_params.'&amp;eventid=';
 		$this->return_url = CMS_MODULE_URL.'/actions/events_list.php'. $this->url_params;

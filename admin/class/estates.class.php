@@ -16,7 +16,6 @@ class  Estates
 	var $action_url;
 
 	var $course_id   = 0;
-	var $instance_id = 0;
 
 	var $page_size   = 15;
 	var $estates     = array();
@@ -27,10 +26,9 @@ class  Estates
 
 
 
-	function  Estates($course_id, $instance_id) 
+	function  Estates($course_id) 
 	{
-		$this->course_id    = $course_id;
-		$this->instance_id  = $instance_id;
+		$this->course_id = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
 		if (!$this->hasPermit) {
 			$this->hasError = true;
@@ -68,7 +66,7 @@ class  Estates
 		$this->estates = opensim_get_estates_infos();
 		if ($this->estates==null) return;
 		//
-		$map_url = CMS_MODULE_URL.'/helper/sim.php?cource='.$this->course_id.'&amp;instance='.$this->instance_id.'&amp;region=';
+		$map_url = CMS_MODULE_URL.'/helper/sim.php?cource='.$this->course_id.'&amp;region=';
 		$region_win_pre = '<a style="cursor:pointer" onClick="window.open(';
 		$region_win_param = "'location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450'";
 
