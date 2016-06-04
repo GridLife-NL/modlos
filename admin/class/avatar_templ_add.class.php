@@ -13,7 +13,7 @@ require_once(CMS_MODULE_PATH.'/admin/lib/modlos_avatar_templ_form.php');
 class  AvatarTemplAdd
 {
 	var $db_data 	= array();
-	var $context;
+//	var $context;
 
 	var $course_id   = 0;
 	var $instance_id = 0;
@@ -47,15 +47,17 @@ class  AvatarTemplAdd
 			return;
 		}
 	
+/*
 		//
 		if ($instance_id==0) {
-			$ids = jbxl_block_instance_ids('modlos', $course_id);
+			$ids = jbxl_get_block_instance_ids('modlos', $course_id);
 			foreach ($ids as $id) {
 				$instance_id = $id->id;
 				break;
 			}
 		}
 		$this->context = context_block::instance($instance_id); 
+*/
 
 		//
 		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
@@ -96,10 +98,12 @@ class  AvatarTemplAdd
 				return false;
 			}
 			
-			$context_id = $this->context->id;
-			$title = trim(required_param('title', PARAM_TEXT));
-			$uuid  = trim(required_param('uuid',  PARAM_TEXT));
-			$order = optional_param('order', $this->order_num, PARAM_INT);
+//			$context_id = $this->context->id;
+			$context_id = jbxl_get_block_id('modlos');
+			$title  = trim(required_param('title', PARAM_TEXT));
+			$uuid   = trim(required_param('uuid',  PARAM_TEXT));
+			$order  = optional_param('order', $this->order_num, PARAM_INT);
+			$status = optional_param('valid', '0', PARAM_INT);
 
 			// Check
 			if ($title==null) {
@@ -138,6 +142,7 @@ class  AvatarTemplAdd
 			$template['fileid']    = 0;
 			$template['filename']  = '';
 			$template['itemid']    = 0;
+			$template['status']    = $status;
 			$template['timestamp'] = time();
 
 			// File Manager. see lib/filelib.php
@@ -177,7 +182,7 @@ class  AvatarTemplAdd
 
 			if ($template['filename']) {
 				$path = '@@PLUGINFILE@@/'.$template['filename'];
-				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $template['itemid']);
+				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $context_id, 'block_modlos', 'templ_picture', $template['itemid']);
 			}
 
 			$this->isPost = true;
@@ -212,6 +217,7 @@ class  AvatarTemplAdd
 		$add_more         = get_string('modlos_templ_add_more_ttl', 'block_modlos');
 		$add_success      = get_string('modlos_templ_add_ok',   'block_modlos');
 		$add_fail         = get_string('modlos_templ_add_fail', 'block_modlos');
+        $invalid_ttl      = get_string('modlos_invalid', 'block_modlos');
 		$modlos_return    = get_string('modlos_return_ttl','block_modlos');
 
 		include(CMS_MODULE_PATH.'/admin/html/avatar_templ_add.html');

@@ -299,6 +299,8 @@ $string['modlos_sales_disp_cndtn']  = 'Condition';
 $string['modlos_sales_disp_order']  = 'Order';
 $string['modlos_sales_displayed']   = 'Results of the Sales since {$a}';
 $string['modlos_sales_disp_mis']    = 'Failed to display the results';
+$string['modlos_sales_counts']      = 'Counts';
+$string['modlos_sales_amount']      = 'Amount';
 
 $string['modlos_date_dmY']          = 'd/m/Y';
 

@@ -57,7 +57,7 @@ $string['modlos_return_ttl'] 		= ' 戻る ';
 $string['modlos_close_ttl'] 		= ' 閉じる ';
 $string['modlos_save_ttl'] 			= ' 保存 ';
 $string['modlos_valid_ttl']			= ' 有効 ';
-$string['modlos_invalid_ttl']		=  '無効 ';
+$string['modlos_invalid_ttl']		= ' 無効 ';
 
 $string['modlos_avatar_reset_ttl'] 	= ' リセット ';
 $string['modlos_avatar_create_ttl'] = ' 作成 ';
@@ -299,6 +299,8 @@ $string['modlos_sales_disp_cndtn']  = '検索条件';
 $string['modlos_sales_disp_order']  = '表示順序';
 $string['modlos_sales_displayed']   = '売上DB の検索結果： {$a} 以降';
 $string['modlos_sales_disp_mis']    = '売上DB の検索に失敗しました';
+$string['modlos_sales_counts']      = '売上数';
+$string['modlos_sales_amount']      = '売上金額';
 
 $string['modlos_date_dmY']         = 'Y/m/d';
 

@@ -13,7 +13,7 @@ require_once(CMS_MODULE_PATH.'/admin/lib/modlos_avatar_templ_form.php');
 class  AvatarTempl
 {
 	var $db_data 	= array();
-	var $context;
+//	var $context;
 
 	var $course_id   = 0;
 	var $instance_id = 0;
@@ -35,18 +35,20 @@ class  AvatarTempl
 
 	function  AvatarTempl($course_id, $instance_id) 
 	{
+/*
 		if ($instance_id==0) {
-			$ids = jbxl_block_instance_ids('modlos', $course_id);
+			$ids = jbxl_get_block_instance_ids('modlos', $course_id);
 			foreach ($ids as $id) {
 				$instance_id = $id->id;
 				$this->instance_id = $instance_id;
 				break;
 			}
 		}
+*/
 
 		$this->course_id   = $course_id;
 		$this->instance_id = $instance_id;
-		$this->context 	   = context_block::instance($instance_id); 
+//		$this->context 	   = context_block::instance($instance_id); 
 
 		$this->hasPermit = hasModlosPermit($this->course_id);
 		if (!$this->hasPermit) {
@@ -84,12 +86,13 @@ class  AvatarTempl
 			$this->db_data[$count]['fullname'] = '';
 			$this->db_data[$count]['url'] 	   = '';
 
+			$context_id = jbxl_get_block_id('modlos');
 			$name = opensim_get_avatar_name($template->uuid);
 			if ($name) $this->db_data[$count]['fullname'] = $name['fullname'];
 
 			if ($template->filename) {
 				$path = '@@PLUGINFILE@@/'.$template->filename;
-				$this->db_data[$count]['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $template->itemid);
+				$this->db_data[$count]['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $context_id, 'block_modlos', 'templ_picture', $template->itemid);
 			}
 			$count++;
 		}

@@ -210,6 +210,7 @@ class  CurrencyManage
 		$remake_ttl 	   = get_string('modlos_sales_remake_ttl',   'block_modlos');
 		$display_ttl	   = get_string('modlos_sales_disp_ttl',     'block_modlos');
 		$currency_return   = get_string('modlos_currency_return',  	 'block_modlos');
+		$modlos_avatar     = get_string('modlos_avatar',  	         'block_modlos');
 
 		$not_exist_avatar  = get_string('modlos_not_exist_avatar',	 'block_modlos');
 
@@ -224,10 +225,13 @@ class  CurrencyManage
 		$currency_move_dst = get_string('modlos_currency_move_dst',	 'block_modlos');
 		$currency_amount   = get_string('modlos_currency_amount',    'block_modlos');
 		$currency_type     = get_string('modlos_currency_type',	     'block_modlos');
+		$currency_object   = get_string('modlos_currency_object',	 'block_modlos');
 
 		$sales_limit 	   = get_string('modlos_sales_remake_limit', 'block_modlos');
 		$sales_remaked 	   = get_string('modlos_sales_remaked', 	 'block_modlos', $this->date_time);
 		$sales_remake_mis  = get_string('modlos_sales_remake_mis', 	 'block_modlos');
+		$sales_counts      = get_string('modlos_sales_counts',	     'block_modlos');
+		$sales_amount      = get_string('modlos_sales_amount',   	 'block_modlos');
 
 		$sales_condition   = get_string('modlos_sales_disp_cndtn',	 'block_modlos');
 		$sales_order       = get_string('modlos_sales_disp_order',	 'block_modlos');

@@ -13,7 +13,7 @@ require_once(CMS_MODULE_PATH.'/admin/lib/modlos_avatar_templ_form.php');
 class  AvatarTemplDelete
 {
 	var $db_data 	= array();
-	var $context;
+//	var $context;
 
 	var $course_id   = 0;
 	var $instance_id = 0;
@@ -46,15 +46,17 @@ class  AvatarTemplDelete
 			return;
 		}
 	
+/*
 		//
 		if ($instance_id==0) {
-			$ids = jbxl_block_instance_ids('modlos', $course_id);
+			$ids = jbxl_get_block_instance_ids('modlos', $course_id);
 			foreach ($ids as $id) {
 				$instance_id = $id->id;
 				break;
 			}
 		}
 		$this->context = context_block::instance($instance_id); 
+*/
 
 		//
 		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
@@ -108,12 +110,13 @@ class  AvatarTemplDelete
 			$this->db_data['fullname'] = '';
 			$this->db_data['url']      = '';
 
+			$context_id = jbxl_get_block_id('modlos');
 			$name = opensim_get_avatar_name($template->uuid);
 			if ($name) $this->db_data['fullname'] = $name['fullname'];
 
 			if ($template->filename) {
 				$path = '@@PLUGINFILE@@/'.$template->filename;
-				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $template->itemid);
+				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $context_id, 'block_modlos', 'templ_picture', $template->itemid);
 			}
 		}
 
@@ -141,6 +144,7 @@ class  AvatarTemplDelete
 		$delete_success   = get_string('modlos_templ_del_ok',  'block_modlos');
 		$delete_fail      = get_string('modlos_templ_del_fail', 'block_modlos');
 		$modlos_return    = get_string('modlos_return_ttl', 'block_modlos');
+        $invalid_ttl      = get_string('modlos_invalid',    'block_modlos');
 		$modlos_delete    = get_string('modlos_delete_ttl', 'block_modlos');
 		$modlos_valid     = get_string('modlos_valid_ttl',  'block_modlos');
 		$modlos_invalid   = get_string('modlos_invalid_ttl','block_modlos');

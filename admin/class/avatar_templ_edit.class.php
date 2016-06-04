@@ -13,7 +13,7 @@ require_once(CMS_MODULE_PATH.'/admin/lib/modlos_avatar_templ_form.php');
 class  AvatarTemplEdit
 {
 	var $db_data 	= array();
-	var $context;
+//	var $context;
 
 	var $course_id   = 0;
 	var $instance_id = 0;
@@ -46,15 +46,17 @@ class  AvatarTemplEdit
 			return;
 		}
 	
+/*
 		//
 		if ($instance_id==0) {
-			$ids = jbxl_block_instance_ids('modlos', $course_id);
+			$ids = jbxl_get_block_instance_ids('modlos', $course_id);
 			foreach ($ids as $id) {
 				$instance_id = $id->id;
 				break;
 			}
 		}
 		$this->context = context_block::instance($instance_id); 
+*/
 
 		//
 		$this->url_params = '?course='.$course_id.'&amp;instance='.$instance_id;
@@ -89,7 +91,8 @@ class  AvatarTemplEdit
 				return false;
 			}
 
-			$context_id = $this->context->id;
+//			$context_id = $this->context->id;
+			$context_id = jbxl_get_block_id('modlos');
 			$title  = trim(required_param('title', PARAM_TEXT));
 			$uuid   = trim(required_param('uuid',  PARAM_TEXT));
 			$order  = optional_param('order', '0', PARAM_INT);
@@ -182,7 +185,7 @@ class  AvatarTemplEdit
 
 			if ($update['filename']) {
 				$path = '@@PLUGINFILE@@/'.$update['filename'];
-				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $this->context->id, 'block_modlos', 'templ_picture', $update['itemid']);
+				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $context_id, 'block_modlos', 'templ_picture', $update['itemid']);
 			}
 
 			$this->isPost = true;
@@ -231,6 +234,7 @@ class  AvatarTemplEdit
 		$edit_avatar      = get_string('modlos_templ_edit_ttl', 'block_modlos');
 		$edit_success     = get_string('modlos_templ_edit_ok',  'block_modlos');
 		$edit_fail        = get_string('modlos_templ_edit_fail','block_modlos');
+        $invalid_ttl      = get_string('modlos_invalid',    'block_modlos');
 		$modlos_return    = get_string('modlos_return_ttl', 'block_modlos');
 		$modlos_valid     = get_string('modlos_valid_ttl',  'block_modlos');
 		$modlos_invalid   = get_string('modlos_invalid_ttl','block_modlos');

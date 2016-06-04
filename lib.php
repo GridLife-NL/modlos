@@ -1,5 +1,14 @@
 <?php
 
+require_once(realpath(dirname(__FILE__).'/include/jbxl_moodle_tools.php'));
+
+// Rewrite $context
+$context = new stdClass();
+$context->id = jbxl_get_block_id('modlos');
+$context->contextlevel = 0;
+
+
+
 function block_modlos_pluginfile($course, $birecord_or_cm, $context, $filearea, $args, $forcedownload, array $options=array())
 {
     global $DB, $CFG, $USER;
