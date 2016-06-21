@@ -153,11 +153,13 @@
                 <tr><td>&nbsp;</td></tr>
                 <?php if ($hasPermit) {?>
                   <tr>
-                    <td class="styleText">
+                    <td class="styleText" align="center">
                       <a href="<?php echo $reset_url.$region?>" target="_blank">
                         <strong style="colr:#c02020;"><?php echo $reset_ttl?></strong>
                       </a>
                       <!--
+                      &nbsp;
+                      <?php echo ' '.$OUTPUT->help_icon('modlos_region_reset', 'block_modlos')?>
                       <input type="submit" name="reset_region" value="<?php echo $reset_ttl?>" />
                       -->
                     </td>
