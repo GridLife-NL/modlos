@@ -152,7 +152,7 @@ class  ResetRegion
 
 	function  print_page() 
 	{
-		global $CFG;
+		global $CFG, $OUTPUT;
 
 		$grid_name = $CFG->modlos_grid_name;
 

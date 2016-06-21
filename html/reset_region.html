@@ -62,13 +62,15 @@
 
     <tr>
       <td class="head">&nbsp;</td>
-      <td class="odd">&nbsp;<img src="<?php echo $server.'/index.php?method=regionImage'.$guid?>" width="256" height="256" /></td>
+      <td class="odd" >&nbsp;<img src="<?php echo $server.'/index.php?method=regionImage'.$guid?>" width="256" height="256" /><br /><br /></td>
     </tr>
   </table>
 
   <div align="center" style="margin-top:10px;">
     <?php if (!$this->reseted) {?>
-      <input name="reset_region" type="submit" id="reset_region" value="<?php echo $reset_region_ttl?>" />&nbsp;&nbsp;&nbsp;
+      <input name="reset_region" type="submit" id="reset_region" value="<?php echo $reset_region_ttl?>" />
+      <?php echo $OUTPUT->help_icon('modlos_region_reset', 'block_modlos') ?>
+      &nbsp;&nbsp;&nbsp;
     <?php }?>
     <?php if ($this->action=='close') {?>
       <a href="#" onclick="window.close()"><strong><?php echo $close_ttl?></strong></a>

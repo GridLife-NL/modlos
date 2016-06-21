@@ -111,6 +111,7 @@ $string['modlos_editable_list'] 	= 'Editable Avatars List';
 $string['modlos_region_reset']      = 'Reset of Region';
 $string['modlos_region_reseted']    = 'Delete information of the Region on DB';
 $string['modlos_region_reset_exp']  = 'When the Region is restarted, Information of the Region on DB is recreated automatically';
+$string['modlos_region_reset_help'] = 'Delete information of the Region on DB. This is used when the Region is abnormally terminated. If the Region is restarted, Information of the Region on DB is recreated automatically';
 $string['modlos_region_reset_error']= 'Failed to dlete information of the Region on DB';
 
 $string['modlos_avatar_info'] 		= 'Avatar Information';
