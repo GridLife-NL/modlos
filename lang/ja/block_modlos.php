@@ -37,7 +37,7 @@ $string['modlos_info'] 				= 'これについて・・・';
 $string['modlos_edit'] 				= '編集';
 $string['modlos_delete'] 			= '削除';
 $string['modlos_operation'] 		= '操作';
-$string['modlos_disconnect'] 		= '切断';
+$string['modlos_disconnect'] 		= 'd/c';
 $string['modlos_change'] 			= '変更';
 $string['modlos_time_now']			= '現時刻';
 $string['modlos_show']			    = '表示';
@@ -111,7 +111,7 @@ $string['modlos_my_regions'] 		= 'マイ リージョン';
 $string['modlos_personal_regions'] 	= '{$a} のリージョン';
 $string['modlos_editable_list'] 	= '編集可能アバターリスト';
 
-$string['modlos_region_reset'] 		= 'リージョンのリセット';
+$string['modlos_region_reset'] 		= 'リージョンの切り離し';
 $string['modlos_region_reseted']    = 'データベースからリージョン情報を削除しました';
 $string['modlos_region_reset_exp']  = 'データベース上のリージョン情報はリージョンを再起動すれば再生成されます';
 $string['modlos_region_reset_help'] = 'データベース上からリージョンのデータを削除します．これはリージョンが異常終了した場合等に使用します．データベース上のリージョン情報はリージョンを再起動すれば再生成されます';
