@@ -308,7 +308,7 @@ class  RegionsList
 
 
         $number_ttl      = get_string('modlos_num',            'block_modlos');
-        $edit_ttl        = get_string('modlos_edit',           'block_modlos');
+        $operation_ttl   = get_string('modlos_operation',      'block_modlos');
 		$location_x		 = get_string('modlos_location_x',	   'block_modlos');
 		$location_y	  	 = get_string('modlos_location_y',	   'block_modlos');
 		$region_name_ttl = get_string('modlos_region_name',	   'block_modlos');
@@ -318,7 +318,7 @@ class  RegionsList
 //		$avatar_name_ttl = get_string('modlos_avatar_name',    'block_modlos');
 		$manager_name_ttl= get_string('modlos_manager_name',   'block_modlos');
 		$reset_ttl	     = get_string('modlos_reset_ttl',	   'block_modlos');
-		$edit_ttl	     = get_string('modlos_edit_ttl',	   'block_modlos');
+		$disconnect_ttl  = get_string('modlos_disconnect',	   'block_modlos');
 		$ip_address	  	 = get_string('modlos_ipaddr',		   'block_modlos');
 		$server_name	 = get_string('modlos_server',		   'block_modlos');
 		$page_num		 = get_string('modlos_page',		   'block_modlos');

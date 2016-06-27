@@ -134,7 +134,7 @@
       <td width="40" style="color: #222;"><strong><?php echo $number_ttl?></strong></td>
 
       <?php if (!$this->isGuest) {?>
-        <td width="50" style="color: #222;"><strong><?php echo $edit_ttl?></strong></td>
+        <td width="50" style="color: #222;"><strong><?php echo $operation_ttl?></strong></td>
       <?php }?>
 
       <td width="200">
@@ -191,7 +191,7 @@
           <td>
             <?php if ($has_permit or $dat['user_id']==$USER->id) { ?>
               <a href="<?php echo $this->reset_url.'&amp;region='.$dat['UUID']?>" >
-                <strong style="color: #cc1010;"><?php echo $edit_ttl?></strong>
+                <strong style="color: #cc1010;"><?php echo $disconnect_ttl?></strong>
               </a>
             <?php } else {?>
               &nbsp;-&nbsp;
