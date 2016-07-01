@@ -45,6 +45,13 @@
       <td class="odd" ><?php echo $this->hmregion?></td>
     </tr>
 
+    <?php if ($use_template and $total_num>0 and $this->base_avatar_ttl!='') {?>
+      <tr>
+        <td class="head"><?php echo $template_ttl?></td>
+        <td class="odd" ><?php echo $this->base_avatar_ttl?></td>
+      </tr>
+    <?php }?>
+
     <?php if ($hasPermit) {?>
       <tr>
         <td class="head"><?php echo $ownername_ttl?></td>

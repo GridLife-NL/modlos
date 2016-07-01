@@ -8,42 +8,43 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 class  CreateAvatar
 {
-	var $regionNames  	= array();
-	var $lastNames    	= array();
-	var $actvLastName 	= false;
+	var $regionNames  	 = array();
+	var $lastNames    	 = array();
+	var $actvLastName 	 = false;
 
-	var $hasPermit 		= false;
-	var $isGuest 		= true;
-	var $action_url		= '';
-	var $return_url		= '';
-	var $created_avatar = false;
+	var $hasPermit 		 = false;
+	var $isGuest 		 = true;
+	var $action_url		 = '';
+	var $return_url		 = '';
+	var $created_avatar  = false;
 
-	var $base_avatar 	= UUID_ZERO;
-	var $db_data        = array();
-	var $select_num     = -1;
-	var $total_num      = 0;
-	var $isPost         = false;
+	var $base_avatar 	 = UUID_ZERO;
+	var $base_avatar_ttl = '';
+	var $db_data         = array();
+	var $select_num      = -1;
+	var $total_num       = 0;
+	var $isPost          = false;
 
-	var	$avatars_num 	= 0;
-	var	$max_avatars 	= 0;
-	var $isAvatarMax 	= false;
+	var	$avatars_num 	 = 0;
+	var	$max_avatars 	 = 0;
+	var $isAvatarMax 	 = false;
 
-	var $course_id   	= 0;
-	var $use_sloodle 	= false;
-	var	$isDisclaimer	= false;
+	var $course_id   	 = 0;
+	var $use_sloodle 	 = false;
+	var	$isDisclaimer	 = false;
 
-	var $hasError	 	= false;
-	var $errorMsg		= array();
+	var $hasError	 	 = false;
+	var $errorMsg		 = array();
 
 	// Moodle DB
-	var $UUID			= '';
-	var $nx_UUID		= '';
-	var $uid			= 0;			// owner id of avatar
-	var $firstname 		= '';
-	var $lastname  		= '';
-	var $passwd 		= '';
-	var $hmregion  		= '';
-	var $ownername 		= '';			// owner name of avatar
+	var $UUID			 = '';
+	var $nx_UUID		 = '';
+	var $uid			 = 0;			// owner id of avatar
+	var $firstname 		 = '';
+	var $lastname  		 = '';
+	var $passwd 		 = '';
+	var $hmregion  		 = '';
+	var $ownername 		 = '';			// owner name of avatar
 
 
 
@@ -159,7 +160,7 @@ class  CreateAvatar
 			$this->select_num = optional_param('select_num','-1',PARAM_INT);
 		
 			if ($this->select_num>=0 and $this->select_num<$count and $this->db_data[$this->select_num]>0) {
-				$this->set_base_avatar($this->db_data[$this->select_num]['uuid']);
+				$this->set_base_avatar($this->select_num);
 			}
 			else {
 				$this->set_base_avatar($CFG->modlos_base_avatar);
@@ -251,22 +252,23 @@ class  CreateAvatar
 		$use_template  = $CFG->modlos_template_system;
 //		$hide_template = $CFG->modlos_template_hide;
 
-		$avatar_create_ttl  = get_string('modlos_avatar_create', 'block_modlos');
-		$avatar_select_ttl  = get_string('modlos_avatar_select', 'block_modlos');
-		$uuid_ttl			= get_string('modlos_uuid',			 'block_modlos');
-		$firstname_ttl		= get_string('modlos_firstname',	 'block_modlos');
-		$lastname_ttl		= get_string('modlos_lastname',		 'block_modlos');
-		$passwd_ttl			= get_string('modlos_password',		 'block_modlos');
-		$confirm_pass_ttl	= get_string('modlos_confirm_pass',  'block_modlos');
-		$home_region_ttl	= get_string('modlos_home_region',	 'block_modlos');
-		$ownername_ttl		= get_string('modlos_ownername',	 'block_modlos');
-		$invalid_ttl		= get_string('modlos_invalid',	 	 'block_modlos');
-		$create_ttl			= get_string('modlos_create_ttl',	 'block_modlos');
-		$reset_ttl			= get_string('modlos_reset_ttl',	 'block_modlos');
-		$return_ttl			= get_string('modlos_return_ttl',	 'block_modlos');
-		$avatar_created		= get_string('modlos_avatar_created','block_modlos');
-		$sloodle_ttl 		= get_string('modlos_sloodle_ttl',	 'block_modlos');
-		$manage_sloodle		= get_string('modlos_manage_sloodle','block_modlos');
+		$avatar_create_ttl  = get_string('modlos_avatar_create',  'block_modlos');
+		$avatar_select_ttl  = get_string('modlos_avatar_select',  'block_modlos');
+		$uuid_ttl			= get_string('modlos_uuid',			  'block_modlos');
+		$firstname_ttl		= get_string('modlos_firstname',	  'block_modlos');
+		$lastname_ttl		= get_string('modlos_lastname',		  'block_modlos');
+		$passwd_ttl			= get_string('modlos_password',		  'block_modlos');
+		$confirm_pass_ttl	= get_string('modlos_confirm_pass',   'block_modlos');
+		$home_region_ttl	= get_string('modlos_home_region',	  'block_modlos');
+		$ownername_ttl		= get_string('modlos_ownername',	  'block_modlos');
+		$invalid_ttl		= get_string('modlos_invalid',	 	  'block_modlos');
+		$create_ttl			= get_string('modlos_create_ttl',	  'block_modlos');
+		$reset_ttl			= get_string('modlos_reset_ttl',	  'block_modlos');
+		$return_ttl			= get_string('modlos_return_ttl',	  'block_modlos');
+		$template_ttl		= get_string('modlos_template_avatar','block_modlos');
+		$avatar_created		= get_string('modlos_avatar_created', 'block_modlos');
+		$sloodle_ttl 		= get_string('modlos_sloodle_ttl',	  'block_modlos');
+		$manage_sloodle		= get_string('modlos_manage_sloodle', 'block_modlos');
 
 		$disclaimer_ttl		= get_string('modlos_disclaimer',  	 'block_modlos');
 		$disclaim_agree		= get_string('modlos_disclaimer_agree','block_modlos');
@@ -282,7 +284,7 @@ class  CreateAvatar
 		// 
 		$pv_ownername = $this->ownername;
 		if ($this->created_avatar) {
-			$pv_firstname = '';
+					$pv_firstname = '';
 			$pv_lastname  = 'Resident';
 		}
 		else {
@@ -296,9 +298,23 @@ class  CreateAvatar
 
 
 	//
-	function  set_base_avatar($base)
+	function  set_base_avatar($num)
 	{
-		if (isGUID($base)) $this->base_avatar = $base;
+		if (isGUID($num)) {
+			$this->base_avatar = $num;
+			$this->base_avatar_ttl = '';
+		}
+		else {
+			$uuid = $this->db_data[$num]['uuid'];
+			if (isGUID($uuid)) {
+				$this->base_avatar = $uuid;
+				$this->base_avatar_ttl = $this->db_data[$num]['title'];
+			}
+			else {
+				$this->base_avatar = $CFG->modlos_base_avatar
+				$this->base_avatar_ttl = '';
+			}
+		}
 	}
 
 

@@ -467,6 +467,7 @@ $string['modlos_templ_del_fail']    = 'Failed to delete the template avatar';
 $string['modlos_templ_title']       = 'Title';
 $string['modlos_templ_uuid']        = 'UUID';
 $string['modlos_templ_uuid_help']   = 'UUID of template avatar';
+$string['modlos_templ_avatar']      = 'Template Avatar';
 $string['modlos_templ_text']        = 'Explain';
 $string['modlos_templ_pic']         = 'Picture';
 $string['modlos_templ_pic_help']    = 'Please upload a picture of template avatar with Jpeg, PNG, Tiff or GIF format';

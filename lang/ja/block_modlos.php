@@ -465,6 +465,7 @@ $string['modlos_templ_del_fail']  	= 'アバターの登録削除に失敗しま
 $string['modlos_templ_title']       = 'タイトル';
 $string['modlos_templ_uuid']        = 'UUID';
 $string['modlos_templ_uuid_help']   = 'テンプレートとなるアバターの UUID';
+$string['modlos_templ_avatar']      = 'テンプレート アバター';
 $string['modlos_templ_text']        = '説明';
 $string['modlos_templ_pic']         = '画像';
 $string['modlos_templ_pic_help']    = '登録するアバター（テンプレートアバター）のスナップショットをアップロードする．画像フォーマットは Jpeg, PNG, Tiff, GIF を使用する';
