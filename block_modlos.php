@@ -82,6 +82,10 @@ class block_modlos extends block_base
 			if (!$isAvatarMax) {
 				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar.php'.$params.'">'.get_string('modlos_avatar_create','block_modlos').'</a><br />';
 			}
+			else if ($CFG->modlos_template_system) {
+				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar.php'.$params.'">'.get_string('modlos_templ_avatar','block_modlos').'</a><br />';
+			}
+			//
 			if ($CFG->modlos_activate_events) {
 				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/events_list.php'.$params.'">'.get_string('modlos_events_list','block_modlos').'</a><br />';
 			}

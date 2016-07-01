@@ -81,6 +81,7 @@ class  CreateAvatar
 		$this->max_avatars = $CFG->modlos_max_own_avatars;
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 
+		/*
 		// Number of Avatars Check
 		if ($this->isAvatarMax) {
 			$course_url = $CFG->wwwroot;
@@ -88,7 +89,7 @@ class  CreateAvatar
 			$mesg = get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)";
 			//print_error($mesg, '', $course_url);
 			redirect($this->return_url, $mesg, 2);
-		}
+		}*/
 
 		return;
 	}
@@ -154,6 +155,12 @@ class  CreateAvatar
 		//
 		// POST
 		if (data_submitted()) {
+			// Number of Avatars Check
+			if ($this->isAvatarMax) {
+				$mesg = get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)";
+				redirect($this->return_url, $mesg, 2);
+			}
+
 			$this->firstname  = optional_param('firstname',	'',  PARAM_TEXT);
 			$this->lastname   = optional_param('lastname', 	'',  PARAM_TEXT);
 			$this->passwd	  = optional_param('passwd','', 	 PARAM_TEXT);
@@ -231,6 +238,10 @@ class  CreateAvatar
 
 			$this->select_num = 0;		// reset
 			$this->isPost = true;
+			//
+			$this->avatars_num = modlos_get_avatars_num($USER->id);
+			$this->max_avatars = $CFG->modlos_max_own_avatars;
+			if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 		}
 
 		// GET
@@ -282,6 +293,7 @@ class  CreateAvatar
 		$select_num	= $this->select_num;
 		$total_num  = $this->total_num;
 		$hasPermit  = $this->hasPermit;
+		$is_avatar_max = $this->isAvatarMax;
 
 		// 
 		$pv_ownername = $this->ownername;

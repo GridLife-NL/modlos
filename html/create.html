@@ -3,7 +3,13 @@
 </style>
 
 
-<h2><center><?php echo $grid_name."&nbsp;:&nbsp;".$avatar_create_ttl?></center></h2>
+<h2><center>
+<?php if (!is_avatar_max) {?>
+  <?php echo $grid_name."&nbsp;:&nbsp;".$avatar_create_ttl?>
+<?php } else {?>
+  <?php echo $grid_name."&nbsp;:&nbsp;".$template_ttl?>
+<?php }?>
+</center></h2>
 
 
 <!-- echo Messages -->
@@ -63,14 +69,14 @@
   <table border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
       <td align="center">
-        <?php if ($this->isAvatarMax) {?>
+        <?php if ($is_avatar_max) {?>
         <form name="assignform" method="GET"  action="<?php echo $this->return_url?>">
         <?php } else {?>
         <form name="assignform" method="GET"  action="<?php echo $this->action_url?>">
         <?php }?>
-          <input type="hidden" name="course"   value="<?php echo $this->course_id?>" />
-          <input type="hidden" name="action"   value="personal" />
-          <input type="hidden" name="userid"   value="<?php echo $USER->id?>" />
+          <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
+          <input type="hidden" name="action"  value="personal" />
+          <input type="hidden" name="userid"  value="<?php echo $USER->id?>" />
           <input type="submit" name="return"  value="<?php echo $return_ttl?>" />
         </form>
       </td>
@@ -81,6 +87,7 @@
 
   <!-- GET -->
   <form action="<?php echo $this->action_url?>" method="POST">
+    <?php if (!$is_avatar_max) {?>
     <table width="640" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-bottom:10px; table-layout:fixed; background-color:#ffffff;">
       <tbody>
         <?php if ($hasPermit) {?>
@@ -173,15 +180,18 @@
 
       </tbody>
     </table>
+    <?php }?>
 
     <!-- Template Avatar -->
     <?php if ($use_template and $total_num>0) {?>
+      <?php if (!$is_avatar_max) {?>
       <br />
       <table width="640" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0; margin-bottom:10px;">
         <tr>
           <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $select_avatar_ttl?></strong></td>
         </tr>
       </table>
+      <?php }?>
 
       <table width="640" border="0" align="center" cellpadding="2" cellspacing="2" style="margin-bottom:10px; table-layout:fixed;">
         <tr>
@@ -223,12 +233,14 @@
       </table>
     <?php }?>
 
+    <?php if (!$is_avatar_max) {?>
     <div align="center">
       <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
       <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
       <input type="submit" value="<?php echo $create_ttl?>" />
       <input type="reset"  value="<?php echo $reset_ttl?>" style="margin-left:30px;"/>
     </div>
+    <?php }?>
 
   </form>
 <?php }?>

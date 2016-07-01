@@ -67,27 +67,6 @@
   </form>
   <br /><br />
 
-  <!-- 売上DBの作り直し -->
-  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0;">
-    <tr>
-      <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $remake_ttl?></strong></td>
-    </tr>
-  </table>
-  <form action="<?php echo $this->action_url?>" method="POST">
-    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
-    <input type="hidden" name="quest"   value="yes" />
-    <div align="center">
-      <br />
-      <strong style="padding:4px;">
-        <?php echo $sales_limit?>&nbsp;(<?php echo $date_format?>)&nbsp;
-        <input name="sales_limit" id="sales_limit" size="10" maxlength="10" value="<?php echo $date_time?>" style="height:16px; margin-right:15px;"/>
-      </strong>
-      <input type="submit" value="Remake" style="height:20px;" /> 
-    </div>
-  </form>
-  <br /><br />
-
   <!-- 売上DBの表示 -->
   <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0;">
     <tr>
@@ -107,6 +86,27 @@
         <input name="sales_order" id="sales_order" size="25" maxlength="50" value="TotalCount DESC LIMIT 25" style="height:16px; margin-right:15px;"/>
       </strong>
       <input type="submit" value="Display" style="height:20px;" /> 
+    </div>
+  </form>
+  <br /><br />
+
+  <!-- 売上DBの作り直し -->
+  <table width="600" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0;">
+    <tr>
+      <td width=80% class="head" align="center"><strong style="color:#116644;"><?php echo $remake_ttl?></strong></td>
+    </tr>
+  </table>
+  <form action="<?php echo $this->action_url?>" method="POST">
+    <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+    <input type="hidden" name="course"  value="<?php echo $this->course_id ?>" />
+    <input type="hidden" name="quest"   value="yes" />
+    <div align="center">
+      <br />
+      <strong style="padding:4px;">
+        <?php echo $sales_limit?>&nbsp;(<?php echo $date_format?>)&nbsp;
+        <input name="sales_limit" id="sales_limit" size="10" maxlength="10" value="<?php echo $date_time?>" style="height:16px; margin-right:15px;"/>
+      </strong>
+      <input type="submit" value="Remake" style="height:20px;" /> 
     </div>
   </form>
   <br /><br />
@@ -154,7 +154,6 @@
       </table>
     <?php }?>
 
-
   <?php } else {?>
 	<!-- エラー   -->
     <!-- 一斉送金 -->
@@ -188,16 +187,16 @@
         </div>
       <?php }?>
 
-    <!-- 売上DBの作り直し -->
-    <?php } else if ($remake) {?>
-      <div align="center" style="color:#cc2020; margin-top:10px; margin-bottom:10px;">
-        <h4><?php echo $sales_remake_mis?></h4>
-      </div>
-
     <!-- 売上DBの表示 -->
     <?php } else if ($display) {?>
       <div align="center" style="color:#cc2020; margin-top:10px; margin-bottom:10px;">
         <h4><?php echo $sales_disp_mis?></h4>
+      </div>
+
+    <!-- 売上DBの作り直し -->
+    <?php } else if ($remake) {?>
+      <div align="center" style="color:#cc2020; margin-top:10px; margin-bottom:10px;">
+        <h4><?php echo $sales_remake_mis?></h4>
       </div>
 
     <?php }?>
