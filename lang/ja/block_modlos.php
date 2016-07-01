@@ -142,7 +142,7 @@ $string['modlos_avatar_upd_submit'] = 'アバター更新';
 $string['modlos_avatar_dlt_canceled']= 'アバター削除取り消し';
 $string['modlos_avatar_dlt_confrm']	= '本当にアバターを削除しますか？';
 
-$string['modlos_online_tab']        = 'オンライン';
+$string['modlos_online_tab']        = 'オンライン アバター';
 $string['modlos_avatars_tab']       = 'アバター リスト';
 $string['modlos_regions_tab']       = 'リージョン リスト';
 $string['modlos_world_map_tab']     = 'ワールド マップ';

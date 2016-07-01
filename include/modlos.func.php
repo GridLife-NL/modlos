@@ -1104,7 +1104,7 @@ function  print_tabnav($currenttab, $course_id, $show_create_tab=true)
 			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $url_params, 
 																	'<strong>'.get_string('modlos_avatar_create','block_modlos').'</strong>');
 		}
-		else {
+		else if ($CFG->modlos_template_system) {
 			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $url_params, 
 																	'<strong>'.get_string('modlos_templ_avatar','block_modlos').'</strong>');
 		}
