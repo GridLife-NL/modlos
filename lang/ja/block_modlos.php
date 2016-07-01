@@ -79,7 +79,7 @@ $string['modlos_visitors_last30days']= '過去30日間の利用者数';
 $string['modlos_online_now']        = 'オンライン アバター';
 $string['modlos_online_hg'] 		= 'ハイパーグリッド アバター';
 $string['modlos_online']            = 'オンライン';
-$string['modlos_online_avatars']    = 'オンライン';
+$string['modlos_online_avatars']    = 'オンライン アバター';
 $string['modlos_online_list']       = 'オンライン アバター リスト';
 
 $string['modlos_login_time'] 		= 'ログイン';
