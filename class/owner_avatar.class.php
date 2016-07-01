@@ -54,7 +54,7 @@ class  OwnerAvatar
 		else $module_url = CMS_MODULE_URL;
 
 		//
-		$url_params 	   = '?course='.$course_id;
+		$url_params 	   = '?course='.$course_id.'&action=personal&userid='.$USER->id;
 		$this->return_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params;
 		$this->course_id   = $course_id;
 		$this->hasPermit   = hasModlosPermit($course_id);
@@ -69,8 +69,9 @@ class  OwnerAvatar
 		if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
 
 		if ($this->isAvatarMax) {
-			$mesg = ' '.get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)";
-			print_error($mesg, '', $this->return_url);
+			$mesg = get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)";
+			//print_error($mesg, '', $this->return_url);
+			redirect($this->return_url, $mesg, 2);
 		}
 
 

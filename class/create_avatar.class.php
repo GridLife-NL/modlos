@@ -67,10 +67,11 @@ class  CreateAvatar
 		}
 		else $module_url = CMS_MODULE_URL;
 
+		$url_params         = '?course='.$course_id.'&action=personal&userid='.$USER->id;
 		$this->course_id	= $course_id;
 		$this->hasPermit	= hasModlosPermit($course_id);
 		$this->action_url  	= $module_url.'/actions/create_avatar.php';
-		$this->return_url  	= $module_url.'/actions/avatars_list.php';
+		$this->return_url  	= $module_url.'/actions/avatars_list.php'.$url_params;
 
 		$this->use_sloodle 	= $CFG->modlos_cooperate_sloodle;
 		$this->actvLastName	= $CFG->modlos_activate_lastname;
@@ -84,8 +85,9 @@ class  CreateAvatar
 		if ($this->isAvatarMax) {
 			$course_url = $CFG->wwwroot;
 			if ($course_id>0) $course_url.= '/course/view.php?id='.$course_id;
-			$mesg = ' '.get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)";
-			print_error($mesg, '', $course_url);
+			$mesg = get_string('modlos_over_max_avatars', 'block_modlos')." ($this->avatars_num >= $this->max_avatars)";
+			//print_error($mesg, '', $course_url);
+			redirect($this->return_url, $mesg, 2);
 		}
 
 		return;
@@ -265,7 +267,7 @@ class  CreateAvatar
 		$create_ttl			= get_string('modlos_create_ttl',	  'block_modlos');
 		$reset_ttl			= get_string('modlos_reset_ttl',	  'block_modlos');
 		$return_ttl			= get_string('modlos_return_ttl',	  'block_modlos');
-		$template_ttl		= get_string('modlos_template_avatar','block_modlos');
+		$template_ttl		= get_string('modlos_templ_avatar',   'block_modlos');
 		$avatar_created		= get_string('modlos_avatar_created', 'block_modlos');
 		$sloodle_ttl 		= get_string('modlos_sloodle_ttl',	  'block_modlos');
 		$manage_sloodle		= get_string('modlos_manage_sloodle', 'block_modlos');
@@ -311,7 +313,7 @@ class  CreateAvatar
 				$this->base_avatar_ttl = $this->db_data[$num]['title'];
 			}
 			else {
-				$this->base_avatar = $CFG->modlos_base_avatar
+				$this->base_avatar = $CFG->modlos_base_avatar;
 				$this->base_avatar_ttl = '';
 			}
 		}
