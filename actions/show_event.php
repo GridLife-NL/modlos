@@ -19,7 +19,7 @@ require_login($course_id);
 print_modlos_header($action, $course);
 
 require_once(CMS_MODULE_PATH.'/class/show_event.class.php');
-$event = new EditEvent($course_id);
+$event = new ShowEvent($course_id);
 
 print_tabnav($action, $course_id, !$event->isAvatarMax);
 

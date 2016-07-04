@@ -6,7 +6,7 @@ require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
 
 
 
-class  EditEvent
+class  ShowEvent
 {
 	var $hasPermit = false;
 	var $isGuest   = true;
@@ -62,7 +62,13 @@ class  EditEvent
 
 
 
-	function  EditEvent($course_id)
+	function  ShowEvent($course_id)
+	{
+		__construct($course_id);
+	}
+
+
+	function  __construct($course_id)
 	{
 		global $CFG, $USER;
 

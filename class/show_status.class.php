@@ -29,6 +29,12 @@ class  ShowStatus
 
 	function  ShowStatus($course_id) 
 	{
+		__construct($course_id); 
+	}
+
+
+	function  __construct($course_id) 
+	{
 		global $CFG, $USER;
 
 		$this->grid_status 		= false;

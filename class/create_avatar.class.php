@@ -50,6 +50,12 @@ class  CreateAvatar
 
 	function  CreateAvatar($course_id)
 	{
+		__construct($course_id);
+	}
+
+
+	function  __construct($course_id)
+	{
 		global $CFG, $USER;
 
 		// for Guest
