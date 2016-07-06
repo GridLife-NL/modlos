@@ -77,7 +77,7 @@ class  AvatarsOnline
 	// アバターの検索条件
 	function  set_condition() 
 	{
-		global $CFG, $USER;
+		global $CFG, $USER, $DB;
 
 		$this->order = optional_param('order', 'login', PARAM_TEXT);
 		$this->order_desc = optional_param('desc', '1', PARAM_INT);
@@ -93,7 +93,8 @@ class  AvatarsOnline
 		// ORDER
 		$sql_order = '';
 		if ($this->order=='login') {
-			$sql_order = 'LastSeen';
+			if (opensim_is_standalone()) $sql_order = 'Login';
+			else                         $sql_order = 'LastSeen';
 			if (!$this->order_desc) $this->desc_login = 1;
 		}
 		//
