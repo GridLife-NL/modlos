@@ -1098,8 +1098,10 @@ function  print_tabnav($currenttab, $course_id, $show_create_tab=true)
 	$toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$url_params.'&amp;order=name', 
 																	'<strong>'.get_string('modlos_regions_tab','block_modlos').'</strong>');
 	if (!$isGuest) {
-		$toprow[] = new tabobject('personal_regions', CMS_MODULE_URL.'/actions/regions_list.php'.$url_params.'&amp;action=personal&amp;userid='.$USER->id.'&amp;order=name', 
+		if (!opensim_is_standalone()) {
+			$toprow[] = new tabobject('personal_regions', CMS_MODULE_URL.'/actions/regions_list.php'.$url_params.'&amp;action=personal&amp;userid='.$USER->id.'&amp;order=name', 
 																	'<strong>'.get_string('modlos_my_regions','block_modlos').'</strong>');
+		}
 		if ($show_create_tab) {
 			$toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $url_params, 
 																	'<strong>'.get_string('modlos_avatar_create','block_modlos').'</strong>');

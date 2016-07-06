@@ -209,6 +209,7 @@ class  AvatarsList
 				$i++;
 			}
 			if ($where!='') $where = $where.") ";
+			else $where = $this->sql_uuid_str.'='."'".UUID_ZERO."'";	// no avatars
 			unset($users);
 		}
 
