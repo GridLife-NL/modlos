@@ -9,7 +9,7 @@ $plugin->maturity  = MATURITY_STABLE;
 
 $plugin->release   = '3.2.0';
 
-$plugin->version   = 2016070600;
+$plugin->version   = 2016070600;	// StandAlone モード
 //$plugin->version = 2016060200;
 //$plugin->version = 2016051500;
 //$plugin->version = 2016010600;

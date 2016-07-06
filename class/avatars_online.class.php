@@ -132,16 +132,18 @@ class  AvatarsOnline
 		$users = array();
 		$num = 0;
 		foreach ($avatars as $avatar) { 
-			$users[$num]['UUID']       = $avatar['UUID'];
-			$users[$num]['uid']	   	   = 0;
-			$users[$num]['lastin']	   = date(DATE_FORMAT, $avatar['timeStamp']);
-			$users[$num]['region_id']  = $avatar['regionUUID'];
-			$users[$num]['region']     = $avatar['regionName'];
-			$users[$num]['hg_name']	   = '';
-			$users[$num]['firstname']  = '';
-			$users[$num]['lastname']   = '';
-			$users[$num]['owner_name'] = ' - ';
-			$num++;
+			if ($avatar['regionName']!='') {
+				$users[$num]['UUID']       = $avatar['UUID'];
+				$users[$num]['uid']	   	   = 0;
+				$users[$num]['lastin']	   = date(DATE_FORMAT, $avatar['timeStamp']);
+				$users[$num]['region_id']  = $avatar['regionUUID'];
+				$users[$num]['region']     = $avatar['regionName'];
+				$users[$num]['hg_name']	   = '';
+				$users[$num]['firstname']  = '';
+				$users[$num]['lastname']   = '';
+				$users[$num]['owner_name'] = ' - ';
+				$num++;
+			}
 		}
 		$this->number = $num;
 
