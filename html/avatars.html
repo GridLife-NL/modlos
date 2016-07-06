@@ -109,16 +109,16 @@
       </td>
       <td style="width:280px; table-layout:fixed; color: #000;">
         <strong><?php echo $firstname_ttl?></strong>&nbsp;&nbsp;
-        <input type="text" name="firstname" size="15" value="<?php echo htmlspecialchars($this->firstname)?>" style="height:16px;">
+        <input type="text" name="firstname" size="15" value="<?php echo htmlspecialchars($this->firstname)?>" style="height:16px;" />
       </td>
       <td style="width:280px; table-layout:fixed; color: #000;">
         <strong><?php echo $lastname_ttl?></strong>&nbsp;&nbsp;
-        <input type="text" name="lastname"  size="15" value="<?php echo htmlspecialchars($this->lastname)?>"  style="height:16px;">
+        <input type="text" name="lastname"  size="15" value="<?php echo htmlspecialchars($this->lastname)?>"  style="height:16px;" />
       </td>
-      <td style="width:80px; table-layout:fixed;">
+      <td style="width:120px; table-layout:fixed;">
         <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
         <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
-        <input type="Submit" value="Search" style="height:20px;">&nbsp;&nbsp;&nbsp;
+        <input type="Submit" value="Search" style="height:26px;" />&nbsp;&nbsp;&nbsp;
       </td>
       <td style="width:100px; table-layout:fixed; color:#000">
         <a href="<?php echo $this->action_url.$plimit_amp.$pstart_amp.$order_amp.$loss_amp.$action_amp?>" target="_self">

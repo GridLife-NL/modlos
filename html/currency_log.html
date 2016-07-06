@@ -106,12 +106,12 @@
     <td style="width:400px; table-layout:fixed; color:#000;">
       <form action="<?php echo $this->action_url.$plimit_amp.$order_amp?>" method="POST">
         <strong>
-          <input type="checkbox" name="nosystem" value="1" <?php echo $nosystem_checked?> >
+          <input type="checkbox" name="nosystem" value="1" <?php echo $nosystem_checked?> />
           <?php echo $currency_nosystem?>&nbsp;&nbsp;&nbsp;
         </strong>
         <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
         <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
-        <input type="Submit" value="Reload" style="height:20px;">
+        <input type="Submit" value="Reload" style="height:26px;" />
       </form>
     </td>
 
@@ -126,7 +126,7 @@
         </strong>
         <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
         <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
-        <input type="Submit" value="Send"   style="height:20px;">
+        <input type="Submit" value="Send"   style="height:26px;" />
       </form>
       <?php }?>
     </td>
