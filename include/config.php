@@ -25,7 +25,13 @@ define('OPENSIM_DB_NAME',		$CFG->modlos_sql_db_name);
 define('OPENSIM_DB_USER',		$CFG->modlos_sql_db_user);
 define('OPENSIM_DB_PASS',		$CFG->modlos_sql_db_pass);
 
-if (!property_exists($CFG, 'modlos_use_mysqli')) $CFG->modlos_use_mysqli = false;
+if (!property_exists($CFG, 'modlos_use_mysqli')) {
+	if (function_exists('mysqli_connect')) $CFG->modlos_use_mysqli = true;
+	else                                   $CFG->modlos_use_mysqli = false;
+}
+else {
+	if (!$CFG->modlos_use_mysqli and !function_exists('mysql_connect')) $CFG->modlos_use_mysqli = true;
+}
 define('OPENSIM_DB_MYSQLI',		$CFG->modlos_use_mysqli);
 
 define('USE_CURRENCY_SERVER',	$CFG->modlos_use_currency_server);

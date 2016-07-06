@@ -17,7 +17,6 @@ ob_end_clean();
 
 $settings->add(new admin_setting_heading('block_modlos_addheading', '', $tabnav));
 
-//$settings->add(new admin_setting_heading('', '', "AAA"));
 
 // OpenSim DB
 $settings->add(new admin_setting_configtext('modlos_grid_name', 
