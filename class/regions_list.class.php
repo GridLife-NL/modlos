@@ -180,11 +180,12 @@ class  RegionsList
 			$i = 0;
 			foreach($users as $user) {
 				$uuid  = $user['UUID'];
-				if ($i==0) $where = "owner_uuid='$uuid' ";
+				if ($i==0) $where = "(owner_uuid='$uuid' ";
 				else	   $where.= " OR owner_uuid='$uuid' ";
 				$i++;
 			}
-			//if ($where!='') $where = $where.") ";
+			if ($where!='') $where = $where.") ";
+			else $where = "uuid = '".UUID_ZERO."'";	// have no regions
 			unset($users);
 		}
 
