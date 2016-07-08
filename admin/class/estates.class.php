@@ -78,7 +78,7 @@ class  Estates
 
 		foreach($this->estates as $estate) {
 			$estate_id = $estate['estate_id'];
-			$regions = opensim_get_regions_infos("estate_map.EstateID=".$estate_id);
+			$regions = opensim_get_regions_infos(false, "estate_map.EstateID=".$estate_id);
 			$this->estates[$estate_id]['regions'] = '';
 			//
 			foreach($regions as $region) {

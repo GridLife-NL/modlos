@@ -193,7 +193,7 @@ class  RegionsList
 		else if ($where!='' and $this->sql_regionname!='') $where.= ' AND '.$this->sql_regionname;
 
 		$this->number = 0;
-		if ($where!='' or $this->show_all) $this->number = opensim_get_regions_num($where);
+		if ($where!='' or $this->show_all) $this->number = opensim_get_regions_num(false, $where);
 
 		// Voice Mode
 		$voice_mode[0] = get_string('modlos_voice_inactive_chnl', 'block_modlos');
@@ -202,7 +202,7 @@ class  RegionsList
 		$voice_mode[9] = get_string('modlos_voice_unknown_chnl',  'block_modlos');
 
 		//
-		$regions = opensim_get_regions_infos($where, $this->sql_order, $this->sql_limit);
+		$regions = opensim_get_regions_infos(false, $where, $this->sql_order, $this->sql_limit);
 
 		$colum = 0;
 		foreach($regions as $region) {

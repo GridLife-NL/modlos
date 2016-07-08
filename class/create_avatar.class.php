@@ -123,7 +123,7 @@ class  CreateAvatar
 		}
 
 		//
-		$this->regionNames = opensim_get_regions_names('', 'regionName ASC');
+		$this->regionNames = opensim_get_regions_names(false, '', 'regionName ASC');
 		$this->lastNames   = modlos_get_lastnames();
 
 		// Template System

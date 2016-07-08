@@ -115,7 +115,7 @@ class  EditAvatar
 		if ($cancel) redirect($this->return_url, 'Please wait ...', 0);
 
 		// OpenSim DB
-		$this->regionNames = opensim_get_regions_names('', 'regionName ASC');
+		$this->regionNames = opensim_get_regions_names(false, '', 'regionName ASC');
 
 		// Form
 		if (data_submitted()) {

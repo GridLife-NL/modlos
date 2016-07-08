@@ -106,7 +106,7 @@ class  EditEvent
 
 		//
 		// List of Parcels
-		$modobj = opensim_get_regions_infos('', 'regionName');
+		$modobj = opensim_get_regions_infos(false, '', 'regionName');
 		$i = 0;
 		foreach ($modobj as $mod) {
 			$locX = $mod['locX'] + ($mod['sizeX']-1)*0.5;
