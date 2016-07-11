@@ -127,22 +127,23 @@ class  AvatarsOnline
 		modlos_sync_opensimdb();
 		if ($this->use_sloodle) modlos_sync_sloodle_users();
 
-		$avatars = opensim_get_avatars_online('', $this->sql_order, $this->sql_limit);
+		$num = opensim_get_avatars_online_num($db);
+		$avatars = opensim_get_avatars_online('', $this->sql_order, $this->sql_limit, $db);
 
 		$users = array();
-		$num = 0;
+		$i = 0;
 		foreach ($avatars as $avatar) { 
 			if ($avatar['regionName']!='') {
-				$users[$num]['UUID']       = $avatar['UUID'];
-				$users[$num]['uid']	   	   = 0;
-				$users[$num]['lastin']	   = date(DATE_FORMAT, $avatar['timeStamp']);
-				$users[$num]['region_id']  = $avatar['regionUUID'];
-				$users[$num]['region']     = $avatar['regionName'];
-				$users[$num]['hg_name']	   = '';
-				$users[$num]['firstname']  = '';
-				$users[$num]['lastname']   = '';
-				$users[$num]['owner_name'] = ' - ';
-				$num++;
+				$users[$i]['UUID']       = $avatar['UUID'];
+				$users[$i]['uid']	   	 = 0;
+				$users[$i]['lastin']	 = date(DATE_FORMAT, $avatar['timeStamp']);
+				$users[$i]['region_id']  = $avatar['regionUUID'];
+				$users[$i]['region']     = $avatar['regionName'];
+				$users[$i]['hg_name']	 = '';
+				$users[$i]['firstname']  = '';
+				$users[$i]['lastname']   = '';
+				$users[$i]['owner_name'] = ' - ';
+				$i++;
 			}
 		}
 		$this->number = $num;
