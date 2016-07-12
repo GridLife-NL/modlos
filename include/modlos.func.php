@@ -105,14 +105,15 @@
 
 if (!defined('CMS_MODULE_PATH')) exit();
 
-require_once(CMS_MODULE_PATH.'/include/env_interface.php');
 
-require_once(CMS_MODULE_PATH.'/include/tools.func.php');
-require_once(CMS_MODULE_PATH.'/include/mysql.func.php');
-require_once(CMS_MODULE_PATH.'/include/opensim.mysql.php');
-require_once(CMS_MODULE_PATH.'/include/moodle.func.php');
+//if (!defined('ENV_READED_INTERFACE')) require_once(ENV_HELPER_PATH.'/../include/env_interface.php');
 
-require_once(CMS_MODULE_PATH.'/include/jbxl_moodle_tools.php');
+require_once(ENV_HELPER_PATH.'/../include/tools.func.php');
+require_once(ENV_HELPER_PATH.'/../include/mysql.func.php');
+require_once(ENV_HELPER_PATH.'/../include/opensim.mysql.php');
+require_once(ENV_HELPER_PATH.'/../include/moodle.func.php');
+
+require_once(ENV_HELPER_PATH.'/../include/jbxl_moodle_tools.php');
 
 
 
