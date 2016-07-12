@@ -29,12 +29,12 @@ class  AvatarTempl
 	var	$errorMsg    = array();
 
 
-
+/*
 	function  AvatarTempl($course_id) 
 	{
 		__construct($course_id);
 	}
-
+*/
 
 	function  __construct($course_id) 
 	{

@@ -31,12 +31,12 @@ class  AvatarTemplEdit
 	var	$errorMsg    = array();
 
 
-
+/*
 	function  AvatarTemplEdit($course_id) 
 	{
 		__construct($course_id);
 	}
-
+*/
 
 	function  __construct($course_id) 
 	{

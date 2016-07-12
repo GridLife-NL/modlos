@@ -25,14 +25,14 @@ class  Estates
 	var $errorMsg    = array();
 
 
+/*
+	function  Estates($course_id) 
+	{
+		__construct($course_id);
+	}
+*/
 
 	function  __construct($course_id) 
-	{
-		Estates($course_id);
-	}
-
-
-	function  Estates($course_id) 
 	{
 		$this->course_id = $course_id;
 		$this->hasPermit = hasModlosPermit($course_id);
