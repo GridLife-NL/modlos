@@ -48,12 +48,12 @@ class  CurrencyLog
 	var $sql_limit     = '';
 
 
-
+/*
 	function  CurrencyLog($course_id, $agent_id)
 	{
 		__construct($course_id, $agent_id);
 	}
-
+*/
 
 	function  __construct($course_id, $agent_id)
 	{

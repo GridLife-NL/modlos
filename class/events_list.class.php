@@ -36,12 +36,12 @@ class  EventsList
 	var $db_data = array();
 
 
-
+/*
 	function  EventsList($course_id)
 	{
 		__construct($course_id);
 	}
-
+*/
 
 	function  __construct($course_id)
 	{

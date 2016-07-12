@@ -41,12 +41,12 @@ class  ResetRegion
 	var $serverPort	 = '';
 
 
-
+/*
 	function  ResetRegion($course_id) 
 	{
 		__construct($course_id); 
 	}
-
+*/
 
 	function  __construct($course_id) 
 	{

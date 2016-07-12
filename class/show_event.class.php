@@ -61,12 +61,12 @@ class  ShowEvent
 	var $saved_event_creator= '';
 
 
-
+/*
 	function  ShowEvent($course_id)
 	{
 		__construct($course_id);
 	}
-
+*/
 
 	function  __construct($course_id)
 	{

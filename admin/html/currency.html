@@ -7,7 +7,7 @@
 
 
 <!-- Error Message -->
-<?php if ($this->hasError and $noProssecced) {?>
+<?php if ($this->hasError and !$noProssecced) {?>
   <div align="center" style="margin-bottom:10px;">
     <ul style="list-style:none;">
       <?php foreach($this->errorMsg as $mesg) {?>
