@@ -32,7 +32,6 @@ class  CurrencyManage
 	var $since        = '...';
 
 	var $move_money   = 0;
-	var $move_type    = 0;
 	var $move_src     = '';
 	var $move_dst     = '';
 
@@ -42,11 +41,12 @@ class  CurrencyManage
 
 
 
+/*
 	function  CurrencyManage($course_id) 
 	{
 		__construct($course_id);
 	}
-
+*/
 
 	function  __construct($course_id) 
 	{
@@ -115,13 +115,11 @@ class  CurrencyManage
 			{
 				$this->move_money = (int)optional_param('move_money', '0', PARAM_INT);
 				if ($this->move_money>0) {
-					$this->move_type = (int)optional_param('move_type', '0', PARAM_INT);
-					$this->move_src  = optional_param('move_src', '', PARAM_TEXT);
-					$this->move_dst  = optional_param('move_dst', '', PARAM_TEXT);
+					$this->move_src = optional_param('move_src', '', PARAM_TEXT);
+					$this->move_dst = optional_param('move_dst', '', PARAM_TEXT);
 
 					$uuid_src = opensim_get_avatar_uuid($this->move_src, $db);
 					$uuid_dst = opensim_get_avatar_uuid($this->move_dst, $db);
-					$this->move = true;
 
 					if (!isGuid($uuid_src)) {
 						$this->hasError = true;
@@ -134,14 +132,16 @@ class  CurrencyManage
 						return false;
 					}
 
-					$this->hasError = true;
-					$this->errorMsg[] = "この機能は，まだ実装されていません．";
+					$regionserver = $CFG->modlos_currency_regionserver;
+        			if ($regionserver=='http://123.456.78.90:9000/' or $regionserver=='') $regionserver = null;
+					require_once(CMS_MODULE_PATH.'/helper/helpers.php');
 
-					/*
-
-						move from to with
-			
-					*/
+					$ret = move_money($uuid_src, $uuid_dst, $this->move_money, $regionserver);
+					if (!$ret) {
+						$this->hasError = true;
+						$this->errorMsg[] = get_string('modlos_currency_move_mis', 'block_modlos').': from '.$this->move_src.' to '.$this->move_dst;
+					}
+					$this->move = $ret;
 				}
 				else $this->noProssecced = true;
 			}
