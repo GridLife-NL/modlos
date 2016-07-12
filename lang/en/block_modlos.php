@@ -382,9 +382,9 @@ $string['modlos_currency_key_desc']	= 'Please specify Money Script access key co
 									  'Specify same key code with MoneyScriptAccessKey in [MoneyServer] section of MoneyServer.ini';
 $string['modlos_currency_unit'] 	= 'Unit of Money';
 $string['modlos_currency_unit_desc']= 'Specify Unit of Money';
-$string['modlos_currency_regionserver']= 'Specify a Region Server\'s URL that operates currency.';
+$string['modlos_currency_regionserver']= 'Region Server\'s URL that operates currency script.';
 $string['modlos_currency_regionserver_desc']= 'Specify a Region Server\'s URL (using http://IP-address:port-number/ format) '.
-                                      'that operates currency when the avatar is off-line. It is possible to choose any Region Server.';
+                                      'that operates currency script when the avatar is off-line. It is possible to choose any Region Server.';
 
 $string['modlos_userinfo_link']     = 'Link from Moodle user\'s name to user information page';
 $string['modlos_userinfo_link_desc']= 'It is specified whether to put the link form Moodle user\'s name to Moodle account information page, '.

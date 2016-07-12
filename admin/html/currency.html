@@ -34,9 +34,9 @@
       <br />
       <strong style="padding:4px;">
         <?php echo $currency_send?>&nbsp;
-        <input name="send_money" id="send_money" size="10" maxlength="10" value="0" style="height:16px; margin-right:15px;"/>
+        <input type="text" name="send_money" id="send_money" size="10" maxlength="10" value="0" style="height:16px; margin-right:15px;"/>
       </strong>
-      <input type="Submit" value="Send" style="height:26px;" /> 
+      <input type="Submit" value="Send" style="height:26px; margin-top:-10px;" /> 
     </div>
   </form>
   <br /><br />
@@ -56,13 +56,13 @@
       <br />
       <strong style="padding:4px;">
         <?php echo $currency_move_src?>&nbsp;
-        <input name="move_src"   id="move_src"   size="15" maxlength="30" value="" style="height:16px; margin-right:15px;"/>
+        <input type="text" name="move_src"   id="move_src"   size="15" maxlength="30" value="" style="height:16px; margin-right:15px;"/>
         <?php echo $currency_move_dst?>&nbsp;
-        <input name="move_dst"   id="move_dst"   size="15" maxlength="30" value="System" style="height:16px; margin-right:15px;"/>
+        <input type="text" name="move_dst"   id="move_dst"   size="15" maxlength="30" value="System" style="height:16px; margin-right:15px;"/>
         <?php echo $currency_amount?>&nbsp;
-        <input name="move_money" id="move_money" size="8" maxlength="10" value="0" style="height:16px; margin-right:15px;"/>
+        <input type="text" name="move_money" id="move_money" size="8" maxlength="10" value="0" style="height:16px; margin-right:15px;"/>
       </strong>
-      <input type="Submit" value="Move" style="height:26px;" /> 
+      <input type="Submit" value="Move" style="height:26px; margin-top:-10px;" /> 
     </div>
   </form>
   <br /><br />
@@ -81,11 +81,11 @@
       <br />
       <strong style="padding:4px;">
         <?php echo $sales_condition?>&nbsp;
-        <input name="sales_condition" id="sales_condition" size="25" maxlength="100" value="type=5008" style="height:16px; margin-right:15px;"/>
+        <input type="text" name="sales_condition" id="sales_condition" size="25" maxlength="100" value="type=5008" style="height:16px; margin-right:15px;"/>
         <?php echo $sales_order?>&nbsp;
-        <input name="sales_order" id="sales_order" size="25" maxlength="50" value="TotalCount DESC LIMIT 25" style="height:16px; margin-right:15px;"/>
+        <input type="text" name="sales_order" id="sales_order" size="25" maxlength="50" value="TotalCount DESC LIMIT 25" style="height:16px; margin-right:15px;"/>
       </strong>
-      <input type="Submit" value="Display" style="height:26px;" /> 
+      <input type="Submit" value="Display" style="height:26px; margin-top:-10px;" /> 
     </div>
   </form>
   <br /><br />
@@ -104,9 +104,9 @@
       <br />
       <strong style="padding:4px;">
         <?php echo $sales_limit?>&nbsp;(<?php echo $date_format?>)&nbsp;
-        <input name="sales_limit" id="sales_limit" size="10" maxlength="10" value="<?php echo $date_time?>" style="height:16px; margin-right:15px;"/>
+        <input type="text" name="sales_limit" id="sales_limit" size="10" maxlength="10" value="<?php echo $date_time?>" style="height:16px; margin-right:15px;"/>
       </strong>
-      <input type="Submit" value="Remake" style="height:26px;" /> 
+      <input type="Submit" value="Remake" style="height:26px; margin-top:-10px;" /> 
     </div>
   </form>
   <br /><br />

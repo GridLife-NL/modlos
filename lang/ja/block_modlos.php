@@ -381,8 +381,8 @@ $string['modlos_currency_key_desc'] = 'ViewerとMoneyスクリプトとのアク
 									  'MoneyServer.ini の [MoneyServer]セクションの MoneyScriptAccessKey の値と一致させる必要がある．';
 $string['modlos_currency_unit'] 	= 'お金の単位';
 $string['modlos_currency_unit_desc']= 'お金の単位を指定する';
-$string['modlos_currency_regionserver']= 'お金の処理を行うリージョンサーバを指定する';
-$string['modlos_currency_regionserver_desc']= 'アバターがオフラインの時に，お金の処理を依頼するリージョンサーバを '.
+$string['modlos_currency_regionserver']= 'スクリプトの処理を行うリージョンサーバ';
+$string['modlos_currency_regionserver_desc']= 'アバターがオフラインの時に，スクリプトが処理を依頼するリージョンサーバを '.
                                       '"http://IPアドレス:ポート番号形式/" で指定する．リージョンサーバであればどのサーバでも選択可能';
 
 $string['modlos_userinfo_link'] 	= 'Moodleユーザの名前からアカウントページへのリンク';
