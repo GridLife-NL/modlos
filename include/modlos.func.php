@@ -106,8 +106,6 @@
 if (!defined('CMS_MODULE_PATH')) exit();
 
 
-//if (!defined('ENV_READED_INTERFACE')) require_once(ENV_HELPER_PATH.'/../include/env_interface.php');
-
 require_once(ENV_HELPER_PATH.'/../include/tools.func.php');
 require_once(ENV_HELPER_PATH.'/../include/mysql.func.php');
 require_once(ENV_HELPER_PATH.'/../include/opensim.mysql.php');
