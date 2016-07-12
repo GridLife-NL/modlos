@@ -17,7 +17,6 @@ require_once(ENV_HELPER_PATH.'/../include/opensim.mysql.php');
 require_once(ENV_HELPER_PATH.'/../include/modlos.func.php');
 
 
-
 ////////////////////////////////////////////////////////////
 // Functions 
 //
