@@ -346,11 +346,11 @@ $string['modlos_max_avatars'] 		= 'アバターの最大数';
 $string['modlos_max_avatars_desc'] 	= '一人の Moodleユーザが所有できるアバターの最大人数．負数の場合は無制限';
 $string['modlos_base_avatar'] 		= 'ベース アバターの GUID';
 $string['modlos_base_avatar_desc'] 	= 'アバターを作成する際のベースとなるアバターの GUID を指定する';
-$string['modlos_template_system'] 	= 'テンプレートアバターシステムを使用する';
-$string['modlos_template_system_desc']	= 'テンプレートアバターシステムを使用し，一名以上のアバターをテンプレートとして登録した場合，modlos_base_avatar '.
+$string['modlos_templ_system'] 	    = 'テンプレートアバターシステムを使用する';
+$string['modlos_templ_system_desc']	= 'テンプレートアバターシステムを使用し，一名以上のアバターをテンプレートとして登録した場合，modlos_base_avatar '.
                                     'の指定は無視される';
-$string['modlos_template_hide'] 	= 'ユーザからテンプレートアバターシステムを隠す';
-$string['modlos_template_hide_desc']= 'アバター登録時（準備中）に，ユーザから一時的にシステムを隠す場合に使用する';
+$string['modlos_templ_hide'] 	    = 'ユーザからテンプレートアバターシステムを隠す';
+$string['modlos_templ_hide_desc']   = 'アバター登録時（準備中）に，ユーザから一時的にシステムを隠す場合に使用する';
 
 $string['modlos_lname_activate'] 	= 'ラストネーム管理';
 $string['modlos_lname_desc'] 		= 'ラストネームを，予めデータベースに用意していた物に制限するか？';

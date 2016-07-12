@@ -348,11 +348,11 @@ $string['modlos_max_avatars'] 		= 'Max Number of Avatars';
 $string['modlos_max_avatars_desc'] 	= 'Max number of avatars that a user can own';
 $string['modlos_base_avatar']       = 'Base Avatar\'s UUID(GUID)';
 $string['modlos_base_avatar_desc']  = 'Specifies the UUID(GUID) of the avatar as a base for creating the avatar.';
-$string['modlos_template_system']   = 'Use of the Template Avatar System';
-$string['modlos_template_system_desc']  = 'When using the Template Avatar System and more than one avatar is registered as a template, '.
+$string['modlos_templ_system']      = 'Use of the Template Avatar System';
+$string['modlos_templ_system_desc'] = 'When using the Template Avatar System and more than one avatar is registered as a template, '.
                                       'above-mentioned modlos_base_avatar is ignored';
-$string['modlos_template_hide']     = 'Hide Template Avatar System from users';
-$string['modlos_template_hide_desc']= 'When the template avatars are registered (in preparation), to use if you temporarily want to hide the system from users';
+$string['modlos_templ_hide']        = 'Hide Template Avatar System from users';
+$string['modlos_templ_hide_desc']   = 'When the template avatars are registered (in preparation), to use if you temporarily want to hide the system from users';
 
 $string['modlos_lname_activate'] 	= 'Last Name Activation';
 $string['modlos_lname_desc'] 		= 'Select to last name limitation is active, or not';
