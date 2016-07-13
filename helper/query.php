@@ -7,7 +7,7 @@
 // Modified by Fumi.Iseki for XoopenSim/Modlos
 //
 
-require_once(realpath('./search_config.php'));
+require_once(realpath(dirname(__FILE__).'/search_config.php'));
 
 
 if (!isset($HTTP_RAW_POST_DATA)) $HTTP_RAW_POST_DATA = file_get_contents('php://input');

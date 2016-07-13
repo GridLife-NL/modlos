@@ -13,7 +13,7 @@
 // Modified by Fumi.Iseki for XoopenSim/Modlos
 //
 
-require_once(realpath('./search_config.php'));
+require_once(realpath(dirname(__FILE__).'/search_config.php'));
 
 //
 /*
