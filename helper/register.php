@@ -13,7 +13,10 @@
 // Modified by Fumi.Iseki for XoopenSim/Modlos
 //
 
-require_once(realpath(dirname(__FILE__).'/search_config.php'));
+if (!defined('ENV_HELPER_PATH')) require_once(realpath(dirname(__FILE__).'/../include/config.php'));
+if (!defined('ENV_READ_DEFINE')) require_once(realpath(ENV_HELPER_PATH.'/../include/env_define.php'));
+require_once(realpath(ENV_HELPER_PATH.'/search_config.php'));
+require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.php'));
 
 //
 /*
