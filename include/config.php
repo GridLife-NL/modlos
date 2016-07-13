@@ -5,7 +5,7 @@
 //                        for Moodle by Fumi.Iseki
 //
 
-require_once(realpath(dirname(__FILE__).'/../../../config.php'));
+require_once(realpath('../../../config.php'));
 
 
 if (!defined('CMS_DIR_NAME'))	 define('CMS_DIR_NAME',	   basename(dirname(dirname(__FILE__))));

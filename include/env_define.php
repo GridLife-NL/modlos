@@ -7,7 +7,7 @@
 //											 by Fumi.Iseki
 //
 
-if (!defined('ENV_HELPER_PATH')) require_once(realpath(dirname(__FILE__).'/config.php'));
+if (!defined('ENV_HELPER_PATH')) require_once(realpath('./config.php'));
 if ( defined('ENV_READ_DEFINE')) return;
 
 //require_once(ENV_HELPER_PATH.'/../include/tools.func.php');
