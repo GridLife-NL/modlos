@@ -2,8 +2,8 @@
 
 if (!defined('CMS_MODULE_PATH')) exit();
 
-require_once(CMS_MODULE_PATH.'/include/moodle.func.php');
-require_once(CMS_MODULE_PATH.'/include/modlos.func.php');
+require_once(realpath(CMS_MODULE_PATH.'/include/moodle.func.php'));
+require_once(realpath(CMS_MODULE_PATH.'/include/modlos.func.php'));
 
 
 
