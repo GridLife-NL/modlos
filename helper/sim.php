@@ -5,9 +5,11 @@
 // usage... http://xxx/yyy/zzz/sim.php?region=3a9379b7-1821-4b04-ab97-e38df166bac1
 //
 
-require_once(realpath(dirname(__FILE__).'/../../../config.php'));
-require_once(realpath(dirname(__FILE__).'/../include/env_interface.php'));
-require_once(realpath(dirname(__FILE__).'/../include/modlos.func.php'));
+if (!defined('ENV_HELPER_PATH')) require_once(realpath(dirname(__FILE__).'/../include/config.php'));
+if (!defined('ENV_READ_DEFINE')) require_once(realpath(ENV_HELPER_PATH.'/../include/env_define.php'));
+
+require_once(realpath(ENV_HELPER_PATH.'/../include/modlos.func.php'));
+
 
 if (isguestuser()) {
 	exit('<h4>Guest User is not allowed to access this page!!</h4>');

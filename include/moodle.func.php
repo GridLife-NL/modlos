@@ -14,7 +14,10 @@
  ****************************************************************/
 
 
-require_once(CMS_MODULE_PATH.'/include/jbxl_moodle_tools.php');
+if (!defined('CMS_MODULE_PATH')) exit();
+
+require_once(realpath(CMS_MODULE_PATH.'/include/jbxl_moodle_tools.php'));
+
 
 
 function  hasPermit($course_id=0)
