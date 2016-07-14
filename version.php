@@ -7,9 +7,10 @@ $plugin->component = 'block_modlos';	// Full name of the plugin (used for diagno
 $plugin->cron      = 0;
 $plugin->maturity  = MATURITY_STABLE;
 
-$plugin->release   = '3.2.0';
+$plugin->release   = '3.2.1';
 
-$plugin->version   = 2016070600;	// StandAlone モード
+$plugin->version   = 2016071300;	// add MoveMoney
+//$plugin->version = 2016070600;	// for Standalone 
 //$plugin->version = 2016060200;
 //$plugin->version = 2016051500;
 //$plugin->version = 2016010600;
