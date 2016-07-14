@@ -10,9 +10,9 @@
 if (!defined('ENV_READ_CONFIG')) require_once(realpath(dirname(__FILE__).'/config.php'));
 if ( defined('ENV_READ_DEFINE')) return;
 
-require_once(realpath(ENV_HELPER_PATH.'/profile_config.php'));
-require_once(realpath(ENV_HELPER_PATH.'/search_config.php'));
-require_once(realpath(ENV_HELPER_PATH.'/xmlgroups_config.php'));
+require_once(realpath(ENV_HELPER_PATH.'/../include/profile_config.php'));
+require_once(realpath(ENV_HELPER_PATH.'/../include/search_config.php'));
+require_once(realpath(ENV_HELPER_PATH.'/../include/xmlgroups_config.php'));
 
 
 
