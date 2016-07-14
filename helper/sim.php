@@ -5,7 +5,7 @@
 // usage... http://xxx/yyy/zzz/sim.php?region=3a9379b7-1821-4b04-ab97-e38df166bac1
 //
 
-if (!defined('ENV_HELPER_PATH')) require_once(realpath(dirname(__FILE__).'/../include/config.php'));
+if (!defined('ENV_READ_CONFIG')) require_once(realpath(dirname(__FILE__).'/../include/config.php'));
 if (!defined('ENV_READ_DEFINE')) require_once(realpath(ENV_HELPER_PATH.'/../include/env_define.php'));
 require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.php'));
 require_once(realpath(ENV_HELPER_PATH.'/../include/modlos.func.php'));

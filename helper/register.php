@@ -1,11 +1,11 @@
 <?php
 //////////////////////////////////////////////////////////////////////////////
-// register.php															 //
-// (C) 2008, Fly-man-													   //
-// This file contains the registration of a simulator to the database	   //
+// register.php															 	//
+// (C) 2008, Fly-man-													   	//
+// This file contains the registration of a simulator to the database	   	//
 // and checks if the simulator is new in the database or a reconnected one  //
-//																		  //
-// If the simulator is old, check if the nextcheck date > registration	  //
+//																		  	//
+// If the simulator is old, check if the nextcheck date > registration	  	//
 // When the date is older, make a request to the Parser to grab new data	//
 //////////////////////////////////////////////////////////////////////////////
 
@@ -13,7 +13,7 @@
 // Modified by Fumi.Iseki for XoopenSim/Modlos
 //
 
-if (!defined('ENV_HELPER_PATH')) require_once(realpath(dirname(__FILE__).'/../include/config.php'));
+if (!defined('ENV_READ_CONFIG')) require_once(realpath(dirname(__FILE__).'/../include/config.php'));
 if (!defined('ENV_READ_DEFINE')) require_once(realpath(ENV_HELPER_PATH.'/../include/env_define.php'));
 require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.php'));
 
