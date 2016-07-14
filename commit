@@ -3,14 +3,14 @@
 svn ci -m ""
 
 #
-cp -f helper/mute.php  opensim.modules/Messaging/php
-cp -f helper/profile.php opensim.modules/Profile/php
-cp -f helper/parser.php   opensim.modules/Search/php
-cp -f helper/query.php    opensim.modules/Search/php
-cp -f helper/register.php opensim.modules/Search/php
+#cp -f helper/mute.php  opensim.modules/Messaging/php
+#cp -f helper/profile.php opensim.modules/Profile/php
+#cp -f helper/parser.php   opensim.modules/Search/php
+#cp -f helper/query.php    opensim.modules/Search/php
+#cp -f helper/register.php opensim.modules/Search/php
 
-cp -f include/profile_config.php opensim.modules/Profile/php
-cp -f include/search_config.php  opensim.modules/Search/php
+#cp -f include/profile_config.php opensim.modules/Profile/php
+#cp -f include/search_config.php  opensim.modules/Search/php
 
 #
 (cd jbxl && svn ci -m "")
