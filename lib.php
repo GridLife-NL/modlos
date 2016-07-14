@@ -1,6 +1,6 @@
 <?php
 
-require_once(realpath('./include/jbxl_moodle_tools.php'));
+require_once(realpath(dirname(__FILE__).'/include/jbxl_moodle_tools.php'));
 
 // Rewrite $context
 $context = new stdClass();

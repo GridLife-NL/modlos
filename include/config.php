@@ -7,7 +7,6 @@
 
 require_once(realpath(dirname(__FILE__).'/../../../config.php'));
 
-
 if (!defined('CMS_DIR_NAME'))	 define('CMS_DIR_NAME',	   basename(dirname(dirname(__FILE__))));
 if (!defined('CMS_MODULE_URL'))	 define('CMS_MODULE_URL',  $CFG->wwwroot.'/blocks/'.CMS_DIR_NAME);
 if (!defined('CMS_MODULE_PATH')) define('CMS_MODULE_PATH', $CFG->dirroot.'/blocks/'.CMS_DIR_NAME);
