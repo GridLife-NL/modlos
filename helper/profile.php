@@ -5,7 +5,6 @@
 
 if (!defined('ENV_HELPER_PATH')) require_once(realpath(dirname(__FILE__).'/../include/config.php'));
 if (!defined('ENV_READ_DEFINE')) require_once(realpath(ENV_HELPER_PATH.'/../include/env_define.php'));
-require_once(realpath(ENV_HELPER_PATH.'/profile_config.php'));
 require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.php'));
 require_once(realpath(ENV_HELPER_PATH.'/../include/env_lib.php'));
 
@@ -18,7 +17,7 @@ if (!isset($HTTP_RAW_POST_DATA)) $HTTP_RAW_POST_DATA = file_get_contents('php://
 
 //
 if (!opensim_is_access_from_region_server()) {
-	$remote_addr = $_SERVER["REMOTE_ADDR"];
+	$remote_addr = $_SERVER['REMOTE_ADDR'];
 	error_log("profile.php: Illegal access from ".$remote_addr);
 	exit;
 }
@@ -34,7 +33,7 @@ if ($GLOBALS['xmlrpc_internalencoding']=='UTF-8')
 
 
 // MySQL DataBase
-$DbLink = new DB($DB_HOST, $DB_NAME, $DB_USER, $DB_PASSWORD, $DB_MYSQLI);
+$DbLink = new DB($PROF_DB_HOST, $PROF_DB_NAME, $PROF_DB_USER, $PROF_DB_PASS, $PROF_DB_MYSQLI);
 
 
 

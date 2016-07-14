@@ -9,7 +9,6 @@
 
 if (!defined('ENV_HELPER_PATH')) require_once(realpath(dirname(__FILE__).'/../include/config.php'));
 if (!defined('ENV_READ_DEFINE')) require_once(realpath(ENV_HELPER_PATH.'/../include/env_define.php'));
-require_once(realpath(ENV_HELPER_PATH.'/search_config.php'));
 require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.php'));
 
 
@@ -38,7 +37,7 @@ if ($GLOBALS['xmlrpc_internalencoding']=='UTF-8')
 
 
 // MySQL DataBase
-$DbLink = new DB($DB_HOST, $DB_NAME, $DB_USER, $DB_PASSWORD, $DB_MYSQLI);
+$DbLink = new DB($SRCH_DB_HOST, $SRCH_DB_NAME, $SRCH_DB_USER, $SRCH_DB_PASS, $SRCH_DB_MYSQLI);
 
 
 

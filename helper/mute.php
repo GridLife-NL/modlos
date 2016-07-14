@@ -4,7 +4,7 @@
 //										by Fumi.Iseki (NSL)
 //
 
-if (!defined('ENV_HELPER_PATH')) require_once(realpath(dirname(__FILE__).'/../include/config.php'));
+if (!defined('ENV_READ_CONFIG')) require_once(realpath(dirname(__FILE__).'/../include/config.php'));
 if (!defined('ENV_READ_DEFINE')) require_once(realpath(ENV_HELPER_PATH.'/../include/env_define.php'));
 require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.php'));
 
@@ -22,7 +22,7 @@ if (!opensim_is_access_from_region_server()) {
 }
 
 
-$DbLink = new DB(MUTE_DB_HOST, MUTE_DB_NAME, MUTE_DB_USER, MUTE_DB_PASS, MUTE_DB_MYSQLI);
+$DbLink = new DB($MUTE_DB_HOST, $MUTE_DB_NAME, $MUTE_DB_USER, $MUTE_DB_PASS, $MUTE_DB_MYSQLI);
 
 
 $method = $_SERVER["PATH_INFO"];

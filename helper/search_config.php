@@ -1,44 +1,40 @@
 <?php
 
 //
-if (defined('CMS_DB_HOST')) 
+$SRCH_DB_HOST   = 'localhost';
+$SRCH_DB_NAME   = '';
+$SRCH_DB_USER   = '';
+$SRCH_DB_PASS   = '';
+$SRCH_DB_MYSQLI = true;
+
+//
+if ($SRCH_DB_HOST=='' or $SRCH_DB_NAME=='' or $SRCH_DB_USER=='' or $SRCH_DB_PASS=='')
 {
-	$DB_HOST = 	   CMS_DB_HOST;
-	$DB_NAME = 	   CMS_DB_NAME;
-	$DB_USER = 	   CMS_DB_USER;
-	$DB_PASSWORD = CMS_DB_PASS;
-	$DB_MYSQLI =   CMS_DB_MYSQLI;
-}
-else if (defined('OPENSIM_DB_HOST'))
-{
-	$DB_HOST = 	   OPENSIM_DB_HOST;
-	$DB_NAME = 	   OPENSIM_DB_NAME;
-	$DB_USER = 	   OPENSIM_DB_USER;
-	$DB_PASSWORD = OPENSIM_DB_PASS;
-	$DB_MYSQLI =   OPENSIM_DB_MYSQLI;
+	if (defined('CMS_DB_HOST')) 
+	{
+		$SRCH_DB_HOST   = CMS_DB_HOST;
+		$SRCH_DB_NAME   = CMS_DB_NAME;
+		$SRCH_DB_USER   = CMS_DB_USER;
+		$SRCH_DB_PASS   = CMS_DB_PASS;
+		$SRCH_DB_MYSQLI = CMS_DB_MYSQLI;
+	}
+	else if (defined('OPENSIM_DB_HOST'))
+	{
+		$SRCH_DB_HOST   = OPENSIM_DB_HOST;
+		$SRCH_DB_NAME   = OPENSIM_DB_NAME;
+		$SRCH_DB_USER   = OPENSIM_DB_USER;
+		$SRCH_DB_PASS   = OPENSIM_DB_PASS;
+		$SRCH_DB_MYSQLI = OPENSIM_DB_MYSQLI;
+	}
 } 
-else
-{
-	// if you donot have env_define.php, please set DB information by manual.
-	$DB_HOST = 	   'localhost';
-	$DB_NAME = 	   '';
-	$DB_USER = 	   '';
-	$DB_PASSWORD = '';
-	$DB_MYSQLI =   false;
-}
 
 
-if (!defined('SEARCH_ALLPARCELS_TBL'))
-{
-	$GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
+define('SEARCH_ALLPARCELS_TBL_BASE',    'search_allparcels');
+define('SEARCH_EVENTS_TBL_BASE',        'search_events');
+define('SEARCH_HOSTSREGISTER_TBL_BASE', 'search_hostsregister');
+define('SEARCH_OBJECTS_TBL_BASE',       'search_objects');
+define('SEARCH_PARCELS_TBL_BASE',       'search_parcels');
+define('SEARCH_PARCELSALES_TBL_BASE',   'search_parcelsales');
+define('SEARCH_POPULARPLACES_TBL_BASE', 'search_popularplaces');
+define('SEARCH_REGIONS_TBL_BASE',       'search_regions');
 
-	define('SEARCH_ALLPARCELS_TBL',		'allparcels');
-	define('SEARCH_CLASSIFIEDS_TBL',	'classifieds');
-	define('SEARCH_EVENTS_TBL',			'events');
-	define('SEARCH_HOSTSREGISTER_TBL',	'hostsregister');
-	define('SEARCH_OBJECTS_TBL',		'objects');
-	define('SEARCH_PARCELS_TBL',		'parcels');
-	define('SEARCH_PARCELSALES_TBL',	'parcelsales');
-	define('SEARCH_POPULARPLACES_TBL',	'popularplaces');
-	define('SEARCH_REGIONS_TBL',		'search_regions');
-}

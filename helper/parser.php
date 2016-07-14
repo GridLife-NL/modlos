@@ -5,7 +5,6 @@
 
 if (!defined('ENV_HELPER_PATH')) require_once(realpath(dirname(__FILE__).'/../include/config.php'));
 if (!defined('ENV_READ_DEFINE')) require_once(realpath(ENV_HELPER_PATH.'/../include/env_define.php'));
-require_once(realpath(ENV_HELPER_PATH.'/search_config.php'));
 require_once(realpath(ENV_HELPER_PATH.'/../include/mysql.func.php'));
 
 
@@ -31,7 +30,7 @@ global $DbLink;
 $now = time();
 
 // MySQL DataBase
-$DbLink = new DB($DB_HOST, $DB_NAME, $DB_USER, $DB_PASSWORD, $DB_MYSQLI);
+$DbLink = new DB($SRCH_DB_HOST, $SRCH_DB_NAME, $SRCH_DB_USER, $SRCH_DB_PASS, $SRCH_DB_MYSQLI);
 
 
 
@@ -321,7 +320,7 @@ function delete_old_events($hour=24)
 // query to select the next set of hosts to be checked.
 //
 
-$DbLink2 = new DB($DB_HOST, $DB_NAME, $DB_USER, $DB_PASSWORD, $DB_MYSQLI);
+$DbLink2 = new DB($SRCH_DB_HOST, $SRCH_DB_NAME, $SRCH_DB_USER, $SRCH_DB_PASS, $SRCH_DB_MYSQLI);
 
 $sql = "SELECT host,port FROM ".SEARCH_HOSTSREGISTER_TBL." WHERE nextcheck<$now AND checked=0 LIMIT 0,50";
 //error_log("parser.php: ".$sql);
