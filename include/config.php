@@ -51,8 +51,8 @@ define('XMLGROUP_RKEY',			$CFG->modlos_groupdb_read_key);
 define('XMLGROUP_WKEY',	   		$CFG->modlos_groupdb_write_key);
 
 define('OPENSIM_PG_ONLY',		$CFG->modlos_pg_only);
-define('USE_UTC_TIME',			$CFG->modlos_use_utc_time);
 
+define('USE_UTC_TIME',			$CFG->modlos_use_utc_time);
 define('DATE_FORMAT', 			$CFG->modlos_date_format);
 
 
