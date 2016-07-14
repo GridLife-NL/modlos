@@ -29,13 +29,13 @@ if [ -d opensim.modules ]; then
 else
 	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.modules/trunk opensim.modules
 	#
-#	[ -f helper/mute.php ]  		 || cp opensim.modules/Messaging/php/mute.php helper
-#	[ -f helper/profile.php ] 		 || cp opensim.modules/Profile/php/profile.php helper
-#	[ -f helper/parser.php ] 		 || cp opensim.modules/Search/php/parser.php helper
-#	[ -f helper/query.php ] 		 || cp opensim.modules/Search/php/query.php helper
-#	[ -f helper/register.php ] 		 || cp opensim.modules/Search/php/register.php helper
-#	[ -f helper/profile_config.php ] || cp opensim.modules/Profile/php/profile_config.php include
-#	[ -f helper/search_config.php ]  || cp opensim.modules/Search/php/searche_config.php include
+	[ -f helper/mute.php ]  		  || ln opensim.modules/Messaging/php/mute.php helper/mute.php
+	[ -f helper/profile.php ] 		  || ln opensim.modules/Profile/php/profile.php helper/profile.php
+	[ -f helper/parser.php ] 		  || ln opensim.modules/Search/php/parser.php helper/parser.php
+	[ -f helper/query.php ] 		  || ln opensim.modules/Search/php/query.php helper/query.php
+	[ -f helper/register.php ] 	 	  || ln opensim.modules/Search/php/register.php helper/register.php
+	[ -f include/profile_config.php ] || ln opensim.modules/Profile/php/profile_config.php include/profile_config.php
+	[ -f include/search_config.php ]  || ln opensim.modules/Search/php/searche_config.php include/searche_config.php
 fi
 
 
