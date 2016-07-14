@@ -16,7 +16,7 @@ if (!isset($HTTP_RAW_POST_DATA)) $HTTP_RAW_POST_DATA = file_get_contents("php://
 
 // Access Check
 if (!opensim_is_access_from_region_server()) {
-	$remote_addr = $_SERVER["REMOTE_ADDR"];
+	$remote_addr = $_SERVER['REMOTE_ADDR'];
 	error_log("mute.php: Illegal access from ".$remote_addr);
 	exit;
 }
@@ -28,7 +28,7 @@ $DbLink = new DB($MUTE_DB_HOST, $MUTE_DB_NAME, $MUTE_DB_USER, $MUTE_DB_PASS, $MU
 $method = $_SERVER["PATH_INFO"];
 
 
-if ($method == "/UpdateList/") {
+if ($method == '/UpdateList/') {
 	$parms = $HTTP_RAW_POST_DATA;
 	$start = strpos($parms, "?>");
 
@@ -63,7 +63,7 @@ if ($method == "/UpdateList/") {
 }
 
 
-if ($method == "/DeleteList/") {
+if ($method == '/DeleteList/') {
 	$parms = $HTTP_RAW_POST_DATA;
 	$start = strpos($parms, "?>");
 
@@ -95,7 +95,7 @@ if ($method == "/DeleteList/") {
 }
 
 
-if ($method == "/RequestList/") {
+if ($method == '/RequestList/') {
 	$parms = $HTTP_RAW_POST_DATA;
 	//$parts = split("[<>]", $parms);
 	$parts = preg_split("/[<>]/", $parms);
@@ -129,6 +129,3 @@ if ($method == "/RequestList/") {
 	echo '</ArrayOfGridMuteList>';
 	exit;
 }
-
-
-?>
