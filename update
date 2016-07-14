@@ -37,5 +37,5 @@ fi
 [ -f helper/query.php ] 		  || ln opensim.modules/Search/php/query.php helper/query.php
 [ -f helper/register.php ] 	 	  || ln opensim.modules/Search/php/register.php helper/register.php
 [ -f include/profile_config.php ] || ln opensim.modules/Profile/php/profile_config.php include/profile_config.php
-[ -f include/search_config.php ]  || ln opensim.modules/Search/php/searche_config.php include/searche_config.php
+[ -f include/search_config.php ]  || ln opensim.modules/Search/php/search_config.php include/searche_config.php
 
