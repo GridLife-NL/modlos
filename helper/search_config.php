@@ -1,9 +1,6 @@
 <?php
 
-require_once(realpath(ENV_HELPER_PATH.'/../include/mysql.func.php'));
-
-
-
+//
 if (defined('CMS_DB_HOST')) 
 {
 	$DB_HOST = 	   CMS_DB_HOST;
@@ -29,7 +26,6 @@ else
 	$DB_PASSWORD = '';
 	$DB_MYSQLI =   false;
 }
-
 
 
 if (!defined('SEARCH_ALLPARCELS_TBL'))

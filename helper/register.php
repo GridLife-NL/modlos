@@ -18,6 +18,7 @@ if (!defined('ENV_READ_DEFINE')) require_once(realpath(ENV_HELPER_PATH.'/../incl
 require_once(realpath(ENV_HELPER_PATH.'/search_config.php'));
 require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.php'));
 
+
 //
 /*
 if (!opensim_is_access_from_region_server()) {

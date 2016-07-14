@@ -14,14 +14,12 @@ if (!isset($HTTP_RAW_POST_DATA)) $HTTP_RAW_POST_DATA = file_get_contents("php://
 //error_log("mute.php: ".$request_xml);
 
 
-
 // Access Check
 if (!opensim_is_access_from_region_server()) {
 	$remote_addr = $_SERVER["REMOTE_ADDR"];
 	error_log("mute.php: Illegal access from ".$remote_addr);
 	exit;
 }
-
 
 
 $DbLink = new DB(MUTE_DB_HOST, MUTE_DB_NAME, MUTE_DB_USER, MUTE_DB_PASS, MUTE_DB_MYSQLI);
