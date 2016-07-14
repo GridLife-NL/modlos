@@ -102,6 +102,7 @@ define('SEARCH_REGIONS_TBL',			FULL_DB_PREFIX.SEARCH_REGIONS_TBL_BASE);
 define('SEARCH_CLASSIFIEDS_TBL',		PROFILE_CLASSIFIEDS_TBL_BASE);
 
 
+
 //////////////////////////////////////////////////////////////////////////////////
 // Table Name without Moodle DB Prefix   Modlos ライブラリで使用する変数名
 
