@@ -970,7 +970,8 @@ function  modlos_sync_opensimdb($update_check=true)
 	if ($update_check) {
 		$opensim_up = opensim_avatars_update_time();					// InnoDB の場合は常に 0
 		if ($opensim_up==0) $opensim_up = opensim_get_avatars_num();	// InnoDB の場合はレコード数でチェック
-		if ($opensim_up==$CFG->opensim_update) return;					// チェック用の値が変わらない場合
+		$user_num = modlos_get_avatars_num();
+		if ($user_num!=0 and $opensim_up==$CFG->opensim_update) return;	// チェック用の値が変わらない場合
 		set_config('opensim_update', $opensim_up);
 	}
 
