@@ -239,14 +239,45 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
-	if ($oldversion < 2016060200) {
+	if ($oldversion < 2016071700) {
 		$table = new xmldb_table('modlos_template_avatars');
         //
         $field = new xmldb_field('status',  XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, '0', 'itemid');
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
-		$table->add_key('uuid', XMLDB_KEY_UNIQUE, array('uuid'));
+		$key = new xmldb_key('uuid', XMLDB_KEY_UNIQUE, array('uuid'));
+        $dbman->add_key($table, $key);
+	}
+
+	if ($oldversion < 2016071700) {
+		$table = new xmldb_table('modlos_mute_list');
+		$key = new xmldb_key('muteid', XMLDB_KEY_UNIQUE, array('agentid, muteid, mutename'));
+        $dbman->add_key($table, $key);
+	}
+
+	if ($oldversion < 2016071700) {
+		$table = new xmldb_table('modlos_search_allparcels');
+        $index = new xmldb_index('regionuuid', XMLDB_INDEX_NOTUNIQUE, array('regionuuid'));
+        $dbman->add_index($table, $index);
+	}
+
+	if ($oldversion < 2016071700) {
+		$table = new xmldb_table('modlos_search_events');
+		$key = new xmldb_key('eventid', XMLDB_KEY_UNIQUE, array('eventid'));
+        $dbman->add_key($table, $key);
+	}
+
+	if ($oldversion < 2016071703) {
+		$table = new xmldb_table('modlos_search_parcels');
+        $index = new xmldb_index('name', XMLDB_INDEX_NOTUNIQUE, array('parcelname'));
+        $dbman->add_index($table, $index);
+        $index = new xmldb_index('description', XMLDB_INDEX_NOTUNIQUE, array('description'));
+        $dbman->add_index($table, $index);
+        $index = new xmldb_index('searchcategory', XMLDB_INDEX_NOTUNIQUE, array('searchcategory'));
+        $dbman->add_index($table, $index);
+        $index = new xmldb_index('dwell', XMLDB_INDEX_NOTUNIQUE, array('dwell'));
+        $dbman->add_index($table, $index);
 	}
 
 

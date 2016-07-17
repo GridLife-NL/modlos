@@ -231,8 +231,8 @@
         <FIELD NAME="profilepartner" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="profileimage" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="profileabouttext" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profileallowpublish" TYPE="binary" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profilematurepublish" TYPE="binary" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profileallowpublish"  TYPE="binary" LENGTH="1" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profilematurepublish" TYPE="binary" LENGTH="1" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="profileurl" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="profilewanttomask" TYPE="int" LENGTH="3" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="profilewanttotext" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -272,6 +272,7 @@
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="muteid" TYPE="unique" FIELDS="agentid, muteid, mutename"/>
       </KEYS>
     </TABLE>
     <TABLE NAME="modlos_login_screen" COMMENT="Login Screen Alert Information Box">
@@ -302,6 +303,9 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
         <KEY NAME="parceluuid" TYPE="unique" FIELDS="parceluuid"/>
       </KEYS>
+      <INDEXES>
+        <INDEX NAME="regionuuid" UNIQUE="false" FIELDS="regionuuid"/>
+      </INDEXES>
     </TABLE>
     <TABLE NAME="modlos_search_events" COMMENT="Events Table for Search">
       <FIELDS>
@@ -323,6 +327,7 @@
       </FIELDS>
       <KEYS>
         <KEY NAME="id" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="eventid" TYPE="unique" FIELDS="eventid"/>
       </KEYS>
     </TABLE>
     <TABLE NAME="modlos_search_hostsregister" COMMENT="Hosts Register">
@@ -375,6 +380,12 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
         <KEY NAME="uuid" TYPE="unique" FIELDS="regionuuid, parceluuid"/>
       </KEYS>
+      <INDEXES>
+        <INDEX NAME="name" UNIQUE="false" FIELDS="parcelname"/>
+        <INDEX NAME="description" UNIQUE="false" FIELDS="description"/>
+        <INDEX NAME="searchcategory" UNIQUE="false" FIELDS="searchcategory"/>
+        <INDEX NAME="dwell" UNIQUE="false" FIELDS="dwell"/>
+      </INDEXES>
     </TABLE>
     <TABLE NAME="modlos_search_parcelsales" COMMENT="Parcel Sales">
       <FIELDS>

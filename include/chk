@@ -1,5 +1,4 @@
 php -l config.php
-php -l cron_search.php
 php -l env_define.php
 php -l env_lib.php
 php -l jbxl_moodle_tools.php
