@@ -268,7 +268,7 @@ function xmldb_block_modlos_upgrade($oldversion=0)
         $dbman->add_key($table, $key);
 	}
 
-	if ($oldversion < 2016071703) {
+	if ($oldversion < 2016071700) {
 		$table = new xmldb_table('modlos_search_parcels');
         $index = new xmldb_index('name', XMLDB_INDEX_NOTUNIQUE, array('parcelname'));
         $dbman->add_index($table, $index);
