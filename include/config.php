@@ -19,11 +19,11 @@ if (!defined('ENV_HELPER_PATH')) define('ENV_HELPER_PATH', $CFG->dirroot.'/block
 //////////////////////////////////////////////////////////////////////////////////
 // for Moodle DB
 
-define('CMS_DB_HOST',			$CFG->dbhost);
-define('CMS_DB_NAME', 			$CFG->dbname);
-define('CMS_DB_USER',			$CFG->dbuser);
-define('CMS_DB_PASS',			$CFG->dbpass);
-define('CMS_DB_MYSQLI',			$CFG->modlos_use_mysqli);
+define('HELPER_DB_HOST',		$CFG->dbhost);
+define('HELPER_DB_NAME', 		$CFG->dbname);
+define('HELPER_DB_USER',		$CFG->dbuser);
+define('HELPER_DB_PASS',		$CFG->dbpass);
+define('HELPER_DB_MYSQLI',		$CFG->modlos_use_mysqli);
 
 
 

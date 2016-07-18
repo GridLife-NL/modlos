@@ -140,7 +140,7 @@ function  modlos_get_update_time($fullname_table)
 {
 	if ($fullname_table=="") return 0;
 
-	$db = new DB(CMS_DB_HOST, CMS_DB_NAME, CMS_DB_USER, CMS_DB_PASS, CMS_DB_MYSQLI);
+	$db = new DB(HELPER_DB_HOST, HELPER_DB_NAME, HELPER_DB_USER, HELPER_DB_PASS, HELPER_DB_MYSQLI);
 	$update = $db->get_update_time($fullname_table);
 
 	return $update;
