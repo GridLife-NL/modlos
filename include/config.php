@@ -55,6 +55,8 @@ define('OPENSIM_PG_ONLY',		$CFG->modlos_pg_only);
 define('USE_UTC_TIME',			$CFG->modlos_use_utc_time);
 define('DATE_FORMAT', 			$CFG->modlos_date_format);
 
+//
+define('LOGINPAGE_SCRIPT', 		0);
 
 
 //////////////////////////////////////////////////////////////////////////////////
