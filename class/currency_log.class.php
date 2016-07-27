@@ -79,31 +79,32 @@ class  CurrencyLog
 		if (!$this->hasPermit and $max_avatars>=0 and $my_avatars>=$max_avatars) $this->isAvatarMax = true;
 
 /*
-		$this->trans_types['1000']  = 'BirthGift';
-		$this->trans_types['1002']  = 'GroupCreate';
-		$this->trans_types['1004']  = 'GroupJoin';
-		$this->trans_types['1101']  = 'UploadCharge';
-		$this->trans_types['1102']  = 'LandAuction';
-		$this->trans_types['1103']  = 'ClassifiedCharge';
-		$this->trans_types['2003']  = 'ParcelDirFee';
-		$this->trans_types['2005']  = 'ClassifiedRenew';
-		$this->trans_types['2900']  = 'ScheduledFee';
-		$this->trans_types['3000']  = 'GiveInventory';
-		$this->trans_types['5000']  = 'ObjectSale';
-		$this->trans_types['5001']  = 'Gift';
-		$this->trans_types['5002']  = 'LandSale';
-		$this->trans_types['5003']  = 'ReferBonus';
-		$this->trans_types['5004']  = 'InvntorySale';
-		$this->trans_types['5005']  = 'RefundPurchase';  
-		$this->trans_types['5006']  = 'LandPassSale';
-		$this->trans_types['5007']  = 'DwellBonus';
-		$this->trans_types['5008']  = 'PayObject';
-		$this->trans_types['5009']  = 'ObjectPays';      
-		$this->trans_types['5010']  = 'BuyMoney';
-		$this->trans_types['5011']  = 'MoveMoney';
-		$this->trans_types['6003']  = 'GroupLiability';
-		$this->trans_types['6004']  = 'GroupDividend';
-		$this->trans_types['10000'] = 'StipendBasic';
+		// Transaction Type
+		$TransactionType['900']   = 'BirthGift';
+		$TransactionType['1002']  = 'GroupCreate';
+		$TransactionType['1004']  = 'GroupJoin';
+		$TransactionType['1101']  = 'UploadCharge';
+		$TransactionType['1102']  = 'LandAuction';
+		$TransactionType['1103']  = 'ClassifiedCharge';
+		$TransactionType['2003']  = 'ParcelDirFee';
+		$TransactionType['2005']  = 'ClassifiedRenew';
+		$TransactionType['2900']  = 'ScheduledFee';
+		$TransactionType['3000']  = 'GiveInventory';
+		$TransactionType['5000']  = 'ObjectSale';
+		$TransactionType['5001']  = 'Gift';
+		$TransactionType['5002']  = 'LandSale';
+		$TransactionType['5003']  = 'ReferBonus';
+		$TransactionType['5004']  = 'InvntorySale';
+		$TransactionType['5005']  = 'RefundPurchase';
+		$TransactionType['5006']  = 'LandPassSale';
+		$TransactionType['5007']  = 'DwellBonus';
+		$TransactionType['5008']  = 'PayObject';
+		$TransactionType['5009']  = 'ObjectPays';
+		$TransactionType['5010']  = 'BuyMoney';
+		$TransactionType['5011']  = 'MoveMoney';
+		$TransactionType['6003']  = 'GroupLiability';
+		$TransactionType['6004']  = 'GroupDividend';
+		$TransactionType['10000'] = 'StipendBasic';
 */
 	}
 
