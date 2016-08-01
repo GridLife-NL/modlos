@@ -445,7 +445,7 @@ class  AvatarsList
 
 		$show_edit = !($this->isGuest or (!$this->show_all and $this->user_id!=$USER->id and !$this->hasPermit));
 
-		include(CMS_MODULE_PATH.'/html/avatars.html');
+		include(CMS_MODULE_PATH.'/html/avatars_list.html');
 	}
 
 

@@ -1,5 +1,5 @@
 php -l agent.html
-php -l avatars.html
+php -l avatars_list.html
 php -l create.html
 php -l delete.html
 php -l delete_event.html
