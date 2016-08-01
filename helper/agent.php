@@ -30,7 +30,7 @@ $editPermit  = $hasPermit;
 //global $USER;
 $owner  = ' - ';
 $userid = 0;
-$state  = 0;
+$state  = AVATAR_STATE_NOSTATE;
 
 if ($agent) {
 	// OpenSim DB

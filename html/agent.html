@@ -94,8 +94,6 @@
               <strong style="color: #c00;"><?php echo $inactive_ttl?>
             <?php } elseif ($state&AVATAR_STATE_SYNCDB) {?>
               <strong style="color: #008;"><?php echo $active_ttl?>
-            <?php } else {?>
-              <strong style="color: #c00;"><?php echo $unknown_status."(".$state.")"?>
             <?php }?>
             <?php if ($state&AVATAR_STATE_SLOODLE and $owner!=' - ' and $use_sloodle) {?>
               ,&nbsp;<?php echo $sloodle_ttl?>
