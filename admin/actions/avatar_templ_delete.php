@@ -9,7 +9,7 @@ $course_id = optional_param('course', SITEID, PARAM_INT);
 
 $urlparams = array();
 $urlparams['course'] = $course_id;
-$PAGE->set_url('/blocks/modlos/actions/avatar_templ_delete.php', $urlparams);
+$PAGE->set_url('/blocks/modlos/admin/actions/avatar_templ_delete.php', $urlparams);
 
 $course = $DB->get_record('course', array('id'=>$course_id));
 

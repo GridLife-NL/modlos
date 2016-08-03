@@ -82,7 +82,7 @@ class  Estates
 			$this->estates[$estate_id]['regions'] = '';
 			//
 			foreach($regions as $region) {
-				$region_link = $region_win_pre."'".$map_url.$region['UUID']."',null,".$region_win_param.')">'.$region['regionName'].'</a>';
+				$region_link = $region_win_pre."'".$map_url.$region['UUID']."','',".$region_win_param.')">'.$region['regionName'].'</a>';
 				if ($this->estates[$estate_id]['regions']=='') { 
 					$this->estates[$estate_id]['regions'] = $region_link;
 				}
