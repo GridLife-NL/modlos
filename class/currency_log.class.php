@@ -324,7 +324,7 @@ class  CurrencyLog
 
 		$avtname = opensim_get_avatar_name($this->agent_id);
 		$userurl = "<a style=\"cursor:pointer;\" onClick=\"window.open('".CMS_MODULE_URL.'/helper/agent.php'.
-                              $url_params.'&agent='.$this->agent_id."',null,'toolbar=no,location=no,directories=no,".
+                              $url_params.'&agent='.$this->agent_id."','','toolbar=no,location=no,directories=no,".
                               "status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')\">";
 		$userurl.= $avtname['fullname'];
 		$userurl.= '</a>';

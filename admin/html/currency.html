@@ -162,7 +162,7 @@
           <tr><td><h4><?php echo $currency_mis?></h4><hr /></td></tr>
           <?php foreach($results as $result) {?>
             <tr><td align="center">
-              <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_params.'&agent='.$result['UUID']?>',null,'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
+              <a style="cursor:pointer;" onClick="window.open('<?php echo CMS_MODULE_URL.'/helper/agent.php'.$url_params.'&agent='.$result['UUID']?>','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')">
                 <strong style="color:#882020;"><?php echo $result['fullname']?></strong>
               </a>
             </td></tr>
