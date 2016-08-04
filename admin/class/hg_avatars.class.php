@@ -82,8 +82,8 @@ class  HgAvatars
     	$infos[$UUID]['lastname']  ... lasti name
     	$infos[$UUID]['created']   ... always 0
     	$infos[$UUID]['lastlogin'] ... lastlogin time
-    	$infos[$UUID]['hgURI']     ... 
-    	$infos[$UUID]['hgName
+    	$infos[$UUID]['hgURI']     ... Hyper Grid URI
+    	$infos[$UUID]['hgName']    ... Hyper Grid name
 		*/
 		//
 		$num = 0;
@@ -96,6 +96,11 @@ class  HgAvatars
 			else {
 				$user['lastin'] = date(DATE_FORMAT, $lastlogin);
 			}
+
+			$user['num']       = $num;
+			$user['region']    = ' - ';
+			$user['region_id'] = ' - ';
+			$user['state']     = AVATAR_STATE_NOSTATE;
 
 			$UUID = $user['UUID'];
 			$online = opensim_get_avatar_online($UUID);
@@ -110,6 +115,8 @@ class  HgAvatars
 			$num++;
 		}
 		unset($infos);
+
+		if ($num< $this->number) $this->number = $num;
 
 		////////////////////////////////////////////////////////////////////
 		// Paging
@@ -162,51 +169,63 @@ class  HgAvatars
 	{
 		global $CFG;
 
-/*
 		$grid_name 		= $CFG->modlos_grid_name;
-		$content   		= $CFG->modlos_avatars_content;
-		$userinfo		= $CFG->modlos_userinfo_link;
-		$money_unit 	= $CFG->modlos_currency_unit;
+		$content   		= '';
+//		$userinfo		= $CFG->modlos_userinfo_link;
+//		$money_unit 	= $CFG->modlos_currency_unit;
 		$date_format	= DATE_FORMAT;
 
-		$has_permit		= $this->hasPermit;
 		$use_currency	= $this->use_currency;
-		$url_params		= $this->url_params;
 
-		$plimit_amp		= "&amp;plimit=$this->plimit";
-		$plimit_		= '&amp;plimit=';
+		$number_ttl		= get_string('modlos_num',	       'block_modlos');
+		$avatarname_ttl = get_string('modlos_avatar_name', 'block_modlos');
+		$lastlogin_ttl	= get_string('modlos_login_time',  'block_modlos');
+		$status_ttl		= get_string('modlos_status',	   'block_modlos');
+		$crntregion_ttl	= get_string('modlos_crntregion',  'block_modlos');
+		$hg_ttl			= get_string('modlos_hg_ttl',      'block_modlos');
+		$inactive_ttl	= get_string('modlos_inactive',	   'block_modlos');
+		$show_ttl		= get_string('modlos_show',		   'block_modlos');
+		$online_ttl	 	= get_string('modlos_online_ttl',  'block_modlos');
+		$offline_ttl	= get_string('modlos_offline_ttl', 'block_modlos');
+		$active_ttl		= get_string('modlos_active',	   'block_modlos');
+
+		$url_params		= $this->url_params;
+        $action_url     = $this->action_url;
+        $pstart_        = '&amp;pstart=';
+        $plimit_        = '&amp;plimit=';
+/*
+        $plimit_amp     = "&amp;plimit=$this->plimit";
+        $pstart_amp     = "&amp;pstart=$this->pstart";
+        $order_amp      = "&amp;order=$this->order&amp;desc=$this->order_desc";
+        $loss_amp       = "&amp;ownerloss=$this->ownerloss";
+        $order_         = '&amp;order=';
+        $loss_          = '&amp;ownerloss=';
+
+		$not_syncdb_ttl = get_string('modlos_not_syncdb',	 'block_modlos');
+
+		$has_permit		= $this->hasPermit;
+
 		$action_url		= $this->action_url;
 
-		$number_ttl		= get_string('modlos_num',			 'block_modlos');
-		$edit_ttl		= get_string('modlos_edit',			 'block_modlos');
-		$show_ttl		= get_string('modlos_show',			 'block_modlos');
 		$editable_ttl	= get_string('modlos_edit_ttl',		 'block_modlos');
-		$lastlogin_ttl	= get_string('modlos_login_time',	 'block_modlos');
-		$status_ttl		= get_string('modlos_status',		 'block_modlos');
-		$crntregion_ttl	= get_string('modlos_crntregion',	 'block_modlos');
 		$owner_ttl		= get_string('modlos_owner',		 'block_modlos');
 		$get_owner_ttl	= get_string('modlos_get_owner_ttl', 'block_modlos');
 		$firstname_ttl	= get_string('modlos_firstname', 	 'block_modlos');
 		$lastname_ttl 	= get_string('modlos_lastname', 	 'block_modlos');
-		$avatarname_ttl = get_string('modlos_avatar_name', 	 'block_modlos');
-		$not_syncdb_ttl = get_string('modlos_not_syncdb',	 'block_modlos');
-		$online_ttl	 	= get_string('modlos_online_ttl',	 'block_modlos');
-		$active_ttl		= get_string('modlos_active',		 'block_modlos');
-		$inactive_ttl	= get_string('modlos_inactive',		 'block_modlos');
 		$reset_ttl		= get_string('modlos_reset_ttl',	 'block_modlos');
 		$find_owner_ttl	= get_string('modlos_find_owner_ttl','block_modlos');
 		$unknown_status	= get_string('modlos_unknown_status','block_modlos');
-		$page_num		= get_string('modlos_page',			 'block_modlos');
-		$page_num_of	= get_string('modlos_page_of',		 'block_modlos');
 		$user_search	= get_string('modlos_avatar_search', 'block_modlos');
-		$users_found  	= get_string('modlos_avatars_found', 'block_modlos');
 		$sloodle_ttl  	= get_string('modlos_sloodle_short', 'block_modlos');
 		$currency_ttl  	= get_string('modlos_currency_ttl',  'block_modlos');
 
 		$avarars_list_url = CMS_MODULE_URL.'/admin/actions/hg_avatars.php'.$this->url_params;
-
-		$hg_avatars = "AAAAAAAAAAAA";//get_string('modlos_hg_avatars', 'block_modlos');
 */
+		$page_num		= get_string('modlos_page',			 'block_modlos');
+		$page_num_of	= get_string('modlos_page_of',		 'block_modlos');
+		$users_found  	= get_string('modlos_avatars_found', 'block_modlos');
+
+		$hg_avatars = get_string('modlos_hg_avatars', 'block_modlos').'&nbsp; TOP '.$this->number;
 
 		include(CMS_MODULE_PATH.'/admin/html/hg_avatars.html');
 	}
