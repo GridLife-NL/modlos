@@ -429,6 +429,7 @@ $string['modlos_user_log_desc'] 	= 'ユーザサーバのログの保存先';
 $string['modlos_show_status_tab'] 	= 'ステータス';
 $string['modlos_admin_title'] 		= 'Moodle OpenSim';
 $string['modlos_general_setting_tab']='全般設定';
+$string['modlos_hg_avatars_tab'] 	= 'HGアバター';
 $string['modlos_lastnames_tab'] 	= 'ラストネーム';
 $string['modlos_lastnames'] 		= 'ラストネーム管理';
 

@@ -431,6 +431,7 @@ $string['modlos_user_log_desc'] 	= 'Specify user server directory';
 $string['modlos_show_status_tab'] 	= 'Status';
 $string['modlos_admin_title'] 		= 'Moodle OpenSim';
 $string['modlos_general_setting_tab']='Preferences';
+$string['modlos_hg_avatars_tab']    = 'HG Avatars';
 $string['modlos_lastnames_tab'] 	= 'Lastnames';
 $string['modlos_lastnames'] 		= 'Lastnames Management';
 

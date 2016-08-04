@@ -6,6 +6,7 @@ require_once(realpath(ENV_HELPER_PATH.'/../include/modlos.func.php'));
 
 
 $course_id = optional_param('course', SITEID, PARAM_INT);
+if (!$course_id) $course_id = 1;
 
 $urlparams = array();
 $urlparams['course'] = $course_id;

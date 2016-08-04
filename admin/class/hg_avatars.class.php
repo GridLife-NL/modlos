@@ -6,68 +6,59 @@ require_once(realpath(CMS_MODULE_PATH.'/include/moodle.func.php'));
 require_once(realpath(CMS_MODULE_PATH.'/include/modlos.func.php'));
 
 
-
 class  HgAvatars
 {
 	var $db_data 	= array();
 	var $icon 		= array();
 	var $pnum 		= array();
 
+	var $course_id  = 0;
+
 	var $action_url;
 	var $currency_url;
 
-	var $url_params   = '';
+	var $url_params = '';
+	var $hasPermit 	= false;
 
-	var $course_id    = 0;
-
-	var $isAvatarMax  = false;
 	var	$use_currency = false;
 
-	var $hasPermit 	= false;
-	var $isGuest   	= true;
+    var $hasError   = false;
+    var $errorMsg   = array();
 
 	// Page Control
-	var $pstart    = 0;
-	var $plimit    = 25;
-	var $number    = 25;
+	var $pstart     = 0;
+	var $plimit     = 25;
+	var $number     = 25;
 	var $sitemax;
 	var	$sitestart;
 
-	var $sql_limit = '';
-	var $sql_order = '';
-
+	var $sql_limit  = '';
+	var $sql_order  = '';
 
 
 	function  __construct($course_id)
 	{
-		global $CFG, $USER;
+		global $CFG;
 
-		// for Guest
-		$this->isGuest = isguestuser();
-		if ($this->isGuest) {
-			print_error('modlos_access_forbidden', 'block_modlos', CMS_MODULE_URL);
-		}
+        $this->course_id = $course_id;
+        $this->hasPermit = hasModlosPermit($this->course_id);
+        if (!$this->hasPermit) {
+            $this->hasError = true;
+            $this->errorMsg[] = get_string('modlos_access_forbidden', 'block_modlos');
+            return;
+        }
 
-		$this->course_id	= $course_id;
-		$this->hasPermit	= hasModlosPermit($course_id);
 		$this->use_currency = $CFG->modlos_use_currency_server;
 
 		$this->url_params   = '?course='.$course_id;
 		$this->action_url   = CMS_MODULE_URL.'/admin/actions/hg_avatars.php'.  $this->url_params;
 		$this->currency_url = CMS_MODULE_URL.'/actions/currency_log.php'.$this->url_params;
-
-		//
-		$my_avatars = modlos_get_avatars_num($USER->id);
-		$max_avatars = $CFG->modlos_max_own_avatars;
-		if (!$this->hasPermit and $max_avatars>=0 and $my_avatars>=$max_avatars) $this->isAvatarMax = true;
 	}
 
 
 	// アバターの検索条件
 	function  set_condition() 
 	{
-		global $CFG, $USER;
-
 		$this->plimit = optional_param('plimit', 25, PARAM_INT);
 		$this->sql_limit = " $this->pstart, $this->plimit ";
 
@@ -79,11 +70,6 @@ class  HgAvatars
 
 	function  execute()
 	{
-		global $CFG, $USER;
-
-		// auto synchro
-		modlos_sync_opensimdb();
-
 		////////////////////////////////////////////////////////////////////
 		// Read Data from DB
 		$users = array();
@@ -124,7 +110,6 @@ class  HgAvatars
 			$num++;
 		}
 		unset($infos);
-
 
 		////////////////////////////////////////////////////////////////////
 		// Paging
@@ -175,8 +160,9 @@ class  HgAvatars
 
 	function  print_page() 
 	{
-		global $CFG, $USER;
+		global $CFG;
 
+/*
 		$grid_name 		= $CFG->modlos_grid_name;
 		$content   		= $CFG->modlos_avatars_content;
 		$userinfo		= $CFG->modlos_userinfo_link;
@@ -184,7 +170,6 @@ class  HgAvatars
 		$date_format	= DATE_FORMAT;
 
 		$has_permit		= $this->hasPermit;
-		$avatar_max		= $this->isAvatarMax;
 		$use_currency	= $this->use_currency;
 		$url_params		= $this->url_params;
 
@@ -221,6 +206,7 @@ class  HgAvatars
 		$avarars_list_url = CMS_MODULE_URL.'/admin/actions/hg_avatars.php'.$this->url_params;
 
 		$hg_avatars = "AAAAAAAAAAAA";//get_string('modlos_hg_avatars', 'block_modlos');
+*/
 
 		include(CMS_MODULE_PATH.'/admin/html/hg_avatars.html');
 	}
