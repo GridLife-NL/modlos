@@ -8,7 +8,7 @@ php -l edit_event.html
 php -l events.html
 php -l map_object.html
 php -l owner.html
-php -l regions.html
+php -l regions_list.html
 php -l reset_region.html
 php -l show_event.html
 php -l show_status.html

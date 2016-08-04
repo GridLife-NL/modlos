@@ -348,6 +348,6 @@ class  RegionsList
 			$regions_list = get_string('modlos_personal_regions', 'block_modlos', $ownerurl);
 		}
 
-		include(CMS_MODULE_PATH.'/html/regions.html');
+		include(CMS_MODULE_PATH.'/html/regions_list.html');
 	}
 }
