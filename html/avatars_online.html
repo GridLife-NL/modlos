@@ -180,7 +180,9 @@
 
         <td>
           <?php if ($dat['hg_name']!='') { ?>
-            <strong style="color: #c02020;"><?php echo $dat['hg_name']?></strong>
+            <a href="http://<?php echo $dat['hg_name']?>/" target="_blank">
+              <strong style="color: #c02020;"><?php echo $dat['hg_name']?></strong>
+            </a>
           <?php } else {?>
             <strong style="align: center;"> - </strong>
           <?php }?>
