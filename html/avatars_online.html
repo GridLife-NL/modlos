@@ -179,7 +179,7 @@
         <?php }?>
 
         <td>
-          <?php if ($dat['hg_name']!='') { ?>
+          <?php if ($CFG->modlos_support_hg and $dat['hg_name']!='') { ?>
             <a href="http://<?php echo $dat['hg_name']?>/" target="_blank">
               <strong style="color: #c02020;"><?php echo $dat['hg_name']?></strong>
             </a>
