@@ -335,6 +335,9 @@ $string['modlos_asset_uri_desc'] 	= "OpenSim Asset サーバの URLを指定す�
 $string['modlos_invent_uri'] 		= 'Inventory サーバのURI';
 $string['modlos_invent_uri_desc'] 	= "OpenSim Inventory サーバの URLを指定する．'localhost(127.0.0.1)' は使用しないこと";
 
+$string['modlos_support_hg'] 	    = 'ハイパーグリッドのサポート';
+$string['modlos_support_hg_desc'] 	= 'OpenSim が HGモードの場合，Modlos側で HGモードをサポートするかどうかを指定する';
+
 $string['modlos_map_stx'] 			= 'ワールドマップのスタート位置 (X)';
 $string['modlos_map_stx_desc'] 		= 'ワールドマップを表示する時の 中心 X座標の初期値';
 $string['modlos_map_sty'] 			= 'ワールドマップのスタート位置 (Y)';
@@ -361,7 +364,16 @@ $string['modlos_use_https_desc'] 	= 'パスワードなどの重要なデータ�
 									  '既にサイト全体が HTTPSの場合，またはMoodleへのログイン時にHTTPSを使用している場合には選択する必要はない．';
 $string['modlos_https_url'] 		= 'Moodle のブロックのHTTPSでの URL';
 $string['modlos_https_url_desc'] 	= 'HTTPSを使用する場合は，Moodleのブロックの HTTPSでの URL(/blocksを含む)を指定する．'.
-									  '省略した場合は，$CFG->wwwroot/blocks の http: を https: に変換したものを使用する';
+									  '省略した場合は，$CFG->wwwroot/blocks の http: を https: に変換したものを使用する．';
+
+$string['modlos_use_openprofile'] 	= 'OpenProfileモジュールの使用';
+$string['modlos_use_openprofile_desc'] = 'Profileモジュールとして，Modlos付属の OpenProfileモジュールを使用するかどうかを指定する．'.
+                                      'チェックを外した場合，OpenSim標準の BasicProfileモジュールを使用する．'.
+                                      'なお，OpenProfileモジュールでは，マルチバイトコード（日本語）が使用可能となる．';
+
+$string['modlos_use_opensearch'] 	= 'OpenSearchモジュールの使用';
+$string['modlos_use_opensearch_desc'] = 'Search ジュールとして，Modlos付属の OpenSearchモジュールを使用するかどうかを指定する．'.
+                                      'チェックを外した場合，OpenSim標準の BasicSearchモジュールを使用する．';
 
 $string['modlos_grpdb_rkey'] 		= 'Flotsam グループデータベース読み込みアクセスキー';
 $string['modlos_grpdb_rkey_desc'] 	= 'Flotsam Group Function を使用する場合に指定する読み込み用キー．'.
@@ -375,14 +387,14 @@ $string['modlos_use_currency_svr_desc'] = 'DTL/NSL Money サーバを使用す�
 $string['modlos_banker'] 			= 'バンカーアバターのUUID(GUID)';
 $string['modlos_banker_desc'] 		= 'バンカーアバター （お金の管理を行うアバター） のUUID(GUID)';
 $string['modlos_currency_uri'] 		= 'Money サーバのURI';
-$string['modlos_currency_uri_desc'] = 'DTL/NSL Money サーバを使用する場合は，そのURLを指定する';
+$string['modlos_currency_uri_desc'] = 'DTL/NSL Money サーバを使用する場合は，そのURLを指定する．';
 $string['modlos_currency_key'] 		= 'ViewerとMoneyスクリプトとのアクセスキー';
 $string['modlos_currency_key_desc'] = 'ViewerとMoneyスクリプトとのアクセスキーを指定する．'.
 									  'MoneyServer.ini の [MoneyServer]セクションの MoneyScriptAccessKey の値と一致させる必要がある．';
 $string['modlos_currency_unit'] 	= 'お金の単位';
 $string['modlos_currency_unit_desc']= 'お金の単位を指定する';
-$string['modlos_currency_regionserver']= 'スクリプトの処理を行うリージョンサーバ';
-$string['modlos_currency_regionserver_desc']= 'アバターがオフラインの時に，スクリプトが処理を依頼するリージョンサーバを '.
+$string['modlos_currency_regionserver']= 'Moneyスクリプトの処理を行うリージョンサーバ';
+$string['modlos_currency_regionserver_desc']= 'アバターがオフラインの時に，Moneyスクリプトが処理を依頼するリージョンサーバを '.
                                       '"http://IPアドレス:ポート番号形式/" で指定する．リージョンサーバであればどのサーバでも選択可能';
 
 $string['modlos_userinfo_link'] 	= 'Moodleユーザの名前からアカウントページへのリンク';

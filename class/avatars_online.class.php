@@ -127,8 +127,8 @@ class  AvatarsOnline
 		modlos_sync_opensimdb();
 		if ($this->use_sloodle) modlos_sync_sloodle_users();
 
-		$num = opensim_get_avatars_online_num($db);
-		$avatars = opensim_get_avatars_online('', $this->sql_order, $this->sql_limit, $db);
+		$num = opensim_get_avatars_online_num($CFG->modlos_support_hg, $db);
+		$avatars = opensim_get_avatars_online('', $this->sql_order, $this->sql_limit, $CFG->modlos_support_hg, $db);
 
 		$users = array();
 		$i = 0;

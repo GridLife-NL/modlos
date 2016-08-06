@@ -66,6 +66,10 @@ $settings->add(new admin_setting_configtext('modlos_currency_uri',
 */
 
 // Modlos
+$settings->add(new admin_setting_configcheckbox('modlos_support_hg', 
+					get_string('modlos_support_hg', 'block_modlos'),
+				   	get_string('modlos_support_hg_desc', 'block_modlos'), 1));
+
 $settings->add(new admin_setting_configtext('modlos_map_start_x', 
 					get_string('modlos_map_stx', 'block_modlos'),
 				   	get_string('modlos_map_stx_desc', 'block_modlos'), '1000', PARAM_INT));
@@ -147,6 +151,14 @@ $settings->add(new admin_setting_configcheckbox('modlos_cooperate_sloodle',
 				   	get_string('modlos_cprt_sloodle_desc', 'block_modlos'), 0));
 
 // Ex Function
+$settings->add(new admin_setting_configcheckbox('modlos_use_openprofile', 
+					get_string('modlos_use_openprofile', 'block_modlos'),
+				   	get_string('modlos_use_openprofile_desc', 'block_modlos'), 1));
+
+$settings->add(new admin_setting_configcheckbox('modlos_use_opensearch', 
+					get_string('modlos_use_opensearch', 'block_modlos'),
+				   	get_string('modlos_use_opensearch_desc', 'block_modlos'), 1));
+
 $settings->add(new admin_setting_configtext('modlos_groupdb_read_key', 
 					get_string('modlos_grpdb_rkey', 'block_modlos'),
 				   	get_string('modlos_grpdb_rkey_desc', 'block_modlos'), '1234', PARAM_TEXT));

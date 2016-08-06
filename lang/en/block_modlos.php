@@ -337,6 +337,9 @@ $string['modlos_asset_uri_desc'] 	= 'Specify Asset server URL';
 $string['modlos_invent_uri'] 		= 'Inventory Server URL';
 $string['modlos_invent_uri_desc'] 	= 'Specify Inventory server URL';
 
+$string['modlos_support_hg'] 	    = 'Support of HG';
+$string['modlos_support_hg_desc'] 	= 'Specify whether Modlos supports HG, when OpenSim is HG mode';
+
 $string['modlos_map_stx'] 			= 'World Map Start Point (X)';
 $string['modlos_map_stx_desc'] 		= 'Specify initial X coordinates of World Map';
 $string['modlos_map_sty'] 			= 'World Map Start Point (Y)';
@@ -350,7 +353,7 @@ $string['modlos_base_avatar']       = 'Base Avatar\'s UUID(GUID)';
 $string['modlos_base_avatar_desc']  = 'Specifies the UUID(GUID) of the avatar as a base for creating the avatar.';
 $string['modlos_template_system']   = 'Use of the Template Avatar System';
 $string['modlos_template_system_desc']= 'When using the Template Avatar System and more than one avatar is registered as a template, '.
-                                        'above-mentioned modlos_base_avatar is ignored';
+                                      'above-mentioned modlos_base_avatar is ignored';
 $string['modlos_template_hide']     = 'Hide Template Avatar System from users';
 $string['modlos_template_hide_desc']= 'When the template avatars are registered (in preparation), to use if you temporarily want to hide the system from users';
 
@@ -365,11 +368,20 @@ $string['modlos_https_url'] 		= 'Moodle Block URL of HTTPS';
 $string['modlos_https_url_desc'] 	= 'Specify HTTPS URL (include /blocks) of Moodle Block.'.
 								  	  'If this is blank (default), http: of $CFG->wwwroot/blocks was changed into https: is used. ';
 
+$string['modlos_use_openprofile']   = 'Use OpenProfile Module';
+$string['modlos_use_openprofile_desc'] = 'Do you use OpenProfile module as profile module?';
+                                      'OpenProfile module is attached to the Modlos. '.
+                                      'If you check off this, Modlos uses default BasicProfile module as profile module.';
+
+$string['modlos_use_opensearch']    = 'Use OpenSearch Module';
+$string['modlos_use_opensearch_desc'] = 'Do you use OpenSearch module as search module?';
+                                      'OprnSearch module is attached to the Modlos. '.
+                                      'If you check off this, Modlos uses default BasicSearch module as search module.';
+
 $string['modlos_grpdb_rkey'] 		= 'Group Database Read Key';
 $string['modlos_grpdb_rkey_desc'] 	= 'Specify same read key code with XmlRpcServiceReadKey in [Groups] section of OpenSim.ini';
 $string['modlos_grpdb_wkey'] 		= 'Group Database Write Key';
 $string['modlos_grpdb_wkey_desc'] 	= 'Specify same write key code with XmlRpcServiceWriteKey in [Groups] section of OpenSim.ini';
-
 
 $string['modlos_use_currency_svr'] 	= 'Do you use DTL/NSL Money Server?';
 $string['modlos_use_currency_svr_desc'] = 'Please specify whether to use DTL/NSL Money Server.';
