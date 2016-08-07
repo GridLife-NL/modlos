@@ -628,12 +628,12 @@ function  modlos_get_profile($uuid)
 		$prof['MaturePublish']	= $prfobj->profilematurepublish;
 		$prof['URL']			= $prfobj->profileurl;
 		$prof['WantToMask']		= $prfobj->profilewanttomask;
-		$prof['SkillsMask']		= $prfobj->profileskillsmask;
 		$prof['WantToText']		= $prfobj->profilewanttotext;
+		$prof['SkillsMask']		= $prfobj->profileskillsmask;
 		$prof['SkillsText']		= $prfobj->profileskillstext;
 		$prof['LanguagesText']	= $prfobj->profilelanguagestext;
-		$prof['FirstAboutText'] = $prfobj->profilefirsttext;
 		$prof['FirstImage']		= $prfobj->profilefirstimage;
+		$prof['FirstAboutText'] = $prfobj->profilefirsttext;
 	}
 
 	return $prof;
