@@ -74,12 +74,14 @@ class  EventsList
 
 	function  execute()
 	{
-		if ($this->hasPermit) {
+		$this->number = modlos_get_events_num(0, OPENSIM_PG_ONLY);
+/*		if ($this->hasPermit) {
 			$this->number = modlos_get_events_num(0, OPENSIM_PG_ONLY);
 		}
 		else {
 			$this->number = modlos_get_events_num($this->userid, OPENSIM_PG_ONLY);
 		}
+*/
 
 		$this->sitemax   = ceil ($this->number/$this->plimit);
 		//$this->sitestart = round($this->pstart/$this->plimit, 0) + 1;
