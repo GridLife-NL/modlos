@@ -231,6 +231,7 @@ class  AvatarsOnline
 		$grid_name 		= $CFG->modlos_grid_name;
 		$content   		= $CFG->modlos_avatars_content;
 		$userinfo		= $CFG->modlos_userinfo_link;
+		$support_hg		= $CFG->modlos_support_hg;
 		$date_format	= DATE_FORMAT;
 
 		$has_permit		= $this->hasPermit;

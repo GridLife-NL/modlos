@@ -220,12 +220,30 @@ class  CurrencyLog
 				$this->db_data[$colum]['balance'] = ' - ';
 			}
 
+			$this->db_data[$colum]['objectName'] = '';
 			if (!$this->db_data[$colum]['objectName']) {
 				if ($this->db_data[$colum]['objectUUID']) {
 					$this->db_data[$colum]['objectName'] = opensim_get_object_name($this->db_data[$colum]['objectUUID']);
 				}
-				if (!$this->db_data[$colum]['objectName']) $this->db_data[$colum]['objectName'] = ' - ';
 			}
+			if (!$this->db_data[$colum]['objectName']) $this->db_data[$colum]['objectName'] = ' - ';
+
+			// Region Name
+			$this->db_data[$colum]['regionName'] = '';
+			if ($this->db_data[$colum]['oppuuid']!='00000000-0000-0000-0000-000000000000') {	// System
+				if ($this->db_data[$colum]['regionUUID']) {
+					$this->db_data[$colum]['regionName'] = opensim_get_region_name($this->db_data[$colum]['regionUUID']);
+				}
+				if (!$this->db_data[$colum]['regionName'] and $this->db_data[$colum]['regionHandle']) {
+					$this->db_data[$colum]['regionName'] = opensim_get_region_name($this->db_data[$colum]['regionHandle']);
+				}
+				if ($this->db_data[$colum]['regionName']) {
+					if (!$this->db_data[$colum]['regionUUID']) {
+						$this->db_data[$colum]['regionUUID'] = opensim_get_region_uuid($this->db_data[$colum]['regionName']);
+					}
+				}
+			}
+			if (!$this->db_data[$colum]['regionName']) $this->db_data[$colum]['regionName'] = ' - ';
 
 			$oppname = opensim_get_avatar_name($this->db_data[$colum]['oppuuid']);
 			if ($oppname['fullname']==null) $oppname['fullname'] = ' - ';
@@ -304,6 +322,7 @@ class  CurrencyLog
 		$order_			= '&amp;order=';
 
 		$number_ttl		= get_string('modlos_num',			   'block_modlos');
+		$region_ttl		= get_string('modlos_region',          'block_modlos');
 		$currency_found	= get_string('modlos_currency_found',  'block_modlos');
 		$currency_date	= get_string('modlos_currency_date',   'block_modlos');
 		$currency_type	= get_string('modlos_currency_type',   'block_modlos');

@@ -126,9 +126,11 @@
         </td>
       <?php }?>
 
+      <?php if ($support_hg) { ?>
       <td width=150>
         <strong style="color: #222;"><?php echo $hg_name_ttl?></strong>
       </td>
+      <?php }?>
 
       <td>&nbsp;</td>
     </tr>
@@ -178,8 +180,9 @@
           </td>
         <?php }?>
 
+        <?php if ($support_hg) { ?>
         <td>
-          <?php if ($CFG->modlos_support_hg and $dat['hg_name']!='') { ?>
+          <?php if ($dat['hg_name']!='') { ?>
             <a href="http://<?php echo $dat['hg_name']?>/" target="_blank">
               <strong style="color: #c02020;"><?php echo $dat['hg_name']?></strong>
             </a>
@@ -187,6 +190,7 @@
             <strong style="align: center;"> - </strong>
           <?php }?>
         </td>
+        <?php }?>
 
         <td>&nbsp;</td>
       </tr>
