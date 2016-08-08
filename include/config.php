@@ -26,7 +26,6 @@ define('HELPER_DB_PASS',		$CFG->dbpass);
 define('HELPER_DB_MYSQLI',		$CFG->modlos_use_mysqli);
 
 
-
 //////////////////////////////////////////////////////////////////////////////////
 // for OpenSim (Modlos)
 

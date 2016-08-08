@@ -61,7 +61,6 @@ class  HgAvatars
 	{
 		$this->plimit = optional_param('plimit', 25, PARAM_INT);
 		$this->sql_limit = " $this->pstart, $this->plimit ";
-
 		$this->sql_order = ' Login DESC';
 
 		return true;
@@ -81,7 +80,7 @@ class  HgAvatars
     	$infos[$UUID]['firstname'] ... first name
     	$infos[$UUID]['lastname']  ... lasti name
     	$infos[$UUID]['created']   ... always 0
-    	$infos[$UUID]['lastlogin'] ... lastlogin time
+  	    $infos[$UUID]['lastlogin'] ... lastlogin time
     	$infos[$UUID]['hgURI']     ... Hyper Grid URI
     	$infos[$UUID]['hgName']    ... Hyper Grid name
 		*/

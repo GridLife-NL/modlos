@@ -2,7 +2,7 @@
 //
 // CMS/LMS Web Interface for Moodle
 //
-//		れぞれのインターフェイスのライブラリに必要な定義を記述する
+//	  それぞれのインターフェイスのライブラリに必要な定義を記述する
 //		
 //											 by Fumi.Iseki
 //
@@ -43,6 +43,24 @@ define('AVATAR_PASSWD_MINLEN',		'8');
 
 
 //////////////////////////////////////////////////////////////////////////////////
+// Profile
+$PROF_DB_HOST      = HELPER_DB_HOST;
+$PROF_DB_NAME      = HELPER_DB_NAME;
+$PROF_DB_USER      = HELPER_DB_USER;
+$PROF_DB_PASS      = HELPER_DB_PASS;
+$PROF_DB_MYSQLI    = HELPER_DB_MYSQLI;
+
+$PROF_DB_HOST      = OPENSIM_DB_HOST;
+$PROF_DB_NAME      = OPENSIM_DB_NAME;
+$PROF_DB_USER      = OPENSIM_DB_USER;
+$PROF_DB_PASS      = OPENSIM_DB_PASS;
+$PROF_DB_MYSQLI    = OPENSIM_DB_MYSQLI;
+
+
+
+
+
+
 // Offline Message
 $OFFLINE_DB_HOST   = HELPER_DB_HOST;
 $OFFLINE_DB_NAME   = HELPER_DB_NAME;
