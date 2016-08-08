@@ -366,13 +366,13 @@ $string['modlos_https_url'] 		= 'Moodle のブロックのHTTPSでの URL';
 $string['modlos_https_url_desc'] 	= 'HTTPSを使用する場合は，Moodleのブロックの HTTPSでの URL(/blocksを含む)を指定する．'.
 									  '省略した場合は，$CFG->wwwroot/blocks の http: を https: に変換したものを使用する．';
 
-$string['modlos_use_openprofile'] 	= 'OpenProfileモジュールの使用';
-$string['modlos_use_openprofile_desc'] = 'Profileモジュールとして，Modlos付属の OpenProfileモジュールを使用するかどうかを指定する．'.
-                                      'チェックを外した場合，OpenSim標準の BasicProfileモジュールを使用する．'.
-                                      'なお，OpenProfileモジュールでは，マルチバイトコード（日本語）が使用可能となる．';
+$string['modlos_use_osprofile'] 	= 'OpenSimProfileモジュールの使用';
+$string['modlos_use_osprofile_desc']= 'Profileモジュールとして，Modlos付属の OpenSimProfileモジュールを使用するかどうかを指定する．'.
+                                      'チェックを外した場合，OpenSim標準の UserProfileモジュールを使用する．'.
+                                      'なお，OpenSimProfileモジュールでは，マルチバイトコード（日本語）が使用可能となる．';
 
-$string['modlos_use_opensearch'] 	= 'OpenSearchモジュールの使用';
-$string['modlos_use_opensearch_desc'] = 'Search ジュールとして，Modlos付属の OpenSearchモジュールを使用するかどうかを指定する．'.
+$string['modlos_use_ossearch'] 	    = 'OpenSimSearchモジュールの使用';
+$string['modlos_use_ossearch_desc'] = 'Search ジュールとして，Modlos付属の OpenSimSearchモジュールを使用するかどうかを指定する．'.
                                       'チェックを外した場合，OpenSim標準の BasicSearchモジュールを使用する．';
 
 $string['modlos_grpdb_rkey'] 		= 'Flotsam グループデータベース読み込みアクセスキー';

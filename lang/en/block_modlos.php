@@ -368,14 +368,14 @@ $string['modlos_https_url'] 		= 'Moodle Block URL of HTTPS';
 $string['modlos_https_url_desc'] 	= 'Specify HTTPS URL (include /blocks) of Moodle Block.'.
 								  	  'If this is blank (default), http: of $CFG->wwwroot/blocks was changed into https: is used. ';
 
-$string['modlos_use_openprofile']   = 'Use OpenProfile Module';
-$string['modlos_use_openprofile_desc'] = 'Do you use OpenProfile module as profile module?';
+$string['modlos_use_osprofile']     = 'Use OpenSimProfile Module';
+$string['modlos_use_osprofile_desc']= 'Do you use OpenSimProfile module as profile module?';
                                       'OpenProfile module is attached to the Modlos. '.
-                                      'If you check off this, Modlos uses default BasicProfile module as profile module.';
+                                      'If you check off this, Modlos uses default UserProfile module as profile module.';
 
-$string['modlos_use_opensearch']    = 'Use OpenSearch Module';
-$string['modlos_use_opensearch_desc'] = 'Do you use OpenSearch module as search module?';
-                                      'OprnSearch module is attached to the Modlos. '.
+$string['modlos_use_ossearch']      = 'Use OpenSimSearch Module';
+$string['modlos_use_ossearch_desc'] = 'Do you use OpenSimSearch module as search module?';
+                                      'OpenSimSearch module is attached to the Modlos. '.
                                       'If you check off this, Modlos uses default BasicSearch module as search module.';
 
 $string['modlos_grpdb_rkey'] 		= 'Group Database Read Key';

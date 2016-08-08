@@ -151,13 +151,13 @@ $settings->add(new admin_setting_configcheckbox('modlos_cooperate_sloodle',
 				   	get_string('modlos_cprt_sloodle_desc', 'block_modlos'), 0));
 
 // Ex Function
-$settings->add(new admin_setting_configcheckbox('modlos_use_openprofile', 
-					get_string('modlos_use_openprofile', 'block_modlos'),
-				   	get_string('modlos_use_openprofile_desc', 'block_modlos'), 1));
+$settings->add(new admin_setting_configcheckbox('modlos_use_osprofile', 
+					get_string('modlos_use_osprofile', 'block_modlos'),
+				   	get_string('modlos_use_osprofile_desc', 'block_modlos'), 1));
 
-$settings->add(new admin_setting_configcheckbox('modlos_use_opensearch', 
-					get_string('modlos_use_opensearch', 'block_modlos'),
-				   	get_string('modlos_use_opensearch_desc', 'block_modlos'), 1));
+$settings->add(new admin_setting_configcheckbox('modlos_use_ossearch', 
+					get_string('modlos_use_ossearch', 'block_modlos'),
+				   	get_string('modlos_use_ossearch_desc', 'block_modlos'), 1));
 
 $settings->add(new admin_setting_configtext('modlos_groupdb_read_key', 
 					get_string('modlos_grpdb_rkey', 'block_modlos'),
