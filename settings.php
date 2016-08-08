@@ -151,6 +151,7 @@ $settings->add(new admin_setting_configcheckbox('modlos_cooperate_sloodle',
 				   	get_string('modlos_cprt_sloodle_desc', 'block_modlos'), 0));
 
 // Ex Function
+/*
 $settings->add(new admin_setting_configcheckbox('modlos_use_osprofile', 
 					get_string('modlos_use_osprofile', 'block_modlos'),
 				   	get_string('modlos_use_osprofile_desc', 'block_modlos'), 1));
@@ -158,6 +159,27 @@ $settings->add(new admin_setting_configcheckbox('modlos_use_osprofile',
 $settings->add(new admin_setting_configcheckbox('modlos_use_ossearch', 
 					get_string('modlos_use_ossearch', 'block_modlos'),
 				   	get_string('modlos_use_ossearch_desc', 'block_modlos'), 1));
+*/
+
+$options = array('os_moodle'=>'OSProfile (on Moodle DB)', 'os_opensim'=>'OSProfile (on OpenSim DB)', 'user'=>'UserProfile');
+$settings->add(new admin_setting_configselect('modlos_profile_mod', 
+					get_string('modlos_profile_mod', 'block_modlos'),
+				   	get_string('modlos_profile_mod_desc', 'block_modlos'), 'os_moodle', $options));
+
+$options = array('os_moodle'=>'OSSearch (on Moodle DB)', 'os_opensim'=>'OSSearch (on OpenSim DB)', 'basic'=>'BasicSearch');
+$settings->add(new admin_setting_configselect('modlos_search_mod', 
+					get_string('modlos_search_mod', 'block_modlos'),
+				   	get_string('modlos_search_mod_desc', 'block_modlos'), 'os_moodle', $options));
+
+$options = array('nsl_moodle'=>'NSL Message (on Moodle DB)', 'nsl_opensim'=>'NSL Message (on OpenSim DB)', 'v2'=>'OpenSim Message V2');
+$settings->add(new admin_setting_configselect('modlos_message_mod', 
+					get_string('modlos_message_mod', 'block_modlos'),
+				   	get_string('modlos_message_mod_desc', 'block_modlos'), 'nsl_moodle', $options));
+
+$options = array('fltsm_moodle'=>'Flotsam Group (on Moodle DB)', 'fltsm_opensim'=>'Flotsam Group (on OpenSim DB)', 'v2'=>'OpenSim Group V2');
+$settings->add(new admin_setting_configselect('modlos_group_mod', 
+					get_string('modlos_group_mod', 'block_modlos'),
+				   	get_string('modlos_group_mod_desc', 'block_modlos'), 'fltsm_moodle', $options));
 
 $settings->add(new admin_setting_configtext('modlos_groupdb_read_key', 
 					get_string('modlos_grpdb_rkey', 'block_modlos'),

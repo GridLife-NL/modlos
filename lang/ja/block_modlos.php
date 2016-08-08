@@ -328,13 +328,6 @@ $string['modlos_sql_pass_desc'] 	= 'OpenSim の SQLデータベースのパス�
 $string['modlos_use_mysqli'] 		= 'MySQLi インターフェイスの使用';
 $string['modlos_use_mysqli_desc'] 	= 'PHP5の拡張機能であるMySQLiインターフェイスを使用するか？（要 MySQL4.1以上）';
 
-$string['modlos_user_uri'] 			= 'User(ROBUST) サーバのURL';
-$string['modlos_user_uri_desc'] 	= "OpenSimの User(ROBUST)サーバの URLを指定する．'localhost(127.0.0.1)' は使用しないこと．この値は DTL/NSL Moneyサーバでも使用される．従って，もしDTL/NSL Moneyサーバを使用するなら，OpenSim.ini の [Economy]セクションの UserServer と同じ値を指定しなければならない";
-$string['modlos_asset_uri'] 		= 'Asset サーバのURI';
-$string['modlos_asset_uri_desc'] 	= "OpenSim Asset サーバの URLを指定する．'localhost(127.0.0.1)' は使用しないこと";
-$string['modlos_invent_uri'] 		= 'Inventory サーバのURI';
-$string['modlos_invent_uri_desc'] 	= "OpenSim Inventory サーバの URLを指定する．'localhost(127.0.0.1)' は使用しないこと";
-
 $string['modlos_support_hg'] 	    = 'ハイパーグリッドのサポート';
 $string['modlos_support_hg_desc'] 	= 'OpenSim が HGモードの場合，Modlos側で HGモードをサポートするかどうかを指定する';
 
@@ -366,14 +359,19 @@ $string['modlos_https_url'] 		= 'Moodle のブロックのHTTPSでの URL';
 $string['modlos_https_url_desc'] 	= 'HTTPSを使用する場合は，Moodleのブロックの HTTPSでの URL(/blocksを含む)を指定する．'.
 									  '省略した場合は，$CFG->wwwroot/blocks の http: を https: に変換したものを使用する．';
 
-$string['modlos_use_osprofile'] 	= 'OpenSimProfileモジュールの使用';
-$string['modlos_use_osprofile_desc']= 'Profileモジュールとして，Modlos付属の OpenSimProfileモジュールを使用するかどうかを指定する．'.
-                                      'チェックを外した場合，OpenSim標準の UserProfileモジュールを使用する．'.
+$string['modlos_profile_mod'] 	    = 'Profileモジュールの指定';
+$string['modlos_profile_mod_desc']  = 'Profileモジュールとして，Modlos付属の OpenSimProfile(OSProfile)モジュール（データをMoodle上に置くか，'.
+                                      'OpenSim上に置くか選択可能）を使用するか，OpenSim標準の UserProfileモジュールを使用するかを指定する．'.
                                       'なお，OpenSimProfileモジュールでは，マルチバイトコード（日本語）が使用可能となる．';
-
-$string['modlos_use_ossearch'] 	    = 'OpenSimSearchモジュールの使用';
-$string['modlos_use_ossearch_desc'] = 'Search ジュールとして，Modlos付属の OpenSimSearchモジュールを使用するかどうかを指定する．'.
-                                      'チェックを外した場合，OpenSim標準の BasicSearchモジュールを使用する．';
+$string['modlos_search_mod'] 	    = 'Searchモジュールの指定';
+$string['modlos_search_mod_desc']   = 'Searchモジュールとして，Modlos付属の OpenSimSearch(OSSearch)モジュール（データをMoodle上に置くか，'.
+                                      'OpenSim上に置くか選択可能）を使用するか，OpenSim標準の BasicSearchモジュールを使用するかどうかを指定する．';
+$string['modlos_message_mod'] 	    = 'Messageモジュールの指定';
+$string['modlos_message_mod_desc']  = 'Messageモジュールとして，Modlos付属の NSL Messageモジュール（データをMoodle上に置くか，'.
+									  'OpenSim上に置くか選択可能）を使用するか，OpenSim標準の Message V2 モジュールを使用するかどうかを指定する．';
+$string['modlos_group_mod'] 	    = 'Groupモジュールの指定';
+$string['modlos_group_mod_desc']    = 'Groupモジュールとして，Floatsam XMLRPC Groupモジュール（データをMoodle上に置くか，'.
+                                      'OpenSim上に置くか選択可能）を使用するか，OpenSim標準の Group V2 モジュールを使用するかどうかを指定する．';
 
 $string['modlos_grpdb_rkey'] 		= 'Flotsam グループデータベース読み込みアクセスキー';
 $string['modlos_grpdb_rkey_desc'] 	= 'Flotsam Group Function を使用する場合に指定する読み込み用キー．'.

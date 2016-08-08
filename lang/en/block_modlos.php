@@ -329,14 +329,6 @@ $string['modlos_sql_pass_desc'] 	= 'Specify the OpenSim SQL password';
 $string['modlos_use_mysqli']        = 'Use of a MySQLi interface';
 $string['modlos_use_mysqli_desc']   = 'Do you use MySQLi interface which is expanded function of PHP5? (need MySQL4.1 or later）';
 
-$string['modlos_user_uri'] 			= 'User(ROBUST) server URL';
-$string['modlos_user_uri_desc'] 	= 'Specify User(ROBUST) server URL. Do not use localhost(127.0.0.1)';
-$string['modlos_user_uri_desc']		= 'Please specify OpenSim User(ROBUST) server URL. Not use localhost(127.0.0.1). This value is used by DTL/NSL Money Server. Therefor, if you use DTL/NSL Money server, please use same vale of UserServer at [Economy] section in OpenSim.ini';
-$string['modlos_asset_uri'] 		= 'Asset Server URL';
-$string['modlos_asset_uri_desc'] 	= 'Specify Asset server URL';
-$string['modlos_invent_uri'] 		= 'Inventory Server URL';
-$string['modlos_invent_uri_desc'] 	= 'Specify Inventory server URL';
-
 $string['modlos_support_hg'] 	    = 'Support of HG';
 $string['modlos_support_hg_desc'] 	= 'Specify whether Modlos supports HG, when OpenSim is HG mode';
 
@@ -368,20 +360,23 @@ $string['modlos_https_url'] 		= 'Moodle Block URL of HTTPS';
 $string['modlos_https_url_desc'] 	= 'Specify HTTPS URL (include /blocks) of Moodle Block.'.
 								  	  'If this is blank (default), http: of $CFG->wwwroot/blocks was changed into https: is used. ';
 
-$string['modlos_use_osprofile']     = 'Use OpenSimProfile Module';
-$string['modlos_use_osprofile_desc']= 'Do you use OpenSimProfile module as profile module?';
-                                      'OpenProfile module is attached to the Modlos. '.
-                                      'If you check off this, Modlos uses default UserProfile module as profile module.';
-
-$string['modlos_use_ossearch']      = 'Use OpenSimSearch Module';
-$string['modlos_use_ossearch_desc'] = 'Do you use OpenSimSearch module as search module?';
-                                      'OpenSimSearch module is attached to the Modlos. '.
-                                      'If you check off this, Modlos uses default BasicSearch module as search module.';
+$string['modlos_profile_mod']       = 'Specify Profile Module';
+$string['modlos_profile_mod_desc']  = 'Specify OpenSimProfile(OSProfile) Module that is attached to Modlos, or UserProfile Module that is OpenSim standard module to use as Profile Module.'.
+                                      ' OpenSimProfile data can be placed on DB of Moodle or OpenSim.';
+$string['modlos_search_mod']        = 'Specify Search Module';
+$string['modlos_search_mod_desc']   = 'Specify OpenSimSearch(OSSearch) Module that is attached to Modlos, or BasicSearch Module that is OpenSim standard module to use as Search Module.'.
+                                      ' OpenSimSearch data can be placed on DB of Moodle or OpenSim.';
+$string['modlos_message_mod']       = 'Specify Message Module';
+$string['modlos_message_mod_desc']  = 'Specify NSL Message Module that is attached to Modlos, or OpenSim Message V2 Module that is OpenSim standard module to use as Message Module.'.
+                                      ' NSL Message data can be placed on DB of Moodle or OpenSim.';
+$string['modlos_group_mod']         = 'Secify Group Module';
+$string['modlos_group_mod_desc']    = 'Specify Flotsam XMLRPC Group Module that is attached to Modlos, or OpenSim Group V2 Module that is OpenSim standard module to use as Group Module.'.
+                                      ' Floatsam Group data can be placed on DB of Moodle or OpenSim.';
 
 $string['modlos_grpdb_rkey'] 		= 'Group Database Read Key';
-$string['modlos_grpdb_rkey_desc'] 	= 'Specify same read key code with XmlRpcServiceReadKey in [Groups] section of OpenSim.ini';
+$string['modlos_grpdb_rkey_desc'] 	= 'If you use Flotsam Group Module, specify same read key code with XmlRpcServiceReadKey in [Groups] section of OpenSim.ini';
 $string['modlos_grpdb_wkey'] 		= 'Group Database Write Key';
-$string['modlos_grpdb_wkey_desc'] 	= 'Specify same write key code with XmlRpcServiceWriteKey in [Groups] section of OpenSim.ini';
+$string['modlos_grpdb_wkey_desc'] 	= 'If you use Flotsam Group Module, specify same write key code with XmlRpcServiceWriteKey in [Groups] section of OpenSim.ini';
 
 $string['modlos_use_currency_svr'] 	= 'Do you use DTL/NSL Money Server?';
 $string['modlos_use_currency_svr_desc'] = 'Please specify whether to use DTL/NSL Money Server.';
