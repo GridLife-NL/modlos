@@ -361,16 +361,16 @@ $string['modlos_https_url_desc'] 	= 'Specify HTTPS URL (include /blocks) of Mood
 								  	  'If this is blank (default), http: of $CFG->wwwroot/blocks was changed into https: is used. ';
 
 $string['modlos_profile_mod']       = 'Specify Profile Module';
-$string['modlos_profile_mod_desc']  = 'Specify OpenSimProfile(OSProfile) Module that is attached to Modlos, or UserProfile Module that is OpenSim standard module to use as Profile Module.'.
+$string['modlos_profile_mod_desc']  = 'To use as Profile Module, specify OpenSimProfile(OSProfile) Module that is attached to Modlos, or UserProfile Module that is OpenSim standard module.'.
                                       ' OpenSimProfile data can be placed on DB of Moodle or OpenSim.';
 $string['modlos_search_mod']        = 'Specify Search Module';
-$string['modlos_search_mod_desc']   = 'Specify OpenSimSearch(OSSearch) Module that is attached to Modlos, or BasicSearch Module that is OpenSim standard module to use as Search Module.'.
+$string['modlos_search_mod_desc']   = 'To use as Search Module, specify OpenSimSearch(OSSearch) Module that is attached to Modlos, or BasicSearch Module that is OpenSim standard module.'.
                                       ' OpenSimSearch data can be placed on DB of Moodle or OpenSim.';
 $string['modlos_message_mod']       = 'Specify Message Module';
-$string['modlos_message_mod_desc']  = 'Specify NSL Message Module that is attached to Modlos, or OpenSim Message V2 Module that is OpenSim standard module to use as Message Module.'.
+$string['modlos_message_mod_desc']  = 'To use as Message Module, specify NSL Message Module that is attached to Modlos, or OpenSim Message V2 Module that is OpenSim standard module.'.
                                       ' NSL Message data can be placed on DB of Moodle or OpenSim.';
 $string['modlos_group_mod']         = 'Secify Group Module';
-$string['modlos_group_mod_desc']    = 'Specify Flotsam XMLRPC Group Module that is attached to Modlos, or OpenSim Group V2 Module that is OpenSim standard module to use as Group Module.'.
+$string['modlos_group_mod_desc']    = 'To use as Group Module, specify Flotsam XMLRPC Group Module that is attached to Modlos, or OpenSim Group V2 Module that is OpenSim standard module.'.
                                       ' Floatsam Group data can be placed on DB of Moodle or OpenSim.';
 
 $string['modlos_grpdb_rkey'] 		= 'Group Database Read Key';
