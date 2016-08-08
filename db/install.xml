@@ -218,6 +218,7 @@
         <FIELD NAME="posglobal" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="sortorder" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="enabled" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false"/>
+        <FIELD NAME="gatekeeper" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="id" TYPE="primary" FIELDS="id"/>

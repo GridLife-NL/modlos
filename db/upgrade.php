@@ -281,5 +281,14 @@ function xmldb_block_modlos_upgrade($oldversion=0)
 	}
 
 
+	if ($oldversion < 2016080902) {
+		$table = new xmldb_table('modlos_profile_userpicks');
+        //
+        $field = new xmldb_field('gatekeeper',  XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, '', 'enabled');
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+	}
+
 	return true;
 }
