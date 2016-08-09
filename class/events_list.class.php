@@ -153,7 +153,6 @@ class  EventsList
 				else {
 					$this->db_data[$colum]['type'] = "title='Mature Event' src=../images/events/blue_star.gif";
 				}
-
 				//if (!array_key_exists('uid', $this->db_data[$colum])) $this->db_data[$colum]['uid'] = 0;
 
 				$colum++;
