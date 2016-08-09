@@ -138,20 +138,20 @@ class  EventsList
 		foreach($events as $event) {
 			if (!OPENSIM_PG_ONLY or $event->eventflags==0) {
 				$this->db_data[$colum] = $event;
-				$this->db_data[$colum]->num	 = $colum;
-				$this->db_data[$colum]->time = date(DATE_FORMAT, $event->dateutc);
+				$this->db_data[$colum]['num']  = $colum;
+				$this->db_data[$colum]['time'] = date(DATE_FORMAT, $event->dateutc);
 
 				$avatar_name = opensim_get_avatar_name($event->creatoruuid);
-				$this->db_data[$colum]->creator = $avatar_name['fullname'];
+				$this->db_data[$colum]['creator'] = $avatar_name['fullname'];
    
 				$avatar_name = opensim_get_avatar_name($event->owneruuid);
-				$this->db_data[$colum]->owner = $avatar_name['fullname'];
+				$this->db_data[$colum]['owner'] = $avatar_name['fullname'];
 
 				if ($event->eventflags==0) {
-					$this->db_data[$colum]->type = "title='PG Event' src=../images/events/pink_star.gif";
+					$this->db_data[$colum]['type'] = "title='PG Event' src=../images/events/pink_star.gif";
 				}
 				else {
-					$this->db_data[$colum]->type = "title='Mature Event' src=../images/events/blue_star.gif";
+					$this->db_data[$colum]{'type'] = "title='Mature Event' src=../images/events/blue_star.gif";
 				}
 				$colum++;
 			}
