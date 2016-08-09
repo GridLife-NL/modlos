@@ -86,7 +86,7 @@ class block_modlos extends block_base
 				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/create_avatar.php'.$params.'">'.get_string('modlos_templ_avatar','block_modlos').'</a><br />';
 			}
 			//
-			if ($CFG->modlos_activate_events) {
+			if ($CFG->modlos_serach_mod=="os_moodle" or $CFG->modlos_serach_mod=="os_opensim") {
 				$this->content->text.= '<a href="'.CMS_MODULE_URL.'/actions/events_list.php'.$params.'">'.get_string('modlos_events_list','block_modlos').'</a><br />';
 			}
 			if (hasModlosPermit($id)) {

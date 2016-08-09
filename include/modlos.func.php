@@ -1107,7 +1107,7 @@ function  print_tabnav($currenttab, $course_id, $show_create_tab=true)
 																	'<strong>'.get_string('modlos_templ_avatar','block_modlos').'</strong>');
 		}
 		//
-		if ($CFG->modlos_activate_events) {
+		if ($CFG->modlos_serach_mod=="os_moodle" or $CFG->modlos_serach_mod=="os_opensim") {
 			$toprow[] = new tabobject('events_list', CMS_MODULE_URL.'/actions/events_list.php'. $url_params, 
 																	'<strong>'.get_string('modlos_events_tab','block_modlos').'</strong>');
 		}
