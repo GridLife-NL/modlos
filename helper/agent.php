@@ -90,14 +90,7 @@ if ($agent) {
     	if (!$editPermit and $USER->id==$userid) $editPermit = true;
 	}
 
-	if (OSPROFILE_DB=='HELPER') {
-		$prof = modlos_get_profile($agent);
-	}
-	else {
-		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.profile.php'));
-		$prof = opensim_get_profile($agent);
-	}
-
+	$prof = modlos_get_profile($agent);
 	if ($prof!=null) {
         if ($prof['Partnar']!='')	 	 $partner 	   = $prof['Partnar'];
         if ($prof['AboutText']!='')  	 $profileText  = $prof['AboutText'];

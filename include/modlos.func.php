@@ -40,8 +40,8 @@
 
  // Profile
  function  modlos_get_profile($uuid)
- function  modlos_delete_profiles($uuid)
  function  modlos_set_profiles_from_users($profs, $ovwrite=true)
+ function  modlos_delete_profiles($uuid)
 
  // Events
  function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
@@ -616,6 +616,18 @@ function  modlos_get_profile($uuid)
 {
 	global $DB;
 
+	if (OSPROFILE_DB=='OPENSIM') {
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.osprofile.php'));
+        $prof = opensim_get_profile($uuid);
+		return $prof;
+	}
+	else if (OSPROFILE_DB=='NONE') {	// UserProfileModule
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.userprofile.php'));
+        $prof = opensim_get_profile($uuid);
+		return $prof;
+	}
+
+	//
 	$prof = array();
 
 	$prfobj = $DB->get_record(MDL_PROFILE_USERPROFILE_TBL, array('useruuid'=>$uuid));
@@ -645,6 +657,18 @@ function  modlos_set_profiles_from_users($profs, $ovwrite=true)
 {
 	global $DB;
 
+	if (OSPROFILE_DB=='OPENSIM') {
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.osprofile.php'));
+        $rslt = opensim_set_profiles($profs, $ovwrite);
+		return $rslt;
+	}
+	else if (OSPROFILE_DB=='NONE') {	// UserProfileModule
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.userprofile.php'));
+        $rslt = opensim_set_profiles($profs, $ovwrite);
+		return $rslt;
+	}
+
+	//
 	foreach($profs as $prof) {
 		if ($prof['UUID']!='') {
 			$insert = false;
@@ -705,6 +729,16 @@ function  modlos_delete_profiles($uuid)
 {
 	global $DB;
 
+	if (OSPROFILE_DB=='OPENSIM') {
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.osprofile.php'));
+ 		modlos_delete_profiles($uuid)
+	}
+	else if (OSPROFILE_DB=='NONE') {	// UserProfileModule
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.userprofile.php'));
+ 		modlos_delete_profiles($uuid)
+	}
+
+	//
 	$DB->delete_records(MDL_PROFILE_USERPROFILE_TBL,  array('useruuid'=>$uuid));
 	$DB->delete_records(MDL_PROFILE_USERSETTINGS_TBL, array('useruuid'=>$uuid));
 	$DB->delete_records(MDL_PROFILE_USERNOTES_TBL, 	  array('useruuid'=>$uuid));
@@ -721,35 +755,23 @@ function  modlos_delete_profiles($uuid)
 // Events
 //
 
-function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
-{
-	global $DB;
-
-	$events = array();
-	if ($tm==0) $tm = time() - 3600;	// - 1hour
-
-	$select = "dateutc > '$tm'";
-	if ($pg_only) $select .= " AND eventflags='0'";
-	if ($uid>0)   $select .= " AND uid='$uid'";
-
-	$rets = $DB->get_recordset_select('modlos_search_events', $select, null, 'dateutc', '*', $start, $limit);
-
-	if ($rets!=null) {
-		$num = 0;
-		foreach ($rets as $event) {
-			$events[$num] = $event;
-			$num++;
-		}
-	}
-   
-	return $events;
-}
-
-
 function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
 { 
 	global $DB;
 
+	// ignore $uid
+	if (OSSEARCH_DB=='OPENSIM') {
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.ossearch.php'));
+		$events_num = opensim_get_events_num($pg_only, $tm);
+		return $events_num;
+	}
+	else if (OSSEARCH_DB=='NONE') {	// BasicSearchModule
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.basicsearch.php'));
+		$events_num = opensim_get_events_num($pg_only, $tm);
+		return $events_num;
+	}
+
+	//
 	if ($tm==0) $tm = time() - 3600;	// - 1hour
    
 	$select = "dateutc > '$tm'";
@@ -762,9 +784,72 @@ function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
 }
 
    
+function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
+{
+	global $DB;
+
+	// ignore $uid
+	if (OSSEARCH_DB=='OPENSIM') {
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.ossearch.php'));
+		$events = opensim_get_events($start, $limit, $pg_only, $tm);
+		return $events;
+	}
+	else if (OSSEARCH_DB=='NONE') {	// BasicSearchModule
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.basicsearch.php'));
+		$events = opensim_get_events($start, $limit, $pg_only, $tm);
+		return $events;
+	}
+
+	//
+	$events = array();
+	if ($tm==0) $tm = time() - 3600;	// - 1hour
+
+	$select = "dateutc > '$tm'";
+	if ($pg_only) $select .= " AND eventflags='0'";
+	if ($uid>0)   $select .= " AND uid='$uid'";
+
+	$rets = $DB->get_recordset_select('modlos_search_events', $select, null, 'dateutc', '*', $start, $limit);
+
+	if ($rets!=null) {
+		$num = 0;
+		foreach ($rets as $event) {
+			$events[$num]['id']		 	 = $event->id;
+			$events[$num]['uid']		 = $event->uid;
+			$events[$num]['OwnerUUID']   = $event->owneruuid;
+			$events[$num]['Name']		 = $event->name;
+			$events[$num]['EventID']	 = $event->eventid;
+			$events[$num]['Creatoruuid'] = $event->creatoruuid;
+			$events[$num]['Category']	 = $event->category;
+			$events[$num]['Description'] = $event->description;
+			$events[$num]['DateUTC']	 = $event->dateutc;
+			$events[$num]['Duration']	 = $event->duration;
+			$events[$num]['CoverCharge'] = $event->covercharge;
+			$events[$num]['CoverAmount'] = $event->coveramount;
+			$events[$num]['SimName']	 = $event->simname;
+			$events[$num]['GlobalPos']   = $event->globalpos;
+			$events[$num]['EventFlags']  = $event->eventflags;
+			$num++;
+		}
+	}
+   
+	return $events;
+}
+
+
 function  modlos_get_event($id)
 { 
 	global $DB;
+
+	if (OSSEARCH_DB=='OPENSIM') {
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.ossearch.php'));
+		$event = opensim_get_event($id);
+		return $event;
+	}
+	else if (OSSEARCH_DB=='NONE') {	// BasicSearchModule
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.basicsearch.php'));
+		$event = opensim_get_event($id);
+		return $event;
+	}
 
 	$event = $DB->get_record('modlos_search_events', array('id'=>$id));
    
@@ -772,21 +857,21 @@ function  modlos_get_event($id)
 	if ($event!=null) {
 		$ret['id']		 	= $event->id;
 		$ret['uid']		 	= $event->uid;
-		$ret['owneruuid']   = $event->owneruuid;
-		$ret['name']		= $event->name;
-		$ret['eventid']	 	= $event->eventid;
-		$ret['creatoruuid'] = $event->creatoruuid;
-		$ret['category']	= $event->category;
-		$ret['description'] = $event->description;
-		$ret['dateutc']	 	= $event->dateutc;
-		$ret['duration']	= $event->duration;
-		$ret['covercharge'] = $event->covercharge;
-		$ret['coveramount'] = $event->coveramount;
-		$ret['simname']	 	= $event->simname;
-		$ret['globalpos']   = $event->globalpos;
-		$ret['eventflags']  = $event->eventflags;
+		$ret['OwnerUUID']   = $event->owneruuid;
+		$ret['Name']		= $event->name;
+		$ret['EventID']	 	= $event->eventid;
+		$ret['Creatoruuid'] = $event->creatoruuid;
+		$ret['Category']	= $event->category;
+		$ret['Description'] = $event->description;
+		$ret['DateUTC']	 	= $event->dateutc;
+		$ret['Duration']	= $event->duration;
+		$ret['CoverCharge'] = $event->covercharge;
+		$ret['CoverAmount'] = $event->coveramount;
+		$ret['SimName']	 	= $event->simname;
+		$ret['GlobalPos']   = $event->globalpos;
+		$ret['EventFlags']  = $event->eventflags;
 	}
-   
+
 	return $ret;
 }
 
@@ -795,6 +880,18 @@ function  modlos_set_event($event)
 {
 	global $DB;
 
+	if (OSSEARCH_DB=='OPENSIM') {
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.ossearch.php'));
+		$rslt = opensim_set_event($event);
+		return $rslt;
+	}
+	else if (OSSEARCH_DB=='NONE') {	// BasicSearchModule
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.basicsearch.php'));
+		$rslt = opensim_set_event($event);
+		return $rslt;
+	}
+
+	//
 	$dbobj = new stdClass();
 	$dbobj->id = 0;
 
@@ -805,19 +902,19 @@ function  modlos_set_event($event)
    
 	$dbobj->id		 	= $event['id'];
 	$dbobj->uid		 	= $event['uid'];
-	$dbobj->owneruuid	= $event['owneruuid'];
-	$dbobj->name		= $event['name'];
-	$dbobj->eventid		= $event['eventid'];
-	$dbobj->creatoruuid	= $event['creatoruuid'];
-	$dbobj->category	= $event['category'];
-	$dbobj->description	= $event['description'];
-	$dbobj->dateutc		= $event['dateutc'];
-	$dbobj->duration	= $event['duration'];
-	$dbobj->covercharge = $event['covercharge'];
-	$dbobj->coveramount = $event['coveramount'];
-	$dbobj->simname		= $event['simname'];
-	$dbobj->globalpos 	= $event['globalpos'];
-	$dbobj->eventflags 	= $event['eventflags'];
+	$dbobj->owneruuid	= $event['OwnerUUID'];
+	$dbobj->name		= $event['Name'];
+	$dbobj->eventid		= $event['EventID'];
+	$dbobj->creatoruuid	= $event['CreatorUUID'];
+	$dbobj->category	= $event['Category'];
+	$dbobj->description	= $event['Description'];
+	$dbobj->dateutc		= $event['DateUTC'];
+	$dbobj->duration	= $event['Duration'];
+	$dbobj->covercharge = $event['CoverCharge'];
+	$dbobj->coveramount = $event['CoverAmount'];
+	$dbobj->simname		= $event['SimName'];
+	$dbobj->globalpos 	= $event['GlobalPos'];
+	$dbobj->eventflags 	= $event['EventFlags'];
  
 	if ($dbobj->id>0) { 
 		$ret = $DB->update_record('modlos_search_events', $dbobj);
