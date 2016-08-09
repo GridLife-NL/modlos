@@ -731,11 +731,13 @@ function  modlos_delete_profiles($uuid)
 
 	if (OSPROFILE_DB=='OPENSIM') {
 		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.osprofile.php'));
- 		modlos_delete_profiles($uuid)
+ 		modlos_delete_profiles($uuid);
+		return;
 	}
 	else if (OSPROFILE_DB=='NONE') {	// UserProfileModule
 		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.userprofile.php'));
- 		modlos_delete_profiles($uuid)
+ 		modlos_delete_profiles($uuid);
+		return;
 	}
 
 	//
@@ -773,7 +775,6 @@ function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
 
 	//
 	if ($tm==0) $tm = time() - 3600;	// - 1hour
-   
 	$select = "dateutc > '$tm'";
 	if ($pg_only) $select .= " AND eventflags='0'";
 	if ($uid>0)   $select .= " AND uid='$uid'";
@@ -803,7 +804,6 @@ function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
 	//
 	$events = array();
 	if ($tm==0) $tm = time() - 3600;	// - 1hour
-
 	$select = "dateutc > '$tm'";
 	if ($pg_only) $select .= " AND eventflags='0'";
 	if ($uid>0)   $select .= " AND uid='$uid'";
