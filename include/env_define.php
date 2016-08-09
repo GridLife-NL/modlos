@@ -32,6 +32,8 @@ define('FULL_DB_PREFIX',          		MDL_DB_PREFIX.MODLOS_DB_PREFIX);
 // for Sloodle
 define('SLOODLE_USERS_TBL',				MDL_DB_PREFIX.'sloodle_users');
 
+
+
 // Offline Message and MuteList
 define('OFFLINE_MESSAGE_TBL',       	FULL_DB_PREFIX.OFFLINE_MESSAGE_TBL_BASE);
 define('MUTE_LIST_TBL',             	FULL_DB_PREFIX.MUTE_LIST_TBL_BASE);
@@ -62,6 +64,7 @@ define('SEARCH_PARCELSALES_TBL',		FULL_DB_PREFIX.SEARCH_PARCELSALES_TBL_BASE);
 define('SEARCH_POPULARPLACES_TBL', 		FULL_DB_PREFIX.SEARCH_POPULARPLACES_TBL_BASE);
 define('SEARCH_REGIONS_TBL',			FULL_DB_PREFIX.SEARCH_REGIONS_TBL_BASE);
 define('SEARCH_CLASSIFIEDS_TBL',		PROFILE_CLASSIFIEDS_TBL);
+
 
 
 //////////////////////////////////////////////////////////////////////////////////

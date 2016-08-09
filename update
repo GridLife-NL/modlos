@@ -30,6 +30,14 @@ else
 	svn co http://www.nsl.tuis.ac.jp/svn/opensim/opensim.modules/trunk opensim.modules
 fi
 
+rm -f include/message_config.php
+rm -f include/profile_config.php
+rm -f include/search_config.php
+rm -f helper/mute.php
+rm -f helper/parser.php
+rm -f helper/profile.php
+rm -f helper/query.php
+rm -f helper/register.php
 
 [ -f helper/mute.php ]  		  || ln opensim.modules/Messaging/php/mute.php helper/mute.php
 [ -f helper/profile.php ] 		  || ln opensim.modules/Profile/php/profile.php helper/profile.php
