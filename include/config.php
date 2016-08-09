@@ -43,6 +43,11 @@ else {
 }
 define('OPENSIM_DB_MYSQLI',		$CFG->modlos_use_mysqli);
 
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// Parameters
+
 define('USE_CURRENCY_SERVER',	$CFG->modlos_use_currency_server);
 define('CURRENCY_SCRIPT_KEY',	$CFG->modlos_currency_script_key);
 
