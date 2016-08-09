@@ -94,7 +94,7 @@ if ($agent) {
 		$prof = modlos_get_profile($agent);
 	}
 	else {
-		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.osprofile.php'));
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.profile.php'));
 		$prof = opensim_get_profile($agent);
 	}
 
