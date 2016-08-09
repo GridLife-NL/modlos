@@ -48,6 +48,7 @@
  function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
  function  modlos_get_event($id)
  function  modlos_set_event($event)
+ function  modlos_delete_event($id)
 
  // Login Screen
  function  modlos_get_loginscreen_alert()
@@ -779,7 +780,7 @@ function  modlos_get_events_num($uid=0, $pg_only=false, $tm=0)
 	if ($pg_only) $select .= " AND eventflags='0'";
 	if ($uid>0)   $select .= " AND uid='$uid'";
 
-	$events_num = $DB->count_records_select('modlos_search_events', $select);
+	$events_num = $DB->count_records_select(MDL_SEARCH_EVENTS_TBL, $select);
    
 	return $events_num;
 }
@@ -809,7 +810,7 @@ function  modlos_get_events($uid=0, $start=0, $limit=25, $pg_only=false, $tm=0)
 	if ($pg_only) $select .= " AND eventflags='0'";
 	if ($uid>0)   $select .= " AND uid='$uid'";
 
-	$rets = $DB->get_recordset_select('modlos_search_events', $select, null, 'dateutc', '*', $start, $limit);
+	$rets = $DB->get_recordset_select(MDL_SEARCH_EVENTS_TBL, $select, null, 'dateutc', '*', $start, $limit);
 
 	if ($rets!=null) {
 		$num = 0;
@@ -856,7 +857,7 @@ function  modlos_get_event($id)
 		return $event;
 	}
 
-	$event = $DB->get_record('modlos_search_events', array('id'=>$id));
+	$event = $DB->get_record(MDL_SEARCH_EVENTS_TBL, array('id'=>$id));
    
 	$ret = array();
 	if ($event!=null) {
@@ -901,7 +902,7 @@ function  modlos_set_event($event)
 	$dbobj->id = 0;
 
 	if ($event['id']>0) {
-		$dbobj = $DB->get_record('modlos_search_events', array('id'=>$event['id']));
+		$dbobj = $DB->get_record(MDL_SEARCH_EVENTS_TBL, array('id'=>$event['id']));
 		if ($dbobj==null) $dbobj->id = 0;
 	}
    
@@ -922,17 +923,39 @@ function  modlos_set_event($event)
 	$dbobj->eventflags 	= $event['EventFlags'];
  
 	if ($dbobj->id>0) { 
-		$ret = $DB->update_record('modlos_search_events', $dbobj);
+		$ret = $DB->update_record(MDL_SEARCH_EVENTS_TBL, $dbobj);
 	}
 	else {
-		$ret = $DB->insert_record('modlos_search_events', $dbobj);
+		$ret = $DB->insert_record(MDL_SEARCH_EVENTS_TBL, $dbobj);
 		if ($ret) {
 			$dbobj->id 		= $ret;
 			$dbobj->eventid = $ret;
-			$ret = $DB->update_record('modlos_search_events', $dbobj);
+			$ret = $DB->update_record(MDL_SEARCH_EVENTS_TBL, $dbobj);
 		}
 	}
 	return $ret;
+}
+
+
+function  modlos_delete_event($id)
+{
+	global $DB;
+
+	if (OSSEARCH_DB=='OPENSIM') {
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.ossearch.php'));
+		opensim_delete_event($id);
+		return;
+	}
+	else if (OSSEARCH_DB=='NONE') {	// BasicSearchModule
+		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.basicsearch.php'));
+		opensim_delete_event($id);
+		return;
+	}
+
+	//
+	$DB->delete_records(MDL_SEARCH_EVENTS_TBL, array('id'=>$id));
+
+	return;
 }
 
 

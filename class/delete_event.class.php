@@ -85,10 +85,9 @@ class  DeleteEvent
 	}
 
 
-
 	function  execute()
 	{
-		global $Categories, $DB;
+		global $Categories;
 
 		$this->event_name = $this->event['Name'];
 		$this->event_date = date(DATE_FORMAT, $this->event['DateUTC']);
@@ -108,11 +107,8 @@ class  DeleteEvent
 
 			$del = optional_param('submit_delete', '', PARAM_TEXT);
 			if ($del!='') {
-				$this->deleted = $DB->delete_records('modlos_search_events', array('id'=>$this->event_id));
-				if (!$this->deleted) {
-					$this->hasError = true;
-					$this->errorMsg[] = get_string('modlos_update_error', 'block_modlos');
-				}
+				modlos_delete_event($this->event_id);
+				$this->deleted = true;
 			}
 			else {
 				redirect($this->return_url, get_string('modlos_events_dlt_canceled', 'block_modlos'), 0);
