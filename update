@@ -38,12 +38,15 @@ rm -f helper/parser.php
 rm -f helper/profile.php
 rm -f helper/query.php
 rm -f helper/register.php
+rm -f helper/cron_search.php
 
 [ -f helper/mute.php ]  		  || ln opensim.modules/Messaging/php/mute.php helper/mute.php
 [ -f helper/profile.php ] 		  || ln opensim.modules/Profile/php/profile.php helper/profile.php
 [ -f helper/parser.php ] 		  || ln opensim.modules/Search/php/parser.php helper/parser.php
 [ -f helper/query.php ] 		  || ln opensim.modules/Search/php/query.php helper/query.php
 [ -f helper/register.php ] 	 	  || ln opensim.modules/Search/php/register.php helper/register.php
+[ -f helper/cron_search.php ] 	  || ln opensim.modules/Search/php/cron_search.php helper/cron_search.php
+
 [ -f include/profile_config.php ] || ln opensim.modules/Profile/php/profile_config.php include/profile_config.php
 [ -f include/search_config.php ]  || ln opensim.modules/Search/php/search_config.php include/search_config.php
 [ -f include/message_config.php ] || ln opensim.modules/Messaging/php/message_config.php include/message_config.php
