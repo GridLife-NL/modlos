@@ -202,7 +202,7 @@
           <td>
             <?php if ($dat['editable']==AVATAR_EDITABLE) {?>
               <a href="<?php echo $this->edit_url. '&amp;uuid='.$dat['UUID']?>" >
-                <strong style="color: #cc1010;"><?php echo $editable_ttl?></strong>
+                <strong style="color: #cc1010;"><?php echo "EDIT"; //$editable_ttl?></strong>
               </a>
             <?php } elseif ($dat['editable']==AVATAR_OWNER_EDITABLE and !($dat['state']&AVATAR_STATE_INACTIVE)) {?>
               <a href="<?php echo $this->avatar_url.'&amp;uuid='.$dat['UUID']?>">
