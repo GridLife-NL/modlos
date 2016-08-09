@@ -137,25 +137,26 @@ class  ShowEvent
 				
 			//if ($event!=null and ($event['uid']==$this->userid or $this->hasPermit)) {
 			if ($event!=null and !$this->isGuest) {
+				//if (!array_key_exists('uid', $event)) $event['uid'] = 0;
 				$this->uid			= $event['uid'];
-				$this->event_name	= $event['name'];
-				$this->owner_uuid	= $event['owneruuid'];
-				$this->creator_uuid	= $event['creatoruuid'];
-				$this->event_desc	= $event['description'];
-				$this->category	 	= $event['category'];
-				$this->duration	 	= $event['duration'];
-				$this->cover_charge = $event['covercharge'];
-				$this->cover_amount = $event['coveramount'];
-				$this->check_mature = $event['eventflags'];
-				$this->global_pos	= $event['globalpos'];
-				$this->region_uuid	= $event['simname'];
+				$this->event_name	= $event['Name'];
+				$this->owner_uuid	= $event['OwnerUUID'];
+				$this->creator_uuid	= $event['CreatorUUID'];
+				$this->event_desc	= $event['Description'];
+				$this->category	 	= $event['Category'];
+				$this->duration	 	= $event['Duration'];
+				$this->cover_charge = $event['CoverCharge'];
+				$this->cover_amount = $event['CoverAmount'];
+				$this->check_mature = $event['EventFlags'];
+				$this->global_pos	= $event['GlobalPos'];
+				$this->region_uuid	= $event['SimName'];
 
 				$owner_name = opensim_get_avatar_name($this->owner_uuid);
 				$this->event_owner   = $owner_name['fullname'];
 				$creator_name = opensim_get_avatar_name($this->creator_uuid);
 				$this->event_creator = $creator_name['fullname'];
 
-				$date = getdate($event['dateutc']);
+				$date = getdate($event['DateUTC']);
 			}
 
 			$this->event_year   = $date['year'];

@@ -90,13 +90,13 @@ class  DeleteEvent
 	{
 		global $Categories, $DB;
 
-		$this->event_name = $this->event['name'];
-		$this->event_date = date(DATE_FORMAT, $this->event['dateutc']);
-		$this->event_category = $Categories[$this->event['category']];
+		$this->event_name = $this->event['Name'];
+		$this->event_date = date(DATE_FORMAT, $this->event['DateUTC']);
+		$this->event_category = $Categories[$this->event['Category']];
 
-		$owner_name = opensim_get_avatar_name($this->event['owneruuid']);
+		$owner_name = opensim_get_avatar_name($this->event['OwnerUUID']);
 		$this->event_ownername = $owner_name['fullname'];
-		$creator_name = opensim_get_avatar_name($this->event['creatoruuid']);
+		$creator_name = opensim_get_avatar_name($this->event['CreatorUUID']);
 		$this->event_creatorname = $creator_name['fullname'];
 
 		if (data_submitted()) {

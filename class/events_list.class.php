@@ -136,23 +136,26 @@ class  EventsList
 */
 		$colum = 0;
 		foreach($events as $event) {
-			if (!OPENSIM_PG_ONLY or $event->eventflags==0) {
+			if (!OPENSIM_PG_ONLY or $event['EventFlags']==0) {
 				$this->db_data[$colum] = $event;
 				$this->db_data[$colum]['num']  = $colum;
-				$this->db_data[$colum]['time'] = date(DATE_FORMAT, $event->dateutc);
+				$this->db_data[$colum]['time'] = date(DATE_FORMAT, $event['DateUTC']);
 
-				$avatar_name = opensim_get_avatar_name($event->creatoruuid);
+				$avatar_name = opensim_get_avatar_name($event['CreatorUUID']);
 				$this->db_data[$colum]['creator'] = $avatar_name['fullname'];
    
-				$avatar_name = opensim_get_avatar_name($event->owneruuid);
+				$avatar_name = opensim_get_avatar_name($event['OwnerUUID']);
 				$this->db_data[$colum]['owner'] = $avatar_name['fullname'];
 
-				if ($event->eventflags==0) {
+				if ($event['EventFlags']==0) {
 					$this->db_data[$colum]['type'] = "title='PG Event' src=../images/events/pink_star.gif";
 				}
 				else {
-					$this->db_data[$colum]{'type'] = "title='Mature Event' src=../images/events/blue_star.gif";
+					$this->db_data[$colum]['type'] = "title='Mature Event' src=../images/events/blue_star.gif";
 				}
+
+				//if (!array_key_exists('uid', $this->db_data[$colum])) $this->db_data[$colum]['uid'] = 0;
+
 				$colum++;
 			}
 		}
@@ -191,6 +194,6 @@ class  EventsList
 		$modlos_edit	= get_string('modlos_edit_ttl',		  'block_modlos');
 		$modlos_delete	= get_string('modlos_delete_ttl',	  'block_modlos');
 
-		include(CMS_MODULE_PATH.'/html/events.html');
+		include(CMS_MODULE_PATH.'/html/events_list.html');
 	}
 }

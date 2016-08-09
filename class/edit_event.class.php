@@ -226,19 +226,19 @@ class  EditEvent
 			if (!$this->hasError) {
 				$event['id']	  	  = $this->event_id;
 				$event['uid']		  = $this->uid;
-				$event['eventid']	  = $this->event_id;
-				$event['owneruuid']   = $this->owner_uuid;
-				$event['name']		  = $this->event_name;
-				$event['creatoruuid'] = $this->creator_uuid;
-				$event['category']	  = $this->category;
-				$event['description'] = $this->event_desc;
-				$event['duration']	  = $this->duration;
-				$event['covercharge'] = $this->cover_charge;
-				$event['coveramount'] = $this->cover_amount;
-				$event['dateutc']	  = $event_date;
-				$event['simname']	  = $this->region_uuid;
-				$event['globalpos']   = $this->global_pos;
-				$event['eventflags']  = $this->check_mature;
+				$event['EventID']	  = $this->event_id;
+				$event['OwnerUUID']   = $this->owner_uuid;
+				$event['Name']		  = $this->event_name;
+				$event['CreatorUUID'] = $this->creator_uuid;
+				$event['Category']	  = $this->category;
+				$event['Description'] = $this->event_desc;
+				$event['Duration']	  = $this->duration;
+				$event['CoverCharge'] = $this->cover_charge;
+				$event['CoverAmount'] = $this->cover_amount;
+				$event['DateUTC']	  = $event_date;
+				$event['SimName']	  = $this->region_uuid;
+				$event['GlobalPos']   = $this->global_pos;
+				$event['EventFlags']  = $this->check_mature;
 
 				// save to DB
 				$this->event_saved = modlos_set_event($event);
@@ -310,24 +310,24 @@ class  EditEvent
 					
 				if ($event!=null and ($event['uid']==$this->userid or $this->hasPermit)) {
 					$this->uid			= $event['uid'];
-					$this->event_name	= $event['name'];
-					$this->owner_uuid	= $event['owneruuid'];
-					$this->creator_uuid	= $event['creatoruuid'];
-					$this->event_desc	= $event['description'];
-					$this->category	 	= $event['category'];
-					$this->duration	 	= $event['duration'];
-					$this->cover_charge = $event['covercharge'];
-					$this->cover_amount = $event['coveramount'];
-					$this->check_mature = $event['eventflags'];
-					$this->global_pos	= $event['globalpos'];
-					$this->region_uuid	= $event['simname'];
+					$this->event_name	= $event['Name'];
+					$this->owner_uuid	= $event['OwnerUUID'];
+					$this->creator_uuid	= $event['CreatorUUID'];
+					$this->event_desc	= $event['Description'];
+					$this->category	 	= $event['Category'];
+					$this->duration	 	= $event['Duration'];
+					$this->cover_charge = $event['CoverCharge'];
+					$this->cover_amount = $event['CoverAmount'];
+					$this->check_mature = $event['EventFlags'];
+					$this->global_pos	= $event['GlobalPos'];
+					$this->region_uuid	= $event['SimName'];
 
 					$owner_name = opensim_get_avatar_name($this->owner_uuid);
 					$this->event_owner   = $owner_name['fullname'];
 					$creator_name = opensim_get_avatar_name($this->creator_uuid);
 					$this->event_creator = $creator_name['fullname'];
 
-					$date = getdate($event['dateutc']);
+					$date = getdate($event['DateUTC']);
 				}
 			}
 					
