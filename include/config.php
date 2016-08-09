@@ -46,21 +46,21 @@ define('OPENSIM_DB_MYSQLI',		$CFG->modlos_use_mysqli);
 //////////////////////////////////////////////////////////////////////////////////
 // select DB
 
-if      ($CFG->modlos_profile_mod=='os_moodle')   define('OSPROFILE_DB',  'HELPER');
-else if ($CFG->modlos_profile_mod=='os_opensim')  define('OSPROFILE_DB',  'OPENSIM');
-else                                              define('OSPROFILE_DB',  'NONE');
+if      ($CFG->modlos_profile_mod=='os_moodle')   define('OSPROFILE_DB', 'HELPER');
+else if ($CFG->modlos_profile_mod=='os_opensim')  define('OSPROFILE_DB', 'OPENSIM');
+else                                              define('OSPROFILE_DB', 'NONE');
 
-if      ($CFG->modlos_search_mod=='os_moodle')    define('OSSEARCH_DB',   'HELPER');
-else if ($CFG->modlos_search_mod=='os_opensim')   define('OSSEARCH_DB',   'OPENSIM');
-else                                              define('OSSEARCH_DB',   'NONE');
+if      ($CFG->modlos_search_mod=='os_moodle')    define('OSSEARCH_DB',  'HELPER');
+else if ($CFG->modlos_search_mod=='os_opensim')   define('OSSEARCH_DB',  'OPENSIM');
+else                                              define('OSSEARCH_DB',  'NONE');
 
-if      ($CFG->modlos_message_mod=='nsl_moodle')  define('NSLMESSAGE_DB', 'HELPER');
-else if ($CFG->modlos_message_mod=='nsl_opensim') define('NSLMESSAGE_DB', 'OPENSIM');
-else                                              define('NSLMESSAGE_DB', 'NONE');
+if      ($CFG->modlos_message_mod=='nsl_moodle')  define('MESSAGE_DB',   'HELPER');
+else if ($CFG->modlos_message_mod=='nsl_opensim') define('MESSAGE_DB',   'OPENSIM');
+else                                              define('MESSAGE_DB',   'NONE');
 
-if      ($CFG->modlos_group_mod=='fltsm_moodle')  define('XMLGROUP_DB',   'HELPER');
-else if ($CFG->modlos_group_mod=='fltsm_opensim') define('XMLGROUP_DB',   'OPENSIM');
-else                                              define('XMLGROUP_DB',   'NONE');
+if      ($CFG->modlos_group_mod=='fltsm_moodle')  define('XMLGROUP_DB',  'HELPER');
+else if ($CFG->modlos_group_mod=='fltsm_opensim') define('XMLGROUP_DB',  'OPENSIM');
+else                                              define('XMLGROUP_DB',  'NONE');
 
 
 
