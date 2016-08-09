@@ -134,7 +134,7 @@ class  ShowEvent
 					
 		if (isNumeric($this->event_id) and $this->event_id>0) {
 			$event = modlos_get_event($this->event_id);
-				
+
 			//if ($event!=null and ($event['uid']==$this->userid or $this->hasPermit)) {
 			if ($event!=null and !$this->isGuest) {
 				//if (!array_key_exists('uid', $event)) $event['uid'] = 0;
