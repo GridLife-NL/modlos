@@ -8,7 +8,9 @@
 //
 
 if (!defined('ENV_READ_CONFIG')) require_once(realpath(dirname(__FILE__).'/config.php'));
+error_log("HHHHHHHHHHHH");
 if ( defined('ENV_READ_DEFINE')) return;
+error_log("HHHHHHHHHHHH");
 
 $groups_config  = realpath(ENV_HELPER_PATH.'/../include/xmlgroups_config.php');
 $profile_config = realpath(ENV_HELPER_PATH.'/../include/profile_config.php');
@@ -45,6 +47,7 @@ define('XMLGROUP_NOTICE_TBL',			FULL_DB_PREFIX.XMLGROUP_NOTICE_TBL_BASE);
 define('XMLGROUP_ROLE_MEMBER_TBL', 		FULL_DB_PREFIX.XMLGROUP_ROLE_MEMBER_TBL_BASE);
 define('XMLGROUP_ROLE_TBL',				FULL_DB_PREFIX.XMLGROUP_ROLE_TBL_BASE);
 
+error_log(XMLGROUP_ROLE_TBL);
 // Avatar Profile. see also profile_config.php 
 define('PROFILE_CLASSIFIEDS_TBL',  		FULL_DB_PREFIX.PROFILE_CLASSIFIEDS_TBL_BASE);
 define('PROFILE_USERNOTES_TBL',  		FULL_DB_PREFIX.PROFILE_USERNOTES_TBL_BASE);
