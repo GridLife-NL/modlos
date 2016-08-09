@@ -10,69 +10,14 @@
 if (!defined('ENV_READ_CONFIG')) require_once(realpath(dirname(__FILE__).'/config.php'));
 if ( defined('ENV_READ_DEFINE')) return;
 
-require_once(realpath(ENV_HELPER_PATH.'/../include/profile_config.php'));
-require_once(realpath(ENV_HELPER_PATH.'/../include/search_config.php'));
-require_once(realpath(ENV_HELPER_PATH.'/../include/xmlgroups_config.php'));
-
-
-
-//////////////////////////////////////////////////////////////////////////////////
-// Avatar State for CMS/LMS
-//
-define('AVATAR_STATE_NOSTATE',		'0');	// 0x00
-define('AVATAR_STATE_SYNCDB',		'1');	// 0x01
-define('AVATAR_STATE_SLOODLE',		'2');	// 0x02
-define('AVATAR_STATE_INACTIVE',		'4');	// 0x04
-
-define('AVATAR_STATE_NOSYNCDB',		'254');	// 0xfe
-define('AVATAR_STATE_NOSLOODLE',	'253');	// 0xfd
-define('AVATAR_STATE_ACTIVE',		'251');	// 0xfb
-
-// Editable
-define('AVATAR_NOT_EDITABLE',		'0');
-define('AVATAR_EDITABLE',			'1');
-define('AVATAR_OWNER_EDITABLE',		'2');
-
-// Lastname
-define('AVATAR_LASTN_INACTIVE',		'0');
-define('AVATAR_LASTN_ACTIVE',		'1');
-
-// Password
-define('AVATAR_PASSWD_MINLEN',		'8');
-
-
-
-//////////////////////////////////////////////////////////////////////////////////
-// Profile
-$PROF_DB_HOST      = HELPER_DB_HOST;
-$PROF_DB_NAME      = HELPER_DB_NAME;
-$PROF_DB_USER      = HELPER_DB_USER;
-$PROF_DB_PASS      = HELPER_DB_PASS;
-$PROF_DB_MYSQLI    = HELPER_DB_MYSQLI;
-
-$PROF_DB_HOST      = OPENSIM_DB_HOST;
-$PROF_DB_NAME      = OPENSIM_DB_NAME;
-$PROF_DB_USER      = OPENSIM_DB_USER;
-$PROF_DB_PASS      = OPENSIM_DB_PASS;
-$PROF_DB_MYSQLI    = OPENSIM_DB_MYSQLI;
-
-
-
-
-
-// Offline Message
-$OFFLINE_DB_HOST   = HELPER_DB_HOST;
-$OFFLINE_DB_NAME   = HELPER_DB_NAME;
-$OFFLINE_DB_USER   = HELPER_DB_USER;
-$OFFLINE_DB_PASS   = HELPER_DB_PASS;
-$OFFLINE_DB_MYSQLI = HELPER_DB_MYSQLI;
-
-// MuteList
-$MUTE_DB_HOST      = HELPER_DB_HOST;
-$MUTE_DB_NAME      = HELPER_DB_NAME;
-$MUTE_DB_USER      = HELPER_DB_USER;
-$MUTE_DB_PASS      = HELPER_DB_PASS;
-$MUTE_DB_MYSQLI    = HELPER_DB_MYSQLI;
+$groups_config  = realpath(ENV_HELPER_PATH.'/../include/xmlgroups_config.php');
+$profile_config = realpath(ENV_HELPER_PATH.'/../include/profile_config.php');
+$search_config  = realpath(ENV_HELPER_PATH.'/../include/search_config.php');
+$message_config = realpath(ENV_HELPER_PATH.'/../include/message_config.php');
+if ($groups_config!='')  require_once($groups_config);
+if ($profile_config!='') require_once($profile_config);
+if ($search_config!='')  require_once($search_config);
+if ($message_config!='') require_once($message_config);
 
 
 
@@ -88,8 +33,8 @@ define('FULL_DB_PREFIX',          		MDL_DB_PREFIX.MODLOS_DB_PREFIX);
 define('SLOODLE_USERS_TBL',				MDL_DB_PREFIX.'sloodle_users');
 
 // Offline Message and MuteList
-define('OFFLINE_MESSAGE_TBL',       	FULL_DB_PREFIX.'offline_message');
-define('MUTE_LIST_TBL',             	FULL_DB_PREFIX.'mute_list');
+define('OFFLINE_MESSAGE_TBL',       	FULL_DB_PREFIX.OFFLINE_MESSAGE_TBL_BASE);
+define('MUTE_LIST_TBL',             	FULL_DB_PREFIX.MUTE_LIST_TBL_BASE);
 
 // XML Group.  see also xmlgroups_config.php 
 define('XMLGROUP_ACTIVE_TBL',			FULL_DB_PREFIX.XMLGROUP_ACTIVE_TBL_BASE);
@@ -119,7 +64,6 @@ define('SEARCH_REGIONS_TBL',			FULL_DB_PREFIX.SEARCH_REGIONS_TBL_BASE);
 define('SEARCH_CLASSIFIEDS_TBL',		PROFILE_CLASSIFIEDS_TBL);
 
 
-
 //////////////////////////////////////////////////////////////////////////////////
 // Table Name without Moodle DB Prefix   Modlos ライブラリで使用する変数名
 
@@ -127,8 +71,8 @@ define('SEARCH_CLASSIFIEDS_TBL',		PROFILE_CLASSIFIEDS_TBL);
 define('MDL_SLOODLE_USERS_TBL',		 	'sloodle_users');
 
 // Offline Message and MuteList
-define('MODLOS_OFFLINE_MESSAGE_TBL', 	MODLOS_DB_PREFIX.'offline_message');
-define('MODLOS_MUTE_LIST_TBL', 			MODLOS_DB_PREFIX.'mute_list');
+define('MODLOS_OFFLINE_MESSAGE_TBL', 	MODLOS_DB_PREFIX.OFFLINE_MESSAGE_TBL_BASE);
+define('MODLOS_MUTE_LIST_TBL', 			MODLOS_DB_PREFIX.MUTE_LIST_TBL_BASE);
 
 // XML Group.  see also xmlgroups_config.php 
 define('MDL_XMLGROUP_ACTIVE_TBL',		MODLOS_DB_PREFIX.XMLGROUP_ACTIVE_TBL_BASE);
@@ -160,6 +104,31 @@ define('MDL_SEARCH_CLASSIFIEDS_TBL',	MDL_PROFILE_CLASSIFIEDS_TBL);
 
 
 //////////////////////////////////////////////////////////////////////////////////
+// Avatar State for CMS/LMS
+//
+define('AVATAR_STATE_NOSTATE',		'0');	// 0x00
+define('AVATAR_STATE_SYNCDB',		'1');	// 0x01
+define('AVATAR_STATE_SLOODLE',		'2');	// 0x02
+define('AVATAR_STATE_INACTIVE',		'4');	// 0x04
+
+define('AVATAR_STATE_NOSYNCDB',		'254');	// 0xfe
+define('AVATAR_STATE_NOSLOODLE',	'253');	// 0xfd
+define('AVATAR_STATE_ACTIVE',		'251');	// 0xfb
+
+// Editable
+define('AVATAR_NOT_EDITABLE',		'0');
+define('AVATAR_EDITABLE',			'1');
+define('AVATAR_OWNER_EDITABLE',		'2');
+
+// Lastname
+define('AVATAR_LASTN_INACTIVE',		'0');
+define('AVATAR_LASTN_ACTIVE',		'1');
+
+// Password
+define('AVATAR_PASSWD_MINLEN',		'8');
+
+
+//////////////////////////////////////////////////////////////////////////////////
 // Event Categories
 
 $Categories		= array();
@@ -176,7 +145,6 @@ $Categories[27] = get_string('modlos_events_arts',         'block_modlos');
 $Categories[28] = get_string('modlos_events_charity',      'block_modlos');
 $Categories[29] = get_string('modlos_events_misc',         'block_modlos');
 if (!OPENSIM_PG_ONLY) $Categories[23] = get_string('modlos_events_nightlife', 'block_modlos').$Categories[23];
-
 
 
 //////////////////////////////////////////////////////////////////////////////////

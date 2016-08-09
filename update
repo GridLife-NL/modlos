@@ -38,4 +38,5 @@ fi
 [ -f helper/register.php ] 	 	  || ln opensim.modules/Search/php/register.php helper/register.php
 [ -f include/profile_config.php ] || ln opensim.modules/Profile/php/profile_config.php include/profile_config.php
 [ -f include/search_config.php ]  || ln opensim.modules/Search/php/search_config.php include/search_config.php
+[ -f include/message_config.php ] || ln opensim.modules/Messaging/php/message_config.php include/message_config.php
 
