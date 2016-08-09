@@ -8,9 +8,7 @@
 //
 
 if (!defined('ENV_READ_CONFIG')) require_once(realpath(dirname(__FILE__).'/config.php'));
-error_log("HHHHHHHHHHHH");
 if ( defined('ENV_READ_DEFINE')) return;
-error_log("HHHHHHHHHHHH");
 
 $groups_config  = realpath(ENV_HELPER_PATH.'/../include/xmlgroups_config.php');
 $profile_config = realpath(ENV_HELPER_PATH.'/../include/profile_config.php');
