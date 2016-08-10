@@ -97,6 +97,7 @@ $string['modlos_unknown_status'] 	= 'unknown Status';
 $string['modlos_unknown_region'] 	= 'unknown Region';
 $string['modlos_active_list'] 		= 'Active List';
 $string['modlos_inactive_list'] 	= 'Inactive List';
+$string['modlos_candidate_list'] 	= 'Candidate List';
 
 $string['modlos_show_status'] 		= 'Modlos Status';
 $string['modlos_show_db'] 			= 'Data Base';

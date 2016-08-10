@@ -79,7 +79,7 @@ define('USE_UTC_TIME',			$CFG->modlos_use_utc_time);
 define('DATE_FORMAT', 			$CFG->modlos_date_format);
 
 //
-define('LOGINPAGE_SCRIPT', 		0);
+define('LOGINPAGE_SCRIPT', 		1);		// 1 or 2  (1: 4 images, 2: 8 images)
 
 
 //////////////////////////////////////////////////////////////////////////////////
