@@ -409,6 +409,10 @@ $string['modlos_date_format_desc']  = 'Modlosで使用する日付表示のフ�
 $string['modlos_use_utc']           = '時刻の表示に世界標準時(UTC)を使用';
 $string['modlos_use_utc_desc']		= 'チェックを入れた場合は時刻の表示に世界標準時を使用．チェックを外した場合はサーバのローカル時刻のロケールを使用する'; 
 
+$string['modlos_loginscreen']		= 'ログイン画面の画像の数'; 
+$string['modlos_loginscreen_desc']	= 'ログイン画面で切り替える画像の数を指定する．画像自体は自分で用意し，images/login_screens/ に保存する．'.
+                                      '詳細は opensim.helper/loginscreen/imageswitch1.js (4画像)，または imageswitch2.js（8画像）を参照すること';
+
 $string['modlos_status_cntnt'] 		= 'ステータスページのコンテンツ';
 $string['modlos_status_cntnt_desc']	= 'Modlos のステータスページのコンテンツ．HTMLタグ使用可能';
 $string['modlos_db_status_cntnt'] 	= 'データベース状態のページのコンテンツ';

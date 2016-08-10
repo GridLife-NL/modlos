@@ -408,6 +408,10 @@ $string['modlos_date_format_desc']	= 'Specify display format of date and time';
 $string['modlos_use_utc']			= 'Do you use UTC to display time?';
 $string['modlos_use_utc_desc']		= 'If you check this, then UTC(Universal Time, Coordinated) is used. If you do not check this, then Local Time locale of server is used.';
 
+$string['modlos_loginscreen']       = 'Images number on the login screen';
+$string['modlos_loginscreen_desc']  = 'Specify the number of images to switch on the login screen. Prepare the images by yourself, and save the images to "images/login_screens/".'.
+                                      'See also opensim.helper/loginscreen/imageswitch1.js (4 images)，and imageswitch2.js (8 images)';
+
 $string['modlos_status_cntnt'] 		= 'Status Page Content';
 $string['modlos_status_cntnt_desc']	= 'Specify content of status page. The HTML tag can be used.';
 $string['modlos_db_status_cntnt'] 	= 'DB Status Content';
