@@ -32,13 +32,13 @@
   <table cellpadding="2" cellspacing="1" align="center" border="2" bordercolor="#ffffff" bgcolor="#f8f8f8">
     <tr height=26 style="background-color: #e0e0e0;">
       <td style="width:45%; font-size:120%; text-align:center">
-        <strong><?php echo $select1_title?></strong>
+        <strong><?php echo $select_lft_ttl?></strong>
       </td>
 
       <td style="width:10%"></td>
 
       <td style="width:45%; font-size:120%; text-align:center">
-        <strong><?php echo $select2_title?></strong>
+        <strong><?php echo $select_rgt_ttl?></strong>
       </td>
     </tr>
 
@@ -48,8 +48,8 @@
                   onFocus="document.assignform.submit_left.disabled=true;
                            document.assignform.submit_right.disabled=false;
                            document.assignform.submit_add.disabled=true;" >
-          <?php foreach($select1 as $slct1) {?>
-            <option value=<?php echo $slct1?> ><?php echo $slct1?></option>
+          <?php foreach($select_lft as $lft) {?>
+            <option value=<?php echo $lft?> ><?php echo $lft?></option>
           <?php }?>
         </select>
       </td>
@@ -59,6 +59,7 @@
 		<input type="hidden" name="course"   value="<?php echo $this->course_id ?>" />
         <input name="submit_left"   type="submit" id="submit_left"   value="&larr;" />
         <input name="submit_right"  type="submit" id="submit_right"  value="&rarr;" />
+        <br /><br />
         <input name="submit_delete" type="submit" id="submit_delete" value="del" />
       </td>
 
@@ -67,8 +68,8 @@
                   onFocus="document.assignform.submit_left.disabled=false;
                            document.assignform.submit_right.disabled=true;
                            document.assignform.submit_add.disabled=true;" >
-          <?php foreach($select2 as $slct2) {?>
-            <option value=<?php echo $slct2?> ><?php echo $slct2?></option>
+          <?php foreach($select_rgt as $rgt) {?>
+            <option value=<?php echo $rgt?> ><?php echo $rgt?></option>
           <?php }?>
         </select>
       </td>
