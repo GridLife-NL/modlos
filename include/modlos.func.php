@@ -618,20 +618,20 @@ function  modlos_get_profile($uuid)
 	global $DB;
 
 	if (OSPROFILE_DB=='OPENSIM') {
-		error_log("modlos_get_profile: OPENSIM");
+		//error_log("modlos_get_profile: OPENSIM");
 		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.osprofile.php'));
         $prof = opensim_get_profile($uuid);
 		return $prof;
 	}
 	else if (OSPROFILE_DB=='NONE') {	// UserProfileModule
-		error_log("modlos_get_profile: NONE");
+		//error_log("modlos_get_profile: NONE");
 		require_once(realpath(ENV_HELPER_PATH.'/../include/opensim.mysql.userprofile.php'));
         $prof = opensim_get_profile($uuid);
 		return $prof;
 	}
 
 	//
-	error_log("modlos_get_profile: HELPER");
+	//error_log("modlos_get_profile: HELPER");
 	$prof = array();
 	$prfobj = $DB->get_record(MDL_PROFILE_USERPROFILE_TBL, array('useruuid'=>$uuid));
 	if ($prfobj) {
