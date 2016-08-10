@@ -79,8 +79,7 @@ define('USE_UTC_TIME',			$CFG->modlos_use_utc_time);
 define('DATE_FORMAT', 			$CFG->modlos_date_format);
 
 //
-// Select script. Set 1 or 2  (1: 4 images, 2: 8 images). 
-// See helper/loginscreen/imageswitch1.js or imageswitch2.js
+// Select script. See helper/loginscreen/imageswitch1.js and imageswitch2.js
 define('LOGINPAGE_SCRIPT', 		$CFG->modlos_loginscreen_script);
 
 
