@@ -83,6 +83,11 @@ $settings->add(new admin_setting_configselect('modlos_map_size',
 					get_string('modlos_map_size', 'block_modlos'),
 				   	get_string('modlos_map_size_desc', 'block_modlos'), '64', $options));
 
+$options = array('1'=>'4 images', '2'=>'8 images');
+$settings->add(new admin_setting_configselect('modlos_loginscreen_script', 
+					get_string('modlos_loginscreen', 'block_modlos'),
+				   	get_string('modlos_loginscreen_desc', 'block_modlos'), '1', $options));
+
 $settings->add(new admin_setting_configcheckbox('modlos_use_utc_time', 
 					get_string('modlos_use_utc', 'block_modlos'),
 				   	get_string('modlos_use_utc_desc', 'block_modlos'), 0));
