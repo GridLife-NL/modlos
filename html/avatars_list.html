@@ -230,14 +230,14 @@
 
         <td><strong style="color: #444444;"><?php echo $dat['lastin']?></strong></td>
         <td>
-          <?php if ($dat['state']&AVATAR_STATE_SYNCDB) { ?>
-            <?php if ($dat['online']) {?>
-              <strong style="color: #005500;"><?php echo $online_ttl?></strong>
-            <?php } else {?>
-              <strong style="color: #0000cc;"><?php echo $active_ttl?></strong>
-            <?php }?>
-          <?php } elseif ($dat['state']&AVATAR_STATE_INACTIVE) { ?>
+          <?php if ($dat['state']&AVATAR_STATE_INACTIVE) { ?>
             <strong style="color: #cc0000;"><?php echo $inactive_ttl?></strong>
+          <?php } else if ($dat['state']&AVATAR_STATE_SYNCDB) { ?>
+            <?php if ($dat['online']) {?>
+            <strong style="color: #005500;"><?php echo $online_ttl?></strong>
+            <?php } else {?>
+            <strong style="color: #0000cc;"><?php echo $active_ttl?></strong>
+            <?php }?>
           <?php } else { ?>
             <strong style="color: #cc0000;"><?php echo $not_syncdb_ttl?></strong>
           <?php }?>
