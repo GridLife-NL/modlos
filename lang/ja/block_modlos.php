@@ -499,8 +499,8 @@ $string['modlos_templ_db_fail']     = 'DB の操作に失敗しました';
 $string['modlos_order_num']     	= '順序番号';
 
 $string['modlos_menu_tab']          = '一般メニュー';
-$string['modlos_manage_tab']        = '管理画面';
-$string['modlos_manage_menu']       = '管理画面';
+$string['modlos_manage_tab']        = '管理メニュー';
+$string['modlos_manage_menu']       = '管理メニュー';
 $string['modlos_manage_cmnd_tab']   = '管理コマンド';
 $string['modlos_manage_ttl']        = '管理コマンド';
 $string['modlos_manage_submit']     = '実行';

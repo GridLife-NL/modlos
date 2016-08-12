@@ -498,8 +498,8 @@ $string['modlos_templ_db_fail']     = 'DB operation failed';
 $string['modlos_order_num']         = 'Order';
 
 $string['modlos_menu_tab']		    = 'Normal Menu';
-$string['modlos_manage_tab']		= 'Management';
-$string['modlos_manage_menu']		= 'Management';
+$string['modlos_manage_tab']		= 'Manage Menu';
+$string['modlos_manage_menu']		= 'Manage Menu';
 $string['modlos_manage_cmnd_tab']	= 'Commands';
 $string['modlos_manage_ttl']		= 'Management Commands';
 $string['modlos_manage_submit']		= 'Exec';
