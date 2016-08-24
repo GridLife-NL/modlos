@@ -15,6 +15,7 @@ class  CurrencyLog
 	var $pnum 		 = array();
 
 	var $nosystem    = 0;
+	var $balance     = 0;
 
 	var $course_id   = 0;
 	var $agent_id	 = '';
@@ -47,13 +48,6 @@ class  CurrencyLog
 	var $sql_order     = '';
 	var $sql_limit     = '';
 
-
-/*
-	function  CurrencyLog($course_id, $agent_id)
-	{
-		__construct($course_id, $agent_id);
-	}
-*/
 
 	function  __construct($course_id, $agent_id)
 	{
@@ -155,6 +149,7 @@ class  CurrencyLog
 	function  execute()
 	{
 		global $CFG, $USER;
+		$db = null;
 
 		if (!USE_CURRENCY_SERVER) return false;
 
@@ -186,9 +181,9 @@ class  CurrencyLog
 
 		////////////////////////////////////////////////////////////////////
 		//
-		$this->number = opensim_get_currency_amounts_num($this->agent_id, $this->sql_condition);
+		$this->number = opensim_get_currency_amounts_num($this->agent_id, $this->sql_condition, $db);
 		//
-		$logs = opensim_get_currency_amounts_log($this->agent_id, $this->sql_condition, $this->sql_order, $this->sql_limit);
+		$logs = opensim_get_currency_amounts_log($this->agent_id, $this->sql_condition, $this->sql_order, $this->sql_limit, $db);
 
 		$colum = 0;
 		foreach ($logs as $log) {
@@ -223,7 +218,7 @@ class  CurrencyLog
 			$this->db_data[$colum]['objectName'] = '';
 			if (!$this->db_data[$colum]['objectName']) {
 				if ($this->db_data[$colum]['objectUUID']) {
-					$this->db_data[$colum]['objectName'] = opensim_get_object_name($this->db_data[$colum]['objectUUID']);
+					$this->db_data[$colum]['objectName'] = opensim_get_object_name($this->db_data[$colum]['objectUUID'], $db);
 				}
 			}
 			if (!$this->db_data[$colum]['objectName']) $this->db_data[$colum]['objectName'] = ' - ';
@@ -232,10 +227,10 @@ class  CurrencyLog
 			$this->db_data[$colum]['regionName'] = '';
 			if ($this->db_data[$colum]['oppuuid']!='00000000-0000-0000-0000-000000000000') {	// System
 				if ($this->db_data[$colum]['regionUUID']) {
-					$this->db_data[$colum]['regionName'] = opensim_get_region_name($this->db_data[$colum]['regionUUID']);
+					$this->db_data[$colum]['regionName'] = opensim_get_region_name($this->db_data[$colum]['regionUUID'], $db);
 				}
 				if (!$this->db_data[$colum]['regionName'] and $this->db_data[$colum]['regionHandle']) {
-					$this->db_data[$colum]['regionName'] = opensim_get_region_name($this->db_data[$colum]['regionHandle']);
+					$this->db_data[$colum]['regionName'] = opensim_get_region_name($this->db_data[$colum]['regionHandle'], $db);
 				}
 				if ($this->db_data[$colum]['regionName']) {
 					if (!$this->db_data[$colum]['regionUUID']) {
@@ -245,12 +240,13 @@ class  CurrencyLog
 			}
 			if (!$this->db_data[$colum]['regionName']) $this->db_data[$colum]['regionName'] = ' - ';
 
-			$oppname = opensim_get_avatar_name($this->db_data[$colum]['oppuuid']);
+			$oppname = opensim_get_avatar_name($this->db_data[$colum]['oppuuid'], $db);
 			if ($oppname['fullname']==null) $oppname['fullname'] = ' - ';
 			$this->db_data[$colum]['opponent'] = $oppname['fullname'];
 
 			$colum++;
 		}
+
 
 		////////////////////////////////////////////////////////////////////
 		// Paging
@@ -341,7 +337,10 @@ class  CurrencyLog
 		$nosystem_checked = '';
 		if ($this->nosystem) $nosystem_checked = 'checked';
 
-		$avtname = opensim_get_avatar_name($this->agent_id);
+		$db = null;
+		$balance = number_format(opensim_get_currency_balance($this->agent_id, $db));
+		$avtname = opensim_get_avatar_name($this->agent_id, $db);
+
 		$userurl = "<a style=\"cursor:pointer;\" onClick=\"window.open('".CMS_MODULE_URL.'/helper/agent.php'.
                               $url_params.'&agent='.$this->agent_id."','','toolbar=no,location=no,directories=no,".
                               "status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no,width=800,height=450')\">";
