@@ -191,6 +191,7 @@ class  AvatarsList
 	function  execute()
 	{
 		global $CFG, $USER;
+		$db = null;
 
 		// auto synchro
 		modlos_sync_opensimdb();
@@ -218,7 +219,7 @@ class  AvatarsList
 
 		////////////////////////////////////////////////////////////////////
 		// Read Data from DB
-		//$infos = opensim_get_avatars_infos($where, $this->sql_order);
+		//$infos = opensim_get_avatars_infos($where, $this->sql_order, $db);
 
 		$num = 0;
 		$con = 0;
@@ -226,8 +227,8 @@ class  AvatarsList
 
 		if (!$this->ownerloss) {
 			//
-			$con   = opensim_get_avatars_num($where);
-			$infos = opensim_get_avatars_infos($where, $this->sql_order, $this->sql_limit);
+			$con   = opensim_get_avatars_num($where, $db);
+			$infos = opensim_get_avatars_infos($where, $this->sql_order, $this->sql_limit, $db);
 			//
 			foreach($infos as $user) {
 				$users[$num] = $user;
@@ -261,7 +262,7 @@ class  AvatarsList
 		//
 		else {		// Search lost avatars
 			//
-			$infos = opensim_get_avatars_infos($where, $this->sql_order);
+			$infos = opensim_get_avatars_infos($where, $this->sql_order, '', $db);
 			//
 			foreach($infos as $user) {
 				$avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
@@ -313,7 +314,7 @@ class  AvatarsList
 		$colum = 0;
 		foreach($users as $user) {
 			$user['editable'] = AVATAR_NOT_EDITABLE;
-			$user['hmregion'] = opensim_get_region_name($user['hmregion_id']);
+			$user['hmregion'] = opensim_get_region_name($user['hmregion_id'], $db);
 			if (isGUID($user['hmregion'])) $user['hmregion'] = '';
 			//
 			$this->db_data[$colum] = $this->get_avatar_info($user, $colum); 

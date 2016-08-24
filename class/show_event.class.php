@@ -99,9 +99,10 @@ class  ShowEvent
 	function  execute()
 	{
 		global $DB;
+		$db = null;
 
 		// List of Parcels
-		$modobj = opensim_get_regions_infos();
+		$modobj = opensim_get_regions_infos(false, '', '', '', $db);
 
 		$i = 0;
 		foreach ($modobj as $mod) {
@@ -151,9 +152,9 @@ class  ShowEvent
 				$this->global_pos	= $event['GlobalPos'];
 				$this->region_uuid	= $event['SimName'];
 
-				$owner_name = opensim_get_avatar_name($this->owner_uuid);
+				$owner_name = opensim_get_avatar_name($this->owner_uuid, $db);
 				$this->event_owner   = $owner_name['fullname'];
-				$creator_name = opensim_get_avatar_name($this->creator_uuid);
+				$creator_name = opensim_get_avatar_name($this->creator_uuid, $db);
 				$this->event_creator = $creator_name['fullname'];
 
 				$date = getdate($event['DateUTC']);

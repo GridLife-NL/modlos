@@ -234,7 +234,7 @@ class  CurrencyLog
 				}
 				if ($this->db_data[$colum]['regionName']) {
 					if (!$this->db_data[$colum]['regionUUID']) {
-						$this->db_data[$colum]['regionUUID'] = opensim_get_region_uuid($this->db_data[$colum]['regionName']);
+						$this->db_data[$colum]['regionUUID'] = opensim_get_region_uuid($this->db_data[$colum]['regionName'], $db);
 					}
 				}
 			}
