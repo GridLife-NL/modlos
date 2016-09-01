@@ -97,11 +97,13 @@ class  CurrencyManage
 					$avatars = opensim_get_userinfos();
 					//
 					foreach ($avatars as $avatar) {
-						$ret = send_money($avatar['UUID'], $this->send_money, $regionserver);
-						if (!$ret) {
-							$this->results[$num] = $avatar;
-							$this->results[$num]['fullname'] = $avatar['avatar'];
-							$num++;
+						if ($avatar['type']==0 ) { 		// Local Avatar
+							$ret = send_money($avatar['UUID'], $this->send_money, $regionserver);
+							if (!$ret) {
+								$this->results[$num] = $avatar;
+								$this->results[$num]['fullname'] = $avatar['avatar'];
+								$num++;
+							}
 						}
 					}
 					if ($num>0) $this->hasError = true;
