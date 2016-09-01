@@ -115,12 +115,17 @@
       </form>
     </td>
 
-    <td width=350 style="color: #000;" align="right">
+    <td width=400 style="color: #000;" align="right">
       <?php if ($has_permit) {?>
       <form action="<?php echo $this->action_url.$plimit_amp.$order_amp?>" method="POST">
         <strong>
           <?php echo $currency_send?>&nbsp;
           <input name="send_money" id="send_money" size="11" maxlength="10" value="0" style="height:16px;" />
+          <select wide="12" name="send_type" id="send_type" style="height:26px; margin-bottom:0px; color:#000"/>
+               <option value="5003" selected>ReferBonus</option>
+               <option value="5012" >SendMoney</option>
+               <option value="5005" >Refund</option>
+          </select>
         </strong>
         <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
         <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
@@ -129,7 +134,7 @@
       <?php }?>
     </td>
 
-    <td width=100>&nbsp;</td>
+    <td width=50>&nbsp;</td>
     <td width=200 style="color: #c22;"><strong><?php echo $currency_balance.': '.$balance ?></strong></td>
 
     <td style="width:50px; table-layout:fixed;">&nbsp;</td>

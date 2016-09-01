@@ -96,6 +96,7 @@ class  CurrencyLog
 		$TransactionType['5009']  = 'ObjectPays';
 		$TransactionType['5010']  = 'BuyMoney';
 		$TransactionType['5011']  = 'MoveMoney';
+		$TransactionType['5012']  = 'SendMoney';
 		$TransactionType['6003']  = 'GroupLiability';
 		$TransactionType['6004']  = 'GroupDividend';
 		$TransactionType['10000'] = 'StipendBasic';
