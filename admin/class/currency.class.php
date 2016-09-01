@@ -26,6 +26,7 @@ class  CurrencyManage
 	var $move         = false;
 
 	var $send_money   = 0;
+	var $send_type    = 5003;		// ReferBonus
 	var	$date_format  = 'd/m/Y';
 	var $date_time    = '01/01/1970';
 	var $unix_time    = 0;
@@ -88,6 +89,7 @@ class  CurrencyManage
 			if (isset($formdata->send_money))
 			{
 				$this->send_money = (int)optional_param('send_money', '0', PARAM_INT);
+				$this->send_type  = (int)optional_param('send_type', '5003', PARAM_INT);
 				if ($this->send_money>0) {
 					$regionserver = $CFG->modlos_currency_regionserver;
         			if ($regionserver=='http://123.456.78.90:9000/' or $regionserver=='') $regionserver = null;
@@ -98,7 +100,7 @@ class  CurrencyManage
 					//
 					foreach ($avatars as $avatar) {
 						if ($avatar['type']==0 ) { 		// Local Avatar
-							$ret = send_money($avatar['UUID'], $this->send_money, $regionserver);
+							$ret = send_money($avatar['UUID'], $this->send_money, $this->send_type, $regionserver);
 							if (!$ret) {
 								$this->results[$num] = $avatar;
 								$this->results[$num]['fullname'] = $avatar['avatar'];

@@ -159,9 +159,10 @@ class  CurrencyLog
 		if (data_submitted()) {
 			if (confirm_sesskey()) {
 				$money = (int)optional_param('send_money', '0', PARAM_INT);
+				$type  = (int)optional_param('send_type',  '5003', PARAM_INT);
 				if ($money>0 and $this->hasPermit) {
 					require_once(CMS_MODULE_PATH.'/helper/helpers.php');
-					send_money($this->agent_id, $money, $regionserver);
+					send_money($this->agent_id, $money, $type, $regionserver);
 				}
 			}
 		}
