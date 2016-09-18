@@ -76,6 +76,13 @@ class  AvatarTemplDelete
 
 			// delete from DB
 			$ret = $DB->delete_records('modlos_template_avatars', array('id'=>$templ_id));
+            if ($ret) {
+                $datfile = $DB->get_record('files', array('id'=>$template->fileid));
+                if ($datfile) {
+			        $ret = $DB->delete_records('files', array('contenthash'=>$datfile->contenthash));
+                }
+            }
+
 			if (!$ret) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_templ_db_fail',  'block_modlos').' (delete)';
