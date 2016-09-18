@@ -165,7 +165,7 @@ class  AvatarTemplEdit
 			$name = opensim_get_avatar_name($update['uuid']);
 			if ($name) $this->db_data['fullname'] = $name['fullname'];
 
-			$usercontext = context_user::instance($USER->id);   // dummy. see lib.php
+			$usercontext = context_user::instance($USER->id);
 			if ($update['filename']) {
 				$path = '@@PLUGINFILE@@/'.$update['filename'];
 				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $usercontext->id, 'block_modlos', 'templ_picture', $update['itemid']);

@@ -82,7 +82,6 @@ class  AvatarTemplDelete
 			        $ret = $DB->delete_records('files', array('contenthash'=>$datfile->contenthash));
                 }
             }
-
 			if (!$ret) {
 				$this->hasError = true;
 				$this->errorMsg[] = get_string('modlos_templ_db_fail',  'block_modlos').' (delete)';
@@ -103,7 +102,7 @@ class  AvatarTemplDelete
 			$name = opensim_get_avatar_name($template->uuid);
 			if ($name) $this->db_data['fullname'] = $name['fullname'];
 
-			$usercontext = context_user::instance($USER->id);   // dummy. see lib.php
+			$usercontext = context_user::instance($USER->id);
 			if ($template->filename) {
 				$path = '@@PLUGINFILE@@/'.$template->filename;
 				$this->db_data['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $usercontext->id, 'block_modlos', 'templ_picture', $template->itemid);
