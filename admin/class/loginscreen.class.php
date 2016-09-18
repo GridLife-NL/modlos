@@ -31,12 +31,6 @@ class  LoginScreen
 	var	$lgnscrn_altbox = '';
 
 
-/*
-	function  LoginScreen($course_id) 
-	{
-		__construct($course_id);
-	}
-*/
 
 	function  __construct($course_id) 
 	{

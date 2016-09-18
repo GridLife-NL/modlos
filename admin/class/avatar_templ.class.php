@@ -29,6 +29,7 @@ class  AvatarTempl
 	var	$errorMsg    = array();
 
 
+
 	function  __construct($course_id) 
 	{
 		$this->course_id = $course_id;

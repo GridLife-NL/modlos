@@ -35,12 +35,6 @@ class  DeleteEvent
 	var $isAvatarMax = false;
 
 
-/*
-	function  DeleteEvent($course_id) 
-	{
-		__construct($course_id);
-	}
-*/
 
 	function  __construct($course_id) 
 	{

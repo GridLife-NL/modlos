@@ -63,13 +63,6 @@ class  AvatarsList
 	var $sql_limit     = '';
 
 
-/*
-	function  AvatarsList($course_id, $show_all, $userid=0)
-	{
-		__construct($course_id, $show_all, $userid);
-	}
-*/
-
 	function  __construct($course_id, $show_all, $userid=0)
 	{
 		global $CFG, $USER;

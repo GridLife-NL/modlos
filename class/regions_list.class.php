@@ -58,12 +58,6 @@ class  RegionsList
 	var $sql_limit      = '';
 
 
-/*
-	function  RegionsList($course_id, $show_all, $userid=0)
-	{
-		__construct($course_id, $show_all, $userid);
-	}
-*/
 
 	function  __construct($course_id, $show_all, $userid=0)
 	{

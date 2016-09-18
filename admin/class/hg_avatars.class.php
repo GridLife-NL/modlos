@@ -36,6 +36,7 @@ class  HgAvatars
 	var $sql_order  = '';
 
 
+
 	function  __construct($course_id)
 	{
 		global $CFG;

@@ -42,13 +42,6 @@ class  CurrencyManage
 
 
 
-/*
-	function  CurrencyManage($course_id) 
-	{
-		__construct($course_id);
-	}
-*/
-
 	function  __construct($course_id) 
 	{
 		$this->course_id = $course_id;

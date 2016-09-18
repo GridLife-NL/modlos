@@ -48,7 +48,6 @@ class  CreateAvatar
 	var $ownername 		 = '';			// owner name of avatar
 
 
-
 	function  __construct($course_id)
 	{
 		global $CFG, $USER;

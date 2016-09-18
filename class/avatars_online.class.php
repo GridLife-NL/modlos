@@ -42,13 +42,6 @@ class  AvatarsOnline
 	var $desc_login	= 0;
 
 
-/*
-	function  AvatarsOnline($course_id)
-	{
-		__construct($course_id);
-	}
-*/
-
 	function  __construct($course_id)
 	{
 		global $CFG, $USER;

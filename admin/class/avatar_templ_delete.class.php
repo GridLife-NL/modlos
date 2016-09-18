@@ -31,12 +31,6 @@ class  AvatarTemplDelete
 	var	$errorMsg    = array();
 
 
-/*
-	function  AvatarTemplDelete($course_id) 
-	{
-		__construct($course_id); 
-	}
-*/
 
 	function  __construct($course_id) 
 	{

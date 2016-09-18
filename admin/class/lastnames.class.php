@@ -29,12 +29,6 @@ class  LastNames
 	var $errorMsg    = array();
 
 
-/*
-	function  LastName$course_id)
-	{
-		__construct($course_id);
-	}
-*/
 
 	function  __construct($course_id)
 	{

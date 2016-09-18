@@ -61,12 +61,6 @@ class  EditEvent
 	var $saved_event_creator= '';
 
 
-/*
-	function  EditEvent($course_id)
-	{
-		__construct($course_id);
-	}
-*/
 
 	function  __construct($course_id)
 	{
