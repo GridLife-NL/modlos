@@ -41,12 +41,6 @@ class  EditAvatar
 	var $ownername 	= '';
 
 
-/*
-	function  EditAvatar($course_id) 
-	{
-		__construct($course_id); 
-	}
-*/
 
 	function  __construct($course_id) 
 	{
@@ -255,7 +249,7 @@ class  EditAvatar
 		$sloodle_ttl		= get_string('modlos_sloodle_ttl',	 'block_modlos');
 		$manage_sloodle		= get_string('modlos_manage_sloodle','block_modlos');
 
-		include(CMS_MODULE_PATH.'/html/edit.html');
+		include(CMS_MODULE_PATH.'/html/edit_avatar.html');
 	}
 
 

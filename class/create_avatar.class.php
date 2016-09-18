@@ -22,6 +22,7 @@ class  CreateAvatar
 	var $base_avatar_ttl = '';
 	var $db_data         = array();
 	var $select_num      = -1;
+	var $valid_num       = 0;
 	var $total_num       = 0;
 	var $isPost          = false;
 
@@ -47,12 +48,6 @@ class  CreateAvatar
 	var $ownername 		 = '';			// owner name of avatar
 
 
-/*
-	function  CreateAvatar($course_id)
-	{
-		__construct($course_id);
-	}
-*/
 
 	function  __construct($course_id)
 	{
@@ -128,6 +123,7 @@ class  CreateAvatar
 
 		// Template System
 		$count = 0;
+        $validnum = 0;
 		$templates = $DB->get_records('modlos_template_avatars', array(), 'num ASC');
 		foreach($templates as $template) {
 			$this->db_data[$count]['id']	   = $template->id;
@@ -151,11 +147,12 @@ class  CreateAvatar
 				$path = '@@PLUGINFILE@@/'.$template->filename;
 				$this->db_data[$count]['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $usercontext->id, 'block_modlos', 'templ_picture', $template->itemid);
 			}
-
 			if ($this->select_num==-1 and $this->db_data[$count]['status']>0) $this->select_num = $count;
  
+			if ($this->db_data[$count]['status']>0) $validnum++;
 			$count++;
 		}
+		$this->valid_num = $validnum;
 		$this->total_num = $count;
 
 		//
@@ -298,6 +295,7 @@ class  CreateAvatar
 		$avatars    = $this->db_data;
 		$select_num	= $this->select_num;
 		$total_num  = $this->total_num;
+		$valid_num  = $this->valid_num;
 		$hasPermit  = $this->hasPermit;
 		$is_avatar_max = $this->isAvatarMax;
 
@@ -313,7 +311,7 @@ class  CreateAvatar
 			if ($pv_lastname=='') $pv_lastname = 'Resident';
 		}
 
-		include(CMS_MODULE_PATH.'/html/create.html');
+		include(CMS_MODULE_PATH.'/html/create_avatar.html');
 	}
 
 

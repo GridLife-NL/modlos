@@ -184,7 +184,7 @@
 
     <!-- Template Avatar -->
     <?php if ($use_template and $total_num>0) {?>
-      <?php if (!$is_avatar_max) {?>
+      <?php if (!$is_avatar_max and ($valid_num>0 or $hasPermit)) {?>
       <br />
       <table width="640" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#f0f0f0; margin-bottom:10px;">
         <tr>

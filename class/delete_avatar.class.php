@@ -36,12 +36,6 @@ class  DeleteAvatar
 	var $ownername   = '';
 
 
-/*
-	function  DeleteAvatar($course_id) 
-	{
-		__construct($course_id);
-	}
-*/
 
 	function  __construct($course_id) 
 	{
@@ -148,7 +142,7 @@ class  DeleteAvatar
 		$manage_sloodle		= get_string('modlos_manage_sloodle',	'block_modlos');
 		$state_deleted		= get_string('modlos_state_deleted',	'block_modlos');
 
-		include(CMS_MODULE_PATH.'/html/delete.html');
+		include(CMS_MODULE_PATH.'/html/delete_avatar.html');
 	}
 
 

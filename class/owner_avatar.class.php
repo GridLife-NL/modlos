@@ -34,12 +34,6 @@ class  OwnerAvatar
 	var $ownername 	 = '';
 
 
-/*
-	function  OwnerAvatar($course_id) 
-	{
-		__construct($course_id);
-	}
-*/
 
 	function  __construct($course_id) 
 	{
@@ -166,7 +160,7 @@ class  OwnerAvatar
 		$ownername_ttl	= get_string('modlos_ownername',	 'block_modlos');
 		$avatar_get		= get_string('modlos_avatar_gotted', 'block_modlos');
 
-		include(CMS_MODULE_PATH.'/html/owner.html');
+		include(CMS_MODULE_PATH.'/html/owner_avatar.html');
 	}
 
 
