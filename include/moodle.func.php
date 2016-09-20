@@ -22,14 +22,14 @@ require_once(realpath(CMS_MODULE_PATH.'/include/jbxl_moodle_tools.php'));
 
 function  hasPermit($course_id=0)
 {
-	global $USER;
+    global $USER;
 
-	if ($USER->id==0) return false;
-	if (isguestuser($USER->id)) return false;
-	if (jbxl_is_admin($USER->id)) return true;
-	if ($course_id==0 or $course_id==null) return false;
+    if ($USER->id==0) return false;
+    if (isguestuser($USER->id)) return false;
+    if (jbxl_is_admin($USER->id)) return true;
+    if ($course_id==0 or $course_id==null) return false;
 
-	$cntxt = jbxl_get_course_context($course_id);
+    $cntxt = jbxl_get_course_context($course_id);
     if (jbxl_is_teacher($USER->id, $cntxt, false)) return true;
     if (jbxl_is_assistant($USER->id, $cntxt)) return true;
 
@@ -43,84 +43,84 @@ function  hasPermit($course_id=0)
 
 function  get_display_username($firstname, $lastname)
 {
-	global $CFG;
+    global $CFG;
 
-	if ($CFG->fullnamedisplay=='lastname firstname') {
-		$username = $lastname.' '.$firstname;
-	}
-	else if ($CFG->fullnamedisplay=='language' and current_language()=='ja_utf8') {
-		$username = $lastname.' '.$firstname;
-	}
-	else {
-		$username = $firstname.' '.$lastname;
-	}
+    if ($CFG->fullnamedisplay=='lastname firstname') {
+        $username = $lastname.' '.$firstname;
+    }
+    else if ($CFG->fullnamedisplay=='language' and current_language()=='ja_utf8') {
+        $username = $lastname.' '.$firstname;
+    }
+    else {
+        $username = $firstname.' '.$lastname;
+    }
 
-	if ($username==' ') $username = '';
+    if ($username==' ') $username = '';
 
-	return $username;
+    return $username;
 }
 
 
 function  get_names_from_display_username($username)
 {
-	global $CFG;
+    global $CFG;
 
-	//$names = explode(' ', $username);
-	$names = preg_split("/ /", $username, 0, PREG_SPLIT_NO_EMPTY);
-	if ($names==null) return null;
+    //$names = explode(' ', $username);
+    $names = preg_split("/ /", $username, 0, PREG_SPLIT_NO_EMPTY);
+    if ($names==null) return null;
 
-	if ($CFG->fullnamedisplay=='lastname firstname') {
-		$firstN = $names[1];
-		$lastN  = $names[0];
-	}
-	else if ($CFG->fullnamedisplay=='language' and current_language()=='ja_utf8') {
-		$firstN = $names[1];
-		$lastN  = $names[0];
-	}
-	else {
-		$firstN = $names[0];
-		$lastN  = $names[1];
-	}
-	
-	$retname['firstname'] = $firstN;
-	$retname['lastname']  = $lastN;
+    if ($CFG->fullnamedisplay=='lastname firstname') {
+        $firstN = $names[1];
+        $lastN  = $names[0];
+    }
+    else if ($CFG->fullnamedisplay=='language' and current_language()=='ja_utf8') {
+        $firstN = $names[1];
+        $lastN  = $names[0];
+    }
+    else {
+        $firstN = $names[0];
+        $lastN  = $names[1];
+    }
+    
+    $retname['firstname'] = $firstN;
+    $retname['lastname']  = $lastN;
 
-	return $retname;
+    return $retname;
 }
 
 
 function  get_userinfo_by_username($username)
 {
-	global $DB;
+    global $DB;
 
-	$user_info = $DB->get_record('user', array('username'=>$username, 'deleted'=>'0'));
-	return $user_info;
+    $user_info = $DB->get_record('user', array('username'=>$username, 'deleted'=>'0'));
+    return $user_info;
 }
 
 
 function  get_userinfo_by_name($firstname, $lastname='')
 {
-	global $DB;
+    global $DB;
 
-	if ($lastname=='') {
-		$names = preg_split("/ /", $firstname, 0, PREG_SPLIT_NO_EMPTY);
-		$firstname = $names[0];
-		$lastname  = $names[1];
-	}
+    if ($lastname=='') {
+        $names = preg_split("/ /", $firstname, 0, PREG_SPLIT_NO_EMPTY);
+        $firstname = $names[0];
+        $lastname  = $names[1];
+    }
 
-	$user_infos = $DB->get_records('user', array('firstname'=>$firstname, 'lastname'=>$lastname, 'deleted'=>'0'));
-	$user_info = current($user_infos);
-	return $user_info;
+    $user_infos = $DB->get_records('user', array('firstname'=>$firstname, 'lastname'=>$lastname, 'deleted'=>'0'));
+    $user_info = current($user_infos);
+    return $user_info;
 }
 
 
 function  get_userinfo_by_id($id)
 {
-	global $DB;
+    global $DB;
 
-	if ($id<=0) return null;
+    if ($id<=0) return null;
 
-	$user_info = $DB->get_record('user', array('id'=>$id, 'deleted'=>'0'));
-	return $user_info;
+    $user_info = $DB->get_record('user', array('id'=>$id, 'deleted'=>'0'));
+    return $user_info;
 }
 

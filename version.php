@@ -2,17 +2,17 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->requires  = 2011120500;		// Moodle 2.2
-$plugin->component = 'block_modlos';	// Full name of the plugin (used for diagnostics)
+$plugin->requires  = 2011120500;        // Moodle 2.2
+$plugin->component = 'block_modlos';    // Full name of the plugin (used for diagnostics)
 $plugin->cron      = 0;
 $plugin->maturity  = MATURITY_STABLE;
 
 $plugin->release   = '3.2.3';
 
-$plugin->version   = 2016080902;	// for external Modules
-//$plugin->version = 2016071801;	// for HG avatar
-//$plugin->version = 2016071300;	// add MoveMoney
-//$plugin->version = 2016070600;	// for Standalone 
+$plugin->version   = 2016080902;    // for external Modules
+//$plugin->version = 2016071801;    // for HG avatar
+//$plugin->version = 2016071300;    // add MoveMoney
+//$plugin->version = 2016070600;    // for Standalone 
 //$plugin->version = 2016060200;
 //$plugin->version = 2016051500;
 //$plugin->version = 2016010600;
