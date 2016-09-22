@@ -6,7 +6,7 @@ require_once(realpath(ENV_HELPER_PATH.'/../include/modlos.func.php'));
 
 
 $agent_id  = required_param('agent', PARAM_TEXT);
-$course_id = optional_param('course',   '1', PARAM_INT);
+$course_id = optional_param('course', '1', PARAM_INT);
 if (!$course_id) $course_id = 1;
 if (!isGUID($agent_id))   exit("<h4>bad agent uuid!! ($agent)</h4>");
 if (!USE_CURRENCY_SERVER) exit("<h4>Money Server is not used!!</h4>");
