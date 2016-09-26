@@ -11,7 +11,7 @@ if (isguestuser()) {
 }
 
 $uuid      = required_param('uuid', PARAM_TEXT);
-$course_id = optional_param('course',   '1', PARAM_INT);
+$course_id = optional_param('course', '1', PARAM_INT);
 if (!isGUID($uuid)) exit('<h4>bad asset uuid!! ('.htmlspecialchars($uuid).')</h4>');
 if (!$course_id) $course_id = 1; 
 
