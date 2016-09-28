@@ -290,5 +290,12 @@ function xmldb_block_modlos_upgrade($oldversion=0)
         }
 	}
 
+
+	if ($oldversion < 2016092800) {
+		$table = new xmldb_table('modlos_users');
+        $index = new xmldb_index('user_id', XMLDB_INDEX_NOTUNIQUE, array('user_id'));
+        $dbman->add_index($table, $index);
+	}
+
 	return true;
 }

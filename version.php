@@ -9,7 +9,8 @@ $plugin->maturity  = MATURITY_STABLE;
 
 $plugin->release   = '3.2.3';
 
-$plugin->version   = 2016080902;    // for external Modules
+$plugin->version   = 2016092800;    // 
+//$plugin->version = 2016080902;    // for external Modules
 //$plugin->version = 2016071801;    // for HG avatar
 //$plugin->version = 2016071300;    // add MoveMoney
 //$plugin->version = 2016070600;    // for Standalone 
