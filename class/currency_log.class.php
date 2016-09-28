@@ -75,6 +75,7 @@ class  CurrencyLog
 /*
         // Transaction Type
         $TransactionType['900']   = 'BirthGift';
+        $TransactionType['901']   = 'AwardPoints';
         $TransactionType['1002']  = 'GroupCreate';
         $TransactionType['1004']  = 'GroupJoin';
         $TransactionType['1101']  = 'UploadCharge';
