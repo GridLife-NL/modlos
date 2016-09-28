@@ -52,13 +52,13 @@
 
     <TABLE NAME="modlos_group_active" COMMENT="Modlos Group Activity">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="agentid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="id"            TYPE="int"  LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="agentid"       TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="activegroupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="agentid" TYPE="unique" FIELDS="agentid"/>
+        <KEY NAME="id"      TYPE="primary" FIELDS="id"/>
+        <KEY NAME="agentid" TYPE="unique"  FIELDS="agentid"/>
       </KEYS>
     </TABLE>
 
@@ -102,71 +102,75 @@
 
     <TABLE NAME="modlos_group_membership" COMMENT="Modlos Group Membership">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="groupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="agentid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="selectedroleid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="contribution" TYPE="int" LENGTH="11" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="listinprofile" TYPE="int" LENGTH="11" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
-        <FIELD NAME="acceptnotices" TYPE="int" LENGTH="11" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="id"             TYPE="int"  LENGTH="11" NOTNULL="true"             SEQUENCE="true"/>
+        <FIELD NAME="groupid"        TYPE="char" LENGTH="64" NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="agentid"        TYPE="char" LENGTH="64" NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="selectedroleid" TYPE="char" LENGTH="64" NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="contribution"   TYPE="int"  LENGTH="11" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="listinprofile"  TYPE="int"  LENGTH="11" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="acceptnotices"  TYPE="int"  LENGTH="11" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="groupid" TYPE="unique" FIELDS="groupid, agentid"/>
+        <KEY NAME="id"      TYPE="primary" FIELDS="id"/>
+        <KEY NAME="groupid" TYPE="unique"  FIELDS="groupid, agentid"/>
       </KEYS>
     </TABLE>
+
     <TABLE NAME="modlos_group_notice" COMMENT="Modlos Group Notice">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="groupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="noticeid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="timestamp" TYPE="int" LENGTH="11" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="fromname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="subject" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="message" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="binarybucket" TYPE="binary" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="id"           TYPE="int"  LENGTH="11"  NOTNULL="true"             SEQUENCE="true"/>
+        <FIELD NAME="groupid"      TYPE="char" LENGTH="64"  NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="noticeid"     TYPE="char" LENGTH="64"  NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="timestamp"    TYPE="int"  LENGTH="11"  NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="fromname"     TYPE="char" LENGTH="255" NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="subject"      TYPE="char" LENGTH="255" NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="message"      TYPE="text"              NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="binarybucket" TYPE="binary"            NOTNULL="true"             SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="groupid" TYPE="unique" FIELDS="groupid, noticeid"/>
+        <KEY NAME="id"      TYPE="primary" FIELDS="id"/>
+        <KEY NAME="groupid" TYPE="unique"  FIELDS="groupid, noticeid"/>
       </KEYS>
       <INDEXES>
         <INDEX NAME="timestamp" UNIQUE="false" FIELDS="timestamp"/>
       </INDEXES>
     </TABLE>
+
     <TABLE NAME="modlos_group_rolemembership" COMMENT="Modlos Group Role Membership">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="id"      TYPE="int"  LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="groupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="roleid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="roleid"  TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="agentid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="groupid" TYPE="unique" FIELDS="groupid, roleid, agentid"/>
+        <KEY NAME="id"      TYPE="primary" FIELDS="id"/>
+        <KEY NAME="groupid" TYPE="unique"  FIELDS="groupid, roleid, agentid"/>
       </KEYS>
     </TABLE>
+
     <TABLE NAME="modlos_group_role" COMMENT="Modlos Group Role">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="groupid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="roleid" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="description" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="powers" TYPE="int" LENGTH="20" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="id"          TYPE="int"  LENGTH="11"  NOTNULL="true"             SEQUENCE="true"/>
+        <FIELD NAME="groupid"     TYPE="char" LENGTH="64"  NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="roleid"      TYPE="char" LENGTH="64"  NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="name"        TYPE="char" LENGTH="255" NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="description" TYPE="char" LENGTH="255" NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="title"       TYPE="char" LENGTH="255" NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="powers"      TYPE="int"  LENGTH="20"  NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="groupid" TYPE="unique" FIELDS="groupid, roleid"/>
+        <KEY NAME="id"      TYPE="primary" FIELDS="id"/>
+        <KEY NAME="groupid" TYPE="unique"  FIELDS="groupid, roleid"/>
       </KEYS>
     </TABLE>
+
     <TABLE NAME="modlos_offline_message" COMMENT="Modlos Offline Message">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="to_uuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="id"        TYPE="int"  LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="to_uuid"   TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="from_uuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="message" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="message"   TYPE="text"             NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="id" TYPE="primary" FIELDS="id"/>
@@ -175,123 +179,130 @@
         <INDEX NAME="to_uuid" UNIQUE="false" FIELDS="to_uuid"/>
       </INDEXES>
     </TABLE>
+
     <TABLE NAME="modlos_profile_classifieds" COMMENT="Modlos Profile Classifieds">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="classifieduuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="creatoruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="creationdate" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="expirationdate" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="category" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="description" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="parceluuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="parentestate" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="snapshotuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="simname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="posglobal" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="parcelname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="classifiedflags" TYPE="int" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="priceforlisting" TYPE="int" LENGTH="5" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="id"              TYPE="int"  LENGTH="11"  NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="classifieduuid"  TYPE="char" LENGTH="36"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="creatoruuid"     TYPE="char" LENGTH="36"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="creationdate"    TYPE="int"  LENGTH="20"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="expirationdate"  TYPE="int"  LENGTH="20"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="category"        TYPE="char" LENGTH="20"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="name"            TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="description"     TYPE="text"              NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="parceluuid"      TYPE="char" LENGTH="36"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="parentestate"    TYPE="int"  LENGTH="11"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="snapshotuuid"    TYPE="char" LENGTH="36"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="simname"         TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="posglobal"       TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="parcelname"      TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="classifiedflags" TYPE="int"  LENGTH="8"   NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="priceforlisting" TYPE="int"  LENGTH="5"   NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="classifieduuid" TYPE="unique" FIELDS="classifieduuid"/>
+        <KEY NAME="id"             TYPE="primary" FIELDS="id"/>
+        <KEY NAME="classifieduuid" TYPE="unique"  FIELDS="classifieduuid"/>
       </KEYS>
     </TABLE>
+
     <TABLE NAME="modlos_profile_usernotes" COMMENT="Modlos Profile User Notes">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="useruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="id"         TYPE="int"  LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="useruuid"   TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="targetuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="notes" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="notes"      TYPE="text"             NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="useruuid" TYPE="unique" FIELDS="useruuid, targetuuid"/>
+        <KEY NAME="id"       TYPE="primary" FIELDS="id"/>
+        <KEY NAME="useruuid" TYPE="unique"  FIELDS="useruuid, targetuuid"/>
       </KEYS>
     </TABLE>
+
     <TABLE NAME="modlos_profile_userpicks" COMMENT="Modlos Profile User Picks">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="pickuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="creatoruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="toppick" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false"/>
-        <FIELD NAME="parceluuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="description" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="snapshotuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="user" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="originalname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="simname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="posglobal" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="sortorder" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="enabled" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false"/>
-        <FIELD NAME="gatekeeper" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="id"           TYPE="int"  LENGTH="11"  NOTNULL="true"                 SEQUENCE="true"/>
+        <FIELD NAME="pickuuid"     TYPE="char" LENGTH="36"  NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="creatoruuid"  TYPE="char" LENGTH="36"  NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="toppick"      TYPE="char" LENGTH="6"   NOTNULL="true" DEFAULT="false" SEQUENCE="false"/>
+        <FIELD NAME="parceluuid"   TYPE="char" LENGTH="36"  NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="name"         TYPE="char" LENGTH="255" NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="description"  TYPE="text"              NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="snapshotuuid" TYPE="char" LENGTH="36"  NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="user"         TYPE="char" LENGTH="255" NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="originalname" TYPE="char" LENGTH="255" NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="simname"      TYPE="char" LENGTH="255" NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="posglobal"    TYPE="char" LENGTH="255" NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="sortorder"    TYPE="int"  LENGTH="2"   NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="enabled"      TYPE="char" LENGTH="6"   NOTNULL="true" DEFAULT="false" SEQUENCE="false"/>
+        <FIELD NAME="gatekeeper"   TYPE="char" LENGTH="255" NOTNULL="true"                 SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="pickuuid" TYPE="unique" FIELDS="pickuuid"/>
+        <KEY NAME="id"       TYPE="primary" FIELDS="id"/>
+        <KEY NAME="pickuuid" TYPE="unique"  FIELDS="pickuuid"/>
       </KEYS>
     </TABLE>
+
     <TABLE NAME="modlos_profile_userprofile" COMMENT="Modlos Profile User Profile">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="useruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profilepartner" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profileimage" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profileabouttext" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profileallowpublish"  TYPE="binary" LENGTH="1" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profilematurepublish" TYPE="binary" LENGTH="1" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profileurl" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profilewanttomask" TYPE="int" LENGTH="3" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profilewanttotext" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profileskillsmask" TYPE="int" LENGTH="3" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profileskillstext" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profilelanguagestext" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profilefirstimage" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="profilefirsttext" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="id"                   TYPE="int"    LENGTH="11"  NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="useruuid"             TYPE="char"   LENGTH="36"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profilepartner"       TYPE="char"   LENGTH="36"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profileimage"         TYPE="char"   LENGTH="36"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profileabouttext"     TYPE="text"                NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profileallowpublish"  TYPE="binary" LENGTH="1"   NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profilematurepublish" TYPE="binary" LENGTH="1"   NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profileurl"           TYPE="char"   LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profilewanttomask"    TYPE="int"    LENGTH="3"   NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profilewanttotext"    TYPE="text"                NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profileskillsmask"    TYPE="int"    LENGTH="3"   NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profileskillstext"    TYPE="text"                NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profilelanguagestext" TYPE="text"                NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profilefirstimage"    TYPE="char"   LENGTH="36"  NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="profilefirsttext"     TYPE="text"                NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="useruuid" TYPE="unique" FIELDS="useruuid"/>
+        <KEY NAME="id"       TYPE="primary" FIELDS="id"/>
+        <KEY NAME="useruuid" TYPE="unique"  FIELDS="useruuid"/>
       </KEYS>
     </TABLE>
+
     <TABLE NAME="modlos_profile_usersettings" COMMENT="Modlos Profile User Settings">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="useruuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="imviaemail" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="false" SEQUENCE="false"/>
-        <FIELD NAME="visible" TYPE="char" LENGTH="6" NOTNULL="true" DEFAULT="true" SEQUENCE="false"/>
-        <FIELD NAME="email" TYPE="char" LENGTH="254" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="id"         TYPE="int"  LENGTH="11"  NOTNULL="true"                 SEQUENCE="true"/>
+        <FIELD NAME="useruuid"   TYPE="char" LENGTH="36"  NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="imviaemail" TYPE="char" LENGTH="6"   NOTNULL="true" DEFAULT="false" SEQUENCE="false"/>
+        <FIELD NAME="visible"    TYPE="char" LENGTH="6"   NOTNULL="true" DEFAULT="true"  SEQUENCE="false"/>
+        <FIELD NAME="email"      TYPE="char" LENGTH="254" NOTNULL="true"                 SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="id" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="useruuid" TYPE="unique" FIELDS="useruuid"/>
+        <KEY NAME="id"       TYPE="primary" FIELDS="id"/>
+        <KEY NAME="useruuid" TYPE="unique"  FIELDS="useruuid"/>
       </KEYS>
     </TABLE>
+
     <TABLE NAME="modlos_mute_list" COMMENT="Modlos Mute List Table">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="agentid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="muteid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="mutename" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="mutetype" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="muteflags" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="timestamp" TYPE="int" LENGTH="11" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="id"        TYPE="int"  LENGTH="10"  NOTNULL="true"             SEQUENCE="true"/>
+        <FIELD NAME="agentid"   TYPE="char" LENGTH="36"  NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="muteid"    TYPE="char" LENGTH="36"  NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="mutename"  TYPE="char" LENGTH="255" NOTNULL="true"             SEQUENCE="false"/>
+        <FIELD NAME="mutetype"  TYPE="int"  LENGTH="10"  NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="muteflags" TYPE="int"  LENGTH="10"  NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timestamp" TYPE="int"  LENGTH="11"  NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="muteid" TYPE="unique" FIELDS="agentid, muteid, mutename"/>
+        <KEY NAME="muteid"  TYPE="unique"  FIELDS="agentid, muteid, mutename"/>
       </KEYS>
     </TABLE>
+
     <TABLE NAME="modlos_login_screen" COMMENT="Login Screen Alert Information Box">
       <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="information" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="bordercolor" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="white" SEQUENCE="false"/>
-        <FIELD NAME="timestamp" TYPE="int" LENGTH="11" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="id"          TYPE="int"  LENGTH="10"  NOTNULL="true"                 SEQUENCE="true"/>
+        <FIELD NAME="title"       TYPE="char" LENGTH="255" NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="information" TYPE="text"              NOTNULL="true"                 SEQUENCE="false"/>
+        <FIELD NAME="bordercolor" TYPE="char" LENGTH="20"  NOTNULL="true" DEFAULT="white" SEQUENCE="false"/>
+        <FIELD NAME="timestamp"   TYPE="int"  LENGTH="11"  NOTNULL="true" DEFAULT="0"     SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="id" TYPE="primary" FIELDS="id"/>
@@ -402,6 +413,7 @@
         <INDEX NAME="dwell"          UNIQUE="false" FIELDS="dwell"/>
       </INDEXES>
     </TABLE>
+
     <TABLE NAME="modlos_search_parcelsales" COMMENT="Parcel Sales">
       <FIELDS>
         <FIELD NAME="id"           TYPE="int"  LENGTH="10"  NOTNULL="true"                                                SEQUENCE="true"/>
