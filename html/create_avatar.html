@@ -150,13 +150,11 @@
           </td>
         </tr>
 
-        <?php if ($this->use_sloodle and $this->avatars_num>0) {?>
+        <?php if ($this->use_sloodle and $this->sloodle_num==0) {?>
           <tr>
             <td class="head"><?php echo $sloodle_ttl?></td>
             <td class="odd "><input name="sloodle" type="checkbox" value="sloodle" />&nbsp;<?php echo $manage_sloodle?></td>
           </tr>
-        <?php } else {?>
-          <input type="hidden" name="sloodle" value="sloodle" />
         <?php }?>
 
         <?php if ($hasPermit) {?>

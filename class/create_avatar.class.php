@@ -26,13 +26,14 @@ class  CreateAvatar
     var $total_num       = 0;
     var $isPost          = false;
 
-    var    $avatars_num  = 0;
-    var    $max_avatars  = 0;
+    var $avatars_num     = 0;
+    var $max_avatars     = 0;
     var $isAvatarMax     = false;
+    var $sloodle_num     = 0;
 
     var $course_id       = 0;
     var $use_sloodle     = false;
-    var    $isDisclaimer = false;
+    var $isDisclaimer    = false;
 
     var $hasError        = false;
     var $errorMsg        = array();
@@ -45,7 +46,7 @@ class  CreateAvatar
     var $lastname        = '';
     var $passwd          = '';
     var $hmregion        = '';
-    var $ownername       = '';            // owner name of avatar
+    var $ownername       = '';           // owner name of avatar
 
 
     function  __construct($course_id)
@@ -115,6 +116,7 @@ class  CreateAvatar
             } while ($modobj!=null);
             $this->nx_UUID = $uuid;
         }
+        $this->uid = $USER->id;
 
         //
         $this->regionNames = opensim_get_regions_names(false, '', 'regionName ASC');
@@ -141,7 +143,7 @@ class  CreateAvatar
             $name = opensim_get_avatar_name($template->uuid);
             if ($name) $this->db_data[$count]['fullname'] = $name['fullname'];
 
-            $usercontext = context_user::instance($USER->id);   // dummy. see lib.php
+            $usercontext = context_user::instance($this->uid);   // dummy. see lib.php
             if ($template->filename) {
                 $path = '@@PLUGINFILE@@/'.$template->filename;
                 $this->db_data[$count]['url'] = file_rewrite_pluginfile_urls($path, 'pluginfile.php', $usercontext->id, 'block_modlos', 'templ_picture', $template->itemid);
@@ -165,8 +167,8 @@ class  CreateAvatar
 
             $this->firstname  = optional_param('firstname',  '',  PARAM_TEXT);
             $this->lastname   = optional_param('lastname',   '',  PARAM_TEXT);
-            $this->passwd      = optional_param('passwd','',      PARAM_TEXT);
-            $confirm_pass      = optional_param('confirm_pass','',PARAM_TEXT);
+            $this->passwd     = optional_param('passwd','',       PARAM_TEXT);
+            $confirm_pass     = optional_param('confirm_pass','', PARAM_TEXT);
             $this->hmregion   = optional_param('hmregion',   '',  PARAM_TEXT);
             $this->select_num = optional_param('select_num','-1', PARAM_INT);
         
@@ -241,7 +243,7 @@ class  CreateAvatar
             $this->select_num = 0;        // reset
             $this->isPost = true;
             //
-            $this->avatars_num = modlos_get_avatars_num($USER->id);
+            $this->avatars_num = modlos_get_avatars_num($this->uid);
             $this->max_avatars = $CFG->modlos_max_own_avatars;
             if (!$this->hasPermit and $this->max_avatars>=0 and $this->avatars_num>=$this->max_avatars) $this->isAvatarMax = true;
         }
@@ -265,28 +267,28 @@ class  CreateAvatar
         $grid_name     = $CFG->modlos_grid_name;
         $disclaimer    = $CFG->modlos_disclaimer_content;
         $use_template  = $CFG->modlos_template_system;
-//        $hide_template = $CFG->modlos_template_hide;
+//      $hide_template = $CFG->modlos_template_hide;
 
         $avatar_create_ttl  = get_string('modlos_avatar_create',  'block_modlos');
         $avatar_select_ttl  = get_string('modlos_avatar_select',  'block_modlos');
-        $uuid_ttl           = get_string('modlos_uuid',              'block_modlos');
+        $uuid_ttl           = get_string('modlos_uuid',           'block_modlos');
         $firstname_ttl      = get_string('modlos_firstname',      'block_modlos');
-        $lastname_ttl       = get_string('modlos_lastname',          'block_modlos');
-        $passwd_ttl         = get_string('modlos_password',          'block_modlos');
+        $lastname_ttl       = get_string('modlos_lastname',       'block_modlos');
+        $passwd_ttl         = get_string('modlos_password',       'block_modlos');
         $confirm_pass_ttl   = get_string('modlos_confirm_pass',   'block_modlos');
-        $home_region_ttl    = get_string('modlos_home_region',      'block_modlos');
+        $home_region_ttl    = get_string('modlos_home_region',    'block_modlos');
         $ownername_ttl      = get_string('modlos_ownername',      'block_modlos');
-        $invalid_ttl        = get_string('modlos_invalid',           'block_modlos');
-        $create_ttl         = get_string('modlos_create_ttl',      'block_modlos');
+        $invalid_ttl        = get_string('modlos_invalid',        'block_modlos');
+        $create_ttl         = get_string('modlos_create_ttl',     'block_modlos');
         $reset_ttl          = get_string('modlos_reset_ttl',      'block_modlos');
-        $return_ttl         = get_string('modlos_return_ttl',      'block_modlos');
+        $return_ttl         = get_string('modlos_return_ttl',     'block_modlos');
         $template_ttl       = get_string('modlos_templ_avatar',   'block_modlos');
         $avatar_created     = get_string('modlos_avatar_created', 'block_modlos');
-        $sloodle_ttl        = get_string('modlos_sloodle_ttl',      'block_modlos');
+        $sloodle_ttl        = get_string('modlos_sloodle_ttl',    'block_modlos');
         $manage_sloodle     = get_string('modlos_manage_sloodle', 'block_modlos');
 
-        $disclaimer_ttl     = get_string('modlos_disclaimer',       'block_modlos');
-        $disclaim_agree     = get_string('modlos_disclaimer_agree','block_modlos');
+        $disclaimer_ttl     = get_string('modlos_disclaimer',           'block_modlos');
+        $disclaim_agree     = get_string('modlos_disclaimer_agree',     'block_modlos');
         $disclaim_need_agree= get_string('modlos_need_agree_disclaimer','block_modlos');
 
         $select_avatar_ttl  = get_string('modlos_templ_select_ttl','block_modlos');
@@ -298,10 +300,12 @@ class  CreateAvatar
         $hasPermit  = $this->hasPermit;
         $is_avatar_max = $this->isAvatarMax;
 
+        if ($this->use_sloodle) $this->sloodle_num = modlos_check_sloodle_user($this->uid);
+
         // 
         $pv_ownername = $this->ownername;
         if ($this->created_avatar) {
-                    $pv_firstname = '';
+            $pv_firstname = '';
             $pv_lastname  = 'Resident';
         }
         else {
@@ -373,7 +377,7 @@ class  CreateAvatar
                 if ($user_info==null) {
                     $this->hasError = true;
                     $this->errorMsg[] = get_string('modlos_ownername', 'block_modlos').' ('.stripslashes($this->ownername).')';
-                //    $this->errorMsg[] = get_string('modlos_nouser_found', 'block_modlos').' ('.$names['firstname'].' '.$names['lastname'].')';
+                    //$this->errorMsg[] = get_string('modlos_nouser_found', 'block_modlos').' ('.$names['firstname'].' '.$names['lastname'].')';
                     $this->ownername = '';
                     $this->uid = '0';
                     //return false;
@@ -382,12 +386,12 @@ class  CreateAvatar
             }
             else $this->uid = '0';
         }
-        else $this->uid = $USER->id;
 
         // Sloodle
+        if ($this->use_sloodle) $this->sloodle_num = modlos_check_sloodle_user($this->uid);
         $state   = AVATAR_STATE_SYNCDB;
         $sloodle = optional_param('sloodle', '', PARAM_ALPHA);
-        if ($sloodle!='' and $this->use_sloodle) $state = (int)$state | AVATAR_STATE_SLOODLE;
+        if ($sloodle!='' and $this->use_sloodle and $this->sloodle_num==0) $state = (int)$state | AVATAR_STATE_SLOODLE;
 
         //
         $new_user['UUID']      = $this->UUID;

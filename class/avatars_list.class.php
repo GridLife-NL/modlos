@@ -9,9 +9,9 @@ require_once(realpath(CMS_MODULE_PATH.'/include/modlos.func.php'));
 
 class  AvatarsList
 {
-    var $db_data      = array();
-    var $icon         = array();
-    var $pnum         = array();
+    var $db_data       = array();
+    var $icon          = array();
+    var $pnum          = array();
 
     var $action_url;
     var $edit_url;
@@ -20,23 +20,23 @@ class  AvatarsList
     var $avatar_url;
     var $owner_url;
 
-    var $course_id    = 0;
+    var $course_id     = 0;
 
-    var $user_id      = 0;
-    var $url_params   = '';
-    var $action_params= '';
+    var $user_id       = 0;
+    var $url_params    = '';
+    var $action_params = '';
 
-    var $use_sloodle  = false;
-    var $isAvatarMax  = false;
-    var    $use_currency = false;
+    var $use_sloodle   = false;
+    var $isAvatarMax   = false;
+    var $use_currency  = false;
 
-    var $show_all     = false;
-    var $hasPermit    = false;
-    var $isGuest      = true;
+    var $show_all      = false;
+    var $hasPermit     = false;
+    var $isGuest       = true;
 
     // Page Control
-    var $Cpstart      = 0;
-    var $Cplimit      = 25;
+    var $Cpstart       = 0;
+    var $Cplimit       = 25;
     var $pstart;
     var $plimit;
     var $number;
@@ -127,7 +127,7 @@ class  AvatarsList
         }
         else {
             if ($this->firstname!='') { 
-                 $sql_firstname = "FirstName LIKE '$this->firstname'";
+                $sql_firstname = "FirstName LIKE '$this->firstname'";
                 $this->lnk_firstname = "&amp;firstname=$this->firstname";
             }
             if ($this->lastname!='') { 
@@ -395,27 +395,27 @@ class  AvatarsList
         $desc_login     = "&amp;desc=$this->desc_login";
         $desc_created   = "&amp;desc=$this->desc_created";
 
-        $number_ttl     = get_string('modlos_num',             'block_modlos');
-        $edit_ttl       = get_string('modlos_edit',             'block_modlos');
-        $show_ttl       = get_string('modlos_show',             'block_modlos');
-        $editable_ttl   = get_string('modlos_edit_ttl',         'block_modlos');
-        $lastlogin_ttl  = get_string('modlos_login_time',     'block_modlos');
-        $status_ttl     = get_string('modlos_status',         'block_modlos');
-        $crntregion_ttl = get_string('modlos_crntregion',     'block_modlos');
+        $number_ttl     = get_string('modlos_num',           'block_modlos');
+        $edit_ttl       = get_string('modlos_edit',          'block_modlos');
+        $show_ttl       = get_string('modlos_show',          'block_modlos');
+        $editable_ttl   = get_string('modlos_edit_ttl',      'block_modlos');
+        $lastlogin_ttl  = get_string('modlos_login_time',    'block_modlos');
+        $status_ttl     = get_string('modlos_status',        'block_modlos');
+        $crntregion_ttl = get_string('modlos_crntregion',    'block_modlos');
         $owner_ttl      = get_string('modlos_owner',         'block_modlos');
         $get_owner_ttl  = get_string('modlos_get_owner_ttl', 'block_modlos');
-        $firstname_ttl  = get_string('modlos_firstname',      'block_modlos');
+        $firstname_ttl  = get_string('modlos_firstname',     'block_modlos');
         $lastname_ttl   = get_string('modlos_lastname',      'block_modlos');
-        $avatarname_ttl = get_string('modlos_avatar_name',      'block_modlos');
-        $not_syncdb_ttl = get_string('modlos_not_syncdb',     'block_modlos');
-        $online_ttl     = get_string('modlos_online_ttl',     'block_modlos');
-        $active_ttl     = get_string('modlos_active',         'block_modlos');
-        $inactive_ttl   = get_string('modlos_inactive',         'block_modlos');
+        $avatarname_ttl = get_string('modlos_avatar_name',   'block_modlos');
+        $not_syncdb_ttl = get_string('modlos_not_syncdb',    'block_modlos');
+        $online_ttl     = get_string('modlos_online_ttl',    'block_modlos');
+        $active_ttl     = get_string('modlos_active',        'block_modlos');
+        $inactive_ttl   = get_string('modlos_inactive',      'block_modlos');
         $reset_ttl      = get_string('modlos_reset_ttl',     'block_modlos');
         $find_owner_ttl = get_string('modlos_find_owner_ttl','block_modlos');
         $unknown_status = get_string('modlos_unknown_status','block_modlos');
-        $page_num       = get_string('modlos_page',             'block_modlos');
-        $page_num_of    = get_string('modlos_page_of',         'block_modlos');
+        $page_num       = get_string('modlos_page',          'block_modlos');
+        $page_num_of    = get_string('modlos_page_of',       'block_modlos');
         $user_search    = get_string('modlos_avatar_search', 'block_modlos');
         $users_found    = get_string('modlos_avatars_found', 'block_modlos');
         $sloodle_ttl    = get_string('modlos_sloodle_short', 'block_modlos');

@@ -57,8 +57,8 @@ class  AvatarsOnline
         $this->use_sloodle = $CFG->modlos_cooperate_sloodle;
         $this->url_params  = '?course='.$course_id;
 
-        $this->action_url = CMS_MODULE_URL.'/actions/avatars_online.php'.$this->url_params;
-        $this->avatar_url = CMS_MODULE_URL.'/actions/avatars_list.php'.  $this->url_params.'&amp;action=personal&amp;userid=';
+        $this->action_url  = CMS_MODULE_URL.'/actions/avatars_online.php'.$this->url_params;
+        $this->avatar_url  = CMS_MODULE_URL.'/actions/avatars_list.php'.  $this->url_params.'&amp;action=personal&amp;userid=';
 //        $this->avatar_url = $CFG->wwwroot.'/user/view.php'.$this->url_params.'&amp;id=';
 
         $my_avatars = modlos_get_avatars_num($USER->id);

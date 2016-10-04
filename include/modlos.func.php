@@ -188,25 +188,25 @@ function  modlos_get_avatars($uid=0, $use_sloodle=false)
     if (!isNumeric($uid)) return null;
 
     if ($uid==0) $users = $DB->get_records('modlos_users');
-    else          $users = $DB->get_records('modlos_users', array('user_id'=>$uid));
+    else         $users = $DB->get_records('modlos_users', array('user_id'=>$uid));
 
     $avatars = array();
     if ($users!=null) {
         foreach ($users as $user) {
             $uuid = $user->uuid;
             $avatars[$uuid]['UUID']     = $user->uuid;
-            $avatars[$uuid]['user_id']     = $user->user_id;
+            $avatars[$uuid]['user_id']  = $user->user_id;
             $avatars[$uuid]['firstname']= $user->firstname;
             $avatars[$uuid]['lastname'] = $user->lastname;
             $avatars[$uuid]['hmregion'] = $user->hmregion;
-            $avatars[$uuid]['state']     = $user->state;
+            $avatars[$uuid]['state']    = $user->state;
             $avatars[$uuid]['time']     = $user->time;
             $avatars[$uuid]['fullname'] = $avatars[$uuid]['firstname']." ".$avatars[$uuid]['lastname'];
         }
     }
 
     if ($use_sloodle) {
-         if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
+         if (jbxl_db_exist_table(MDL_SLOODLE_USERS_TBL)) {
             if ($uid==0) $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);
             else         $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL, array('userid'=>$uid));
 
@@ -251,7 +251,7 @@ function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
     else $num = 0;
 
     if ($use_sloodle) {
-         if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
+         if (jbxl_db_exist_table(MDL_SLOODLE_USERS_TBL)) {
             if ($uid==0) $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);
             else         $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL, array('userid'=>$uid));
 
@@ -288,11 +288,11 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 
     if (!isGUID($uuid)) return null;
 
-    $avatar = $DB->get_record('modlos_users', array('uuid'=>$uuid));        
+    $avatar = $DB->get_record('modlos_users', array('uuid'=>$uuid)); 
 
     $sloodle = null;
     if ($use_sloodle) {
-         if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
+         if (jbxl_db_exist_table(MDL_SLOODLE_USERS_TBL)) {
             $sloodle = $DB->get_record(MDL_SLOODLE_USERS_TBL, array('uuid'=>$uuid));
             if ($sloodle!=null) {
                 $names = null;
@@ -339,7 +339,7 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 
     // Sloodle
     if ($use_sloodle) {
-         if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
+         if (jbxl_db_exist_table(MDL_SLOODLE_USERS_TBL)) {
             $updobj = $DB->get_record(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
             if ($updobj==null) {
                 if ((int)$avatar['state']&AVATAR_STATE_SLOODLE) {
@@ -366,7 +366,7 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
     }
 
     // Modlos
-    $obj = $DB->get_record('modlos_users', array('uuid'=>$avatar['UUID']));        
+    $obj = $DB->get_record('modlos_users', array('uuid'=>$avatar['UUID'])); 
     if ($obj==null) {
         $ret = modlos_insert_userstable($avatar);
     }
@@ -386,7 +386,7 @@ function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 
     // Sloodle
     if ($use_sloodle) {
-         if (jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) {
+         if (jbxl_db_exist_table(MDL_SLOODLE_USERS_TBL)) {
             $ret = $DB->delete_records(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
         }
     }
@@ -472,7 +472,7 @@ function  modlos_update_userstable($user, $updobj=null)
     if (!isGUID($user['UUID'])) return false;
 
     if ($updobj==null) {
-        $updobj = $DB->get_record('modlos_users', array('uuid'=>$user['UUID']));        
+        $updobj = $DB->get_record('modlos_users', array('uuid'=>$user['UUID']));
         if ($updobj==null) return false;
     }
 
@@ -577,8 +577,8 @@ function  modlos_delete_groupdb_by_uuid($uuid)
 { 
     global $DB;
 
-    $DB->delete_records(MDL_XMLGROUP_ACTIVE_TBL,       array('agentid'=>$uuid));
-    $DB->delete_records(MDL_XMLGROUP_INVITE_TBL,       array('agentid'=>$uuid));
+    $DB->delete_records(MDL_XMLGROUP_ACTIVE_TBL,      array('agentid'=>$uuid));
+    $DB->delete_records(MDL_XMLGROUP_INVITE_TBL,      array('agentid'=>$uuid));
     $DB->delete_records(MDL_XMLGROUP_MEMBERSHIP_TBL,  array('agentid'=>$uuid));
     $DB->delete_records(MDL_XMLGROUP_ROLE_MEMBER_TBL, array('agentid'=>$uuid));
 
@@ -1106,7 +1106,7 @@ function  modlos_sync_opensimdb($update_check=true)
 
     // OpenSimにデータがある場合は，Modlos のデータを OpenSimにあわせる．
     foreach ($opnsim_users as $opnsim_user) {
-        $opnsim_uuid = $opnsim_user['UUID'];    
+        $opnsim_uuid = $opnsim_user['UUID']; 
         $opnsim_user['hmregion'] = opensim_get_region_name($opnsim_user['hmregion_id']);    // OpenSim DB のホームリージョン名
         //
         //     ホームリージョンの名前を更新
@@ -1134,7 +1134,7 @@ function  modlos_sync_sloodle_users($update_check=true)
 {
     global $DB, $CFG;
 
-     if (!jbxl_db_exist_table(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL)) return;
+    if (!jbxl_db_exist_table(MDL_SLOODLE_USERS_TBL)) return;
 
     if ($update_check) {
         $sloodle_up = modlos_get_update_time(MDL_DB_PREFIX.MDL_SLOODLE_USERS_TBL);        // InnoDB の場合は常に 0
@@ -1169,6 +1169,39 @@ function  modlos_sync_sloodle_users($update_check=true)
         }
     }
     return;
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+//
+// Sloodle
+//
+
+/*
+return
+  0 : there is no sloodle support user
+ >0 : number of sloodle support users (usually 1)
+ -1 : this uuid is supported as sloodle user
+*/
+function  modlos_check_sloodle_user($userid, $uuid=null)
+{
+    global $DB;
+
+    $num = 0;
+    $avatars = $DB->get_records('modlos_users', array('user_id'=>$userid)); 
+
+    foreach($avatars as $avatar) {
+        if ($avatar->state&AVATAR_STATE_SLOODLE) {
+            $num++;
+            if ($avatar->uuid==$uuid) {
+                $num = -1;
+                break;
+            }
+        }
+    }
+
+    return $num;
 }
 
 
