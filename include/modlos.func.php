@@ -21,8 +21,9 @@
  function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
 
  function  modlos_get_avatar_info($uuid, $use_sloodle=false)
- function  modlos_set_avatar_info($avatar, $use_sloodle=false)
  function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
+
+ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 
  // User Table
  function  modlos_get_userstable()
@@ -62,6 +63,9 @@
  // Synchro DB
  function  modlos_sync_opensimdb($timecheck=true)
  function  modlos_sync_sloodle_users($timecheck=true)
+
+ // Sloodle
+ function  modlos_check_sloodle_user($userid, $uuid=null)
 
  // Tab Menu
  function  print_tabnav($currenttab, $course, $create_tab=true)
@@ -342,21 +346,22 @@ function  modlos_set_avatar_info($avatar, $use_sloodle=false)
          if (jbxl_db_exist_table(MDL_SLOODLE_USERS_TBL)) {
             $updobj = $DB->get_record(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
             if ($updobj==null) {
-                if ((int)$avatar['state']&AVATAR_STATE_SLOODLE) {
+                if (((int)$avatar['state'])&AVATAR_STATE_SLOODLE) {
                     $insobj = new stdClass();
                     $insobj->userid = $avatar['uid'];
                     $insobj->uuid   = $avatar['UUID'];
                     $insobj->avname = $avatar['firstname'].' '.$avatar['lastname'];
                     if ($insobj->avname==' ') $insobj->avname = '';
-                    $insobj->lastactive = time();
+                    $insobj->lastactive = 0;
                     $ret = $DB->insert_record(MDL_SLOODLE_USERS_TBL, $insobj);
                 }
             }
             else {
-                if ((int)$avatar['state']&AVATAR_STATE_SLOODLE and $avatar['uid']!=0) {
-                    $updobj->userid = $avatar['uid'];
-                    $updobj->lastactive = time();
-                    $ret = $DB->update_record(MDL_SLOODLE_USERS_TBL, $updobj);
+                if (((int)$avatar['state'])&AVATAR_STATE_SLOODLE and $avatar['uid']!=0) {
+                    if ($updobj->userid!=$avatar['uid']) {
+                        $updobj->userid = $avatar['uid'];
+                        $ret = $DB->update_record(MDL_SLOODLE_USERS_TBL, $updobj);
+                    }
                 }
                 else {
                     $ret = $DB->delete_records(MDL_SLOODLE_USERS_TBL, array('uuid'=>$avatar['UUID']));
@@ -1162,7 +1167,7 @@ function  modlos_sync_sloodle_users($update_check=true)
                 $DB->update_record('modlos_users', $modlos);
             }
             else if ((int)$modlos->state&AVATAR_STATE_SLOODLE) {
-                //$modlos->user_id = '0';
+                // Modlosにアバターデータがあるが，Sloodleにはない．
                 $modlos->state = (int)$modlos->state & AVATAR_STATE_NOSLOODLE;
                 $DB->update_record('modlos_users', $modlos);
             }

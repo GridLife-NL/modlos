@@ -231,19 +231,19 @@
         <td><strong style="color: #444444;"><?php echo $dat['lastin']?></strong></td>
         <td>
           <?php if ($dat['state']&AVATAR_STATE_INACTIVE) { ?>
-            <strong style="color: #cc0000;"><?php echo $inactive_ttl?></strong>
+            <strong style="color: #cc0000;"><?php echo $inactive_ttl?>&nbsp;</strong>
           <?php } else if ($dat['state']&AVATAR_STATE_SYNCDB) { ?>
             <?php if ($dat['online']) {?>
-            <strong style="color: #005500;"><?php echo $online_ttl?></strong>
+            <strong style="color: #005500;"><?php echo $online_ttl?>&nbsp;</strong>
             <?php } else {?>
-            <strong style="color: #0000cc;"><?php echo $active_ttl?></strong>
+            <strong style="color: #0000cc;"><?php echo $active_ttl?>&nbsp;</strong>
             <?php }?>
           <?php } else { ?>
-            <strong style="color: #cc0000;"><?php echo $not_syncdb_ttl?></strong>
+            <strong style="color: #cc0000;"><?php echo $not_syncdb_ttl?>&nbsp;</strong>
           <?php }?>
 
           <?php if ($dat['state']&AVATAR_STATE_SLOODLE and $dat['owner_name']!=' - ' and $this->use_sloodle) {?>
-            ,&nbsp;<?php echo $sloodle_ttl?>
+            <?php echo $sloodle_ttl?>
           <?php }?>
         </td>
 

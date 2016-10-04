@@ -27,7 +27,7 @@
     <?php if ($this->hasPermit) {?>
       <tr>
         <td width="120" class="head"><?php echo $uuid_ttl?></td>
-        <td width="320" class="even"style="color: #2060b0;"><?php echo $this->UUID?></td>	
+        <td width="320" class="even"style="color: #2060b0;"><?php echo $this->uuid?></td>	
       </tr>
     <?php }?>
 
@@ -55,7 +55,7 @@
         <?php } else {?>
           <style="color: #cc0000;"><?php echo $unknown_status?>
         <?php }?>
-        <?php if ($this->state&AVATAR_STATE_SLOODLE and $this->use_sloodle) {?>
+        <?php if ($this->use_sloodle and $this->sloodle_num<=0 and $this->state&AVATAR_STATE_SLOODLE) {?>
           ,&nbsp;<?php echo $sloodle_ttl?>
         <?php }?>
           </style>
@@ -78,7 +78,7 @@
 <form name="assignform" id="assignform" action="<?php echo $this->action_url?>" method="POST">
 
   <input type="hidden" name="course"  value="<?php echo $this->course_id?>" />
-  <input type="hidden" name="uuid"    value="<?php echo $this->UUID?>" />
+  <input type="hidden" name="uuid"    value="<?php echo $this->uuid?>" />
   <input type="hidden" name="sesskey" value="<?php echo sesskey()?>" />
 
   <table width="520" border="0" align="center" cellpadding="2" cellspacing="2" style="background-color:#ffffff;">
@@ -134,16 +134,14 @@
       </td>
     </tr>
 
-    <?php if ($this->use_sloodle) {?>
-      <?php if ($this->avatars_num>1 or $this->hasPermit) {?>
+    <?php if ($this->use_sloodle and $this->sloodle_num<=0) {?>
+      <?php if ($this->avatars_num>=1 or $this->hasPermit) {?>
         <tr>
           <td class="head"><?php echo $sloodle_ttl?></td>
           <td class="even">
             <input name="sloodle" type="checkbox" value="sloodle" <?php if ($this->state&AVATAR_STATE_SLOODLE) {?>checked<?php }?> />&nbsp;<?php echo $manage_sloodle?>
           </td>
         </tr>
-      <?php } else {?>
-        <input type="hidden" name="sloodle" value="sloodle" />
       <?php }?>
     <?php }?>
 

@@ -20,17 +20,19 @@ class  EditAvatar
 
     var $updated_avatar = false;
 
-    var $use_sloodle = false;
     var $avatars_num = false;
     var $max_avatars = false;
     var $isAvatarMax = false;
+
+    var $use_sloodle = false;
+    var $sloodle_num = 0;
 
     var $hasError    = false;
     var $errorMsg    = array();
 
     // Moodle DB
     var $avatar      = null;
-    var $UUID        = '';
+    var $uuid        = '';
     var $uid         = 0;
     var $firstname   = '';
     var $lastname    = '';
@@ -78,11 +80,11 @@ class  EditAvatar
             $mesg = ' '.get_string('modlos_invalid_uuid', 'block_modlos')." ($uuid)";
             print_error($mesg, '', $this->return_url);
         }
-        $this->UUID = $uuid;
+        $this->uuid = $uuid;
         $this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
         // get uid from Modlos and Sloodle DB
-        $avatar = modlos_get_avatar_info($this->UUID, $this->use_sloodle);
+        $avatar = modlos_get_avatar_info($this->uuid, $this->use_sloodle);
         $this->uid       = $avatar['uid'];
         $this->ostate    = (int)$avatar['state'];
         $this->firstname = $avatar['firstname'];
@@ -121,7 +123,7 @@ class  EditAvatar
             // Delete Avatar
             $del = optional_param('submit_delete', '', PARAM_TEXT);
             if ($del!='') {
-                redirect($this->delete_url.'&amp;uuid='.$this->UUID, 'Please wait ...', 0);
+                redirect($this->delete_url.'&amp;uuid='.$this->uuid, 'Please wait ...', 0);
                 exit('<h4>delete page open error!!</h4>');
             }
 
@@ -129,11 +131,6 @@ class  EditAvatar
             $state = optional_param('state', '', PARAM_INT);
             if ($state>0x80) $this->state = $this->ostate & $state;
             else             $this->state = $this->ostate | $state;
-
-            // Sloodle
-            $sloodle = optional_param('sloodle', '', PARAM_ALPHA);
-            if ($sloodle!='') $this->state |= AVATAR_STATE_SLOODLE;
-            else              $this->state &= AVATAR_STATE_NOSLOODLE;
 
             //
             $this->hmregion = optional_param('hmregion', '', PARAM_TEXT);
@@ -195,6 +192,12 @@ class  EditAvatar
 
             if ($this->hasError) return false;
 
+            // Sloodle
+            if ($this->use_sloodle) $this->sloodle_num = modlos_check_sloodle_user($this->uid, $this->uuid);
+            $sloodle = optional_param('sloodle', '', PARAM_ALPHA);
+            if ($this->sloodle_num<=0 and $sloodle!='') $this->state |= AVATAR_STATE_SLOODLE;
+            else                                        $this->state &= AVATAR_STATE_NOSLOODLE;
+
             //////////
             $this->updated_avatar = $this->updateAvatar();
             if (!$this->updated_avatar) {
@@ -215,6 +218,8 @@ class  EditAvatar
                 $this->ownername  = $user_info->username;   //get_display_username($user_info->firstname, $user_info->lastname);
             }
             else $this->ownername = $USER->username;        //get_display_username($USER->firstname, $USER->lastname);
+            //
+            if ($this->use_sloodle) $this->sloodle_num = modlos_check_sloodle_user($this->uid, $this->uuid);
         }
 
         return true;
@@ -260,7 +265,7 @@ class  EditAvatar
             $passwdsalt = make_random_hash();
             $passwdhash = md5(md5($this->passwd).':'.$passwdsalt);
 
-            $ret = opensim_set_password($this->UUID, $passwdhash, $passwdsalt);
+            $ret = opensim_set_password($this->uuid, $passwdhash, $passwdsalt);
             if (!$ret) {
                 $this->hasError = true;
                 $this->errorMsg[] = get_string('modlos_passwd_update_error', 'block_modlos');
@@ -270,7 +275,7 @@ class  EditAvatar
 
         // update Home Region
         if ($this->hmregion!='') {
-            $ret = opensim_set_home_region($this->UUID, $this->hmregion);
+            $ret = opensim_set_home_region($this->uuid, $this->hmregion);
             if (!$ret) {
                 $this->hasError = true;
                 $this->errorMsg[] = get_string('modlos_hmrgn_update_error', 'block_modlos');
@@ -282,7 +287,7 @@ class  EditAvatar
         if ($this->state!=$this->ostate) {
             // Avtive -> InAcvtive
             if (!($this->ostate&AVATAR_STATE_INACTIVE) and $this->state&AVATAR_STATE_INACTIVE) {
-                $ret = modlos_inactivate_avatar($this->UUID);
+                $ret = modlos_inactivate_avatar($this->uuid);
                 if (!$ret) {
                     $this->state &= AVATAR_STATE_ACTIVE;
                     $this->hasError = true;
@@ -292,7 +297,7 @@ class  EditAvatar
             }
             // InActive -> Acvtive
             elseif ($this->ostate&AVATAR_STATE_INACTIVE and !($this->state&AVATAR_STATE_INACTIVE)) {
-                $ret = modlos_activate_avatar($this->UUID);
+                $ret = modlos_activate_avatar($this->uuid);
                 if (!$ret) {
                     $this->state |= AVATAR_STATE_INACTIVE;
                     $this->hasError = true;
@@ -304,7 +309,7 @@ class  EditAvatar
 
         // Modlos and Sloodle DB
         $update_user['id']        = $this->avatar['id'];
-        $update_user['UUID']      = $this->UUID;
+        $update_user['UUID']      = $this->uuid;
         $update_user['uid']       = $this->uid;
         $update_user['firstname'] = $this->firstname;
         $update_user['lastname']  = $this->lastname;

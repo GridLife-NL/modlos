@@ -251,9 +251,10 @@ class  CreateAvatar
         // GET
         else {
             // Default Value
-            $this->hmregion    = $CFG->modlos_home_region;
-            $this->UUID        = $this->nx_UUID;
-            $this->ownername   = $USER->username; //get_display_username($USER->firstname, $USER->lastname);
+            $this->hmregion  = $CFG->modlos_home_region;
+            $this->UUID      = $this->nx_UUID;
+            $this->ownername = $USER->username; //get_display_username($USER->firstname, $USER->lastname);
+            if ($this->use_sloodle) $this->sloodle_num = modlos_check_sloodle_user($this->uid);
         }
 
         return true;
@@ -299,8 +300,6 @@ class  CreateAvatar
         $valid_num  = $this->valid_num;
         $hasPermit  = $this->hasPermit;
         $is_avatar_max = $this->isAvatarMax;
-
-        if ($this->use_sloodle) $this->sloodle_num = modlos_check_sloodle_user($this->uid);
 
         // 
         $pv_ownername = $this->ownername;

@@ -418,7 +418,7 @@ class  AvatarsList
         $page_num_of    = get_string('modlos_page_of',       'block_modlos');
         $user_search    = get_string('modlos_avatar_search', 'block_modlos');
         $users_found    = get_string('modlos_avatars_found', 'block_modlos');
-        $sloodle_ttl    = get_string('modlos_sloodle_short', 'block_modlos');
+        $sloodle_ttl    = get_string('modlos_sloodle_ttl',   'block_modlos');
         $currency_ttl   = get_string('modlos_currency_ttl',  'block_modlos');
 
         $avarars_list_url = CMS_MODULE_URL.'/actions/avatars_list.php'.$this->url_params;
