@@ -144,8 +144,7 @@ class  CurrencyManage
             }
 
             // Remake Total Sales DB
-            else if (isset($formdata->sales_limit))    
-            {
+            else if (isset($formdata->sales_limit)) {
                 $sales_limit = optional_param('sales_limit', $this->date_time, PARAM_TEXT);
                 $since = strtotime($sales_limit);
                 //
@@ -158,8 +157,7 @@ class  CurrencyManage
             }
 
             // Display Total Sales DB
-            else if (isset($formdata->sales_condition))    
-            {
+            else if (isset($formdata->sales_condition)) {
                 $sales_cndtn = optional_param('sales_condition', '', PARAM_TEXT);
                 $sales_order = optional_param('sales_order',     '', PARAM_TEXT);
                 $sales_cndtn = preg_replace('/[\'";#&\$\\\\]/', '', $sales_cndtn);
@@ -230,7 +228,7 @@ class  CurrencyManage
         $currency_object   = get_string('modlos_currency_object',     'block_modlos');
 
         $sales_limit       = get_string('modlos_sales_remake_limit',  'block_modlos');
-        $sales_remaked        = get_string('modlos_sales_remaked',    'block_modlos', $this->date_time);
+        $sales_remaked     = get_string('modlos_sales_remaked',       'block_modlos', $this->date_time);
         $sales_remake_mis  = get_string('modlos_sales_remake_mis',    'block_modlos');
         $sales_counts      = get_string('modlos_sales_counts',        'block_modlos');
         $sales_amount      = get_string('modlos_sales_amount',        'block_modlos');
@@ -248,8 +246,8 @@ class  CurrencyManage
         else if ($move) {
             $result_ttl = $currency_move_ttl;
             $result_msg = $currency_moved.'&nbsp;&nbsp;&nbsp;('.$currency_move_src.': '.$this->move_src.', '.
-                                                                    $currency_move_dst.': '.$this->move_dst.', '.
-                                                                   $currency_amount.  ': '.$this->move_money.')';
+                                                                $currency_move_dst.': '.$this->move_dst.', '.
+                                                                $currency_amount.  ': '.$this->move_money.')';
         }
         else if ($remake) {
             $result_ttl = $remake_ttl;
