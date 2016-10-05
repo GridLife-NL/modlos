@@ -1185,6 +1185,7 @@ function  modlos_sync_sloodle_users($update_check=true)
             }
         }
     }
+
     return;
 }
 

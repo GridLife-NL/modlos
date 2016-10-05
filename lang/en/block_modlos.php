@@ -525,6 +525,7 @@ $string['modlos_lgnscrn_color']		= 'Color';
 $string['modlos_lgnscrn_altbox']	= 'Information';
 $string['modlos_lgnscrn_boxttl']	= 'Title';
 
+$string['modlos_syncdb_ttl']        = 'Synchronize with external DB';
 $string['modlos_cltexture_ttl']		= 'Clear Texture Cache Data';
 $string['modlos_clpresence_ttl']	= 'Clear Login Information Table';
 $string['modlos_cleandb_ttl']       = 'Clean Up DB';

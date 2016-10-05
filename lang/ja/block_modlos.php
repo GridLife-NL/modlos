@@ -526,6 +526,7 @@ $string['modlos_lgnscrn_color']		= 'カラー';
 $string['modlos_lgnscrn_altbox']	= '情報ボックス';
 $string['modlos_lgnscrn_boxttl']	= 'タイトル';
 
+$string['modlos_syncdb_ttl']        = '外部DBとの同期';
 $string['modlos_cltexture_ttl']     = 'テクスチャのキャッシュデータをクリア';
 $string['modlos_clpresence_ttl']    = 'ログイン情報テーブルをクリア';
 $string['modlos_cleandb_ttl']       = 'データベースのクリーンアップ';

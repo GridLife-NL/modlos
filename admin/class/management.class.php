@@ -17,11 +17,11 @@ class  ManagementBase
     var $action_url;
     var $course_id   = 0;
 
-    var    $managed  = false;
+    var $managed  = false;
     var $hasPermit   = false;
-    var    $hasError = false;
-    var    $errorMsg = array();
-    var    $command  = '';
+    var $hasError = false;
+    var $errorMsg = array();
+    var $command  = '';
 
 
 
@@ -40,6 +40,8 @@ class  ManagementBase
 
     function  execute()
     {
+        global $CFG;
+ 
         if (data_submitted()) {        // POST
             if (!$this->hasPermit) {
                 $this->hasError = true;
@@ -67,7 +69,13 @@ class  ManagementBase
                 $this->managed = true;
 
                 // Command
-                if ($command=='cltexture') {
+                if ($command=='syncdb') {
+                    modlos_sync_opensimdb(false);
+                    $use_sloodle = $CFG->modlos_cooperate_sloodle;
+                    if ($use_sloodle) modlos_sync_sloodle_users(false);
+                }
+                //
+                else if ($command=='cltexture') {
                     $cachedir = CMS_MODULE_PATH.'/helper/texture_cache';
                     $command  = "cd $cachedir && /bin/sh cache_clear.sh";
                     exec($command);
@@ -110,15 +118,17 @@ class  ManagementBase
         $manage_url    = CMS_MODULE_URL.'/admin/actions/management.php'.$url_params;
         $return_ttl    = get_string('modlos_manage_return', 'block_modlos');
 
-        $commands[0]['com'] = 'cltexture';
-        $commands[0]['ttl'] = get_string('modlos_cltexture_ttl', 'block_modlos');
-        $commands[1]['com'] = 'clpresence';
-        $commands[1]['ttl'] = get_string('modlos_clpresence_ttl', 'block_modlos');
-        $commands[2]['com'] = 'cleandb';
-        $commands[2]['ttl'] = get_string('modlos_cleandb_ttl', 'block_modlos');
+        $commands[0]['com'] = 'syncdb';
+        $commands[0]['ttl'] = get_string('modlos_syncdb_ttl',    'block_modlos');
+        $commands[1]['com'] = 'cltexture';
+        $commands[1]['ttl'] = get_string('modlos_cltexture_ttl', 'block_modlos');
+        $commands[2]['com'] = 'clpresence';
+        $commands[2]['ttl'] = get_string('modlos_clpresence_ttl','block_modlos');
+        $commands[3]['com'] = 'cleandb';
+        $commands[3]['ttl'] = get_string('modlos_cleandb_ttl',   'block_modlos');
         //
-        $commands[3]['com'] = 'debugcom';
-        $commands[3]['ttl'] = get_string('modlos_debugcom_ttl', 'block_modlos');
+        //$commands[4]['com'] = 'debugcom';
+        //$commands[4]['ttl'] = get_string('modlos_debugcom_ttl',  'block_modlos');
 
         include(CMS_MODULE_PATH.'/admin/html/management.html');
     }
