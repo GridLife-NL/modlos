@@ -95,10 +95,10 @@
             <?php } elseif ($state&AVATAR_STATE_SYNCDB) {?>
               <strong style="color: #008;"><?php echo $active_ttl?>
             <?php }?>
-            <?php if ($state&AVATAR_STATE_SLOODLE and $owner!=' - ' and $use_sloodle) {?>
-              ,&nbsp;<?php echo $sloodle_ttl?>
-            <?php }?>
               </strong>
+            <?php if ($state&AVATAR_STATE_SLOODLE and $owner!=' - ' and $use_sloodle) {?>
+              <strong style="color: #662;">&nbsp;<?php echo $sloodle_ttl?></strong>
+            <?php }?>
 
             <?php if ($agentOnline) {?>
               &nbsp;<span class='styleOnline'>[<?php echo $online_ttl?>]</span>
