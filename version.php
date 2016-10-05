@@ -9,7 +9,7 @@ $plugin->maturity  = MATURITY_STABLE;
 
 $plugin->release   = '3.3.0';
 
-$plugin->version   = 2016010500;    // supports Sloodle 2.2.0
+$plugin->version   = 2016100500;    // supports Sloodle 2.2.0
 //$plugin->version = 2016080902;    // for external Modules
 //$plugin->version = 2016071801;    // for HG avatar
 //$plugin->version = 2016071300;    // add MoveMoney
