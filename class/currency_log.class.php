@@ -175,7 +175,7 @@ class  CurrencyLog
 
         //
         $this->user_id = 0;
-        $avatardata = modlos_get_avatar_info($this->agent_id, $this->use_sloodle);
+        $avatardata = modlos_get_avatar_info($this->agent_id);
         if ($avatardata!=null) $this->user_id = $avatardata['uid'];
 
         if (!$this->hasPermit and $USER->id!=$this->user_id) {

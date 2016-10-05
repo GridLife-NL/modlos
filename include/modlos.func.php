@@ -16,14 +16,14 @@
  function  modlos_get_update_time($fullname_table)
  function  modlos_get_user_email($uuid)
 
+ // Avatars
+ function  modlos_get_avatars($uid=0)
+ function  modlos_get_avatars_num($uid=0)
+ function  modlos_get_avatar_info($uuid)
+
  // Avatars (with Sloodle)
- function  modlos_get_avatars($uid=0, $use_sloodle=false)
- function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
-
- function  modlos_get_avatar_info($uuid, $use_sloodle=false)
- function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
-
  function  modlos_set_avatar_info($avatar, $use_sloodle=false)
+ function  modlos_delete_avatar_info($avatar, $use_sloodle=false)
 
  // User Table
  function  modlos_get_userstable()
@@ -185,7 +185,7 @@ function  modlos_get_user_email($uuid)
 // Avatars with Sloodle
 //
 
-function  modlos_get_avatars($uid=0, $use_sloodle=false)
+function  modlos_get_avatars($uid=0)
 {
     global $DB;
 
@@ -209,6 +209,7 @@ function  modlos_get_avatars($uid=0, $use_sloodle=false)
         }
     }
 
+    /*
     if ($use_sloodle) {
          if (jbxl_db_exist_table(MDL_SLOODLE_USERS_TBL)) {
             if ($uid==0) $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);
@@ -237,12 +238,13 @@ function  modlos_get_avatars($uid=0, $use_sloodle=false)
             }
         }
     }
+    */
 
     return $avatars;
 }
 
 
-function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
+function  modlos_get_avatars_num($uid=0)
 {
     global $DB;
 
@@ -254,6 +256,7 @@ function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
     if (is_array($users)) $num = count($users);
     else $num = 0;
 
+    /*
     if ($use_sloodle) {
          if (jbxl_db_exist_table(MDL_SLOODLE_USERS_TBL)) {
             if ($uid==0) $sloodles = $DB->get_records(MDL_SLOODLE_USERS_TBL);
@@ -271,6 +274,7 @@ function  modlos_get_avatars_num($uid=0, $use_sloodle=false)
             }
         }
     }    
+    */
     return $num;
 }
 
@@ -286,7 +290,7 @@ return:
     $avatar_info['state']
     $avatar_info['time']
 */
-function  modlos_get_avatar_info($uuid, $use_sloodle=false)
+function  modlos_get_avatar_info($uuid)
 {
     global $DB;
 
@@ -294,6 +298,7 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
 
     $avatar = $DB->get_record('modlos_users', array('uuid'=>$uuid)); 
 
+    /*
     $sloodle = null;
     if ($use_sloodle) {
          if (jbxl_db_exist_table(MDL_SLOODLE_USERS_TBL)) {
@@ -310,8 +315,9 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
             }
         }
     }
-    
     if ($avatar==null and $sloodle==null) return null;
+    */
+
     if ($avatar->firstname=='' or $avatar->lastname=='') return null;
 
     //
@@ -334,6 +340,12 @@ function  modlos_get_avatar_info($uuid, $use_sloodle=false)
     return $avatar_info;
 }
 
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Avatars with Sloodle
+//
 
 function  modlos_set_avatar_info($avatar, $use_sloodle=false)
 {

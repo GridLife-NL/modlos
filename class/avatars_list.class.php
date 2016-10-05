@@ -93,7 +93,7 @@ class  AvatarsList
         $this->currency_url = CMS_MODULE_URL.'/actions/currency_log.php'.$this->url_params.$this->action_params;
         $this->owner_url    = $CFG->wwwroot.'/user/view.php'.$this->url_params;
 
-        $my_avatars = modlos_get_avatars_num($USER->id);
+        $my_avatars  = modlos_get_avatars_num($USER->id);
         $max_avatars = $CFG->modlos_max_own_avatars;
         if (!$this->hasPermit and $max_avatars>=0 and $my_avatars>=$max_avatars) $this->isAvatarMax = true;
     }
@@ -226,7 +226,7 @@ class  AvatarsList
             foreach($infos as $user) {
                 $users[$num] = $user;
                 $users[$num]['owner_name'] = ' - ';
-                $avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
+                $avatardata = modlos_get_avatar_info($user['UUID']);
                 if ($avatardata==null) {
                     $users[$num]['uid']   = 0;
                     $users[$num]['state'] = AVATAR_STATE_NOSTATE;
@@ -258,7 +258,7 @@ class  AvatarsList
             $infos = opensim_get_avatars_infos($where, $this->sql_order, '', $db);
             //
             foreach($infos as $user) {
-                $avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle); // from sloodle
+                $avatardata = modlos_get_avatar_info($user['UUID']);
                 if ($avatardata==null) {
                     if ($con>=$this->pstart and $con<$this->pstart + $this->plimit) {
                         $users[$num] = $user;

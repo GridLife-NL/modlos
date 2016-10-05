@@ -86,7 +86,7 @@ class  ResetRegion
 
         // get uid from Modlos and Sloodle DB
         $region = opensim_get_region_info($uuid);
-        $avatar = modlos_get_avatar_info($region['owner_uuid'], $this->use_sloodle);
+        $avatar = modlos_get_avatar_info($region['owner_uuid']);
 
         $this->UUID       = $uuid;
         $this->uid        = $avatar['uid'];

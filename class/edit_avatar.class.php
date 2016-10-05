@@ -84,7 +84,7 @@ class  EditAvatar
         $this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
         // get uid from Modlos and Sloodle DB
-        $avatar = modlos_get_avatar_info($this->uuid, $this->use_sloodle);
+        $avatar = modlos_get_avatar_info($this->uuid);
         $this->uid       = $avatar['uid'];
         $this->ostate    = (int)$avatar['state'];
         $this->firstname = $avatar['firstname'];

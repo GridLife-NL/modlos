@@ -71,14 +71,14 @@ if ($agent) {
 	modlos_sync_opensimdb();
 	if ($use_sloodle) modlos_sync_sloodle_users();
 
-	// Modlos and Sloodle DB
-	$avatar = modlos_get_avatar_info($agent, $use_sloodle);
+	// Modlos 
+	$avatar = modlos_get_avatar_info($agent);
 
 	// auto synchro
 	if ($avatar==null) {
 		modlos_sync_opensimdb(false);
 		if ($use_sloodle) modlos_sync_sloodle_users(false);
-		$avatar = modlos_get_avatar_info($agent, $use_sloodle);
+		$avatar = modlos_get_avatar_info($agent);
 	}
 
 	if ($avatar!=null) {

@@ -63,7 +63,7 @@ class  DeleteAvatar
         $this->use_sloodle = $CFG->modlos_cooperate_sloodle;
 
         // get uid from Modlos and Sloodle DB
-        $avatar = modlos_get_avatar_info($this->UUID, $this->use_sloodle);
+        $avatar = modlos_get_avatar_info($this->UUID);
         $this->uid       = $avatar['uid'];
         $this->state     = (int)$avatar['state'];
         $this->hmregion  = $avatar['hmregion'];
@@ -158,6 +158,7 @@ class  DeleteAvatar
         $delete_user['UUID']  = $this->UUID;
         $delete_user['state'] = $this->state;
 
+        // delete from Moodle
         $ret = modlos_delete_avatar_info($delete_user, $this->use_sloodle);
         if (!$ret) {
             $this->hasError = true;
@@ -169,7 +170,7 @@ class  DeleteAvatar
         modlos_delete_groupdb ($this->UUID, false);
         modlos_delete_profiles($this->UUID);
 
-        // delete form OpenSim
+        // delete from OpenSim
         $ret = opensim_delete_avatar($this->UUID);
         return $ret;
     }

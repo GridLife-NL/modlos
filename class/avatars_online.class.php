@@ -155,7 +155,7 @@ class  AvatarsOnline
                 $this->db_data[$num]['lastname']  = $avinfo['lastname'];
             }
 
-            $avatardata = modlos_get_avatar_info($user['UUID'], $this->use_sloodle);
+            $avatardata = modlos_get_avatar_info($user['UUID']);
             if ($avatardata!=null) {
                 if ($avatardata['uid']>0) {
                     $this->db_data[$num]['uid'] = $avatardata['uid'];
