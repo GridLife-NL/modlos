@@ -1280,7 +1280,7 @@ function  print_tabnav($currenttab, $course_id, $show_create_tab=true)
         $toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, get_string('modlos_return_tab', 'block_modlos'));
     }
     else {
-        $toprow[] = new tabobject('', $CFG->wwwroot, get_string('modlos_return_sitetop_tab', 'block_modlos'));
+        $toprow[] = new tabobject('', $CFG->wwwroot.'/?redirect=0', get_string('modlos_return_sitetop_tab', 'block_modlos'));
     }
 
     $tabs = array($toprow);
@@ -1307,7 +1307,7 @@ function  print_tabnav_manage($currenttab, $course_id)
 
     ///////
     $toprow = array();
-//    $toprow[] = new tabobject('show_status', CMS_MODULE_URL.'/actions/show_status.php'.$url_params, get_string('modlos_menu_tab','block_modlos'));
+//  $toprow[] = new tabobject('show_status', CMS_MODULE_URL.'/actions/show_status.php'.$url_params, get_string('modlos_menu_tab','block_modlos'));
     if ($hasPermit) {
         if (jbxl_is_admin($USER->id)) {
             $url_amp = '&amp;course='.$course_id;
@@ -1339,7 +1339,7 @@ function  print_tabnav_manage($currenttab, $course_id)
         $toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, get_string('modlos_return_tab', 'block_modlos'));
     }
     else {
-        $toprow[] = new tabobject('', $CFG->wwwroot, get_string('modlos_return_sitetop_tab', 'block_modlos'));
+        $toprow[] = new tabobject('', $CFG->wwwroot.'?redirect=0', get_string('modlos_return_sitetop_tab', 'block_modlos'));
     }
 
     $tabs = array($toprow);
