@@ -1307,50 +1307,39 @@ function  print_tabnav_manage($currenttab, $course_id)
 
     ///////
     $toprow = array();
-//    $toprow[] = new tabobject('show_status', CMS_MODULE_URL.'/actions/show_status.php'.$url_params, 
-//                                            '<strong>'.get_string('modlos_menu_tab','block_modlos').'</strong>');
+//    $toprow[] = new tabobject('show_status', CMS_MODULE_URL.'/actions/show_status.php'.$url_params, get_string('modlos_menu_tab','block_modlos'));
     if ($hasPermit) {
         if (jbxl_is_admin($USER->id)) {
             $url_amp = '&amp;course='.$course_id;
-            $toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos'.$url_amp, 
-                                              '<strong>'.get_string('modlos_general_setting_tab','block_modlos').'</strong>');
+            $toprow[] = new tabobject('settings', $CFG->wwwroot.'/admin/settings.php?section=blocksettingmodlos'.$url_amp, get_string('modlos_general_setting_tab','block_modlos'));
         }
 
         if ($CFG->modlos_template_system) {
-            $toprow[] = new tabobject('avatar_templ', CMS_MODULE_URL.'/admin/actions/avatar_templ.php'.$url_params, 
-                                              '<strong>'.get_string('modlos_templ_tab','block_modlos').'</strong>');
+            $toprow[] = new tabobject('avatar_templ', CMS_MODULE_URL.'/admin/actions/avatar_templ.php'.$url_params, get_string('modlos_templ_tab','block_modlos'));
         }
 
         if ($CFG->modlos_support_hg) {
-            $toprow[] = new tabobject('hg_avatars', CMS_MODULE_URL.'/admin/actions/hg_avatars.php'.$url_params, 
-                                              '<strong>'.get_string('modlos_hg_avatars_tab','block_modlos').'</strong>');
+            $toprow[] = new tabobject('hg_avatars', CMS_MODULE_URL.'/admin/actions/hg_avatars.php'.$url_params, get_string('modlos_hg_avatars_tab','block_modlos'));
         }
         if ($CFG->modlos_use_currency_server) {
-            $toprow[] = new tabobject('currency', CMS_MODULE_URL.'/admin/actions/currency.php'.$url_params, 
-                                              '<strong>'.get_string('modlos_currency_tab','block_modlos').'</strong>');
+            $toprow[] = new tabobject('currency', CMS_MODULE_URL.'/admin/actions/currency.php'.$url_params, get_string('modlos_currency_tab','block_modlos'));
         }
 
-        $toprow[] = new tabobject('loginscreen', CMS_MODULE_URL.'/admin/actions/loginscreen.php'.$url_params, 
-                                              '<strong>'.get_string('modlos_lgnscrn_tab','block_modlos').'</strong>');
+        $toprow[] = new tabobject('loginscreen', CMS_MODULE_URL.'/admin/actions/loginscreen.php'.$url_params, get_string('modlos_lgnscrn_tab','block_modlos'));
         if ($CFG->modlos_activate_lastname) {
-            $toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/actions/lastnames.php'.$url_params, 
-                                              '<strong>'.get_string('modlos_lastnames_tab','block_modlos').'</strong>');
+            $toprow[] = new tabobject('lastnames', CMS_MODULE_URL.'/admin/actions/lastnames.php'.$url_params, get_string('modlos_lastnames_tab','block_modlos'));
         }
 
-        $toprow[] = new tabobject('estates', CMS_MODULE_URL.'/admin/actions/estates.php'.$url_params, 
-                                              '<strong>'.get_string('modlos_estate_tab','block_modlos').'</strong>');
-        $toprow[] = new tabobject('management', CMS_MODULE_URL.'/admin/actions/management.php'.$url_params, 
-                                              '<strong>'.get_string('modlos_manage_cmnd_tab','block_modlos').'</strong>');
+        $toprow[] = new tabobject('estates', CMS_MODULE_URL.'/admin/actions/estates.php'.$url_params, get_string('modlos_estate_tab','block_modlos'));
+        $toprow[] = new tabobject('management', CMS_MODULE_URL.'/admin/actions/management.php'.$url_params, get_string('modlos_manage_cmnd_tab','block_modlos'));
     }
 
-    $toprow[] = new tabobject('avatars_online', CMS_MODULE_URL.'/actions/avatars_online.php'.$url_params.'&amp;order=login&amp;desc=1', 
-                                              '<strong>'.get_string('modlos_menu_tab','block_modlos').'</strong>');
+    $toprow[] = new tabobject('avatars_online', CMS_MODULE_URL.'/actions/avatars_online.php'.$url_params.'&amp;order=login&amp;desc=1', get_string('modlos_menu_tab','block_modlos'));
     if ($course_id>1) {
-        $toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, 
-                                              '<strong>'.get_string('modlos_return_tab', 'block_modlos').'</strong>');
+        $toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, get_string('modlos_return_tab', 'block_modlos'));
     }
     else {
-        $toprow[] = new tabobject('', $CFG->wwwroot, '<strong>'.get_string('modlos_return_sitetop_tab', 'block_modlos').'</strong>');
+        $toprow[] = new tabobject('', $CFG->wwwroot, get_string('modlos_return_sitetop_tab', 'block_modlos'));
     }
 
     $tabs = array($toprow);
