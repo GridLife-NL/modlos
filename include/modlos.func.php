@@ -1245,51 +1245,42 @@ function  print_tabnav($currenttab, $course_id, $show_create_tab=true)
 
     $toprow = array();
 //  $toprow[] = new tabobject('show_status', CMS_MODULE_URL.'/actions/show_status.php'.$url_params, 
-//                                             '<strong>'.get_string('modlos_show_status_tab','block_modlos').'</strong>');
-    $toprow[] = new tabobject('avatars_online', CMS_MODULE_URL.'/actions/avatars_online.php'.$url_params.'&amp;order=login&amp;desc=1', 
-                                               '<strong>'.get_string('modlos_online_tab','block_modlos').'</strong>');
-    $toprow[] = new tabobject('world_map', CMS_MODULE_URL.'/actions/map_action.php'.$url_params, 
-                                               '<strong>'.get_string('modlos_world_map_tab','block_modlos').'</strong>');
+//                                             get_string('modlos_show_status_tab','block_modlos'));
+    $toprow[] = new tabobject('avatars_online', CMS_MODULE_URL.'/actions/avatars_online.php'.$url_params.'&amp;order=login&amp;desc=1', get_string('modlos_online_tab','block_modlos'));
+    $toprow[] = new tabobject('world_map', CMS_MODULE_URL.'/actions/map_action.php'.$url_params, get_string('modlos_world_map_tab','block_modlos'));
     if (!$isGuest) {
-        $toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params.'&amp;order=login&amp;desc=1', 
-                                               '<strong>'.get_string('modlos_avatars_tab','block_modlos').'</strong>');
+        $toprow[] = new tabobject('avatars_list', CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params.'&amp;order=login&amp;desc=1', get_string('modlos_avatars_tab','block_modlos'));
         $toprow[] = new tabobject('personal_avatars', CMS_MODULE_URL.'/actions/avatars_list.php'.$url_params.'&amp;action=personal&amp;userid='.$USER->id, 
-                                               '<strong>'.get_string('modlos_my_avatars','block_modlos').'</strong>');
+                                               get_string('modlos_my_avatars','block_modlos'));
     }
 
-    $toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$url_params.'&amp;order=name', 
-                                               '<strong>'.get_string('modlos_regions_tab','block_modlos').'</strong>');
+    $toprow[] = new tabobject('regions_list', CMS_MODULE_URL.'/actions/regions_list.php'.$url_params.'&amp;order=name', get_string('modlos_regions_tab','block_modlos'));
     if (!$isGuest) {
         if (!opensim_is_standalone()) {
             $toprow[] = new tabobject('personal_regions', CMS_MODULE_URL.'/actions/regions_list.php'.$url_params.'&amp;action=personal&amp;userid='.$USER->id.'&amp;order=name', 
-                                               '<strong>'.get_string('modlos_my_regions','block_modlos').'</strong>');
+                                               get_string('modlos_my_regions','block_modlos'));
         }
         if ($show_create_tab) {
-            $toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $url_params, 
-                                               '<strong>'.get_string('modlos_avatar_create','block_modlos').'</strong>');
+            $toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $url_params, get_string('modlos_avatar_create','block_modlos'));
         }
         else if ($CFG->modlos_template_system) {
-            $toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $url_params, 
-                                               '<strong>'.get_string('modlos_templ_avatar','block_modlos').'</strong>');
+            $toprow[] = new tabobject('create_avatar', CMS_MODULE_URL.'/actions/create_avatar.php'. $url_params, get_string('modlos_templ_avatar','block_modlos'));
         }
         //
         if ($CFG->modlos_search_mod=="os_moodle" or $CFG->modlos_search_mod=="os_opensim") {
-            $toprow[] = new tabobject('events_list', CMS_MODULE_URL.'/actions/events_list.php'. $url_params, 
-                                               '<strong>'.get_string('modlos_events_tab','block_modlos').'</strong>');
+            $toprow[] = new tabobject('events_list', CMS_MODULE_URL.'/actions/events_list.php'. $url_params, get_string('modlos_events_tab','block_modlos'));
         }
     }
 
     if ($hasPermit) {
-        $toprow[] = new tabobject('management', CMS_MODULE_URL.'/admin/actions/management.php'.$url_params, 
-                                               '<strong>'.get_string('modlos_manage_tab','block_modlos').'</strong>');
+        $toprow[] = new tabobject('management', CMS_MODULE_URL.'/admin/actions/management.php'.$url_params, get_string('modlos_manage_tab','block_modlos'));
     }
 
     if ($course_id>1) {
-        $toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, 
-                                               '<strong>'.get_string('modlos_return_tab', 'block_modlos').'</strong>');
+        $toprow[] = new tabobject('', $CFG->wwwroot.'/course/view.php?id='.$course_id, get_string('modlos_return_tab', 'block_modlos'));
     }
     else {
-        $toprow[] = new tabobject('', $CFG->wwwroot, '<strong>'.get_string('modlos_return_sitetop_tab', 'block_modlos').'</strong>');
+        $toprow[] = new tabobject('', $CFG->wwwroot, get_string('modlos_return_sitetop_tab', 'block_modlos'));
     }
 
     $tabs = array($toprow);
