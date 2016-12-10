@@ -15,6 +15,18 @@ if (!defined('ENV_HELPER_PATH')) define('ENV_HELPER_PATH', $CFG->dirroot.'/block
 
 
 //////////////////////////////////////////////////////////////////////////////////
+
+if (!property_exists($CFG, 'modlos_use_mysqli')) {
+    return;
+    //if (function_exists('mysqli_connect')) $CFG->modlos_use_mysqli = true;
+    //else                                   $CFG->modlos_use_mysqli = false;
+}
+else {
+    if (!$CFG->modlos_use_mysqli and !function_exists('mysql_connect')) $CFG->modlos_use_mysqli = true;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
 // for Moodle DB
 
 define('HELPER_DB_HOST',         $CFG->dbhost);
@@ -31,14 +43,6 @@ define('OPENSIM_DB_HOST',        $CFG->modlos_sql_server_name);
 define('OPENSIM_DB_NAME',        $CFG->modlos_sql_db_name);
 define('OPENSIM_DB_USER',        $CFG->modlos_sql_db_user);
 define('OPENSIM_DB_PASS',        $CFG->modlos_sql_db_pass);
-
-if (!property_exists($CFG, 'modlos_use_mysqli')) {
-    if (function_exists('mysqli_connect')) $CFG->modlos_use_mysqli = true;
-    else                                   $CFG->modlos_use_mysqli = false;
-}
-else {
-    if (!$CFG->modlos_use_mysqli and !function_exists('mysql_connect')) $CFG->modlos_use_mysqli = true;
-}
 define('OPENSIM_DB_MYSQLI',      $CFG->modlos_use_mysqli);
 
 
