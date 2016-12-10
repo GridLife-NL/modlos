@@ -32,8 +32,8 @@ class block_modlos extends block_base
         $this->release = $plugin->release;
 
         //
-        if (!isset($CFG->modlos_grid_name)) set_config('modlos_grid_name', 'My Grid');
-        $this->grid_name        = $CFG->modlos_grid_name;
+        if (isset($CFG->modlos_grid_name)) $this->grid_name = $CFG->modlos_grid_name;
+        else                               $this->grid_name = 'My Grid';
         $this->grid_status      = false;
         $this->now_online       = '0';
         $this->hg_online        = '0';
