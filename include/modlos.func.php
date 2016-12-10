@@ -297,6 +297,7 @@ function  modlos_get_avatar_info($uuid)
     if (!isGUID($uuid)) return null;
 
     $avatar = $DB->get_record('modlos_users', array('uuid'=>$uuid)); 
+    if (!$avatar) return null;
 
     /*
     $sloodle = null;
