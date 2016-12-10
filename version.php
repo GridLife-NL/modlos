@@ -7,9 +7,10 @@ $plugin->component = 'block_modlos';    // Full name of the plugin (used for dia
 $plugin->cron      = 0;
 $plugin->maturity  = MATURITY_STABLE;
 
-$plugin->release   = '3.3.0';
+$plugin->release   = '3.3.1';
 
-$plugin->version   = 2016100500;    // supports Sloodle 2.2.0
+$plugin->version   = 2016121000;    // fix bugs: message, profile and search config file is 0 byte
+//$plugin->version = 2016100500;    // supports Sloodle 2.2.0
 //$plugin->version = 2016080902;    // for external Modules
 //$plugin->version = 2016071801;    // for HG avatar
 //$plugin->version = 2016071300;    // add MoveMoney
