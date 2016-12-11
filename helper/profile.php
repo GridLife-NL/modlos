@@ -670,7 +670,8 @@ function avatar_properties_update($method_name, $params, $app_data)
 	}
 	else {
 		$items = "useruuid, profileURL, profileFirstImage, profileFirstText, profileImage, profileAboutText, ".
-				 "profilePartner, profileAllowPublish, profileMaturePublish";
+				 "profilePartner, profileAllowPublish, profileMaturePublish, ".
+		         "profileWantToMask, profileWantToText, profileSkillsMask, profileSkillsText, profileLanguagesText";
 		$query_str = 'INSERT INTO '.PROFILE_USERPROFILE_TBL." (".$items.") ".
 						" VALUES ('".$DbLink->escape($uuid)."',".
 								 "'".$DbLink->escape($url)."',".
@@ -680,7 +681,8 @@ function avatar_properties_update($method_name, $params, $app_data)
 							 	 "'".$DbLink->escape($aboutText)."',".
 							 	 "'".$DbLink->escape($partner)."',".
 							 	 "'".$DbLink->escape($publish)."',".
- 								 "'".$DbLink->escape($mature)."')";
+ 								 "'".$DbLink->escape($mature)."',".
+ 								 "'0','','0','','')";
 	}
 
 	//error_log("profile: avatar_properties_update: ".$query_str);
